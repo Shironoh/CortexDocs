@@ -1,0 +1,4015 @@
+{
+ "meta": {
+  "duration": 176.17692307692312,
+  "cues": [
+   {
+    "id": "c1",
+    "sc": "s1",
+    "start": 0.6,
+    "end": 7.369230769230769,
+    "dur": 6.769230769230769,
+    "words": 15,
+    "sub": "3 h 12. Alerte : un compte Gmail inconnu est devenu propriétaire du projet prod-paiements.",
+    "guess": false
+   },
+   {
+    "id": "c2",
+    "sc": "s1",
+    "start": 7.369230769230769,
+    "end": 14.523076923076921,
+    "dur": 7.153846153846153,
+    "words": 16,
+    "sub": "Vous ne connaissez pas Google Cloud. Seule piste : ses journaux d'audit. Qui ? Quand ? D'où ? Et ensuite ?",
+    "guess": false
+   },
+   {
+    "id": "c3",
+    "sc": "s2",
+    "start": 14.523076923076921,
+    "end": 22.06153846153846,
+    "dur": 7.538461538461538,
+    "words": 17,
+    "sub": "Google Cloud, c'est un immeuble : l'organisation est le bâtiment, chaque projet un étage, avec machines et données.",
+    "guess": false
+   },
+   {
+    "id": "c4",
+    "sc": "s2",
+    "start": 22.06153846153846,
+    "end": 29.6,
+    "dur": 7.538461538461538,
+    "words": 17,
+    "sub": "Personne n'entre par la fenêtre : console, ligne de commande ou script, tout passe par le guichet : l'API.",
+    "guess": false
+   },
+   {
+    "id": "c5",
+    "sc": "s3",
+    "start": 29.6,
+    "end": 38.292307692307695,
+    "dur": 8.692307692307692,
+    "words": 20,
+    "sub": "Sans rien configurer, a-t-on une trace ? Oui : tout appel qui modifie un réglage est écrit dans le registre Admin Activity.",
+    "guess": false
+   },
+   {
+    "id": "c6",
+    "sc": "s3",
+    "start": 38.292307692307695,
+    "end": 47.753846153846155,
+    "dur": 9.461538461538462,
+    "words": 22,
+    "sub": "On croit qu'il fallait l'activer. Faux : toujours écrit, impossible à couper, gardé 400 jours. Les modifications sont rares : ça coûte peu.",
+    "guess": false
+   },
+   {
+    "id": "c7",
+    "sc": "s3",
+    "start": 47.753846153846155,
+    "end": 57.56153846153846,
+    "dur": 9.807692307692307,
+    "words": 19,
+    "sub": "Devinez : devenu propriétaire, l'attaquant peut-il effacer ce registre ?|Non : son coffre, _Required, ne se supprime pas. L'historique est intact.",
+    "guess": true
+   },
+   {
+    "id": "c9",
+    "sc": "s4",
+    "start": 57.56153846153846,
+    "end": 67.40769230769232,
+    "dur": 9.846153846153847,
+    "words": 23,
+    "sub": "Ouvrons l'entrée de 3 h 07. Quoi ? SetIamPolicy, un changement de droits : le rôle Owner, donné au compte Gmail.",
+    "guess": false
+   },
+   {
+    "id": "c10",
+    "sc": "s4",
+    "start": 67.40769230769232,
+    "end": 77.60000000000001,
+    "dur": 10.192307692307692,
+    "words": 20,
+    "sub": "Et qui a signé ?|Pas un humain : ci-deployer, un compte de service, l'identité d'un robot. Sa clé a fuité.",
+    "guess": true
+   },
+   {
+    "id": "c11",
+    "sc": "s4",
+    "start": 77.60000000000001,
+    "end": 85.13846153846154,
+    "dur": 7.538461538461538,
+    "words": 17,
+    "sub": "D'où ? Une IP externe, et un nom d'outil déclaré par l'appelant lui-même : un indice, pas une preuve.",
+    "guess": false
+   },
+   {
+    "id": "c12",
+    "sc": "s4",
+    "start": 85.13846153846154,
+    "end": 91.13846153846154,
+    "dur": 6,
+    "words": 13,
+    "sub": "Côté SIEM, une règle tient en quatre champs : méthode, signataire, adresse, rôle ajouté.",
+    "guess": false
+   },
+   {
+    "id": "c13",
+    "sc": "s5",
+    "start": 91.13846153846154,
+    "end": 97.13846153846154,
+    "dur": 6,
+    "words": 13,
+    "sub": "A-t-il lu les fichiers clients ? Admin Activity note les modifications, pas les lectures.",
+    "guess": false
+   },
+   {
+    "id": "c14",
+    "sc": "s5",
+    "start": 97.13846153846154,
+    "end": 106.94615384615385,
+    "dur": 9.807692307692307,
+    "words": 19,
+    "sub": "Ces téléchargements sont-ils notés ailleurs ?|Par défaut, non. Les lectures relèvent d'un second registre, Data Access, éteint par défaut.",
+    "guess": true
+   },
+   {
+    "id": "c15",
+    "sc": "s5",
+    "start": 106.94615384615385,
+    "end": 115.63846153846154,
+    "dur": 8.692307692307692,
+    "words": 20,
+    "sub": "Pourquoi ? Des millions de lectures : trop de volume, trop de coût. Résultat : impossible de prouver le vol, ni son absence.",
+    "guess": false
+   },
+   {
+    "id": "c16",
+    "sc": "s6",
+    "start": 115.63846153846154,
+    "end": 122.02307692307693,
+    "dur": 6.384615384615384,
+    "words": 14,
+    "sub": "Réflexe d'enquête : pivoter sur l'identité, et filtrer tout ce qu'a fait ce compte Gmail.",
+    "guess": false
+   },
+   {
+    "id": "c17",
+    "sc": "s6",
+    "start": 122.02307692307693,
+    "end": 129.56153846153848,
+    "dur": 7.538461538461538,
+    "words": 17,
+    "sub": "3 h 09 : CreateServiceAccountKey. Il se fabrique une clé de secours pour ci-deployer.",
+    "guess": false
+   },
+   {
+    "id": "c18",
+    "sc": "s6",
+    "start": 129.56153846153848,
+    "end": 137.8692307692308,
+    "dur": 8.307692307692307,
+    "words": 19,
+    "sub": "On croit que retirer le rôle suffit. Faux : avec cette clé, il redevient ci-deployer, et se refait propriétaire.",
+    "guess": false
+   },
+   {
+    "id": "c20",
+    "sc": "s7",
+    "start": 137.8692307692308,
+    "end": 147.71538461538464,
+    "dur": 9.846153846153847,
+    "words": 23,
+    "sub": "Recul : chaque projet a son propre registre. Un sink agrégé sur l'organisation les copie tous vers votre SIEM, au-delà de 400 jours.",
+    "guess": false
+   },
+   {
+    "id": "c21",
+    "sc": "s8",
+    "start": 147.71538461538464,
+    "end": 157.56153846153848,
+    "dur": 9.846153846153847,
+    "words": 23,
+    "sub": "Verdict : clé volée utilisée à 3 h 07, clé de secours à 3 h 09. On retire Owner, on supprime les deux clés.",
+    "guess": false
+   },
+   {
+    "id": "c22",
+    "sc": "s8",
+    "start": 157.56153846153848,
+    "end": 165.8692307692308,
+    "dur": 8.307692307692307,
+    "words": 19,
+    "sub": "Vos trois actions : alerter sur ces deux méthodes, un sink vers le SIEM, Data Access sur les données sensibles.",
+    "guess": false
+   },
+   {
+    "id": "c23",
+    "sc": "s8",
+    "start": 165.8692307692308,
+    "end": 174.17692307692312,
+    "dur": 8.307692307692307,
+    "words": 19,
+    "sub": "Vous savez maintenant dire qui, quand, d'où, et la suite. Nuance : une IP ou un e-mail peuvent être masqués.",
+    "guess": false
+   }
+  ],
+  "scenes": [
+   {
+    "id": "s1",
+    "title": "3 h 12, l'alerte",
+    "start": 0.6,
+    "end": 14.523076923076921
+   },
+   {
+    "id": "s2",
+    "title": "Google Cloud en 30 s",
+    "start": 14.523076923076921,
+    "end": 29.6
+   },
+   {
+    "id": "s3",
+    "title": "Le registre Admin Activity",
+    "start": 29.6,
+    "end": 57.56153846153846
+   },
+   {
+    "id": "s4",
+    "title": "Anatomie d'une entrée",
+    "start": 57.56153846153846,
+    "end": 91.13846153846154
+   },
+   {
+    "id": "s5",
+    "title": "L'angle mort : les lectures",
+    "start": 91.13846153846154,
+    "end": 115.63846153846154
+   },
+   {
+    "id": "s6",
+    "title": "Suivre la piste",
+    "start": 115.63846153846154,
+    "end": 137.8692307692308
+   },
+   {
+    "id": "s7",
+    "title": "Tout centraliser",
+    "start": 137.8692307692308,
+    "end": 147.71538461538464
+   },
+   {
+    "id": "s8",
+    "title": "Verdict et actions",
+    "start": 147.71538461538464,
+    "end": 174.17692307692312
+   }
+  ],
+  "guess": [
+   [
+    50.830769230769235,
+    52.330769230769235
+   ],
+   [
+    68.94615384615385,
+    70.44615384615385
+   ],
+   [
+    99.06153846153846,
+    100.56153846153846
+   ]
+  ],
+  "events": 141,
+  "marks": [
+   1.754,
+   2.908,
+   4.446,
+   4.646,
+   1.754,
+   8.138,
+   10.831,
+   11.6,
+   11.985,
+   12.369,
+   13.138,
+   0,
+   1.554,
+   7.169,
+   11.2,
+   16.062,
+   16.446,
+   16.212,
+   16.362,
+   16.512,
+   18.469,
+   19.908,
+   20.008,
+   20.677,
+   20.777,
+   16.562,
+   27.831,
+   23.6,
+   23.985,
+   24.369,
+   25.908,
+   28.215,
+   28.395,
+   28.575,
+   28.755,
+   16.062,
+   23.6,
+   13.323,
+   18.069,
+   21.862,
+   28.015,
+   36.523,
+   33.446,
+   33.696,
+   33.946,
+   38.677,
+   40.215,
+   42.908,
+   45.015,
+   49.677,
+   52.431,
+   52.331,
+   39.831,
+   40.215,
+   56.177,
+   28.4,
+   36.123,
+   38.477,
+   42.608,
+   47.554,
+   52.231,
+   57.562,
+   57.962,
+   58.082,
+   58.202,
+   58.322,
+   60.254,
+   64.485,
+   71.6,
+   78.369,
+   80.292,
+   70.446,
+   76.215,
+   85.138,
+   57.562,
+   59.869,
+   64.485,
+   77.6,
+   82.6,
+   56.362,
+   59.569,
+   64.185,
+   67.208,
+   70.346,
+   77.3,
+   84.938,
+   92.292,
+   95.954,
+   92.492,
+   92.842,
+   93.192,
+   93.542,
+   93.892,
+   104.023,
+   104.792,
+   105.092,
+   110.792,
+   111.177,
+   98.292,
+   109.638,
+   89.938,
+   92.092,
+   92.862,
+   96.938,
+   107.315,
+   110.977,
+   117.946,
+   122.023,
+   117.946,
+   118.346,
+   118.446,
+   118.546,
+   118.646,
+   118.746,
+   118.846,
+   118.946,
+   119.046,
+   117.177,
+   121.038,
+   123.177,
+   125.485,
+   127.023,
+   116.408,
+   130.715,
+   132.254,
+   134.177,
+   136.485,
+   114.438,
+   117.746,
+   122.877,
+   129.362,
+   137.869,
+   137.919,
+   138.354,
+   138.404,
+   138.069,
+   138.119,
+   138.554,
+   138.604,
+   138.654,
+   138.704,
+   138.754,
+   138.804,
+   138.854,
+   138.904,
+   138.954,
+   139.004,
+   140.946,
+   141.146,
+   144.408,
+   145.562,
+   136.669,
+   140.446,
+   143.908,
+   147.715,
+   148.869,
+   151.562,
+   155.023,
+   155.223,
+   155.523,
+   158.715,
+   161.023,
+   162.562,
+   167.408,
+   167.658,
+   167.908,
+   168.158,
+   172.792,
+   147.715,
+   157.562,
+   166.638,
+   169.715,
+   146.315,
+   153.569,
+   157.262,
+   165.669,
+   169.715
+  ],
+  "cams": [
+   {
+    "t": 0,
+    "d": 0,
+    "z": 0.85
+   },
+   {
+    "t": 1.5538461538461539,
+    "d": 1,
+    "z": 1.45
+   },
+   {
+    "t": 7.169230769230769,
+    "d": 1,
+    "z": 1.1
+   },
+   {
+    "t": 11.2,
+    "d": 0.9,
+    "z": 1.25
+   },
+   {
+    "t": 13.323076923076922,
+    "d": 1.5,
+    "z": 0.78
+   },
+   {
+    "t": 18.069230769230767,
+    "d": 0.9,
+    "z": 1.3
+   },
+   {
+    "t": 21.861538461538462,
+    "d": 1,
+    "z": 1.05
+   },
+   {
+    "t": 28.015384615384615,
+    "d": 0.8,
+    "z": 1.35
+   },
+   {
+    "t": 28.400000000000002,
+    "d": 1.5,
+    "z": 0.8
+   },
+   {
+    "t": 36.12307692307692,
+    "d": 0.9,
+    "z": 1.5
+   },
+   {
+    "t": 38.47692307692308,
+    "d": 0.9,
+    "z": 1.25
+   },
+   {
+    "t": 42.60769230769231,
+    "d": 0.9,
+    "z": 1.15
+   },
+   {
+    "t": 47.55384615384615,
+    "d": 1,
+    "z": 0.95
+   },
+   {
+    "t": 52.23076923076923,
+    "d": 0.6,
+    "z": 1.15
+   },
+   {
+    "t": 56.36153846153846,
+    "d": 1.5,
+    "z": 0.82
+   },
+   {
+    "t": 59.56923076923077,
+    "d": 0.8,
+    "z": 1.6
+   },
+   {
+    "t": 64.18461538461538,
+    "d": 0.8,
+    "z": 1.6
+   },
+   {
+    "t": 67.20769230769231,
+    "d": 0.9,
+    "z": 1
+   },
+   {
+    "t": 70.34615384615385,
+    "d": 0.6,
+    "z": 1.35
+   },
+   {
+    "t": 77.30000000000001,
+    "d": 0.8,
+    "z": 1.45
+   },
+   {
+    "t": 84.93846153846154,
+    "d": 0.9,
+    "z": 1.15
+   },
+   {
+    "t": 89.93846153846154,
+    "d": 1.5,
+    "z": 0.82
+   },
+   {
+    "t": 92.0923076923077,
+    "d": 0.9,
+    "z": 1.15
+   },
+   {
+    "t": 92.86153846153846,
+    "d": 0.8,
+    "z": 1.3
+   },
+   {
+    "t": 96.93846153846154,
+    "d": 0.9,
+    "z": 1.6
+   },
+   {
+    "t": 107.31538461538462,
+    "d": 0.9,
+    "z": 0.95
+   },
+   {
+    "t": 110.97692307692307,
+    "d": 0.8,
+    "z": 1.25
+   },
+   {
+    "t": 114.43846153846154,
+    "d": 1.5,
+    "z": 0.85
+   },
+   {
+    "t": 117.74615384615385,
+    "d": 2,
+    "z": 1
+   },
+   {
+    "t": 122.87692307692309,
+    "d": 0.9,
+    "z": 1.45
+   },
+   {
+    "t": 129.3615384615385,
+    "d": 0.9,
+    "z": 1
+   },
+   {
+    "t": 136.6692307692308,
+    "d": 1.5,
+    "z": 0.62
+   },
+   {
+    "t": 140.44615384615386,
+    "d": 0.9,
+    "z": 1
+   },
+   {
+    "t": 143.90769230769234,
+    "d": 1,
+    "z": 1
+   },
+   {
+    "t": 146.31538461538463,
+    "d": 1.8,
+    "z": 0.9
+   },
+   {
+    "t": 153.56923076923078,
+    "d": 0.9,
+    "z": 1.15
+   },
+   {
+    "t": 157.26153846153846,
+    "d": 1,
+    "z": 1
+   },
+   {
+    "t": 165.6692307692308,
+    "d": 1,
+    "z": 1.15
+   },
+   {
+    "t": 169.71538461538464,
+    "d": 2.5,
+    "z": 0.85
+   }
+  ],
+  "chars": [
+   {
+    "name": "analyste",
+    "poses": [
+     [
+      0,
+      "type"
+     ],
+     [
+      1.7538461538461538,
+      "jump"
+     ],
+     [
+      8.138461538461538,
+      "shrug"
+     ],
+     [
+      10.83076923076923,
+      "loupe"
+     ],
+     [
+      147.71538461538464,
+      "point"
+     ],
+     [
+      153.8692307692308,
+      "nod"
+     ],
+     [
+      157.56153846153848,
+      "point"
+     ],
+     [
+      166.63846153846157,
+      "cheer"
+     ],
+     [
+      169.71538461538464,
+      "shrug"
+     ]
+    ],
+    "walks": [],
+    "exprs": [
+     -1,
+     1.7538461538461538,
+     7.369230769230769,
+     10.061538461538461,
+     153.8692307692308,
+     169.71538461538464
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 14.22307692307692,
+    "poses": [
+     [
+      16.06153846153846,
+      "point"
+     ],
+     [
+      23.6,
+      "point"
+     ],
+     [
+      28.215384615384615,
+      "nod"
+     ]
+    ],
+    "walks": [
+     14.523076923076921
+    ],
+    "exprs": [
+     -1,
+     28.215384615384615
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 47.753846153846155,
+    "poses": [
+     [
+      49.676923076923075,
+      "point"
+     ],
+     [
+      52.430769230769236,
+      "jump"
+     ]
+    ],
+    "walks": [
+     48.05384615384615,
+     52.430769230769236
+    ],
+    "exprs": [
+     -1,
+     52.330769230769235
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 29.3,
+    "poses": [
+     [
+      31.907692307692308,
+      "nod"
+     ],
+     [
+      39.830769230769235,
+      "point"
+     ],
+     [
+      40.215384615384615,
+      "jump"
+     ],
+     [
+      56.176923076923075,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     29.6,
+     38.67692307692308
+    ],
+    "exprs": [
+     -1,
+     31.907692307692308,
+     38.67692307692308,
+     40.215384615384615,
+     42.90769230769231,
+     47.753846153846155,
+     52.63076923076923
+    ]
+   },
+   {
+    "name": "ci-deployer",
+    "pop": 67.40769230769232,
+    "poses": [
+     [
+      70.44615384615385,
+      "hold"
+     ]
+    ],
+    "walks": [],
+    "exprs": [
+     -1,
+     70.44615384615385
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 57.261538461538464,
+    "poses": [
+     [
+      57.56153846153846,
+      "loupe"
+     ],
+     [
+      59.86923076923077,
+      "point"
+     ],
+     [
+      64.48461538461538,
+      "point"
+     ],
+     [
+      77.60000000000001,
+      "point"
+     ],
+     [
+      82.60000000000001,
+      "shrug"
+     ]
+    ],
+    "walks": [
+     57.56153846153846
+    ],
+    "exprs": [
+     -1,
+     70.44615384615385,
+     77.60000000000001
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 90.93846153846154,
+    "poses": [
+     [
+      92.2923076923077,
+      "hold"
+     ]
+    ],
+    "walks": [
+     97.13846153846154
+    ],
+    "exprs": [
+     -1
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 90.83846153846154,
+    "poses": [
+     [
+      98.2923076923077,
+      "point"
+     ],
+     [
+      109.63846153846154,
+      "shrug"
+     ]
+    ],
+    "walks": [
+     91.13846153846154
+    ],
+    "exprs": [
+     -1,
+     95.75384615384615,
+     100.56153846153846,
+     111.17692307692307
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 115.33846153846154,
+    "poses": [
+     [
+      116.40769230769232,
+      "loupe"
+     ],
+     [
+      130.71538461538464,
+      "point"
+     ],
+     [
+      132.25384615384615,
+      "jump"
+     ]
+    ],
+    "walks": [
+     115.63846153846154,
+     117.94615384615385
+    ],
+    "exprs": [
+     -1,
+     127.02307692307693,
+     129.56153846153848,
+     132.25384615384615
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 133.40769230769232,
+    "poses": [
+     [
+      134.1769230769231,
+      "point"
+     ],
+     [
+      136.4846153846154,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     133.40769230769232
+    ],
+    "exprs": [
+     -1
+    ]
+   }
+  ],
+  "says": [
+   "Trois heures douze. Alerte : un compte Gmail inconnu est devenu propriétaire du projet prod paiements.",
+   "Vous ne connaissez pas Google Cloud. Seule piste : ses journaux d'audit. Qui ? Quand ? D'où ? Et ensuite ?",
+   "Google Cloud, c'est un immeuble : l'organisation est le bâtiment, chaque projet un étage, avec machines et données.",
+   "Personne n'entre par la fenêtre : console, ligne de commande ou script, tout passe par le guichet : l'API.",
+   "Sans rien configurer, a-t-on une trace ? Oui : tout appel qui modifie un réglage est écrit dans le registre Admin Activity.",
+   "On croit qu'il fallait l'activer. Faux : toujours écrit, impossible à couper, gardé quatre cents jours. Les modifications sont rares : ça coûte peu.",
+   "Devinez : devenu propriétaire, l'attaquant peut-il effacer ce registre ? | Non : son coffre, Required, ne se supprime pas. L'historique est intact.",
+   "Ouvrons l'entrée de trois heures sept. Quoi ? Set I A M Policy, un changement de droits : le rôle Owner, donné au compte Gmail.",
+   "Et qui a signé ? | Pas un humain : ci déployeur, un compte de service, l'identité d'un robot. Sa clé a fuité.",
+   "D'où ? Une IP externe, et un nom d'outil déclaré par l'appelant lui-même : un indice, pas une preuve.",
+   "Côté sim, une règle tient en quatre champs : méthode, signataire, adresse, rôle ajouté.",
+   "A-t-il lu les fichiers clients ? Admin Activity note les modifications, pas les lectures.",
+   "Ces téléchargements sont-ils notés ailleurs ? | Par défaut, non. Les lectures relèvent d'un second registre, Data Access, éteint par défaut.",
+   "Pourquoi ? Des millions de lectures : trop de volume, trop de coût. Résultat : impossible de prouver le vol, ni son absence.",
+   "Réflexe d'enquête : pivoter sur l'identité, et filtrer tout ce qu'a fait ce compte Gmail.",
+   "Trois heures neuf : Create Service Account Key. Il se fabrique une clé de secours pour ci déployeur.",
+   "On croit que retirer le rôle suffit. Faux : avec cette clé, il redevient ci déployeur, et se refait propriétaire.",
+   "Recul : chaque projet a son propre registre. Un sink agrégé sur l'organisation les copie tous vers votre sim, au-delà de quatre cents jours.",
+   "Verdict : clé volée utilisée à trois heures sept, clé de secours à trois heures neuf. On retire Owner, on supprime les deux clés.",
+   "Vos trois actions : alerter sur ces deux méthodes, un sink vers le sim, Data Access sur les données sensibles.",
+   "Vous savez maintenant dire qui, quand, d'où, et la suite. Nuance : une IP ou un e-mail peuvent être masqués."
+  ]
+ },
+ "caps": [
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c1_25.jpg",
+   "t": 2.292307692307692,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 784,
+    "cy": 284,
+    "area": 0.059
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.059
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c1_50.jpg",
+   "t": 3.9846153846153847,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 800,
+    "cy": 445,
+    "area": 0.042
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.042
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c1_75.jpg",
+   "t": 5.676923076923076,
+   "ntext": 4,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 445,
+    "area": 0.042
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "03:12 | ALERTE | nuitblanche42@gmail.com | Owner"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.042
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c2_25.jpg",
+   "t": 9.157692307692308,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 1185,
+    "cy": 770,
+    "area": 0.041
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1185,
+      770
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.041
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "focus"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c2_50.jpg",
+   "t": 10.946153846153845,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 1188,
+    "cy": 763,
+    "area": 0.03
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.03
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "focus"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c2_75.jpg",
+   "t": 12.734615384615385,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 675,
+    "cy": 313,
+    "area": 0.017
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "Owner"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.017
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c3_25.jpg",
+   "t": 16.407692307692304,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 800,
+    "cy": 422,
+    "area": 0.267
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c3_50.jpg",
+   "t": 18.29230769230769,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 800,
+    "cy": 424,
+    "area": 0.256
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Organisation",
+     "v": 40.2
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c3_75.jpg",
+   "t": 20.176923076923075,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 800,
+    "cy": 463,
+    "area": 0.127
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Organisation"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c4_25.jpg",
+   "t": 23.946153846153845,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1073,
+    "cy": 198,
+    "area": 0.083
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c4_50.jpg",
+   "t": 25.83076923076923,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1074,
+    "cy": 282,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c4_75.jpg",
+   "t": 27.715384615384615,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1074,
+    "cy": 282,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c5_25.jpg",
+   "t": 31.773076923076925,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 880,
+    "cy": 502,
+    "area": 0.059
+   },
+   "issues": [
+    {
+     "k": "subj_occluded",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c5_50.jpg",
+   "t": 33.94615384615385,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 880,
+    "cy": 502,
+    "area": 0.059
+   },
+   "issues": [
+    {
+     "k": "subj_occluded",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c5_75.jpg",
+   "t": 36.11923076923077,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 880,
+    "cy": 502,
+    "area": 0.059
+   },
+   "issues": [
+    {
+     "k": "subj_occluded",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c6_25.jpg",
+   "t": 40.65769230769231,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 700,
+    "cy": 375,
+    "area": 0.029
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Admin Activity"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_occluded",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c6_50.jpg",
+   "t": 43.02307692307693,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 1639,
+    "cy": 384,
+    "area": 0.009
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "400"
+    },
+    {
+     "k": "cut",
+     "s": "jours"
+    },
+    {
+     "k": "small",
+     "s": "jours",
+     "v": 42.8
+    },
+    {
+     "k": "overlap",
+     "s": "400 / jours"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1639,
+      384
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.009
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_occluded",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c6_75.jpg",
+   "t": 45.38846153846154,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 1085,
+    "cy": 662,
+    "area": 0.144
+   },
+   "issues": [
+    {
+     "k": "overlap",
+     "s": "400 / jours"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "focus"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c7_25.jpg",
+   "t": 50.205769230769235,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 648,
+    "cy": 474,
+    "area": 0.083
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c7_50.jpg",
+   "t": 52.65769230769231,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 783,
+    "cy": 402,
+    "area": 0.285
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_occluded",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c7_75.jpg",
+   "t": 55.10961538461538,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 800,
+    "cy": 402,
+    "area": 0.295
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_occluded",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c9_25.jpg",
+   "t": 60.02307692307692,
+   "ntext": 1,
+   "words": 3,
+   "focus": {
+    "cx": 696,
+    "cy": 425,
+    "area": 0.095
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c9",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c9_50.jpg",
+   "t": 62.48461538461538,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 450,
+    "area": 0.147
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c9_75.jpg",
+   "t": 64.94615384615385,
+   "ntext": 3,
+   "words": 6,
+   "focus": {
+    "cx": 800,
+    "cy": 450,
+    "area": 0.147
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "SetIamPolicy"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c10_25.jpg",
+   "t": 69.95576923076923,
+   "ntext": 2,
+   "words": 5,
+   "focus": {
+    "cx": 1240,
+    "cy": 658,
+    "area": 0.021
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.021
+    },
+    {
+     "k": "subj_occluded",
+     "s": "perso:ci-deployer"
+    },
+    {
+     "k": "subj_occluded",
+     "s": "focus"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c10_50.jpg",
+   "t": 72.50384615384615,
+   "ntext": 2,
+   "words": 5,
+   "focus": {
+    "cx": -293,
+    "cy": 572,
+    "area": 0.003
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Entrée de 03:07"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -293,
+      572
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:ci-deployer"
+    },
+    {
+     "k": "subj_occluded",
+     "s": "perso:ci-deployer"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c10_75.jpg",
+   "t": 75.05192307692309,
+   "ntext": 2,
+   "words": 5,
+   "focus": {
+    "cx": -293,
+    "cy": 572,
+    "area": 0.003
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Entrée de 03:07"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -293,
+      572
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:ci-deployer"
+    },
+    {
+     "k": "subj_occluded",
+     "s": "perso:ci-deployer"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c11_25.jpg",
+   "t": 79.4846153846154,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 684,
+    "cy": 407,
+    "area": 0.121
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "ci-deployer"
+    },
+    {
+     "k": "subj_occluded",
+     "s": "perso:ci-deployer"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c11_50.jpg",
+   "t": 81.36923076923078,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 684,
+    "cy": 407,
+    "area": 0.121
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "ci-deployer"
+    },
+    {
+     "k": "subj_occluded",
+     "s": "perso:ci-deployer"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c11_75.jpg",
+   "t": 83.25384615384615,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 684,
+    "cy": 407,
+    "area": 0.121
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "ci-deployer"
+    },
+    {
+     "k": "subj_occluded",
+     "s": "perso:ci-deployer"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c12_25.jpg",
+   "t": 86.63846153846154,
+   "ntext": 2,
+   "words": 13,
+   "focus": {
+    "cx": 800,
+    "cy": 404,
+    "area": 0.494
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c12_50.jpg",
+   "t": 88.13846153846154,
+   "ntext": 2,
+   "words": 13,
+   "focus": {
+    "cx": 800,
+    "cy": 404,
+    "area": 0.494
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c12_75.jpg",
+   "t": 89.63846153846154,
+   "ntext": 2,
+   "words": 13,
+   "focus": {
+    "cx": 800,
+    "cy": 404,
+    "area": 0.494
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c13_25.jpg",
+   "t": 92.63846153846154,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 990,
+    "cy": 691,
+    "area": 0.018
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.018
+    },
+    {
+     "k": "subj_occluded",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c13_50.jpg",
+   "t": 94.13846153846154,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 917,
+    "cy": 465,
+    "area": 0.034
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "factures-clients"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.034
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c13_75.jpg",
+   "t": 95.63846153846154,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 917,
+    "cy": 465,
+    "area": 0.034
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "factures-clients"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.034
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c14_25.jpg",
+   "t": 99.59038461538462,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 749,
+    "cy": 302,
+    "area": 0.035
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "factures-clients"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.035
+    },
+    {
+     "k": "subj_occluded",
+     "s": "focus"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c14_50.jpg",
+   "t": 102.0423076923077,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 737,
+    "cy": 593,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "factures-clients"
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c14_75.jpg",
+   "t": 104.49423076923077,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 736,
+    "cy": 581,
+    "area": 0.06
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "factures-clients"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.06
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c15_25.jpg",
+   "t": 109.11923076923077,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 758,
+    "cy": 493,
+    "area": 0.161
+   },
+   "issues": [
+    {
+     "k": "subj_occluded",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c15_50.jpg",
+   "t": 111.29230769230769,
+   "ntext": 5,
+   "words": 6,
+   "focus": {
+    "cx": 754,
+    "cy": 514,
+    "area": 0.085
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 5,
+     "s": "factures-clients | Data Access | OFF | € | ?"
+    },
+    {
+     "k": "subj_occluded",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c15_75.jpg",
+   "t": 113.46538461538462,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 800,
+    "cy": 453,
+    "area": 0.198
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c16_25.jpg",
+   "t": 117.23461538461538,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1055,
+    "cy": 545,
+    "area": 0.017
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.017
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c16_50.jpg",
+   "t": 118.83076923076923,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 619,
+    "cy": 587,
+    "area": 0.017
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.017
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c16_75.jpg",
+   "t": 120.42692307692307,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 550,
+    "cy": 603,
+    "area": 0.02
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.02
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c17_25.jpg",
+   "t": 123.90769230769232,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 626,
+    "cy": 537,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c17_50.jpg",
+   "t": 125.7923076923077,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 620,
+    "cy": 537,
+    "area": 0.019
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.019
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c17_75.jpg",
+   "t": 127.67692307692309,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1046,
+    "cy": 551,
+    "area": 0.009
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.009
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c18_25.jpg",
+   "t": 131.63846153846154,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 1097,
+    "cy": 330,
+    "area": 0.004
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.004
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c18_50.jpg",
+   "t": 133.71538461538464,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 1400,
+    "cy": 749,
+    "area": 0.019
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1400,
+      749
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.019
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "focus"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c18_75.jpg",
+   "t": 135.7923076923077,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 1100,
+    "cy": 753,
+    "area": 0.018
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.018
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "focus"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c20_25.jpg",
+   "t": 140.33076923076925,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 788,
+    "cy": 462,
+    "area": 0.219
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c20_50.jpg",
+   "t": 142.79230769230773,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 680,
+    "cy": 353,
+    "area": 0.016
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.016
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c20_75.jpg",
+   "t": 145.25384615384618,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 880,
+    "cy": 604,
+    "area": 0.068
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "SIEM"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c21",
+   "sc": "s8",
+   "q": 0.25,
+   "file": "caps/c21_25.jpg",
+   "t": 150.1769230769231,
+   "ntext": 4,
+   "words": 4,
+   "focus": {
+    "cx": 1178,
+    "cy": 360,
+    "area": 0.099
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Owner",
+     "v": 41.4
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "ALERTE | nuitblanche42@gmail.com | Owner | 03:07"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c21",
+   "sc": "s8",
+   "q": 0.5,
+   "file": "caps/c21_50.jpg",
+   "t": 152.63846153846157,
+   "ntext": 5,
+   "words": 5,
+   "focus": {
+    "cx": 1178,
+    "cy": 360,
+    "area": 0.099
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Owner",
+     "v": 41.4
+    },
+    {
+     "k": "toomanytext",
+     "v": 5,
+     "s": "ALERTE | nuitblanche42@gmail.com | Owner | 03:07 | 03:09"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c21",
+   "sc": "s8",
+   "q": 0.75,
+   "file": "caps/c21_75.jpg",
+   "t": 155.10000000000002,
+   "ntext": 4,
+   "words": 4,
+   "focus": {
+    "cx": 462,
+    "cy": 413,
+    "area": 0.402
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "03:09"
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "ALERTE | nuitblanche42@gmail.com | 03:07 | 03:09"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c22",
+   "sc": "s8",
+   "q": 0.25,
+   "file": "caps/c22_25.jpg",
+   "t": 159.63846153846154,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 460,
+    "cy": 450,
+    "area": 0.05
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "03:09"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c22",
+   "sc": "s8",
+   "q": 0.5,
+   "file": "caps/c22_50.jpg",
+   "t": 161.71538461538464,
+   "ntext": 4,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 450,
+    "area": 0.05
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "03:09"
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "03:07 | 03:09 | Alerte | Sink"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c22",
+   "sc": "s8",
+   "q": 0.75,
+   "file": "caps/c22_75.jpg",
+   "t": 163.7923076923077,
+   "ntext": 5,
+   "words": 6,
+   "focus": {
+    "cx": 1140,
+    "cy": 450,
+    "area": 0.05
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "03:09"
+    },
+    {
+     "k": "toomanytext",
+     "v": 5,
+     "s": "03:07 | 03:09 | Alerte | Sink | Data Access"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c23",
+   "sc": "s8",
+   "q": 0.25,
+   "file": "caps/c23_25.jpg",
+   "t": 167.94615384615386,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 524,
+    "cy": 312,
+    "area": 0.002
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.002
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c23",
+   "sc": "s8",
+   "q": 0.5,
+   "file": "caps/c23_50.jpg",
+   "t": 170.02307692307696,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 524,
+    "cy": 311,
+    "area": 0.002
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.002
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c23",
+   "sc": "s8",
+   "q": 0.75,
+   "file": "caps/c23_75.jpg",
+   "t": 172.10000000000002,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 545,
+    "cy": 229,
+    "area": 0.001
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.001
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  }
+ ],
+ "frozen": [
+  {
+   "t": 0,
+   "file": "frozen/f0000.png"
+  },
+  {
+   "t": 0.5,
+   "file": "frozen/f0001.png"
+  },
+  {
+   "t": 1,
+   "file": "frozen/f0002.png"
+  },
+  {
+   "t": 1.5,
+   "file": "frozen/f0003.png"
+  },
+  {
+   "t": 2,
+   "file": "frozen/f0004.png"
+  },
+  {
+   "t": 2.5,
+   "file": "frozen/f0005.png"
+  },
+  {
+   "t": 3,
+   "file": "frozen/f0006.png"
+  },
+  {
+   "t": 3.5,
+   "file": "frozen/f0007.png"
+  },
+  {
+   "t": 4,
+   "file": "frozen/f0008.png"
+  },
+  {
+   "t": 4.5,
+   "file": "frozen/f0009.png"
+  },
+  {
+   "t": 5,
+   "file": "frozen/f0010.png"
+  },
+  {
+   "t": 5.5,
+   "file": "frozen/f0011.png"
+  },
+  {
+   "t": 6,
+   "file": "frozen/f0012.png"
+  },
+  {
+   "t": 6.5,
+   "file": "frozen/f0013.png"
+  },
+  {
+   "t": 7,
+   "file": "frozen/f0014.png"
+  },
+  {
+   "t": 7.5,
+   "file": "frozen/f0015.png"
+  },
+  {
+   "t": 8,
+   "file": "frozen/f0016.png"
+  },
+  {
+   "t": 8.5,
+   "file": "frozen/f0017.png"
+  },
+  {
+   "t": 9,
+   "file": "frozen/f0018.png"
+  },
+  {
+   "t": 9.5,
+   "file": "frozen/f0019.png"
+  },
+  {
+   "t": 10,
+   "file": "frozen/f0020.png"
+  },
+  {
+   "t": 10.5,
+   "file": "frozen/f0021.png"
+  },
+  {
+   "t": 11,
+   "file": "frozen/f0022.png"
+  },
+  {
+   "t": 11.5,
+   "file": "frozen/f0023.png"
+  },
+  {
+   "t": 12,
+   "file": "frozen/f0024.png"
+  },
+  {
+   "t": 12.5,
+   "file": "frozen/f0025.png"
+  },
+  {
+   "t": 13,
+   "file": "frozen/f0026.png"
+  },
+  {
+   "t": 13.5,
+   "file": "frozen/f0027.png"
+  },
+  {
+   "t": 14,
+   "file": "frozen/f0028.png"
+  },
+  {
+   "t": 14.5,
+   "file": "frozen/f0029.png"
+  },
+  {
+   "t": 15,
+   "file": "frozen/f0030.png"
+  },
+  {
+   "t": 15.5,
+   "file": "frozen/f0031.png"
+  },
+  {
+   "t": 16,
+   "file": "frozen/f0032.png"
+  },
+  {
+   "t": 16.5,
+   "file": "frozen/f0033.png"
+  },
+  {
+   "t": 17,
+   "file": "frozen/f0034.png"
+  },
+  {
+   "t": 17.5,
+   "file": "frozen/f0035.png"
+  },
+  {
+   "t": 18,
+   "file": "frozen/f0036.png"
+  },
+  {
+   "t": 18.5,
+   "file": "frozen/f0037.png"
+  },
+  {
+   "t": 19,
+   "file": "frozen/f0038.png"
+  },
+  {
+   "t": 19.5,
+   "file": "frozen/f0039.png"
+  },
+  {
+   "t": 20,
+   "file": "frozen/f0040.png"
+  },
+  {
+   "t": 20.5,
+   "file": "frozen/f0041.png"
+  },
+  {
+   "t": 21,
+   "file": "frozen/f0042.png"
+  },
+  {
+   "t": 21.5,
+   "file": "frozen/f0043.png"
+  },
+  {
+   "t": 22,
+   "file": "frozen/f0044.png"
+  },
+  {
+   "t": 22.5,
+   "file": "frozen/f0045.png"
+  },
+  {
+   "t": 23,
+   "file": "frozen/f0046.png"
+  },
+  {
+   "t": 23.5,
+   "file": "frozen/f0047.png"
+  },
+  {
+   "t": 24,
+   "file": "frozen/f0048.png"
+  },
+  {
+   "t": 24.5,
+   "file": "frozen/f0049.png"
+  },
+  {
+   "t": 25,
+   "file": "frozen/f0050.png"
+  },
+  {
+   "t": 25.5,
+   "file": "frozen/f0051.png"
+  },
+  {
+   "t": 26,
+   "file": "frozen/f0052.png"
+  },
+  {
+   "t": 26.5,
+   "file": "frozen/f0053.png"
+  },
+  {
+   "t": 27,
+   "file": "frozen/f0054.png"
+  },
+  {
+   "t": 27.5,
+   "file": "frozen/f0055.png"
+  },
+  {
+   "t": 28,
+   "file": "frozen/f0056.png"
+  },
+  {
+   "t": 28.5,
+   "file": "frozen/f0057.png"
+  },
+  {
+   "t": 29,
+   "file": "frozen/f0058.png"
+  },
+  {
+   "t": 29.5,
+   "file": "frozen/f0059.png"
+  },
+  {
+   "t": 30,
+   "file": "frozen/f0060.png"
+  },
+  {
+   "t": 30.5,
+   "file": "frozen/f0061.png"
+  },
+  {
+   "t": 31,
+   "file": "frozen/f0062.png"
+  },
+  {
+   "t": 31.5,
+   "file": "frozen/f0063.png"
+  },
+  {
+   "t": 32,
+   "file": "frozen/f0064.png"
+  },
+  {
+   "t": 32.5,
+   "file": "frozen/f0065.png"
+  },
+  {
+   "t": 33,
+   "file": "frozen/f0066.png"
+  },
+  {
+   "t": 33.5,
+   "file": "frozen/f0067.png"
+  },
+  {
+   "t": 34,
+   "file": "frozen/f0068.png"
+  },
+  {
+   "t": 34.5,
+   "file": "frozen/f0069.png"
+  },
+  {
+   "t": 35,
+   "file": "frozen/f0070.png"
+  },
+  {
+   "t": 35.5,
+   "file": "frozen/f0071.png"
+  },
+  {
+   "t": 36,
+   "file": "frozen/f0072.png"
+  },
+  {
+   "t": 36.5,
+   "file": "frozen/f0073.png"
+  },
+  {
+   "t": 37,
+   "file": "frozen/f0074.png"
+  },
+  {
+   "t": 37.5,
+   "file": "frozen/f0075.png"
+  },
+  {
+   "t": 38,
+   "file": "frozen/f0076.png"
+  },
+  {
+   "t": 38.5,
+   "file": "frozen/f0077.png"
+  },
+  {
+   "t": 39,
+   "file": "frozen/f0078.png"
+  },
+  {
+   "t": 39.5,
+   "file": "frozen/f0079.png"
+  },
+  {
+   "t": 40,
+   "file": "frozen/f0080.png"
+  },
+  {
+   "t": 40.5,
+   "file": "frozen/f0081.png"
+  },
+  {
+   "t": 41,
+   "file": "frozen/f0082.png"
+  },
+  {
+   "t": 41.5,
+   "file": "frozen/f0083.png"
+  },
+  {
+   "t": 42,
+   "file": "frozen/f0084.png"
+  },
+  {
+   "t": 42.5,
+   "file": "frozen/f0085.png"
+  },
+  {
+   "t": 43,
+   "file": "frozen/f0086.png"
+  },
+  {
+   "t": 43.5,
+   "file": "frozen/f0087.png"
+  },
+  {
+   "t": 44,
+   "file": "frozen/f0088.png"
+  },
+  {
+   "t": 44.5,
+   "file": "frozen/f0089.png"
+  },
+  {
+   "t": 45,
+   "file": "frozen/f0090.png"
+  },
+  {
+   "t": 45.5,
+   "file": "frozen/f0091.png"
+  },
+  {
+   "t": 46,
+   "file": "frozen/f0092.png"
+  },
+  {
+   "t": 46.5,
+   "file": "frozen/f0093.png"
+  },
+  {
+   "t": 47,
+   "file": "frozen/f0094.png"
+  },
+  {
+   "t": 47.5,
+   "file": "frozen/f0095.png"
+  },
+  {
+   "t": 48,
+   "file": "frozen/f0096.png"
+  },
+  {
+   "t": 48.5,
+   "file": "frozen/f0097.png"
+  },
+  {
+   "t": 49,
+   "file": "frozen/f0098.png"
+  },
+  {
+   "t": 49.5,
+   "file": "frozen/f0099.png"
+  },
+  {
+   "t": 50,
+   "file": "frozen/f0100.png"
+  },
+  {
+   "t": 50.5,
+   "file": "frozen/f0101.png"
+  },
+  {
+   "t": 51,
+   "file": "frozen/f0102.png"
+  },
+  {
+   "t": 51.5,
+   "file": "frozen/f0103.png"
+  },
+  {
+   "t": 52,
+   "file": "frozen/f0104.png"
+  },
+  {
+   "t": 52.5,
+   "file": "frozen/f0105.png"
+  },
+  {
+   "t": 53,
+   "file": "frozen/f0106.png"
+  },
+  {
+   "t": 53.5,
+   "file": "frozen/f0107.png"
+  },
+  {
+   "t": 54,
+   "file": "frozen/f0108.png"
+  },
+  {
+   "t": 54.5,
+   "file": "frozen/f0109.png"
+  },
+  {
+   "t": 55,
+   "file": "frozen/f0110.png"
+  },
+  {
+   "t": 55.5,
+   "file": "frozen/f0111.png"
+  },
+  {
+   "t": 56,
+   "file": "frozen/f0112.png"
+  },
+  {
+   "t": 56.5,
+   "file": "frozen/f0113.png"
+  },
+  {
+   "t": 57,
+   "file": "frozen/f0114.png"
+  },
+  {
+   "t": 57.5,
+   "file": "frozen/f0115.png"
+  },
+  {
+   "t": 58,
+   "file": "frozen/f0116.png"
+  },
+  {
+   "t": 58.5,
+   "file": "frozen/f0117.png"
+  },
+  {
+   "t": 59,
+   "file": "frozen/f0118.png"
+  },
+  {
+   "t": 59.5,
+   "file": "frozen/f0119.png"
+  },
+  {
+   "t": 60,
+   "file": "frozen/f0120.png"
+  },
+  {
+   "t": 60.5,
+   "file": "frozen/f0121.png"
+  },
+  {
+   "t": 61,
+   "file": "frozen/f0122.png"
+  },
+  {
+   "t": 61.5,
+   "file": "frozen/f0123.png"
+  },
+  {
+   "t": 62,
+   "file": "frozen/f0124.png"
+  },
+  {
+   "t": 62.5,
+   "file": "frozen/f0125.png"
+  },
+  {
+   "t": 63,
+   "file": "frozen/f0126.png"
+  },
+  {
+   "t": 63.5,
+   "file": "frozen/f0127.png"
+  },
+  {
+   "t": 64,
+   "file": "frozen/f0128.png"
+  },
+  {
+   "t": 64.5,
+   "file": "frozen/f0129.png"
+  },
+  {
+   "t": 65,
+   "file": "frozen/f0130.png"
+  },
+  {
+   "t": 65.5,
+   "file": "frozen/f0131.png"
+  },
+  {
+   "t": 66,
+   "file": "frozen/f0132.png"
+  },
+  {
+   "t": 66.5,
+   "file": "frozen/f0133.png"
+  },
+  {
+   "t": 67,
+   "file": "frozen/f0134.png"
+  },
+  {
+   "t": 67.5,
+   "file": "frozen/f0135.png"
+  },
+  {
+   "t": 68,
+   "file": "frozen/f0136.png"
+  },
+  {
+   "t": 68.5,
+   "file": "frozen/f0137.png"
+  },
+  {
+   "t": 69,
+   "file": "frozen/f0138.png"
+  },
+  {
+   "t": 69.5,
+   "file": "frozen/f0139.png"
+  },
+  {
+   "t": 70,
+   "file": "frozen/f0140.png"
+  },
+  {
+   "t": 70.5,
+   "file": "frozen/f0141.png"
+  },
+  {
+   "t": 71,
+   "file": "frozen/f0142.png"
+  },
+  {
+   "t": 71.5,
+   "file": "frozen/f0143.png"
+  },
+  {
+   "t": 72,
+   "file": "frozen/f0144.png"
+  },
+  {
+   "t": 72.5,
+   "file": "frozen/f0145.png"
+  },
+  {
+   "t": 73,
+   "file": "frozen/f0146.png"
+  },
+  {
+   "t": 73.5,
+   "file": "frozen/f0147.png"
+  },
+  {
+   "t": 74,
+   "file": "frozen/f0148.png"
+  },
+  {
+   "t": 74.5,
+   "file": "frozen/f0149.png"
+  },
+  {
+   "t": 75,
+   "file": "frozen/f0150.png"
+  },
+  {
+   "t": 75.5,
+   "file": "frozen/f0151.png"
+  },
+  {
+   "t": 76,
+   "file": "frozen/f0152.png"
+  },
+  {
+   "t": 76.5,
+   "file": "frozen/f0153.png"
+  },
+  {
+   "t": 77,
+   "file": "frozen/f0154.png"
+  },
+  {
+   "t": 77.5,
+   "file": "frozen/f0155.png"
+  },
+  {
+   "t": 78,
+   "file": "frozen/f0156.png"
+  },
+  {
+   "t": 78.5,
+   "file": "frozen/f0157.png"
+  },
+  {
+   "t": 79,
+   "file": "frozen/f0158.png"
+  },
+  {
+   "t": 79.5,
+   "file": "frozen/f0159.png"
+  },
+  {
+   "t": 80,
+   "file": "frozen/f0160.png"
+  },
+  {
+   "t": 80.5,
+   "file": "frozen/f0161.png"
+  },
+  {
+   "t": 81,
+   "file": "frozen/f0162.png"
+  },
+  {
+   "t": 81.5,
+   "file": "frozen/f0163.png"
+  },
+  {
+   "t": 82,
+   "file": "frozen/f0164.png"
+  },
+  {
+   "t": 82.5,
+   "file": "frozen/f0165.png"
+  },
+  {
+   "t": 83,
+   "file": "frozen/f0166.png"
+  },
+  {
+   "t": 83.5,
+   "file": "frozen/f0167.png"
+  },
+  {
+   "t": 84,
+   "file": "frozen/f0168.png"
+  },
+  {
+   "t": 84.5,
+   "file": "frozen/f0169.png"
+  },
+  {
+   "t": 85,
+   "file": "frozen/f0170.png"
+  },
+  {
+   "t": 85.5,
+   "file": "frozen/f0171.png"
+  },
+  {
+   "t": 86,
+   "file": "frozen/f0172.png"
+  },
+  {
+   "t": 86.5,
+   "file": "frozen/f0173.png"
+  },
+  {
+   "t": 87,
+   "file": "frozen/f0174.png"
+  },
+  {
+   "t": 87.5,
+   "file": "frozen/f0175.png"
+  },
+  {
+   "t": 88,
+   "file": "frozen/f0176.png"
+  },
+  {
+   "t": 88.5,
+   "file": "frozen/f0177.png"
+  },
+  {
+   "t": 89,
+   "file": "frozen/f0178.png"
+  },
+  {
+   "t": 89.5,
+   "file": "frozen/f0179.png"
+  },
+  {
+   "t": 90,
+   "file": "frozen/f0180.png"
+  },
+  {
+   "t": 90.5,
+   "file": "frozen/f0181.png"
+  },
+  {
+   "t": 91,
+   "file": "frozen/f0182.png"
+  },
+  {
+   "t": 91.5,
+   "file": "frozen/f0183.png"
+  },
+  {
+   "t": 92,
+   "file": "frozen/f0184.png"
+  },
+  {
+   "t": 92.5,
+   "file": "frozen/f0185.png"
+  },
+  {
+   "t": 93,
+   "file": "frozen/f0186.png"
+  },
+  {
+   "t": 93.5,
+   "file": "frozen/f0187.png"
+  },
+  {
+   "t": 94,
+   "file": "frozen/f0188.png"
+  },
+  {
+   "t": 94.5,
+   "file": "frozen/f0189.png"
+  },
+  {
+   "t": 95,
+   "file": "frozen/f0190.png"
+  },
+  {
+   "t": 95.5,
+   "file": "frozen/f0191.png"
+  },
+  {
+   "t": 96,
+   "file": "frozen/f0192.png"
+  },
+  {
+   "t": 96.5,
+   "file": "frozen/f0193.png"
+  },
+  {
+   "t": 97,
+   "file": "frozen/f0194.png"
+  },
+  {
+   "t": 97.5,
+   "file": "frozen/f0195.png"
+  },
+  {
+   "t": 98,
+   "file": "frozen/f0196.png"
+  },
+  {
+   "t": 98.5,
+   "file": "frozen/f0197.png"
+  },
+  {
+   "t": 99,
+   "file": "frozen/f0198.png"
+  },
+  {
+   "t": 99.5,
+   "file": "frozen/f0199.png"
+  },
+  {
+   "t": 100,
+   "file": "frozen/f0200.png"
+  },
+  {
+   "t": 100.5,
+   "file": "frozen/f0201.png"
+  },
+  {
+   "t": 101,
+   "file": "frozen/f0202.png"
+  },
+  {
+   "t": 101.5,
+   "file": "frozen/f0203.png"
+  },
+  {
+   "t": 102,
+   "file": "frozen/f0204.png"
+  },
+  {
+   "t": 102.5,
+   "file": "frozen/f0205.png"
+  },
+  {
+   "t": 103,
+   "file": "frozen/f0206.png"
+  },
+  {
+   "t": 103.5,
+   "file": "frozen/f0207.png"
+  },
+  {
+   "t": 104,
+   "file": "frozen/f0208.png"
+  },
+  {
+   "t": 104.5,
+   "file": "frozen/f0209.png"
+  },
+  {
+   "t": 105,
+   "file": "frozen/f0210.png"
+  },
+  {
+   "t": 105.5,
+   "file": "frozen/f0211.png"
+  },
+  {
+   "t": 106,
+   "file": "frozen/f0212.png"
+  },
+  {
+   "t": 106.5,
+   "file": "frozen/f0213.png"
+  },
+  {
+   "t": 107,
+   "file": "frozen/f0214.png"
+  },
+  {
+   "t": 107.5,
+   "file": "frozen/f0215.png"
+  },
+  {
+   "t": 108,
+   "file": "frozen/f0216.png"
+  },
+  {
+   "t": 108.5,
+   "file": "frozen/f0217.png"
+  },
+  {
+   "t": 109,
+   "file": "frozen/f0218.png"
+  },
+  {
+   "t": 109.5,
+   "file": "frozen/f0219.png"
+  },
+  {
+   "t": 110,
+   "file": "frozen/f0220.png"
+  },
+  {
+   "t": 110.5,
+   "file": "frozen/f0221.png"
+  },
+  {
+   "t": 111,
+   "file": "frozen/f0222.png"
+  },
+  {
+   "t": 111.5,
+   "file": "frozen/f0223.png"
+  },
+  {
+   "t": 112,
+   "file": "frozen/f0224.png"
+  },
+  {
+   "t": 112.5,
+   "file": "frozen/f0225.png"
+  },
+  {
+   "t": 113,
+   "file": "frozen/f0226.png"
+  },
+  {
+   "t": 113.5,
+   "file": "frozen/f0227.png"
+  },
+  {
+   "t": 114,
+   "file": "frozen/f0228.png"
+  },
+  {
+   "t": 114.5,
+   "file": "frozen/f0229.png"
+  },
+  {
+   "t": 115,
+   "file": "frozen/f0230.png"
+  },
+  {
+   "t": 115.5,
+   "file": "frozen/f0231.png"
+  },
+  {
+   "t": 116,
+   "file": "frozen/f0232.png"
+  },
+  {
+   "t": 116.5,
+   "file": "frozen/f0233.png"
+  },
+  {
+   "t": 117,
+   "file": "frozen/f0234.png"
+  },
+  {
+   "t": 117.5,
+   "file": "frozen/f0235.png"
+  },
+  {
+   "t": 118,
+   "file": "frozen/f0236.png"
+  },
+  {
+   "t": 118.5,
+   "file": "frozen/f0237.png"
+  },
+  {
+   "t": 119,
+   "file": "frozen/f0238.png"
+  },
+  {
+   "t": 119.5,
+   "file": "frozen/f0239.png"
+  },
+  {
+   "t": 120,
+   "file": "frozen/f0240.png"
+  },
+  {
+   "t": 120.5,
+   "file": "frozen/f0241.png"
+  },
+  {
+   "t": 121,
+   "file": "frozen/f0242.png"
+  },
+  {
+   "t": 121.5,
+   "file": "frozen/f0243.png"
+  },
+  {
+   "t": 122,
+   "file": "frozen/f0244.png"
+  },
+  {
+   "t": 122.5,
+   "file": "frozen/f0245.png"
+  },
+  {
+   "t": 123,
+   "file": "frozen/f0246.png"
+  },
+  {
+   "t": 123.5,
+   "file": "frozen/f0247.png"
+  },
+  {
+   "t": 124,
+   "file": "frozen/f0248.png"
+  },
+  {
+   "t": 124.5,
+   "file": "frozen/f0249.png"
+  },
+  {
+   "t": 125,
+   "file": "frozen/f0250.png"
+  },
+  {
+   "t": 125.5,
+   "file": "frozen/f0251.png"
+  },
+  {
+   "t": 126,
+   "file": "frozen/f0252.png"
+  },
+  {
+   "t": 126.5,
+   "file": "frozen/f0253.png"
+  },
+  {
+   "t": 127,
+   "file": "frozen/f0254.png"
+  },
+  {
+   "t": 127.5,
+   "file": "frozen/f0255.png"
+  },
+  {
+   "t": 128,
+   "file": "frozen/f0256.png"
+  },
+  {
+   "t": 128.5,
+   "file": "frozen/f0257.png"
+  },
+  {
+   "t": 129,
+   "file": "frozen/f0258.png"
+  },
+  {
+   "t": 129.5,
+   "file": "frozen/f0259.png"
+  },
+  {
+   "t": 130,
+   "file": "frozen/f0260.png"
+  },
+  {
+   "t": 130.5,
+   "file": "frozen/f0261.png"
+  },
+  {
+   "t": 131,
+   "file": "frozen/f0262.png"
+  },
+  {
+   "t": 131.5,
+   "file": "frozen/f0263.png"
+  },
+  {
+   "t": 132,
+   "file": "frozen/f0264.png"
+  },
+  {
+   "t": 132.5,
+   "file": "frozen/f0265.png"
+  },
+  {
+   "t": 133,
+   "file": "frozen/f0266.png"
+  },
+  {
+   "t": 133.5,
+   "file": "frozen/f0267.png"
+  },
+  {
+   "t": 134,
+   "file": "frozen/f0268.png"
+  },
+  {
+   "t": 134.5,
+   "file": "frozen/f0269.png"
+  },
+  {
+   "t": 135,
+   "file": "frozen/f0270.png"
+  },
+  {
+   "t": 135.5,
+   "file": "frozen/f0271.png"
+  },
+  {
+   "t": 136,
+   "file": "frozen/f0272.png"
+  },
+  {
+   "t": 136.5,
+   "file": "frozen/f0273.png"
+  },
+  {
+   "t": 137,
+   "file": "frozen/f0274.png"
+  },
+  {
+   "t": 137.5,
+   "file": "frozen/f0275.png"
+  },
+  {
+   "t": 138,
+   "file": "frozen/f0276.png"
+  },
+  {
+   "t": 138.5,
+   "file": "frozen/f0277.png"
+  },
+  {
+   "t": 139,
+   "file": "frozen/f0278.png"
+  },
+  {
+   "t": 139.5,
+   "file": "frozen/f0279.png"
+  },
+  {
+   "t": 140,
+   "file": "frozen/f0280.png"
+  },
+  {
+   "t": 140.5,
+   "file": "frozen/f0281.png"
+  },
+  {
+   "t": 141,
+   "file": "frozen/f0282.png"
+  },
+  {
+   "t": 141.5,
+   "file": "frozen/f0283.png"
+  },
+  {
+   "t": 142,
+   "file": "frozen/f0284.png"
+  },
+  {
+   "t": 142.5,
+   "file": "frozen/f0285.png"
+  },
+  {
+   "t": 143,
+   "file": "frozen/f0286.png"
+  },
+  {
+   "t": 143.5,
+   "file": "frozen/f0287.png"
+  },
+  {
+   "t": 144,
+   "file": "frozen/f0288.png"
+  },
+  {
+   "t": 144.5,
+   "file": "frozen/f0289.png"
+  },
+  {
+   "t": 145,
+   "file": "frozen/f0290.png"
+  },
+  {
+   "t": 145.5,
+   "file": "frozen/f0291.png"
+  },
+  {
+   "t": 146,
+   "file": "frozen/f0292.png"
+  },
+  {
+   "t": 146.5,
+   "file": "frozen/f0293.png"
+  },
+  {
+   "t": 147,
+   "file": "frozen/f0294.png"
+  },
+  {
+   "t": 147.5,
+   "file": "frozen/f0295.png"
+  },
+  {
+   "t": 148,
+   "file": "frozen/f0296.png"
+  },
+  {
+   "t": 148.5,
+   "file": "frozen/f0297.png"
+  },
+  {
+   "t": 149,
+   "file": "frozen/f0298.png"
+  },
+  {
+   "t": 149.5,
+   "file": "frozen/f0299.png"
+  },
+  {
+   "t": 150,
+   "file": "frozen/f0300.png"
+  },
+  {
+   "t": 150.5,
+   "file": "frozen/f0301.png"
+  },
+  {
+   "t": 151,
+   "file": "frozen/f0302.png"
+  },
+  {
+   "t": 151.5,
+   "file": "frozen/f0303.png"
+  },
+  {
+   "t": 152,
+   "file": "frozen/f0304.png"
+  },
+  {
+   "t": 152.5,
+   "file": "frozen/f0305.png"
+  },
+  {
+   "t": 153,
+   "file": "frozen/f0306.png"
+  },
+  {
+   "t": 153.5,
+   "file": "frozen/f0307.png"
+  },
+  {
+   "t": 154,
+   "file": "frozen/f0308.png"
+  },
+  {
+   "t": 154.5,
+   "file": "frozen/f0309.png"
+  },
+  {
+   "t": 155,
+   "file": "frozen/f0310.png"
+  },
+  {
+   "t": 155.5,
+   "file": "frozen/f0311.png"
+  },
+  {
+   "t": 156,
+   "file": "frozen/f0312.png"
+  },
+  {
+   "t": 156.5,
+   "file": "frozen/f0313.png"
+  },
+  {
+   "t": 157,
+   "file": "frozen/f0314.png"
+  },
+  {
+   "t": 157.5,
+   "file": "frozen/f0315.png"
+  },
+  {
+   "t": 158,
+   "file": "frozen/f0316.png"
+  },
+  {
+   "t": 158.5,
+   "file": "frozen/f0317.png"
+  },
+  {
+   "t": 159,
+   "file": "frozen/f0318.png"
+  },
+  {
+   "t": 159.5,
+   "file": "frozen/f0319.png"
+  },
+  {
+   "t": 160,
+   "file": "frozen/f0320.png"
+  },
+  {
+   "t": 160.5,
+   "file": "frozen/f0321.png"
+  },
+  {
+   "t": 161,
+   "file": "frozen/f0322.png"
+  },
+  {
+   "t": 161.5,
+   "file": "frozen/f0323.png"
+  },
+  {
+   "t": 162,
+   "file": "frozen/f0324.png"
+  },
+  {
+   "t": 162.5,
+   "file": "frozen/f0325.png"
+  },
+  {
+   "t": 163,
+   "file": "frozen/f0326.png"
+  },
+  {
+   "t": 163.5,
+   "file": "frozen/f0327.png"
+  },
+  {
+   "t": 164,
+   "file": "frozen/f0328.png"
+  },
+  {
+   "t": 164.5,
+   "file": "frozen/f0329.png"
+  },
+  {
+   "t": 165,
+   "file": "frozen/f0330.png"
+  },
+  {
+   "t": 165.5,
+   "file": "frozen/f0331.png"
+  },
+  {
+   "t": 166,
+   "file": "frozen/f0332.png"
+  },
+  {
+   "t": 166.5,
+   "file": "frozen/f0333.png"
+  },
+  {
+   "t": 167,
+   "file": "frozen/f0334.png"
+  },
+  {
+   "t": 167.5,
+   "file": "frozen/f0335.png"
+  },
+  {
+   "t": 168,
+   "file": "frozen/f0336.png"
+  },
+  {
+   "t": 168.5,
+   "file": "frozen/f0337.png"
+  },
+  {
+   "t": 169,
+   "file": "frozen/f0338.png"
+  },
+  {
+   "t": 169.5,
+   "file": "frozen/f0339.png"
+  },
+  {
+   "t": 170,
+   "file": "frozen/f0340.png"
+  },
+  {
+   "t": 170.5,
+   "file": "frozen/f0341.png"
+  },
+  {
+   "t": 171,
+   "file": "frozen/f0342.png"
+  },
+  {
+   "t": 171.5,
+   "file": "frozen/f0343.png"
+  },
+  {
+   "t": 172,
+   "file": "frozen/f0344.png"
+  },
+  {
+   "t": 172.5,
+   "file": "frozen/f0345.png"
+  },
+  {
+   "t": 173,
+   "file": "frozen/f0346.png"
+  },
+  {
+   "t": 173.5,
+   "file": "frozen/f0347.png"
+  },
+  {
+   "t": 174,
+   "file": "frozen/f0348.png"
+  },
+  {
+   "t": 174.5,
+   "file": "frozen/f0349.png"
+  },
+  {
+   "t": 175,
+   "file": "frozen/f0350.png"
+  },
+  {
+   "t": 175.5,
+   "file": "frozen/f0351.png"
+  },
+  {
+   "t": 176,
+   "file": "frozen/f0352.png"
+  }
+ ],
+ "errors": [],
+ "mobileHScroll": false
+}

@@ -1,0 +1,753 @@
+{
+ "duration": 176.17692307692312,
+ "events": [
+  {
+   "t": 1.554,
+   "type": "whoosh"
+  },
+  {
+   "t": 1.754,
+   "type": "pop"
+  },
+  {
+   "t": 1.754,
+   "type": "impact"
+  },
+  {
+   "t": 2.908,
+   "type": "pop"
+  },
+  {
+   "t": 4.446,
+   "type": "pop"
+  },
+  {
+   "t": 4.646,
+   "type": "pop"
+  },
+  {
+   "t": 7.169,
+   "type": "whoosh"
+  },
+  {
+   "t": 11.6,
+   "type": "pop"
+  },
+  {
+   "t": 11.985,
+   "type": "pop"
+  },
+  {
+   "t": 12.369,
+   "type": "pop"
+  },
+  {
+   "t": 13.138,
+   "type": "pop"
+  },
+  {
+   "t": 13.323,
+   "type": "whoosh"
+  },
+  {
+   "t": 14.223,
+   "type": "pop"
+  },
+  {
+   "t": 16.062,
+   "type": "pop"
+  },
+  {
+   "t": 16.212,
+   "type": "pop"
+  },
+  {
+   "t": 16.362,
+   "type": "pop"
+  },
+  {
+   "t": 16.446,
+   "type": "pop"
+  },
+  {
+   "t": 16.512,
+   "type": "pop"
+  },
+  {
+   "t": 16.562,
+   "type": "pop"
+  },
+  {
+   "t": 18.469,
+   "type": "pop"
+  },
+  {
+   "t": 19.908,
+   "type": "pop"
+  },
+  {
+   "t": 20.008,
+   "type": "pop"
+  },
+  {
+   "t": 20.677,
+   "type": "pop"
+  },
+  {
+   "t": 20.777,
+   "type": "pop"
+  },
+  {
+   "t": 21.862,
+   "type": "whoosh"
+  },
+  {
+   "t": 23.6,
+   "type": "pop"
+  },
+  {
+   "t": 23.6,
+   "type": "impact"
+  },
+  {
+   "t": 23.985,
+   "type": "pop"
+  },
+  {
+   "t": 24.369,
+   "type": "pop"
+  },
+  {
+   "t": 25.908,
+   "type": "pop"
+  },
+  {
+   "t": 27.831,
+   "type": "pop"
+  },
+  {
+   "t": 28.215,
+   "type": "pop"
+  },
+  {
+   "t": 28.395,
+   "type": "pop"
+  },
+  {
+   "t": 28.4,
+   "type": "whoosh"
+  },
+  {
+   "t": 28.575,
+   "type": "pop"
+  },
+  {
+   "t": 28.755,
+   "type": "pop"
+  },
+  {
+   "t": 29.3,
+   "type": "pop"
+  },
+  {
+   "t": 33.446,
+   "type": "pop"
+  },
+  {
+   "t": 33.696,
+   "type": "pop"
+  },
+  {
+   "t": 33.946,
+   "type": "pop"
+  },
+  {
+   "t": 36.523,
+   "type": "pop"
+  },
+  {
+   "t": 38.677,
+   "type": "pop"
+  },
+  {
+   "t": 40.215,
+   "type": "pop"
+  },
+  {
+   "t": 40.215,
+   "type": "impact"
+  },
+  {
+   "t": 42.908,
+   "type": "pop"
+  },
+  {
+   "t": 45.015,
+   "type": "pop"
+  },
+  {
+   "t": 47.554,
+   "type": "whoosh"
+  },
+  {
+   "t": 47.754,
+   "type": "pop"
+  },
+  {
+   "t": 52.331,
+   "type": "impact"
+  },
+  {
+   "t": 56.362,
+   "type": "whoosh"
+  },
+  {
+   "t": 57.262,
+   "type": "pop"
+  },
+  {
+   "t": 57.562,
+   "type": "pop"
+  },
+  {
+   "t": 57.962,
+   "type": "pop"
+  },
+  {
+   "t": 58.082,
+   "type": "pop"
+  },
+  {
+   "t": 58.202,
+   "type": "pop"
+  },
+  {
+   "t": 58.322,
+   "type": "pop"
+  },
+  {
+   "t": 60.254,
+   "type": "pop"
+  },
+  {
+   "t": 64.485,
+   "type": "pop"
+  },
+  {
+   "t": 67.408,
+   "type": "pop"
+  },
+  {
+   "t": 70.446,
+   "type": "pop"
+  },
+  {
+   "t": 71.6,
+   "type": "pop"
+  },
+  {
+   "t": 76.215,
+   "type": "pop"
+  },
+  {
+   "t": 78.369,
+   "type": "pop"
+  },
+  {
+   "t": 80.292,
+   "type": "pop"
+  },
+  {
+   "t": 85.138,
+   "type": "pop"
+  },
+  {
+   "t": 89.938,
+   "type": "whoosh"
+  },
+  {
+   "t": 90.838,
+   "type": "pop"
+  },
+  {
+   "t": 90.938,
+   "type": "pop"
+  },
+  {
+   "t": 92.292,
+   "type": "pop"
+  },
+  {
+   "t": 92.492,
+   "type": "pop"
+  },
+  {
+   "t": 92.842,
+   "type": "pop"
+  },
+  {
+   "t": 93.192,
+   "type": "pop"
+  },
+  {
+   "t": 93.542,
+   "type": "pop"
+  },
+  {
+   "t": 93.892,
+   "type": "pop"
+  },
+  {
+   "t": 95.954,
+   "type": "pop"
+  },
+  {
+   "t": 104.023,
+   "type": "pop"
+  },
+  {
+   "t": 104.792,
+   "type": "pop"
+  },
+  {
+   "t": 105.092,
+   "type": "pop"
+  },
+  {
+   "t": 110.792,
+   "type": "pop"
+  },
+  {
+   "t": 111.177,
+   "type": "pop"
+  },
+  {
+   "t": 114.438,
+   "type": "whoosh"
+  },
+  {
+   "t": 115.338,
+   "type": "pop"
+  },
+  {
+   "t": 117.177,
+   "type": "pop"
+  },
+  {
+   "t": 117.746,
+   "type": "whoosh"
+  },
+  {
+   "t": 117.946,
+   "type": "pop"
+  },
+  {
+   "t": 117.946,
+   "type": "pop"
+  },
+  {
+   "t": 118.346,
+   "type": "pop"
+  },
+  {
+   "t": 118.446,
+   "type": "pop"
+  },
+  {
+   "t": 118.546,
+   "type": "pop"
+  },
+  {
+   "t": 118.646,
+   "type": "pop"
+  },
+  {
+   "t": 118.746,
+   "type": "pop"
+  },
+  {
+   "t": 118.846,
+   "type": "pop"
+  },
+  {
+   "t": 118.946,
+   "type": "pop"
+  },
+  {
+   "t": 119.046,
+   "type": "pop"
+  },
+  {
+   "t": 121.038,
+   "type": "pop"
+  },
+  {
+   "t": 122.023,
+   "type": "pop"
+  },
+  {
+   "t": 123.177,
+   "type": "pop"
+  },
+  {
+   "t": 125.485,
+   "type": "pop"
+  },
+  {
+   "t": 127.023,
+   "type": "pop"
+  },
+  {
+   "t": 133.408,
+   "type": "pop"
+  },
+  {
+   "t": 136.669,
+   "type": "whoosh"
+  },
+  {
+   "t": 137.869,
+   "type": "pop"
+  },
+  {
+   "t": 137.919,
+   "type": "pop"
+  },
+  {
+   "t": 138.069,
+   "type": "pop"
+  },
+  {
+   "t": 138.119,
+   "type": "pop"
+  },
+  {
+   "t": 138.354,
+   "type": "pop"
+  },
+  {
+   "t": 138.404,
+   "type": "pop"
+  },
+  {
+   "t": 138.554,
+   "type": "pop"
+  },
+  {
+   "t": 138.604,
+   "type": "pop"
+  },
+  {
+   "t": 138.654,
+   "type": "pop"
+  },
+  {
+   "t": 138.704,
+   "type": "pop"
+  },
+  {
+   "t": 138.754,
+   "type": "pop"
+  },
+  {
+   "t": 138.804,
+   "type": "pop"
+  },
+  {
+   "t": 138.854,
+   "type": "pop"
+  },
+  {
+   "t": 138.904,
+   "type": "pop"
+  },
+  {
+   "t": 138.954,
+   "type": "pop"
+  },
+  {
+   "t": 139.004,
+   "type": "pop"
+  },
+  {
+   "t": 140.946,
+   "type": "pop"
+  },
+  {
+   "t": 141.146,
+   "type": "pop"
+  },
+  {
+   "t": 143.908,
+   "type": "whoosh"
+  },
+  {
+   "t": 144.408,
+   "type": "pop"
+  },
+  {
+   "t": 145.562,
+   "type": "pop"
+  },
+  {
+   "t": 146.315,
+   "type": "whoosh"
+  },
+  {
+   "t": 147.715,
+   "type": "pop"
+  },
+  {
+   "t": 148.869,
+   "type": "pop"
+  },
+  {
+   "t": 151.562,
+   "type": "pop"
+  },
+  {
+   "t": 155.023,
+   "type": "pop"
+  },
+  {
+   "t": 155.023,
+   "type": "impact"
+  },
+  {
+   "t": 155.223,
+   "type": "pop"
+  },
+  {
+   "t": 155.523,
+   "type": "pop"
+  },
+  {
+   "t": 157.262,
+   "type": "whoosh"
+  },
+  {
+   "t": 158.715,
+   "type": "pop"
+  },
+  {
+   "t": 161.023,
+   "type": "pop"
+  },
+  {
+   "t": 162.562,
+   "type": "pop"
+  },
+  {
+   "t": 165.669,
+   "type": "whoosh"
+  },
+  {
+   "t": 167.408,
+   "type": "pop"
+  },
+  {
+   "t": 167.658,
+   "type": "pop"
+  },
+  {
+   "t": 167.908,
+   "type": "pop"
+  },
+  {
+   "t": 168.158,
+   "type": "pop"
+  },
+  {
+   "t": 169.715,
+   "type": "whoosh"
+  },
+  {
+   "t": 172.792,
+   "type": "pop"
+  }
+ ],
+ "guess": [
+  [
+   50.830769230769235,
+   52.330769230769235
+  ],
+  [
+   68.94615384615385,
+   70.44615384615385
+  ],
+  [
+   99.06153846153846,
+   100.56153846153846
+  ]
+ ],
+ "cues": [
+  {
+   "id": "c1",
+   "start": 0.6,
+   "end": 7.369230769230769,
+   "say": "Trois heures douze. Alerte : un compte Gmail inconnu est devenu propriétaire du projet prod paiements.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c2",
+   "start": 7.369230769230769,
+   "end": 14.523076923076921,
+   "say": "Vous ne connaissez pas Google Cloud. Seule piste : ses journaux d'audit. Qui ? Quand ? D'où ? Et ensuite ?",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c3",
+   "start": 14.523076923076921,
+   "end": 22.06153846153846,
+   "say": "Google Cloud, c'est un immeuble : l'organisation est le bâtiment, chaque projet un étage, avec machines et données.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c4",
+   "start": 22.06153846153846,
+   "end": 29.6,
+   "say": "Personne n'entre par la fenêtre : console, ligne de commande ou script, tout passe par le guichet : l'API.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c5",
+   "start": 29.6,
+   "end": 38.292307692307695,
+   "say": "Sans rien configurer, a-t-on une trace ? Oui : tout appel qui modifie un réglage est écrit dans le registre Admin Activity.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c6",
+   "start": 38.292307692307695,
+   "end": 47.753846153846155,
+   "say": "On croit qu'il fallait l'activer. Faux : toujours écrit, impossible à couper, gardé quatre cents jours. Les modifications sont rares : ça coûte peu.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c7",
+   "start": 47.753846153846155,
+   "end": 57.56153846153846,
+   "say": "Devinez : devenu propriétaire, l'attaquant peut-il effacer ce registre ? | Non : son coffre, Required, ne se supprime pas. L'historique est intact.",
+   "guess": true,
+   "pauseAt": 50.830769230769235
+  },
+  {
+   "id": "c9",
+   "start": 57.56153846153846,
+   "end": 67.40769230769232,
+   "say": "Ouvrons l'entrée de trois heures sept. Quoi ? Set I A M Policy, un changement de droits : le rôle Owner, donné au compte Gmail.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c10",
+   "start": 67.40769230769232,
+   "end": 77.60000000000001,
+   "say": "Et qui a signé ? | Pas un humain : ci déployeur, un compte de service, l'identité d'un robot. Sa clé a fuité.",
+   "guess": true,
+   "pauseAt": 68.94615384615385
+  },
+  {
+   "id": "c11",
+   "start": 77.60000000000001,
+   "end": 85.13846153846154,
+   "say": "D'où ? Une IP externe, et un nom d'outil déclaré par l'appelant lui-même : un indice, pas une preuve.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c12",
+   "start": 85.13846153846154,
+   "end": 91.13846153846154,
+   "say": "Côté sim, une règle tient en quatre champs : méthode, signataire, adresse, rôle ajouté.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c13",
+   "start": 91.13846153846154,
+   "end": 97.13846153846154,
+   "say": "A-t-il lu les fichiers clients ? Admin Activity note les modifications, pas les lectures.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c14",
+   "start": 97.13846153846154,
+   "end": 106.94615384615385,
+   "say": "Ces téléchargements sont-ils notés ailleurs ? | Par défaut, non. Les lectures relèvent d'un second registre, Data Access, éteint par défaut.",
+   "guess": true,
+   "pauseAt": 99.06153846153846
+  },
+  {
+   "id": "c15",
+   "start": 106.94615384615385,
+   "end": 115.63846153846154,
+   "say": "Pourquoi ? Des millions de lectures : trop de volume, trop de coût. Résultat : impossible de prouver le vol, ni son absence.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c16",
+   "start": 115.63846153846154,
+   "end": 122.02307692307693,
+   "say": "Réflexe d'enquête : pivoter sur l'identité, et filtrer tout ce qu'a fait ce compte Gmail.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c17",
+   "start": 122.02307692307693,
+   "end": 129.56153846153848,
+   "say": "Trois heures neuf : Create Service Account Key. Il se fabrique une clé de secours pour ci déployeur.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c18",
+   "start": 129.56153846153848,
+   "end": 137.8692307692308,
+   "say": "On croit que retirer le rôle suffit. Faux : avec cette clé, il redevient ci déployeur, et se refait propriétaire.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c20",
+   "start": 137.8692307692308,
+   "end": 147.71538461538464,
+   "say": "Recul : chaque projet a son propre registre. Un sink agrégé sur l'organisation les copie tous vers votre sim, au-delà de quatre cents jours.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c21",
+   "start": 147.71538461538464,
+   "end": 157.56153846153848,
+   "say": "Verdict : clé volée utilisée à trois heures sept, clé de secours à trois heures neuf. On retire Owner, on supprime les deux clés.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c22",
+   "start": 157.56153846153848,
+   "end": 165.8692307692308,
+   "say": "Vos trois actions : alerter sur ces deux méthodes, un sink vers le sim, Data Access sur les données sensibles.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c23",
+   "start": 165.8692307692308,
+   "end": 174.17692307692312,
+   "say": "Vous savez maintenant dire qui, quand, d'où, et la suite. Nuance : une IP ou un e-mail peuvent être masqués.",
+   "guess": false,
+   "pauseAt": null
+  }
+ ]
+}

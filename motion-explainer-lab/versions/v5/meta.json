@@ -1,0 +1,753 @@
+{
+ "duration": 176.10000000000002,
+ "events": [
+  {
+   "t": 1.454,
+   "type": "whoosh"
+  },
+  {
+   "t": 1.754,
+   "type": "pop"
+  },
+  {
+   "t": 1.754,
+   "type": "impact"
+  },
+  {
+   "t": 2.908,
+   "type": "pop"
+  },
+  {
+   "t": 4.831,
+   "type": "pop"
+  },
+  {
+   "t": 5.4,
+   "type": "whoosh"
+  },
+  {
+   "t": 7.454,
+   "type": "whoosh"
+  },
+  {
+   "t": 9.292,
+   "type": "pop"
+  },
+  {
+   "t": 13.523,
+   "type": "pop"
+  },
+  {
+   "t": 13.908,
+   "type": "pop"
+  },
+  {
+   "t": 14.292,
+   "type": "pop"
+  },
+  {
+   "t": 15.062,
+   "type": "pop"
+  },
+  {
+   "t": 15.146,
+   "type": "whoosh"
+  },
+  {
+   "t": 15.946,
+   "type": "pop"
+  },
+  {
+   "t": 17.215,
+   "type": "pop"
+  },
+  {
+   "t": 17.365,
+   "type": "pop"
+  },
+  {
+   "t": 17.515,
+   "type": "pop"
+  },
+  {
+   "t": 17.665,
+   "type": "pop"
+  },
+  {
+   "t": 17.715,
+   "type": "pop"
+  },
+  {
+   "t": 19.138,
+   "type": "pop"
+  },
+  {
+   "t": 20.008,
+   "type": "pop"
+  },
+  {
+   "t": 21.831,
+   "type": "pop"
+  },
+  {
+   "t": 21.931,
+   "type": "pop"
+  },
+  {
+   "t": 22.985,
+   "type": "pop"
+  },
+  {
+   "t": 23.085,
+   "type": "pop"
+  },
+  {
+   "t": 24.069,
+   "type": "whoosh"
+  },
+  {
+   "t": 25.908,
+   "type": "pop"
+  },
+  {
+   "t": 25.908,
+   "type": "impact"
+  },
+  {
+   "t": 26.292,
+   "type": "pop"
+  },
+  {
+   "t": 26.677,
+   "type": "pop"
+  },
+  {
+   "t": 28.215,
+   "type": "pop"
+  },
+  {
+   "t": 30.138,
+   "type": "pop"
+  },
+  {
+   "t": 32.831,
+   "type": "pop"
+  },
+  {
+   "t": 32.915,
+   "type": "whoosh"
+  },
+  {
+   "t": 33.011,
+   "type": "pop"
+  },
+  {
+   "t": 33.191,
+   "type": "pop"
+  },
+  {
+   "t": 33.371,
+   "type": "pop"
+  },
+  {
+   "t": 33.715,
+   "type": "pop"
+  },
+  {
+   "t": 34.985,
+   "type": "pop"
+  },
+  {
+   "t": 36.138,
+   "type": "pop"
+  },
+  {
+   "t": 38.062,
+   "type": "pop"
+  },
+  {
+   "t": 38.312,
+   "type": "pop"
+  },
+  {
+   "t": 38.562,
+   "type": "pop"
+  },
+  {
+   "t": 41.138,
+   "type": "pop"
+  },
+  {
+   "t": 43.292,
+   "type": "pop"
+  },
+  {
+   "t": 44.831,
+   "type": "pop"
+  },
+  {
+   "t": 44.831,
+   "type": "myth"
+  },
+  {
+   "t": 48.292,
+   "type": "pop"
+  },
+  {
+   "t": 50.6,
+   "type": "pop"
+  },
+  {
+   "t": 50.6,
+   "type": "impact"
+  },
+  {
+   "t": 52.454,
+   "type": "whoosh"
+  },
+  {
+   "t": 52.754,
+   "type": "pop"
+  },
+  {
+   "t": 55.446,
+   "type": "pop"
+  },
+  {
+   "t": 57.331,
+   "type": "reveal"
+  },
+  {
+   "t": 57.331,
+   "type": "impact"
+  },
+  {
+   "t": 58.485,
+   "type": "pop"
+  },
+  {
+   "t": 59.638,
+   "type": "pop"
+  },
+  {
+   "t": 61.262,
+   "type": "whoosh"
+  },
+  {
+   "t": 62.062,
+   "type": "pop"
+  },
+  {
+   "t": 62.962,
+   "type": "pop"
+  },
+  {
+   "t": 63.082,
+   "type": "pop"
+  },
+  {
+   "t": 63.202,
+   "type": "pop"
+  },
+  {
+   "t": 63.322,
+   "type": "pop"
+  },
+  {
+   "t": 65.638,
+   "type": "pop"
+  },
+  {
+   "t": 66.408,
+   "type": "pop"
+  },
+  {
+   "t": 67.562,
+   "type": "pop"
+  },
+  {
+   "t": 69.1,
+   "type": "pop"
+  },
+  {
+   "t": 70.085,
+   "type": "pop"
+  },
+  {
+   "t": 71.638,
+   "type": "pop"
+  },
+  {
+   "t": 73.523,
+   "type": "reveal"
+  },
+  {
+   "t": 73.523,
+   "type": "pop"
+  },
+  {
+   "t": 74.677,
+   "type": "pop"
+  },
+  {
+   "t": 75.831,
+   "type": "pop"
+  },
+  {
+   "t": 78.523,
+   "type": "pop"
+  },
+  {
+   "t": 78.823,
+   "type": "pop"
+  },
+  {
+   "t": 79.123,
+   "type": "pop"
+  },
+  {
+   "t": 80.831,
+   "type": "pop"
+  },
+  {
+   "t": 82.985,
+   "type": "pop"
+  },
+  {
+   "t": 84.523,
+   "type": "pop"
+  },
+  {
+   "t": 88.754,
+   "type": "pop"
+  },
+  {
+   "t": 89.992,
+   "type": "whoosh"
+  },
+  {
+   "t": 90.792,
+   "type": "pop"
+  },
+  {
+   "t": 91.492,
+   "type": "pop"
+  },
+  {
+   "t": 92.446,
+   "type": "pop"
+  },
+  {
+   "t": 92.446,
+   "type": "pop"
+  },
+  {
+   "t": 92.746,
+   "type": "pop"
+  },
+  {
+   "t": 95.908,
+   "type": "pop"
+  },
+  {
+   "t": 97.162,
+   "type": "pop"
+  },
+  {
+   "t": 101.869,
+   "type": "reveal"
+  },
+  {
+   "t": 103.408,
+   "type": "pop"
+  },
+  {
+   "t": 104.946,
+   "type": "pop"
+  },
+  {
+   "t": 105.715,
+   "type": "pop"
+  },
+  {
+   "t": 110.562,
+   "type": "pop"
+  },
+  {
+   "t": 112.4,
+   "type": "pop"
+  },
+  {
+   "t": 114.023,
+   "type": "pop"
+  },
+  {
+   "t": 115.177,
+   "type": "pop"
+  },
+  {
+   "t": 115.646,
+   "type": "pop"
+  },
+  {
+   "t": 118.254,
+   "type": "pop"
+  },
+  {
+   "t": 118.254,
+   "type": "pop"
+  },
+  {
+   "t": 118.338,
+   "type": "whoosh"
+  },
+  {
+   "t": 119.138,
+   "type": "pop"
+  },
+  {
+   "t": 121.946,
+   "type": "pop"
+  },
+  {
+   "t": 122.515,
+   "type": "pop"
+  },
+  {
+   "t": 123.569,
+   "type": "whoosh"
+  },
+  {
+   "t": 124.269,
+   "type": "pop"
+  },
+  {
+   "t": 124.369,
+   "type": "pop"
+  },
+  {
+   "t": 124.469,
+   "type": "pop"
+  },
+  {
+   "t": 124.569,
+   "type": "pop"
+  },
+  {
+   "t": 124.669,
+   "type": "pop"
+  },
+  {
+   "t": 124.769,
+   "type": "pop"
+  },
+  {
+   "t": 124.869,
+   "type": "pop"
+  },
+  {
+   "t": 124.969,
+   "type": "pop"
+  },
+  {
+   "t": 126.946,
+   "type": "pop"
+  },
+  {
+   "t": 127.346,
+   "type": "pop"
+  },
+  {
+   "t": 129.1,
+   "type": "pop"
+  },
+  {
+   "t": 130.638,
+   "type": "pop"
+  },
+  {
+   "t": 131.408,
+   "type": "pop"
+  },
+  {
+   "t": 132.562,
+   "type": "pop"
+  },
+  {
+   "t": 134.485,
+   "type": "pop"
+  },
+  {
+   "t": 137.023,
+   "type": "pop"
+  },
+  {
+   "t": 139.715,
+   "type": "myth"
+  },
+  {
+   "t": 140.869,
+   "type": "pop"
+  },
+  {
+   "t": 144.5,
+   "type": "whoosh"
+  },
+  {
+   "t": 146.1,
+   "type": "pop"
+  },
+  {
+   "t": 147.254,
+   "type": "pop"
+  },
+  {
+   "t": 149.946,
+   "type": "pop"
+  },
+  {
+   "t": 151.869,
+   "type": "pop"
+  },
+  {
+   "t": 155.331,
+   "type": "pop"
+  },
+  {
+   "t": 155.331,
+   "type": "impact"
+  },
+  {
+   "t": 155.531,
+   "type": "pop"
+  },
+  {
+   "t": 155.831,
+   "type": "pop"
+  },
+  {
+   "t": 157.254,
+   "type": "pop"
+  },
+  {
+   "t": 159.877,
+   "type": "pop"
+  },
+  {
+   "t": 160.946,
+   "type": "pop"
+  },
+  {
+   "t": 161.415,
+   "type": "pop"
+  },
+  {
+   "t": 163.638,
+   "type": "pop"
+  },
+  {
+   "t": 164.108,
+   "type": "pop"
+  },
+  {
+   "t": 165.377,
+   "type": "whoosh"
+  },
+  {
+   "t": 166.262,
+   "type": "whoosh"
+  },
+  {
+   "t": 168.1,
+   "type": "pop"
+  },
+  {
+   "t": 168.4,
+   "type": "pop"
+  },
+  {
+   "t": 168.7,
+   "type": "pop"
+  },
+  {
+   "t": 169,
+   "type": "pop"
+  },
+  {
+   "t": 170.408,
+   "type": "whoosh"
+  },
+  {
+   "t": 172.715,
+   "type": "pop"
+  }
+ ],
+ "guess": [
+  [
+   55.830769230769235,
+   57.330769230769235
+  ],
+  [
+   72.02307692307691,
+   73.52307692307691
+  ],
+  [
+   100.36923076923075,
+   101.86923076923075
+  ]
+ ],
+ "cues": [
+  {
+   "id": "c1",
+   "start": 0.6,
+   "end": 7.753846153846153,
+   "say": "Trois heures douze. Alerte : un compte Gmail inconnu vient de devenir propriétaire du projet prod paiements.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c2",
+   "start": 7.753846153846153,
+   "end": 16.446153846153845,
+   "say": "Vous ne connaissez pas Google Cloud, mais c'est à vous d'enquêter. Seule piste : ses journaux. Qui ? Quand ? D'où ? Et ensuite ?",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c3",
+   "start": 16.446153846153845,
+   "end": 24.369230769230768,
+   "say": "Imaginez un immeuble : le bâtiment, c'est votre entreprise ; chaque projet, un étage, avec ses machines et ses données.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c4",
+   "start": 24.369230769230768,
+   "end": 34.215384615384615,
+   "say": "Personne n'entre par la fenêtre : console, ligne de commande ou script, tout passe par le guichet, l'API. Chaque geste y laisse une trace.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c5",
+   "start": 34.215384615384615,
+   "end": 42.90769230769231,
+   "say": "Sans rien configurer, a-t-on cette trace ? Oui : toute action qui modifie un réglage est écrite dans le registre Admin Activity.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c6",
+   "start": 42.90769230769231,
+   "end": 52.753846153846155,
+   "say": "On croit qu'il faut l'activer. Faux : il est toujours écrit, impossible à couper, gardé quatre cents jours. Google le juge indispensable à l'audit.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c7",
+   "start": 52.753846153846155,
+   "end": 62.56153846153846,
+   "say": "Devinez : devenu propriétaire, l'attaquant peut-il effacer ce registre ? | Non : son coffre, Required, ne se supprime pas. L'historique est intact.",
+   "guess": true,
+   "pauseAt": 55.830769230769235
+  },
+  {
+   "id": "c8",
+   "start": 62.56153846153846,
+   "end": 70.48461538461538,
+   "say": "Ouvrons l'entrée de trois heures sept. Quoi ? Un changement de droits : le rôle Owner, donné au compte Gmail.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c9",
+   "start": 70.48461538461538,
+   "end": 82.21538461538461,
+   "say": "Et qui a signé ? | Pas un humain : ci déployeur, un compte de service, l'identité du robot de déploiement. Sa clé a sans doute fuité.",
+   "guess": true,
+   "pauseAt": 72.02307692307691
+  },
+  {
+   "id": "c10",
+   "start": 82.21538461538461,
+   "end": 91.29230769230769,
+   "say": "D'où ? Une IP inconnue, et un outil déclaré par l'appelant : un indice, pas une preuve. Ces quatre champs font une règle.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c11",
+   "start": 91.29230769230769,
+   "end": 98.44615384615383,
+   "say": "A-t-il lu les fichiers clients ? Admin Activity note les modifications. Or une lecture ne modifie rien.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c12",
+   "start": 98.44615384615383,
+   "end": 107.86923076923075,
+   "say": "Ces lectures sont-elles notées ailleurs ? | Par défaut, non : elles relèvent d'un autre registre, Data Access, éteint par défaut.",
+   "guess": true,
+   "pauseAt": 100.36923076923075
+  },
+  {
+   "id": "c13",
+   "start": 107.86923076923075,
+   "end": 119.63846153846153,
+   "say": "Pourquoi ? Des millions de lectures : trop de volume, donc de coût. Résultat : impossible de prouver le vol, ou son absence. Il s'allume page Journaux d'audit, pour la suite.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c14",
+   "start": 119.63846153846153,
+   "end": 129.1,
+   "say": "Et ensuite ? Réflexe d'enquête : pivoter sur l'identité. Dans Logs Explorer, on filtre tout ce qu'a fait ce compte depuis trois heures sept.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c15",
+   "start": 129.1,
+   "end": 137.02307692307693,
+   "say": "Trois heures neuf : il crée une nouvelle clé pour ci déployeur. Sa clé de secours, rien qu'à lui.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c16",
+   "start": 137.02307692307693,
+   "end": 146.1,
+   "say": "On croit que retirer le rôle suffit. Faux : avec cette clé, il redevient ci déployeur, et peut se redonner le rôle.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c17",
+   "start": 146.1,
+   "end": 158.63846153846154,
+   "say": "Verdict : clé volée utilisée à trois heures sept, clé de secours à trois heures neuf. Dans I A M, on retire Owner et on supprime toutes les clés du robot.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c18",
+   "start": 158.63846153846154,
+   "end": 166.56153846153848,
+   "say": "Vos trois réflexes : une alerte dans Logs Explorer ; Data Access sur vos données sensibles ; le pivot sur l'identité.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c19",
+   "start": 166.56153846153848,
+   "end": 174.10000000000002,
+   "say": "Vous savez maintenant dire qui, quand, d'où, et la suite. Nuance : l'IP ou l'e-mail sont parfois masqués.",
+   "guess": false,
+   "pauseAt": null
+  }
+ ]
+}

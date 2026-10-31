@@ -1,0 +1,11 @@
+w1 frame 0/1379
+w0 frame 0/1379
+w2 frame 0/1379
+w1 frame 480/1379
+w0 frame 480/1379
+w2 frame 480/1379
+w1 frame 960/1379
+w0 frame 960/1379
+w2 frame 960/1379
+silent video -> versions/v3/_silent.mp4
+video -> versions/v3/video.mp4 | voice parts 22, overruns 0, max speed 195

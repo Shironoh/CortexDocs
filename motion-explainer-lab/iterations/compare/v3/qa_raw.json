@@ -1,0 +1,3704 @@
+{
+ "meta": {
+  "duration": 172.25384615384613,
+  "cues": [
+   {
+    "id": "c1",
+    "sc": "s1",
+    "start": 0.6,
+    "end": 7.753846153846153,
+    "dur": 7.153846153846153,
+    "words": 16,
+    "sub": "3 h 12. Alerte : un compte Gmail inconnu vient de devenir propriétaire du projet prod-paiements.",
+    "guess": false
+   },
+   {
+    "id": "c2",
+    "sc": "s1",
+    "start": 7.753846153846153,
+    "end": 16.446153846153845,
+    "dur": 8.692307692307692,
+    "words": 20,
+    "sub": "Vous ne connaissez pas Google Cloud, mais c'est à vous d'enquêter. Seule piste : ses journaux. Qui ? Quand ? D'où ? Et ensuite ?",
+    "guess": false
+   },
+   {
+    "id": "c3",
+    "sc": "s2",
+    "start": 16.446153846153845,
+    "end": 24.369230769230768,
+    "dur": 7.9230769230769225,
+    "words": 18,
+    "sub": "Imaginez un immeuble : le bâtiment, c'est votre entreprise ; chaque projet, un étage, avec ses machines et ses données.",
+    "guess": false
+   },
+   {
+    "id": "c4",
+    "sc": "s2",
+    "start": 24.369230769230768,
+    "end": 34.215384615384615,
+    "dur": 9.846153846153847,
+    "words": 23,
+    "sub": "Personne n'entre par la fenêtre : console, ligne de commande ou script, tout passe par le guichet, l'API. Chaque geste y laisse une trace.",
+    "guess": false
+   },
+   {
+    "id": "c5",
+    "sc": "s3",
+    "start": 34.215384615384615,
+    "end": 42.90769230769231,
+    "dur": 8.692307692307692,
+    "words": 20,
+    "sub": "Sans rien configurer, a-t-on cette trace ? Oui : toute action qui modifie un réglage est écrite dans le registre Admin Activity.",
+    "guess": false
+   },
+   {
+    "id": "c6",
+    "sc": "s3",
+    "start": 42.90769230769231,
+    "end": 52.753846153846155,
+    "dur": 9.846153846153847,
+    "words": 23,
+    "sub": "On croit qu'il faut l'activer. Faux : il est toujours écrit, impossible à couper, gardé 400 jours. Google le juge indispensable à l'audit.",
+    "guess": false
+   },
+   {
+    "id": "c7",
+    "sc": "s3",
+    "start": 52.753846153846155,
+    "end": 62.56153846153846,
+    "dur": 9.807692307692307,
+    "words": 19,
+    "sub": "Devinez : devenu propriétaire, l'attaquant peut-il effacer ce registre ?|Non : son coffre, _Required, ne se supprime pas. L'historique est intact.",
+    "guess": true
+   },
+   {
+    "id": "c8",
+    "sc": "s4",
+    "start": 62.56153846153846,
+    "end": 70.48461538461538,
+    "dur": 7.9230769230769225,
+    "words": 18,
+    "sub": "Ouvrons l'entrée de 3 h 07. Quoi ? Un changement de droits : le rôle Owner, donné au compte Gmail.",
+    "guess": false
+   },
+   {
+    "id": "c9",
+    "sc": "s4",
+    "start": 70.48461538461538,
+    "end": 82.21538461538461,
+    "dur": 11.73076923076923,
+    "words": 24,
+    "sub": "Et qui a signé ?|Pas un humain : ci-deployer, un compte de service, l'identité du robot de déploiement. Sa clé a sans doute fuité.",
+    "guess": true
+   },
+   {
+    "id": "c10",
+    "sc": "s4",
+    "start": 82.21538461538461,
+    "end": 91.29230769230769,
+    "dur": 9.076923076923077,
+    "words": 21,
+    "sub": "D'où ? Une IP inconnue, et un outil déclaré par l'appelant : un indice, pas une preuve. Ces quatre champs font une règle.",
+    "guess": false
+   },
+   {
+    "id": "c11",
+    "sc": "s5",
+    "start": 91.29230769230769,
+    "end": 98.44615384615383,
+    "dur": 7.153846153846153,
+    "words": 16,
+    "sub": "A-t-il lu les fichiers clients ? Admin Activity note les modifications. Or une lecture ne modifie rien.",
+    "guess": false
+   },
+   {
+    "id": "c12",
+    "sc": "s5",
+    "start": 98.44615384615383,
+    "end": 107.86923076923075,
+    "dur": 9.423076923076923,
+    "words": 18,
+    "sub": "Ces lectures sont-elles notées ailleurs ?|Par défaut, non : elles relèvent d'un autre registre, Data Access, éteint par défaut.",
+    "guess": true
+   },
+   {
+    "id": "c13",
+    "sc": "s5",
+    "start": 107.86923076923075,
+    "end": 116.56153846153845,
+    "dur": 8.692307692307692,
+    "words": 20,
+    "sub": "Pourquoi ? Des millions de lectures : trop de volume, donc de coût. Résultat : impossible de prouver le vol, ou son absence.",
+    "guess": false
+   },
+   {
+    "id": "c14",
+    "sc": "s6",
+    "start": 116.56153846153845,
+    "end": 125.25384615384614,
+    "dur": 8.692307692307692,
+    "words": 20,
+    "sub": "Et ensuite ? Réflexe d'enquête : pivoter sur l'identité, et filtrer tout ce qu'a fait ce compte Gmail depuis 3 h 07.",
+    "guess": false
+   },
+   {
+    "id": "c15",
+    "sc": "s6",
+    "start": 125.25384615384614,
+    "end": 133.17692307692306,
+    "dur": 7.9230769230769225,
+    "words": 18,
+    "sub": "3 h 09 : il crée une nouvelle clé pour ci-deployer. Sa clé de secours, rien qu'à lui.",
+    "guess": false
+   },
+   {
+    "id": "c16",
+    "sc": "s6",
+    "start": 133.17692307692306,
+    "end": 142.25384615384613,
+    "dur": 9.076923076923077,
+    "words": 21,
+    "sub": "On croit que retirer le rôle suffit. Faux : avec cette clé, il redevient ci-deployer, et peut se redonner le rôle.",
+    "guess": false
+   },
+   {
+    "id": "c17",
+    "sc": "s7",
+    "start": 142.25384615384613,
+    "end": 152.86923076923074,
+    "dur": 10.615384615384615,
+    "words": 25,
+    "sub": "Verdict : clé volée utilisée à 3 h 07, clé de secours à 3 h 09. On retire Owner, on supprime toutes les clés du robot.",
+    "guess": false
+   },
+   {
+    "id": "c18",
+    "sc": "s7",
+    "start": 152.86923076923074,
+    "end": 162.71538461538458,
+    "dur": 9.846153846153847,
+    "words": 23,
+    "sub": "Vos trois réflexes : une alerte sur l'ajout d'Owner et la création de clé ; Data Access sur vos données sensibles ; le pivot sur l'identité.",
+    "guess": false
+   },
+   {
+    "id": "c19",
+    "sc": "s7",
+    "start": 162.71538461538458,
+    "end": 170.25384615384613,
+    "dur": 7.538461538461538,
+    "words": 17,
+    "sub": "Vous savez maintenant dire qui, quand, d'où, et la suite. Nuance : l'IP ou l'e-mail sont parfois masqués.",
+    "guess": false
+   }
+  ],
+  "scenes": [
+   {
+    "id": "s1",
+    "title": "3 h 12, l'alerte",
+    "start": 0.6,
+    "end": 16.446153846153845
+   },
+   {
+    "id": "s2",
+    "title": "Google Cloud en 20 s",
+    "start": 16.446153846153845,
+    "end": 34.215384615384615
+   },
+   {
+    "id": "s3",
+    "title": "Le registre Admin Activity",
+    "start": 34.215384615384615,
+    "end": 62.56153846153846
+   },
+   {
+    "id": "s4",
+    "title": "Anatomie d'une entrée",
+    "start": 62.56153846153846,
+    "end": 91.29230769230769
+   },
+   {
+    "id": "s5",
+    "title": "L'angle mort : les lectures",
+    "start": 91.29230769230769,
+    "end": 116.56153846153845
+   },
+   {
+    "id": "s6",
+    "title": "La clé de secours",
+    "start": 116.56153846153845,
+    "end": 142.25384615384613
+   },
+   {
+    "id": "s7",
+    "title": "Verdict et réflexes",
+    "start": 142.25384615384613,
+    "end": 170.25384615384613
+   }
+  ],
+  "guess": [
+   [
+    55.830769230769235,
+    57.330769230769235
+   ],
+   [
+    72.02307692307691,
+    73.52307692307691
+   ],
+   [
+    100.36923076923075,
+    101.86923076923075
+   ]
+  ],
+  "events": 136,
+  "marks": [
+   7.754,
+   1.754,
+   2.908,
+   4.831,
+   1.754,
+   8.523,
+   11.6,
+   13.138,
+   9.292,
+   11.6,
+   13.523,
+   16.046,
+   13.908,
+   16.046,
+   14.292,
+   16.046,
+   15.062,
+   16.046,
+   0,
+   1.454,
+   5.4,
+   7.454,
+   13.023,
+   17.215,
+   19.138,
+   17.365,
+   17.515,
+   17.665,
+   19.908,
+   20.008,
+   21.831,
+   21.931,
+   22.985,
+   23.085,
+   17.715,
+   30.138,
+   25.908,
+   26.292,
+   26.492,
+   30.723,
+   26.677,
+   26.877,
+   30.873,
+   28.215,
+   28.415,
+   31.023,
+   32.831,
+   34.431,
+   33.031,
+   33.011,
+   34.611,
+   33.211,
+   33.191,
+   34.791,
+   33.391,
+   33.371,
+   34.971,
+   33.571,
+   15.946,
+   16.246,
+   17.215,
+   25.908,
+   32.831,
+   15.146,
+   19.608,
+   24.069,
+   30.123,
+   41.138,
+   39.6,
+   39.9,
+   40.2,
+   40.5,
+   40.8,
+   41.138,
+   38.062,
+   39.162,
+   38.062,
+   38.312,
+   39.412,
+   38.312,
+   38.562,
+   39.662,
+   38.562,
+   34.985,
+   36.523,
+   36.138,
+   36.823,
+   43.292,
+   45.985,
+   48.292,
+   44.831,
+   44.831,
+   47.523,
+   48.292,
+   52.754,
+   50.6,
+   52.754,
+   52.754,
+   52.954,
+   54.677,
+   57.381,
+   57.431,
+   55.446,
+   57.431,
+   57.431,
+   57.331,
+   57.331,
+   58.485,
+   59.638,
+   61.177,
+   59.838,
+   57.331,
+   33.715,
+   34.015,
+   36.523,
+   43.292,
+   44.446,
+   44.831,
+   61.177,
+   32.915,
+   40.638,
+   42.992,
+   47.892,
+   50.2,
+   52.454,
+   57.231,
+   62.262,
+   88.754,
+   62.262,
+   62.962,
+   63.082,
+   63.202,
+   63.322,
+   65.638,
+   70.485,
+   65.638,
+   70.485,
+   67.562,
+   82.215,
+   67.562,
+   82.215,
+   74.677,
+   88.754,
+   74.677,
+   88.754,
+   82.985,
+   88.754,
+   82.985,
+   88.754,
+   66.408,
+   70.485,
+   66.708,
+   69.1,
+   82.215,
+   69.2,
+   84.523,
+   88.754,
+   71.638,
+   73.523,
+   70.085,
+   70.485,
+   73.523,
+   77.754,
+   75.831,
+   78.323,
+   78.523,
+   80.023,
+   78.523,
+   78.823,
+   80.323,
+   78.823,
+   79.123,
+   80.623,
+   79.123,
+   73.523,
+   80.831,
+   83.031,
+   81.031,
+   88.754,
+   90.992,
+   62.062,
+   62.362,
+   62.562,
+   64.869,
+   67.562,
+   82.215,
+   86.446,
+   61.262,
+   64.469,
+   67.162,
+   70.185,
+   73.423,
+   81.815,
+   88.454,
+   91.492,
+   91.592,
+   93.215,
+   92.446,
+   108.638,
+   94.754,
+   95.908,
+   95.908,
+   97.462,
+   95.908,
+   97.162,
+   98.446,
+   92.446,
+   92.746,
+   98.446,
+   103.408,
+   108.638,
+   105.715,
+   104.946,
+   108.638,
+   105.715,
+   108.638,
+   108.638,
+   112.1,
+   110.562,
+   112.1,
+   112.4,
+   114.023,
+   115.177,
+   90.792,
+   91.092,
+   97.062,
+   99.6,
+   107.869,
+   114.023,
+   89.992,
+   92.146,
+   92.915,
+   98.146,
+   101.769,
+   108.238,
+   111.8,
+   119.638,
+   123.1,
+   125.254,
+   133.177,
+   120.038,
+   120.138,
+   120.238,
+   120.338,
+   120.438,
+   120.538,
+   120.638,
+   120.738,
+   118.869,
+   125.254,
+   123.5,
+   134.331,
+   140.1,
+   126.792,
+   133.177,
+   127.562,
+   130.638,
+   128.715,
+   133.177,
+   130.638,
+   116.062,
+   116.362,
+   118.1,
+   119.638,
+   125.254,
+   133.177,
+   134.331,
+   135.869,
+   137.023,
+   137.023,
+   137.792,
+   140.1,
+   115.262,
+   119.338,
+   126.392,
+   127.362,
+   132.877,
+   135.569,
+   142.254,
+   152.869,
+   143.408,
+   146.1,
+   144.946,
+   151.485,
+   149.562,
+   149.762,
+   150.062,
+   152.869,
+   154.408,
+   162.715,
+   156.715,
+   156.715,
+   156.815,
+   157.869,
+   162.715,
+   159.792,
+   160.562,
+   162.715,
+   160.862,
+   164.254,
+   164.554,
+   164.854,
+   165.154,
+   168.869,
+   142.054,
+   142.254,
+   148.408,
+   152.869,
+   154.408,
+   157.869,
+   160.562,
+   163.485,
+   166.562,
+   169.669,
+   140.654,
+   143.108,
+   148.008,
+   152.569,
+   162.415,
+   166.562
+  ],
+  "cams": [
+   {
+    "t": 0,
+    "d": 0,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 1.4538461538461538,
+    "d": 1,
+    "z": 1.5428571428571427
+   },
+   {
+    "t": 5.3999999999999995,
+    "d": 1.2,
+    "z": 2.10164531768922
+   },
+   {
+    "t": 7.453846153846153,
+    "d": 1,
+    "z": 1.0721594720193546
+   },
+   {
+    "t": 13.023076923076921,
+    "d": 0.9,
+    "z": 1.1409395973154361
+   },
+   {
+    "t": 15.146153846153844,
+    "d": 1.5,
+    "z": 0.7919650779932542
+   },
+   {
+    "t": 19.607692307692304,
+    "d": 0.9,
+    "z": 1.92
+   },
+   {
+    "t": 24.069230769230767,
+    "d": 1,
+    "z": 1.2828221460835838
+   },
+   {
+    "t": 30.123076923076923,
+    "d": 0.8,
+    "z": 1.2004003075425476
+   },
+   {
+    "t": 32.91538461538462,
+    "d": 1.5,
+    "z": 1.0743641782432074
+   },
+   {
+    "t": 40.638461538461534,
+    "d": 0.9,
+    "z": 1.234162841075727
+   },
+   {
+    "t": 42.9923076923077,
+    "d": 0.9,
+    "z": 1.1785246303223766
+   },
+   {
+    "t": 47.892307692307696,
+    "d": 0.9,
+    "z": 2.0454545454545454
+   },
+   {
+    "t": 50.2,
+    "d": 0.8,
+    "z": 1.2857476939882821
+   },
+   {
+    "t": 52.45384615384616,
+    "d": 1,
+    "z": 0.8224478869339313
+   },
+   {
+    "t": 57.23076923076923,
+    "d": 0.6,
+    "z": 1.1654676258992807
+   },
+   {
+    "t": 61.261538461538464,
+    "d": 1.5,
+    "z": 0.8865720038901866
+   },
+   {
+    "t": 64.46923076923076,
+    "d": 0.8,
+    "z": 2.1106382978723404
+   },
+   {
+    "t": 67.16153846153846,
+    "d": 0.8,
+    "z": 2.1106382978723404
+   },
+   {
+    "t": 70.18461538461538,
+    "d": 0.9,
+    "z": 1.510681334893129
+   },
+   {
+    "t": 73.42307692307692,
+    "d": 0.6,
+    "z": 1.6623376623376624
+   },
+   {
+    "t": 81.8153846153846,
+    "d": 0.8,
+    "z": 2.0425531914893615
+   },
+   {
+    "t": 88.45384615384614,
+    "d": 0.9,
+    "z": 0.9939393939393939
+   },
+   {
+    "t": 89.99230769230769,
+    "d": 1.5,
+    "z": 0.833509178218238
+   },
+   {
+    "t": 92.14615384615385,
+    "d": 0.9,
+    "z": 0.8823876498423188
+   },
+   {
+    "t": 92.91538461538461,
+    "d": 0.8,
+    "z": 0.8695653299555796
+   },
+   {
+    "t": 98.14615384615384,
+    "d": 0.9,
+    "z": 1.4750874912868843
+   },
+   {
+    "t": 101.76923076923076,
+    "d": 0.7,
+    "z": 1.7459325488901951
+   },
+   {
+    "t": 108.23846153846152,
+    "d": 0.9,
+    "z": 1.0287952201122215
+   },
+   {
+    "t": 111.79999999999998,
+    "d": 0.8,
+    "z": 1.0484929593576189
+   },
+   {
+    "t": 115.26153846153845,
+    "d": 1.5,
+    "z": 0.7793606910241012
+   },
+   {
+    "t": 119.33846153846153,
+    "d": 1.6,
+    "z": 1.0458321302153522
+   },
+   {
+    "t": 126.39230769230767,
+    "d": 0.9,
+    "z": 3
+   },
+   {
+    "t": 127.36153846153844,
+    "d": 0.8,
+    "z": 0.9995294596128915
+   },
+   {
+    "t": 132.87692307692305,
+    "d": 0.9,
+    "z": 1.3038080787717379
+   },
+   {
+    "t": 135.56923076923073,
+    "d": 0.9,
+    "z": 0.7842399969259255
+   },
+   {
+    "t": 140.65384615384613,
+    "d": 1.9,
+    "z": 0.8698503293446169
+   },
+   {
+    "t": 143.10769230769228,
+    "d": 0.8,
+    "z": 0.9725490196078432
+   },
+   {
+    "t": 148.00769230769228,
+    "d": 0.9,
+    "z": 0.9349411417630672
+   },
+   {
+    "t": 152.56923076923073,
+    "d": 1,
+    "z": 0.9226372821725863
+   },
+   {
+    "t": 162.41538461538457,
+    "d": 1,
+    "z": 1.0221721157459602
+   },
+   {
+    "t": 166.56153846153842,
+    "d": 2.4,
+    "z": 0.6071428571428571
+   }
+  ],
+  "chars": [
+   {
+    "name": "analyste",
+    "poses": [
+     [
+      0,
+      "type"
+     ],
+     [
+      1.7538461538461538,
+      "jump"
+     ],
+     [
+      8.523076923076921,
+      "shrug"
+     ],
+     [
+      13.138461538461538,
+      "loupe"
+     ],
+     [
+      142.25384615384613,
+      "point"
+     ],
+     [
+      148.4076923076923,
+      "nod"
+     ],
+     [
+      154.4076923076923,
+      "point"
+     ],
+     [
+      157.86923076923074,
+      "point"
+     ],
+     [
+      160.56153846153842,
+      "point"
+     ],
+     [
+      163.48461538461535,
+      "cheer"
+     ],
+     [
+      166.56153846153842,
+      "shrug"
+     ],
+     [
+      169.66923076923075,
+      "nod"
+     ]
+    ],
+    "walks": [
+     11.599999999999998,
+     142.05384615384614,
+     152.86923076923074
+    ],
+    "exprs": [
+     -1,
+     1.7538461538461538,
+     7.753846153846153,
+     11.599999999999998,
+     148.4076923076923,
+     166.56153846153842
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 15.946153846153845,
+    "poses": [
+     [
+      17.215384615384615,
+      "point"
+     ],
+     [
+      25.907692307692308,
+      "point"
+     ],
+     [
+      32.83076923076923,
+      "nod"
+     ]
+    ],
+    "walks": [
+     16.246153846153845
+    ],
+    "exprs": [
+     -1,
+     32.83076923076923
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 52.753846153846155,
+    "poses": [
+     [
+      54.676923076923075,
+      "point"
+     ],
+     [
+      57.38076923076923,
+      "jump"
+     ]
+    ],
+    "walks": [
+     52.95384615384616,
+     57.430769230769236
+    ],
+    "exprs": [
+     -1,
+     57.330769230769235
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 33.715384615384615,
+    "poses": [
+     [
+      36.52307692307692,
+      "nod"
+     ],
+     [
+      44.44615384615385,
+      "point"
+     ],
+     [
+      44.83076923076923,
+      "jump"
+     ],
+     [
+      61.176923076923075,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     34.01538461538461,
+     43.292307692307695
+    ],
+    "exprs": [
+     -1,
+     36.52307692307692,
+     43.292307692307695,
+     44.83076923076923,
+     48.292307692307695,
+     52.753846153846155,
+     57.63076923076923
+    ]
+   },
+   {
+    "name": "ci-deployer",
+    "pop": 70.08461538461538,
+    "poses": [
+     [
+      73.52307692307691,
+      "hold"
+     ],
+     [
+      77.75384615384615,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     70.48461538461538
+    ],
+    "exprs": [
+     -1,
+     73.52307692307691
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 62.06153846153846,
+    "poses": [
+     [
+      62.56153846153846,
+      "loupe"
+     ],
+     [
+      64.86923076923077,
+      "point"
+     ],
+     [
+      67.56153846153846,
+      "point"
+     ],
+     [
+      82.21538461538461,
+      "point"
+     ],
+     [
+      86.44615384615383,
+      "shrug"
+     ]
+    ],
+    "walks": [
+     62.36153846153846
+    ],
+    "exprs": [
+     -1,
+     73.52307692307691,
+     82.21538461538461,
+     88.75384615384614
+    ]
+   },
+   {
+    "name": "inconnu",
+    "pop": 92.44615384615385,
+    "poses": [],
+    "walks": [],
+    "exprs": [
+     -1
+    ]
+   },
+   {
+    "name": "inconnu2",
+    "pop": 114.0230769230769,
+    "poses": [],
+    "walks": [],
+    "exprs": [
+     -1
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 90.79230769230769,
+    "poses": [
+     [
+      97.06153846153846,
+      "point"
+     ],
+     [
+      99.6,
+      "point"
+     ],
+     [
+      114.0230769230769,
+      "shrug"
+     ]
+    ],
+    "walks": [
+     91.09230769230768,
+     107.86923076923075
+    ],
+    "exprs": [
+     -1,
+     97.06153846153846,
+     101.86923076923075,
+     112.09999999999998
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 116.06153846153845,
+    "poses": [
+     [
+      118.09999999999998,
+      "loupe"
+     ],
+     [
+      134.33076923076922,
+      "point"
+     ],
+     [
+      135.86923076923074,
+      "jump"
+     ]
+    ],
+    "walks": [
+     116.36153846153844,
+     119.63846153846153,
+     125.25384615384614,
+     133.17692307692306
+    ],
+    "exprs": [
+     -1,
+     130.6384615384615,
+     133.17692307692306,
+     135.86923076923074
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 137.0230769230769,
+    "poses": [
+     [
+      137.79230769230767,
+      "point"
+     ],
+     [
+      140.1,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     137.0230769230769
+    ],
+    "exprs": [
+     -1
+    ]
+   }
+  ],
+  "says": [
+   "Trois heures douze. Alerte : un compte Gmail inconnu vient de devenir propriétaire du projet prod paiements.",
+   "Vous ne connaissez pas Google Cloud, mais c'est à vous d'enquêter. Seule piste : ses journaux. Qui ? Quand ? D'où ? Et ensuite ?",
+   "Imaginez un immeuble : le bâtiment, c'est votre entreprise ; chaque projet, un étage, avec ses machines et ses données.",
+   "Personne n'entre par la fenêtre : console, ligne de commande ou script, tout passe par le guichet, l'API. Chaque geste y laisse une trace.",
+   "Sans rien configurer, a-t-on cette trace ? Oui : toute action qui modifie un réglage est écrite dans le registre Admin Activity.",
+   "On croit qu'il faut l'activer. Faux : il est toujours écrit, impossible à couper, gardé quatre cents jours. Google le juge indispensable à l'audit.",
+   "Devinez : devenu propriétaire, l'attaquant peut-il effacer ce registre ? | Non : son coffre, Required, ne se supprime pas. L'historique est intact.",
+   "Ouvrons l'entrée de trois heures sept. Quoi ? Un changement de droits : le rôle Owner, donné au compte Gmail.",
+   "Et qui a signé ? | Pas un humain : ci déployeur, un compte de service, l'identité du robot de déploiement. Sa clé a sans doute fuité.",
+   "D'où ? Une IP inconnue, et un outil déclaré par l'appelant : un indice, pas une preuve. Ces quatre champs font une règle.",
+   "A-t-il lu les fichiers clients ? Admin Activity note les modifications. Or une lecture ne modifie rien.",
+   "Ces lectures sont-elles notées ailleurs ? | Par défaut, non : elles relèvent d'un autre registre, Data Access, éteint par défaut.",
+   "Pourquoi ? Des millions de lectures : trop de volume, donc de coût. Résultat : impossible de prouver le vol, ou son absence.",
+   "Et ensuite ? Réflexe d'enquête : pivoter sur l'identité, et filtrer tout ce qu'a fait ce compte Gmail depuis trois heures sept.",
+   "Trois heures neuf : il crée une nouvelle clé pour ci déployeur. Sa clé de secours, rien qu'à lui.",
+   "On croit que retirer le rôle suffit. Faux : avec cette clé, il redevient ci déployeur, et peut se redonner le rôle.",
+   "Verdict : clé volée utilisée à trois heures sept, clé de secours à trois heures neuf. On retire Owner, on supprime toutes les clés du robot.",
+   "Vos trois réflexes : une alerte sur l'ajout d'Owner et la création de clé ; Data Access sur vos données sensibles ; le pivot sur l'identité.",
+   "Vous savez maintenant dire qui, quand, d'où, et la suite. Nuance : l'IP ou l'e-mail sont parfois masqués."
+  ]
+ },
+ "caps": [
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c1_25.jpg",
+   "t": 2.3884615384615384,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.457
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c1_50.jpg",
+   "t": 4.176923076923076,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.458
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c1_75.jpg",
+   "t": 5.965384615384615,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 771,
+    "cy": 515,
+    "area": 0.06
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.06
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c2_25.jpg",
+   "t": 9.926923076923076,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 581,
+    "cy": 285,
+    "area": 0.221
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c2_50.jpg",
+   "t": 12.099999999999998,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 581,
+    "cy": 285,
+    "area": 0.221
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c2_75.jpg",
+   "t": 14.273076923076921,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 703,
+    "cy": 135,
+    "area": 0.017
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.017
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c3_25.jpg",
+   "t": 18.426923076923075,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1080,
+    "cy": 393,
+    "area": 0.263
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c3_50.jpg",
+   "t": 20.407692307692304,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 804,
+    "cy": 399,
+    "area": 0.274
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c3_75.jpg",
+   "t": 22.388461538461534,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.276
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c4_25.jpg",
+   "t": 26.830769230769228,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 332,
+    "cy": 451,
+    "area": 0.076
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c4_50.jpg",
+   "t": 29.29230769230769,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 289,
+    "cy": 449,
+    "area": 0.053
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c4_75.jpg",
+   "t": 31.753846153846155,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1075,
+    "cy": 461,
+    "area": 0.029
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.029
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c5_25.jpg",
+   "t": 36.388461538461534,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1286,
+    "cy": 281,
+    "area": 0.106
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c5_50.jpg",
+   "t": 38.56153846153846,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1286,
+    "cy": 281,
+    "area": 0.106
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c5_75.jpg",
+   "t": 40.73461538461538,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1284,
+    "cy": 282,
+    "area": 0.106
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c6_25.jpg",
+   "t": 45.36923076923077,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 728,
+    "cy": 497,
+    "area": 0.076
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c6_50.jpg",
+   "t": 47.830769230769235,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 708,
+    "cy": 536,
+    "area": 0.044
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c6_75.jpg",
+   "t": 50.292307692307695,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 804,
+    "cy": 399,
+    "area": 0.153
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c7_25.jpg",
+   "t": 55.205769230769235,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 1150,
+    "cy": 533,
+    "area": 0.031
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.031
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c7_50.jpg",
+   "t": 57.65769230769231,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 796,
+    "cy": 362,
+    "area": 0.284
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c7_75.jpg",
+   "t": 60.10961538461538,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.325
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c8_25.jpg",
+   "t": 64.54230769230769,
+   "ntext": 1,
+   "words": 3,
+   "focus": {
+    "cx": 1058,
+    "cy": 352,
+    "area": 0.379
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c8",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c8_50.jpg",
+   "t": 66.52307692307693,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.276
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Entrée de 03:07"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c8_75.jpg",
+   "t": 68.50384615384615,
+   "ntext": 3,
+   "words": 6,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.276
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Entrée de 03:07"
+    },
+    {
+     "k": "cut",
+     "s": "SetIamPolicy"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c9_25.jpg",
+   "t": 73.41730769230769,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1187,
+    "cy": 469,
+    "area": 0.087
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c9_50.jpg",
+   "t": 76.35,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 634,
+    "cy": 265,
+    "area": 0.033
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.033
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c9_75.jpg",
+   "t": 79.2826923076923,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 634,
+    "cy": 265,
+    "area": 0.033
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.033
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c10_25.jpg",
+   "t": 84.48461538461538,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 800,
+    "cy": 325,
+    "area": 0.259
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c10_50.jpg",
+   "t": 86.75384615384614,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 800,
+    "cy": 325,
+    "area": 0.259
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c10_75.jpg",
+   "t": 89.02307692307691,
+   "ntext": 3,
+   "words": 15,
+   "focus": {
+    "cx": 858,
+    "cy": 343,
+    "area": 0.5
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:ci-deployer"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:ci-deployer"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c11",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c11_25.jpg",
+   "t": 93.08076923076922,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1014,
+    "cy": 644,
+    "area": 0.022
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.022
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c11",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c11_50.jpg",
+   "t": 94.86923076923077,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1345,
+    "cy": 276,
+    "area": 0.024
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.024
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c11_75.jpg",
+   "t": 96.6576923076923,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1345,
+    "cy": 276,
+    "area": 0.024
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.024
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c12_25.jpg",
+   "t": 100.80192307692306,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 500,
+    "cy": 163,
+    "area": 0.038
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "factures-clients"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.038
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c12_50.jpg",
+   "t": 103.1576923076923,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 678,
+    "cy": 598,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "factures-clients"
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c12_75.jpg",
+   "t": 105.51346153846153,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 678,
+    "cy": 599,
+    "area": 0.078
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "factures-clients"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.078
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c13_25.jpg",
+   "t": 110.04230769230767,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 762,
+    "cy": 323,
+    "area": 0.274
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c13_50.jpg",
+   "t": 112.2153846153846,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 804,
+    "cy": 331,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c13_75.jpg",
+   "t": 114.38846153846153,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 853,
+    "cy": 271,
+    "area": 0.248
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c14_25.jpg",
+   "t": 118.73461538461537,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 928,
+    "cy": 328,
+    "area": 0.018
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.018
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c14_50.jpg",
+   "t": 120.90769230769229,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 773,
+    "cy": 114,
+    "area": 0.051
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      773,
+      114
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.051
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c14_75.jpg",
+   "t": 123.08076923076922,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 773,
+    "cy": 114,
+    "area": 0.051
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      773,
+      114
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.051
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c15_25.jpg",
+   "t": 127.23461538461537,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 801,
+    "cy": 395,
+    "area": 0.08
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.08
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c15",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c15_50.jpg",
+   "t": 129.2153846153846,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 795,
+    "cy": 308,
+    "area": 0.012
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.012
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c15_75.jpg",
+   "t": 131.19615384615383,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 1220,
+    "cy": 308,
+    "area": 0.015
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.015
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c16_25.jpg",
+   "t": 135.44615384615383,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 171,
+    "cy": -419,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      171,
+      -419
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c16_50.jpg",
+   "t": 137.7153846153846,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 977,
+    "cy": 553,
+    "area": 0.017
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.017
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c16_75.jpg",
+   "t": 139.98461538461538,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 916,
+    "cy": 549,
+    "area": 0.017
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.017
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c17_25.jpg",
+   "t": 144.9076923076923,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.241
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c17_50.jpg",
+   "t": 147.56153846153845,
+   "ntext": 4,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.241
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "ALERTE | Owner | 03:07 | 03:09"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c17_75.jpg",
+   "t": 150.21538461538458,
+   "ntext": 4,
+   "words": 4,
+   "focus": {
+    "cx": 207,
+    "cy": 40,
+    "area": 0.002
+   },
+   "issues": [
+    {
+     "k": "overlap",
+     "s": "ALERTE / CONTENU"
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "ALERTE | CONTENU | 03:07 | 03:09"
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      207,
+      40
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.002
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c18_25.jpg",
+   "t": 155.3307692307692,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 292,
+    "cy": 234,
+    "area": 0.06
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.06
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c18_50.jpg",
+   "t": 157.79230769230767,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 292,
+    "cy": 234,
+    "area": 0.06
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.06
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c18_75.jpg",
+   "t": 160.25384615384613,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 754,
+    "cy": 234,
+    "area": 0.044
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.044
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c19_25.jpg",
+   "t": 164.59999999999997,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 419,
+    "cy": 215,
+    "area": 0.02
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.02
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c19_50.jpg",
+   "t": 166.48461538461535,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 419,
+    "cy": 215,
+    "area": 0.02
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.02
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c19_75.jpg",
+   "t": 168.36923076923074,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 639,
+    "cy": 293,
+    "area": 0.007
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.007
+    }
+   ],
+   "moving": true
+  }
+ ],
+ "frozen": [
+  {
+   "t": 0,
+   "file": "frozen/f0000.png"
+  },
+  {
+   "t": 0.5,
+   "file": "frozen/f0001.png"
+  },
+  {
+   "t": 1,
+   "file": "frozen/f0002.png"
+  },
+  {
+   "t": 1.5,
+   "file": "frozen/f0003.png"
+  },
+  {
+   "t": 2,
+   "file": "frozen/f0004.png"
+  },
+  {
+   "t": 2.5,
+   "file": "frozen/f0005.png"
+  },
+  {
+   "t": 3,
+   "file": "frozen/f0006.png"
+  },
+  {
+   "t": 3.5,
+   "file": "frozen/f0007.png"
+  },
+  {
+   "t": 4,
+   "file": "frozen/f0008.png"
+  },
+  {
+   "t": 4.5,
+   "file": "frozen/f0009.png"
+  },
+  {
+   "t": 5,
+   "file": "frozen/f0010.png"
+  },
+  {
+   "t": 5.5,
+   "file": "frozen/f0011.png"
+  },
+  {
+   "t": 6,
+   "file": "frozen/f0012.png"
+  },
+  {
+   "t": 6.5,
+   "file": "frozen/f0013.png"
+  },
+  {
+   "t": 7,
+   "file": "frozen/f0014.png"
+  },
+  {
+   "t": 7.5,
+   "file": "frozen/f0015.png"
+  },
+  {
+   "t": 8,
+   "file": "frozen/f0016.png"
+  },
+  {
+   "t": 8.5,
+   "file": "frozen/f0017.png"
+  },
+  {
+   "t": 9,
+   "file": "frozen/f0018.png"
+  },
+  {
+   "t": 9.5,
+   "file": "frozen/f0019.png"
+  },
+  {
+   "t": 10,
+   "file": "frozen/f0020.png"
+  },
+  {
+   "t": 10.5,
+   "file": "frozen/f0021.png"
+  },
+  {
+   "t": 11,
+   "file": "frozen/f0022.png"
+  },
+  {
+   "t": 11.5,
+   "file": "frozen/f0023.png"
+  },
+  {
+   "t": 12,
+   "file": "frozen/f0024.png"
+  },
+  {
+   "t": 12.5,
+   "file": "frozen/f0025.png"
+  },
+  {
+   "t": 13,
+   "file": "frozen/f0026.png"
+  },
+  {
+   "t": 13.5,
+   "file": "frozen/f0027.png"
+  },
+  {
+   "t": 14,
+   "file": "frozen/f0028.png"
+  },
+  {
+   "t": 14.5,
+   "file": "frozen/f0029.png"
+  },
+  {
+   "t": 15,
+   "file": "frozen/f0030.png"
+  },
+  {
+   "t": 15.5,
+   "file": "frozen/f0031.png"
+  },
+  {
+   "t": 16,
+   "file": "frozen/f0032.png"
+  },
+  {
+   "t": 16.5,
+   "file": "frozen/f0033.png"
+  },
+  {
+   "t": 17,
+   "file": "frozen/f0034.png"
+  },
+  {
+   "t": 17.5,
+   "file": "frozen/f0035.png"
+  },
+  {
+   "t": 18,
+   "file": "frozen/f0036.png"
+  },
+  {
+   "t": 18.5,
+   "file": "frozen/f0037.png"
+  },
+  {
+   "t": 19,
+   "file": "frozen/f0038.png"
+  },
+  {
+   "t": 19.5,
+   "file": "frozen/f0039.png"
+  },
+  {
+   "t": 20,
+   "file": "frozen/f0040.png"
+  },
+  {
+   "t": 20.5,
+   "file": "frozen/f0041.png"
+  },
+  {
+   "t": 21,
+   "file": "frozen/f0042.png"
+  },
+  {
+   "t": 21.5,
+   "file": "frozen/f0043.png"
+  },
+  {
+   "t": 22,
+   "file": "frozen/f0044.png"
+  },
+  {
+   "t": 22.5,
+   "file": "frozen/f0045.png"
+  },
+  {
+   "t": 23,
+   "file": "frozen/f0046.png"
+  },
+  {
+   "t": 23.5,
+   "file": "frozen/f0047.png"
+  },
+  {
+   "t": 24,
+   "file": "frozen/f0048.png"
+  },
+  {
+   "t": 24.5,
+   "file": "frozen/f0049.png"
+  },
+  {
+   "t": 25,
+   "file": "frozen/f0050.png"
+  },
+  {
+   "t": 25.5,
+   "file": "frozen/f0051.png"
+  },
+  {
+   "t": 26,
+   "file": "frozen/f0052.png"
+  },
+  {
+   "t": 26.5,
+   "file": "frozen/f0053.png"
+  },
+  {
+   "t": 27,
+   "file": "frozen/f0054.png"
+  },
+  {
+   "t": 27.5,
+   "file": "frozen/f0055.png"
+  },
+  {
+   "t": 28,
+   "file": "frozen/f0056.png"
+  },
+  {
+   "t": 28.5,
+   "file": "frozen/f0057.png"
+  },
+  {
+   "t": 29,
+   "file": "frozen/f0058.png"
+  },
+  {
+   "t": 29.5,
+   "file": "frozen/f0059.png"
+  },
+  {
+   "t": 30,
+   "file": "frozen/f0060.png"
+  },
+  {
+   "t": 30.5,
+   "file": "frozen/f0061.png"
+  },
+  {
+   "t": 31,
+   "file": "frozen/f0062.png"
+  },
+  {
+   "t": 31.5,
+   "file": "frozen/f0063.png"
+  },
+  {
+   "t": 32,
+   "file": "frozen/f0064.png"
+  },
+  {
+   "t": 32.5,
+   "file": "frozen/f0065.png"
+  },
+  {
+   "t": 33,
+   "file": "frozen/f0066.png"
+  },
+  {
+   "t": 33.5,
+   "file": "frozen/f0067.png"
+  },
+  {
+   "t": 34,
+   "file": "frozen/f0068.png"
+  },
+  {
+   "t": 34.5,
+   "file": "frozen/f0069.png"
+  },
+  {
+   "t": 35,
+   "file": "frozen/f0070.png"
+  },
+  {
+   "t": 35.5,
+   "file": "frozen/f0071.png"
+  },
+  {
+   "t": 36,
+   "file": "frozen/f0072.png"
+  },
+  {
+   "t": 36.5,
+   "file": "frozen/f0073.png"
+  },
+  {
+   "t": 37,
+   "file": "frozen/f0074.png"
+  },
+  {
+   "t": 37.5,
+   "file": "frozen/f0075.png"
+  },
+  {
+   "t": 38,
+   "file": "frozen/f0076.png"
+  },
+  {
+   "t": 38.5,
+   "file": "frozen/f0077.png"
+  },
+  {
+   "t": 39,
+   "file": "frozen/f0078.png"
+  },
+  {
+   "t": 39.5,
+   "file": "frozen/f0079.png"
+  },
+  {
+   "t": 40,
+   "file": "frozen/f0080.png"
+  },
+  {
+   "t": 40.5,
+   "file": "frozen/f0081.png"
+  },
+  {
+   "t": 41,
+   "file": "frozen/f0082.png"
+  },
+  {
+   "t": 41.5,
+   "file": "frozen/f0083.png"
+  },
+  {
+   "t": 42,
+   "file": "frozen/f0084.png"
+  },
+  {
+   "t": 42.5,
+   "file": "frozen/f0085.png"
+  },
+  {
+   "t": 43,
+   "file": "frozen/f0086.png"
+  },
+  {
+   "t": 43.5,
+   "file": "frozen/f0087.png"
+  },
+  {
+   "t": 44,
+   "file": "frozen/f0088.png"
+  },
+  {
+   "t": 44.5,
+   "file": "frozen/f0089.png"
+  },
+  {
+   "t": 45,
+   "file": "frozen/f0090.png"
+  },
+  {
+   "t": 45.5,
+   "file": "frozen/f0091.png"
+  },
+  {
+   "t": 46,
+   "file": "frozen/f0092.png"
+  },
+  {
+   "t": 46.5,
+   "file": "frozen/f0093.png"
+  },
+  {
+   "t": 47,
+   "file": "frozen/f0094.png"
+  },
+  {
+   "t": 47.5,
+   "file": "frozen/f0095.png"
+  },
+  {
+   "t": 48,
+   "file": "frozen/f0096.png"
+  },
+  {
+   "t": 48.5,
+   "file": "frozen/f0097.png"
+  },
+  {
+   "t": 49,
+   "file": "frozen/f0098.png"
+  },
+  {
+   "t": 49.5,
+   "file": "frozen/f0099.png"
+  },
+  {
+   "t": 50,
+   "file": "frozen/f0100.png"
+  },
+  {
+   "t": 50.5,
+   "file": "frozen/f0101.png"
+  },
+  {
+   "t": 51,
+   "file": "frozen/f0102.png"
+  },
+  {
+   "t": 51.5,
+   "file": "frozen/f0103.png"
+  },
+  {
+   "t": 52,
+   "file": "frozen/f0104.png"
+  },
+  {
+   "t": 52.5,
+   "file": "frozen/f0105.png"
+  },
+  {
+   "t": 53,
+   "file": "frozen/f0106.png"
+  },
+  {
+   "t": 53.5,
+   "file": "frozen/f0107.png"
+  },
+  {
+   "t": 54,
+   "file": "frozen/f0108.png"
+  },
+  {
+   "t": 54.5,
+   "file": "frozen/f0109.png"
+  },
+  {
+   "t": 55,
+   "file": "frozen/f0110.png"
+  },
+  {
+   "t": 55.5,
+   "file": "frozen/f0111.png"
+  },
+  {
+   "t": 56,
+   "file": "frozen/f0112.png"
+  },
+  {
+   "t": 56.5,
+   "file": "frozen/f0113.png"
+  },
+  {
+   "t": 57,
+   "file": "frozen/f0114.png"
+  },
+  {
+   "t": 57.5,
+   "file": "frozen/f0115.png"
+  },
+  {
+   "t": 58,
+   "file": "frozen/f0116.png"
+  },
+  {
+   "t": 58.5,
+   "file": "frozen/f0117.png"
+  },
+  {
+   "t": 59,
+   "file": "frozen/f0118.png"
+  },
+  {
+   "t": 59.5,
+   "file": "frozen/f0119.png"
+  },
+  {
+   "t": 60,
+   "file": "frozen/f0120.png"
+  },
+  {
+   "t": 60.5,
+   "file": "frozen/f0121.png"
+  },
+  {
+   "t": 61,
+   "file": "frozen/f0122.png"
+  },
+  {
+   "t": 61.5,
+   "file": "frozen/f0123.png"
+  },
+  {
+   "t": 62,
+   "file": "frozen/f0124.png"
+  },
+  {
+   "t": 62.5,
+   "file": "frozen/f0125.png"
+  },
+  {
+   "t": 63,
+   "file": "frozen/f0126.png"
+  },
+  {
+   "t": 63.5,
+   "file": "frozen/f0127.png"
+  },
+  {
+   "t": 64,
+   "file": "frozen/f0128.png"
+  },
+  {
+   "t": 64.5,
+   "file": "frozen/f0129.png"
+  },
+  {
+   "t": 65,
+   "file": "frozen/f0130.png"
+  },
+  {
+   "t": 65.5,
+   "file": "frozen/f0131.png"
+  },
+  {
+   "t": 66,
+   "file": "frozen/f0132.png"
+  },
+  {
+   "t": 66.5,
+   "file": "frozen/f0133.png"
+  },
+  {
+   "t": 67,
+   "file": "frozen/f0134.png"
+  },
+  {
+   "t": 67.5,
+   "file": "frozen/f0135.png"
+  },
+  {
+   "t": 68,
+   "file": "frozen/f0136.png"
+  },
+  {
+   "t": 68.5,
+   "file": "frozen/f0137.png"
+  },
+  {
+   "t": 69,
+   "file": "frozen/f0138.png"
+  },
+  {
+   "t": 69.5,
+   "file": "frozen/f0139.png"
+  },
+  {
+   "t": 70,
+   "file": "frozen/f0140.png"
+  },
+  {
+   "t": 70.5,
+   "file": "frozen/f0141.png"
+  },
+  {
+   "t": 71,
+   "file": "frozen/f0142.png"
+  },
+  {
+   "t": 71.5,
+   "file": "frozen/f0143.png"
+  },
+  {
+   "t": 72,
+   "file": "frozen/f0144.png"
+  },
+  {
+   "t": 72.5,
+   "file": "frozen/f0145.png"
+  },
+  {
+   "t": 73,
+   "file": "frozen/f0146.png"
+  },
+  {
+   "t": 73.5,
+   "file": "frozen/f0147.png"
+  },
+  {
+   "t": 74,
+   "file": "frozen/f0148.png"
+  },
+  {
+   "t": 74.5,
+   "file": "frozen/f0149.png"
+  },
+  {
+   "t": 75,
+   "file": "frozen/f0150.png"
+  },
+  {
+   "t": 75.5,
+   "file": "frozen/f0151.png"
+  },
+  {
+   "t": 76,
+   "file": "frozen/f0152.png"
+  },
+  {
+   "t": 76.5,
+   "file": "frozen/f0153.png"
+  },
+  {
+   "t": 77,
+   "file": "frozen/f0154.png"
+  },
+  {
+   "t": 77.5,
+   "file": "frozen/f0155.png"
+  },
+  {
+   "t": 78,
+   "file": "frozen/f0156.png"
+  },
+  {
+   "t": 78.5,
+   "file": "frozen/f0157.png"
+  },
+  {
+   "t": 79,
+   "file": "frozen/f0158.png"
+  },
+  {
+   "t": 79.5,
+   "file": "frozen/f0159.png"
+  },
+  {
+   "t": 80,
+   "file": "frozen/f0160.png"
+  },
+  {
+   "t": 80.5,
+   "file": "frozen/f0161.png"
+  },
+  {
+   "t": 81,
+   "file": "frozen/f0162.png"
+  },
+  {
+   "t": 81.5,
+   "file": "frozen/f0163.png"
+  },
+  {
+   "t": 82,
+   "file": "frozen/f0164.png"
+  },
+  {
+   "t": 82.5,
+   "file": "frozen/f0165.png"
+  },
+  {
+   "t": 83,
+   "file": "frozen/f0166.png"
+  },
+  {
+   "t": 83.5,
+   "file": "frozen/f0167.png"
+  },
+  {
+   "t": 84,
+   "file": "frozen/f0168.png"
+  },
+  {
+   "t": 84.5,
+   "file": "frozen/f0169.png"
+  },
+  {
+   "t": 85,
+   "file": "frozen/f0170.png"
+  },
+  {
+   "t": 85.5,
+   "file": "frozen/f0171.png"
+  },
+  {
+   "t": 86,
+   "file": "frozen/f0172.png"
+  },
+  {
+   "t": 86.5,
+   "file": "frozen/f0173.png"
+  },
+  {
+   "t": 87,
+   "file": "frozen/f0174.png"
+  },
+  {
+   "t": 87.5,
+   "file": "frozen/f0175.png"
+  },
+  {
+   "t": 88,
+   "file": "frozen/f0176.png"
+  },
+  {
+   "t": 88.5,
+   "file": "frozen/f0177.png"
+  },
+  {
+   "t": 89,
+   "file": "frozen/f0178.png"
+  },
+  {
+   "t": 89.5,
+   "file": "frozen/f0179.png"
+  },
+  {
+   "t": 90,
+   "file": "frozen/f0180.png"
+  },
+  {
+   "t": 90.5,
+   "file": "frozen/f0181.png"
+  },
+  {
+   "t": 91,
+   "file": "frozen/f0182.png"
+  },
+  {
+   "t": 91.5,
+   "file": "frozen/f0183.png"
+  },
+  {
+   "t": 92,
+   "file": "frozen/f0184.png"
+  },
+  {
+   "t": 92.5,
+   "file": "frozen/f0185.png"
+  },
+  {
+   "t": 93,
+   "file": "frozen/f0186.png"
+  },
+  {
+   "t": 93.5,
+   "file": "frozen/f0187.png"
+  },
+  {
+   "t": 94,
+   "file": "frozen/f0188.png"
+  },
+  {
+   "t": 94.5,
+   "file": "frozen/f0189.png"
+  },
+  {
+   "t": 95,
+   "file": "frozen/f0190.png"
+  },
+  {
+   "t": 95.5,
+   "file": "frozen/f0191.png"
+  },
+  {
+   "t": 96,
+   "file": "frozen/f0192.png"
+  },
+  {
+   "t": 96.5,
+   "file": "frozen/f0193.png"
+  },
+  {
+   "t": 97,
+   "file": "frozen/f0194.png"
+  },
+  {
+   "t": 97.5,
+   "file": "frozen/f0195.png"
+  },
+  {
+   "t": 98,
+   "file": "frozen/f0196.png"
+  },
+  {
+   "t": 98.5,
+   "file": "frozen/f0197.png"
+  },
+  {
+   "t": 99,
+   "file": "frozen/f0198.png"
+  },
+  {
+   "t": 99.5,
+   "file": "frozen/f0199.png"
+  },
+  {
+   "t": 100,
+   "file": "frozen/f0200.png"
+  },
+  {
+   "t": 100.5,
+   "file": "frozen/f0201.png"
+  },
+  {
+   "t": 101,
+   "file": "frozen/f0202.png"
+  },
+  {
+   "t": 101.5,
+   "file": "frozen/f0203.png"
+  },
+  {
+   "t": 102,
+   "file": "frozen/f0204.png"
+  },
+  {
+   "t": 102.5,
+   "file": "frozen/f0205.png"
+  },
+  {
+   "t": 103,
+   "file": "frozen/f0206.png"
+  },
+  {
+   "t": 103.5,
+   "file": "frozen/f0207.png"
+  },
+  {
+   "t": 104,
+   "file": "frozen/f0208.png"
+  },
+  {
+   "t": 104.5,
+   "file": "frozen/f0209.png"
+  },
+  {
+   "t": 105,
+   "file": "frozen/f0210.png"
+  },
+  {
+   "t": 105.5,
+   "file": "frozen/f0211.png"
+  },
+  {
+   "t": 106,
+   "file": "frozen/f0212.png"
+  },
+  {
+   "t": 106.5,
+   "file": "frozen/f0213.png"
+  },
+  {
+   "t": 107,
+   "file": "frozen/f0214.png"
+  },
+  {
+   "t": 107.5,
+   "file": "frozen/f0215.png"
+  },
+  {
+   "t": 108,
+   "file": "frozen/f0216.png"
+  },
+  {
+   "t": 108.5,
+   "file": "frozen/f0217.png"
+  },
+  {
+   "t": 109,
+   "file": "frozen/f0218.png"
+  },
+  {
+   "t": 109.5,
+   "file": "frozen/f0219.png"
+  },
+  {
+   "t": 110,
+   "file": "frozen/f0220.png"
+  },
+  {
+   "t": 110.5,
+   "file": "frozen/f0221.png"
+  },
+  {
+   "t": 111,
+   "file": "frozen/f0222.png"
+  },
+  {
+   "t": 111.5,
+   "file": "frozen/f0223.png"
+  },
+  {
+   "t": 112,
+   "file": "frozen/f0224.png"
+  },
+  {
+   "t": 112.5,
+   "file": "frozen/f0225.png"
+  },
+  {
+   "t": 113,
+   "file": "frozen/f0226.png"
+  },
+  {
+   "t": 113.5,
+   "file": "frozen/f0227.png"
+  },
+  {
+   "t": 114,
+   "file": "frozen/f0228.png"
+  },
+  {
+   "t": 114.5,
+   "file": "frozen/f0229.png"
+  },
+  {
+   "t": 115,
+   "file": "frozen/f0230.png"
+  },
+  {
+   "t": 115.5,
+   "file": "frozen/f0231.png"
+  },
+  {
+   "t": 116,
+   "file": "frozen/f0232.png"
+  },
+  {
+   "t": 116.5,
+   "file": "frozen/f0233.png"
+  },
+  {
+   "t": 117,
+   "file": "frozen/f0234.png"
+  },
+  {
+   "t": 117.5,
+   "file": "frozen/f0235.png"
+  },
+  {
+   "t": 118,
+   "file": "frozen/f0236.png"
+  },
+  {
+   "t": 118.5,
+   "file": "frozen/f0237.png"
+  },
+  {
+   "t": 119,
+   "file": "frozen/f0238.png"
+  },
+  {
+   "t": 119.5,
+   "file": "frozen/f0239.png"
+  },
+  {
+   "t": 120,
+   "file": "frozen/f0240.png"
+  },
+  {
+   "t": 120.5,
+   "file": "frozen/f0241.png"
+  },
+  {
+   "t": 121,
+   "file": "frozen/f0242.png"
+  },
+  {
+   "t": 121.5,
+   "file": "frozen/f0243.png"
+  },
+  {
+   "t": 122,
+   "file": "frozen/f0244.png"
+  },
+  {
+   "t": 122.5,
+   "file": "frozen/f0245.png"
+  },
+  {
+   "t": 123,
+   "file": "frozen/f0246.png"
+  },
+  {
+   "t": 123.5,
+   "file": "frozen/f0247.png"
+  },
+  {
+   "t": 124,
+   "file": "frozen/f0248.png"
+  },
+  {
+   "t": 124.5,
+   "file": "frozen/f0249.png"
+  },
+  {
+   "t": 125,
+   "file": "frozen/f0250.png"
+  },
+  {
+   "t": 125.5,
+   "file": "frozen/f0251.png"
+  },
+  {
+   "t": 126,
+   "file": "frozen/f0252.png"
+  },
+  {
+   "t": 126.5,
+   "file": "frozen/f0253.png"
+  },
+  {
+   "t": 127,
+   "file": "frozen/f0254.png"
+  },
+  {
+   "t": 127.5,
+   "file": "frozen/f0255.png"
+  },
+  {
+   "t": 128,
+   "file": "frozen/f0256.png"
+  },
+  {
+   "t": 128.5,
+   "file": "frozen/f0257.png"
+  },
+  {
+   "t": 129,
+   "file": "frozen/f0258.png"
+  },
+  {
+   "t": 129.5,
+   "file": "frozen/f0259.png"
+  },
+  {
+   "t": 130,
+   "file": "frozen/f0260.png"
+  },
+  {
+   "t": 130.5,
+   "file": "frozen/f0261.png"
+  },
+  {
+   "t": 131,
+   "file": "frozen/f0262.png"
+  },
+  {
+   "t": 131.5,
+   "file": "frozen/f0263.png"
+  },
+  {
+   "t": 132,
+   "file": "frozen/f0264.png"
+  },
+  {
+   "t": 132.5,
+   "file": "frozen/f0265.png"
+  },
+  {
+   "t": 133,
+   "file": "frozen/f0266.png"
+  },
+  {
+   "t": 133.5,
+   "file": "frozen/f0267.png"
+  },
+  {
+   "t": 134,
+   "file": "frozen/f0268.png"
+  },
+  {
+   "t": 134.5,
+   "file": "frozen/f0269.png"
+  },
+  {
+   "t": 135,
+   "file": "frozen/f0270.png"
+  },
+  {
+   "t": 135.5,
+   "file": "frozen/f0271.png"
+  },
+  {
+   "t": 136,
+   "file": "frozen/f0272.png"
+  },
+  {
+   "t": 136.5,
+   "file": "frozen/f0273.png"
+  },
+  {
+   "t": 137,
+   "file": "frozen/f0274.png"
+  },
+  {
+   "t": 137.5,
+   "file": "frozen/f0275.png"
+  },
+  {
+   "t": 138,
+   "file": "frozen/f0276.png"
+  },
+  {
+   "t": 138.5,
+   "file": "frozen/f0277.png"
+  },
+  {
+   "t": 139,
+   "file": "frozen/f0278.png"
+  },
+  {
+   "t": 139.5,
+   "file": "frozen/f0279.png"
+  },
+  {
+   "t": 140,
+   "file": "frozen/f0280.png"
+  },
+  {
+   "t": 140.5,
+   "file": "frozen/f0281.png"
+  },
+  {
+   "t": 141,
+   "file": "frozen/f0282.png"
+  },
+  {
+   "t": 141.5,
+   "file": "frozen/f0283.png"
+  },
+  {
+   "t": 142,
+   "file": "frozen/f0284.png"
+  },
+  {
+   "t": 142.5,
+   "file": "frozen/f0285.png"
+  },
+  {
+   "t": 143,
+   "file": "frozen/f0286.png"
+  },
+  {
+   "t": 143.5,
+   "file": "frozen/f0287.png"
+  },
+  {
+   "t": 144,
+   "file": "frozen/f0288.png"
+  },
+  {
+   "t": 144.5,
+   "file": "frozen/f0289.png"
+  },
+  {
+   "t": 145,
+   "file": "frozen/f0290.png"
+  },
+  {
+   "t": 145.5,
+   "file": "frozen/f0291.png"
+  },
+  {
+   "t": 146,
+   "file": "frozen/f0292.png"
+  },
+  {
+   "t": 146.5,
+   "file": "frozen/f0293.png"
+  },
+  {
+   "t": 147,
+   "file": "frozen/f0294.png"
+  },
+  {
+   "t": 147.5,
+   "file": "frozen/f0295.png"
+  },
+  {
+   "t": 148,
+   "file": "frozen/f0296.png"
+  },
+  {
+   "t": 148.5,
+   "file": "frozen/f0297.png"
+  },
+  {
+   "t": 149,
+   "file": "frozen/f0298.png"
+  },
+  {
+   "t": 149.5,
+   "file": "frozen/f0299.png"
+  },
+  {
+   "t": 150,
+   "file": "frozen/f0300.png"
+  },
+  {
+   "t": 150.5,
+   "file": "frozen/f0301.png"
+  },
+  {
+   "t": 151,
+   "file": "frozen/f0302.png"
+  },
+  {
+   "t": 151.5,
+   "file": "frozen/f0303.png"
+  },
+  {
+   "t": 152,
+   "file": "frozen/f0304.png"
+  },
+  {
+   "t": 152.5,
+   "file": "frozen/f0305.png"
+  },
+  {
+   "t": 153,
+   "file": "frozen/f0306.png"
+  },
+  {
+   "t": 153.5,
+   "file": "frozen/f0307.png"
+  },
+  {
+   "t": 154,
+   "file": "frozen/f0308.png"
+  },
+  {
+   "t": 154.5,
+   "file": "frozen/f0309.png"
+  },
+  {
+   "t": 155,
+   "file": "frozen/f0310.png"
+  },
+  {
+   "t": 155.5,
+   "file": "frozen/f0311.png"
+  },
+  {
+   "t": 156,
+   "file": "frozen/f0312.png"
+  },
+  {
+   "t": 156.5,
+   "file": "frozen/f0313.png"
+  },
+  {
+   "t": 157,
+   "file": "frozen/f0314.png"
+  },
+  {
+   "t": 157.5,
+   "file": "frozen/f0315.png"
+  },
+  {
+   "t": 158,
+   "file": "frozen/f0316.png"
+  },
+  {
+   "t": 158.5,
+   "file": "frozen/f0317.png"
+  },
+  {
+   "t": 159,
+   "file": "frozen/f0318.png"
+  },
+  {
+   "t": 159.5,
+   "file": "frozen/f0319.png"
+  },
+  {
+   "t": 160,
+   "file": "frozen/f0320.png"
+  },
+  {
+   "t": 160.5,
+   "file": "frozen/f0321.png"
+  },
+  {
+   "t": 161,
+   "file": "frozen/f0322.png"
+  },
+  {
+   "t": 161.5,
+   "file": "frozen/f0323.png"
+  },
+  {
+   "t": 162,
+   "file": "frozen/f0324.png"
+  },
+  {
+   "t": 162.5,
+   "file": "frozen/f0325.png"
+  },
+  {
+   "t": 163,
+   "file": "frozen/f0326.png"
+  },
+  {
+   "t": 163.5,
+   "file": "frozen/f0327.png"
+  },
+  {
+   "t": 164,
+   "file": "frozen/f0328.png"
+  },
+  {
+   "t": 164.5,
+   "file": "frozen/f0329.png"
+  },
+  {
+   "t": 165,
+   "file": "frozen/f0330.png"
+  },
+  {
+   "t": 165.5,
+   "file": "frozen/f0331.png"
+  },
+  {
+   "t": 166,
+   "file": "frozen/f0332.png"
+  },
+  {
+   "t": 166.5,
+   "file": "frozen/f0333.png"
+  },
+  {
+   "t": 167,
+   "file": "frozen/f0334.png"
+  },
+  {
+   "t": 167.5,
+   "file": "frozen/f0335.png"
+  },
+  {
+   "t": 168,
+   "file": "frozen/f0336.png"
+  },
+  {
+   "t": 168.5,
+   "file": "frozen/f0337.png"
+  },
+  {
+   "t": 169,
+   "file": "frozen/f0338.png"
+  },
+  {
+   "t": 169.5,
+   "file": "frozen/f0339.png"
+  },
+  {
+   "t": 170,
+   "file": "frozen/f0340.png"
+  },
+  {
+   "t": 170.5,
+   "file": "frozen/f0341.png"
+  },
+  {
+   "t": 171,
+   "file": "frozen/f0342.png"
+  },
+  {
+   "t": 171.5,
+   "file": "frozen/f0343.png"
+  },
+  {
+   "t": 172,
+   "file": "frozen/f0344.png"
+  }
+ ],
+ "errors": [],
+ "mobileHScroll": false
+}

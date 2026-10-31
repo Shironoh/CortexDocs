@@ -1,0 +1,994 @@
+<title>Le registre qui n'oublie rien</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+/* Layout: one cinema column — header, 16:9 stage, transport bar, chapters, legend. Single dark look by choice. */
+:root {
+  --ink: #050B1E; --night: #0B1A3A; --panel: #14295C; --line: #26407e;
+  --text: #F8FAFC; --muted: #9fb0d6; --amber: #FFB703; --cyan: #22D3EE; --rose: #EF476F;
+  --f-disp: Poppins, 'DejaVu Sans', system-ui, sans-serif; --f-mono: 'JetBrains Mono', 'DejaVu Sans Mono', monospace;
+  color-scheme: dark;
+}
+html, body { background: var(--ink); color: var(--text); }
+body { font-family: var(--f-disp); font-size: 15px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.app { max-width: 1180px; margin: 0 auto; padding-block: 18px 40px; display: grid; gap: 12px; }
+.top h1 { margin: 0; font-size: clamp(20px, 3vw, 30px); font-weight: 800; text-wrap: balance; letter-spacing: -.01em; }
+.eyebrow { color: var(--amber); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+.stage-wrap { width: 100%; }
+.stage { position: relative; width: 100%; aspect-ratio: 16/9; max-width: 100%; background: var(--night); border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px -20px #000; }
+.stage svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.subs { position: absolute; left: 50%; bottom: 3.2%; transform: translateX(-50%); max-width: 86%; text-align: center; background: rgba(5, 11, 30, .78);
+  color: var(--text); font-size: clamp(13px, 1.9vw, 22px); line-height: 1.35; padding: .35em .8em; border-radius: 10px; font-weight: 600; pointer-events: none; }
+.subs.empty, .subs-m.empty { visibility: hidden; }
+.nosubs .subs, .nosubs .subs-m { display: none; }
+.subs-m { display: none; text-align: center; font-size: 15px; line-height: 1.4; min-height: 3.2em; color: var(--text); font-weight: 600; }
+@media (max-width: 720px) { .subs { display: none; } .subs-m { display: block; } }
+.poster { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(180deg, transparent 40%, rgba(5, 11, 30, .55)); }
+.bigplay { display: flex; gap: .6em; align-items: center; font: 700 clamp(15px, 2.2vw, 22px) var(--f-disp); color: var(--ink); background: var(--amber); border: 0; border-radius: 999px; padding: .7em 1.4em; cursor: pointer; box-shadow: 0 10px 30px -8px var(--amber); }
+.bigplay:focus-visible, button:focus-visible, select:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
+.controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.controls button, .controls select { font: 600 14px var(--f-disp); color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 7px 11px; cursor: pointer; }
+.controls .pp { background: var(--amber); color: var(--ink); border-color: var(--amber); min-width: 46px; }
+.tg[aria-pressed="true"] { background: var(--cyan); color: var(--ink); border-color: var(--cyan); }
+.track { position: relative; flex: 1 1 200px; min-width: 120px; height: 10px; background: var(--panel); border-radius: 99px; cursor: pointer; }
+.bar { position: absolute; left: 0; top: 0; bottom: 0; background: var(--amber); border-radius: 99px; }
+.ticks i { position: absolute; top: -3px; width: 2px; height: 16px; background: var(--muted); opacity: .6; }
+.time { font: 600 13px var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.opts { display: flex; gap: 6px; flex-wrap: wrap; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.chapters { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 6px; }
+.chap { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; text-align: left; font: 600 13px var(--f-disp); color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; cursor: pointer; min-width: 0; }
+.chap .n { font: 700 12px var(--f-mono); color: var(--amber); }
+.chap .tt { min-width: 0; overflow-wrap: anywhere; }
+.chap .ts { font: 500 11px var(--f-mono); color: var(--muted); }
+.chap.on { background: var(--panel); border-color: var(--amber); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); }
+.lg { display: inline-flex; gap: 6px; align-items: center; }
+.lg i { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+.hint { color: var(--muted); font-size: 12px; margin: 0; }
+.hotspots { position: absolute; inset: 0; pointer-events: none; }
+.hot { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; display: flex; align-items: center; gap: 6px; background: rgba(5, 11, 30, .85); color: var(--text); border: 2px solid var(--cyan); border-radius: 999px; padding: 4px 10px 4px 4px; font: 600 12px var(--f-disp); cursor: pointer; }
+.hot .dot { width: 22px; height: 22px; border-radius: 50%; background: var(--cyan); color: var(--ink); display: grid; place-items: center; font-weight: 800; }
+.hotpanel { position: absolute; right: 2%; top: 4%; width: min(520px, 92%); max-height: 84%; overflow: auto; background: rgba(11, 26, 58, .97); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; z-index: 5; }
+.hp-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--amber); }
+.hp-head button { background: none; border: 0; color: var(--text); font-size: 18px; cursor: pointer; }
+.hp-body { font-size: 13px; line-height: 1.5; color: var(--text); }
+.hp-body pre { font: 12px/1.45 var(--f-mono); background: var(--ink); padding: 8px 10px; border-radius: 8px; overflow-x: auto; white-space: pre; }
+.hp-body code { font-family: var(--f-mono); color: var(--cyan); }
+.hp-body .tbd { color: var(--rose); font-weight: 700; }
+.quiz { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(5, 11, 30, .55); z-index: 6; }
+.quiz-card { width: min(560px, 92%); background: var(--night); border: 2px solid var(--amber); border-radius: 14px; padding: 14px 16px; display: grid; gap: 8px; }
+.quiz-k { color: var(--amber); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: 12px; }
+.quiz-card p { margin: 0; font-size: 16px; font-weight: 600; }
+.quiz-c { display: grid; gap: 6px; }
+.quiz-c button { text-align: left; font: 600 14px var(--f-disp); color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; cursor: pointer; }
+.quiz-c button.ok { background: #06D6A0; color: var(--ink); } .quiz-c button.ko { background: var(--rose); } .quiz-c button.dim { opacity: .5; }
+.quiz-why { font-weight: 500 !important; font-size: 14px !important; color: var(--muted); }
+.quiz-go { justify-self: end; font: 700 14px var(--f-disp); background: var(--amber); color: var(--ink); border: 0; border-radius: 10px; padding: 8px 14px; cursor: pointer; }
+.footer { color: var(--muted); font-size: 12px; line-height: 1.5; border-top: 1px solid var(--line); padding-top: 10px; }
+.footer a { color: var(--cyan); }
+/* export: stage fullscreen 1920x1080, no chrome */
+html.export, html.export body { margin: 0; padding: 0; overflow: hidden; background: #000; }
+html.export .app { max-width: none; padding: 0; display: block; }
+html.export .top, html.export .controls, html.export .chapters, html.export .legend, html.export .hint, html.export .subs-m,
+html.export .hotspots, html.export .quiz, html.export .hotpanel, html.export .poster, html.export .footer { display: none !important; }
+html.export .stage { width: 1920px; height: 1080px; border-radius: 0; box-shadow: none; }
+html.export .subs { display: block; font-size: 34px; bottom: 34px; }
+@media (prefers-reduced-motion: reduce) { .bigplay { box-shadow: none; } }
+html.export body.nosubs .subs { display: none !important; }
+
+</style>
+<div class="app">
+  <header class="top">
+    <div class="eyebrow">Google Cloud · Audit logs · v3</div>
+    <h1>Le registre qui n'oublie rien : Admin Activity, côté détection et réponse</h1>
+  </header>
+  <div class="stage-wrap">
+    <div class="stage" id="stage">
+      <svg id="svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Le registre qui n'oublie rien : Admin Activity, côté détection et réponse"></svg>
+      <div id="hotspots" class="hotspots"></div>
+      <div id="subs" class="subs empty" aria-live="polite"></div>
+      <div id="poster" class="poster">
+        <button id="bigplay" class="bigplay" type="button"><span class="tri">▶</span><span>Lire · <b id="dur"></b></span></button>
+      </div>
+      <div id="quiz" class="quiz" hidden>
+        <div class="quiz-card">
+          <div class="quiz-k">Devinez</div>
+          <p id="quizq"></p>
+          <div id="quizc" class="quiz-c"></div>
+          <p id="quizwhy" class="quiz-why" hidden></p>
+          <button id="quizgo" class="quiz-go" type="button" hidden>Continuer ▶</button>
+        </div>
+      </div>
+      <div id="hotpanel" class="hotpanel" hidden>
+        <div class="hp-head"><b id="hottitle"></b><button id="hotclose" type="button" aria-label="Fermer">✕</button></div>
+        <div id="hotbody" class="hp-body"></div>
+      </div>
+    </div>
+  </div>
+  <div id="subsM" class="subs-m empty"></div>
+  <div class="controls">
+    <button id="prev" type="button" aria-label="Scène précédente">⏮</button>
+    <button id="play" type="button" class="pp" aria-label="Lecture">▶</button>
+    <button id="next" type="button" aria-label="Scène suivante">⏭</button>
+    <div id="track" class="track"><div id="ticks" class="ticks"></div><div id="bar" class="bar"></div></div>
+    <span id="time" class="time">0:00</span>
+    <div class="opts">
+      <label class="sel"><span class="sr">Vitesse</span><select id="speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option></select></label>
+      <button id="cc" type="button" class="tg">CC</button>
+      <button id="voice" type="button" class="tg">Voix</button>
+      <button id="quizb" type="button" class="tg">Quiz</button>
+    </div>
+  </div>
+  <nav id="chapters" class="chapters" aria-label="Chapitres"></nav>
+  <div id="legend" class="legend"></div>
+  <p class="hint">Pause = points <b>+</b> cliquables pour le détail technique. Raccourcis : espace, ← →, Échap.</p>
+  <p class='footer'>Itération v3, générée avec le skill v2. Sources : documentation Google Cloud (Cloud Audit Logs, Store log entries, AuditLog reference, Cloud Storage audit logging), règle Elastic « GCP Service Account Key Creation ». IP 203.0.113.47 = plage de documentation, compte Gmail fictif. Épisode suivant : centraliser les journaux de tous les projets (sink agrégé).</p>
+</div>
+<script>
+/* motion-explainer engine — pure function of time, no library.
+   Everything is created once; render(t) only mutates attributes. */
+'use strict';
+const NS = 'http://www.w3.org/2000/svg';
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, p) => a + (b - a) * p;
+const P = (t, a, d) => d <= 0 ? (t >= a ? 1 : 0) : clamp((t - a) / d);
+const E = {
+  lin: p => p, oc: p => 1 - (1 - p) ** 3, ic: p => p ** 3,
+  ioc: p => p < .5 ? 4 * p ** 3 : 1 - (-2 * p + 2) ** 3 / 2,
+  ob: p => 1 + 2.6 * (p - 1) ** 3 + 1.6 * (p - 1) ** 2,
+};
+let AMBIENT = true;
+let FRAMING = false; // true while resolving frame(): actors measured at full size, ignoring pop/out
+const WPS = 2.6;            // words per second (timing model)
+const GUESS_PAUSE = 1.5;    // silence for "devinez"
+
+function S(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs || {}) if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const words = s => s.replace(/\|/g, ' ').trim().split(/\s+/).filter(w => /[\p{L}\p{N}]/u.test(w)); // French spacing: lone ':' '?' are not words
+const norm = w => w.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9_%@.\-]/g, '');
+
+/* ---------------- Actor ---------------- */
+class Actor {
+  constructor(el, o) { this.el = el; this.o = o; this.bx = o.x || 0; this.by = o.y || 0; this.bs = o.s == null ? 1 : o.s; this.br = o.r || 0;
+    if (o.dash) { this.len = o.len || (el.getTotalLength ? el.getTotalLength() : 1000); el.setAttribute('stroke-dasharray', this.len); } }
+  update(t) {
+    const o = this.o; let x = this.bx, y = this.by, s = this.bs, r = this.br, a = o.a == null ? 1 : o.a;
+    if (o.pop != null && !FRAMING) { const p = P(t, o.pop, .6); s *= p <= 0 ? 0.001 : .4 + .6 * E.ob(p); a *= Math.min(1, p * 3); }
+    if (o.fin && !FRAMING) { a *= E.oc(P(t, o.fin[0], o.fin[1])); }
+    for (const m of o.moves || []) { const p = (m[3] || E.ioc)(P(t, m[0], m[1]));
+      if (p <= 0) continue; const v = m[2];
+      if ('x' in v) x = lerp(x, v.x, p); if ('y' in v) y = lerp(y, v.y, p); if ('s' in v) s = lerp(s, v.s, p);
+      if ('r' in v) r = lerp(r, v.r, p); if ('a' in v) a *= lerp(1, v.a, p); }
+    if (o.out != null && !FRAMING) a *= 1 - P(t, o.out, o.outd || .4);
+    if (FRAMING) a = 1;
+    const st = { x, y, s, r, a };
+    if (o.fn) o.fn(st, t);
+    if (o.dash) this.el.setAttribute('stroke-dashoffset', this.len * (1 - E.ioc(P(t, o.dash[0], o.dash[1]))));
+    this.el.setAttribute('opacity', st.a.toFixed(3));
+    this.el.setAttribute('visibility', st.a > 0.001 ? 'visible' : 'hidden');
+    this.el.setAttribute('transform', `translate(${st.x.toFixed(2)} ${st.y.toFixed(2)}) rotate(${st.r.toFixed(2)}) scale(${Math.max(st.s, 0.0001).toFixed(4)})`);
+  }
+}
+
+/* ---------------- Characters ---------------- */
+const SHAPES = {
+  blob: 'M -58 0 C -66 -44 -56 -128 0 -130 C 56 -128 66 -44 58 0 Q 0 10 -58 0 Z',
+  robot: 'M -54 -8 Q -58 -120 -40 -122 L 40 -122 Q 58 -120 54 -8 Q 0 4 -54 -8 Z',
+};
+const MOUTH = {
+  neutral: 'M -13 -50 Q 0 -46 13 -50', happy: 'M -17 -54 Q 0 -36 17 -54', smug: 'M -15 -50 Q 5 -44 17 -56',
+  angry: 'M -14 -44 Q 0 -54 14 -44', surprise: 'M -8 -50 a 8 10 0 1 0 16 0 a 8 10 0 1 0 -16 0', worried: 'M -14 -46 Q -4 -52 4 -48 Q 10 -45 14 -48',
+};
+const BROWS = { // [left, right] as dy at inner, dy at outer
+  neutral: [[0, 0], [0, 0]], happy: [[-4, -4], [-4, -4]], smug: [[2, 2], [-10, -4]], angry: [[8, -4], [8, -4]],
+  surprise: [[-12, -10], [-12, -10]], worried: [[-8, 2], [-8, 2]],
+};
+class Char {
+  constructor(K, parent, o) {
+    this.K = K; this.o = o; this.x = o.x; this.y = o.y; this.s = o.s || 1; this.dir = o.dir || 1;
+    this.moves = []; this.poses = []; this.exprs = [[-1, o.expr || 'neutral']]; this.looks = [];
+    this.popT = o.pop; this.outT = null;
+    const col = o.color, dark = o.dark || '#0B1A3A';
+    this.root = S('g', { 'data-char': o.name || '' }, parent);
+    S('ellipse', { cx: 0, cy: 2, rx: 60, ry: 11, fill: '#000', opacity: .28 }, this.root);
+    this.body = S('g', {}, this.root);
+    const shape = SHAPES[o.shape || 'blob'];
+    S('path', { d: shape, fill: dark, opacity: .45, transform: 'translate(7 7)' }, this.body);
+    this.armL = S('path', { fill: 'none', stroke: o.limb || col, 'stroke-width': 13, 'stroke-linecap': 'round' }, this.body);
+    this.armR = S('path', { fill: 'none', stroke: o.limb || col, 'stroke-width': 13, 'stroke-linecap': 'round' }, this.body);
+    if (o.ghost) S('path', { d: shape, fill: col, 'fill-opacity': .12, stroke: col, 'stroke-width': 6, 'stroke-dasharray': '16 12' }, this.body);
+    else { S('path', { d: shape, fill: col }, this.body);
+      S('ellipse', { cx: -18, cy: -96, rx: 16, ry: 9, fill: '#fff', opacity: .25, transform: 'rotate(-25 -18 -96)' }, this.body); }
+    if (o.shape === 'robot') {
+      S('line', { x1: 0, y1: -122, x2: 0, y2: -150, stroke: col, 'stroke-width': 6 }, this.body);
+      this.bulb = S('circle', { cx: 0, cy: -154, r: 9, fill: '#FFB703' }, this.body);
+      S('rect', { x: -40, y: -108, width: 80, height: 52, rx: 14, fill: '#0B1A3A', opacity: .55 }, this.body);
+    }
+    if (o.mask) { S('path', { d: 'M -50 -100 Q 0 -112 50 -100 L 48 -72 Q 0 -80 -48 -72 Z', fill: '#2A0F2E' }, this.body);
+      S('path', { d: 'M -46 -118 Q 0 -150 46 -118 Q 0 -128 -46 -118 Z', fill: '#2A0F2E' }, this.body); }
+    this.face = S('g', { opacity: o.ghost ? .35 : 1 }, this.body);
+    this.eyes = S('g', {}, this.face);
+    this.pupils = [];
+    for (const ex of [-20, 20]) {
+      S('ellipse', { cx: ex, cy: -86, rx: 14, ry: 16, fill: '#fff' }, this.eyes);
+      this.pupils.push(S('circle', { cx: ex, cy: -86, r: 7, fill: '#0B1A3A' }, this.eyes));
+    }
+    this.browL = S('path', { stroke: '#0B1A3A', 'stroke-width': 5, 'stroke-linecap': 'round', fill: 'none' }, this.face);
+    this.browR = S('path', { stroke: '#0B1A3A', 'stroke-width': 5, 'stroke-linecap': 'round', fill: 'none' }, this.face);
+    this.mouth = S('path', { stroke: '#0B1A3A', 'stroke-width': 5, 'stroke-linecap': 'round', fill: '#0B1A3A', 'fill-opacity': 0 }, this.face);
+    if (o.headset) { S('path', { d: 'M -60 -84 Q -62 -150 0 -150 Q 62 -150 60 -84', stroke: '#0B1A3A', 'stroke-width': 8, fill: 'none' }, this.body);
+      S('rect', { x: -68, y: -98, width: 16, height: 30, rx: 6, fill: '#0B1A3A' }, this.body);
+      S('path', { d: 'M -60 -74 Q -50 -50 -22 -50', stroke: '#0B1A3A', 'stroke-width': 5, fill: 'none' }, this.body); }
+    this.handL = S('circle', { r: 10, fill: o.limb || col }, this.body);
+    this.handR = S('circle', { r: 10, fill: o.limb || col }, this.body);
+    this.loupe = S('g', { visibility: 'hidden' }, this.body);
+    S('line', { x1: 0, y1: 0, x2: 24, y2: 30, stroke: '#7c5a3a', 'stroke-width': 10, 'stroke-linecap': 'round' }, this.loupe);
+    S('circle', { cx: -14, cy: -18, r: 30, fill: '#bfefff', 'fill-opacity': .25, stroke: '#F8FAFC', 'stroke-width': 7 }, this.loupe);
+    this.prop = null;
+  }
+  /* timeline API (times absolute, coords in parent space) */
+  pop(t) { this.popT = t; this.K.ev(t, 'pop'); this.K.mark(t); return this; }
+  out(t) { this.outT = t; return this; }
+  walk(t, d, x, y) { this.moves.push({ t, d, x, y: y == null ? null : y, walk: true }); this.K.mark(t); return this; }
+  slide(t, d, x, y) { this.moves.push({ t, d, x, y: y == null ? null : y, walk: false }); this.K.mark(t); return this; }
+  pose(t, d, name, p) { this.poses.push({ t, d, name, p: p || {} }); if (name !== 'type') this.K.mark(t); return this; }
+  expr(t, e) { this.exprs.push([t, e]); this.exprs.sort((a, b) => a[0] - b[0]); return this; }
+  look(t, x, y) { this.looks.push([t, x, y]); this.looks.sort((a, b) => a[0] - b[0]); return this; }
+  hold(el) { this.prop = el; return this; }
+  posAt(t) {
+    let x = this.x, y = this.y, walking = 0, phase = 0;
+    for (const m of this.moves) { const p = E.ioc(P(t, m.t, m.d)); if (p <= 0) continue;
+      const nx = lerp(x, m.x, p), ny = m.y == null ? y : lerp(y, m.y, p);
+      if (m.walk && p > 0 && p < 1) { walking = Math.sin(Math.PI * p); phase = (t - m.t) * 9; this._wd = Math.sign(m.x - x) || this._wd; }
+      x = nx; y = ny; }
+    return { x, y, walking, phase };
+  }
+  update(t) {
+    const st = this.posAt(t);
+    let a = 1, sc = this.s;
+    if (this.popT != null && !FRAMING) { const p = P(t, this.popT, .6); sc *= p <= 0 ? 0.001 : .4 + .6 * E.ob(p); a = Math.min(1, p * 3); }
+    if (this.outT != null && !FRAMING) a *= 1 - P(t, this.outT, .4);
+    // expression
+    let ex = 'neutral'; for (const e of this.exprs) if (t >= e[0]) ex = e[1];
+    // pose
+    let rest = { L: [-62, -22], R: [62, -22] }, H = { L: rest.L.slice(), R: rest.R.slice() };
+    let bodyDy = 0, bodyRot = 0, sy = 1, sx = 1, loupe = 0, gaze = null;
+    if (st.walking > 0) { const sw = Math.sin(st.phase) * 22 * st.walking; H.L = [-58 + sw, -24]; H.R = [58 - sw, -24];
+      bodyDy -= Math.abs(Math.sin(st.phase)) * 10 * st.walking; bodyRot = 4 * st.walking * (this._wd || 1); }
+    for (const q of this.poses) {
+      const pin = P(t, q.t, .28), pout = 1 - P(t, q.t + q.d - .25, .25); let w = E.oc(Math.min(pin, pout));
+      if (t < q.t - .15 || t > q.t + q.d) continue;
+      if (t < q.t) { const ant = 1 - Math.abs((t - (q.t - .075)) / .075); bodyDy += 5 * ant; sy *= 1 - .04 * ant; continue; } // anticipation
+      const n = q.name, p = q.p;
+      if (n === 'point') { const dx = p.x - st.x, dy = p.y - (st.y - 70 * this.s); const L = Math.hypot(dx, dy) || 1;
+        const side = dx < 0 ? 'L' : 'R'; const sh = side === 'L' ? [-48, -62] : [48, -62];
+        const tgt = [sh[0] + dx / L * 82, sh[1] + dy / L * 82]; H[side] = [lerp(H[side][0], tgt[0], w), lerp(H[side][1], tgt[1], w)];
+        bodyRot += (dx < 0 ? -5 : 5) * w; gaze = [p.x, p.y]; }
+      if (n === 'loupe') { H.R = [lerp(H.R[0], 52, w), lerp(H.R[1], -50, w)]; loupe = w; }
+      if (n === 'shrug') { H.L = [lerp(H.L[0], -86, w), lerp(H.L[1], -96, w)]; H.R = [lerp(H.R[0], 86, w), lerp(H.R[1], -96, w)]; bodyDy += 6 * w; }
+      if (n === 'cheer') { H.L = [lerp(H.L[0], -74, w), lerp(H.L[1], -132, w)]; H.R = [lerp(H.R[0], 74, w), lerp(H.R[1], -132, w)];
+        bodyDy -= 14 * Math.abs(Math.sin((t - q.t) * 7)) * w; }
+      if (n === 'hold') { H.L = [lerp(H.L[0], -40, w), lerp(H.L[1], -70, w)]; H.R = [lerp(H.R[0], 40, w), lerp(H.R[1], -70, w)]; }
+      if (n === 'type') { const j = Math.sin((t - q.t) * 22); H.L = [lerp(H.L[0], -34, w), lerp(H.L[1], -26 + 6 * j, w)]; H.R = [lerp(H.R[0], 34, w), lerp(H.R[1], -26 - 6 * j, w)]; }
+      if (n === 'jump') { const k = P(t, q.t, Math.min(.7, q.d)); const h = Math.sin(Math.PI * k);
+        bodyDy -= 48 * h; sy *= k < .12 ? 1 - .2 * Math.sin(k / .12 * Math.PI) : 1 + .1 * h; sx = 2 - sy;
+        H.L = [lerp(H.L[0], -80, w), lerp(H.L[1], -118, w)]; H.R = [lerp(H.R[0], 80, w), lerp(H.R[1], -118, w)]; }
+      if (n === 'nod') { bodyDy += 7 * Math.abs(Math.sin((t - q.t) * 9)) * w; }
+      if (n === 'lean') { bodyRot += (p.dir || 1) * 10 * w; }
+      if (n === 'walkcycle') { const sw = Math.sin((t - q.t) * 9) * 22 * w; H.L = [-58 + sw, -24]; H.R = [58 - sw, -24]; bodyDy -= Math.abs(Math.sin((t - q.t) * 9)) * 10 * w; }
+    }
+    // gaze
+    if (!gaze) { let L = null; for (const l of this.looks) if (t >= l[0]) L = l; if (L && L[1] != null) gaze = [L[1], L[2]]; }
+    let px = 0, py = 0;
+    if (gaze) { const dx = gaze[0] - st.x, dy = gaze[1] - (st.y - 86 * this.s); const L = Math.hypot(dx, dy) || 1; px = dx / L * 6; py = dy / L * 6; }
+    // ambient: breathing + blink
+    let blink = 1;
+    if (AMBIENT) { sy *= 1 + .018 * Math.sin(t * 2.3 + this.x); const bt = (t + (this.x % 3)) % 3.7; if (bt < .12) blink = .12; }
+    // write
+    this.root.setAttribute('opacity', a.toFixed(3));
+    this.root.setAttribute('visibility', a > .001 ? 'visible' : 'hidden');
+    this.root.setAttribute('transform', `translate(${st.x.toFixed(1)} ${st.y.toFixed(1)}) scale(${(sc * this.dir).toFixed(4)} ${sc.toFixed(4)})`);
+    this.body.setAttribute('transform', `translate(0 ${bodyDy.toFixed(1)}) rotate(${bodyRot.toFixed(1)} 0 -40) scale(${sx.toFixed(3)} ${sy.toFixed(3)})`);
+    const ddir = this.dir; px *= ddir;
+    this.pupils[0].setAttribute('cx', -20 + px); this.pupils[0].setAttribute('cy', -86 + py);
+    this.pupils[1].setAttribute('cx', 20 + px); this.pupils[1].setAttribute('cy', -86 + py);
+    this.eyes.setAttribute('transform', `translate(0 ${-86 * (1 - blink)}) scale(1 ${blink})`);
+    const b = BROWS[ex] || BROWS.neutral;
+    this.browL.setAttribute('d', `M -34 ${-108 + b[0][1]} L -8 ${-108 + b[0][0]}`);
+    this.browR.setAttribute('d', `M 8 ${-108 + b[1][0]} L 34 ${-108 + b[1][1]}`);
+    this.mouth.setAttribute('d', MOUTH[ex] || MOUTH.neutral);
+    this.mouth.setAttribute('fill-opacity', ex === 'surprise' ? 1 : 0);
+    const arm = (el, sh, h) => { const mx = (sh[0] + h[0]) / 2 + (h[0] > 0 ? 8 : -8), my = (sh[1] + h[1]) / 2 + 10;
+      el.setAttribute('d', `M ${sh[0]} ${sh[1]} Q ${mx} ${my} ${h[0]} ${h[1]}`); };
+    arm(this.armL, [-46, -60], H.L); arm(this.armR, [46, -60], H.R);
+    this.handL.setAttribute('cx', H.L[0]); this.handL.setAttribute('cy', H.L[1]);
+    this.handR.setAttribute('cx', H.R[0]); this.handR.setAttribute('cy', H.R[1]);
+    this.loupe.setAttribute('visibility', loupe > .02 && a > .001 ? 'visible' : 'hidden');
+    this.loupe.setAttribute('transform', `translate(${H.R[0] - 26} ${H.R[1] - 26}) scale(${(.5 + .5 * loupe).toFixed(3)})`);
+    if (this.bulb) this.bulb.setAttribute('opacity', AMBIENT ? (.6 + .4 * Math.sin(t * 5)).toFixed(2) : 1);
+    if (this.prop) { const hx = (H.L[0] + H.R[0]) / 2, hy = Math.min(H.L[1], H.R[1]) - 20;
+      this.prop.setAttribute('transform', `translate(${(st.x + hx * sc * this.dir).toFixed(1)} ${(st.y + (hy + bodyDy) * sc).toFixed(1)})`); }
+  }
+}
+
+/* ---------------- Episode runtime ---------------- */
+function Runtime(ep, svg) {
+  const R = { ep, svg, actors: [], chars: [], camMoves: [], frames: [], focusKeys: [], hots: [], events: [], marks: [], fx: [] };
+  // ---- timing
+  let t0 = ep.lead || 0.6;
+  const cues = ep.cues.map(c => {
+    const parts = c.say.split('|'); const w1 = words(parts[0]).length, wAll = words(c.say).length;
+    const guess = parts.length > 1;
+    const dur = Math.max(3.6, wAll / WPS + 1.0) + (guess ? GUESS_PAUSE : 0) + (c.extra || 0);
+    const o = { ...c, start: t0, dur, end: t0 + dur, guess, w1, wAll, pauseAt: guess ? t0 + w1 / WPS : null };
+    t0 += dur; return o;
+  });
+  // scenes: start = first cue start minus travel lead
+  const scenes = ep.scenes.map(s => { const cs = cues.filter(c => c.sc === s.id); return { ...s, start: cs[0].start, end: cs[cs.length - 1].end, cues: cs }; });
+  R.duration = t0 + (ep.tail || 1.5);
+  R.cues = cues; R.scenes = scenes;
+  const cueById = Object.fromEntries(cues.map(c => [c.id, c]));
+  // ---- kit
+  const K = R.K = {};
+  K.S = S; K.E = E; K.P = P; K.lerp = lerp; K.clamp = clamp; K.Z = ep.zones;
+  K.cue = id => { const c = cueById[id]; if (!c) throw new Error('cue inconnu ' + id); return c; };
+  K.T = (id, word, n = 0, after = false) => {
+    const c = K.cue(id); if (word == null) return c.start; if (word === '$end') return c.end;
+    const ws = words(c.say); const target = norm(word); let k = -1, seen = 0;
+    for (let i = 0; i < ws.length; i++) if (norm(ws[i]).startsWith(target)) { if (seen === n) { k = i; break; } seen++; }
+    if (k < 0) throw new Error(`mot "${word}" absent du cue ${id}`);
+    const idx = after ? k + 1 : k;
+    let t = c.start + idx / WPS; if (c.guess && idx >= c.w1) t += GUESS_PAUSE; return t;
+  };
+  K.reveal = id => { const c = K.cue(id); return c.pauseAt + GUESS_PAUSE; };
+  K.sc = id => scenes.find(s => s.id === id);
+  K.layers = {};
+  K.A = (el, o) => { const a = new Actor(el, o || {}); R.actors.push(a);
+    if (o && o.pop != null) { K.ev(o.pop, 'pop'); K.mark(o.pop); }
+    if (o && o.fin) K.mark(o.fin[0]); if (o && o.out != null) K.mark(o.out); if (o && o.dash) K.mark(o.dash[0]);
+    for (const m of (o && o.moves) || []) K.mark(m[0]);
+    return a; };
+  K.g = (parent, attrs) => S('g', attrs || {}, parent);
+  K.tx = (parent, x, y, str, o = {}) => { // o.deco: a lone symbol (?, €, !) — not a text to read, not counted as a text block
+    const e = S('text', { x, y, 'font-size': o.size || 48, fill: o.fill || '#F8FAFC', 'font-weight': o.weight || 600,
+      'text-anchor': o.anchor || 'middle', 'font-family': o.mono ? "'JetBrains Mono','DejaVu Sans Mono',monospace" : "Poppins,'DejaVu Sans',sans-serif",
+      'data-txt': o.deco ? null : (o.mono ? 'code' : 'txt'), 'dominant-baseline': 'middle', 'letter-spacing': o.ls || null }, parent);
+    if (o.mono) e.setAttribute('style', 'white-space:pre');
+    if (o.bleed) e.setAttribute('data-bleed', '1');
+    e.textContent = str; return e;
+  };
+  K.char = (parent, o) => { const c = new Char(K, parent, o); R.chars.push(c); return c; };
+  K.cam = (t, d, x, y, z) => { R.camMoves.push({ t, d, x, y, z }); if (d > 0.9) K.ev(t, 'whoosh'); K.mark(t); };
+  // frame(t, d, targets, part, o): camera computed from the subject's bounding box at arrival time.
+  // part = share of the frame taken by the subject's dominant dimension (ensemble ~.9, travail ~.55, gros plan ~.7).
+  // Subject is centred at screen y=400 and kept inside y 60..740 (subtitle band free). o.focus adds a spotlight key.
+  K.frame = (t, d, targets, part = .55, o = {}) => { R.frames.push({ t, d, targets: [].concat(targets), part, o }); if (d > 0.9) K.ev(t, 'whoosh'); K.mark(t);
+    if (o.focus !== false) K.focus(t + Math.min(d, .4), [].concat(targets)[0], o.r || null); };
+  K.focus = (t, target, r) => R.focusKeys.push({ t, target: target && target.root ? target.root : target, r: r || null });
+  K.hot = (h) => R.hots.push(h);
+  K.ev = (t, type) => R.events.push({ t: +t.toFixed(3), type });
+  K.mark = t => R.marks.push(+t.toFixed(3));
+  K.fx = fn => R.fx.push(fn); // custom per-frame function (t) => void
+  return R;
+}
+function worldBBox(R, els) {
+  const main = R.K.layers.main, inv = main.getCTM().inverse(); let x1 = 1e9, y1 = 1e9, x2 = -1e9, y2 = -1e9;
+  for (let el of els) { if (el && el.root) el = el.root; if (!el) continue; let bb; try { bb = el.getBBox(); } catch (e) { continue; }
+    if (!bb || (bb.width === 0 && bb.height === 0)) continue; const m = inv.multiply(el.getCTM());
+    for (const [px, py] of [[bb.x, bb.y], [bb.x + bb.width, bb.y], [bb.x, bb.y + bb.height], [bb.x + bb.width, bb.y + bb.height]]) {
+      const p = R.svg.createSVGPoint(); p.x = px; p.y = py; const q = p.matrixTransform(m);
+      x1 = Math.min(x1, q.x); y1 = Math.min(y1, q.y); x2 = Math.max(x2, q.x); y2 = Math.max(y2, q.y); } }
+  return x1 > x2 ? null : { x: x1, y: y1, w: x2 - x1, h: y2 - y1 };
+}
+function camFor(bb, part, o = {}) {
+  let z = part / Math.max(bb.w / 1600, bb.h / 900); z = Math.min(z, 680 / bb.h, 1480 / bb.w, o.zmax || 3); if (o.zmin) z = Math.max(z, o.zmin);
+  return { x: bb.x + bb.w / 2 + (o.dx || 0), y: bb.y + bb.h / 2 + 50 / z + (o.dy || 0), z };
+}
+
+function camAt(R, t) {
+  const m0 = R.camMoves[0]; let x = m0.x, y = m0.y, z = m0.z;
+  for (const m of R.camMoves) { const p = E.ioc(P(t, m.t, m.d)); if (p <= 0) break;
+    x = lerp(x, m.x, p); y = lerp(y, m.y, p); z = Math.exp(lerp(Math.log(z), Math.log(m.z), p)); }
+  return { x, y, z };
+}
+function worldCenter(R, el) {
+  const bb = el.getBBox(); const m = el.getCTM(), base = R.K.layers.main.getCTM();
+  if (!m || !base) return [0, 0];
+  const pt = R.svg.createSVGPoint(); pt.x = bb.x + bb.width / 2; pt.y = bb.y + bb.height / 2;
+  const p = pt.matrixTransform(base.inverse().multiply(m)); return [p.x, p.y];
+}
+function focusAt(R, t) {
+  let f = null; for (const k of R.focusKeys) if (t >= k.t) f = k; return f;
+}
+
+/* Flat vector icon kit: each icon drawn around (0,0), ~100 units, returns <g>. Shared by episodes. */
+'use strict';
+const ICO = {
+  crown(g, c = '#FFB703') { S('path', { d: 'M -46 22 L -52 -26 L -22 2 L 0 -36 L 22 2 L 52 -26 L 46 22 Z', fill: c }, g); S('rect', { x: -48, y: 22, width: 96, height: 16, rx: 5, fill: c }, g);
+    S('path', { d: 'M -46 22 L -52 -26 L -22 2 Z', fill: '#000', opacity: .12 }, g); for (const x of [-52, 0, 52]) S('circle', { cx: x, cy: x ? -28 : -38, r: 7, fill: '#fff', opacity: .9 }, g); },
+  key(g, c = '#FB8500') { S('circle', { cx: -34, cy: 0, r: 26, fill: c }, g); S('circle', { cx: -34, cy: 0, r: 10, fill: '#0B1A3A' }, g);
+    S('rect', { x: -12, y: -8, width: 66, height: 16, rx: 6, fill: c }, g); S('rect', { x: 30, y: 4, width: 10, height: 18, rx: 3, fill: c }, g); S('rect', { x: 44, y: 4, width: 10, height: 13, rx: 3, fill: c }, g); },
+  laptop(g, c = '#22D3EE') { S('rect', { x: -44, y: -40, width: 88, height: 58, rx: 8, fill: '#0B1A3A', stroke: c, 'stroke-width': 7 }, g); S('path', { d: 'M -58 22 L 58 22 L 50 36 L -50 36 Z', fill: c }, g);
+    S('rect', { x: -30, y: -26, width: 40, height: 7, rx: 3, fill: c, opacity: .7 }, g); S('rect', { x: -30, y: -12, width: 56, height: 7, rx: 3, fill: c, opacity: .4 }, g); },
+  terminal(g, c = '#06D6A0') { S('rect', { x: -48, y: -38, width: 96, height: 76, rx: 10, fill: '#0B1A3A', stroke: c, 'stroke-width': 7 }, g);
+    S('path', { d: 'M -30 -14 L -14 0 L -30 14', fill: 'none', stroke: c, 'stroke-width': 7, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g); S('rect', { x: -6, y: 12, width: 28, height: 7, rx: 3, fill: c }, g); },
+  gear(g, c = '#A78BFA') { for (let i = 0; i < 8; i++) S('rect', { x: -9, y: -48, width: 18, height: 22, rx: 4, fill: c, transform: `rotate(${i * 45})` }, g);
+    S('circle', { r: 32, fill: c }, g); S('circle', { r: 13, fill: '#0B1A3A' }, g); },
+  person(g, c = '#F8FAFC') { S('circle', { cx: 0, cy: -22, r: 20, fill: c }, g); S('path', { d: 'M -34 34 Q -34 2 0 2 Q 34 2 34 34 Z', fill: c }, g); },
+  clock(g, c = '#F8FAFC') { S('circle', { r: 38, fill: 'none', stroke: c, 'stroke-width': 8 }, g); S('path', { d: 'M 0 -22 L 0 0 L 16 10', fill: 'none', stroke: c, 'stroke-width': 7, 'stroke-linecap': 'round' }, g); },
+  pin(g, c = '#F8FAFC') { S('path', { d: 'M 0 44 C -10 22 -34 4 -34 -14 A 34 34 0 1 1 34 -14 C 34 4 10 22 0 44 Z', fill: c }, g); S('circle', { cx: 0, cy: -14, r: 12, fill: '#0B1A3A' }, g); },
+  steps(g, c = '#EF476F') { for (const [x, y, r] of [[-26, 18, -12], [8, -2, 10], [-10, -30, -12], [26, -42, 10]]) { S('ellipse', { cx: x, cy: y, rx: 10, ry: 15, fill: c, transform: `rotate(${r} ${x} ${y})` }, g); } },
+  wrench(g, c = '#F8FAFC') { S('path', { d: 'M -36 30 L 8 -14 A 22 22 0 1 1 22 0 L -22 44 Z', fill: c }, g); S('circle', { cx: 24, cy: -20, r: 8, fill: '#0B1A3A' }, g); },
+  plusminus(g, c = '#06D6A0') { S('rect', { x: -40, y: -10, width: 80, height: 20, rx: 6, fill: c }, g); S('rect', { x: -10, y: -40, width: 20, height: 80, rx: 6, fill: c }, g); },
+  doc(g, c = '#F8FAFC') { S('path', { d: 'M -30 -40 L 14 -40 L 30 -24 L 30 40 L -30 40 Z', fill: c }, g); for (const y of [-16, 0, 16]) S('rect', { x: -18, y, width: 36, height: 6, rx: 3, fill: '#0B1A3A', opacity: .35 }, g); },
+  slip(g, c = '#FFB703') { S('rect', { x: -26, y: -18, width: 52, height: 36, rx: 5, fill: c }, g); S('rect', { x: -16, y: -8, width: 32, height: 5, rx: 2, fill: '#0B1A3A', opacity: .4 }, g); S('rect', { x: -16, y: 3, width: 22, height: 5, rx: 2, fill: '#0B1A3A', opacity: .4 }, g); },
+  padlock(g, c = '#F8FAFC') { S('path', { d: 'M -22 -6 L -22 -26 A 22 22 0 0 1 22 -26 L 22 -6', fill: 'none', stroke: c, 'stroke-width': 10 }, g); S('rect', { x: -34, y: -8, width: 68, height: 52, rx: 10, fill: c }, g); S('circle', { cx: 0, cy: 14, r: 7, fill: '#0B1A3A' }, g); },
+  bell(g, c = '#FFB703') { S('path', { d: 'M -36 24 Q -30 18 -30 -4 Q -30 -36 0 -38 Q 30 -36 30 -4 Q 30 18 36 24 Z', fill: c }, g); S('circle', { cx: 0, cy: 32, r: 9, fill: c }, g); S('rect', { x: -4, y: -48, width: 8, height: 12, rx: 3, fill: c }, g); },
+  funnel(g, c = '#22D3EE') { S('path', { d: 'M -50 -36 L 50 -36 L 12 6 L 12 40 L -12 48 L -12 6 Z', fill: c }, g); S('rect', { x: -50, y: -44, width: 100, height: 12, rx: 5, fill: c }, g); },
+  cam(g, c = '#A78BFA', on = false) { S('rect', { x: -46, y: -22, width: 80, height: 44, rx: 10, fill: c }, g); S('path', { d: 'M 34 -12 L 56 -24 L 56 24 L 34 12 Z', fill: c }, g);
+    S('rect', { x: -10, y: -52, width: 10, height: 32, fill: c }, g); },
+  door(g, c = '#EF476F') { S('rect', { x: -32, y: -50, width: 64, height: 100, rx: 8, fill: '#0B1A3A', stroke: c, 'stroke-width': 7 }, g); S('circle', { cx: 16, cy: 4, r: 6, fill: c }, g); },
+  book(g, c = '#FFB703') { S('path', { d: 'M 0 -30 Q -30 -42 -60 -34 L -60 36 Q -30 28 0 40 Q 30 28 60 36 L 60 -34 Q 30 -42 0 -30 Z', fill: '#F8FAFC' }, g); S('path', { d: 'M 0 -30 L 0 40', stroke: c, 'stroke-width': 6 }, g);
+    S('path', { d: 'M -64 36 Q -30 30 0 44 Q 30 30 64 36 L 64 44 Q 30 38 0 52 Q -30 38 -64 44 Z', fill: c }, g); },
+  server(g, c = '#22D3EE') { for (const y of [-30, 0, 30]) { S('rect', { x: -40, y: y - 12, width: 80, height: 24, rx: 6, fill: '#14295C', stroke: c, 'stroke-width': 4 }, g); S('circle', { cx: 26, cy: y, r: 4, fill: c }, g); } },
+  barrel(g, c = '#F8FAFC') { S('rect', { x: -34, y: -38, width: 68, height: 76, rx: 14, fill: c }, g); for (const y of [-16, 12]) S('rect', { x: -34, y, width: 68, height: 6, fill: '#0B1A3A', opacity: .3 }, g); },
+  check(g, c = '#06D6A0') { S('circle', { r: 30, fill: c }, g); S('path', { d: 'M -14 0 L -4 12 L 16 -12', fill: 'none', stroke: '#0B1A3A', 'stroke-width': 8, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g); },
+  cross(g, c = '#EF476F') { S('path', { d: 'M -30 -30 L 30 30 M 30 -30 L -30 30', stroke: c, 'stroke-width': 16, 'stroke-linecap': 'round' }, g); },
+  mask(g, c = '#2A0F2E') { S('path', { d: 'M -40 -10 Q 0 -24 40 -10 L 36 14 Q 0 6 -36 14 Z', fill: c }, g); for (const x of [-16, 16]) S('ellipse', { cx: x, cy: 0, rx: 8, ry: 6, fill: '#F8FAFC' }, g); },
+  plant(g, c = '#06121f') { S('path', { d: 'M -30 60 L 30 60 L 22 100 L -22 100 Z', fill: c }, g); for (const [r, l] of [[-40, 120], [-10, 150], [20, 130], [45, 100]]) S('ellipse', { cx: 0, cy: -l / 2 + 60, rx: 22, ry: l / 2, fill: c, transform: `rotate(${r} 0 60)` }, g); },
+};
+function ico(name, parent, x, y, s, c, extra) { const g = S('g', {}, parent); const inner = S('g', {}, g); ICO[name](inner, c, extra); g._x = x; g._y = y; g._s = s; return g; }
+
+</script>
+<script>
+/* Player: layers, render(t), controls, voice-driven clock, quiz, hotspots, export hooks. */
+'use strict';
+function boot(ep) {
+  const svg = document.getElementById('svg');
+  const $ = id => document.getElementById(id);
+  const R = Runtime(ep, svg), K = R.K;
+  // ---- layers
+  const defs = S('defs', {}, svg);
+  const grad = S('radialGradient', { id: 'spotG', gradientUnits: 'userSpaceOnUse', cx: 800, cy: 450, r: 700 }, defs);
+  S('stop', { offset: 0, 'stop-color': '#050B1E', 'stop-opacity': 0 }, grad);
+  S('stop', { offset: .55, 'stop-color': '#050B1E', 'stop-opacity': 0 }, grad);
+  S('stop', { offset: 1, 'stop-color': '#050B1E', 'stop-opacity': ep.spotDark == null ? .42 : ep.spotDark }, grad);
+  S('rect', { x: -10, y: -10, width: 1620, height: 920, fill: ep.bg || '#0B1A3A' }, svg);
+  K.layers.far = S('g', { id: 'L-far' }, svg);
+  K.layers.main = S('g', { id: 'L-main' }, svg);
+  K.layers.front = S('g', { id: 'L-front' }, svg);
+  const spot = S('rect', { x: -10, y: -10, width: 1620, height: 920, fill: 'url(#spotG)', 'pointer-events': 'none' }, svg);
+  K.layers.hud = S('g', { id: 'L-hud' }, svg);
+  ep.build(K);
+  function layout(t) { AMBIENT = false; FRAMING = true; for (const a of R.actors) a.update(t); for (const ch of R.chars) ch.update(t); for (const fn of R.fx) fn(t); FRAMING = false; }
+  for (const fr of R.frames) { layout(fr.t + fr.d); const bb = worldBBox(R, fr.targets);
+    if (!bb) { console.warn('frame: cible vide', fr); continue; } const c = camFor(bb, fr.part, fr.o); R.camMoves.push({ t: fr.t, d: fr.d, x: c.x, y: c.y, z: c.z }); }
+  R.camMoves.sort((a, b) => a.t - b.t); R.focusKeys.sort((a, b) => a.t - b.t);
+  R.events.sort((a, b) => a.t - b.t);
+  const PAR = ep.parallax || { far: .5, front: 1.3 };
+
+  function cueAt(t) { for (const c of R.cues) if (t >= c.start && t < c.end) return c; return null; }
+  function sceneAt(t) { let s = R.scenes[0]; for (const sc of R.scenes) if (t >= sc.start - 1e-6) s = sc; return s; }
+  let fPrev = null, fCur = null;
+  function focusPoint(t) {
+    let cur = null, prev = null;
+    for (const k of R.focusKeys) { if (t >= k.t) { prev = cur; cur = k; } }
+    if (!cur) return null;
+    const pos = k => { if (Array.isArray(k.target)) return [k.target[0], k.target[1], k.r || 420];
+      const bb = worldBBox(R, [k.target]); if (!bb) return [0, 0, 420]; return [bb.x + bb.w / 2, bb.y + bb.h / 2, k.r || Math.max(260, .75 * Math.hypot(bb.w, bb.h))]; };
+    const pc = pos(cur); if (!prev) return { x: pc[0], y: pc[1], r: pc[2] };
+    const pp = pos(prev); const p = E.ioc(P(t, cur.t, .6));
+    return { x: lerp(pp[0], pc[0], p), y: lerp(pp[1], pc[1], p), r: lerp(pp[2], pc[2], p) };
+  }
+  const subEls = [$('subs'), $('subsM')];
+  let lastSub = null;
+  function render(t, opts = {}) {
+    AMBIENT = opts.ambient !== false;
+    const c = camAt(R, t);
+    const tf = f => `translate(800 450) scale(${c.z.toFixed(4)}) translate(${(-c.x * f).toFixed(2)} ${(-c.y * f).toFixed(2)})`;
+    K.layers.far.setAttribute('transform', tf(PAR.far));
+    K.layers.main.setAttribute('transform', tf(1));
+    K.layers.front.setAttribute('transform', tf(PAR.front));
+    for (const a of R.actors) a.update(t);
+    for (const ch of R.chars) ch.update(t);
+    for (const fn of R.fx) fn(t);
+    const f = focusPoint(t);
+    if (f) { grad.setAttribute('cx', 800 + (f.x - c.x) * c.z); grad.setAttribute('cy', 450 + (f.y - c.y) * c.z); grad.setAttribute('r', Math.max(380, f.r * c.z)); }
+    else { grad.setAttribute('cx', 800); grad.setAttribute('cy', 430); grad.setAttribute('r', 760); }
+    // subtitles
+    const cu = cueAt(t); let sub = '';
+    if (cu) { const parts = cu.sub.split('|'); sub = (cu.guess && t < cu.pauseAt + GUESS_PAUSE) ? parts[0] : parts.join(' '); }
+    if (sub !== lastSub) { for (const e of subEls) { e.textContent = sub; e.classList.toggle('empty', !sub); } lastSub = sub; }
+    R.t = t; R.cam = c;
+    return c;
+  }
+  R.render = render;
+
+  /* -------- player state -------- */
+  const st = { t: 0, playing: false, speed: 1, subs: true, voice: false, quiz: false, last: 0, waitStart: null, spoken: {}, pending: false, quizDone: {} };
+  const synth = (() => { try { return window.speechSynthesis || null; } catch (e) { return null; } })();
+  let frVoice = null;
+  function pickVoice() { try { const vs = synth.getVoices(); frVoice = vs.find(v => /fr[-_]FR/i.test(v.lang)) || vs.find(v => /^fr/i.test(v.lang)) || null; } catch (e) { } }
+  if (synth) { pickVoice(); try { synth.onvoiceschanged = pickVoice; } catch (e) { } }
+  function speak(text) {
+    if (!synth || !st.voice) return;
+    try { const u = new SpeechSynthesisUtterance(text); u.lang = 'fr-FR'; if (frVoice) u.voice = frVoice; u.rate = 1.05 * st.speed;
+      st.pending = true; u.onend = u.onerror = () => { st.pending = false; }; synth.speak(u); } catch (e) { st.pending = false; }
+  }
+  function cancelSpeech() { try { synth && synth.cancel(); } catch (e) { } st.pending = false; }
+  function sayParts(c) { return c.say.split('|').map(s => s.trim()); }
+  function voiceStep(prevT, t) {
+    if (!st.voice) return;
+    for (const c of R.cues) {
+      const parts = sayParts(c);
+      if (prevT <= c.start + .02 && t >= c.start && !st.spoken[c.id + 'a']) { st.spoken[c.id + 'a'] = 1; cancelSpeech(); speak(parts[0]); }
+      if (c.guess) { const tr = c.pauseAt + GUESS_PAUSE; if (prevT <= tr && t >= tr && !st.spoken[c.id + 'b']) { st.spoken[c.id + 'b'] = 1; speak(parts[1]); } }
+    }
+  }
+  function resetSpoken(t) { st.spoken = {}; for (const c of R.cues) { if (c.start < t - .05) st.spoken[c.id + 'a'] = 1; if (c.guess && c.pauseAt + GUESS_PAUSE < t - .05) st.spoken[c.id + 'b'] = 1; } }
+
+  function seek(t) { st.t = clamp(t, 0, R.duration); cancelSpeech(); resetSpoken(st.t); st.waitStart = null; render(st.t); ui(); }
+  function play() { if (st.t >= R.duration - .05) seek(0); st.playing = true; st.last = performance.now(); $('poster').hidden = true; closeHot(); resetSpoken(st.t);
+    if (st.voice) { const c = cueAt(st.t); if (c && st.t - c.start < .3) { st.spoken[c.id + 'a'] = 0; } }
+    requestAnimationFrame(loop); ui(); }
+  function pause() { st.playing = false; cancelSpeech(); ui(); }
+  function loop(now) {
+    if (!st.playing) return;
+    const dt = Math.min(.1, (now - st.last) / 1000); st.last = now;
+    let nt = st.t + dt * st.speed; const c = cueAt(st.t);
+    if (st.voice && c && st.pending && nt >= c.end - .02) {
+      if (st.waitStart == null) st.waitStart = now;
+      if (now - st.waitStart < 20000) nt = c.end - .021; else st.pending = false;
+    } else st.waitStart = null;
+    // quiz pause
+    if (st.quiz && c && c.guess && ep.quiz && ep.quiz[c.id] && !st.quizDone[c.id] && st.t < c.pauseAt + .3 && nt >= c.pauseAt + .3) {
+      st.quizDone[c.id] = 1; st.t = c.pauseAt + .3; render(st.t); pause(); showQuiz(c); return;
+    }
+    voiceStep(st.t, nt);
+    st.t = nt;
+    if (st.t >= R.duration) { st.t = R.duration; render(st.t); pause(); return; }
+    render(st.t); ui(); requestAnimationFrame(loop);
+  }
+
+  /* -------- UI -------- */
+  const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const chap = $('chapters');
+  R.scenes.forEach((s, i) => { const b = document.createElement('button'); b.className = 'chap'; b.type = 'button';
+    b.innerHTML = `<span class="n">${i + 1}</span><span class="tt">${s.title}</span><span class="ts">${fmt(s.start)}</span>`;
+    b.onclick = () => { seek(s.start - (i ? 1.4 : .6)); }; chap.appendChild(b); });
+  const ticks = $('ticks');
+  R.scenes.forEach(s => { const d = document.createElement('i'); d.style.left = (s.start / R.duration * 100) + '%'; ticks.appendChild(d); });
+  const leg = $('legend');
+  (ep.legend || []).forEach(([col, label]) => { const d = document.createElement('span'); d.className = 'lg'; d.innerHTML = `<i style="background:${col}"></i>${label}`; leg.appendChild(d); });
+  function ui() {
+    $('play').textContent = st.playing ? '❚❚' : '▶'; $('play').setAttribute('aria-label', st.playing ? 'Pause' : 'Lecture');
+    $('time').textContent = `${fmt(st.t)} / ${fmt(R.duration)}`;
+    $('bar').style.width = (st.t / R.duration * 100) + '%';
+    const sc = sceneAt(st.t); [...chap.children].forEach((b, i) => b.classList.toggle('on', R.scenes[i] === sc));
+    document.body.classList.toggle('paused', !st.playing);
+    if (!st.playing) drawHots(); else clearHots();
+  }
+  $('play').onclick = () => st.playing ? pause() : play();
+  $('bigplay').onclick = play;
+  $('prev').onclick = () => { const i = R.scenes.indexOf(sceneAt(st.t)); const s = R.scenes[Math.max(0, st.t - sceneAt(st.t).start > 2 ? i : i - 1)]; seek(s.start - (s === R.scenes[0] ? .6 : 1.4)); };
+  $('next').onclick = () => { const i = R.scenes.indexOf(sceneAt(st.t)); if (i < R.scenes.length - 1) seek(R.scenes[i + 1].start - 1.4); };
+  $('track').onclick = e => { const r = e.currentTarget.getBoundingClientRect(); seek((e.clientX - r.left) / r.width * R.duration); };
+  $('speed').onchange = e => { st.speed = +e.target.value; };
+  const tog = (id, key, cb) => { const b = $(id); b.onclick = () => { st[key] = !st[key]; b.setAttribute('aria-pressed', st[key]); cb && cb(); }; b.setAttribute('aria-pressed', st[key]); };
+  tog('cc', 'subs', () => document.body.classList.toggle('nosubs', !st.subs));
+  tog('voice', 'voice', () => { if (!st.voice) cancelSpeech(); else resetSpoken(st.t); });
+  tog('quizb', 'quiz', () => { st.quizDone = {}; });
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'SELECT') return;
+    if (e.code === 'Space') { e.preventDefault(); st.playing ? pause() : play(); }
+    if (e.code === 'ArrowRight') $('next').click(); if (e.code === 'ArrowLeft') $('prev').click();
+    if (e.code === 'Escape') { closeHot(); $('quiz').hidden = true; }
+  });
+  // hotspots
+  const hl = $('hotspots');
+  function clearHots() { hl.innerHTML = ''; }
+  function drawHots() {
+    clearHots(); if (document.documentElement.classList.contains('export')) return;
+    const c = R.cam || camAt(R, st.t);
+    for (const h of R.hots) {
+      if (st.t < h.at || st.t > h.until) continue;
+      const sx = 800 + (h.x - c.x) * c.z, sy = 450 + (h.y - c.y) * c.z;
+      if (sx < 40 || sx > 1560 || sy < 40 || sy > 740) continue;
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'hot';
+      b.style.left = (sx / 16) + '%'; b.style.top = (sy / 9) + '%';
+      b.innerHTML = `<span class="dot">+</span><span class="lbl">${h.title}</span>`;
+      b.onclick = () => openHot(h); hl.appendChild(b);
+    }
+  }
+  function openHot(h) { $('hotpanel').hidden = false; $('hottitle').textContent = h.title; $('hotbody').innerHTML = h.html; }
+  function closeHot() { $('hotpanel').hidden = true; }
+  $('hotclose').onclick = closeHot;
+  // quiz
+  function showQuiz(c) {
+    const q = ep.quiz[c.id], box = $('quiz'); box.hidden = false;
+    $('quizq').textContent = q.q; const ch = $('quizc'); ch.innerHTML = ''; $('quizwhy').hidden = true; $('quizgo').hidden = true;
+    q.choices.forEach((txt, i) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = txt;
+      b.onclick = () => { [...ch.children].forEach((x, j) => { x.disabled = true; x.classList.add(j === q.answer ? 'ok' : (j === i ? 'ko' : 'dim')); });
+        $('quizwhy').textContent = q.why; $('quizwhy').hidden = false; $('quizgo').hidden = false; $('quizgo').focus(); };
+      ch.appendChild(b); });
+  }
+  $('quizgo').onclick = () => { $('quiz').hidden = true; play(); };
+  // poster
+  $('dur').textContent = fmt(R.duration);
+  const posterT = ep.poster != null ? (typeof ep.poster === 'function' ? ep.poster(K) : ep.poster) : 2;
+  // hash routing for scenes (#s3)
+  function fromHash() { const m = /^#(s\d+)$/.exec(location.hash); if (m) { const s = K.sc(m[1]); if (s) { seek(s.start - .6); $('poster').hidden = true; return true; } } return false; }
+  window.addEventListener('hashchange', fromHash);
+  if (!fromHash()) { st.t = posterT; render(st.t); ui(); }
+  window.addEventListener('resize', () => { if (!st.playing) drawHots(); });
+
+  /* -------- test / export hooks -------- */
+  window.__mx = {
+    setEp() { }, render: (t, o) => render(t, o), duration: R.duration, cues: R.cues, scenes: R.scenes, events: R.events,
+    marks: R.marks, focusAt: t => { const f = focusAt(R, t); return f && !Array.isArray(f.target) ? f.target : null; },
+    charRoots: () => R.chars.map(c => c.root),
+    guessWindows: R.cues.filter(c => c.guess).map(c => [c.pauseAt, c.pauseAt + GUESS_PAUSE]),
+    exportMode(w = 1920, subs = true) { document.documentElement.classList.add('export'); $('poster').hidden = true; clearHots();
+      const stg = $('stage'); stg.style.width = w + 'px'; stg.style.height = Math.round(w * 9 / 16) + 'px';
+      $('subs').style.fontSize = Math.round(34 * w / 1920) + 'px'; $('subs').style.bottom = Math.round(34 * w / 1920) + 'px';
+      document.body.classList.toggle('nosubs', !subs); },
+    pause, seek, R,
+  };
+}
+
+</script>
+<script>
+/*META{"title":"Le registre qui n'oublie rien","h1":"Le registre qui n'oublie rien : Admin Activity, côté détection et réponse","eyebrow":"Google Cloud · Audit logs · v3","footer":"<p class='footer'>Itération v3, générée avec le skill v2. Sources : documentation Google Cloud (Cloud Audit Logs, Store log entries, AuditLog reference, Cloud Storage audit logging), règle Elastic « GCP Service Account Key Creation ». IP 203.0.113.47 = plage de documentation, compte Gmail fictif. Épisode suivant : centraliser les journaux de tous les projets (sink agrégé).</p>"}META*/
+/* ---------- FICHE PERTINENCE (skill v2 §0) ----------
+Termes nouveaux par scène : s1 projet (nommé) · s2 API (projet défini par son rôle, « organisation » dite « votre entreprise », nom à l'écran) · s3 Admin Activity ·
+ s4 compte de service (SetIamPolicy dit « un changement de droits », nom à l'écran) · s5 Data Access · s6 aucun (CreateServiceAccountKey dit « il crée une nouvelle clé », nom à l'écran) · s7 aucun.
+Beats : quota ⌈durée/2⌉ par cue, trous > 2,5 s audités par tools/beats.mjs.
+Audience : analyste détection/réponse, ne connaît pas Google Cloud. Praticien sécu, débutant GCP.
+Déjà su : log, alerte, timeline -> aucun rappel.
+Ignore / croit à tort : structure organisation > projets + API ; "il faut activer les logs" ; "les logs diront ce qui a été volé" ; "retirer le rôle suffit".
+3 actions : alerte sur ajout d'Owner + création de clé ; Data Access sur les données sensibles ; pivot sur l'identité + suppression de toutes les clés.
+Question centrale : « Cette nuit, quelqu'un est devenu propriétaire de notre projet : que peut-on prouver, et comment le chasser ? »
+Idées (4) : registre toujours écrit et inviolable ; anatomie d'une entrée ; angle mort des lectures ; persistance par clé -> pivot.
+Coupé (budget, règle « supprimer une idée plutôt que comprimer ») : la centralisation multi-projets -> épisode 2.
+Budget : 19 cues, 3 devinez, cible 177 s -> (177 - 19 - 4.5 - 2) x 2.6 ≈ 394 mots. Script : 394 mots.
+Pourquoi sourcés : _Required = « entrées requises pour la conformité ou l'audit » (doc Store log entries) ; Data Access = volume (compromis observable).
+Incertain (montré comme tel) : l'exfiltration des fichiers ; la fuite de la clé (« sans doute »).
+---------------------------------------------------- */
+const EP = {
+  bg: '#0B1A3A', lead: .6, tail: 2, spotDark: .25,
+  zones: { bureau: [0, 0], immeuble: [2300, 0], greffe: [4600, 0], atelier: [6900, 0], coffres: [6900, 1900], frise: [4600, 1900] },
+  legend: [['#FFB703', 'Admin Activity (registre)'], ['#A78BFA', 'Data Access (lectures)'], ['#EF476F', 'Attaquant'], ['#FB8500', 'Compte de service / clé'], ['#22D3EE', 'Défense'], ['#06D6A0', 'Remédiation']],
+  scenes: [
+    { id: 's1', title: '3 h 12, l\'alerte' }, { id: 's2', title: 'Google Cloud en 20 s' }, { id: 's3', title: 'Le registre Admin Activity' },
+    { id: 's4', title: 'Anatomie d\'une entrée' }, { id: 's5', title: 'L\'angle mort : les lectures' }, { id: 's6', title: 'La clé de secours' },
+    { id: 's7', title: 'Verdict et réflexes' }],
+  cues: [
+    { id: 'c1', sc: 's1', sub: '3 h 12. Alerte : un compte Gmail inconnu vient de devenir propriétaire du projet prod-paiements.', say: 'Trois heures douze. Alerte : un compte Gmail inconnu vient de devenir propriétaire du projet prod paiements.' },
+    { id: 'c2', sc: 's1', sub: 'Vous ne connaissez pas Google Cloud, mais c\'est à vous d\'enquêter. Seule piste : ses journaux. Qui ? Quand ? D\'où ? Et ensuite ?', say: 'Vous ne connaissez pas Google Cloud, mais c\'est à vous d\'enquêter. Seule piste : ses journaux. Qui ? Quand ? D\'où ? Et ensuite ?' },
+    { id: 'c3', sc: 's2', sub: 'Imaginez un immeuble : le bâtiment, c\'est votre entreprise ; chaque projet, un étage, avec ses machines et ses données.', say: 'Imaginez un immeuble : le bâtiment, c\'est votre entreprise ; chaque projet, un étage, avec ses machines et ses données.' },
+    { id: 'c4', sc: 's2', sub: 'Personne n\'entre par la fenêtre : console, ligne de commande ou script, tout passe par le guichet, l\'API. Chaque geste y laisse une trace.', say: 'Personne n\'entre par la fenêtre : console, ligne de commande ou script, tout passe par le guichet, l\'API. Chaque geste y laisse une trace.' },
+    { id: 'c5', sc: 's3', sub: 'Sans rien configurer, a-t-on cette trace ? Oui : toute action qui modifie un réglage est écrite dans le registre Admin Activity.', say: 'Sans rien configurer, a-t-on cette trace ? Oui : toute action qui modifie un réglage est écrite dans le registre Admin Activity.' },
+    { id: 'c6', sc: 's3', sub: 'On croit qu\'il faut l\'activer. Faux : il est toujours écrit, impossible à couper, gardé 400 jours. Google le juge indispensable à l\'audit.', say: 'On croit qu\'il faut l\'activer. Faux : il est toujours écrit, impossible à couper, gardé quatre cents jours. Google le juge indispensable à l\'audit.' },
+    { id: 'c7', sc: 's3', sub: 'Devinez : devenu propriétaire, l\'attaquant peut-il effacer ce registre ?|Non : son coffre, _Required, ne se supprime pas. L\'historique est intact.', say: 'Devinez : devenu propriétaire, l\'attaquant peut-il effacer ce registre ? | Non : son coffre, Required, ne se supprime pas. L\'historique est intact.' },
+    { id: 'c8', sc: 's4', sub: 'Ouvrons l\'entrée de 3 h 07. Quoi ? Un changement de droits : le rôle Owner, donné au compte Gmail.', say: 'Ouvrons l\'entrée de trois heures sept. Quoi ? Un changement de droits : le rôle Owner, donné au compte Gmail.' },
+    { id: 'c9', sc: 's4', sub: 'Et qui a signé ?|Pas un humain : ci-deployer, un compte de service, l\'identité du robot de déploiement. Sa clé a sans doute fuité.', say: 'Et qui a signé ? | Pas un humain : ci déployeur, un compte de service, l\'identité du robot de déploiement. Sa clé a sans doute fuité.' },
+    { id: 'c10', sc: 's4', sub: 'D\'où ? Une IP inconnue, et un outil déclaré par l\'appelant : un indice, pas une preuve. Ces quatre champs font une règle.', say: 'D\'où ? Une IP inconnue, et un outil déclaré par l\'appelant : un indice, pas une preuve. Ces quatre champs font une règle.' },
+    { id: 'c11', sc: 's5', sub: 'A-t-il lu les fichiers clients ? Admin Activity note les modifications. Or une lecture ne modifie rien.', say: 'A-t-il lu les fichiers clients ? Admin Activity note les modifications. Or une lecture ne modifie rien.' },
+    { id: 'c12', sc: 's5', sub: 'Ces lectures sont-elles notées ailleurs ?|Par défaut, non : elles relèvent d\'un autre registre, Data Access, éteint par défaut.', say: 'Ces lectures sont-elles notées ailleurs ? | Par défaut, non : elles relèvent d\'un autre registre, Data Access, éteint par défaut.' },
+    { id: 'c13', sc: 's5', sub: 'Pourquoi ? Des millions de lectures : trop de volume, donc de coût. Résultat : impossible de prouver le vol, ou son absence.', say: 'Pourquoi ? Des millions de lectures : trop de volume, donc de coût. Résultat : impossible de prouver le vol, ou son absence.' },
+    { id: 'c14', sc: 's6', sub: 'Et ensuite ? Réflexe d\'enquête : pivoter sur l\'identité, et filtrer tout ce qu\'a fait ce compte Gmail depuis 3 h 07.', say: 'Et ensuite ? Réflexe d\'enquête : pivoter sur l\'identité, et filtrer tout ce qu\'a fait ce compte Gmail depuis trois heures sept.' },
+    { id: 'c15', sc: 's6', sub: '3 h 09 : il crée une nouvelle clé pour ci-deployer. Sa clé de secours, rien qu\'à lui.', say: 'Trois heures neuf : il crée une nouvelle clé pour ci déployeur. Sa clé de secours, rien qu\'à lui.' },
+    { id: 'c16', sc: 's6', sub: 'On croit que retirer le rôle suffit. Faux : avec cette clé, il redevient ci-deployer, et peut se redonner le rôle.', say: 'On croit que retirer le rôle suffit. Faux : avec cette clé, il redevient ci déployeur, et peut se redonner le rôle.' },
+    { id: 'c17', sc: 's7', sub: 'Verdict : clé volée utilisée à 3 h 07, clé de secours à 3 h 09. On retire Owner, on supprime toutes les clés du robot.', say: 'Verdict : clé volée utilisée à trois heures sept, clé de secours à trois heures neuf. On retire Owner, on supprime toutes les clés du robot.' },
+    { id: 'c18', sc: 's7', sub: 'Vos trois réflexes : une alerte sur l\'ajout d\'Owner et la création de clé ; Data Access sur vos données sensibles ; le pivot sur l\'identité.', say: 'Vos trois réflexes : une alerte sur l\'ajout d\'Owner et la création de clé ; Data Access sur vos données sensibles ; le pivot sur l\'identité.' },
+    { id: 'c19', sc: 's7', sub: 'Vous savez maintenant dire qui, quand, d\'où, et la suite. Nuance : l\'IP ou l\'e-mail sont parfois masqués.', say: 'Vous savez maintenant dire qui, quand, d\'où, et la suite. Nuance : l\'IP ou l\'e-mail sont parfois masqués.' },
+  ],
+  quiz: {
+    c7: { q: 'Devenu Owner du projet, l\'attaquant peut-il effacer le registre Admin Activity ?', choices: ['Oui, Owner peut tout', 'Non, le bucket _Required ne se supprime pas', 'Seulement s\'il coupe l\'API Logging'], answer: 1, why: 'Le bucket _Required ne peut être ni supprimé ni modifié, sa rétention de 400 jours est fixe, et Admin Activity est écrit même si l\'API Cloud Logging est désactivée.' },
+    c9: { q: 'Qui a signé la modification de 3 h 07 ?', choices: ['Le compte Gmail inconnu', 'Un administrateur interne', 'Le compte de service ci-deployer'], answer: 2, why: 'principalEmail = ci-deployer@prod-paiements.iam.gserviceaccount.com : le robot de déploiement.' },
+    c12: { q: 'Les téléchargements de fichiers dans un bucket sont-ils journalisés ?', choices: ['Oui, dans Admin Activity', 'Non par défaut : Data Access est désactivé', 'Oui, dans System Event'], answer: 1, why: 'Lire des objets relève de Data Access (DATA_READ), désactivé par défaut pour Cloud Storage.' },
+  },
+  poster: K => K.T('c1', 'compte') + .8,
+  build(K) {
+    const { S, E, Z } = K; const T = K.T, R = K.reveal;
+    const main = K.layers.main, far = K.layers.far, front = K.layers.front;
+    const C = { amber: '#FFB703', orange: '#FB8500', cyan: '#22D3EE', rose: '#EF476F', green: '#06D6A0', violet: '#A78BFA', text: '#F8FAFC', ink: '#0B1A3A', p1: '#14295C', p2: '#1E3A8A' };
+    const FLOOR = 250; // characters stand on y=250 (zone coords)
+    const zg = (name, tint) => { const g = K.g(main, { transform: `translate(${Z[name][0]} ${Z[name][1]})` });
+      const room = S('rect', { x: -1000, y: -560, width: 2000, height: 1120, rx: 80, fill: tint, opacity: .8 }, g);
+      S('rect', { x: -1000, y: FLOOR, width: 2000, height: 560 - FLOOR, rx: 40, fill: '#081330', opacity: .75 }, g);
+      S('rect', { x: -1000, y: FLOOR - 6, width: 2000, height: 12, fill: '#26407e', opacity: .8 }, g); g._room = room; return g; };
+    // décor de zone (skill v2 « décor qui remplit ») : murs et sol habités, à l'écart des sujets
+    const decor = (g, o = {}) => { const wall = o.wall || '#1E3A8A';
+      for (const sx of [-1, 1]) { const x = sx * 820; S('rect', { x: x - 90, y: -420, width: 180, height: 240, rx: 14, fill: wall, opacity: .55 }, g);
+        for (let k = 0; k < 3; k++) S('rect', { x: x - 70, y: -400 + k * 74, width: 140, height: 56, rx: 8, fill: o.acc || '#FFB703', opacity: .14 + .06 * k }, g);
+        S('rect', { x: x - 110, y: -120, width: 220, height: 18, rx: 9, fill: wall, opacity: .8 }, g);
+        for (let k = 0; k < 4; k++) S('rect', { x: x - 96 + k * 50, y: -168, width: 38, height: 48, rx: 6, fill: ['#22D3EE', '#FFB703', '#EF476F', '#A78BFA'][(k + (o.seed || 0)) % 4], opacity: .35 }, g); }
+      for (let k = 0; k < 9; k++) S('rect', { x: -1000 + k * 230, y: 300 + (k % 2) * 60, width: 150, height: 10, rx: 5, fill: '#26407e', opacity: .55 }, g);
+      S('path', { d: 'M -1000 -500 L 1000 -500', stroke: '#26407e', 'stroke-width': 16, opacity: .6 }, g); for (let k = 0; k < 6; k++) S('circle', { cx: -900 + k * 360, cy: -500, r: 14, fill: '#26407e' }, g); };
+    const I = (name, parent, x, y, s, c, o = {}) => { const g = ico(name, parent, 0, 0, 1, c); g._a = K.A(g, { x, y, s, ...o }); return g; };
+    const G = (parent, x, y, o = {}) => { const g = K.g(parent); g._a = K.A(g, { x, y, ...o }); return g; };
+    const sc = id => K.sc(id).start;
+    const F = (t, d, tg, part, o) => K.frame(t, d, tg, part, o);
+    // ---------- FAR layer
+    for (let i = 0; i < 160; i++) { const x = -800 + (i * 977) % 6200, y = -700 + (i * 613) % 2400;
+      const st = S('circle', { cx: x, cy: y, r: 2 + (i % 3), fill: '#cfe3ff', opacity: .25 + (i % 5) * .08 }, far);
+      if (i % 7 === 0) K.fx(t => st.setAttribute('opacity', AMBIENT ? (.2 + .3 * Math.abs(Math.sin(t * .8 + i))).toFixed(2) : .35)); }
+    for (let i = 0; i < 16; i++) { const x = -600 + i * 380, y = (i % 2 ? -260 : 900) + (i % 3) * 120;
+      S('path', { d: 'M 0 -120 L 104 -60 L 104 60 L 0 120 L -104 60 L -104 -60 Z', fill: '#1E3A8A', opacity: .22, transform: `translate(${x} ${y}) scale(${1 + (i % 3) * .4})` }, far); }
+    // ---------- FRONT layer: silhouettes only on travel paths (midpoints) and at far edges
+    const fr = (wx, wy, name, s, rot = 0) => { const g = ico(name, front, 0, 0, 1, '#040916'); g.setAttribute('transform', `translate(${wx * 1.3} ${wy * 1.3}) scale(${s}) rotate(${rot})`); };
+    [[1150, 0], [3450, 0], [5750, 0], [7700, 950], [5750, 1900]].forEach(([x, y], i) => { fr(x, y + 380, 'plant', 3.2, i % 2 ? 8 : -6); });
+    for (const [zx, zy] of Object.values(Z)) { fr(zx - 1080, zy + 520, 'plant', 2.6, -4); fr(zx + 1080, zy + 520, 'plant', 2.4, 6); }
+    S('path', { d: 'M -1600 -900 Q 3000 -640 9800 -880', stroke: '#040916', 'stroke-width': 30, fill: 'none' }, front);
+    // ---------- inhabited travel corridors (main layer)
+    const corridor = (x0, y0, x1, y1) => { S('path', { d: `M ${x0} ${y0} L ${x1} ${y1}`, stroke: '#14295C', 'stroke-width': 70, 'stroke-linecap': 'round' }, main);
+      S('path', { d: `M ${x0} ${y0} L ${x1} ${y1}`, stroke: C.amber, 'stroke-width': 6, 'stroke-dasharray': '18 26', opacity: .4 }, main); };
+    corridor(1000, 320, 1300, 320); corridor(3300, 320, 3600, 320); corridor(5600, 320, 5900, 320); corridor(6900, 560, 6900, 1340); corridor(5600, 2220, 5900, 2220); corridor(3600, 1700, 1000, 300);
+
+    /* ================= S1 BUREAU ================= */
+    const B = {};
+    { const g = zg('bureau', '#13285e'); decor(g, { seed: 0 }); B.g = g;
+      const win = G(g, -620, -330); S('rect', { x: -150, y: -115, width: 300, height: 230, rx: 20, fill: '#081330', stroke: C.p2, 'stroke-width': 10 }, win);
+      S('circle', { cx: 40, cy: -40, r: 38, fill: '#F8FAFC', opacity: .9 }, win); S('circle', { cx: 56, cy: -52, r: 34, fill: '#081330' }, win);
+      const clock = G(g, 640, -360, { out: T('c2', 'vous') }); S('rect', { x: -110, y: -48, width: 220, height: 96, rx: 18, fill: '#081330', stroke: C.p2, 'stroke-width': 6 }, clock);
+      K.tx(clock, 0, 2, '03:12', { size: 62, fill: C.rose, mono: true, weight: 700 });
+      const desk = K.g(g); S('rect', { x: -560, y: 60, width: 900, height: 44, rx: 14, fill: C.p2 }, desk); S('rect', { x: -520, y: 104, width: 28, height: 146, fill: C.p1 }, desk); S('rect', { x: 280, y: 104, width: 28, height: 146, fill: C.p1 }, desk);
+      const mon = G(g, -110, -170); S('rect', { x: -330, y: -190, width: 660, height: 380, rx: 24, fill: C.p1, stroke: '#26407e', 'stroke-width': 6 }, mon);
+      S('rect', { x: -305, y: -168, width: 610, height: 334, rx: 14, fill: '#071028' }, mon); S('rect', { x: -40, y: 190, width: 80, height: 40, fill: C.p1 }, mon);
+      const alertG = G(mon, 0, -126, { pop: T('c1', 'alerte'), fn: (s, t) => { if (AMBIENT && t < sc('s2')) s.a *= .75 + .25 * Math.abs(Math.sin(t * 5)); } });
+      S('rect', { x: -305, y: -42, width: 610, height: 84, rx: 14, fill: C.rose }, alertG); K.tx(alertG, 0, 2, 'ALERTE', { size: 56, fill: C.ink, weight: 800, ls: 4 });
+      K.ev(T('c1', 'alerte'), 'impact');
+      const mail = G(mon, 0, -10, { pop: T('c1', 'gmail') }); K.tx(mail, 0, 0, 'nuitblanche42@gmail.com', { size: 44, mono: true, fill: C.rose, weight: 700 });
+      const owner = G(mon, 0, 100, { pop: T('c1', 'proprietaire') }); ico('crown', owner, 0, 0, 1, C.amber).setAttribute('transform', 'translate(-120 0)'); K.tx(owner, 50, 6, 'Owner', { size: 56, fill: C.amber, weight: 800 });
+      const an = K.char(g, { name: 'analyste', color: C.cyan, x: 520, y: FLOOR, s: 1.5, dir: -1, headset: true });
+      an.pose(0, T('c1', 'alerte') - .1, 'type').pose(T('c1', 'alerte'), .8, 'jump').expr(T('c1', 'alerte'), 'surprise').look(T('c1', 'alerte'), -110, -170)
+        .expr(T('c2', 'vous'), 'worried').pose(T('c2', 'connaissez'), 1.4, 'shrug').expr(T('c2', 'denqueter'), 'neutral').walk(T('c2', 'denqueter'), 1.0, 420)
+        .pose(T('c2', 'journaux'), 6.5, 'loupe').look(T('c2', 'qui'), -110, -480);
+      const cq = G(g, 420, -170, { pop: T('c2', 'google'), out: T('c2', 'denqueter') }); S('ellipse', { rx: 120, ry: 70, fill: C.text }, cq); S('circle', { cx: -70, cy: 20, r: 55, fill: C.text }, cq); S('circle', { cx: 70, cy: 25, r: 50, fill: C.text }, cq); K.tx(cq, 0, 6, '?', { size: 80, fill: C.ink, weight: 800, deco: true });
+      const bub = (name, i, word) => { const b = G(g, -365 + i * 170, -470, { pop: T('c2', word), out: sc('s2') - .4 }); S('circle', { r: 66, fill: C.p2, stroke: C.cyan, 'stroke-width': 6 }, b); ico(name, b, 0, 0, 1, C.text).setAttribute('transform', 'scale(.9)'); return b; };
+      const Bs = [bub('person', 0, 'qui'), bub('clock', 1, 'quand'), bub('pin', 2, 'dou'), bub('steps', 3, 'ensuite')];
+      Object.assign(B, { mon, alertG, mail, owner, an, Bs, desk, clock });
+      // shots: ensemble -> gros plan monitor -> travail analyst+monitor -> bubbles
+      F(0, 0, [g._room], .98, { focus: false }); K.focus(0, mon);
+      F(T('c1', 'alerte') - .3, 1.0, [mon], .72);
+      F(T('c1', 'projet') - .2, 1.2, [mail, owner], .8, { focus: false }); K.focus(T('c1', 'projet'), owner);
+      F(T('c2', 'vous') - .3, 1.0, [mon, an], .8);
+      F(T('c2', 'qui') - .5, .9, [...Bs, mon], .78, { focus: false }); K.focus(T('c2', 'qui'), Bs[0]); K.focus(T('c2', 'quand'), Bs[1]); K.focus(T('c2', 'dou'), Bs[2]); K.focus(T('c2', 'ensuite'), Bs[3]);
+      K.hot({ x: Z.bureau[0] - 110, y: Z.bureau[1] - 170, at: 0, until: sc('s2'), title: 'D\'où vient cette alerte ?', html: '<p>Une alerte basée sur les journaux (Cloud Monitoring) ou une règle SIEM qui surveille <code>protoPayload.methodName="SetIamPolicy"</code> avec un ajout de <code>roles/owner</code>.</p><p>Compte Gmail et IP fictifs (203.0.113.0/24 = plage de documentation).</p>' });
+    }
+
+    /* ================= S2 IMMEUBLE ================= */
+    { const g = zg('immeuble', '#16224f'); decor(g, { seed: 1 }); const s2 = sc('s2');
+      const bld = G(g, 0, -170, { pop: T('c3', 'immeuble') }); S('rect', { x: -330, y: -370, width: 660, height: 790, rx: 26, fill: C.p2 }, bld); S('rect', { x: -360, y: -420, width: 720, height: 70, rx: 20, fill: C.p1 }, bld);
+      const roof = G(g, 0, -555, { pop: T('c3', 'entreprise') }); K.tx(roof, 0, 0, 'Organisation', { size: 54, fill: C.amber, weight: 800 });
+      const floors = [-430, -220, -10].map((y, i) => { const f = G(g, 0, y, { pop: T('c3', 'immeuble') + .15 * (i + 1) }); S('rect', { x: -300, y: -90, width: 600, height: 180, rx: 16, fill: '#0F2350' }, f);
+        for (let k = 0; k < 4; k++) S('rect', { x: -270 + k * 140, y: -60, width: 110, height: 50, rx: 8, fill: '#FFF2C4', opacity: .12 }, f); return f; });
+      const prod = floors[1]; const glow = S('rect', { x: -300, y: -310, width: 600, height: 180, rx: 16, fill: 'none', stroke: C.amber, 'stroke-width': 8 }, g); K.A(glow, { fin: [T('c3', 'projet'), .4] });
+      const plab = G(g, 0, -270, { pop: T('c3', 'projet') + .1 }); K.tx(plab, 0, 0, 'prod-paiements', { size: 50, fill: C.amber, weight: 700, mono: true });
+      I('server', g, -190, -185, .8, C.cyan, { pop: T('c3', 'machines') }); I('server', g, -80, -185, .8, C.cyan, { pop: T('c3', 'machines') + .1 });
+      I('barrel', g, 90, -185, .7, C.text, { pop: T('c3', 'donnees') }); I('barrel', g, 190, -185, .7, C.text, { pop: T('c3', 'donnees') + .1 });
+      const door = G(g, 0, 160, { pop: T('c3', 'immeuble') + .5 }); S('rect', { x: -80, y: -60, width: 160, height: 120, rx: 10, fill: '#071028' }, door);
+      const desk = G(g, 0, 205, { pop: T('c4', 'guichet'), fn: (s, t) => { s.s *= 1 + .14 * Math.sin(Math.PI * P(t, T('c4', 'lapi'), .5)); } });
+      S('rect', { x: -170, y: -42, width: 340, height: 84, rx: 16, fill: C.amber }, desk); K.tx(desk, 0, 2, 'API', { size: 58, fill: C.ink, weight: 800 });
+      const xw = I('cross', g, 230, -10, .9, C.rose, { pop: T('c4', 'fenetre') }); K.ev(T('c4', 'fenetre'), 'impact');
+      const toks = [['laptop', C.cyan, 'console'], ['terminal', C.green, 'ligne'], ['gear', C.violet, 'script']].map(([n, col, w], i) => { const tt = T('c4', w);
+        return I(n, g, -900, 120, 1.3, col, { pop: tt, moves: [[tt + .2, 1.0, { x: -280 - i * 150, y: 120 }], [T('c4', 'lapi') + .2 + i * .15, .6, { x: 0, y: 160, s: .2, a: 0 }]] }); });
+      const slips = []; for (let i = 0; i < 4; i++) { const t0 = T('c4', 'trace') + i * .18; slips.push(I('slip', g, 0, 170, 1.2, C.amber, { pop: t0, moves: [[t0 + .2, 1.6, { x: 950 + i * 40, y: 40 - i * 50 }, E.ic]], out: t0 + 1.6 })); }
+      const an = K.char(g, { name: 'analyste', color: C.cyan, x: -1000, y: FLOOR, s: 1.4, headset: true });
+      an.pop(s2 - .5).walk(s2 - .2, 1.4, -640).pose(T('c3', 'immeuble'), 1.2, 'point', { x: -100, y: -300 }).look(T('c3', 'projet'), 0, -270)
+        .pose(T('c4', 'fenetre'), 1.0, 'point', { x: 230, y: -10 }).look(T('c4', 'console'), -800, 120).look(T('c4', 'guichet'), 0, 200).pose(T('c4', 'trace'), .9, 'nod').expr(T('c4', 'trace'), 'happy');
+      F(s2 - 1.3, 1.5, [bld, roof, an], .9, { focus: false }); K.focus(s2, bld);
+      F(T('c3', 'projet') - .3, .9, [prod], .72);
+      F(T('c4', 'personne') - .3, 1.0, [an, desk, xw], .8);
+      F(T('c4', 'lapi') - .4, .8, [desk, ...toks], .62, { focus: false }); K.focus(T('c4', 'lapi'), desk);
+      K.hot({ x: Z.immeuble[0], y: Z.immeuble[1] - 555, at: s2, until: sc('s3'), title: 'Hiérarchie réelle', html: '<p>Simplifié : <b>Organisation → Dossiers → Projets → ressources</b>. Les droits (IAM) se posent à chaque niveau et s\'héritent vers le bas.</p>' });
+    }
+
+    /* ================= S3 GREFFE (registre) ================= */
+    { const g = zg('greffe', '#221f55'); decor(g, { seed: 2 }); const s3 = sc('s3');
+      const lect = G(g, 0, 160); S('path', { d: 'M -130 90 L -70 -150 L 70 -150 L 130 90 Z', fill: C.p2 }, lect);
+      const glow = S('ellipse', { cx: 0, cy: -120, rx: 300, ry: 170, fill: C.amber, opacity: .18 }, g); K.A(glow, { fin: [T('c5', 'admin'), .5] });
+      const book = G(g, 0, -130, { fn: (s, t) => { s.s *= 1 + .08 * Math.sin(Math.PI * P(t, T('c5', 'admin'), .6)); } }); ico('book', book, 0, 0, 1, C.amber).setAttribute('transform', 'scale(3.4)');
+      for (let i = 0; i < 5; i++) K.A(S('rect', { x: -180, y: -70 + i * 34, width: 140, height: 12, rx: 6, fill: C.ink, opacity: .35 }, book), { fin: [T('c5', 'ecrite') + i * .3, .2] });
+      const ban = G(g, 0, -420, { pop: T('c5', 'admin') }); S('rect', { x: -300, y: -46, width: 600, height: 92, rx: 46, fill: C.amber }, ban); K.tx(ban, 0, 2, 'Admin Activity', { size: 58, fill: C.ink, weight: 800 });
+      for (let i = 0; i < 3; i++) { const t0 = T('c5', 'modifie') + i * .25; I('slip', g, -950, -300 + i * 40, 1.2, C.amber, { pop: t0, moves: [[t0, 1.1, { x: 0, y: -130, s: .4 }, E.ioc]], out: t0 + 1.1 }); }
+      const nog = G(g, -800, -190, { pop: T('c5', 'configurer'), out: T('c5', 'oui') }); ico('gear', nog, 0, 0, 1, C.violet); ico('cross', nog, 0, 0, 1, C.rose).setAttribute('transform', 'scale(.9)');
+      const qb = G(g, -700, -230, { pop: T('c5', 'trace'), out: T('c5', 'oui') + .3 }); S('circle', { r: 56, fill: C.text }, qb); K.tx(qb, 0, 4, '?', { size: 70, fill: C.ink, weight: 800, deco: true });
+      const sw = G(g, -560, -60, { pop: T('c6', 'croit') }); S('rect', { x: -70, y: -130, width: 140, height: 260, rx: 34, fill: C.p1, stroke: C.text, 'stroke-width': 6 }, sw); S('rect', { x: -48, y: -106, width: 96, height: 104, rx: 22, fill: C.green }, sw);
+      const ring = G(g, -560, -60, { fin: [T('c6', 'toujours'), .3], out: T('c6', 'quatre') }); S('rect', { x: -110, y: -170, width: 220, height: 340, rx: 50, fill: 'none', stroke: C.green, 'stroke-width': 10 }, ring);
+      const lock = I('padlock', g, -560, 10, 1.3, C.text, { pop: T('c6', 'faux'), moves: [[T('c6', 'faux'), .3, { y: 40 }, E.ob], [T('c6', 'couper'), .5, { s: 1.7 }, E.ob]] }); K.ev(T('c6', 'faux'), 'impact');
+      const cal = G(g, 560, -130, { pop: T('c6', 'quatre'), out: T('c7', 'devinez') }); S('rect', { x: -120, y: -110, width: 240, height: 220, rx: 18, fill: C.text }, cal); S('rect', { x: -120, y: -110, width: 240, height: 60, rx: 18, fill: C.rose }, cal);
+      K.tx(cal, 0, 4, '400', { size: 80, fill: C.ink, weight: 800 }); K.tx(cal, 0, 82, 'jours', { size: 44, fill: C.ink, weight: 600 });
+      // why: stamp "audit" on the book
+      const stamp = G(g, 560, 90, { pop: T('c6', 'indispensable'), out: T('c7', 'devinez'), r: -10 }); S('rect', { x: -150, y: -46, width: 300, height: 92, rx: 14, fill: 'none', stroke: C.rose, 'stroke-width': 8 }, stamp);
+      K.tx(stamp, 0, 2, 'AUDIT', { size: 58, fill: C.rose, weight: 800, ls: 6 }); K.ev(T('c6', 'indispensable'), 'impact');
+      const vil = K.char(g, { name: 'attaquant', color: C.rose, x: 900, y: FLOOR, s: 1.4, dir: -1, mask: true, expr: 'smug' });
+      vil.pop(T('c7', 'devinez')).walk(T('c7', 'devinez') + .2, 1.4, 420).pose(T('c7', 'effacer'), R('c7') - T('c7', 'effacer'), 'point', { x: 0, y: -130 })
+        .expr(R('c7'), 'angry').pose(R('c7') + .05, .7, 'jump').slide(R('c7') + .1, .5, 640);
+      const eraser = G(g, 300, -60, { pop: T('c7', 'registre'), out: R('c7') + .1, moves: [[R('c7') + .1, .5, { x: 700, y: -300, r: 90 }]] }); S('rect', { x: -60, y: -26, width: 120, height: 52, rx: 12, fill: '#f9a8d4' }, eraser); S('rect', { x: 10, y: -26, width: 50, height: 52, rx: 12, fill: C.violet }, eraser);
+      const dome = G(g, 0, -190, { fin: [R('c7'), .1], moves: [[R('c7'), .35, { y: -130 }, E.ob]] }); S('path', { d: 'M -310 160 L -310 -40 A 310 270 0 0 1 310 -40 L 310 160 Z', fill: '#BDEBFF', 'fill-opacity': .14, stroke: '#BDEBFF', 'stroke-width': 8 }, dome);
+      const req = G(dome, 0, 210, { pop: T('c7', 'required') }); I('cross', g, 260, -220, .9, C.rose, { pop: T('c7', 'supprime'), out: T('c7', 'intact'), moves: [[T('c7', 'supprime') + .2, .6, { x: 420, y: -320, r: 40 }]] });
+      S('rect', { x: -160, y: -36, width: 320, height: 72, rx: 36, fill: C.text }, req); K.tx(req, 0, 2, '_Required', { size: 50, fill: C.ink, weight: 800, mono: true });
+      K.ev(R('c7'), 'impact'); K.mark(R('c7'));
+      const an = K.char(g, { name: 'analyste', color: C.cyan, x: -1050, y: FLOOR, s: 1.4, headset: true });
+      an.pop(s3 - .5).walk(s3 - .2, 1.3, -800).look(T('c5', 'trace'), 0, -130).pose(T('c5', 'oui'), .8, 'nod').expr(T('c5', 'oui'), 'happy')
+        .expr(T('c6', 'croit'), 'smug').walk(T('c6', 'croit'), .9, -760).pose(T('c6', 'lactiver'), 1.2, 'point', { x: -560, y: -60 }).expr(T('c6', 'faux'), 'surprise').pose(T('c6', 'faux'), .6, 'jump')
+        .expr(T('c6', 'quatre'), 'neutral').look(T('c6', 'quatre'), 560, -130).expr(T('c7', 'devinez'), 'worried').look(T('c7', 'devinez'), 420, -40)
+        .expr(R('c7') + .3, 'happy').pose(T('c7', 'intact'), 1.4, 'cheer');
+      F(s3 - 1.3, 1.5, [book, lect, an], .9, { focus: false }); K.focus(s3, book);
+      F(T('c5', 'admin') - .5, .9, [book, ban], .72);
+      F(T('c6', 'croit') - .3, .9, [an, sw], .6);
+      F(T('c6', 'quatre') - .4, .9, [cal], .5); F(T('c6', 'indispensable') - .4, .8, [cal, stamp, book], .75, { focus: false }); K.focus(T('c6', 'indispensable'), stamp);
+      F(T('c7', 'devinez') - .3, 1.0, [book, vil, an], .92, { focus: false }); K.focus(T('c7', 'devinez'), vil);
+      F(R('c7') - .1, .6, [dome], .72);
+      K.hot({ x: Z.greffe[0] - 200, y: Z.greffe[1] - 420, at: s3, until: sc('s4'), title: 'Les 4 journaux d\'audit', html: '<p><b>Admin Activity</b> : modifications de configuration/métadonnées. Toujours écrit, non désactivable → bucket <code>_Required</code>, 400 jours fixes.</p><p><b>Data Access</b> : lectures de config et lectures/écritures de données. Désactivé par défaut (sauf certains services BigQuery) → <code>_Default</code>, 30 jours par défaut.</p><p><b>System Event</b> : actions de Google (toujours écrit). <b>Policy Denied</b> : accès refusés par une politique de sécurité.</p>' });
+    }
+
+    /* ================= S4 ATELIER (anatomie) ================= */
+    { const g = zg('atelier', '#123257'); decor(g, { seed: 3 }); const s4 = sc('s4');
+      const card = G(g, 0, -150, { fin: [T('c8', 'ouvrons') - .3, .3], moves: [[T('c8', 'ouvrons') - .3, .9, { y: -150 }, E.oc]], out: T('c10', 'champs') });
+      card._a.by = 700; S('rect', { x: -540, y: -330, width: 1080, height: 640, rx: 36, fill: '#E8EEF9' }, card); S('rect', { x: -540, y: -330, width: 1080, height: 120, rx: 36, fill: C.amber }, card);
+      S('rect', { x: -540, y: -250, width: 1080, height: 40, fill: C.amber }, card); K.tx(card, 0, -268, 'Entrée de 03:07', { size: 58, fill: C.ink, weight: 800 });
+      const slotDef = [['wrench', -255, -60], ['plusminus', 255, -60], ['person', 255, 170], ['pin', -255, 170]];
+      const slots = slotDef.map(([icn, x, y], i) => { const sg = G(card, x, y, { pop: T('c8', 'ouvrons') + .4 + i * .12 }); S('rect', { x: -235, y: -95, width: 470, height: 190, rx: 24, fill: '#CBD5E8' }, sg);
+        ico(icn, sg, 0, 0, 1, C.ink).setAttribute('transform', 'translate(-165 0) scale(.85)'); return { sg, x, y }; });
+      const val = (i, str, word, cue, until, o = {}) => { const vg = G(card, slots[i].x, slots[i].y, { pop: T(cue, word), out: until }); K.tx(vg, 50, 0, str, { size: o.size || 44, fill: o.fill || C.ink, weight: 700, mono: !!o.mono });
+        const hl = S('rect', { x: slots[i].x - 241, y: slots[i].y - 101, width: 482, height: 202, rx: 28, fill: 'none', stroke: o.stroke || C.cyan, 'stroke-width': 8 }, card); K.A(hl, { fin: [T(cue, word), .3], out: until }); return vg; };
+      const v0 = val(0, 'SetIamPolicy', 'changement', 'c8', T('c9', 'et'), { mono: true, size: 44 });
+      const v1 = val(1, '+ Owner', 'owner', 'c8', T('c10', 'dou'), { fill: '#b45309', size: 60, stroke: C.amber });
+      const v2 = val(2, 'ci-deployer', 'ci', 'c9', T('c10', 'champs'), { mono: true, size: 44, fill: '#c2410c', stroke: C.orange });
+      const v3 = val(3, '203.0.113.47', 'ip', 'c10', T('c10', 'champs'), { mono: true, size: 40 });
+      const unl = I('padlock', card, -60, -60, .55, C.cyan, { pop: T('c8', 'droits'), out: T('c9', 'et'), moves: [[T('c8', 'droits') + .3, .4, { y: -80 }, E.ob]] });
+      const hop = I('crown', card, 120, -60, .5, C.amber, { pop: T('c8', 'gmail'), out: T('c10', 'dou'), moves: [[T('c8', 'gmail') + .1, .5, { y: -110 }, E.ob]] });
+      const ua = G(g, -255, 150, { pop: T('c10', 'outil'), out: T('c10', 'champs'), fn: (s, t) => { const ti = T('c10', 'indice'); if (t > ti) s.r = 5 * Math.sin((t - ti) * 12) * (1 - P(t, ti, 1.2)); } });
+      S('rect', { x: -160, y: -38, width: 320, height: 76, rx: 38, fill: C.ink, stroke: C.rose, 'stroke-width': 5, 'stroke-dasharray': '14 10' }, ua); K.tx(ua, 0, 2, 'gcloud ?', { size: 46, fill: C.rose, weight: 700, mono: true });
+      const qq = G(card, 255 + 50, 170, { pop: T('c9', 'signe'), out: R('c9') }); K.tx(qq, 0, 0, '?', { size: 90, fill: C.orange, weight: 800, deco: true });
+      const robot = K.char(g, { name: 'ci-deployer', color: C.orange, shape: 'robot', x: 1100, y: FLOOR, s: 1.5, dir: -1 });
+      robot.pop(T('c9', 'et') - .4).slide(T('c9', 'et'), .9, 700).expr(R('c9'), 'worried').pose(R('c9'), 1.6, 'hold').pose(T('c9', 'robot'), 1.2, 'cheer');
+      const badge = G(g, 700, 30, { pop: T('c9', 'compte') }); S('rect', { x: -70, y: -46, width: 140, height: 92, rx: 12, fill: C.text }, badge); ico('person', badge, 0, 0, 1, C.orange).setAttribute('transform', 'scale(.75)');
+      const belt = G(g, 700, 190, { fin: [T('c9', 'deploiement') - .2, .3] }); S('rect', { x: -260, y: -14, width: 520, height: 28, rx: 14, fill: C.p2 }, belt);
+      for (let i = 0; i < 3; i++) I('barrel', g, 470, 140, .55, C.orange, { pop: T('c9', 'deploiement') + i * .3, moves: [[T('c9', 'deploiement') + i * .3, 1.6, { x: 930 }]], out: T('c9', 'deploiement') + i * .3 + 1.5 });
+      const key = ico('key', g, 0, 0, 1, C.orange); robot.hold(key); K.A(key, { pop: R('c9') });
+      // uncertain leak: dashed ghost key drifting away with "?"
+      const leak = G(g, 700, -160, { pop: T('c9', 'fuite'), moves: [[T('c9', 'fuite') + .2, 1.4, { x: 1000, y: -380 }]], out: T('c9', 'fuite') + 2.2 });
+      const lk = ico('key', leak, 0, 0, 1, C.rose); lk.setAttribute('opacity', .55); K.tx(leak, 0, -70, '?', { size: 70, fill: C.rose, weight: 800, deco: true });
+      const code = G(g, 0, -150, { pop: T('c10', 'champs'), out: sc('s5') - .3 }); S('rect', { x: -660, y: -230, width: 1320, height: 400, rx: 26, fill: '#071028', stroke: C.cyan, 'stroke-width': 5 }, code);
+      const ct = K.tx(code, -620, -140, '', { size: 40, mono: true, anchor: 'start' });
+      [['methodName', ' = "SetIamPolicy"'], ['principalEmail', ' = "ci-deployer@…"'], ['callerIp', ' = "203.0.113.47"'], ['bindingDeltas', ' : ADD roles/owner']].forEach(([k, v], i) => {
+        const a = S('tspan', { x: -620, dy: i ? 88 : 0, fill: C.cyan }, ct); a.textContent = k; const b = S('tspan', { fill: C.text }, ct); b.textContent = v; });
+      const an = K.char(g, { name: 'analyste', color: C.cyan, x: -1050, y: FLOOR, s: 1.4, headset: true });
+      an.pop(s4 - .5).walk(s4 - .2, 1.3, -780).pose(T('c8', 'ouvrons'), 2.2, 'loupe').pose(T('c8', 'quoi'), 1.0, 'point', { x: -255, y: -210 }).pose(T('c8', 'owner'), 1.0, 'point', { x: 255, y: -210 })
+        .expr(R('c9'), 'surprise').look(R('c9'), 820, 60).expr(T('c10', 'dou'), 'neutral').pose(T('c10', 'dou'), 1.2, 'point', { x: -255, y: 20 }).pose(T('c10', 'indice'), 1.2, 'shrug').expr(T('c10', 'champs'), 'happy');
+      const cardArea = S('rect', { x: -540, y: -480, width: 1080, height: 640, fill: 'none' }, g);
+      F(s4 - 1.3, 1.5, [cardArea, an], .92, { focus: false }); K.focus(s4, cardArea);
+      F(T('c8', 'quoi') - .4, .8, [slots[0].sg], .62);
+      F(T('c8', 'owner') - .4, .8, [slots[1].sg], .62);
+      F(T('c9', 'et') - .3, .9, [robot, slots[2].sg], .8, { focus: false }); K.focus(T('c9', 'et'), robot);
+      F(R('c9') - .1, .6, [robot, slots[2].sg, badge], .8, { focus: false }); K.focus(R('c9'), v2);
+      F(T('c10', 'dou') - .4, .8, [slots[3].sg, ua], .6);
+      F(T('c10', 'champs') - .3, .9, [code], .82);
+      K.hot({ x: Z.atelier[0] + 300, y: Z.atelier[1] - 400, at: s4, until: sc('s5'), title: 'L\'entrée complète (extrait)', html: '<pre>{\n "logName": "projects/prod-paiements/logs/\n   cloudaudit.googleapis.com%2Factivity",\n "protoPayload": {\n  "methodName": "SetIamPolicy",\n  "authenticationInfo": {"principalEmail":\n   "ci-deployer@prod-paiements.iam.gserviceaccount.com"},\n  "requestMetadata": {"callerIp": "203.0.113.47",\n   "callerSuppliedUserAgent": "google-cloud-sdk gcloud/…"},\n  "serviceData": {"policyDelta": {"bindingDeltas": [\n   {"action":"ADD","role":"roles/owner",\n    "member":"user:nuitblanche42@gmail.com"}]}}\n }\n}</pre><p><code>callerIp</code> vaut <code>gce-internal-ip</code> ou <code>private</code> pour certains appels internes. <code>callerSuppliedUserAgent</code> n\'est pas authentifié.</p>' });
+    }
+
+    /* ================= S5 COFFRES (angle mort) ================= */
+    { const g = zg('coffres', '#211d4f'); decor(g, { seed: 0 }); const s5 = sc('s5');
+      const vault = G(g, -420, -120); S('circle', { r: 240, fill: C.p1, stroke: '#3a4f8f', 'stroke-width': 16 }, vault); S('circle', { r: 190, fill: '#071028' }, vault);
+      for (let i = 0; i < 6; i++) ico('doc', vault, 0, 0, 1, C.text).setAttribute('transform', `translate(${-95 + (i % 3) * 95} ${-55 + Math.floor(i / 3) * 110}) scale(.9)`);
+      const lift = I('doc', g, -420, -120, 1.2, C.text, { pop: s5 + .2, moves: [[s5 + .3, 1.0, { y: -330 }], [T('c11', 'admin'), .6, { y: -120, a: 0 }]] });
+      const vlab = G(g, -420, -470, { pop: T('c11', 'fichiers') }); K.tx(vlab, 0, 0, 'factures-clients', { size: 50, mono: true, fill: C.text, weight: 700 });
+      const sb = I('book', g, 520, -120, 2, C.amber, { out: T('c13', 'millions'), fn: (s, t) => { const p = P(t, T('c11', 'rien'), .8); s.r = 6 * Math.sin(p * Math.PI * 4) * (1 - p); } });
+      const wline = G(g, 450, -150, { fin: [T('c11', 'modifications'), .3], out: T('c11', 'lecture') }); S('rect', { x: -60, y: -6, width: 120, height: 12, rx: 6, fill: C.ink, opacity: .5 }, wline);
+      I('doc', g, -420, -120, 1, C.text, { pop: T('c11', 'lecture'), moves: [[T('c11', 'lecture'), 1.2, { x: 520, y: -260 }]], out: T('c11', 'rien') + .4 });
+      const blank = I('cross', g, 520, -120, .9, C.rose, { pop: T('c11', 'rien') + .1, out: T('c12', 'ces') });
+      // uncertain intruder: ghost silhouette with question mark
+      const ghost = K.char(g, { name: 'inconnu', color: C.rose, x: -60, y: FLOOR, s: 1.4, ghost: true, mask: true });
+      ghost.pop(T('c11', 'fichiers')).look(T('c11', 'fichiers'), -420, -120).out(T('c12', 'ces'));
+      const qm = G(g, -60, -40, { pop: T('c11', 'fichiers') + .3, out: T('c12', 'ces') }); K.tx(qm, 0, 0, '?', { size: 110, fill: C.rose, weight: 800, deco: true });
+      const camG = G(g, 140, -380, { fn: (s, t) => { s.r = AMBIENT ? 4 * Math.sin(t * .7) : 0; } }); ico('cam', camG, 0, 0, 1, C.violet).setAttribute('transform', 'scale(1.8)'); S('circle', { cx: 70, cy: 0, r: 18, fill: '#2b2350' }, camG);
+      const dabook = I('book', g, 140, -40, 1.5, C.violet, { pop: T('c12', 'relevent'), out: T('c13', 'millions') }); K.A(S('rect', { x: -70, y: -50, width: 140, height: 100, rx: 10, fill: '#0B1A3A', opacity: .5 }, dabook), { fin: [T('c12', 'eteint'), .3] });
+      const dalab = G(g, 140, -200, { pop: T('c12', 'data'), out: T('c13', 'millions') }); S('rect', { x: -200, y: -46, width: 400, height: 92, rx: 46, fill: C.violet }, dalab); K.tx(dalab, 0, 2, 'Data Access', { size: 54, fill: C.ink, weight: 800 });
+      const off = G(g, 400, -380, { pop: T('c12', 'eteint'), out: T('c13', 'millions') }); S('rect', { x: -80, y: -44, width: 160, height: 88, rx: 44, fill: '#2b2350', stroke: C.violet, 'stroke-width': 5 }, off); K.tx(off, 0, 2, 'OFF', { size: 50, fill: C.violet, weight: 800 });
+      const tor = G(g, 0, 0, { fin: [T('c13', 'millions'), .2], out: T('c13', 'resultat') }); const torSlips = []; for (let i = 0; i < 30; i++) torSlips.push(ico('slip', tor, 0, 0, 1, C.violet));
+      K.fx(t => { const t0 = T('c13', 'millions'); torSlips.forEach((s, i) => { const ph = ((t - t0) * .9 + i / 30) % 1; const x = -650 + ph * 1300, y = -60 + Math.sin(i * 7.3) * 110 - ph * 40;
+        s.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(1.1)`); }); });
+      const meter = G(g, 720, -60, { pop: T('c13', 'volume'), out: T('c13', 'resultat') }); S('rect', { x: -50, y: -220, width: 100, height: 260, rx: 24, fill: C.p1, stroke: C.text, 'stroke-width': 5 }, meter);
+      const fill = S('rect', { x: -36, y: 28, width: 72, height: 0, rx: 14, fill: C.rose }, meter); K.tx(meter, 0, 100, '€', { size: 72, fill: C.text, weight: 800, deco: true });
+      K.fx(t => { const p = E.oc(P(t, T('c13', 'cout'), 1.2)); fill.setAttribute('height', 236 * p); fill.setAttribute('y', 28 - 236 * p); });
+      const tl = G(g, 0, -60, { pop: T('c13', 'resultat') + .3 }); S('rect', { x: -560, y: -12, width: 360, height: 24, rx: 12, fill: C.text }, tl); S('rect', { x: 200, y: -12, width: 360, height: 24, rx: 12, fill: C.text }, tl);
+      S('rect', { x: -200, y: -12, width: 400, height: 24, fill: 'none', stroke: C.text, 'stroke-width': 4, 'stroke-dasharray': '12 12' }, tl); K.tx(tl, 0, -100, '?', { size: 120, fill: C.violet, weight: 800, deco: true });
+      K.tx(tl, -380, 70, '03:07', { size: 46, mono: true, fill: C.text, weight: 700 }); K.tx(tl, 380, 70, '03:12', { size: 46, mono: true, fill: C.text, weight: 700 });
+      const ghost2 = K.char(g, { name: 'inconnu2', color: C.rose, x: 0, y: -90, s: .8, ghost: true, mask: true }); ghost2.pop(T('c13', 'vol', 1));
+      const ddoc = G(g, 180, -230, { pop: T('c13', 'absence') }); S('path', { d: 'M -30 -40 L 14 -40 L 30 -24 L 30 40 L -30 40 Z', fill: 'none', stroke: C.text, 'stroke-width': 5, 'stroke-dasharray': '10 8' }, ddoc);
+      const an = K.char(g, { name: 'analyste', color: C.cyan, x: -1050, y: FLOOR, s: 1.4, headset: true });
+      an.pop(s5 - .5).walk(s5 - .2, 1.3, -760).look(T('c11', 'admin'), 520, -120).pose(T('c11', 'rien'), 1.2, 'point', { x: 520, y: -120 }).expr(T('c11', 'rien'), 'worried').look(T('c12', 'ces'), 140, -380)
+        .pose(T('c12', 'notees'), 1.4, 'point', { x: 140, y: -380 }).expr(R('c12'), 'angry').walk(T('c13', 'pourquoi'), 1.0, -560).expr(T('c13', 'resultat'), 'worried').pose(T('c13', 'vol', 1), 1.6, 'shrug');
+      F(s5 - 1.3, 1.5, [vault, sb, an], .92, { focus: false }); K.focus(s5, vault);
+      F(T('c11', 'fichiers') - .3, .9, [vault, ghost, vlab], .82, { focus: false }); K.focus(T('c11', 'fichiers'), ghost);
+      F(T('c11', 'admin') - .3, .8, [sb, an], .82, { focus: false }); K.focus(T('c11', 'admin'), sb);
+      F(T('c12', 'ces') - .3, .9, [camG, off, sb], .75, { focus: false }); K.focus(T('c12', 'ces'), camG);
+      F(R('c12') - .1, .7, [camG, dalab, off], .62, { focus: false }); K.focus(R('c12'), dalab);
+      F(T('c13', 'millions') - .4, .9, [tor, meter, an], .92, { focus: false }); K.focus(T('c13', 'millions'), tor); K.focus(T('c13', 'cout'), meter);
+      F(T('c13', 'resultat') - .3, .8, [tl, an], .8, { focus: false }); K.focus(T('c13', 'resultat'), tl);
+      K.hot({ x: Z.coffres[0] + 140, y: Z.coffres[1] - 200, at: s5, until: sc('s6'), title: 'Activer Data Access', html: '<p>Console : <b>IAM et administration → Journaux d\'audit</b>, choisir le service (ex. Cloud Storage) et cocher <code>DATA_READ</code>. Ou bloc <code>auditConfigs</code> de la stratégie IAM.</p><p>Ces journaux vont dans <code>_Default</code> (30 jours par défaut) et leur volume a un coût : ciblez les données sensibles.</p>' });
+    }
+
+    /* ================= S6 FRISE (clé de secours) ================= */
+    { const g = zg('frise', '#11304a'); decor(g, { seed: 1 }); const s6 = sc('s6');
+      const rail = G(g, 0, 60); S('rect', { x: -780, y: -14, width: 1560, height: 28, rx: 14, fill: C.p2 }, rail);
+      const dots = G(g, 0, 60, { moves: [[T('c14', 'filtrer'), .8, { a: .08 }]] }); for (let i = 0; i < 22; i++) S('circle', { cx: -740 + i * 70, cy: (i % 2 ? -60 : 60), r: 15, fill: '#6b7fae' }, dots);
+      const mark = (x, label, word, cue, col) => { const m = G(g, x, 60, { pop: T(cue, word) }); S('rect', { x: -7, y: -60, width: 14, height: 120, rx: 7, fill: col }, m); K.tx(m, 0, 110, label, { size: 50, mono: true, fill: col, weight: 700 }); return m; };
+      const m7 = mark(-420, '03:07', 'trois', 'c14', C.rose); const m9 = mark(0, '03:09', 'trois', 'c15', C.rose); const m12 = mark(660, '03:12', 'on', 'c16', C.text);
+      const steps = []; for (let i = 0; i < 8; i++) steps.push(I('steps', g, -580 + i * 120, -40, .75, C.rose, { pop: T('c14', 'filtrer') + .4 + i * .1 }));
+      const tag = G(g, -260, -330, { pop: T('c14', 'lidentite'), out: T('c15', 'trois') }); S('rect', { x: -320, y: -52, width: 640, height: 104, rx: 52, fill: C.cyan }, tag); K.tx(tag, 0, 2, 'nuitblanche42@…', { size: 48, mono: true, fill: C.ink, weight: 700 });
+      const crown = I('crown', g, -420, -170, 1, C.amber, { pop: T('c14', 'trois') + .4, moves: [[T('c16', 'retirer'), .8, { x: -1000, y: -600, r: -60 }], [T('c16', 'redonner'), .8, { x: 330, y: -10, r: 0 }]] });
+      const ktx = G(g, 0, -420, { pop: T('c15', 'cree'), out: T('c16', 'on') }); const ktt = K.tx(ktx, 0, 0, 'CreateServiceAccountKey', { size: 50, mono: true, fill: C.orange, weight: 700 });
+      K.fx(t => { const n = Math.round(23 * K.clamp((t - T('c15', 'cree')) / 1.6)); ktt.textContent = 'CreateServiceAccountKey'.slice(0, Math.max(1, n)); });
+      const nk = I('key', g, 0, -220, 1.7, C.orange, { pop: T('c15', 'nouvelle'), moves: [[T('c15', 'secours'), .8, { x: 330, y: -220, s: 1.2 }]] });
+      const rb = G(g, -40, -90, { pop: T('c15', 'ci'), out: T('c16', 'on') }); S('rect', { x: -60, y: -40, width: 120, height: 80, rx: 12, fill: C.text }, rb); ico('person', rb, 0, 0, 1, C.orange).setAttribute('transform', 'scale(.65)');
+      const door = I('door', g, 420, -220, 1.8, C.rose, { pop: T('c15', 'secours') });
+      const an = K.char(g, { name: 'analyste', color: C.cyan, x: -1050, y: FLOOR, s: 1.4, headset: true });
+      an.pop(s6 - .5).walk(s6 - .2, 1.3, -680).pose(T('c14', 'pivoter'), 2.2, 'loupe').walk(T('c14', 'filtrer'), 2.0, -640).walk(T('c15', 'trois'), 1.2, -200).look(T('c15', 'trois'), 0, -220)
+        .expr(T('c15', 'secours'), 'angry').expr(T('c16', 'on'), 'smug').walk(T('c16', 'on'), .8, -620).pose(T('c16', 'retirer'), 1.0, 'point', { x: -420, y: -170 }).expr(T('c16', 'faux'), 'surprise').pose(T('c16', 'faux'), .7, 'jump');
+      const vil = K.char(g, { name: 'attaquant', color: C.rose, x: 1000, y: FLOOR, s: 1.4, dir: -1, mask: true, expr: 'smug' });
+      vil.pop(T('c16', 'cle')).walk(T('c16', 'cle'), 1.0, 330).pose(T('c16', 'redevient'), 1.4, 'point', { x: 420, y: -220 }).pose(T('c16', 'redonner'), 1.8, 'cheer');
+      F(s6 - 1.3, 1.5, [rail, an], .92, { focus: false }); K.focus(s6, rail);
+      F(T('c14', 'filtrer') - .3, 1.6, [tag, ...steps, m7, an], .85, { focus: false }); K.focus(T('c14', 'filtrer'), tag); K.focus(T('c14', 'trois'), m7);
+      F(T('c15', 'cree') - .4, .9, [ktx], .7, { focus: false }); K.focus(T('c15', 'cree'), ktx); F(T('c15', 'nouvelle') - .2, .8, [ktx, nk, m9], .72, { focus: false }); K.focus(T('c15', 'nouvelle'), nk); K.focus(T('c15', 'secours'), door);
+      F(T('c16', 'on') - .3, .9, [an, crown, m7], .7, { focus: false }); K.focus(T('c16', 'on'), crown);
+      F(T('c16', 'faux') - .3, .9, [vil, door, an], .9, { focus: false }); K.focus(T('c16', 'faux'), vil);
+      K.hot({ x: Z.frise[0] - 260, y: Z.frise[1] - 330, at: s6, until: sc('s7'), title: 'Requête de pivot (Logs Explorer)', html: '<pre>logName:"cloudaudit.googleapis.com%2Factivity"\nprotoPayload.authenticationInfo.principalEmail=\n  "nuitblanche42@gmail.com"\ntimestamp>="2026-10-31T03:00:00Z"</pre><p>Puis la même chose sur <code>ci-deployer@…</code> : l\'attaquant agit sous les deux identités.</p>' });
+      K.hot({ x: Z.frise[0], y: Z.frise[1] - 220, at: T('c15', 'trois'), until: sc('s7'), title: 'Méthode exacte', html: '<p><code>google.iam.admin.v1.CreateServiceAccountKey</code> (MITRE ATT&CK T1098.001, Additional Cloud Credentials).</p>' });
+    }
+
+    /* ================= S7 VERDICT + RÉFLEXES (retour au bureau) ================= */
+    { const g = B.g, s7 = sc('s7');
+      const board = G(g, 640, -330, { pop: T('c17', 'verdict'), out: T('c18', 'vos') }); S('rect', { x: -290, y: -180, width: 580, height: 360, rx: 24, fill: '#5b3a1e' }, board); S('rect', { x: -270, y: -160, width: 540, height: 320, rx: 18, fill: '#8a5a2b' }, board);
+      const pinA = G(board, -130, -10, { pop: T('c17', 'utilisee') }); ico('key', pinA, 0, 0, 1, C.orange).setAttribute('transform', 'translate(0 -40) scale(1.1)'); K.tx(pinA, 0, 70, '03:07', { size: 50, mono: true, fill: C.text, weight: 700 });
+      const pinB = G(board, 130, -10, { pop: T('c17', 'secours') }); ico('door', pinB, 0, 0, 1, C.rose).setAttribute('transform', 'translate(0 -40) scale(.9)'); K.tx(pinB, 0, 70, '03:09', { size: 50, mono: true, fill: C.text, weight: 700 });
+      const thread = S('path', { d: 'M -130 -40 C -300 80, -500 120, -730 160', stroke: C.rose, 'stroke-width': 6, fill: 'none', 'stroke-dasharray': '1' }, board); K.A(thread, { dash: [T('c17', 'sept'), .8] });
+      const rk = I('check', board, 0, 120, .8, C.green, { pop: T('c17', 'robot') });
+      B.owner._a.o.moves = [[T('c17', 'retire'), .7, { x: -500, y: -300, s: .3, a: 0 }]];
+      const x1 = I('cross', board, -130, -50, 1.1, C.green, { pop: T('c17', 'supprime') }), x2 = I('cross', board, 130, -50, 1.1, C.green, { pop: T('c17', 'supprime') + .2 }); K.ev(T('c17', 'supprime'), 'impact');
+      const okG = G(B.mon, 0, -126, { pop: T('c17', 'supprime') + .5, out: T('c18', 'vos') }); S('rect', { x: -305, y: -42, width: 610, height: 84, rx: 14, fill: C.green }, okG); K.tx(okG, 0, 2, 'CONTENU', { size: 56, fill: C.ink, weight: 800, ls: 4 });
+      B.mail._a.o.out = T('c17', 'verdict'); B.alertG._a.o.out = T('c17', 'supprime') + .5; B.mon._a.o.out = T('c18', 'vos'); B.mon._a.o.outd = .5;
+      // three reflexes as manipulated objects (trigger -> action)
+      const R1 = G(g, -560, -200, { pop: T('c18', 'alerte'), out: T('c19', 'vous') }); S('rect', { x: -230, y: -110, width: 460, height: 220, rx: 26, fill: C.p1, stroke: C.amber, 'stroke-width': 6 }, R1);
+      ico('crown', R1, 0, 0, 1, C.amber).setAttribute('transform', 'translate(-150 -30) scale(.7)'); ico('key', R1, 0, 0, 1, C.orange).setAttribute('transform', 'translate(-150 40) scale(.7)');
+      S('path', { d: 'M -70 0 L 20 0 M 0 -18 L 22 0 L 0 18', stroke: C.text, 'stroke-width': 8, fill: 'none', 'stroke-linecap': 'round' }, R1);
+      const bell = G(R1, 120, 0, { fn: (s, t) => { s.r = 14 * Math.sin((t - T('c18', 'alerte')) * 14) * (1 - P(t, T('c18', 'alerte') + .3, 1.2)); } }); ico('bell', bell, 0, 0, 1, C.amber).setAttribute('transform', 'scale(1.3)');
+      K.mark(T('c18', 'creation')); const kfl = I('key', R1, -150, 40, .7, C.orange, { pop: T('c18', 'creation'), moves: [[T('c18', 'creation') + .1, .6, { x: -60 }, E.ob]] });
+      const R2 = G(g, -60, -200, { pop: T('c18', 'data'), out: T('c19', 'vous') }); S('rect', { x: -170, y: -110, width: 340, height: 220, rx: 26, fill: C.p1, stroke: C.violet, 'stroke-width': 6 }, R2);
+      ico('cam', R2, 0, 0, 1, C.violet).setAttribute('transform', 'translate(-20 0) scale(1.3)');
+      const lens = S('circle', { cx: 50, cy: 0, r: 16, fill: '#2b2350' }, R2); K.fx(t => lens.setAttribute('fill', t > T('c18', 'data') + .6 ? C.green : '#2b2350'));
+      const onr = G(R2, 50, 0, { pop: T('c18', 'sensibles') }); S('circle', { r: 34, fill: 'none', stroke: C.green, 'stroke-width': 8 }, onr);
+      const R3 = G(g, 340, -200, { pop: T('c18', 'pivot'), out: T('c19', 'vous') }); S('rect', { x: -170, y: -110, width: 340, height: 220, rx: 26, fill: C.p1, stroke: C.cyan, 'stroke-width': 6 }, R3);
+      ico('steps', R3, 0, 0, 1, C.rose).setAttribute('transform', 'translate(-30 10) scale(1.1)');
+      const lp = G(R3, 40, -20, { moves: [[T('c18', 'pivot') + .3, 1.2, { x: -40, y: 10 }]] }); S('circle', { r: 46, fill: '#bfefff', 'fill-opacity': .25, stroke: C.text, 'stroke-width': 8 }, lp); S('line', { x1: 32, y1: 32, x2: 70, y2: 70, stroke: '#7c5a3a', 'stroke-width': 14, 'stroke-linecap': 'round' }, lp);
+      // recap: the four questions of the hook come back, checked
+      const chk = B.Bs.map((b, i) => I('check', g, -460 + i * 210 + 62, -110, .9, C.green, { pop: T('c19', 'qui') + i * .3 }));
+      B.Bs.forEach((b, i) => { const o = b._a.o, t1 = o.out, t2 = T('c19', 'vous'); o.out = null; o.moves = [[t2 - .4, .01, { x: -460 + i * 210, y: -170, s: 1.25 }]]; o.fn = (s, t) => { if (t >= t2) s.a *= P(t, t2, .4); else s.a *= 1 - P(t, t1, .4); }; });
+      const msk = I('mask', g, -40, -170, 1.6, '#2A0F2E', { pop: T('c19', 'masques') });
+      B.an.walk(s7 - .2, 1.0, 560).pose(T('c17', 'verdict'), 1.2, 'point', { x: 640, y: -330 }).expr(T('c17', 'retire'), 'happy').pose(T('c17', 'retire'), 1.0, 'nod')
+        .walk(T('c18', 'vos'), 1.0, 680).pose(T('c18', 'alerte'), 1.0, 'point', { x: -560, y: -200 }).pose(T('c18', 'data'), 1.0, 'point', { x: -60, y: -200 }).pose(T('c18', 'pivot'), 1.0, 'point', { x: 340, y: -200 })
+        .pose(T('c19', 'maintenant'), 1.8, 'cheer').expr(T('c19', 'nuance'), 'neutral').pose(T('c19', 'nuance'), 1.6, 'shrug').pose(T('c19', 'masques') + .8, 1.4, 'nod');
+      F(s7 - 1.6, 1.9, [board, B.mon, B.an], .9, { focus: false }); K.focus(s7, board);
+      F(T('c17', 'utilisee') - .3, .8, [board], .62);
+      F(T('c17', 'retire') - .4, .9, [B.mon, B.an], .8, { focus: false }); K.focus(T('c17', 'retire'), B.owner);
+      F(T('c18', 'vos') - .3, 1.0, [R1, R2, R3, B.an], .9, { focus: false }); K.focus(T('c18', 'alerte'), R1); K.focus(T('c18', 'data'), R2); K.focus(T('c18', 'pivot'), R3);
+      F(T('c19', 'vous') - .3, 1.0, [...B.Bs, B.an], .85, { focus: false }); K.focus(T('c19', 'qui'), B.Bs[1]);
+      F(T('c19', 'nuance'), 2.4, [g._room], .98, { focus: false });
+      K.hot({ x: Z.bureau[0] - 420, y: Z.bureau[1] - 420, at: T('c18', 'vos'), until: 9999, title: 'Les 3 réflexes, exécutables', html: '<ol><li><b>Alerte</b> : <code>protoPayload.methodName="SetIamPolicy"</code> + <code>bindingDeltas.action="ADD"</code> + <code>role="roles/owner"</code> ; et <code>methodName="google.iam.admin.v1.CreateServiceAccountKey"</code>.</li><li><b>Data Access</b> : <code>DATA_READ</code> sur les services qui portent vos données sensibles (ex. Cloud Storage).</li><li><b>Pivot</b> : filtrer <code>principalEmail</code> sur chaque identité trouvée, puis supprimer <b>toutes</b> les clés du compte de service.</li></ol>' });
+    }
+  },
+};
+
+</script>
+<script>boot(EP);</script>
