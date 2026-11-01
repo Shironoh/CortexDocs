@@ -50,3 +50,16 @@ les cues et les `kit.eventRoom({...})`. Les 1080p (`video.mp4`) ne sont pas vers
 - Un deuxième `K.A()` sur un même élément écrase sa position : chaîner via `el._a.o.fn` / `moves`.
 - Un attribut `opacity` est écrasé par l'animateur : utiliser `fill-opacity` pour un calque translucide.
 - Ancres de mots : `T(cue, mot, n)` compare le mot normalisé (« l'API » → `lapi`, « n'importe » → `nimporte`).
+
+## Stack cible quand l'environnement est ouvert (à vérifier au démarrage)
+
+Variables lues si présentes (secrets de l'environnement, jamais dans le chat) :
+`ELEVENLABS_API_KEY` · `GOOGLE_TTS_API_KEY` · `AZURE_SPEECH_KEY` + `AZURE_SPEECH_REGION` ·
+`GCP_SANDBOX_SA_JSON` + `GCP_SANDBOX_PROJECT` (projet bac à sable dédié, pour produire de vraies entrées d'audit).
+
+- **Voix** : ElevenLabs (meilleure expressivité FR) ou Google Chirp 3 HD / Azure neural FR ; à défaut Piper FR (huggingface.co).
+  Récupérer les **horodatages par mot** et caler les beats dessus (au lieu du modèle 2,6 mots/s).
+- **Animation** : garder le moteur SVG pour le lecteur interactif ; pour la vidéo, évaluer Motion Canvas ou Remotion (npm),
+  personnages en Lottie, synchro des bouches (Rhubarb), musique libre de droits.
+- **Contenu** : docs.cloud.google.com, github.com (règles Sigma / Elastic detection-rules), attack.mitre.org ; vraies entrées
+  JSON générées dans le projet bac à sable plutôt que reconstituées.
