@@ -34,16 +34,44 @@ summary { cursor: pointer; padding: 12px 14px; font-weight: 700; }
 pre { margin: 0; max-height: 520px; overflow: auto; background: var(--ink); border-radius: 10px; padding: 12px; font: 12px/1.5 var(--f-mono); white-space: pre-wrap; color: var(--text); }
 button { justify-self: start; font: 700 14px var(--f-disp); background: var(--amber); color: var(--ink); border: 0; border-radius: 10px; padding: 8px 14px; cursor: pointer; }
 .note { font-size: 13px; }
+.aud { font-size: 13px; } .qa { font: 12px/1.5 var(--f-mono); color: var(--cyan); }
+.sounds { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.snd { margin: 0; background: var(--night); border: 1px solid var(--line); border-radius: 12px; padding: 10px; display: grid; gap: 6px; min-width: 0; }
+.snd figcaption { font-size: 13px; color: var(--text); font-weight: 600; } .snd audio { width: 100%; }
 </style>
 <main>
   <header>
     <div class="eyebrow">Skill motion-explainer · boucle d'amélioration continue</div>
-    <h1>Six itérations, un skill réécrit, une série DFIR</h1>
-    <p>Sujet de test : <b>les journaux Admin Activity de Google Cloud, côté détection et réponse</b>, pour quelqu'un qui ne connaît pas GCP, en moins de 3 minutes.
-    Chaque vidéo est générée avec la version précédente du skill, mesurée, notée, puis le skill est corrigé par des règles valables pour n'importe quel sujet.</p>
+    <h1>Un skill, plusieurs sujets, chaque version gardée</h1>
+    <p>Le but est le <b>skill</b> : chercher des faits sûrs sur n'importe quel sujet, puis réaliser une vidéo explicative flat vector.
+    Les vidéos sont des bancs d'essai. Itérations 1 à 6 : un seul sujet (journaux d'audit GCP). Depuis v7 : chaque version du skill est testée sur des sujets
+    de domaines, d'audiences et de natures différents, la série GCP servant de non-régression.</p>
   </header>
   <section>
-    <h2>v6 · La série DFIR (après ton retour)</h2>
+    <h2>v7 · Voix neuronale, recherche sourcée, outillage générique</h2>
+    <p class="note" style="margin-bottom:12px">Skill v7 : méthode de recherche (sources primaires, artefacts produits soi-même, recoupement, faits datés, fiche sources contrôlée par script),
+    voix Piper calée au mot près, bouches synchronisées, musique générée, bande son dans le lecteur, kit de scènes indépendant du sujet. <b>En attente de ton avis</b> avant la v8.</p>
+    <div class="vers">
+<article class="ver"><div class="vh"><span class="tag">c14</span><span class="by">L&#x27;horloge d&#x27;Ötzi (carbone 14)</span><span class="nums">fond 3.38 · forme 3.14</span></div>
+  <video controls preload="metadata" playsinline src="v7-c14.mp4"></video>
+  <p class="aud"><b>Audience</b> : grand public adulte · <b>Nature</b> : sciences : mécanisme, chiffres datés</p><p>Rayons cosmiques → carbone 14 → sablier qui se vide à la mort ; une vraie ligne du rapport de labo (ETH-8342, 4560 ± 65 BP), BP = avant 1950, calibration en intervalles avec leur probabilité, limite de 50 000 ans.</p><p class="qa">2:35 · 156 mots/min · captures avec alerte 37/60 · fenêtres figées 0</p>
+  <a class="open" href="v7-c14.html" target="_blank" rel="noopener">Ouvrir le lecteur interactif (bande son intégrée, hotspots en pause, quiz)</a></article>
+<article class="ver"><div class="vh"><span class="tag">pgexplain</span><span class="by">Lire un EXPLAIN ANALYZE (PostgreSQL 18)</span><span class="nums">fond 3.50 · forme 3.14</span></div>
+  <video controls preload="metadata" playsinline src="v7-pgexplain.mp4"></video>
+  <p class="aud"><b>Audience</b> : développeurs back-end, praticiens · <b>Nature</b> : technique : artefacts réels</p><p>Plans réels générés sur PostgreSQL 18.6 : cost vs actual time, rows prévu vs réel, lecture de l'arbre, loops, Rows Removed by Filter → index (48 ms → 0,16 ms), statistiques périmées → ANALYZE (1 077 ms → 176 ms), BEGIN/ROLLBACK.</p><p class="qa">2:45 · 135 mots/min · captures avec alerte 35/57 · fenêtres figées 1</p>
+  <a class="open" href="v7-pgexplain.html" target="_blank" rel="noopener">Ouvrir le lecteur interactif (bande son intégrée, hotspots en pause, quiz)</a></article>
+<article class="ver"><div class="vh"><span class="tag">reg-gcp-ep2</span><span class="by">Non-régression : série GCP, épisode 2</span><span class="nums"></span></div>
+  <video controls preload="metadata" playsinline src="v7-reg-gcp-ep2.mp4"></video>
+  <p class="aud"><b>Audience</b> : praticien DFIR · <b>Nature</b> : même épisode que v6, nouvelle chaîne voix/son</p><p>Le script et les scènes de v6-ep2, inchangés, passés dans le nouveau pipeline : voix Piper calée au mot, musique générée, bande son dans le lecteur.</p><p class="qa">2:38 · 133 mots/min · captures avec alerte 18/45 · fenêtres figées 0</p>
+  <a class="open" href="v7-reg-gcp-ep2.html" target="_blank" rel="noopener">Ouvrir le lecteur interactif (bande son intégrée, hotspots en pause, quiz)</a></article></div>
+  </section>
+  <section>
+    <h2>Voix et musiques testées</h2>
+    <p class="note" style="margin-bottom:12px">Même texte de 43 mots pour chaque voix française Piper (huggingface.co/rhasspy/piper-voices). La musique est générée par le labo (pas de licence en jeu) ; quatre ambiances.</p>
+    <div class="sounds"><figure class="snd"><figcaption>siwis réglée (choix par défaut)</figcaption><audio controls preload="none" src="voice-siwis-ls1.08-pause0.35.mp3"></audio></figure><figure class="snd"><figcaption>siwis medium</figcaption><audio controls preload="none" src="voice-siwis-medium.mp3"></audio></figure><figure class="snd"><figcaption>tom medium (voix de l'antagoniste)</figcaption><audio controls preload="none" src="voice-tom-medium.mp3"></audio></figure><figure class="snd"><figcaption>upmc jessica</figcaption><audio controls preload="none" src="voice-upmc-jessica.mp3"></audio></figure><figure class="snd"><figcaption>upmc pierre</figcaption><audio controls preload="none" src="voice-upmc-pierre.mp3"></audio></figure><figure class="snd"><figcaption>gilles low</figcaption><audio controls preload="none" src="voice-gilles-low.mp3"></audio></figure><figure class="snd"><figcaption>espeak mbrola (ancienne voix)</figcaption><audio controls preload="none" src="voice-espeak-reference.mp3"></audio></figure><figure class="snd"><figcaption>ambiance « curious »</figcaption><audio controls preload="none" src="music-curious.mp3"></audio></figure><figure class="snd"><figcaption>ambiance « wonder »</figcaption><audio controls preload="none" src="music-wonder.mp3"></audio></figure><figure class="snd"><figcaption>ambiance « tense »</figcaption><audio controls preload="none" src="music-tense.mp3"></audio></figure><figure class="snd"><figcaption>ambiance « warm »</figcaption><audio controls preload="none" src="music-warm.mp3"></audio></figure></div>
+  </section>
+  <section>
+    <h2>v6 · La série DFIR (sujet GCP, après ton retour)</h2>
     <p class="note" style="margin-bottom:12px">Ton retour : « superficiel et abstrait ». Le skill v6 cadre l'audience sur deux axes (métier détection/réponse, outil GCP), part d'un inventaire des artefacts à reconnaître et montre les vrais noms de méthodes et de champs à l'écran. Résultat : 3 épisodes, 15 événements et champs réels, chacun avec sa condition d'alerte.</p>
     <div class="vers">
 <article class="ver"><div class="vh"><span class="tag">EP1</span><span class="by">Lire une entrée, champ par champ</span></div>
@@ -57,7 +85,7 @@ button { justify-self: start; font: 700 14px var(--f-disp); background: var(--am
   <a class="open" href="ep3.html" target="_blank" rel="noopener">Ouvrir le lecteur interactif (requêtes complètes en pause)</a></article></div>
   </section>
   <section>
-    <h2>Progression (itérations 1 à 5)</h2>
+    <h2>v1 à v5 · Progression sur le sujet GCP</h2>
     <div class="tw"><table>
       <thead><tr><th></th><th>v1</th><th>v2</th><th>v3</th><th>v4</th><th>v5</th></tr></thead>
       <tbody><tr><th scope='row'>Note fond (/4)</th><td class='sc'>2.71</td><td class='sc'>3.43</td><td class='sc'>3.57</td><td class='sc'>3.57</td><td class='sc'>3.71</td></tr><tr><th scope='row'>Note forme (/4)</th><td class='sc'>2.00</td><td class='sc'>2.57</td><td class='sc'>2.71</td><td class='sc'>3.29</td><td class='sc'>3.57</td></tr><tr><th scope='row'>Captures avec défaut</th><td>61/63</td><td>53/57</td><td>47/57</td><td>29/57</td><td>24/57</td></tr><tr><th scope='row'>Fenêtres figées &gt; 2,5 s</th><td>5</td><td>4</td><td>1</td><td>0</td><td>0</td></tr><tr><th scope='row'>Surface vide moyenne</th><td>53 %</td><td>48 %</td><td>42 %</td><td>7 %</td><td>7 %</td></tr><tr><th scope='row'>Personnage sous les sous-titres</th><td>33</td><td>4</td><td>5</td><td>5</td><td>5</td></tr><tr><th scope='row'>Personnage masqué (1er plan)</th><td>18</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><th scope='row'>Plus de 3 textes à l'écran</th><td>7</td><td>5</td><td>2</td><td>2</td><td>0</td></tr><tr><th scope='row'>Spot sur un objet invisible</th><td>4</td><td>3</td><td>3</td><td>3</td><td>0</td></tr><tr><th scope='row'>Scènes sous 3 échelles de plan</th><td>6/8</td><td>2/7</td><td>2/7</td><td>1/7</td><td>0/7</td></tr><tr><th scope='row'>Durée</th><td>2:56</td><td>2:54</td><td>2:52</td><td>2:55</td><td>2:56</td></tr></tbody>
@@ -65,7 +93,7 @@ button { justify-self: start; font: 700 14px var(--f-disp); background: var(--am
     <p class="note" style="margin-top:8px">Mesures automatiques recalculées avec les mêmes outils pour les cinq versions (captures à 25, 50 et 75 % de chaque phrase). Notes /4 : grille de 14 critères, chaque note cite sa preuve dans <code>iterations/vN/REVIEW.md</code>.</p>
   </section>
   <section>
-    <h2>Les versions</h2>
+    <h2>v1 à v5 · Les vidéos</h2>
     <div class="vers">
 <article class="ver" id="v1">
   <div class="vh"><span class="tag">v1</span><span class="by">générée avec le skill v0 (d'origine)</span><span class="nums">fond 2.71 · forme 2.00</span></div>
@@ -114,7 +142,7 @@ button { justify-self: start; font: 700 14px var(--f-disp); background: var(--am
   </section>
   <section>
     <details>
-      <summary>Skill final (v6), à copier</summary>
+      <summary>Skill courant (v7), à copier</summary>
       <div class="sk"><button type="button" id="cp">Copier le skill</button><pre id="skill">---
 name: &quot;motion-explainer&quot;
 description: &quot;Use when the user wants to understand a topic through an animated motion-design explainer (flat vector, Kurzgesagt-like style) built as an interactive HTML artifact.&quot;
@@ -122,14 +150,15 @@ description: &quot;Use when the user wants to understand a topic through an anim
 
 # Motion Explainer
 
-Objectif : transformer un sujet complexe en une courte &quot;vidéo&quot; animée de 2 à 3 minutes, style motion design flat vector, jouable dans un artifact HTML (play, pause, scène par scène) et exportable en MP4 avec bande son. La compréhension prime, l&#x27;animation sert l&#x27;explication.
+Objectif : transformer un sujet complexe en une courte &quot;vidéo&quot; animée de 2 à 3 minutes, style motion design flat vector, jouable dans un artifact HTML (play, pause, scène par scène) et exportable en MP4 avec voix neuronale, musique et bruitages. La compréhension prime, l&#x27;animation sert l&#x27;explication. Deux métiers : **chercher** (des faits sûrs, datés, sourcés) puis **réaliser**.
+Outillage réutilisable (moteur, kit de scènes, voix, son, QA, export) : dossier `toolkit/` à côté de ce fichier, mode d&#x27;emploi dans `reference/TOOLKIT.md`.
 - **On montre, on n&#x27;écrit pas** : si une scène ressemble à une diapositive, elle est ratée.
 - **On filme, on ne pose pas** : si chaque plan est un plan large fixe, la scène est ratée.
 - **On explique, on ne décrit pas** : si le spectateur sait quoi mais pas pourquoi, ni quoi en faire, la scène est ratée.
 
 ## 0. Cadrer
 
-- **Niveau d&#x27;audience, sur deux axes** : le métier (ce que la personne fait : débutant, praticien, expert) et l&#x27;outil ou le domaine du sujet (le connaît-elle ?). Les deux se règlent séparément : un praticien qui découvre l&#x27;outil garde la profondeur de son métier, le contexte de l&#x27;outil se limite à ce qu&#x27;il faut pour lire les artefacts. Ne demander que si c&#x27;est vraiment ambigu ; si la demande ne dit pas ce que le spectateur doit savoir faire après, le demander.
+- **Niveau d&#x27;audience, sur deux axes** : le métier (ce que la personne fait : débutant, praticien, expert) et l&#x27;outil ou le domaine du sujet (le connaît-elle ?). Les deux se règlent séparément : un praticien qui découvre l&#x27;outil garde la profondeur de son métier, le contexte de l&#x27;outil se limite à ce qu&#x27;il faut pour lire les artefacts. Ne demander que si c&#x27;est vraiment ambigu ; si la demande ne dit pas ce que le spectateur doit savoir faire après, le demander. Pour un public sans métier lié au sujet, « savoir faire » = un raisonnement réutilisable (lire une valeur qu&#x27;il croisera, reconnaître un cas où la règle ne s&#x27;applique pas, démonter une idée reçue).
 - **Inventaire de valeur** (avant le script) : la liste des artefacts concrets que le spectateur doit reconnaître après la vidéo (noms exacts, champs, valeurs, seuils, commandes), chacun avec ce qu&#x27;on en fait. Pour un praticien, c&#x27;est le cœur de l&#x27;épisode : chaque artefact apparaît à l&#x27;écran tel qu&#x27;il est en vrai et la narration dit à quoi il sert. Si l&#x27;inventaire dépasse le budget d&#x27;un épisode, découper en épisodes par famille plutôt que de rester en surface.
 - **Fiche pertinence** (écrite avant le script, non publiée) :
   - ce que l&#x27;audience sait déjà : à réduire à une ligne de rappel, 15 % du temps au maximum
@@ -139,10 +168,16 @@ Objectif : transformer un sujet complexe en une courte &quot;vidéo&quot; animé
 - **Question centrale** : une seule, écrite en une phrase.
 - **Budget d&#x27;idées** : 3 à 5 idées clés maximum. Au-delà, découper en épisodes : produire l&#x27;épisode 1 et lister les suivants dans la réponse finale.
 - Repérer le prérequis que le spectateur risque de ne pas avoir et prévoir une scène pour lui (débutant) ou une phrase (praticien).
-- Si le sujet touche à l&#x27;état actuel du monde (versions, produits, valeurs par défaut, rétentions, chiffres, CVE), faire des recherches web et vérifier chaque fait.
-- **Faits non confirmés** : une affirmation qu&#x27;aucune source consultée ne confirme ne va jamais dans la narration ni à l&#x27;écran. Elle peut apparaître seulement dans un hotspot, marquée &quot;à vérifier&quot;, et elle est signalée dans la réponse finale.
 - Si la demande est ambiguë sur le style (ex : &quot;stop motion&quot; peut vouloir dire &quot;refais l&#x27;animation&quot; ou un vrai rendu image par image), dire en une ligne l&#x27;interprétation retenue.
 
+## 0 bis. Rechercher (avant la fiche, pour tout sujet)
+
+1. **Sources primaires d&#x27;abord** : le texte qui fait autorité sur le fait (spécification ou documentation officielle de la version courante, article de recherche original, texte de loi, publication de l&#x27;organisme qui produit le chiffre, données brutes). Les sources secondaires (presse, blogs, encyclopédies, réponses de recherche résumées) servent à trouver les primaires, pas à citer. Lire la source elle-même (page, PDF) plutôt que son résumé.
+2. **Produire l&#x27;artefact quand c&#x27;est possible** : exécuter la commande, générer la sortie, calculer la valeur dans l&#x27;environnement plutôt que la reconstituer. L&#x27;artefact montré est alors vrai par construction ; noter comment il a été produit (version, données, graine).
+3. **Recouper** : chaque fait de la narration a une source primaire ou deux sources indépendantes ; un chiffre clé, les deux si possible. Sources en désaccord : montrer la plage ou la condition, ne pas choisir en silence.
+4. **Dater** : un fait qui peut changer (version, valeur par défaut, prix, taux, record, état de la science) porte sa date ou sa version dans la narration (« depuis la version 18 », « calibration publiée en 1994 ») ; vérifier qu&#x27;il est encore vrai à la date du jour.
+5. **Fiche sources** (non publiée) : une ligne par fait, avec les valeurs qu&#x27;il contient, la citation exacte de la source, l&#x27;URL, la date de consultation et le niveau (primaire, recoupé, à vérifier). Tout nombre affiché ou dit doit y figurer (`factcheck.py` le contrôle).
+6. **Faits non confirmés** : jamais dans la narration ni à l&#x27;écran. Seulement dans un hotspot marqué &quot;à vérifier&quot;, et signalés dans la réponse finale.
 ## 1. Script pédagogique
 
 Structure, 6 à 8 scènes :
@@ -180,10 +215,11 @@ Règles générales :
 - **Fil rouge obligatoire** : le cas du hook réapparaît dans au moins la moitié des scènes et se conclut à la fin. Dans une série, chaque épisode résout une partie et ouvre la suivante.
 - **Une seule métaphore système** déclinée partout. Si un concept ne rentre pas dedans, l&#x27;adapter plutôt qu&#x27;en introduire une seconde.
 - Narration en français, termes techniques en anglais non francisés.
-- Pour chaque cue : `sub` (sous-titre) et `say` (texte prononcé, phonétique si besoin : &quot;x²&quot; se dit &quot;x au carré&quot;, &quot;48 Mo&quot; se dit &quot;48 méga-octets&quot;).
+- Pour chaque cue : `sub` (sous-titre, chiffres en chiffres) et `say` (texte prononcé, nombres en toutes lettres : &quot;x²&quot; se dit &quot;x au carré&quot;, &quot;48 Mo&quot; se dit &quot;quarante-huit méga-octets&quot;). Un terme étranger est dit par sa fonction en français quand c&#x27;est possible, son nom exact restant à l&#x27;écran ; sinon il passe par le lexique de prononciation (§8).
+- **Personnages qui parlent** : un cue peut être dit par un personnage (`who`), avec sa propre voix et sa bouche synchronisée. Bon usage : l&#x27;antagoniste énonce l&#x27;idée reçue, le protagoniste pose la question du spectateur ; une réplique courte (≤ 12 mots), la narration garde l&#x27;explication.
 - **Pas de doublon** : le sous-titre ne répète jamais mot pour mot un texte affiché. À l&#x27;écran, un mot-clé ; en sous-titre, la phrase.
-- Durée cible 2 à 3 minutes (une limite donnée par l&#x27;utilisateur ne se dépasse jamais), 25 cues maximum. Durée d&#x27;un cue : `max(3.6, mots/2.6 + 1.0)` secondes, plus 1,5 s pour un moment &quot;devinez&quot;. Ancre d&#x27;un mot : `debutCue + indexMot / 2.6`. Un mot = un token qui contient une lettre ou un chiffre (un « : » ou « ? » isolé n&#x27;en est pas un).
-- **Budget avant d&#x27;écrire** : mots disponibles ≈ (durée cible − 1,0 × cues − 1,5 × devinez − 2) × 2,6. Compter dès le premier jet. Si ça déborde, **supprimer une idée ou une scène entière** plutôt que de comprimer toutes les phrases : une scène de mécanisme garde au moins 2 cues (une seule ne laisse de place ni aux trois plans ni au pourquoi).
+- Durée cible 2 à 3 minutes (une limite donnée par l&#x27;utilisateur ne se dépasse jamais), 25 cues maximum. **La voix fixe le temps** : chaque cue dure sa narration réelle plus une respiration (0,45 s, davantage après une idée clé : `breath`), plus 1,5 s pour un moment &quot;devinez&quot; ; chaque ancre `T(cue, mot)` tombe sur le mot réellement prononcé. Sans voix de synthèse, le moteur retombe sur 2,6 mots/s. Un mot = un token qui contient une lettre ou un chiffre.
+- **Budget avant d&#x27;écrire** : mots disponibles ≈ (durée cible − 0,6 × cues − 1,5 × devinez − 2) × 2,4 (débit de la voix par défaut). Compter dès le premier jet. Si ça déborde, **supprimer une idée ou une scène entière** plutôt que de comprimer toutes les phrases : une scène de mécanisme garde au moins 2 cues (une seule ne laisse de place ni aux trois plans ni au pourquoi).
 
 ## 2. Storyboard : un monde, une caméra, des beats
 
@@ -217,64 +253,51 @@ Règles générales :
 - **Typo identique dans l&#x27;artifact et le MP4** : avant de choisir, lancer `fc-list` dans l&#x27;environnement de rendu. Par défaut Poppins (titres et texte, sur Google Fonts) et JetBrains Mono avec repli `DejaVu Sans Mono` pour le code. Si une police manque localement, l&#x27;installer avant tout rendu (paquet npm `@fontsource/&lt;nom&gt;`, fichiers woff dans `~/.local/share/fonts`, puis `fc-cache -f`).
 - **Lisibilité mobile** (viewBox 1600x900, affichée vers 360 px de large) : texte 44 unités minimum à l&#x27;écran après zoom caméra, 36 pour du code ; 3 éléments textuels simultanés maximum ; 12 mots par carton.
 - **Zones de sécurité** : la bande sous-titres (y &gt; 760) ne contient rien d&#x27;important (ni texte, ni personnage, ni objet du beat) : poser le sol des personnages au-dessus de y = 700 à l&#x27;écran. Marges de 60 unités sur les côtés et en haut.
+- **Son** : une voix posée (≈ 140-160 mots/min), une musique douce qui suit la structure (plus clairsemée au hook, plus pleine dans le mécanisme, cadence finale) et se tait pendant les silences &quot;devinez&quot;, des bruitages sémantiques fixes (§8). La musique ne couvre jamais la voix.
 - Animation : easing systématique (`easeOutCubic`, `easeOutBack` pour les apparitions), stagger 0.05 à 0.15 s, squash and stretch léger, un seul point d&#x27;attention, 1 à 2 s de respiration après chaque idée clé.
 
-## 4. Moteur d&#x27;animation : maison, sans librairie
+## 4. Moteur et kit de scènes (`toolkit/`)
 
-Pas de CDN pour l&#x27;animation. Tout est une **fonction pure du temps** : seek, test et export marchent sans effort.
-
-Squelette de référence (à adapter) :
-
-```js
-const clamp=(v,a=0,b=1)=&gt;Math.max(a,Math.min(b,v)), lerp=(a,b,p)=&gt;a+(b-a)*p;
-const P=(t,a,d)=&gt;d&lt;=0?(t&gt;=a?1:0):clamp((t-a)/d);
-const E={oc:p=&gt;1-(1-p)**3, ic:p=&gt;p**3, ioc:p=&gt;p&lt;.5?4*p**3:1-(-2*p+2)**3/2,
-  ob:p=&gt;1+2.6*(p-1)**3+1.6*(p-1)**2};
-class Actor{ // el = &lt;g&gt; dessiné autour de (0,0)
-  constructor(el,x,y,s,o){Object.assign(this,{el,bx:x,by:y,bs:s,o:o||{}});}
-  update(t){const o=this.o;let x=this.bx,y=this.by,s=this.bs,r=0,a=1;
-    if(o.pop!=null){const p=P(t,o.pop,.6);s*=p&lt;=0?.4:.4+.6*E.ob(p);a*=Math.min(1,p*3);}
-    for(const m of o.moves||[]){const p=(m[3]||E.ioc)(P(t,m[0],m[1]));
-      if(&#x27;x&#x27;in m[2])x=lerp(x,m[2].x,p);if(&#x27;y&#x27;in m[2])y=lerp(y,m[2].y,p);if(&#x27;s&#x27;in m[2])s=lerp(s,m[2].s,p);}
-    if(o.out!=null)a*=1-P(t,o.out,.4);
-    const st={x,y,s,r,a};if(o.fn)o.fn(st,t);   // hook pour poses, regards, idle
-    this.el.setAttribute(&#x27;opacity&#x27;,st.a);this.el.setAttribute(&#x27;visibility&#x27;,st.a&gt;0?&#x27;visible&#x27;:&#x27;hidden&#x27;);
-    this.el.setAttribute(&#x27;transform&#x27;,`translate(${st.x} ${st.y}) rotate(${st.r}) scale(${st.s})`);}}
-// Caméra : par scène, une liste de keyframes [t, x, y, zoom] ; la scène N démarre depuis la dernière
-// keyframe de N-1 (trajet). Interpolation ioc sur x,y et log-lerp sur le zoom.
-// Calques : far (parallaxe 0,5), main (1), front (1,3) :
-//   translate(800 450) scale(z) translate(-x*f -y*f)
-// Pendant le trajet, la scène précédente reste affichée dans son état final.
-```
-
-- **Coordonnées relatives** : chaque zone a une origine en constante (`const Z={bureau:[0,0],usine:[1800,0],...}`) et tout ce qui la compose est placé relativement à cette origine, caméra et hotspots compris. Déplacer une zone = changer une seule valeur.
-- Les éléments sont créés une fois ; `render(t)` ne fait que muter des attributs.
-- **Ambiance séparable** : idle, particules, tapis, bobines lisent un drapeau global `AMBIENT`. `render(t,{ambient:false})` les fige, pour les tests.
-- Exposer `window.__mx = { setEp(i), render(t,opts), duration, cues, scenes, events }`, où `events` liste les temps des pops, trajets et impacts (pour la bande son).
+Tout est une **fonction pure du temps** (`render(t)` ne fait que muter des attributs) : seek, tests sans rendu, lecteur et MP4 sortent de la même source. Pas de librairie d&#x27;animation ni de CDN. Utiliser l&#x27;outillage fourni ; s&#x27;il manque, reconstruire le squelette décrit dans `reference/TOOLKIT.md`.
+- **Épisode** = `versions/&lt;id&gt;/episode.js` : `META` (titre, voix, musique), fiche en commentaire, `EP = { zones, scenes, cues, quiz, build(K) }`. `K.T(cue, mot)` donne l&#x27;instant d&#x27;un mot, `K.A(el, {pop, moves, out, fn})` anime, `K.frame(t, d, cibles, part)` cadre depuis la boîte englobante, `K.char(...)` crée un personnage, `K.focus`, `K.hot`, `K.ev(t, type)` (son).
+- **Kit générique** `sceneKit(K)` : `room` (décor de zone : room, outdoor, lab, void), `world` (fond, trajets, premier plan), `hero`/`foe`, `bubble`, `card` (artefact réel : en-tête, valeur tapée, ligne éclairée), `doc` (artefact long déroulé ligne par ligne, 3 lisibles), `counter`, `bars`, `curve`, `arrow`, `label`, `timeline`, `balance`, `unknown` (incertain en pointillés), `suspense` (« ? » du devinez). Un besoin qui revient d&#x27;un sujet à l&#x27;autre s&#x27;ajoute au kit, jamais un objet propre à un sujet.
+- **Personnages vivants** : respiration, clignements, regard qui suit la cible et saccades au repos, pieds qui marchent, gestes avec anticipation (`point`, `loupe`, `shrug`, `cheer`, `hold`, `type`, `jump`, `nod`, `lean`, `walkcycle`), expressions ; la bouche suit les visèmes de la voix quand le personnage dit le cue (`who`).
+- **Coordonnées relatives** : chaque zone a une origine (`zones: {bureau: [0, 0], ...}`) et tout ce qui la compose est placé relativement à elle, caméra et hotspots compris.
+- **Ambiance séparable** : idle, particules, saccades lisent `AMBIENT` ; `render(t, {ambient:false})` les fige pour les tests.
 - **Pièges connus** :
-  - masquer une scène avec `display=&quot;none&quot;`, jamais `visibility` : un enfant en `visibility=&quot;visible&quot;` reste affiché sous un parent caché
-  - ne pas stocker les keyframes de caméra dans une propriété écrasée plus tard (ex : `scene.cam` réutilisé pour le groupe SVG)
-  - texte monospace : `white-space: pre`
-  - `getTotalLength()` des tracés : le mesurer à la construction, scène dans le DOM
-  - ne rien appeler qui dépend de l&#x27;épisode courant avant qu&#x27;il soit initialisé
-  - modifications par remplacement de chaînes : faire échouer tout le lot si une seule chaîne manque, et ne jamais mettre d&#x27;entrée vide
+  - masquer une scène avec `display=&quot;none&quot;`, jamais `visibility`
+  - un deuxième `K.A()` sur un même élément écrase sa position : chaîner dans `moves`
+  - un attribut `opacity` est écrasé par l&#x27;animateur : `fill-opacity` pour un calque translucide
+  - texte monospace : `white-space: pre` ; `getTotalLength()` mesuré à la construction, élément dans le DOM
+  - ancres : `T(cue, mot)` compare le début du mot normalisé (« l&#x27;API » → `lapi`) ; un mot absent lève une erreur
+  - modifications par remplacement de chaînes : faire échouer tout le lot si une seule chaîne manque
 
 ## 5. Player
 
 - Une page HTML autonome, SVG inline `viewBox=&quot;0 0 1600 900&quot;`, letterbox 16:9 qui tient sur mobile.
-- Contrôles : play/pause, scène précédente/suivante, barre de progression, vitesse (0.75x, 1x, 1.25x), sous-titres on/off, voix on/off, chapitres cliquables, raccourcis (espace, flèches, Échap).
+- Contrôles : play/pause, scène précédente/suivante, barre de progression, vitesse (0.75x, 1x, 1.25x), sous-titres on/off, son on/off, chapitres cliquables, raccourcis (espace, flèches, Échap).
+- **Bande son intégrée** : la page embarque la même bande son que le MP4 (voix, musique, bruitages) et **l&#x27;audio est l&#x27;horloge** de la lecture (seek, vitesse, pause synchronisés). Sans bande son, repli sur `speechSynthesis` en `fr-FR`, l&#x27;horloge attendant la fin de chaque phrase (garde-fou 20 s).
 - **Séries** : un onglet par épisode dans le même artifact, routage `#ep1`, `#ep2`. Ajouter ou refaire un épisode = republier le même fichier pour garder l&#x27;URL.
 - Sous-titres en overlay sur desktop, sous la vidéo sur mobile (largeur &lt; 720 px).
-- **La voix pilote la timeline** : chaque cue lance `speechSynthesis` sur `say` en `fr-FR` ; si la phrase n&#x27;est pas finie à la fin du cue, l&#x27;horloge attend `onend` (garde-fou 20 s). Voix off par défaut, tout en try/catch.
-- **Mode quiz** (bouton, désactivé par défaut) : aux moments &quot;devinez&quot;, la lecture se met en pause et propose 2 à 3 réponses ; un clic révèle la bonne avec une phrase d&#x27;explication, puis la lecture reprend. Sans le mode quiz, la vidéo se joue normalement.
-- **Hotspots en pause** : 1 ou 2 par scène, en coordonnées monde converties via la caméra, avec une fenêtre de validité (`at`, `until`). Ils portent le détail (JSON, requête complète, table), jamais l&#x27;idée principale.
-- Poster : la page s&#x27;ouvre sur une frame lisible de la scène 1, gros bouton play avec la durée.
+- **Mode quiz** (désactivé par défaut) : aux moments &quot;devinez&quot;, pause et 2 à 3 réponses ; un clic révèle la bonne avec une phrase d&#x27;explication.
+- **Hotspots en pause** : 1 ou 2 par scène, avec fenêtre de validité ; ils portent le détail (sortie complète, table, source), jamais l&#x27;idée principale.
+- Poster : une frame lisible de la scène 1, gros bouton play avec la durée.
 
-## 6. Build
+## 6. Build (pipeline standard)
 
 1. Charger le skill `artifact-design` avant d&#x27;écrire la page.
-2. Écrire la fiche pertinence, le script (gabarit par scène), puis la beat sheet et la liste de plans.
-3. Écrire les origines de zones, le décor (3 calques), le moteur et le player, puis une scène à la fois.
+2. Recherche (§0 bis) → fiche sources ; fiche pertinence ; script (gabarit par scène) ; beat sheet et liste de plans.
+3. Écrire `episode.js` (cues d&#x27;abord), puis :
+```bash
+python3 toolkit/tools/voice.py versions/&lt;id&gt; --check   # voix Piper par cue, horodatage des mots, visèmes, écoute Whisper
+python3 toolkit/tools/build.py versions/&lt;id&gt;           # page autonome (timing réel intégré)
+node toolkit/tools/beats.mjs versions/&lt;id&gt;/index.html  # trous de rythme, sans rendu
+node toolkit/tools/qa.mjs versions/&lt;id&gt;/index.html iterations/&lt;it&gt;/&lt;id&gt; &amp;&amp; python3 toolkit/tools/analyze.py iterations/&lt;it&gt;/&lt;id&gt;
+node toolkit/tools/export.mjs versions/&lt;id&gt;/index.html versions/&lt;id&gt; 3   # images 1080p24 -&gt; _silent.mp4 + meta.json
+python3 toolkit/tools/audio.py versions/&lt;id&gt;           # voix + musique + bruitages -&gt; soundtrack.mp3 + video.mp4
+python3 toolkit/tools/build.py versions/&lt;id&gt;           # republie la page avec la bande son
+python3 toolkit/tools/factcheck.py versions/&lt;id&gt; research/&lt;sujet&gt;/SOURCES.md
+```
 4. Publier avec l&#x27;outil Artifact.
 
 ## 7. Vérification
@@ -287,35 +310,30 @@ class Actor{ // el = &lt;g&gt; dessiné autour de (0,0)
 - le récap contient des actions, pas des résumés
 - test du praticien : un expert du métier se demande « qu&#x27;est-ce que je sais faire demain que je ne savais pas ? » ; la réponse cite les artefacts de l&#x27;inventaire, sinon l&#x27;épisode est trop superficiel
 - écrire les 3 questions que le spectateur doit savoir résoudre après la vidéo, dont « où est-ce que je fais ça ? », et vérifier que la narration (pas seulement un hotspot) y répond
-- chaque fait de la narration est confirmé par une source consultée
+- chaque fait de la narration est dans la fiche sources, avec sa date ou sa version s&#x27;il peut changer ; `factcheck.py` ne signale aucun nombre orphelin
 
-**Contrôle de la feuille de beats (sans rendu, avant tout le reste)** : exposer les instants de chaque beat (`__mx.marks`), lister les trous de plus de 2,5 s hors devinez et les cues sous le quota ; corriger avant de rendre une seule image.
+**Voix (avant tout rendu)** : `voice.py --check` fait écouter chaque partie par Whisper sans le script. Une partie à plus de 20 % de mots mal entendus est réécrite (mot plus courant, terme étranger dit par sa fonction ou ajouté au lexique) puis revérifiée. Débit parlé entre 130 et 165 mots/min.
 
-**Contrôles visuels (Playwright)** :
-- Pour chaque cue, rendre et capturer à 25 %, 50 % et 75 % du cue, en 1280 px, puis assembler des planches contact (PIL) et les regarder.
+**Contrôle de la feuille de beats (sans rendu, avant tout le reste)** : `beats.mjs` liste les trous de plus de 2,5 s hors devinez et les cues sous le quota ; corriger avant de rendre une seule image.
+
+**Contrôles visuels (Playwright, `qa.mjs` + `analyze.py`)** :
+- Pour chaque cue, rendre et capturer à 25 %, 50 % et 75 % du cue, en 1280 px, puis assembler des planches contact et les regarder.
 - Contrôles automatiques, une fois par capture :
-  - textes visibles : chevauchement, dépassement du cadre (sauf éléments marqués `data-bleed`), intrusion dans la bande sous-titres, taille à l&#x27;écran inférieure à 44 unités
-  - sujet dans le cadre : l&#x27;objet du beat courant (marqué `data-focus`) est visible, dans les 70 % centraux, couvre au moins 8 % de la surface (ou 25 % de la hauteur), n&#x27;entre pas dans la bande sous-titres et n&#x27;est pas masqué par le premier plan ; idem pour chaque personnage visible
-  - durée totale ≤ limite demandée
-  - surface vide : moins de 40 % de pixels proches du fond
-- **Image figée réelle** : rendre toutes les 0,5 s avec `ambient:false` et **sans sous-titres**, comparer les frames ; signaler toute fenêtre de plus de 2,5 s sans changement, hors silences &quot;devinez&quot; déclarés, avec le cue concerné.
-- **Variété de plans** : compter par scène les échelles distinctes (zooms séparés d&#x27;un facteur 1,35 au moins) ; moins de 3 = à corriger.
+  - textes visibles : chevauchement, dépassement du cadre (sauf `data-bleed`), intrusion dans la bande sous-titres, taille à l&#x27;écran inférieure à 44 unités
+  - sujet dans le cadre : l&#x27;objet du beat (`data-focus`) est visible, dans les 70 % centraux, couvre au moins 8 % de la surface (ou 25 % de la hauteur), hors bande sous-titres, non masqué par le premier plan ; idem pour chaque personnage visible
+  - durée totale ≤ limite demandée ; surface vide &lt; 40 % de pixels proches du fond
+- **Image figée réelle** : rendre toutes les 0,5 s sans ambiance ni sous-titres ; signaler toute fenêtre de plus de 2,5 s sans changement, hors silences &quot;devinez&quot;.
+- **Variété de plans** : moins de 3 échelles distinctes (facteur 1,35) dans une scène = à corriger.
 - **Personnage devant un texte** : signaler tout texte recouvert à plus de 25 % par un personnage.
-- Une capture en 390 px de large pour la page (pas de scroll horizontal).
-- Une passe de corrections, puis publier.
+- Une capture en 390 px de large pour la page (pas de scroll horizontal). Une passe de corrections, puis publier.
 
-## 8. Export MP4
+## 8. Voix, son, export MP4
 
-Quand l&#x27;utilisateur veut un fichier, ou qu&#x27;il demande comment télécharger :
-- Injecter une CSS d&#x27;export : scène en plein écran 1920x1080, hotspots, quiz, bouton et panneau masqués, sous-titres à 34 px.
-- Rendu à 24 fps : `__mx.render(i/24)` puis capture JPEG (qualité 90) envoyée en pipe à ffmpeg : `ffmpeg -f image2pipe -framerate 24 -c:v mjpeg -i - -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -movflags +faststart video.mp4`. Lancer en arrière-plan ; environ 5 minutes de rendu pour 2:50 de vidéo.
-- **Bande son, toujours** :
-  - bruitages synthétisés hors ligne depuis `__mx.events` : pop = `sine` court (600 à 900 Hz, 80 ms, `afade`), whoosh de trajet = `anoisesrc` filtré en `lowpass` avec fondu (0,6 s), impact ou tampon = `sine` grave 120 Hz, 120 ms ; chaque son placé avec `adelay`, puis `amix`
-  - sons sémantiques, fixes comme le code couleur : révélation d&#x27;un devinez = carillon montant, idée reçue démentie = buzzer doux et grave, conséquence = coup sourd, apparition = pop ; chaque événement de `__mx.events` porte son type
-  - une nappe d&#x27;ambiance douce (deux `sine` graves légèrement désaccordés, `lowpass`, volume bas) sur toute la durée, coupée pendant les silences &quot;devinez&quot;
-  - voix : si `espeak-ng` ou `piper` manque, tenter l&#x27;installation (`apt-get update &amp;&amp; apt-get install -y espeak-ng mbrola mbrola-fr4`) avant d&#x27;y renoncer ; un WAV par cue depuis `say`, accéléré (`-s`) jusqu&#x27;à tenir dans son cue, dépassements listés ; baisser la nappe pendant la parole
-  - `loudnorm` sur le mix, puis multiplexer avec la vidéo (`-c:v copy -c:a aac`)
-- Vérifier durée et pistes avec `ffprobe`, regarder 4 frames extraites avant d&#x27;envoyer avec SendUserFile.
+- **Voix (Piper, hors ligne)** : `pip install piper-tts onnx faster-whisper num2words` (num2words avec `--no-deps`) ; voix dans `~/.local/share/piper-voices` depuis `huggingface.co/rhasspy/piper-voices` (`fr/fr_FR/siwis/medium/fr_FR-siwis-medium.onnx` + `.onnx.json`). Défaut : `fr_FR-siwis-medium`, `length_scale 1.08`, pause entre phrases 0,35 s ; voix masculine : `fr_FR-tom-medium`. Les alignements de phonèmes de Piper donnent l&#x27;instant exact de chaque mot et les visèmes des bouches. Réglages par épisode dans `META.voice` (`voice`, `ls`, `pause`, `lexicon`, `cast` : une voix par personnage).
+- **Replis, dans l&#x27;ordre** : alignement Whisper si le découpage des mots diffère ; répartition proportionnelle sans Whisper ; `espeak-ng` (`mbrola-fr4`) sans Piper ; sans aucune synthèse, le modèle 2,6 mots/s. Une clé d&#x27;API vocale (ElevenLabs, Google, Azure) fournie en secret d&#x27;environnement peut remplacer Piper : même sortie attendue (un WAV par partie + horodatage des mots). Une voix enregistrée : la découper par cue, aligner avec Whisper, bouches par l&#x27;enveloppe (ou `rhubarb -r phonetic`).
+- **Musique** : générée par `music.py` (originale, donc libre de droits) selon `META.music.mood` (`curious`, `wonder`, `tense`, `warm`) ; elle suit les scènes, se tait pendant les devinez, baisse d&#x27;environ 12 dB sous la voix. Repli : un fichier CC0 ou CC-BY (`audio.py --music piste.mp3`), crédité dans le pied de page.
+- **Bruitages sémantiques**, fixes comme le code couleur, depuis `__mx.events` : apparition = pop, trajet = whoosh, révélation d&#x27;un devinez = carillon montant, idée reçue démentie = buzzer doux et grave (`myth`), conséquence = coup sourd (`impact`), compteur = tic.
+- **Export** : 1920×1080 à 24 fps, rendu image par image (`__mx.render(i/24)`) en parallèle, encodage H.264 ; `loudnorm` (-16 LUFS) sur le mix ; vérifier durée et pistes avec `ffprobe`, regarder 4 frames avant d&#x27;envoyer.
 - Sans ffmpeg ni Playwright : le dire et proposer l&#x27;enregistrement d&#x27;écran (macOS `Cmd+Shift+5`, Windows Outil Capture d&#x27;écran).
 
 ## 9. Livraison
@@ -326,10 +344,11 @@ Réponse courte :
 - les 3 actions du récap
 - ce qui a été simplifié, et tout point resté &quot;à vérifier&quot;
 - les épisodes suivants si le sujet a été découpé
-- les sources</pre></div>
+- les sources principales, avec la date de consultation
+</pre></div>
     </details>
   </section>
-  <p class="note">Limites : voix de synthèse espeak-ng/mbrola dans les MP4 (dans les lecteurs interactifs, le bouton « Voix » utilise la voix du navigateur) ; les notes de fond sont une auto-évaluation appuyée sur des preuves.</p>
+  <p class="note">Limites : v1 à v6 ont une voix espeak-ng/mbrola ; depuis v7 voix Piper (neuronale, hors ligne). Les notes sont une auto-évaluation appuyée sur des preuves ; ton avis prime.</p>
 </main>
 <script>
 document.getElementById('cp').addEventListener('click', async e => {

@@ -2,3 +2,11 @@ w0 frame 0/954
 w2 frame 0/954
 w1 frame 0/954
 w3 frame 0/954
+w0 frame 480/954
+w3 frame 480/954
+w1 frame 480/954
+w2 frame 480/954
+silent video -> versions/v7-reg-gcp-ep2/_silent.mp4
+soundtrack -> versions/v7-reg-gcp-ep2/soundtrack.mp3 | voix : piper (timing réel) | video -> versions/v7-reg-gcp-ep2/video.mp4
+/home/user/CortexDocs/motion-explainer-lab/versions/v7-reg-gcp-ep2/index.html : 2620 Ko | voix réelle : oui | bande son intégrée : oui
+v7-reg-gcp-ep2 done in 272s

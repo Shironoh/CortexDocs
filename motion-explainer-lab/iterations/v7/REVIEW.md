@@ -92,6 +92,18 @@ Sujets témoins jamais produits (G2) : H1 DNS, H2 Kerberoasting, H3 taux BCE. Va
 Même script et mêmes scènes qu'en v6, nouveau pipeline voix/son. Durée 2:25 → 2:39 (la voix Piper, plus posée, fixe le temps).
 Feuille de beats : 1 trou de 2,9 s (c14) que le modèle 2,6 mots/s masquait. Voir `iterations/v7/reg-gcp-ep2/QA.md`.
 
+| QA automatique | v6 ép. 2 (espeak) | v7 ép. 2 (Piper, même script) |
+|---|---|---|
+| Durée | 2:25 | 2:39 |
+| Captures avec alerte | 19/45 | 18/45 |
+| Fenêtres figées > 2,5 s | 0 | 0 |
+| Surface vide | 8 % | 7 % |
+| Scènes sous 3 échelles de plan | 1/7 | 1/7 |
+
+Aucun critère ne recule (G5 respecté). QA des deux sujets nouveaux, pour comparaison : C14 37/60 captures avec alerte,
+PostgreSQL 35/57 (surtout `focus_small` et `subj_in_band` : sujets jamais encore travaillés par la boucle, alors que l'épisode
+GCP a bénéficié de six itérations de corrections).
+
 ## 9. En attente
 
 **Ton avis sur les trois vidéos** (voix, musique, bouches, fond, forme) avant d'écrire la v8. Candidats déjà identifiés,

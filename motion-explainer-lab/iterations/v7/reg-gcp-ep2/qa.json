@@ -1,0 +1,1027 @@
+{
+ "summary": {
+  "beat_gaps_gt2_5s": [
+   [
+    134.88,
+    137.78,
+    "c14"
+   ]
+  ],
+  "cues_under_beat_quota": [],
+  "moving_captures": 14,
+  "duration_s": 158.9,
+  "cues": 15,
+  "scenes": 7,
+  "say_words": 352,
+  "words_per_min": 132.9,
+  "captures": 45,
+  "captures_with_issue": 18,
+  "issues": {
+   "subj_in_band": 12,
+   "subj_cut": 6,
+   "focus_offcenter": 7,
+   "focus_small": 5,
+   "toomanytext": 1,
+   "cut": 1,
+   "focus_hidden": 4
+  },
+  "frozen_windows_gt2_5s": [],
+  "avg_text_blocks": 1.36,
+  "avg_onscreen_words": 2.29,
+  "avg_empty": 0.073,
+  "shot_values_per_scene": {
+   "s1": [
+    0.61,
+    1.07,
+    1.5
+   ],
+   "s2": [
+    0.61,
+    0.91,
+    1.25,
+    1.69,
+    2.4
+   ],
+   "s3": [
+    0.61,
+    0.94,
+    1.3
+   ],
+   "s4": [
+    0.61,
+    0.89,
+    1.25
+   ],
+   "s5": [
+    0.61,
+    0.84,
+    1.25
+   ],
+   "s6": [
+    0.61,
+    0.87,
+    1.25,
+    2.4
+   ],
+   "s7": [
+    0.61,
+    0.85
+   ]
+  },
+  "scenes_lt3_shot_values": [
+   "s7"
+  ],
+  "analyst_acting_scenes": "7/7",
+  "villain_scenes": "6/7",
+  "js_errors": [],
+  "mobile_hscroll": false,
+  "sound_events": 92
+ },
+ "captures": [
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c1_25.jpg",
+   "t": 3.7015000000000002,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.433
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false,
+   "empty": 0.24
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c1_50.jpg",
+   "t": 6.803,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 799,
+    "cy": 400,
+    "area": 0.432
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.24
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c1_75.jpg",
+   "t": 9.9045,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1364,
+    "cy": 92,
+    "area": 0.013
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1364,
+      92
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.013
+    }
+   ],
+   "moving": false,
+   "empty": 0.111
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c2_25.jpg",
+   "t": 15.148,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.436
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c2_50.jpg",
+   "t": 17.29,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.436
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c2_75.jpg",
+   "t": 19.432,
+   "ntext": 4,
+   "words": 6,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.436
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "03:07 | Tactique | methodName | condition qui alerte"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c3_25.jpg",
+   "t": 23.80925,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 559,
+    "cy": 546,
+    "area": 0.073
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.0
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c3_50.jpg",
+   "t": 26.0445,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 603,
+    "cy": 520,
+    "area": 0.049
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c3_75.jpg",
+   "t": 28.279749999999996,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 312,
+    "cy": 552,
+    "area": 0.032
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.0
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c4_25.jpg",
+   "t": 33.1885,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 798,
+    "cy": 399,
+    "area": 0.103
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Persistance · élévation"
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c4_50.jpg",
+   "t": 35.861999999999995,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 708,
+    "cy": 437,
+    "area": 0.057
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.031
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c4_75.jpg",
+   "t": 38.5355,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 708,
+    "cy": 437,
+    "area": 0.057
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.031
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c5_25.jpg",
+   "t": 43.17725,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 773,
+    "cy": 564,
+    "area": 0.022
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.113
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c5_50.jpg",
+   "t": 45.145500000000006,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 800,
+    "cy": 538,
+    "area": 0.045
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.106
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c5_75.jpg",
+   "t": 47.11375,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 206,
+    "cy": 557,
+    "area": 0.048
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.035
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c6_25.jpg",
+   "t": 51.45375000000001,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 600,
+    "cy": 399,
+    "area": 0.023
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.023
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:robot"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:robot"
+    }
+   ],
+   "moving": false,
+   "empty": 0.146
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c6_50.jpg",
+   "t": 53.82550000000001,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 798,
+    "cy": 399,
+    "area": 0.038
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:robot"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:robot"
+    }
+   ],
+   "moving": false,
+   "empty": 0.146
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c6_75.jpg",
+   "t": 56.19725000000001,
+   "ntext": 3,
+   "words": 6,
+   "focus": {
+    "cx": 542,
+    "cy": 441,
+    "area": 0.043
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.043
+    }
+   ],
+   "moving": false,
+   "empty": 0.056
+  },
+  {
+   "cue": "c7",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c7_25.jpg",
+   "t": 60.60700000000001,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 547,
+    "cy": 500,
+    "area": 0.034
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.054
+  },
+  {
+   "cue": "c7",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c7_50.jpg",
+   "t": 62.64500000000002,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 658,
+    "cy": 522,
+    "area": 0.056
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.052
+  },
+  {
+   "cue": "c7",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c7_75.jpg",
+   "t": 64.68300000000002,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 192,
+    "cy": 551,
+    "area": 0.036
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.0
+  },
+  {
+   "cue": "c8",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c8_25.jpg",
+   "t": 69.78100000000002,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 787,
+    "cy": 400,
+    "area": 0.034
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.118
+  },
+  {
+   "cue": "c8",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c8_50.jpg",
+   "t": 72.84100000000002,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 659,
+    "cy": 439,
+    "area": 0.057
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.03
+  },
+  {
+   "cue": "c8",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c8_75.jpg",
+   "t": 75.90100000000002,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 659,
+    "cy": 439,
+    "area": 0.057
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.03
+  },
+  {
+   "cue": "c9",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c9_25.jpg",
+   "t": 81.04525000000002,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 876,
+    "cy": 150,
+    "area": 0.102
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.003
+  },
+  {
+   "cue": "c9",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c9_50.jpg",
+   "t": 83.12950000000002,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 800,
+    "cy": 187,
+    "area": 0.08
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    }
+   ],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c9",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c9_75.jpg",
+   "t": 85.21375000000003,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 615,
+    "cy": 222,
+    "area": 0.061
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.007
+  },
+  {
+   "cue": "c10",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c10_25.jpg",
+   "t": 90.48000000000003,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.033
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.132
+  },
+  {
+   "cue": "c10",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c10_50.jpg",
+   "t": 93.66200000000003,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 798,
+    "cy": 399,
+    "area": 0.057
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.014
+  },
+  {
+   "cue": "c10",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c10_75.jpg",
+   "t": 96.84400000000004,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 707,
+    "cy": 442,
+    "area": 0.059
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.043
+  },
+  {
+   "cue": "c11",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c11_25.jpg",
+   "t": 101.92700000000004,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 547,
+    "cy": 532,
+    "area": 0.038
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.062
+  },
+  {
+   "cue": "c11",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c11_50.jpg",
+   "t": 103.82800000000003,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 685,
+    "cy": 546,
+    "area": 0.04
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.132
+  },
+  {
+   "cue": "c11",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c11_75.jpg",
+   "t": 105.72900000000004,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 663,
+    "cy": 546,
+    "area": 0.04
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.106
+  },
+  {
+   "cue": "c12",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c12_25.jpg",
+   "t": 111.11625000000004,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 798,
+    "cy": 399,
+    "area": 0.079
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c12",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c12_50.jpg",
+   "t": 114.60250000000003,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 798,
+    "cy": 399,
+    "area": 0.079
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.003
+  },
+  {
+   "cue": "c12",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c12_75.jpg",
+   "t": 118.08875000000003,
+   "ntext": 3,
+   "words": 6,
+   "focus": {
+    "cx": 793,
+    "cy": 439,
+    "area": 0.056
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.03
+  },
+  {
+   "cue": "c13",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c13_25.jpg",
+   "t": 123.98725000000003,
+   "ntext": 2,
+   "words": 5,
+   "focus": {
+    "cx": 924,
+    "cy": 482,
+    "area": 0.076
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    }
+   ],
+   "moving": true,
+   "empty": 0.0
+  },
+  {
+   "cue": "c13",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c13_50.jpg",
+   "t": 126.39950000000003,
+   "ntext": 2,
+   "words": 5,
+   "focus": {
+    "cx": 845,
+    "cy": 417,
+    "area": 0.055
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    }
+   ],
+   "moving": true,
+   "empty": 0.03
+  },
+  {
+   "cue": "c13",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c13_75.jpg",
+   "t": 128.81175000000002,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 798,
+    "cy": 399,
+    "area": 0.046
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.08
+  },
+  {
+   "cue": "c14",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c14_25.jpg",
+   "t": 133.87475,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": -323,
+    "cy": 365,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -323,
+      365
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false,
+   "empty": 0.271
+  },
+  {
+   "cue": "c14",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c14_50.jpg",
+   "t": 136.52550000000002,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": -767,
+    "cy": 538,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -767,
+      538
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false,
+   "empty": 0.184
+  },
+  {
+   "cue": "c14",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c14_75.jpg",
+   "t": 139.17625,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 190,
+    "cy": 400,
+    "area": 0.044
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      190,
+      400
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false,
+   "empty": 0.163
+  },
+  {
+   "cue": "c15",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c15_25.jpg",
+   "t": 145.59199999999998,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1423,
+    "cy": 400,
+    "area": 0.046
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1423,
+      400
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false,
+   "empty": 0.16
+  },
+  {
+   "cue": "c15",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c15_50.jpg",
+   "t": 149.357,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1423,
+    "cy": 400,
+    "area": 0.046
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1423,
+      400
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false,
+   "empty": 0.16
+  },
+  {
+   "cue": "c15",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c15_75.jpg",
+   "t": 153.12199999999999,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1423,
+    "cy": 400,
+    "area": 0.046
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1423,
+      400
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false,
+   "empty": 0.16
+  }
+ ]
+}
