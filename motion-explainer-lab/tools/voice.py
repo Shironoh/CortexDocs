@@ -28,7 +28,7 @@ def words(s):
     return [w for w in s.replace("|", " ").split() if re.search(r"[^\W_]", w) or re.search(r"\d", w)]
 
 def norm(s):
-    s = unicodedata.normalize("NFD", s.lower())
+    s = unicodedata.normalize("NFD", s.lower().replace("œ", "oe").replace("æ", "ae"))
     return "".join(c for c in s if unicodedata.category(c) != "Mn" and (c.isalnum()))
 
 # ---------- visemes (mouth shapes) from IPA phonemes ----------
@@ -274,6 +274,7 @@ def cmp_tokens(s):
         from num2words import num2words
     except ImportError: num2words = None
     s = re.sub(r"[’'\-]", " ", s.lower())
+    s = re.sub(r"(\d)[\s.,\u202f\u00a0](?=\d{3}\b)", r"\1", s)  # "300 000" is one number
     if num2words:
         s = re.sub(r"\b(\d+)(?:e|ème|eme)\b", lambda m: num2words(int(m.group(1)), lang="fr", to="ordinal"), s)
         s = re.sub(r"\d+", lambda m: num2words(int(m.group(0)), lang="fr"), s)

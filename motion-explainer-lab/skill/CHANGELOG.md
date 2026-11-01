@@ -2,7 +2,7 @@
 
 Chaque entrée : la règle, l'observation qui l'a provoquée (G3), son étiquette (S lacune, C contradiction,
 T outillage, G6 exemples). Le détail des tests de transfert (G2) est dans `iterations/vN/REVIEW.md`.
-Taille : v0 196 lignes → v5 208 lignes (+6 %), sous le plafond G4. `tools/overfit_lint.py` : aucun terme du
+Taille : v0 196 lignes → v5 208 lignes (+6 %) → v7 202 lignes, sous le plafond G4. `tools/overfit_lint.py` : aucun terme du
 sujet de test ajouté entre v0 et v5.
 
 ## v1 (après la vidéo v1)
@@ -60,6 +60,28 @@ sujet de test ajouté entre v0 et v5.
 - **S** Icônes pour les concepts, vrais artefacts pour les artefacts ; artefact long déroulé ligne par ligne (3 lisibles).
 - **S** Test du praticien dans la relecture pédagogique.
 - **Protocole** : critère F8 « profondeur métier » ; le retour humain prime sur l'auto-notation (v5 auto-notée 3,71 en fond, jugée superficielle).
+
+## v7 (demande de l'utilisateur : voix, recherche, outillage générique, sujets variés)
+Itération déclenchée par la demande, pas par une vidéo : les règles suivantes sont des exigences de l'utilisateur (S),
+vérifiées ensuite sur deux sujets nouveaux (`iterations/v7/REVIEW.md`). Skill 212 → 202 lignes (le squelette de code du
+moteur est sorti vers `reference/TOOLKIT.md`). `overfit_lint.py` (étendu aux nouveaux sujets et aux témoins) : G1 OK.
+- **S** Section « 0 bis. Rechercher » : sources primaires d'abord, produire l'artefact soi-même, recouper, dater, fiche sources,
+  faits non confirmés hors narration. *Obs.* : v1-v6 n'avaient qu'une ligne « faire des recherches web » ; `factcheck.py` a
+  trouvé 29 nombres affichés sans source dans le premier jet d'un épisode v7.
+- **S** Audience sans métier lié au sujet : « savoir faire » = un raisonnement réutilisable. *Obs.* : la règle des 3 actions ne
+  disait rien d'un public grand public (sujet témoin H1 déjà signalé « pas d'action métier »).
+- **S** La voix fixe le temps (durée réelle + respiration), ancres sur les mots prononcés ; budget de mots recalibré
+  (2,4 mots/s, 0,6 s par cue). *Obs.* : modèle 2,6 mots/s contre 2,3-2,5 réels avec Piper ; dépassements espeak accélérés.
+- **S** Termes étrangers dits par leur fonction ou passés au lexique, contrôle d'écoute Whisper. *Obs.* : « Create Service Account Key »
+  entendu « crisier de service à compte… » (WER 48 % sur la partie).
+- **S** Personnages qui parlent (`who`), une voix par personnage, bouches sur les visèmes. *Obs.* : demande utilisateur
+  (« personnages plus vivants, bouches synchronisées »).
+- **S** Son : musique originale générée, qui suit la structure et se tait sur les devinez ; bande son embarquée dans le lecteur,
+  l'audio devient l'horloge. *Obs.* : demande utilisateur ; la nappe à deux sinus de v1-v6 n'était pas une musique.
+- **T** Outillage générique documenté (`toolkit/`, `reference/TOOLKIT.md`) : kit de scènes indépendant du sujet (le kit v6 portait
+  des objets propres au sujet de test : cartes d'événements, salle d'attaque), `voice.py`, `music.py`, `factcheck.py`,
+  `package_skill.py`. Contrôle des blocs de texte : les graduations d'un graphique et les lignes d'un même artefact comptent
+  pour un bloc (**C** : la règle « 3 textes max » contredisait « vrais artefacts tels quels »).
 
 ## Rejeté ou laissé hors du skill (X : spécifique au sujet)
 Prononciations (« Set I A M Policy », « ci déployeur », « sim »), choix d'un compte Gmail fictif, la plage

@@ -35,6 +35,37 @@ series = "".join(f'''
   <video controls preload="metadata" playsinline src="{e}.mp4"></video><p>{d}</p>
   <a class="open" href="{e}.html" target="_blank" rel="noopener">Ouvrir le lecteur interactif (requêtes complètes en pause)</a></article>''' for e, t, d in EPS)
 
+V7 = [  # (version dir, gallery slug, subject, audience, nature, description)
+    ("v7-c14", "v7-c14", "L'horloge d'Ötzi (carbone 14)", "grand public adulte", "sciences : mécanisme, chiffres datés",
+     "Rayons cosmiques → carbone 14 → sablier qui se vide à la mort ; une vraie ligne du rapport de labo (ETH-8342, 4560 ± 65 BP), BP = avant 1950, calibration en intervalles avec leur probabilité, limite de 50 000 ans."),
+    ("v7-pgexplain", "v7-pgexplain", "Lire un EXPLAIN ANALYZE (PostgreSQL 18)", "développeurs back-end, praticiens", "technique : artefacts réels",
+     "Plans réels générés sur PostgreSQL 18.6 : cost vs actual time, rows prévu vs réel, lecture de l'arbre, loops, Rows Removed by Filter → index (48 ms → 0,16 ms), statistiques périmées → ANALYZE (1 077 ms → 176 ms), BEGIN/ROLLBACK."),
+    ("v7-reg-gcp-ep2", "v7-reg-gcp-ep2", "Non-régression : série GCP, épisode 2", "praticien DFIR", "même épisode que v6, nouvelle chaîne voix/son",
+     "Le script et les scènes de v6-ep2, inchangés, passés dans le nouveau pipeline : voix Piper calée au mot, musique générée, bande son dans le lecteur."),
+]
+for vd, slug, *_ in V7:
+    src_ = (LAB / f"versions/{vd}/index.html").read_text(encoding="utf-8")
+    (G / f"{slug}.html").write_text('<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}</style></head><body>' + src_ + '</body></html>', encoding="utf-8")
+def qa_v7(vd, it):
+    try: return json.load(open(LAB / f"iterations/v7/{it}/qa.json"))["summary"]
+    except Exception: return None
+V7QA = {"v7-c14": qa_v7("v7-c14", "c14"), "v7-pgexplain": qa_v7("v7-pgexplain", "pgexplain"), "v7-reg-gcp-ep2": qa_v7("v7-reg-gcp-ep2", "reg-gcp-ep2")}
+V7SC = json.load(open(LAB / "iterations/v7/scores.json")) if (LAB / "iterations/v7/scores.json").exists() else {}
+def v7card(vd, slug, title, aud, nature, desc):
+    q = V7QA.get(vd); sc = V7SC.get(vd, {})
+    nums = f"fond {sc['fond']:.2f} · forme {sc['forme']:.2f}" if sc else ""
+    stats = (f"{int(q['duration_s']//60)}:{int(q['duration_s']%60):02d} · {q['words_per_min']:.0f} mots/min · captures avec alerte {q['captures_with_issue']}/{q['captures']} · fenêtres figées {len(q['frozen_windows_gt2_5s'])}") if q else ""
+    return f"""
+<article class="ver"><div class="vh"><span class="tag">{slug.replace('v7-', '')}</span><span class="by">{html.escape(title)}</span><span class="nums">{nums}</span></div>
+  <video controls preload="metadata" playsinline src="{slug}.mp4"></video>
+  <p class="aud"><b>Audience</b> : {aud} · <b>Nature</b> : {nature}</p><p>{desc}</p><p class="qa">{stats}</p>
+  <a class="open" href="{slug}.html" target="_blank" rel="noopener">Ouvrir le lecteur interactif (bande son intégrée, hotspots en pause, quiz)</a></article>"""
+v7cards = "".join(v7card(*x) for x in V7)
+VOICES = [("siwis-ls1.08-pause0.35", "siwis réglée (choix par défaut)"), ("siwis-medium", "siwis medium"), ("tom-medium", "tom medium (voix de l'antagoniste)"),
+          ("upmc-jessica", "upmc jessica"), ("upmc-pierre", "upmc pierre"), ("gilles-low", "gilles low"), ("espeak-reference", "espeak mbrola (ancienne voix)")]
+voices = "".join(f'<figure class="snd"><figcaption>{lab}</figcaption><audio controls preload="none" src="voice-{f}.mp3"></audio></figure>' for f, lab in VOICES)
+musics = "".join(f'<figure class="snd"><figcaption>ambiance « {m} »</figcaption><audio controls preload="none" src="music-{m}.mp3"></audio></figure>' for m in ("curious", "wonder", "tense", "warm"))
+
 def row(label, fn, best=None):
     cells = "".join(f"<td>{fn(cmp[v])}</td>" for v in VERS)
     return f"<tr><th scope='row'>{label}</th>{cells}</tr>"
@@ -100,21 +131,37 @@ summary {{ cursor: pointer; padding: 12px 14px; font-weight: 700; }}
 pre {{ margin: 0; max-height: 520px; overflow: auto; background: var(--ink); border-radius: 10px; padding: 12px; font: 12px/1.5 var(--f-mono); white-space: pre-wrap; color: var(--text); }}
 button {{ justify-self: start; font: 700 14px var(--f-disp); background: var(--amber); color: var(--ink); border: 0; border-radius: 10px; padding: 8px 14px; cursor: pointer; }}
 .note {{ font-size: 13px; }}
+.aud {{ font-size: 13px; }} .qa {{ font: 12px/1.5 var(--f-mono); color: var(--cyan); }}
+.sounds {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }}
+.snd {{ margin: 0; background: var(--night); border: 1px solid var(--line); border-radius: 12px; padding: 10px; display: grid; gap: 6px; min-width: 0; }}
+.snd figcaption {{ font-size: 13px; color: var(--text); font-weight: 600; }} .snd audio {{ width: 100%; }}
 </style>
 <main>
   <header>
     <div class="eyebrow">Skill motion-explainer · boucle d'amélioration continue</div>
-    <h1>Six itérations, un skill réécrit, une série DFIR</h1>
-    <p>Sujet de test : <b>les journaux Admin Activity de Google Cloud, côté détection et réponse</b>, pour quelqu'un qui ne connaît pas GCP, en moins de 3 minutes.
-    Chaque vidéo est générée avec la version précédente du skill, mesurée, notée, puis le skill est corrigé par des règles valables pour n'importe quel sujet.</p>
+    <h1>Un skill, plusieurs sujets, chaque version gardée</h1>
+    <p>Le but est le <b>skill</b> : chercher des faits sûrs sur n'importe quel sujet, puis réaliser une vidéo explicative flat vector.
+    Les vidéos sont des bancs d'essai. Itérations 1 à 6 : un seul sujet (journaux d'audit GCP). Depuis v7 : chaque version du skill est testée sur des sujets
+    de domaines, d'audiences et de natures différents, la série GCP servant de non-régression.</p>
   </header>
   <section>
-    <h2>v6 · La série DFIR (après ton retour)</h2>
+    <h2>v7 · Voix neuronale, recherche sourcée, outillage générique</h2>
+    <p class="note" style="margin-bottom:12px">Skill v7 : méthode de recherche (sources primaires, artefacts produits soi-même, recoupement, faits datés, fiche sources contrôlée par script),
+    voix Piper calée au mot près, bouches synchronisées, musique générée, bande son dans le lecteur, kit de scènes indépendant du sujet. <b>En attente de ton avis</b> avant la v8.</p>
+    <div class="vers">{v7cards}</div>
+  </section>
+  <section>
+    <h2>Voix et musiques testées</h2>
+    <p class="note" style="margin-bottom:12px">Même texte de 43 mots pour chaque voix française Piper (huggingface.co/rhasspy/piper-voices). La musique est générée par le labo (pas de licence en jeu) ; quatre ambiances.</p>
+    <div class="sounds">{voices}{musics}</div>
+  </section>
+  <section>
+    <h2>v6 · La série DFIR (sujet GCP, après ton retour)</h2>
     <p class="note" style="margin-bottom:12px">Ton retour : « superficiel et abstrait ». Le skill v6 cadre l'audience sur deux axes (métier détection/réponse, outil GCP), part d'un inventaire des artefacts à reconnaître et montre les vrais noms de méthodes et de champs à l'écran. Résultat : 3 épisodes, 15 événements et champs réels, chacun avec sa condition d'alerte.</p>
     <div class="vers">{series}</div>
   </section>
   <section>
-    <h2>Progression (itérations 1 à 5)</h2>
+    <h2>v1 à v5 · Progression sur le sujet GCP</h2>
     <div class="tw"><table>
       <thead><tr><th></th>{''.join(f'<th>{v}</th>' for v in VERS)}</tr></thead>
       <tbody>{score_rows}{rows}</tbody>
@@ -122,7 +169,7 @@ button {{ justify-self: start; font: 700 14px var(--f-disp); background: var(--a
     <p class="note" style="margin-top:8px">Mesures automatiques recalculées avec les mêmes outils pour les cinq versions (captures à 25, 50 et 75 % de chaque phrase). Notes /4 : grille de 14 critères, chaque note cite sa preuve dans <code>iterations/vN/REVIEW.md</code>.</p>
   </section>
   <section>
-    <h2>Les versions</h2>
+    <h2>v1 à v5 · Les vidéos</h2>
     <div class="vers">{cards}</div>
   </section>
   <section>
@@ -141,11 +188,11 @@ button {{ justify-self: start; font: 700 14px var(--f-disp); background: var(--a
   </section>
   <section>
     <details>
-      <summary>Skill final (v6), à copier</summary>
+      <summary>Skill courant (v7), à copier</summary>
       <div class="sk"><button type="button" id="cp">Copier le skill</button><pre id="skill">{skill}</pre></div>
     </details>
   </section>
-  <p class="note">Limites : voix de synthèse espeak-ng/mbrola dans les MP4 (dans les lecteurs interactifs, le bouton « Voix » utilise la voix du navigateur) ; les notes de fond sont une auto-évaluation appuyée sur des preuves.</p>
+  <p class="note">Limites : v1 à v6 ont une voix espeak-ng/mbrola ; depuis v7 voix Piper (neuronale, hors ligne). Les notes sont une auto-évaluation appuyée sur des preuves ; ton avis prime.</p>
 </main>
 <script>
 document.getElementById('cp').addEventListener('click', async e => {{

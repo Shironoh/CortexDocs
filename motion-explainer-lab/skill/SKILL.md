@@ -5,14 +5,15 @@ description: "Use when the user wants to understand a topic through an animated 
 
 # Motion Explainer
 
-Objectif : transformer un sujet complexe en une courte "vidéo" animée de 2 à 3 minutes, style motion design flat vector, jouable dans un artifact HTML (play, pause, scène par scène) et exportable en MP4 avec bande son. La compréhension prime, l'animation sert l'explication.
+Objectif : transformer un sujet complexe en une courte "vidéo" animée de 2 à 3 minutes, style motion design flat vector, jouable dans un artifact HTML (play, pause, scène par scène) et exportable en MP4 avec voix neuronale, musique et bruitages. La compréhension prime, l'animation sert l'explication. Deux métiers : **chercher** (des faits sûrs, datés, sourcés) puis **réaliser**.
+Outillage réutilisable (moteur, kit de scènes, voix, son, QA, export) : dossier `toolkit/` à côté de ce fichier, mode d'emploi dans `reference/TOOLKIT.md`.
 - **On montre, on n'écrit pas** : si une scène ressemble à une diapositive, elle est ratée.
 - **On filme, on ne pose pas** : si chaque plan est un plan large fixe, la scène est ratée.
 - **On explique, on ne décrit pas** : si le spectateur sait quoi mais pas pourquoi, ni quoi en faire, la scène est ratée.
 
 ## 0. Cadrer
 
-- **Niveau d'audience, sur deux axes** : le métier (ce que la personne fait : débutant, praticien, expert) et l'outil ou le domaine du sujet (le connaît-elle ?). Les deux se règlent séparément : un praticien qui découvre l'outil garde la profondeur de son métier, le contexte de l'outil se limite à ce qu'il faut pour lire les artefacts. Ne demander que si c'est vraiment ambigu ; si la demande ne dit pas ce que le spectateur doit savoir faire après, le demander.
+- **Niveau d'audience, sur deux axes** : le métier (ce que la personne fait : débutant, praticien, expert) et l'outil ou le domaine du sujet (le connaît-elle ?). Les deux se règlent séparément : un praticien qui découvre l'outil garde la profondeur de son métier, le contexte de l'outil se limite à ce qu'il faut pour lire les artefacts. Ne demander que si c'est vraiment ambigu ; si la demande ne dit pas ce que le spectateur doit savoir faire après, le demander. Pour un public sans métier lié au sujet, « savoir faire » = un raisonnement réutilisable (lire une valeur qu'il croisera, reconnaître un cas où la règle ne s'applique pas, démonter une idée reçue).
 - **Inventaire de valeur** (avant le script) : la liste des artefacts concrets que le spectateur doit reconnaître après la vidéo (noms exacts, champs, valeurs, seuils, commandes), chacun avec ce qu'on en fait. Pour un praticien, c'est le cœur de l'épisode : chaque artefact apparaît à l'écran tel qu'il est en vrai et la narration dit à quoi il sert. Si l'inventaire dépasse le budget d'un épisode, découper en épisodes par famille plutôt que de rester en surface.
 - **Fiche pertinence** (écrite avant le script, non publiée) :
   - ce que l'audience sait déjà : à réduire à une ligne de rappel, 15 % du temps au maximum
@@ -22,10 +23,16 @@ Objectif : transformer un sujet complexe en une courte "vidéo" animée de 2 à 
 - **Question centrale** : une seule, écrite en une phrase.
 - **Budget d'idées** : 3 à 5 idées clés maximum. Au-delà, découper en épisodes : produire l'épisode 1 et lister les suivants dans la réponse finale.
 - Repérer le prérequis que le spectateur risque de ne pas avoir et prévoir une scène pour lui (débutant) ou une phrase (praticien).
-- Si le sujet touche à l'état actuel du monde (versions, produits, valeurs par défaut, rétentions, chiffres, CVE), faire des recherches web et vérifier chaque fait.
-- **Faits non confirmés** : une affirmation qu'aucune source consultée ne confirme ne va jamais dans la narration ni à l'écran. Elle peut apparaître seulement dans un hotspot, marquée "à vérifier", et elle est signalée dans la réponse finale.
 - Si la demande est ambiguë sur le style (ex : "stop motion" peut vouloir dire "refais l'animation" ou un vrai rendu image par image), dire en une ligne l'interprétation retenue.
 
+## 0 bis. Rechercher (avant la fiche, pour tout sujet)
+
+1. **Sources primaires d'abord** : le texte qui fait autorité sur le fait (spécification ou documentation officielle de la version courante, article de recherche original, texte de loi, publication de l'organisme qui produit le chiffre, données brutes). Les sources secondaires (presse, blogs, encyclopédies, réponses de recherche résumées) servent à trouver les primaires, pas à citer. Lire la source elle-même (page, PDF) plutôt que son résumé.
+2. **Produire l'artefact quand c'est possible** : exécuter la commande, générer la sortie, calculer la valeur dans l'environnement plutôt que la reconstituer. L'artefact montré est alors vrai par construction ; noter comment il a été produit (version, données, graine).
+3. **Recouper** : chaque fait de la narration a une source primaire ou deux sources indépendantes ; un chiffre clé, les deux si possible. Sources en désaccord : montrer la plage ou la condition, ne pas choisir en silence.
+4. **Dater** : un fait qui peut changer (version, valeur par défaut, prix, taux, record, état de la science) porte sa date ou sa version dans la narration (« depuis la version 18 », « calibration publiée en 1994 ») ; vérifier qu'il est encore vrai à la date du jour.
+5. **Fiche sources** (non publiée) : une ligne par fait, avec les valeurs qu'il contient, la citation exacte de la source, l'URL, la date de consultation et le niveau (primaire, recoupé, à vérifier). Tout nombre affiché ou dit doit y figurer (`factcheck.py` le contrôle).
+6. **Faits non confirmés** : jamais dans la narration ni à l'écran. Seulement dans un hotspot marqué "à vérifier", et signalés dans la réponse finale.
 ## 1. Script pédagogique
 
 Structure, 6 à 8 scènes :
@@ -63,10 +70,11 @@ Règles générales :
 - **Fil rouge obligatoire** : le cas du hook réapparaît dans au moins la moitié des scènes et se conclut à la fin. Dans une série, chaque épisode résout une partie et ouvre la suivante.
 - **Une seule métaphore système** déclinée partout. Si un concept ne rentre pas dedans, l'adapter plutôt qu'en introduire une seconde.
 - Narration en français, termes techniques en anglais non francisés.
-- Pour chaque cue : `sub` (sous-titre) et `say` (texte prononcé, phonétique si besoin : "x²" se dit "x au carré", "48 Mo" se dit "48 méga-octets").
+- Pour chaque cue : `sub` (sous-titre, chiffres en chiffres) et `say` (texte prononcé, nombres en toutes lettres : "x²" se dit "x au carré", "48 Mo" se dit "quarante-huit méga-octets"). Un terme étranger est dit par sa fonction en français quand c'est possible, son nom exact restant à l'écran ; sinon il passe par le lexique de prononciation (§8).
+- **Personnages qui parlent** : un cue peut être dit par un personnage (`who`), avec sa propre voix et sa bouche synchronisée. Bon usage : l'antagoniste énonce l'idée reçue, le protagoniste pose la question du spectateur ; une réplique courte (≤ 12 mots), la narration garde l'explication.
 - **Pas de doublon** : le sous-titre ne répète jamais mot pour mot un texte affiché. À l'écran, un mot-clé ; en sous-titre, la phrase.
-- Durée cible 2 à 3 minutes (une limite donnée par l'utilisateur ne se dépasse jamais), 25 cues maximum. Durée d'un cue : `max(3.6, mots/2.6 + 1.0)` secondes, plus 1,5 s pour un moment "devinez". Ancre d'un mot : `debutCue + indexMot / 2.6`. Un mot = un token qui contient une lettre ou un chiffre (un « : » ou « ? » isolé n'en est pas un).
-- **Budget avant d'écrire** : mots disponibles ≈ (durée cible − 1,0 × cues − 1,5 × devinez − 2) × 2,6. Compter dès le premier jet. Si ça déborde, **supprimer une idée ou une scène entière** plutôt que de comprimer toutes les phrases : une scène de mécanisme garde au moins 2 cues (une seule ne laisse de place ni aux trois plans ni au pourquoi).
+- Durée cible 2 à 3 minutes (une limite donnée par l'utilisateur ne se dépasse jamais), 25 cues maximum. **La voix fixe le temps** : chaque cue dure sa narration réelle plus une respiration (0,45 s, davantage après une idée clé : `breath`), plus 1,5 s pour un moment "devinez" ; chaque ancre `T(cue, mot)` tombe sur le mot réellement prononcé. Sans voix de synthèse, le moteur retombe sur 2,6 mots/s. Un mot = un token qui contient une lettre ou un chiffre.
+- **Budget avant d'écrire** : mots disponibles ≈ (durée cible − 0,6 × cues − 1,5 × devinez − 2) × 2,4 (débit de la voix par défaut). Compter dès le premier jet. Si ça déborde, **supprimer une idée ou une scène entière** plutôt que de comprimer toutes les phrases : une scène de mécanisme garde au moins 2 cues (une seule ne laisse de place ni aux trois plans ni au pourquoi).
 
 ## 2. Storyboard : un monde, une caméra, des beats
 
@@ -100,64 +108,51 @@ Règles générales :
 - **Typo identique dans l'artifact et le MP4** : avant de choisir, lancer `fc-list` dans l'environnement de rendu. Par défaut Poppins (titres et texte, sur Google Fonts) et JetBrains Mono avec repli `DejaVu Sans Mono` pour le code. Si une police manque localement, l'installer avant tout rendu (paquet npm `@fontsource/<nom>`, fichiers woff dans `~/.local/share/fonts`, puis `fc-cache -f`).
 - **Lisibilité mobile** (viewBox 1600x900, affichée vers 360 px de large) : texte 44 unités minimum à l'écran après zoom caméra, 36 pour du code ; 3 éléments textuels simultanés maximum ; 12 mots par carton.
 - **Zones de sécurité** : la bande sous-titres (y > 760) ne contient rien d'important (ni texte, ni personnage, ni objet du beat) : poser le sol des personnages au-dessus de y = 700 à l'écran. Marges de 60 unités sur les côtés et en haut.
+- **Son** : une voix posée (≈ 140-160 mots/min), une musique douce qui suit la structure (plus clairsemée au hook, plus pleine dans le mécanisme, cadence finale) et se tait pendant les silences "devinez", des bruitages sémantiques fixes (§8). La musique ne couvre jamais la voix.
 - Animation : easing systématique (`easeOutCubic`, `easeOutBack` pour les apparitions), stagger 0.05 à 0.15 s, squash and stretch léger, un seul point d'attention, 1 à 2 s de respiration après chaque idée clé.
 
-## 4. Moteur d'animation : maison, sans librairie
+## 4. Moteur et kit de scènes (`toolkit/`)
 
-Pas de CDN pour l'animation. Tout est une **fonction pure du temps** : seek, test et export marchent sans effort.
-
-Squelette de référence (à adapter) :
-
-```js
-const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)), lerp=(a,b,p)=>a+(b-a)*p;
-const P=(t,a,d)=>d<=0?(t>=a?1:0):clamp((t-a)/d);
-const E={oc:p=>1-(1-p)**3, ic:p=>p**3, ioc:p=>p<.5?4*p**3:1-(-2*p+2)**3/2,
-  ob:p=>1+2.6*(p-1)**3+1.6*(p-1)**2};
-class Actor{ // el = <g> dessiné autour de (0,0)
-  constructor(el,x,y,s,o){Object.assign(this,{el,bx:x,by:y,bs:s,o:o||{}});}
-  update(t){const o=this.o;let x=this.bx,y=this.by,s=this.bs,r=0,a=1;
-    if(o.pop!=null){const p=P(t,o.pop,.6);s*=p<=0?.4:.4+.6*E.ob(p);a*=Math.min(1,p*3);}
-    for(const m of o.moves||[]){const p=(m[3]||E.ioc)(P(t,m[0],m[1]));
-      if('x'in m[2])x=lerp(x,m[2].x,p);if('y'in m[2])y=lerp(y,m[2].y,p);if('s'in m[2])s=lerp(s,m[2].s,p);}
-    if(o.out!=null)a*=1-P(t,o.out,.4);
-    const st={x,y,s,r,a};if(o.fn)o.fn(st,t);   // hook pour poses, regards, idle
-    this.el.setAttribute('opacity',st.a);this.el.setAttribute('visibility',st.a>0?'visible':'hidden');
-    this.el.setAttribute('transform',`translate(${st.x} ${st.y}) rotate(${st.r}) scale(${st.s})`);}}
-// Caméra : par scène, une liste de keyframes [t, x, y, zoom] ; la scène N démarre depuis la dernière
-// keyframe de N-1 (trajet). Interpolation ioc sur x,y et log-lerp sur le zoom.
-// Calques : far (parallaxe 0,5), main (1), front (1,3) :
-//   translate(800 450) scale(z) translate(-x*f -y*f)
-// Pendant le trajet, la scène précédente reste affichée dans son état final.
-```
-
-- **Coordonnées relatives** : chaque zone a une origine en constante (`const Z={bureau:[0,0],usine:[1800,0],...}`) et tout ce qui la compose est placé relativement à cette origine, caméra et hotspots compris. Déplacer une zone = changer une seule valeur.
-- Les éléments sont créés une fois ; `render(t)` ne fait que muter des attributs.
-- **Ambiance séparable** : idle, particules, tapis, bobines lisent un drapeau global `AMBIENT`. `render(t,{ambient:false})` les fige, pour les tests.
-- Exposer `window.__mx = { setEp(i), render(t,opts), duration, cues, scenes, events }`, où `events` liste les temps des pops, trajets et impacts (pour la bande son).
+Tout est une **fonction pure du temps** (`render(t)` ne fait que muter des attributs) : seek, tests sans rendu, lecteur et MP4 sortent de la même source. Pas de librairie d'animation ni de CDN. Utiliser l'outillage fourni ; s'il manque, reconstruire le squelette décrit dans `reference/TOOLKIT.md`.
+- **Épisode** = `versions/<id>/episode.js` : `META` (titre, voix, musique), fiche en commentaire, `EP = { zones, scenes, cues, quiz, build(K) }`. `K.T(cue, mot)` donne l'instant d'un mot, `K.A(el, {pop, moves, out, fn})` anime, `K.frame(t, d, cibles, part)` cadre depuis la boîte englobante, `K.char(...)` crée un personnage, `K.focus`, `K.hot`, `K.ev(t, type)` (son).
+- **Kit générique** `sceneKit(K)` : `room` (décor de zone : room, outdoor, lab, void), `world` (fond, trajets, premier plan), `hero`/`foe`, `bubble`, `card` (artefact réel : en-tête, valeur tapée, ligne éclairée), `doc` (artefact long déroulé ligne par ligne, 3 lisibles), `counter`, `bars`, `curve`, `arrow`, `label`, `timeline`, `balance`, `unknown` (incertain en pointillés), `suspense` (« ? » du devinez). Un besoin qui revient d'un sujet à l'autre s'ajoute au kit, jamais un objet propre à un sujet.
+- **Personnages vivants** : respiration, clignements, regard qui suit la cible et saccades au repos, pieds qui marchent, gestes avec anticipation (`point`, `loupe`, `shrug`, `cheer`, `hold`, `type`, `jump`, `nod`, `lean`, `walkcycle`), expressions ; la bouche suit les visèmes de la voix quand le personnage dit le cue (`who`).
+- **Coordonnées relatives** : chaque zone a une origine (`zones: {bureau: [0, 0], ...}`) et tout ce qui la compose est placé relativement à elle, caméra et hotspots compris.
+- **Ambiance séparable** : idle, particules, saccades lisent `AMBIENT` ; `render(t, {ambient:false})` les fige pour les tests.
 - **Pièges connus** :
-  - masquer une scène avec `display="none"`, jamais `visibility` : un enfant en `visibility="visible"` reste affiché sous un parent caché
-  - ne pas stocker les keyframes de caméra dans une propriété écrasée plus tard (ex : `scene.cam` réutilisé pour le groupe SVG)
-  - texte monospace : `white-space: pre`
-  - `getTotalLength()` des tracés : le mesurer à la construction, scène dans le DOM
-  - ne rien appeler qui dépend de l'épisode courant avant qu'il soit initialisé
-  - modifications par remplacement de chaînes : faire échouer tout le lot si une seule chaîne manque, et ne jamais mettre d'entrée vide
+  - masquer une scène avec `display="none"`, jamais `visibility`
+  - un deuxième `K.A()` sur un même élément écrase sa position : chaîner dans `moves`
+  - un attribut `opacity` est écrasé par l'animateur : `fill-opacity` pour un calque translucide
+  - texte monospace : `white-space: pre` ; `getTotalLength()` mesuré à la construction, élément dans le DOM
+  - ancres : `T(cue, mot)` compare le début du mot normalisé (« l'API » → `lapi`) ; un mot absent lève une erreur
+  - modifications par remplacement de chaînes : faire échouer tout le lot si une seule chaîne manque
 
 ## 5. Player
 
 - Une page HTML autonome, SVG inline `viewBox="0 0 1600 900"`, letterbox 16:9 qui tient sur mobile.
-- Contrôles : play/pause, scène précédente/suivante, barre de progression, vitesse (0.75x, 1x, 1.25x), sous-titres on/off, voix on/off, chapitres cliquables, raccourcis (espace, flèches, Échap).
+- Contrôles : play/pause, scène précédente/suivante, barre de progression, vitesse (0.75x, 1x, 1.25x), sous-titres on/off, son on/off, chapitres cliquables, raccourcis (espace, flèches, Échap).
+- **Bande son intégrée** : la page embarque la même bande son que le MP4 (voix, musique, bruitages) et **l'audio est l'horloge** de la lecture (seek, vitesse, pause synchronisés). Sans bande son, repli sur `speechSynthesis` en `fr-FR`, l'horloge attendant la fin de chaque phrase (garde-fou 20 s).
 - **Séries** : un onglet par épisode dans le même artifact, routage `#ep1`, `#ep2`. Ajouter ou refaire un épisode = republier le même fichier pour garder l'URL.
 - Sous-titres en overlay sur desktop, sous la vidéo sur mobile (largeur < 720 px).
-- **La voix pilote la timeline** : chaque cue lance `speechSynthesis` sur `say` en `fr-FR` ; si la phrase n'est pas finie à la fin du cue, l'horloge attend `onend` (garde-fou 20 s). Voix off par défaut, tout en try/catch.
-- **Mode quiz** (bouton, désactivé par défaut) : aux moments "devinez", la lecture se met en pause et propose 2 à 3 réponses ; un clic révèle la bonne avec une phrase d'explication, puis la lecture reprend. Sans le mode quiz, la vidéo se joue normalement.
-- **Hotspots en pause** : 1 ou 2 par scène, en coordonnées monde converties via la caméra, avec une fenêtre de validité (`at`, `until`). Ils portent le détail (JSON, requête complète, table), jamais l'idée principale.
-- Poster : la page s'ouvre sur une frame lisible de la scène 1, gros bouton play avec la durée.
+- **Mode quiz** (désactivé par défaut) : aux moments "devinez", pause et 2 à 3 réponses ; un clic révèle la bonne avec une phrase d'explication.
+- **Hotspots en pause** : 1 ou 2 par scène, avec fenêtre de validité ; ils portent le détail (sortie complète, table, source), jamais l'idée principale.
+- Poster : une frame lisible de la scène 1, gros bouton play avec la durée.
 
-## 6. Build
+## 6. Build (pipeline standard)
 
 1. Charger le skill `artifact-design` avant d'écrire la page.
-2. Écrire la fiche pertinence, le script (gabarit par scène), puis la beat sheet et la liste de plans.
-3. Écrire les origines de zones, le décor (3 calques), le moteur et le player, puis une scène à la fois.
+2. Recherche (§0 bis) → fiche sources ; fiche pertinence ; script (gabarit par scène) ; beat sheet et liste de plans.
+3. Écrire `episode.js` (cues d'abord), puis :
+```bash
+python3 toolkit/tools/voice.py versions/<id> --check   # voix Piper par cue, horodatage des mots, visèmes, écoute Whisper
+python3 toolkit/tools/build.py versions/<id>           # page autonome (timing réel intégré)
+node toolkit/tools/beats.mjs versions/<id>/index.html  # trous de rythme, sans rendu
+node toolkit/tools/qa.mjs versions/<id>/index.html iterations/<it>/<id> && python3 toolkit/tools/analyze.py iterations/<it>/<id>
+node toolkit/tools/export.mjs versions/<id>/index.html versions/<id> 3   # images 1080p24 -> _silent.mp4 + meta.json
+python3 toolkit/tools/audio.py versions/<id>           # voix + musique + bruitages -> soundtrack.mp3 + video.mp4
+python3 toolkit/tools/build.py versions/<id>           # republie la page avec la bande son
+python3 toolkit/tools/factcheck.py versions/<id> research/<sujet>/SOURCES.md
+```
 4. Publier avec l'outil Artifact.
 
 ## 7. Vérification
@@ -170,35 +165,30 @@ class Actor{ // el = <g> dessiné autour de (0,0)
 - le récap contient des actions, pas des résumés
 - test du praticien : un expert du métier se demande « qu'est-ce que je sais faire demain que je ne savais pas ? » ; la réponse cite les artefacts de l'inventaire, sinon l'épisode est trop superficiel
 - écrire les 3 questions que le spectateur doit savoir résoudre après la vidéo, dont « où est-ce que je fais ça ? », et vérifier que la narration (pas seulement un hotspot) y répond
-- chaque fait de la narration est confirmé par une source consultée
+- chaque fait de la narration est dans la fiche sources, avec sa date ou sa version s'il peut changer ; `factcheck.py` ne signale aucun nombre orphelin
 
-**Contrôle de la feuille de beats (sans rendu, avant tout le reste)** : exposer les instants de chaque beat (`__mx.marks`), lister les trous de plus de 2,5 s hors devinez et les cues sous le quota ; corriger avant de rendre une seule image.
+**Voix (avant tout rendu)** : `voice.py --check` fait écouter chaque partie par Whisper sans le script. Une partie à plus de 20 % de mots mal entendus est réécrite (mot plus courant, terme étranger dit par sa fonction ou ajouté au lexique) puis revérifiée. Débit parlé entre 130 et 165 mots/min.
 
-**Contrôles visuels (Playwright)** :
-- Pour chaque cue, rendre et capturer à 25 %, 50 % et 75 % du cue, en 1280 px, puis assembler des planches contact (PIL) et les regarder.
+**Contrôle de la feuille de beats (sans rendu, avant tout le reste)** : `beats.mjs` liste les trous de plus de 2,5 s hors devinez et les cues sous le quota ; corriger avant de rendre une seule image.
+
+**Contrôles visuels (Playwright, `qa.mjs` + `analyze.py`)** :
+- Pour chaque cue, rendre et capturer à 25 %, 50 % et 75 % du cue, en 1280 px, puis assembler des planches contact et les regarder.
 - Contrôles automatiques, une fois par capture :
-  - textes visibles : chevauchement, dépassement du cadre (sauf éléments marqués `data-bleed`), intrusion dans la bande sous-titres, taille à l'écran inférieure à 44 unités
-  - sujet dans le cadre : l'objet du beat courant (marqué `data-focus`) est visible, dans les 70 % centraux, couvre au moins 8 % de la surface (ou 25 % de la hauteur), n'entre pas dans la bande sous-titres et n'est pas masqué par le premier plan ; idem pour chaque personnage visible
-  - durée totale ≤ limite demandée
-  - surface vide : moins de 40 % de pixels proches du fond
-- **Image figée réelle** : rendre toutes les 0,5 s avec `ambient:false` et **sans sous-titres**, comparer les frames ; signaler toute fenêtre de plus de 2,5 s sans changement, hors silences "devinez" déclarés, avec le cue concerné.
-- **Variété de plans** : compter par scène les échelles distinctes (zooms séparés d'un facteur 1,35 au moins) ; moins de 3 = à corriger.
+  - textes visibles : chevauchement, dépassement du cadre (sauf `data-bleed`), intrusion dans la bande sous-titres, taille à l'écran inférieure à 44 unités
+  - sujet dans le cadre : l'objet du beat (`data-focus`) est visible, dans les 70 % centraux, couvre au moins 8 % de la surface (ou 25 % de la hauteur), hors bande sous-titres, non masqué par le premier plan ; idem pour chaque personnage visible
+  - durée totale ≤ limite demandée ; surface vide < 40 % de pixels proches du fond
+- **Image figée réelle** : rendre toutes les 0,5 s sans ambiance ni sous-titres ; signaler toute fenêtre de plus de 2,5 s sans changement, hors silences "devinez".
+- **Variété de plans** : moins de 3 échelles distinctes (facteur 1,35) dans une scène = à corriger.
 - **Personnage devant un texte** : signaler tout texte recouvert à plus de 25 % par un personnage.
-- Une capture en 390 px de large pour la page (pas de scroll horizontal).
-- Une passe de corrections, puis publier.
+- Une capture en 390 px de large pour la page (pas de scroll horizontal). Une passe de corrections, puis publier.
 
-## 8. Export MP4
+## 8. Voix, son, export MP4
 
-Quand l'utilisateur veut un fichier, ou qu'il demande comment télécharger :
-- Injecter une CSS d'export : scène en plein écran 1920x1080, hotspots, quiz, bouton et panneau masqués, sous-titres à 34 px.
-- Rendu à 24 fps : `__mx.render(i/24)` puis capture JPEG (qualité 90) envoyée en pipe à ffmpeg : `ffmpeg -f image2pipe -framerate 24 -c:v mjpeg -i - -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -movflags +faststart video.mp4`. Lancer en arrière-plan ; environ 5 minutes de rendu pour 2:50 de vidéo.
-- **Bande son, toujours** :
-  - bruitages synthétisés hors ligne depuis `__mx.events` : pop = `sine` court (600 à 900 Hz, 80 ms, `afade`), whoosh de trajet = `anoisesrc` filtré en `lowpass` avec fondu (0,6 s), impact ou tampon = `sine` grave 120 Hz, 120 ms ; chaque son placé avec `adelay`, puis `amix`
-  - sons sémantiques, fixes comme le code couleur : révélation d'un devinez = carillon montant, idée reçue démentie = buzzer doux et grave, conséquence = coup sourd, apparition = pop ; chaque événement de `__mx.events` porte son type
-  - une nappe d'ambiance douce (deux `sine` graves légèrement désaccordés, `lowpass`, volume bas) sur toute la durée, coupée pendant les silences "devinez"
-  - voix : si `espeak-ng` ou `piper` manque, tenter l'installation (`apt-get update && apt-get install -y espeak-ng mbrola mbrola-fr4`) avant d'y renoncer ; un WAV par cue depuis `say`, accéléré (`-s`) jusqu'à tenir dans son cue, dépassements listés ; baisser la nappe pendant la parole
-  - `loudnorm` sur le mix, puis multiplexer avec la vidéo (`-c:v copy -c:a aac`)
-- Vérifier durée et pistes avec `ffprobe`, regarder 4 frames extraites avant d'envoyer avec SendUserFile.
+- **Voix (Piper, hors ligne)** : `pip install piper-tts onnx faster-whisper num2words` (num2words avec `--no-deps`) ; voix dans `~/.local/share/piper-voices` depuis `huggingface.co/rhasspy/piper-voices` (`fr/fr_FR/siwis/medium/fr_FR-siwis-medium.onnx` + `.onnx.json`). Défaut : `fr_FR-siwis-medium`, `length_scale 1.08`, pause entre phrases 0,35 s ; voix masculine : `fr_FR-tom-medium`. Les alignements de phonèmes de Piper donnent l'instant exact de chaque mot et les visèmes des bouches. Réglages par épisode dans `META.voice` (`voice`, `ls`, `pause`, `lexicon`, `cast` : une voix par personnage).
+- **Replis, dans l'ordre** : alignement Whisper si le découpage des mots diffère ; répartition proportionnelle sans Whisper ; `espeak-ng` (`mbrola-fr4`) sans Piper ; sans aucune synthèse, le modèle 2,6 mots/s. Une clé d'API vocale (ElevenLabs, Google, Azure) fournie en secret d'environnement peut remplacer Piper : même sortie attendue (un WAV par partie + horodatage des mots). Une voix enregistrée : la découper par cue, aligner avec Whisper, bouches par l'enveloppe (ou `rhubarb -r phonetic`).
+- **Musique** : générée par `music.py` (originale, donc libre de droits) selon `META.music.mood` (`curious`, `wonder`, `tense`, `warm`) ; elle suit les scènes, se tait pendant les devinez, baisse d'environ 12 dB sous la voix. Repli : un fichier CC0 ou CC-BY (`audio.py --music piste.mp3`), crédité dans le pied de page.
+- **Bruitages sémantiques**, fixes comme le code couleur, depuis `__mx.events` : apparition = pop, trajet = whoosh, révélation d'un devinez = carillon montant, idée reçue démentie = buzzer doux et grave (`myth`), conséquence = coup sourd (`impact`), compteur = tic.
+- **Export** : 1920×1080 à 24 fps, rendu image par image (`__mx.render(i/24)`) en parallèle, encodage H.264 ; `loudnorm` (-16 LUFS) sur le mix ; vérifier durée et pistes avec `ffprobe`, regarder 4 frames avant d'envoyer.
 - Sans ffmpeg ni Playwright : le dire et proposer l'enregistrement d'écran (macOS `Cmd+Shift+5`, Windows Outil Capture d'écran).
 
 ## 9. Livraison
@@ -209,4 +199,4 @@ Réponse courte :
 - les 3 actions du récap
 - ce qui a été simplifié, et tout point resté "à vérifier"
 - les épisodes suivants si le sujet a été découpé
-- les sources
+- les sources principales, avec la date de consultation

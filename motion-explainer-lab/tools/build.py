@@ -9,7 +9,7 @@ LAB = pathlib.Path(__file__).resolve().parent.parent
 ENGINE = ("engine.js", "icons.js", "kit.js", "kit_series.js")
 
 def main(ver, embed_audio=True):
-    vdir = LAB / "versions" / ver
+    vdir = pathlib.Path(ver) if pathlib.Path(ver).is_dir() else LAB / "versions" / ver  # a path, or an id under versions/
     src = LAB / "src"
     for f in ENGINE + ("player.js", "style.css", "shell.html"):
         shutil.copy(src / f, vdir / f"_{f}")

@@ -1,0 +1,7 @@
+{
+ "_doc": "Termes propres à chaque sujet de test ou témoin. Une règle du skill ne doit en contenir aucun (garde-fou G1). Ajouter un sujet à chaque nouveau banc d'essai.",
+ "gcp-audit (v1-v6, non-régression)": ["\\bgcp\\b", "google", "\\bcloud\\b", "\\baudit", "\\blogs?\\b", "journa(l|ux)", "\\biam\\b", "bucket", "admin activity", "data access", "bindingdelta", "principalemail", "service account", "\\bsoc\\b", "\\bsiem\\b", "\\bsink", "owner", "methodname"],
+ "c14 (v7+)": ["carbone", "radiocarbone", "\\bc ?14\\b", "ötzi|otzi", "demi-vie", "\\bbp\\b", "cernes?", "intcal", "momie", "fossile", "dinosaure"],
+ "pg-explain (v7+)": ["postgres", "\\bsql\\b", "explain", "\\banalyze\\b", "seq scan", "nested loop", "hash join", "planificateur", "autovacuum", "\\brows=", "requête lente"],
+ "holdout H1-H4 (jamais dans le skill)": ["\\bdns\\b", "kerberos", "kerberoast", "active directory", "\\bbce\\b", "taux directeur", "crédit immobilier", "arnm", "vaccin"]
+}

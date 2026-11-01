@@ -24,3 +24,11 @@ les sorties sont copiées telles quelles dans `plan*.txt`.
 
 **Simplifications assumées** (dites dans la narration ou au hotspot) : les temps varient d'une machine et d'une exécution à
 l'autre (cache) ; le plan après index choisit ici un Bitmap Index Scan (il pourrait choisir un Index Scan avec d'autres données).
+
+## Valeurs dérivées
+
+| Valeur | Calcul |
+|---|---|
+| « 48 » (ms, arrondi) ; « 0,16 » | 48.466 ms et 0.159 ms (lignes 11-12) |
+| « 2 millions » | 666 664 × 3 + 8 ≈ 2 000 000 (= taille de la table, `setup.sql`) |
+| « plus d'une seconde » | 1077.072 ms (ligne 13) |

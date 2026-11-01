@@ -1,0 +1,67 @@
+<title>{{TITLE}}</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+{{CSS}}
+</style>
+<div class="app">
+  <header class="top">
+    <div class="eyebrow">{{EYEBROW}}</div>
+    <h1>{{H1}}</h1>
+  </header>
+  <div class="stage-wrap">
+    <div class="stage" id="stage">
+      <svg id="svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" role="img" aria-label="{{H1}}"></svg>
+      <div id="hotspots" class="hotspots"></div>
+      <audio id="snd" preload="auto"{{AUDIO}}></audio>
+      <div id="subs" class="subs empty" aria-live="polite"></div>
+      <div id="poster" class="poster">
+        <button id="bigplay" class="bigplay" type="button"><span class="tri">▶</span><span>Lire · <b id="dur"></b></span></button>
+      </div>
+      <div id="quiz" class="quiz" hidden>
+        <div class="quiz-card">
+          <div class="quiz-k">Devinez</div>
+          <p id="quizq"></p>
+          <div id="quizc" class="quiz-c"></div>
+          <p id="quizwhy" class="quiz-why" hidden></p>
+          <button id="quizgo" class="quiz-go" type="button" hidden>Continuer ▶</button>
+        </div>
+      </div>
+      <div id="hotpanel" class="hotpanel" hidden>
+        <div class="hp-head"><b id="hottitle"></b><button id="hotclose" type="button" aria-label="Fermer">✕</button></div>
+        <div id="hotbody" class="hp-body"></div>
+      </div>
+    </div>
+  </div>
+  <div id="subsM" class="subs-m empty"></div>
+  <div class="controls">
+    <button id="prev" type="button" aria-label="Scène précédente">⏮</button>
+    <button id="play" type="button" class="pp" aria-label="Lecture">▶</button>
+    <button id="next" type="button" aria-label="Scène suivante">⏭</button>
+    <div id="track" class="track"><div id="ticks" class="ticks"></div><div id="bar" class="bar"></div></div>
+    <span id="time" class="time">0:00</span>
+    <div class="opts">
+      <label class="sel"><span class="sr">Vitesse</span><select id="speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option></select></label>
+      <button id="cc" type="button" class="tg">CC</button>
+      <button id="voice" type="button" class="tg">Voix</button>
+      <button id="quizb" type="button" class="tg">Quiz</button>
+    </div>
+  </div>
+  <nav id="chapters" class="chapters" aria-label="Chapitres"></nav>
+  <div id="legend" class="legend"></div>
+  <p class="hint">Pause = points <b>+</b> cliquables pour le détail technique. Raccourcis : espace, ← →, Échap.</p>
+  {{FOOTER}}
+</div>
+<script>
+{{ENGINE}}
+</script>
+<script>
+{{PLAYER}}
+</script>
+<script>
+{{EPISODE}}
+</script>
+<script>EP.timing = {{TIMING}};</script>
+<script>boot(EP);</script>

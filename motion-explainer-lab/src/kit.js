@@ -136,8 +136,26 @@ function sceneKit(K) {
   /* ---- question mark suspended above an object during a "devinez" silence */
   function suspense(g, x, y, t0, t1, o = {}) { const q = G(g, x, y, { pop: t0, out: t1, fn: (s, t) => { s.y += AMBIENT ? 8 * Math.sin(t * 3) : 0; } });
     K.tx(q, 0, 0, '?', { size: o.size || 140, fill: o.col || C.amber, weight: 800, deco: true }); return q; }
+  /* ---- artifact panel: real text lines (monospace), wrapped only at natural breaks; segments lit by hi(line, from, len, t).
+     lines: [str]; o: { w, size, title, col, pop, out, bg }. Returns g with ._hi(line, from, len, t0, o) and ._els */
+  function panel(g, x, y, lines, o = {}) {
+    const W = o.w || 1440, size = o.size || mono(Math.max(...lines.map(l => l.length)), W - 70, 48, 34), lh = size * 1.5, H = lh * lines.length + 60;
+    const p = G(g, x, y, { pop: o.pop, out: o.out });
+    S('rect', { x: -W / 2 + 10, y: -H / 2 + 12, width: W, height: H, rx: 26, fill: '#000', opacity: .25 }, p);
+    S('rect', { x: -W / 2, y: -H / 2, width: W, height: H, rx: 26, fill: o.bg || '#071028', stroke: o.col || C.cyan, 'stroke-width': 6 }, p);
+    if (o.title) { const tt = G(p, -W / 2 + 20, -H / 2 - 48); K.tx(tt, 0, 0, o.title, { size: 52, fill: o.col || C.cyan, weight: 700, anchor: 'start' }); }
+    const hlg = K.g(p); const x0 = -W / 2 + 34, y0 = -H / 2 + 30 + lh / 2, cw = size * .6;
+    const bid = 'p' + Math.random().toString(36).slice(2, 8); const els = lines.map((l, i) => { const e = K.tx(p, x0, y0 + i * lh, l, { size, mono: true, fill: o.fill || C.text, weight: 600, anchor: 'start', block: bid });
+      if (o.typeAt != null && i === 0) typeIn(e, l, o.typeAt, Math.min(1.6, .04 * l.length + .4)); return e; });
+    p._els = els; p._lh = lh;
+    p._hi = (li, from, len, t0, ho = {}) => { const r = S('rect', { x: x0 + from * cw - 8, y: y0 + li * lh - lh / 2 + 4, width: len * cw + 16, height: lh - 8, rx: 10,
+        fill: ho.col || C.amber, 'fill-opacity': ho.box ? 0 : .32, stroke: ho.box ? (ho.col || C.amber) : 'none', 'stroke-width': 6 }, hlg);
+      const a = K.A(r, { fin: [t0, .25], out: ho.out }); r._a = a; return r; };
+    p._dim = (t0, keep = [], t1) => els.forEach((e, i) => { if (keep.includes(i)) return; K.fx(t => e.setAttribute('fill-opacity', t >= t0 && (t1 == null || t < t1) ? .3 : 1)); });
+    return p;
+  }
   /* ---- pulse: a short scale bump on an element that already has an actor (g._a) — a beat that re-points attention */
   function pulse(el, t, amt = 1.14) { const a = el._a || el; const s0 = a.bs == null ? 1 : a.bs; a.o.moves = a.o.moves || [];
     a.o.moves.push([t, .18, { s: s0 * amt }, E.oc], [t + .18, .32, { s: s0 }, E.ioc]); K.mark(t); return el; }
-  return { pulse, C, FLOOR, sc, G, I, F, mono, typeIn, room, world, hero, foe, bubble, card, doc, counter, bars, curve, arrow, label, timeline, balance, unknown, suspense };
+  return { panel, pulse, C, FLOOR, sc, G, I, F, mono, typeIn, room, world, hero, foe, bubble, card, doc, counter, bars, curve, arrow, label, timeline, balance, unknown, suspense };
 }

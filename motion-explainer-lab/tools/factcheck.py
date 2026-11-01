@@ -2,13 +2,14 @@
 """Fact lint: every number shown or said in an episode must appear in the research sheet (SOURCES.md).
 Numbers are read from cue subtitles (`sub`, digits) and from on-screen strings in episode.js; a number is
 covered when the same value (spaces, thin spaces, dots and commas ignored) appears in the sheet.
-Usage: factcheck.py versions/<id> research/<topic>/SOURCES.md [--ignore 1,2,3]"""
+Usage: factcheck.py versions/<id> research/<topic>/SOURCES.md [artifact files produced during research...] [--ignore 1,2,3]
+Real artifacts (command outputs saved during research) count as sources: pass them after the sheet."""
 import json, pathlib, re, subprocess, sys
 
 LAB = pathlib.Path(__file__).resolve().parent.parent
 
 def nums(s):
-    out = set()
+    out = set(); s = s.replace("..", " ")  # ranges like cost=0.00..25555.67
     for m in re.finditer(r"\d[\d   .,]*\d|\d", s):
         v = re.sub(r"[   ]", "", m.group(0)).rstrip(".,")
         out.add(v)
@@ -17,10 +18,10 @@ def nums(s):
 
 def key(v): return re.sub(r"[^\d]", "", v)
 
-def main(vdir, sheet, ignore=()):
+def main(vdir, sheets, ignore=()):
     vdir = pathlib.Path(vdir); src = (vdir / "episode.js").read_text(encoding="utf-8")
     cues = json.loads(subprocess.run(["node", "-e", "const fs=require('fs');const EP=new Function(fs.readFileSync(process.argv[1],'utf8')+';return EP;')();console.log(JSON.stringify(EP.cues.map(c=>[c.id,c.sub])))", str(vdir / "episode.js")], capture_output=True, text=True, check=True).stdout)
-    sheet_keys = {key(v) for v in nums(pathlib.Path(sheet).read_text(encoding="utf-8"))}
+    sheet_keys = {key(v) for sh in sheets for v in nums(pathlib.Path(sh).read_text(encoding="utf-8"))}
     build = src[src.find("build(K)"):]
     strings = re.findall(r"'((?:[^'\\]|\\.)*)'", build) + re.findall(r'"((?:[^"\\]|\\.)*)"', build)
     found = []
@@ -35,5 +36,6 @@ def main(vdir, sheet, ignore=()):
     return 1 if orphans else 0
 
 if __name__ == "__main__":
-    ign = sys.argv[sys.argv.index("--ignore") + 1].split(",") if "--ignore" in sys.argv else ()
-    sys.exit(main(sys.argv[1], sys.argv[2], ign))
+    args = sys.argv[1:]; ign = ()
+    if "--ignore" in args: i = args.index("--ignore"); ign = args[i + 1].split(","); del args[i:i + 2]
+    sys.exit(main(args[0], args[1:], ign))

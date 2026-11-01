@@ -145,12 +145,12 @@ Tout est une **fonction pure du temps** (`render(t)` ne fait que muter des attri
 3. Écrire `episode.js` (cues d'abord), puis :
 ```bash
 python3 toolkit/tools/voice.py versions/<id> --check   # voix Piper par cue, horodatage des mots, visèmes, écoute Whisper
-python3 toolkit/tools/build.py <id>                    # page autonome (timing réel intégré)
+python3 toolkit/tools/build.py versions/<id>           # page autonome (timing réel intégré)
 node toolkit/tools/beats.mjs versions/<id>/index.html  # trous de rythme, sans rendu
 node toolkit/tools/qa.mjs versions/<id>/index.html iterations/<it>/<id> && python3 toolkit/tools/analyze.py iterations/<it>/<id>
 node toolkit/tools/export.mjs versions/<id>/index.html versions/<id> 3   # images 1080p24 -> _silent.mp4 + meta.json
 python3 toolkit/tools/audio.py versions/<id>           # voix + musique + bruitages -> soundtrack.mp3 + video.mp4
-python3 toolkit/tools/build.py <id>                    # republie la page avec la bande son
+python3 toolkit/tools/build.py versions/<id>           # republie la page avec la bande son
 python3 toolkit/tools/factcheck.py versions/<id> research/<sujet>/SOURCES.md
 ```
 4. Publier avec l'outil Artifact.

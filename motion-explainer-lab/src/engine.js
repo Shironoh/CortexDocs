@@ -22,7 +22,7 @@ function S(tag, attrs, parent) {
   return e;
 }
 const words = s => s.replace(/\|/g, ' ').trim().split(/\s+/).filter(w => /[\p{L}\p{N}]/u.test(w)); // French spacing: lone ':' '?' are not words
-const norm = w => w.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9_%@.\-]/g, '');
+const norm = w => w.toLowerCase().replace(/œ/g, 'oe').replace(/æ/g, 'ae').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9_%@.\-]/g, '');
 
 /* ---------------- Actor ---------------- */
 class Actor {
@@ -265,6 +265,7 @@ function Runtime(ep, svg) {
       'data-txt': o.deco ? null : (o.mono ? 'code' : 'txt'), 'dominant-baseline': 'middle', 'letter-spacing': o.ls || null }, parent);
     if (o.mono) e.setAttribute('style', 'white-space:pre');
     if (o.bleed) e.setAttribute('data-bleed', '1');
+    if (o.block) e.setAttribute('data-block', o.block); // lines of one artifact panel = one text block
     if (o.axis) e.setAttribute('data-axis', '1'); // chart reading aid (axis title, tick): counted as one text block with its siblings
     e.textContent = str; return e;
   };
