@@ -1,0 +1,3633 @@
+{
+ "meta": {
+  "duration": 155.64100000000002,
+  "cues": [
+   {
+    "id": "c1",
+    "sc": "s1",
+    "start": 0.6,
+    "end": 9.901,
+    "dur": 9.301,
+    "words": 20,
+    "sub": "Septembre 1991, dans un glacier des Alpes : un homme, mort depuis très longtemps. Depuis combien de temps ?",
+    "guess": false
+   },
+   {
+    "id": "c2",
+    "sc": "s1",
+    "start": 9.901,
+    "end": 13.5,
+    "dur": 3.5989999999999993,
+    "words": 6,
+    "sub": "Facile : le carbone 14 date tout !",
+    "guess": false
+   },
+   {
+    "id": "c3",
+    "sc": "s1",
+    "start": 13.5,
+    "end": 18.749,
+    "dur": 5.249,
+    "words": 11,
+    "sub": "Pas tout. Mais pour lui, oui : son corps contient une horloge.",
+    "guess": false
+   },
+   {
+    "id": "c4",
+    "sc": "s2",
+    "start": 18.749,
+    "end": 24.461,
+    "dur": 5.712000000000001,
+    "words": 15,
+    "sub": "Très haut, les rayons cosmiques frappent l'azote de l'air et le changent en carbone 14.",
+    "guess": false
+   },
+   {
+    "id": "c5",
+    "sc": "s2",
+    "start": 24.461,
+    "end": 32.172,
+    "dur": 7.710999999999999,
+    "words": 19,
+    "sub": "Il est rare : environ un atome de carbone sur mille milliards. Les plantes l'absorbent, puis ceux qui les mangent.",
+    "guess": false
+   },
+   {
+    "id": "c6",
+    "sc": "s2",
+    "start": 32.172,
+    "end": 39.137,
+    "dur": 6.965000000000005,
+    "words": 16,
+    "sub": "Tant qu'on vit, on en reprend : le sablier reste plein. À la mort, plus rien n'entre.",
+    "guess": false
+   },
+   {
+    "id": "c7",
+    "sc": "s3",
+    "start": 39.137,
+    "end": 46.04500000000001,
+    "dur": 6.908000000000006,
+    "words": 20,
+    "sub": "Puis il redevient lentement de l'azote, à un rythme fixe : chaque atome a la même chance de changer chaque année.",
+    "guess": false
+   },
+   {
+    "id": "c8",
+    "sc": "s3",
+    "start": 46.04500000000001,
+    "end": 58.747000000000014,
+    "dur": 12.702000000000002,
+    "words": 27,
+    "sub": "En 5 700 ans, la moitié disparaît. Devinez : après deux fois 5 700 ans, que reste-t-il ?|Un quart. Puis un huitième, un seizième…",
+    "guess": true
+   },
+   {
+    "id": "c9",
+    "sc": "s3",
+    "start": 58.747000000000014,
+    "end": 63.551000000000016,
+    "dur": 4.804000000000004,
+    "words": 13,
+    "sub": "Compter ce qui reste, c'est donc lire depuis quand le sablier se vide.",
+    "guess": false
+   },
+   {
+    "id": "c10",
+    "sc": "s4",
+    "start": 63.551000000000016,
+    "end": 71.71300000000002,
+    "dur": 8.162000000000003,
+    "words": 21,
+    "sub": "Zurich et Oxford ont compté les atomes un par un, avec un accélérateur, sur environ un milligramme : la momie est précieuse.",
+    "guess": false
+   },
+   {
+    "id": "c11",
+    "sc": "s4",
+    "start": 71.71300000000002,
+    "end": 78.34200000000003,
+    "dur": 6.629000000000002,
+    "words": 17,
+    "sub": "Une vraie ligne du rapport : l'os, 4 560 ± 65 BP.",
+    "guess": false
+   },
+   {
+    "id": "c12",
+    "sc": "s4",
+    "start": 78.34200000000003,
+    "end": 87.12200000000003,
+    "dur": 8.779999999999998,
+    "words": 25,
+    "sub": "On croit que BP veut dire « avant aujourd'hui ». Faux : avant 1950. Et le « ± », c'est la marge de mesure.",
+    "guess": false
+   },
+   {
+    "id": "c13",
+    "sc": "s5",
+    "start": 87.12200000000003,
+    "end": 92.68300000000004,
+    "dur": 5.561000000000004,
+    "words": 17,
+    "sub": "Ce n'est pas encore une date : le carbone 14 de l'air a varié au fil des siècles.",
+    "guess": false
+   },
+   {
+    "id": "c14",
+    "sc": "s5",
+    "start": 92.68300000000004,
+    "end": 98.91700000000004,
+    "dur": 6.234000000000006,
+    "words": 16,
+    "sub": "On corrige avec des cernes d'arbres, dont on connaît l'année exacte : c'est la courbe de calibration.",
+    "guess": false
+   },
+   {
+    "id": "c15",
+    "sc": "s5",
+    "start": 98.91700000000004,
+    "end": 112.92800000000004,
+    "dur": 14.010999999999992,
+    "words": 34,
+    "sub": "Devinez : 4 550 BP, la moyenne d'Ötzi, est-ce une seule date ?|Non : deux chances sur trois entre 3239 et 3105 avant notre ère.",
+    "guess": true
+   },
+   {
+    "id": "c16",
+    "sc": "s6",
+    "start": 112.92800000000004,
+    "end": 115.67400000000005,
+    "dur": 2.7460000000000067,
+    "words": 4,
+    "sub": "Alors datons un dinosaure !",
+    "guess": false
+   },
+   {
+    "id": "c17",
+    "sc": "s6",
+    "start": 115.67400000000005,
+    "end": 127.60800000000006,
+    "dur": 11.934000000000006,
+    "words": 26,
+    "sub": "Impossible : au-delà de 50 000 ans environ, il reste trop peu de carbone 14 à compter. Les dinosaures, 66 millions d'années, se datent avec d'autres horloges.",
+    "guess": false
+   },
+   {
+    "id": "c18",
+    "sc": "s7",
+    "start": 127.60800000000006,
+    "end": 137.15100000000007,
+    "dur": 9.543000000000017,
+    "words": 32,
+    "sub": "Ötzi est donc mort vers 3300 à 3100 avant notre ère, selon la calibration de 1994 : il y a plus de 5 000 ans.",
+    "guess": false
+   },
+   {
+    "id": "c19",
+    "sc": "s7",
+    "start": 137.15100000000007,
+    "end": 146.19500000000005,
+    "dur": 9.043999999999993,
+    "words": 28,
+    "sub": "Devant une datation : lisez le BP et sa marge, demandez si elle est calibrée, vérifiez que l'objet a vécu il y a moins de 50 000 ans.",
+    "guess": false
+   },
+   {
+    "id": "c20",
+    "sc": "s7",
+    "start": 146.19500000000005,
+    "end": 153.44100000000003,
+    "dur": 7.2459999999999924,
+    "words": 16,
+    "sub": "En réalité, les labos corrigent aussi la composition de l'échantillon. Mais vous savez lire l'horloge d'Ötzi.",
+    "guess": false
+   }
+  ],
+  "scenes": [
+   {
+    "id": "s1",
+    "title": "Un homme dans la glace",
+    "start": 0.6,
+    "end": 18.749
+   },
+   {
+    "id": "s2",
+    "title": "D'où vient le carbone 14",
+    "start": 18.749,
+    "end": 39.137
+   },
+   {
+    "id": "s3",
+    "title": "Le sablier se vide",
+    "start": 39.137,
+    "end": 63.551000000000016
+   },
+   {
+    "id": "s4",
+    "title": "Le rapport du labo",
+    "start": 63.551000000000016,
+    "end": 87.12200000000003
+   },
+   {
+    "id": "s5",
+    "title": "Calibrer",
+    "start": 87.12200000000003,
+    "end": 112.92800000000004
+   },
+   {
+    "id": "s6",
+    "title": "Les limites",
+    "start": 112.92800000000004,
+    "end": 127.60800000000006
+   },
+   {
+    "id": "s7",
+    "title": "Lire une datation",
+    "start": 127.60800000000006,
+    "end": 153.44100000000003
+   }
+  ],
+  "guess": [
+   [
+    53.38200000000001,
+    54.88200000000001
+   ],
+   [
+    104.54600000000003,
+    106.04600000000003
+   ]
+  ],
+  "events": 82,
+  "marks": [
+   5.52,
+   7.18,
+   0.8,
+   13.758,
+   5.32,
+   5.52,
+   8.54,
+   8.54,
+   10.301,
+   9.601,
+   9.601,
+   12.419,
+   11.239,
+   12.313,
+   12.619,
+   13.758,
+   14.642,
+   13.908,
+   14.642,
+   13.758,
+   15.223,
+   15.223,
+   16.79,
+   0,
+   0.3,
+   5.12,
+   8.24,
+   9.701,
+   14.923,
+   29.156,
+   20.238,
+   20.718,
+   29.156,
+   29.156,
+   20.438,
+   20.918,
+   29.156,
+   29.156,
+   20.638,
+   21.118,
+   29.156,
+   21.201,
+   29.156,
+   21.321,
+   29.156,
+   21.441,
+   29.156,
+   22.525,
+   29.156,
+   22.525,
+   25.137,
+   29.556,
+   27.482,
+   29.556,
+   29.156,
+   36.437,
+   29.258,
+   29.738,
+   36.437,
+   30.906,
+   36.437,
+   31.106,
+   31.586,
+   36.437,
+   34.255,
+   33.591,
+   36.437,
+   36.437,
+   28.656,
+   28.856,
+   32.86,
+   36.737,
+   17.349,
+   20.801,
+   24.837,
+   28.956,
+   34.155,
+   41.102,
+   48.277,
+   44.132,
+   44.582,
+   45.032,
+   45.482,
+   45.932,
+   46.382,
+   41.102,
+   42.007,
+   42.107,
+   48.277,
+   47.677,
+   47.877,
+   47.887,
+   48.487,
+   47.897,
+   48.497,
+   47.907,
+   48.507,
+   47.917,
+   48.517,
+   54.882,
+   56.602,
+   57.542,
+   48.277,
+   63.551,
+   49.66,
+   54.882,
+   38.737,
+   38.837,
+   48.277,
+   59.144,
+   58.544,
+   37.737,
+   40.802,
+   41.707,
+   42.607,
+   47.777,
+   49.46,
+   58.844,
+   65.191,
+   63.751,
+   71.713,
+   64.631,
+   71.713,
+   68.971,
+   72.013,
+   71.513,
+   73.643,
+   82.131,
+   82.131,
+   79.844,
+   81.672,
+   81.272,
+   81.672,
+   85.535,
+   63.351,
+   63.551,
+   72.459,
+   81.272,
+   85.535,
+   62.151,
+   64.791,
+   68.571,
+   71.613,
+   73.443,
+   79.644,
+   81.831,
+   85.235,
+   89.412,
+   93.255,
+   89.762,
+   93.255,
+   90.112,
+   93.255,
+   93.867,
+   94.067,
+   94.147,
+   94.227,
+   94.307,
+   94.387,
+   94.467,
+   94.547,
+   94.627,
+   94.707,
+   95.716,
+   95.716,
+   99.117,
+   96.802,
+   97.202,
+   99.999,
+   99.999,
+   106.046,
+   106.046,
+   106.546,
+   105.946,
+   105.946,
+   99.28,
+   106.046,
+   108.786,
+   86.822,
+   86.922,
+   90.735,
+   94.067,
+   106.046,
+   85.722,
+   89.212,
+   93.667,
+   96.802,
+   98.98,
+   108.486,
+   112.528,
+   112.628,
+   114.024,
+   113.674,
+   115.802,
+   119.775,
+   116.897,
+   117.697,
+   119.775,
+   122.377,
+   122.377,
+   125.965,
+   126.165,
+   115.402,
+   115.502,
+   116.002,
+   125.965,
+   126.365,
+   111.528,
+   112.728,
+   115.702,
+   122.077,
+   127.008,
+   137.606,
+   127.308,
+   137.606,
+   128.76,
+   129.06,
+   129.36,
+   129.073,
+   137.606,
+   139.058,
+   142.088,
+   144.073,
+   127.208,
+   128.76,
+   139.058,
+   142.088,
+   144.073,
+   151.459,
+   146.397,
+   146.497,
+   151.459,
+   126.208,
+   128.673,
+   136.951,
+   146.195,
+   3.92,
+   6.14,
+   2.64,
+   15.791,
+   18.449,
+   50.798,
+   51.36,
+   52.551,
+   59.713,
+   60.851,
+   65.671,
+   67.151,
+   70.371,
+   70.671,
+   74.467,
+   76.269,
+   77.335,
+   78.902,
+   82.77,
+   91.606,
+   91.223,
+   102.159,
+   103.645,
+   109.541,
+   111.584,
+   119.38,
+   121.087,
+   123.933,
+   125.152,
+   132.498,
+   137.606,
+   131.128,
+   133.892,
+   135.61,
+   140.567,
+   143.62,
+   149.17,
+   147.835
+  ],
+  "cams": [
+   {
+    "t": 0,
+    "d": 0,
+    "z": 1.15
+   },
+   {
+    "t": 0.3,
+    "d": 3.6,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 3.92,
+    "d": 1,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 5.119999999999999,
+    "d": 1.1,
+    "z": 1.5030303030303032
+   },
+   {
+    "t": 8.24,
+    "d": 0.8,
+    "z": 1.218274082640551
+   },
+   {
+    "t": 9.701,
+    "d": 0.9,
+    "z": 1.03584345175177
+   },
+   {
+    "t": 14.922999999999998,
+    "d": 0.9,
+    "z": 1.0161880543323203
+   },
+   {
+    "t": 17.349,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 20.801,
+    "d": 0.9,
+    "z": 1.027681660899654
+   },
+   {
+    "t": 24.836999999999996,
+    "d": 0.8,
+    "z": 1.357758620689655
+   },
+   {
+    "t": 28.956,
+    "d": 0.9,
+    "z": 0.8756756395628381
+   },
+   {
+    "t": 34.155,
+    "d": 0.9,
+    "z": 1.150656524686377
+   },
+   {
+    "t": 37.737,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 40.80200000000001,
+    "d": 0.9,
+    "z": 0.8949478748997594
+   },
+   {
+    "t": 41.70700000000001,
+    "d": 0.8,
+    "z": 1.0153102336825142
+   },
+   {
+    "t": 42.607000000000006,
+    "d": 2.6,
+    "z": 1.095890410958904
+   },
+   {
+    "t": 47.777000000000015,
+    "d": 0.9,
+    "z": 0.9158069883527454
+   },
+   {
+    "t": 49.46000000000001,
+    "d": 0.7,
+    "z": 1.2444444444444445
+   },
+   {
+    "t": 58.84400000000002,
+    "d": 0.9,
+    "z": 1.0872698276597603
+   },
+   {
+    "t": 62.15100000000002,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 64.79100000000001,
+    "d": 0.9,
+    "z": 0.9228739431775715
+   },
+   {
+    "t": 68.57100000000001,
+    "d": 0.8,
+    "z": 3
+   },
+   {
+    "t": 71.61300000000003,
+    "d": 0.9,
+    "z": 1.181981981981982
+   },
+   {
+    "t": 73.44300000000003,
+    "d": 0.7,
+    "z": 1.7755490587739804
+   },
+   {
+    "t": 79.64400000000003,
+    "d": 0.8,
+    "z": 0.8705554314721126
+   },
+   {
+    "t": 81.83100000000003,
+    "d": 0.7,
+    "z": 1.2972972972972974
+   },
+   {
+    "t": 85.23500000000003,
+    "d": 0.8,
+    "z": 1.1531531531531531
+   },
+   {
+    "t": 85.72200000000002,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 89.21200000000003,
+    "d": 0.9,
+    "z": 1.5927601809954752
+   },
+   {
+    "t": 93.66700000000003,
+    "d": 0.9,
+    "z": 0.9269102990033223
+   },
+   {
+    "t": 96.80200000000004,
+    "d": 0.9,
+    "z": 0.9431123404763948
+   },
+   {
+    "t": 98.98000000000005,
+    "d": 0.8,
+    "z": 0.8111605047357473
+   },
+   {
+    "t": 108.48600000000003,
+    "d": 0.8,
+    "z": 0.8837831699701948
+   },
+   {
+    "t": 111.52800000000003,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 112.72800000000004,
+    "d": 0.8,
+    "z": 1.0722520948947711
+   },
+   {
+    "t": 115.70200000000006,
+    "d": 0.9,
+    "z": 1.3193027629272456
+   },
+   {
+    "t": 122.07700000000006,
+    "d": 0.9,
+    "z": 1.1800685649236746
+   },
+   {
+    "t": 126.20800000000006,
+    "d": 1.5,
+    "z": 0.9170862162792506
+   },
+   {
+    "t": 128.67300000000006,
+    "d": 0.8,
+    "z": 0.8512080839830242
+   },
+   {
+    "t": 136.95100000000008,
+    "d": 0.9,
+    "z": 0.888888888888889
+   },
+   {
+    "t": 146.19500000000005,
+    "d": 1,
+    "z": 0.7902449961804895
+   }
+  ],
+  "chars": [
+   {
+    "name": "hero",
+    "pop": 5.319999999999999,
+    "poses": [
+     [
+      8.540000000000001,
+      "loupe"
+     ],
+     [
+      13.758,
+      "shrug"
+     ],
+     [
+      15.222999999999999,
+      "point"
+     ]
+    ],
+    "walks": [
+     5.52
+    ],
+    "exprs": [
+     -1,
+     8.540000000000001,
+     13.758,
+     17.555999999999997
+    ]
+   },
+   {
+    "name": "foe",
+    "pop": 9.600999999999999,
+    "poses": [
+     [
+      12.418999999999999,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     9.600999999999999,
+     15.222999999999999
+    ],
+    "exprs": [
+     -1,
+     13.758
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 28.656,
+    "poses": [
+     [
+      32.86,
+      "point"
+     ],
+     [
+      36.736999999999995,
+      "nod"
+     ]
+    ],
+    "walks": [
+     28.855999999999998
+    ],
+    "exprs": [
+     -1
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 38.737,
+    "poses": [
+     [
+      48.277000000000015,
+      "point"
+     ],
+     [
+      59.14400000000002,
+      "loupe"
+     ],
+     [
+      60.85100000000001,
+      "nod"
+     ]
+    ],
+    "walks": [
+     38.837,
+     58.54400000000002
+    ],
+    "exprs": [
+     -1,
+     49.66000000000001,
+     54.88200000000001,
+     62.15100000000002
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 63.35100000000001,
+    "poses": [
+     [
+      72.45900000000003,
+      "point"
+     ],
+     [
+      81.27200000000003,
+      "shrug"
+     ],
+     [
+      85.53500000000003,
+      "point"
+     ],
+     [
+      70.37100000000002,
+      "nod"
+     ],
+     [
+      77.33500000000002,
+      "nod"
+     ],
+     [
+      78.90200000000003,
+      "lean"
+     ]
+    ],
+    "walks": [
+     63.551000000000016
+    ],
+    "exprs": [
+     -1,
+     82.13100000000003
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 86.82200000000003,
+    "poses": [
+     [
+      90.73500000000003,
+      "shrug"
+     ],
+     [
+      94.06700000000004,
+      "loupe"
+     ],
+     [
+      106.04600000000003,
+      "point"
+     ],
+     [
+      91.22300000000003,
+      "nod"
+     ]
+    ],
+    "walks": [
+     86.92200000000003
+    ],
+    "exprs": [
+     -1,
+     90.73500000000003,
+     94.06700000000004,
+     106.04600000000003
+    ]
+   },
+   {
+    "name": "foe",
+    "pop": 112.52800000000003,
+    "poses": [
+     [
+      114.02400000000004,
+      "cheer"
+     ],
+     [
+      126.36500000000005,
+      "nod"
+     ]
+    ],
+    "walks": [
+     112.62800000000004
+    ],
+    "exprs": [
+     -1,
+     116.00200000000005
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 115.40200000000006,
+    "poses": [
+     [
+      116.00200000000005,
+      "shrug"
+     ],
+     [
+      125.96500000000005,
+      "point"
+     ]
+    ],
+    "walks": [
+     115.50200000000005
+    ],
+    "exprs": [
+     -1,
+     125.96500000000005
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 127.20800000000006,
+    "poses": [
+     [
+      128.76000000000008,
+      "point"
+     ],
+     [
+      139.05800000000005,
+      "point"
+     ],
+     [
+      142.08800000000005,
+      "point"
+     ],
+     [
+      144.07300000000006,
+      "point"
+     ],
+     [
+      151.45900000000003,
+      "cheer"
+     ]
+    ],
+    "walks": [],
+    "exprs": [
+     -1,
+     151.45900000000003
+    ]
+   },
+   {
+    "name": "foe",
+    "pop": 146.39700000000002,
+    "poses": [
+     [
+      151.45900000000003,
+      "nod"
+     ]
+    ],
+    "walks": [
+     146.49700000000004
+    ],
+    "exprs": [
+     -1,
+     151.45900000000003
+    ]
+   }
+  ],
+  "says": [
+   "Septembre mille neuf cent quatre-vingt-onze, dans un glacier des Alpes : un homme, mort depuis très longtemps. Depuis combien de temps ?",
+   "Facile : le carbone quatorze date tout !",
+   "Pas tout. Mais pour lui, oui : son corps contient une horloge.",
+   "Très haut, les rayons cosmiques frappent l'azote de l'air et le changent en carbone quatorze.",
+   "Il est rare : environ un atome de carbone sur mille milliards. Les plantes l'absorbent, puis ceux qui les mangent.",
+   "Tant qu'on vit, on en reprend : le sablier reste plein. À la mort, plus rien n'entre.",
+   "Puis il redevient lentement de l'azote, à un rythme fixe : chaque atome a la même chance de changer chaque année.",
+   "En cinq mille sept cents ans, la moitié disparaît. Devinez : après deux fois cinq mille sept cents ans, que reste-t-il ? | Un quart. Puis un huitième, un seizième.",
+   "Compter ce qui reste, c'est donc lire depuis quand le sablier se vide.",
+   "Zurich et Oxford ont compté les atomes un par un, avec un accélérateur, sur environ un milligramme : la momie est précieuse.",
+   "Une vraie ligne du rapport : l'os, quatre mille cinq cent soixante, plus ou moins soixante-cinq, B P.",
+   "On croit que B P veut dire avant aujourd'hui. Faux : avant mille neuf cent cinquante. Et le plus ou moins, c'est la marge de mesure.",
+   "Ce n'est pas encore une date : le carbone quatorze de l'air a varié au fil des siècles.",
+   "On corrige avec des cernes d'arbres, dont on connaît l'année exacte : c'est la courbe de calibration.",
+   "Devinez : quatre mille cinq cent cinquante B P, la moyenne d'Ötzi, est-ce une seule date ? | Non : deux chances sur trois entre trois mille deux cent trente-neuf et trois mille cent cinq avant notre ère.",
+   "Alors datons un dinosaure !",
+   "Impossible : au-delà de cinquante mille ans environ, il reste trop peu de carbone quatorze à compter. Les dinosaures, soixante-six millions d'années, se datent avec d'autres horloges.",
+   "Ötzi est donc mort vers trois mille trois cents à trois mille cent avant notre ère, selon la calibration de mille neuf cent quatre-vingt-quatorze : il y a plus de cinq mille ans.",
+   "Devant une datation : lisez le B P et sa marge, demandez si elle est calibrée, vérifiez que l'objet a vécu il y a moins de cinquante mille ans.",
+   "En réalité, les labos corrigent aussi la composition de l'échantillon. Mais vous savez lire l'horloge d'Ötzi."
+  ]
+ },
+ "caps": [
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c1_25.jpg",
+   "t": 2.92525,
+   "ntext": 1,
+   "words": 1,
+   "focus": null,
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c1_50.jpg",
+   "t": 5.2505,
+   "ntext": 1,
+   "words": 1,
+   "focus": null,
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c1_75.jpg",
+   "t": 7.575749999999999,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.266
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c2_25.jpg",
+   "t": 10.800749999999999,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1255,
+    "cy": 272,
+    "area": 0.011
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.011
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c2_50.jpg",
+   "t": 11.7005,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 820,
+    "cy": 230,
+    "area": 0.011
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.011
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c2_75.jpg",
+   "t": 12.600249999999999,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 820,
+    "cy": 230,
+    "area": 0.01
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.01
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c3_25.jpg",
+   "t": 14.81225,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 820,
+    "cy": 230,
+    "area": 0.01
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.01
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c3_50.jpg",
+   "t": 16.1245,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 373,
+    "cy": 260,
+    "area": 0.01
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.01
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c3_75.jpg",
+   "t": 17.43675,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 798,
+    "cy": 230,
+    "area": 0.04
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c4_25.jpg",
+   "t": 20.177,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 588,
+    "cy": 235,
+    "area": 0.104
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c4_50.jpg",
+   "t": 21.605,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 737,
+    "cy": 399,
+    "area": 0.295
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c4_75.jpg",
+   "t": 23.033,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 913,
+    "cy": 535,
+    "area": 0.016
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.016
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c5_25.jpg",
+   "t": 26.388749999999998,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 67,
+    "cy": 370,
+    "area": 0.024
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      67,
+      370
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.024
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c5_50.jpg",
+   "t": 28.316499999999998,
+   "ntext": 1,
+   "words": 7,
+   "focus": {
+    "cx": 800,
+    "cy": 655,
+    "area": 0.085
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c5_75.jpg",
+   "t": 30.244249999999997,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1330,
+    "cy": 418,
+    "area": 0.032
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.032
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c6_25.jpg",
+   "t": 33.91325,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1085,
+    "cy": 489,
+    "area": 0.013
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.013
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c6_50.jpg",
+   "t": 35.6545,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1004,
+    "cy": 336,
+    "area": 0.066
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c6_75.jpg",
+   "t": 37.39575,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1004,
+    "cy": 83,
+    "area": 0.006
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1004,
+      83
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.006
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c7_25.jpg",
+   "t": 40.864000000000004,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 515,
+    "cy": 364,
+    "area": 0.04
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c7_50.jpg",
+   "t": 42.591,
+   "ntext": 1,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 129,
+    "area": 0.051
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      800,
+      129
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c7_75.jpg",
+   "t": 44.318000000000005,
+   "ntext": 1,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 111,
+    "area": 0.055
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      800,
+      111
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c8_25.jpg",
+   "t": 49.22050000000001,
+   "ntext": 4,
+   "words": 7,
+   "focus": {
+    "cx": 1076,
+    "cy": 434,
+    "area": 0.242
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c8_50.jpg",
+   "t": 52.39600000000001,
+   "ntext": 4,
+   "words": 7,
+   "focus": {
+    "cx": 800,
+    "cy": 341,
+    "area": 0.016
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c8_75.jpg",
+   "t": 55.571500000000015,
+   "ntext": 4,
+   "words": 7,
+   "focus": {
+    "cx": 800,
+    "cy": 404,
+    "area": 0.448
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c9_25.jpg",
+   "t": 59.948000000000015,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 917,
+    "cy": 359,
+    "area": 0.164
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c9_50.jpg",
+   "t": 61.149000000000015,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 917,
+    "cy": 359,
+    "area": 0.127
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c9_75.jpg",
+   "t": 62.350000000000016,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 887,
+    "cy": 359,
+    "area": 0.125
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "5 700"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c10_25.jpg",
+   "t": 65.59150000000001,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 805,
+    "cy": 474,
+    "area": 0.126
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c10_50.jpg",
+   "t": 67.63200000000002,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 806,
+    "cy": 476,
+    "area": 0.127
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c10_75.jpg",
+   "t": 69.67250000000001,
+   "ntext": 1,
+   "words": 3,
+   "focus": {
+    "cx": 800,
+    "cy": 390,
+    "area": 0.206
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c11_25.jpg",
+   "t": 73.37025000000003,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.444
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c11_50.jpg",
+   "t": 75.02750000000002,
+   "ntext": 2,
+   "words": 8,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.089
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c11_75.jpg",
+   "t": 76.68475000000002,
+   "ntext": 2,
+   "words": 8,
+   "focus": {
+    "cx": 794,
+    "cy": 399,
+    "area": 0.09
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c12_25.jpg",
+   "t": 80.53700000000002,
+   "ntext": 3,
+   "words": 11,
+   "focus": {
+    "cx": 1174,
+    "cy": 172,
+    "area": 0.036
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Rapport · ETH-8342",
+     "v": 40
+    },
+    {
+     "k": "focus_small",
+     "v": 0.036
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c12_50.jpg",
+   "t": 82.73200000000003,
+   "ntext": 3,
+   "words": 12,
+   "focus": {
+    "cx": 370,
+    "cy": 513,
+    "area": 0.028
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.028
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c12_75.jpg",
+   "t": 84.92700000000002,
+   "ntext": 3,
+   "words": 12,
+   "focus": {
+    "cx": 370,
+    "cy": 513,
+    "area": 0.028
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.028
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c13_25.jpg",
+   "t": 88.51225000000002,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 618,
+    "cy": 327,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c13_50.jpg",
+   "t": 89.90250000000003,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 777,
+    "cy": 389,
+    "area": 0.036
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c13_75.jpg",
+   "t": 91.29275000000003,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.053
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c14_25.jpg",
+   "t": 94.24150000000003,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 749,
+    "cy": 347,
+    "area": 0.178
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c14_50.jpg",
+   "t": 95.80000000000004,
+   "ntext": 1,
+   "words": 5,
+   "focus": {
+    "cx": 800,
+    "cy": 338,
+    "area": 0.131
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "1 cerne = 1 année",
+     "v": 39.9
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c14_75.jpg",
+   "t": 97.35850000000003,
+   "ntext": 3,
+   "words": 11,
+   "focus": {
+    "cx": 1024,
+    "cy": 392,
+    "area": 0.39
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "1 cerne = 1 année"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c15_25.jpg",
+   "t": 102.41975000000004,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 853,
+    "cy": 127,
+    "area": 0.007
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "année réelle (av. J.-C.)"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      853,
+      127
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.007
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c15_50.jpg",
+   "t": 105.92250000000004,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 853,
+    "cy": 127,
+    "area": 0.007
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "année réelle (av. J.-C.)",
+     "v": 42.2
+    },
+    {
+     "k": "small",
+     "s": "âge BP",
+     "v": 42.2
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      853,
+      127
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.007
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c15_75.jpg",
+   "t": 109.42525000000003,
+   "ntext": 4,
+   "words": 13,
+   "focus": {
+    "cx": 858,
+    "cy": 98,
+    "area": 0.031
+   },
+   "issues": [
+    {
+     "k": "overlap",
+     "s": "âge BP / 3239 – 3105 av. J.-C."
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      858,
+      98
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.031
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c16_25.jpg",
+   "t": 113.61450000000004,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": -801,
+    "cy": -80,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -801,
+      -80
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c16_50.jpg",
+   "t": 114.30100000000004,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": -801,
+    "cy": -80,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -801,
+      -80
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c16_75.jpg",
+   "t": 114.98750000000004,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 957,
+    "cy": 177,
+    "area": 0.029
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.029
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c17_25.jpg",
+   "t": 118.65750000000006,
+   "ntext": 1,
+   "words": 4,
+   "focus": {
+    "cx": 1118,
+    "cy": 396,
+    "area": 0.226
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c17_50.jpg",
+   "t": 121.64100000000005,
+   "ntext": 1,
+   "words": 4,
+   "focus": {
+    "cx": 1118,
+    "cy": 396,
+    "area": 0.226
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c17_75.jpg",
+   "t": 124.62450000000005,
+   "ntext": 2,
+   "words": 8,
+   "focus": {
+    "cx": 1516,
+    "cy": 741,
+    "area": 0.096
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "≈ 50 000 ans"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1516,
+      741
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:foe"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:foe"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "focus"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c18_25.jpg",
+   "t": 129.99375000000006,
+   "ntext": 4,
+   "words": 10,
+   "focus": {
+    "cx": 767,
+    "cy": 308,
+    "area": 0.06
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "3300",
+     "v": 42.6
+    },
+    {
+     "k": "small",
+     "s": "3100 av. J.-C.",
+     "v": 42.6
+    },
+    {
+     "k": "small",
+     "s": "aujourd'hui",
+     "v": 42.6
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c18_50.jpg",
+   "t": 132.37950000000006,
+   "ntext": 4,
+   "words": 10,
+   "focus": {
+    "cx": 767,
+    "cy": 308,
+    "area": 0.06
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "3300",
+     "v": 42.6
+    },
+    {
+     "k": "small",
+     "s": "3100 av. J.-C.",
+     "v": 42.6
+    },
+    {
+     "k": "small",
+     "s": "aujourd'hui",
+     "v": 42.6
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c18_75.jpg",
+   "t": 134.76525000000007,
+   "ntext": 5,
+   "words": 12,
+   "focus": {
+    "cx": 767,
+    "cy": 308,
+    "area": 0.06
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "3300",
+     "v": 42.6
+    },
+    {
+     "k": "small",
+     "s": "3100 av. J.-C.",
+     "v": 42.6
+    },
+    {
+     "k": "small",
+     "s": "aujourd'hui",
+     "v": 42.6
+    },
+    {
+     "k": "overlap",
+     "s": "+ de 5 000 ans / calibration 1994"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c19_25.jpg",
+   "t": 139.41200000000006,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 302,
+    "cy": 401,
+    "area": 0.079
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c19_50.jpg",
+   "t": 141.67300000000006,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 302,
+    "cy": 401,
+    "area": 0.071
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c19_75.jpg",
+   "t": 143.93400000000005,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 401,
+    "area": 0.071
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c20_25.jpg",
+   "t": 148.00650000000005,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 1302,
+    "cy": 298,
+    "area": 0.057
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.057
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c20_50.jpg",
+   "t": 149.81800000000004,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 1302,
+    "cy": 298,
+    "area": 0.057
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.057
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c20_75.jpg",
+   "t": 151.62950000000004,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 1460,
+    "cy": 495,
+    "area": 0.028
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1460,
+      495
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.028
+    }
+   ],
+   "moving": false
+  }
+ ],
+ "frozen": [
+  {
+   "t": 0,
+   "file": "frozen/f0000.png"
+  },
+  {
+   "t": 0.5,
+   "file": "frozen/f0001.png"
+  },
+  {
+   "t": 1,
+   "file": "frozen/f0002.png"
+  },
+  {
+   "t": 1.5,
+   "file": "frozen/f0003.png"
+  },
+  {
+   "t": 2,
+   "file": "frozen/f0004.png"
+  },
+  {
+   "t": 2.5,
+   "file": "frozen/f0005.png"
+  },
+  {
+   "t": 3,
+   "file": "frozen/f0006.png"
+  },
+  {
+   "t": 3.5,
+   "file": "frozen/f0007.png"
+  },
+  {
+   "t": 4,
+   "file": "frozen/f0008.png"
+  },
+  {
+   "t": 4.5,
+   "file": "frozen/f0009.png"
+  },
+  {
+   "t": 5,
+   "file": "frozen/f0010.png"
+  },
+  {
+   "t": 5.5,
+   "file": "frozen/f0011.png"
+  },
+  {
+   "t": 6,
+   "file": "frozen/f0012.png"
+  },
+  {
+   "t": 6.5,
+   "file": "frozen/f0013.png"
+  },
+  {
+   "t": 7,
+   "file": "frozen/f0014.png"
+  },
+  {
+   "t": 7.5,
+   "file": "frozen/f0015.png"
+  },
+  {
+   "t": 8,
+   "file": "frozen/f0016.png"
+  },
+  {
+   "t": 8.5,
+   "file": "frozen/f0017.png"
+  },
+  {
+   "t": 9,
+   "file": "frozen/f0018.png"
+  },
+  {
+   "t": 9.5,
+   "file": "frozen/f0019.png"
+  },
+  {
+   "t": 10,
+   "file": "frozen/f0020.png"
+  },
+  {
+   "t": 10.5,
+   "file": "frozen/f0021.png"
+  },
+  {
+   "t": 11,
+   "file": "frozen/f0022.png"
+  },
+  {
+   "t": 11.5,
+   "file": "frozen/f0023.png"
+  },
+  {
+   "t": 12,
+   "file": "frozen/f0024.png"
+  },
+  {
+   "t": 12.5,
+   "file": "frozen/f0025.png"
+  },
+  {
+   "t": 13,
+   "file": "frozen/f0026.png"
+  },
+  {
+   "t": 13.5,
+   "file": "frozen/f0027.png"
+  },
+  {
+   "t": 14,
+   "file": "frozen/f0028.png"
+  },
+  {
+   "t": 14.5,
+   "file": "frozen/f0029.png"
+  },
+  {
+   "t": 15,
+   "file": "frozen/f0030.png"
+  },
+  {
+   "t": 15.5,
+   "file": "frozen/f0031.png"
+  },
+  {
+   "t": 16,
+   "file": "frozen/f0032.png"
+  },
+  {
+   "t": 16.5,
+   "file": "frozen/f0033.png"
+  },
+  {
+   "t": 17,
+   "file": "frozen/f0034.png"
+  },
+  {
+   "t": 17.5,
+   "file": "frozen/f0035.png"
+  },
+  {
+   "t": 18,
+   "file": "frozen/f0036.png"
+  },
+  {
+   "t": 18.5,
+   "file": "frozen/f0037.png"
+  },
+  {
+   "t": 19,
+   "file": "frozen/f0038.png"
+  },
+  {
+   "t": 19.5,
+   "file": "frozen/f0039.png"
+  },
+  {
+   "t": 20,
+   "file": "frozen/f0040.png"
+  },
+  {
+   "t": 20.5,
+   "file": "frozen/f0041.png"
+  },
+  {
+   "t": 21,
+   "file": "frozen/f0042.png"
+  },
+  {
+   "t": 21.5,
+   "file": "frozen/f0043.png"
+  },
+  {
+   "t": 22,
+   "file": "frozen/f0044.png"
+  },
+  {
+   "t": 22.5,
+   "file": "frozen/f0045.png"
+  },
+  {
+   "t": 23,
+   "file": "frozen/f0046.png"
+  },
+  {
+   "t": 23.5,
+   "file": "frozen/f0047.png"
+  },
+  {
+   "t": 24,
+   "file": "frozen/f0048.png"
+  },
+  {
+   "t": 24.5,
+   "file": "frozen/f0049.png"
+  },
+  {
+   "t": 25,
+   "file": "frozen/f0050.png"
+  },
+  {
+   "t": 25.5,
+   "file": "frozen/f0051.png"
+  },
+  {
+   "t": 26,
+   "file": "frozen/f0052.png"
+  },
+  {
+   "t": 26.5,
+   "file": "frozen/f0053.png"
+  },
+  {
+   "t": 27,
+   "file": "frozen/f0054.png"
+  },
+  {
+   "t": 27.5,
+   "file": "frozen/f0055.png"
+  },
+  {
+   "t": 28,
+   "file": "frozen/f0056.png"
+  },
+  {
+   "t": 28.5,
+   "file": "frozen/f0057.png"
+  },
+  {
+   "t": 29,
+   "file": "frozen/f0058.png"
+  },
+  {
+   "t": 29.5,
+   "file": "frozen/f0059.png"
+  },
+  {
+   "t": 30,
+   "file": "frozen/f0060.png"
+  },
+  {
+   "t": 30.5,
+   "file": "frozen/f0061.png"
+  },
+  {
+   "t": 31,
+   "file": "frozen/f0062.png"
+  },
+  {
+   "t": 31.5,
+   "file": "frozen/f0063.png"
+  },
+  {
+   "t": 32,
+   "file": "frozen/f0064.png"
+  },
+  {
+   "t": 32.5,
+   "file": "frozen/f0065.png"
+  },
+  {
+   "t": 33,
+   "file": "frozen/f0066.png"
+  },
+  {
+   "t": 33.5,
+   "file": "frozen/f0067.png"
+  },
+  {
+   "t": 34,
+   "file": "frozen/f0068.png"
+  },
+  {
+   "t": 34.5,
+   "file": "frozen/f0069.png"
+  },
+  {
+   "t": 35,
+   "file": "frozen/f0070.png"
+  },
+  {
+   "t": 35.5,
+   "file": "frozen/f0071.png"
+  },
+  {
+   "t": 36,
+   "file": "frozen/f0072.png"
+  },
+  {
+   "t": 36.5,
+   "file": "frozen/f0073.png"
+  },
+  {
+   "t": 37,
+   "file": "frozen/f0074.png"
+  },
+  {
+   "t": 37.5,
+   "file": "frozen/f0075.png"
+  },
+  {
+   "t": 38,
+   "file": "frozen/f0076.png"
+  },
+  {
+   "t": 38.5,
+   "file": "frozen/f0077.png"
+  },
+  {
+   "t": 39,
+   "file": "frozen/f0078.png"
+  },
+  {
+   "t": 39.5,
+   "file": "frozen/f0079.png"
+  },
+  {
+   "t": 40,
+   "file": "frozen/f0080.png"
+  },
+  {
+   "t": 40.5,
+   "file": "frozen/f0081.png"
+  },
+  {
+   "t": 41,
+   "file": "frozen/f0082.png"
+  },
+  {
+   "t": 41.5,
+   "file": "frozen/f0083.png"
+  },
+  {
+   "t": 42,
+   "file": "frozen/f0084.png"
+  },
+  {
+   "t": 42.5,
+   "file": "frozen/f0085.png"
+  },
+  {
+   "t": 43,
+   "file": "frozen/f0086.png"
+  },
+  {
+   "t": 43.5,
+   "file": "frozen/f0087.png"
+  },
+  {
+   "t": 44,
+   "file": "frozen/f0088.png"
+  },
+  {
+   "t": 44.5,
+   "file": "frozen/f0089.png"
+  },
+  {
+   "t": 45,
+   "file": "frozen/f0090.png"
+  },
+  {
+   "t": 45.5,
+   "file": "frozen/f0091.png"
+  },
+  {
+   "t": 46,
+   "file": "frozen/f0092.png"
+  },
+  {
+   "t": 46.5,
+   "file": "frozen/f0093.png"
+  },
+  {
+   "t": 47,
+   "file": "frozen/f0094.png"
+  },
+  {
+   "t": 47.5,
+   "file": "frozen/f0095.png"
+  },
+  {
+   "t": 48,
+   "file": "frozen/f0096.png"
+  },
+  {
+   "t": 48.5,
+   "file": "frozen/f0097.png"
+  },
+  {
+   "t": 49,
+   "file": "frozen/f0098.png"
+  },
+  {
+   "t": 49.5,
+   "file": "frozen/f0099.png"
+  },
+  {
+   "t": 50,
+   "file": "frozen/f0100.png"
+  },
+  {
+   "t": 50.5,
+   "file": "frozen/f0101.png"
+  },
+  {
+   "t": 51,
+   "file": "frozen/f0102.png"
+  },
+  {
+   "t": 51.5,
+   "file": "frozen/f0103.png"
+  },
+  {
+   "t": 52,
+   "file": "frozen/f0104.png"
+  },
+  {
+   "t": 52.5,
+   "file": "frozen/f0105.png"
+  },
+  {
+   "t": 53,
+   "file": "frozen/f0106.png"
+  },
+  {
+   "t": 53.5,
+   "file": "frozen/f0107.png"
+  },
+  {
+   "t": 54,
+   "file": "frozen/f0108.png"
+  },
+  {
+   "t": 54.5,
+   "file": "frozen/f0109.png"
+  },
+  {
+   "t": 55,
+   "file": "frozen/f0110.png"
+  },
+  {
+   "t": 55.5,
+   "file": "frozen/f0111.png"
+  },
+  {
+   "t": 56,
+   "file": "frozen/f0112.png"
+  },
+  {
+   "t": 56.5,
+   "file": "frozen/f0113.png"
+  },
+  {
+   "t": 57,
+   "file": "frozen/f0114.png"
+  },
+  {
+   "t": 57.5,
+   "file": "frozen/f0115.png"
+  },
+  {
+   "t": 58,
+   "file": "frozen/f0116.png"
+  },
+  {
+   "t": 58.5,
+   "file": "frozen/f0117.png"
+  },
+  {
+   "t": 59,
+   "file": "frozen/f0118.png"
+  },
+  {
+   "t": 59.5,
+   "file": "frozen/f0119.png"
+  },
+  {
+   "t": 60,
+   "file": "frozen/f0120.png"
+  },
+  {
+   "t": 60.5,
+   "file": "frozen/f0121.png"
+  },
+  {
+   "t": 61,
+   "file": "frozen/f0122.png"
+  },
+  {
+   "t": 61.5,
+   "file": "frozen/f0123.png"
+  },
+  {
+   "t": 62,
+   "file": "frozen/f0124.png"
+  },
+  {
+   "t": 62.5,
+   "file": "frozen/f0125.png"
+  },
+  {
+   "t": 63,
+   "file": "frozen/f0126.png"
+  },
+  {
+   "t": 63.5,
+   "file": "frozen/f0127.png"
+  },
+  {
+   "t": 64,
+   "file": "frozen/f0128.png"
+  },
+  {
+   "t": 64.5,
+   "file": "frozen/f0129.png"
+  },
+  {
+   "t": 65,
+   "file": "frozen/f0130.png"
+  },
+  {
+   "t": 65.5,
+   "file": "frozen/f0131.png"
+  },
+  {
+   "t": 66,
+   "file": "frozen/f0132.png"
+  },
+  {
+   "t": 66.5,
+   "file": "frozen/f0133.png"
+  },
+  {
+   "t": 67,
+   "file": "frozen/f0134.png"
+  },
+  {
+   "t": 67.5,
+   "file": "frozen/f0135.png"
+  },
+  {
+   "t": 68,
+   "file": "frozen/f0136.png"
+  },
+  {
+   "t": 68.5,
+   "file": "frozen/f0137.png"
+  },
+  {
+   "t": 69,
+   "file": "frozen/f0138.png"
+  },
+  {
+   "t": 69.5,
+   "file": "frozen/f0139.png"
+  },
+  {
+   "t": 70,
+   "file": "frozen/f0140.png"
+  },
+  {
+   "t": 70.5,
+   "file": "frozen/f0141.png"
+  },
+  {
+   "t": 71,
+   "file": "frozen/f0142.png"
+  },
+  {
+   "t": 71.5,
+   "file": "frozen/f0143.png"
+  },
+  {
+   "t": 72,
+   "file": "frozen/f0144.png"
+  },
+  {
+   "t": 72.5,
+   "file": "frozen/f0145.png"
+  },
+  {
+   "t": 73,
+   "file": "frozen/f0146.png"
+  },
+  {
+   "t": 73.5,
+   "file": "frozen/f0147.png"
+  },
+  {
+   "t": 74,
+   "file": "frozen/f0148.png"
+  },
+  {
+   "t": 74.5,
+   "file": "frozen/f0149.png"
+  },
+  {
+   "t": 75,
+   "file": "frozen/f0150.png"
+  },
+  {
+   "t": 75.5,
+   "file": "frozen/f0151.png"
+  },
+  {
+   "t": 76,
+   "file": "frozen/f0152.png"
+  },
+  {
+   "t": 76.5,
+   "file": "frozen/f0153.png"
+  },
+  {
+   "t": 77,
+   "file": "frozen/f0154.png"
+  },
+  {
+   "t": 77.5,
+   "file": "frozen/f0155.png"
+  },
+  {
+   "t": 78,
+   "file": "frozen/f0156.png"
+  },
+  {
+   "t": 78.5,
+   "file": "frozen/f0157.png"
+  },
+  {
+   "t": 79,
+   "file": "frozen/f0158.png"
+  },
+  {
+   "t": 79.5,
+   "file": "frozen/f0159.png"
+  },
+  {
+   "t": 80,
+   "file": "frozen/f0160.png"
+  },
+  {
+   "t": 80.5,
+   "file": "frozen/f0161.png"
+  },
+  {
+   "t": 81,
+   "file": "frozen/f0162.png"
+  },
+  {
+   "t": 81.5,
+   "file": "frozen/f0163.png"
+  },
+  {
+   "t": 82,
+   "file": "frozen/f0164.png"
+  },
+  {
+   "t": 82.5,
+   "file": "frozen/f0165.png"
+  },
+  {
+   "t": 83,
+   "file": "frozen/f0166.png"
+  },
+  {
+   "t": 83.5,
+   "file": "frozen/f0167.png"
+  },
+  {
+   "t": 84,
+   "file": "frozen/f0168.png"
+  },
+  {
+   "t": 84.5,
+   "file": "frozen/f0169.png"
+  },
+  {
+   "t": 85,
+   "file": "frozen/f0170.png"
+  },
+  {
+   "t": 85.5,
+   "file": "frozen/f0171.png"
+  },
+  {
+   "t": 86,
+   "file": "frozen/f0172.png"
+  },
+  {
+   "t": 86.5,
+   "file": "frozen/f0173.png"
+  },
+  {
+   "t": 87,
+   "file": "frozen/f0174.png"
+  },
+  {
+   "t": 87.5,
+   "file": "frozen/f0175.png"
+  },
+  {
+   "t": 88,
+   "file": "frozen/f0176.png"
+  },
+  {
+   "t": 88.5,
+   "file": "frozen/f0177.png"
+  },
+  {
+   "t": 89,
+   "file": "frozen/f0178.png"
+  },
+  {
+   "t": 89.5,
+   "file": "frozen/f0179.png"
+  },
+  {
+   "t": 90,
+   "file": "frozen/f0180.png"
+  },
+  {
+   "t": 90.5,
+   "file": "frozen/f0181.png"
+  },
+  {
+   "t": 91,
+   "file": "frozen/f0182.png"
+  },
+  {
+   "t": 91.5,
+   "file": "frozen/f0183.png"
+  },
+  {
+   "t": 92,
+   "file": "frozen/f0184.png"
+  },
+  {
+   "t": 92.5,
+   "file": "frozen/f0185.png"
+  },
+  {
+   "t": 93,
+   "file": "frozen/f0186.png"
+  },
+  {
+   "t": 93.5,
+   "file": "frozen/f0187.png"
+  },
+  {
+   "t": 94,
+   "file": "frozen/f0188.png"
+  },
+  {
+   "t": 94.5,
+   "file": "frozen/f0189.png"
+  },
+  {
+   "t": 95,
+   "file": "frozen/f0190.png"
+  },
+  {
+   "t": 95.5,
+   "file": "frozen/f0191.png"
+  },
+  {
+   "t": 96,
+   "file": "frozen/f0192.png"
+  },
+  {
+   "t": 96.5,
+   "file": "frozen/f0193.png"
+  },
+  {
+   "t": 97,
+   "file": "frozen/f0194.png"
+  },
+  {
+   "t": 97.5,
+   "file": "frozen/f0195.png"
+  },
+  {
+   "t": 98,
+   "file": "frozen/f0196.png"
+  },
+  {
+   "t": 98.5,
+   "file": "frozen/f0197.png"
+  },
+  {
+   "t": 99,
+   "file": "frozen/f0198.png"
+  },
+  {
+   "t": 99.5,
+   "file": "frozen/f0199.png"
+  },
+  {
+   "t": 100,
+   "file": "frozen/f0200.png"
+  },
+  {
+   "t": 100.5,
+   "file": "frozen/f0201.png"
+  },
+  {
+   "t": 101,
+   "file": "frozen/f0202.png"
+  },
+  {
+   "t": 101.5,
+   "file": "frozen/f0203.png"
+  },
+  {
+   "t": 102,
+   "file": "frozen/f0204.png"
+  },
+  {
+   "t": 102.5,
+   "file": "frozen/f0205.png"
+  },
+  {
+   "t": 103,
+   "file": "frozen/f0206.png"
+  },
+  {
+   "t": 103.5,
+   "file": "frozen/f0207.png"
+  },
+  {
+   "t": 104,
+   "file": "frozen/f0208.png"
+  },
+  {
+   "t": 104.5,
+   "file": "frozen/f0209.png"
+  },
+  {
+   "t": 105,
+   "file": "frozen/f0210.png"
+  },
+  {
+   "t": 105.5,
+   "file": "frozen/f0211.png"
+  },
+  {
+   "t": 106,
+   "file": "frozen/f0212.png"
+  },
+  {
+   "t": 106.5,
+   "file": "frozen/f0213.png"
+  },
+  {
+   "t": 107,
+   "file": "frozen/f0214.png"
+  },
+  {
+   "t": 107.5,
+   "file": "frozen/f0215.png"
+  },
+  {
+   "t": 108,
+   "file": "frozen/f0216.png"
+  },
+  {
+   "t": 108.5,
+   "file": "frozen/f0217.png"
+  },
+  {
+   "t": 109,
+   "file": "frozen/f0218.png"
+  },
+  {
+   "t": 109.5,
+   "file": "frozen/f0219.png"
+  },
+  {
+   "t": 110,
+   "file": "frozen/f0220.png"
+  },
+  {
+   "t": 110.5,
+   "file": "frozen/f0221.png"
+  },
+  {
+   "t": 111,
+   "file": "frozen/f0222.png"
+  },
+  {
+   "t": 111.5,
+   "file": "frozen/f0223.png"
+  },
+  {
+   "t": 112,
+   "file": "frozen/f0224.png"
+  },
+  {
+   "t": 112.5,
+   "file": "frozen/f0225.png"
+  },
+  {
+   "t": 113,
+   "file": "frozen/f0226.png"
+  },
+  {
+   "t": 113.5,
+   "file": "frozen/f0227.png"
+  },
+  {
+   "t": 114,
+   "file": "frozen/f0228.png"
+  },
+  {
+   "t": 114.5,
+   "file": "frozen/f0229.png"
+  },
+  {
+   "t": 115,
+   "file": "frozen/f0230.png"
+  },
+  {
+   "t": 115.5,
+   "file": "frozen/f0231.png"
+  },
+  {
+   "t": 116,
+   "file": "frozen/f0232.png"
+  },
+  {
+   "t": 116.5,
+   "file": "frozen/f0233.png"
+  },
+  {
+   "t": 117,
+   "file": "frozen/f0234.png"
+  },
+  {
+   "t": 117.5,
+   "file": "frozen/f0235.png"
+  },
+  {
+   "t": 118,
+   "file": "frozen/f0236.png"
+  },
+  {
+   "t": 118.5,
+   "file": "frozen/f0237.png"
+  },
+  {
+   "t": 119,
+   "file": "frozen/f0238.png"
+  },
+  {
+   "t": 119.5,
+   "file": "frozen/f0239.png"
+  },
+  {
+   "t": 120,
+   "file": "frozen/f0240.png"
+  },
+  {
+   "t": 120.5,
+   "file": "frozen/f0241.png"
+  },
+  {
+   "t": 121,
+   "file": "frozen/f0242.png"
+  },
+  {
+   "t": 121.5,
+   "file": "frozen/f0243.png"
+  },
+  {
+   "t": 122,
+   "file": "frozen/f0244.png"
+  },
+  {
+   "t": 122.5,
+   "file": "frozen/f0245.png"
+  },
+  {
+   "t": 123,
+   "file": "frozen/f0246.png"
+  },
+  {
+   "t": 123.5,
+   "file": "frozen/f0247.png"
+  },
+  {
+   "t": 124,
+   "file": "frozen/f0248.png"
+  },
+  {
+   "t": 124.5,
+   "file": "frozen/f0249.png"
+  },
+  {
+   "t": 125,
+   "file": "frozen/f0250.png"
+  },
+  {
+   "t": 125.5,
+   "file": "frozen/f0251.png"
+  },
+  {
+   "t": 126,
+   "file": "frozen/f0252.png"
+  },
+  {
+   "t": 126.5,
+   "file": "frozen/f0253.png"
+  },
+  {
+   "t": 127,
+   "file": "frozen/f0254.png"
+  },
+  {
+   "t": 127.5,
+   "file": "frozen/f0255.png"
+  },
+  {
+   "t": 128,
+   "file": "frozen/f0256.png"
+  },
+  {
+   "t": 128.5,
+   "file": "frozen/f0257.png"
+  },
+  {
+   "t": 129,
+   "file": "frozen/f0258.png"
+  },
+  {
+   "t": 129.5,
+   "file": "frozen/f0259.png"
+  },
+  {
+   "t": 130,
+   "file": "frozen/f0260.png"
+  },
+  {
+   "t": 130.5,
+   "file": "frozen/f0261.png"
+  },
+  {
+   "t": 131,
+   "file": "frozen/f0262.png"
+  },
+  {
+   "t": 131.5,
+   "file": "frozen/f0263.png"
+  },
+  {
+   "t": 132,
+   "file": "frozen/f0264.png"
+  },
+  {
+   "t": 132.5,
+   "file": "frozen/f0265.png"
+  },
+  {
+   "t": 133,
+   "file": "frozen/f0266.png"
+  },
+  {
+   "t": 133.5,
+   "file": "frozen/f0267.png"
+  },
+  {
+   "t": 134,
+   "file": "frozen/f0268.png"
+  },
+  {
+   "t": 134.5,
+   "file": "frozen/f0269.png"
+  },
+  {
+   "t": 135,
+   "file": "frozen/f0270.png"
+  },
+  {
+   "t": 135.5,
+   "file": "frozen/f0271.png"
+  },
+  {
+   "t": 136,
+   "file": "frozen/f0272.png"
+  },
+  {
+   "t": 136.5,
+   "file": "frozen/f0273.png"
+  },
+  {
+   "t": 137,
+   "file": "frozen/f0274.png"
+  },
+  {
+   "t": 137.5,
+   "file": "frozen/f0275.png"
+  },
+  {
+   "t": 138,
+   "file": "frozen/f0276.png"
+  },
+  {
+   "t": 138.5,
+   "file": "frozen/f0277.png"
+  },
+  {
+   "t": 139,
+   "file": "frozen/f0278.png"
+  },
+  {
+   "t": 139.5,
+   "file": "frozen/f0279.png"
+  },
+  {
+   "t": 140,
+   "file": "frozen/f0280.png"
+  },
+  {
+   "t": 140.5,
+   "file": "frozen/f0281.png"
+  },
+  {
+   "t": 141,
+   "file": "frozen/f0282.png"
+  },
+  {
+   "t": 141.5,
+   "file": "frozen/f0283.png"
+  },
+  {
+   "t": 142,
+   "file": "frozen/f0284.png"
+  },
+  {
+   "t": 142.5,
+   "file": "frozen/f0285.png"
+  },
+  {
+   "t": 143,
+   "file": "frozen/f0286.png"
+  },
+  {
+   "t": 143.5,
+   "file": "frozen/f0287.png"
+  },
+  {
+   "t": 144,
+   "file": "frozen/f0288.png"
+  },
+  {
+   "t": 144.5,
+   "file": "frozen/f0289.png"
+  },
+  {
+   "t": 145,
+   "file": "frozen/f0290.png"
+  },
+  {
+   "t": 145.5,
+   "file": "frozen/f0291.png"
+  },
+  {
+   "t": 146,
+   "file": "frozen/f0292.png"
+  },
+  {
+   "t": 146.5,
+   "file": "frozen/f0293.png"
+  },
+  {
+   "t": 147,
+   "file": "frozen/f0294.png"
+  },
+  {
+   "t": 147.5,
+   "file": "frozen/f0295.png"
+  },
+  {
+   "t": 148,
+   "file": "frozen/f0296.png"
+  },
+  {
+   "t": 148.5,
+   "file": "frozen/f0297.png"
+  },
+  {
+   "t": 149,
+   "file": "frozen/f0298.png"
+  },
+  {
+   "t": 149.5,
+   "file": "frozen/f0299.png"
+  },
+  {
+   "t": 150,
+   "file": "frozen/f0300.png"
+  },
+  {
+   "t": 150.5,
+   "file": "frozen/f0301.png"
+  },
+  {
+   "t": 151,
+   "file": "frozen/f0302.png"
+  },
+  {
+   "t": 151.5,
+   "file": "frozen/f0303.png"
+  },
+  {
+   "t": 152,
+   "file": "frozen/f0304.png"
+  },
+  {
+   "t": 152.5,
+   "file": "frozen/f0305.png"
+  },
+  {
+   "t": 153,
+   "file": "frozen/f0306.png"
+  },
+  {
+   "t": 153.5,
+   "file": "frozen/f0307.png"
+  },
+  {
+   "t": 154,
+   "file": "frozen/f0308.png"
+  },
+  {
+   "t": 154.5,
+   "file": "frozen/f0309.png"
+  },
+  {
+   "t": 155,
+   "file": "frozen/f0310.png"
+  },
+  {
+   "t": 155.5,
+   "file": "frozen/f0311.png"
+  }
+ ],
+ "errors": [],
+ "mobileHScroll": false
+}

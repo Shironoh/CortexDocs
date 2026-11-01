@@ -1,0 +1,292 @@
+{
+ "engine": "piper:fr_FR-siwis-medium",
+ "wer_mean": 0.05,
+ "to_fix": [
+  [
+   "c9",
+   0.23,
+   [
+    [
+     "sablier coule",
+     "sablie est cool"
+    ]
+   ]
+  ]
+ ],
+ "often_misheard": [
+  [
+   "mille",
+   5
+  ],
+  [
+   "otzi",
+   2
+  ],
+  [
+   "n",
+   1
+  ],
+  [
+   "sablier",
+   1
+  ],
+  [
+   "coule",
+   1
+  ],
+  [
+   "milligramme",
+   1
+  ],
+  [
+   "b",
+   1
+  ],
+  [
+   "p",
+   1
+  ],
+  [
+   "ce",
+   1
+  ],
+  [
+   "chances",
+   1
+  ],
+  [
+   "sa",
+   1
+  ],
+  [
+   "marge",
+   1
+  ],
+  [
+   "si",
+   1
+  ],
+  [
+   "l",
+   1
+  ],
+  [
+   "horloge",
+   1
+  ]
+ ],
+ "parts": [
+  {
+   "cue": "c1",
+   "wer": 0.0,
+   "heard": "Septembre 1991, dans un glacier des Alpes, un homme mort depuis très longtemps. Depuis combien de temps ?",
+   "errors": []
+  },
+  {
+   "cue": "c2",
+   "wer": 0.0,
+   "heard": "Facile. Le carbone 14 date tout.",
+   "errors": []
+  },
+  {
+   "cue": "c3",
+   "wer": 0.0,
+   "heard": "pas tout. Mais pour lui, oui, son corps contient une horloge.",
+   "errors": []
+  },
+  {
+   "cue": "c4",
+   "wer": 0.0,
+   "heard": "Très haut, les rayons cosmiques frappent l 'azote de l 'air et le changent en carbone 14.",
+   "errors": []
+  },
+  {
+   "cue": "c5",
+   "wer": 0.0,
+   "heard": "Il est rare, environ un atome de carbone sur mille milliards. Les plantes l 'absorbe, puis ceux qui les mangent.",
+   "errors": []
+  },
+  {
+   "cue": "c6",
+   "wer": 0.056,
+   "heard": "Tant qu 'on vit, on en reprend, le sablier reste plein, à la mort, plus rien entre.",
+   "errors": [
+    [
+     "n",
+     ""
+    ]
+   ]
+  },
+  {
+   "cue": "c7",
+   "wer": 0.0,
+   "heard": "Puis, il redevient lentement de l 'azote à un rythme fixe. Chaque atome a la même chance de changer chaque année.",
+   "errors": []
+  },
+  {
+   "cue": "c8",
+   "wer": 0.091,
+   "heard": "En 5 700 ans, la moitié disparaît. Devinez, après 2 fois 5 700 ans, que reste -t -il ?",
+   "errors": [
+    [
+     "mille",
+     ""
+    ],
+    [
+     "mille",
+     ""
+    ]
+   ]
+  },
+  {
+   "cue": "c8",
+   "wer": 0.0,
+   "heard": "un quart, puis un huitième, un sézième.",
+   "errors": []
+  },
+  {
+   "cue": "c9",
+   "wer": 0.231,
+   "heard": "Comptez ce qui reste, c 'est donc lire depuis quand le sablie est cool.",
+   "errors": [
+    [
+     "sablier coule",
+     "sablie est cool"
+    ]
+   ]
+  },
+  {
+   "cue": "c10",
+   "wer": 0.048,
+   "heard": "Zurich et Oxford ont compté les atomes un par un avec un accélérateur sur environ 1 mg. La mommie est précieuse.",
+   "errors": [
+    [
+     "milligramme",
+     "mg"
+    ]
+   ]
+  },
+  {
+   "cue": "c11",
+   "wer": 0.105,
+   "heard": "Une vraie ligne du rapport LOS 4560 plus ou moins 65 BT.",
+   "errors": [
+    [
+     "b p",
+     "bt"
+    ]
+   ]
+  },
+  {
+   "cue": "c12",
+   "wer": 0.037,
+   "heard": "On croit que BP veut dire avant vous aujourd 'hui. Faux, avant 1950. Et le plus ou moins, c 'est la marge de mesure.",
+   "errors": [
+    [
+     "",
+     "vous"
+    ]
+   ]
+  },
+  {
+   "cue": "c13",
+   "wer": 0.0,
+   "heard": "Ce n 'est pas encore une date. Le carbone 14 de l 'air a varié au fil des siècles.",
+   "errors": []
+  },
+  {
+   "cue": "c14",
+   "wer": 0.0,
+   "heard": "On corrige avec des cernes d 'arbres dont on connaît l 'année exacte, c 'est la courbe de calibration.",
+   "errors": []
+  },
+  {
+   "cue": "c15",
+   "wer": 0.118,
+   "heard": "Devinez, 4 ,550 BP, la moyenne d 'Otzi est une seule date ?",
+   "errors": [
+    [
+     "mille",
+     ""
+    ],
+    [
+     "ce",
+     ""
+    ]
+   ]
+  },
+  {
+   "cue": "c15",
+   "wer": 0.05,
+   "heard": "Non, deux champs sur trois entre 3239 et 3105 avant notre ère.",
+   "errors": [
+    [
+     "chances",
+     "champs"
+    ]
+   ]
+  },
+  {
+   "cue": "c16",
+   "wer": 0.0,
+   "heard": "Alors datons un dinosaure.",
+   "errors": []
+  },
+  {
+   "cue": "c17",
+   "wer": 0.033,
+   "heard": "Impossible ! Au -delà de 50 000 ans environ, il reste trop peu de carbone quator à compter. Les dinosaures, 66 millions d 'années, se datent avec d 'autres horloges.",
+   "errors": [
+    [
+     "mille",
+     "zero"
+    ]
+   ]
+  },
+  {
+   "cue": "c18",
+   "wer": 0.029,
+   "heard": "Aussi est donc mort vers 3300 à 3100 avant notre ère, selon la calibration de 1994. Il y a plus de 5000 ans.",
+   "errors": [
+    [
+     "otzi",
+     "aussi"
+    ]
+   ]
+  },
+  {
+   "cue": "c19",
+   "wer": 0.138,
+   "heard": "Devant une datation, lisez le BP et ça marche. Demandez -y elle est calibrée. Vérifiez que l 'objet a vécu il y a moins de 50 000 ans.",
+   "errors": [
+    [
+     "sa marge",
+     "ca marche"
+    ],
+    [
+     "si",
+     "y"
+    ],
+    [
+     "mille",
+     "zero"
+    ]
+   ]
+  },
+  {
+   "cue": "c20",
+   "wer": 0.158,
+   "heard": "En réalité, les labos corrigent aussi la composition de l 'échantillon. Mais vous savez lire leur loge d 'Otsi.",
+   "errors": [
+    [
+     "l horloge",
+     "leur loge"
+    ],
+    [
+     "otzi",
+     "otsi"
+    ]
+   ]
+  }
+ ]
+}

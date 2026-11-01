@@ -1,0 +1,1380 @@
+{
+ "summary": {
+  "beat_gaps_gt2_5s": [],
+  "cues_under_beat_quota": [],
+  "moving_captures": 12,
+  "duration_s": 165.9,
+  "cues": 19,
+  "scenes": 7,
+  "say_words": 373,
+  "words_per_min": 134.9,
+  "captures": 57,
+  "captures_with_issue": 35,
+  "issues": {
+   "subj_in_band": 7,
+   "focus_hidden": 4,
+   "focus_small": 18,
+   "focus_offcenter": 7,
+   "cut": 14,
+   "subj_cut": 1,
+   "small": 9,
+   "toomanytext": 6
+  },
+  "frozen_windows_gt2_5s": [
+   [
+    49.5,
+    53.0,
+    "c7"
+   ]
+  ],
+  "avg_text_blocks": 3.28,
+  "avg_onscreen_words": 11.25,
+  "avg_empty": 0.078,
+  "shot_values_per_scene": {
+   "s1": [
+    0.61,
+    0.99,
+    1.6
+   ],
+   "s2": [
+    0.78,
+    2.1
+   ],
+   "s3": [
+    0.91,
+    1.23
+   ],
+   "s4": [
+    0.79,
+    2.6
+   ],
+   "s5": [
+    0.61,
+    1.1,
+    1.63
+   ],
+   "s6": [
+    0.61,
+    1.1,
+    1.52
+   ],
+   "s7": [
+    0.61,
+    0.84,
+    2.4
+   ]
+  },
+  "scenes_lt3_shot_values": [
+   "s2",
+   "s3",
+   "s4"
+  ],
+  "analyst_acting_scenes": "7/7",
+  "villain_scenes": "4/7",
+  "js_errors": [],
+  "mobile_hscroll": false,
+  "sound_events": 84
+ },
+ "captures": [
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c1_25.jpg",
+   "t": 2.3975,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 712,
+    "cy": 294,
+    "area": 0.113
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.115
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c1_50.jpg",
+   "t": 4.195,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 715,
+    "cy": 297,
+    "area": 0.085
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.253
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c1_75.jpg",
+   "t": 5.9925,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 598,
+    "cy": 330,
+    "area": 0.164
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.0
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c2_25.jpg",
+   "t": 9.40675,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.106
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.028
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c2_50.jpg",
+   "t": 11.0235,
+   "ntext": 2,
+   "words": 6,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.106
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c2_75.jpg",
+   "t": 12.640250000000002,
+   "ntext": 2,
+   "words": 6,
+   "focus": {
+    "cx": 542,
+    "cy": 317,
+    "area": 0.09
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.003
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c3_25.jpg",
+   "t": 15.325000000000001,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 800,
+    "cy": 260,
+    "area": 0.397
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.036
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c3_50.jpg",
+   "t": 16.393,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.131
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.238
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c3_75.jpg",
+   "t": 17.461000000000002,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 420,
+    "cy": 298,
+    "area": 0.028
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.035
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c4_25.jpg",
+   "t": 21.06375,
+   "ntext": 5,
+   "words": 21,
+   "focus": {
+    "cx": 528,
+    "cy": 618,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    }
+   ],
+   "moving": true,
+   "empty": 0.031
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c4_50.jpg",
+   "t": 23.5985,
+   "ntext": 5,
+   "words": 20,
+   "focus": {
+    "cx": 528,
+    "cy": 625,
+    "area": 0.031
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.031
+    }
+   ],
+   "moving": false,
+   "empty": 0.106
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c4_75.jpg",
+   "t": 26.13325,
+   "ntext": 5,
+   "words": 20,
+   "focus": {
+    "cx": 528,
+    "cy": 625,
+    "area": 0.031
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.031
+    }
+   ],
+   "moving": false,
+   "empty": 0.035
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c5_25.jpg",
+   "t": 30.68025,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 529,
+    "cy": 418,
+    "area": 0.036
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.036
+    }
+   ],
+   "moving": false,
+   "empty": 0.038
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c5_50.jpg",
+   "t": 32.6925,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 827,
+    "cy": 344,
+    "area": 0.009
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.009
+    }
+   ],
+   "moving": false,
+   "empty": 0.038
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c5_75.jpg",
+   "t": 34.704750000000004,
+   "ntext": 5,
+   "words": 23,
+   "focus": {
+    "cx": 1079,
+    "cy": 418,
+    "area": 0.013
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.013
+    }
+   ],
+   "moving": false,
+   "empty": 0.038
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c6_25.jpg",
+   "t": 38.46725,
+   "ntext": 4,
+   "words": 12,
+   "focus": {
+    "cx": 294,
+    "cy": 199,
+    "area": 0.024
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.024
+    }
+   ],
+   "moving": false,
+   "empty": 0.089
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c6_50.jpg",
+   "t": 40.2175,
+   "ntext": 4,
+   "words": 12,
+   "focus": {
+    "cx": 164,
+    "cy": 21,
+    "area": 0.016
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.0
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c6_75.jpg",
+   "t": 41.96775,
+   "ntext": 4,
+   "words": 12,
+   "focus": {
+    "cx": 246,
+    "cy": 350,
+    "area": 0.265
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.0
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c7_25.jpg",
+   "t": 46.075250000000004,
+   "ntext": 3,
+   "words": 10,
+   "focus": {
+    "cx": 821,
+    "cy": 570,
+    "area": 0.274
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c7_50.jpg",
+   "t": 48.432500000000005,
+   "ntext": 3,
+   "words": 10,
+   "focus": {
+    "cx": 859,
+    "cy": 570,
+    "area": 0.256
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c7_75.jpg",
+   "t": 50.789750000000005,
+   "ntext": 4,
+   "words": 11,
+   "focus": {
+    "cx": 1202,
+    "cy": 115,
+    "area": 0.033
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1202,
+      115
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.033
+    }
+   ],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c8_25.jpg",
+   "t": 56.221000000000004,
+   "ntext": 5,
+   "words": 17,
+   "focus": {
+    "cx": 945,
+    "cy": 135,
+    "area": 0.069
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "-> Limit"
+    },
+    {
+     "k": "cut",
+     "s": "-> Sort"
+    }
+   ],
+   "moving": false,
+   "empty": 0.073
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c8_50.jpg",
+   "t": 59.29500000000001,
+   "ntext": 2,
+   "words": 8,
+   "focus": {
+    "cx": 872,
+    "cy": -67,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "-> Gather"
+    },
+    {
+     "k": "cut",
+     "s": "-> Parallel Seq Scan on orders"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      872,
+      -67
+     ]
+    }
+   ],
+   "moving": false,
+   "empty": 0.05
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c8_75.jpg",
+   "t": 62.36900000000001,
+   "ntext": 6,
+   "words": 21,
+   "focus": {
+    "cx": 725,
+    "cy": 111,
+    "area": 0.048
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "-> Limit"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      725,
+      111
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.048
+    }
+   ],
+   "moving": false,
+   "empty": 0.111
+  },
+  {
+   "cue": "c9",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c9_25.jpg",
+   "t": 67.42875000000001,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 792,
+    "cy": 386,
+    "area": 0.105
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.312
+  },
+  {
+   "cue": "c9",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c9_50.jpg",
+   "t": 69.41450000000002,
+   "ntext": 1,
+   "words": 7,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.105
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.278
+  },
+  {
+   "cue": "c9",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c9_75.jpg",
+   "t": 71.40025000000001,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 278,
+    "cy": 402,
+    "area": 0.083
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c10_25.jpg",
+   "t": 75.42100000000002,
+   "ntext": 3,
+   "words": 16,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.169
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.031
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c10_50.jpg",
+   "t": 77.45600000000002,
+   "ntext": 3,
+   "words": 16,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.166
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.028
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c10_75.jpg",
+   "t": 79.49100000000003,
+   "ntext": 2,
+   "words": 9,
+   "focus": {
+    "cx": 1239,
+    "cy": 326,
+    "area": 0.607
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.222
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c11_25.jpg",
+   "t": 83.38150000000003,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 1053,
+    "cy": 356,
+    "area": 0.085
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.102
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c11_50.jpg",
+   "t": 85.23700000000002,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 801,
+    "cy": 400,
+    "area": 0.254
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c11_75.jpg",
+   "t": 87.09250000000003,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 802,
+    "cy": 408,
+    "area": 0.327
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c12",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c12_25.jpg",
+   "t": 90.77700000000002,
+   "ntext": 3,
+   "words": 13,
+   "focus": {
+    "cx": 801,
+    "cy": 401,
+    "area": 0.324
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.153
+  },
+  {
+   "cue": "c12",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c12_50.jpg",
+   "t": 92.60600000000002,
+   "ntext": 3,
+   "words": 13,
+   "focus": {
+    "cx": 689,
+    "cy": 456,
+    "area": 0.011
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.011
+    }
+   ],
+   "moving": false,
+   "empty": 0.161
+  },
+  {
+   "cue": "c12",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c12_75.jpg",
+   "t": 94.43500000000002,
+   "ntext": 3,
+   "words": 9,
+   "focus": {
+    "cx": 945,
+    "cy": 292,
+    "area": 0.06
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "(actual time=61.397..920.280 rows=300000"
+    },
+    {
+     "k": "cut",
+     "s": "Execution Time: 1077.072 ms"
+    }
+   ],
+   "moving": false,
+   "empty": 0.045
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c13_25.jpg",
+   "t": 99.10525000000003,
+   "ntext": 4,
+   "words": 14,
+   "focus": {
+    "cx": 794,
+    "cy": 552,
+    "area": 0.012
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.012
+    }
+   ],
+   "moving": false,
+   "empty": 0.071
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c13_50.jpg",
+   "t": 101.94650000000001,
+   "ntext": 5,
+   "words": 16,
+   "focus": {
+    "cx": 794,
+    "cy": 576,
+    "area": 0.057
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.057
+    }
+   ],
+   "moving": false,
+   "empty": 0.059
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c13_75.jpg",
+   "t": 104.78775000000002,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 769,
+    "cy": 565,
+    "area": 0.014
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.014
+    }
+   ],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c14_25.jpg",
+   "t": 109.35400000000003,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 830,
+    "cy": 514,
+    "area": 0.003
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "+300 000",
+     "v": 25.3
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.003
+    }
+   ],
+   "moving": false,
+   "empty": 0.122
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c14_50.jpg",
+   "t": 111.07900000000002,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 887,
+    "cy": 462,
+    "area": 0.029
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "+300 000",
+     "v": 34.5
+    },
+    {
+     "k": "focus_small",
+     "v": 0.029
+    }
+   ],
+   "moving": false,
+   "empty": 0.125
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c14_75.jpg",
+   "t": 112.80400000000003,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 335,
+    "cy": 329,
+    "area": 0.025
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "+300 000",
+     "v": 34.5
+    },
+    {
+     "k": "focus_small",
+     "v": 0.025
+    }
+   ],
+   "moving": false,
+   "empty": 0.125
+  },
+  {
+   "cue": "c15",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c15_25.jpg",
+   "t": 116.69800000000002,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 852,
+    "cy": 359,
+    "area": 0.088
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.0
+  },
+  {
+   "cue": "c15",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c15_50.jpg",
+   "t": 118.86700000000002,
+   "ntext": 5,
+   "words": 17,
+   "focus": {
+    "cx": -54,
+    "cy": 383,
+    "area": 0.017
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "ANALYZE orders;"
+    },
+    {
+     "k": "cut",
+     "s": "rows=127586"
+    },
+    {
+     "k": "small",
+     "s": "rows=127586",
+     "v": 34.4
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -54,
+      383
+     ]
+    }
+   ],
+   "moving": false,
+   "empty": 0.075
+  },
+  {
+   "cue": "c15",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c15_75.jpg",
+   "t": 121.03600000000003,
+   "ntext": 7,
+   "words": 19,
+   "focus": {
+    "cx": 508,
+    "cy": 129,
+    "area": 0.021
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "ANALYZE orders;"
+    },
+    {
+     "k": "cut",
+     "s": "rows=127586"
+    },
+    {
+     "k": "small",
+     "s": "rows=127586",
+     "v": 34.4
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "ANALYZE orders; | rows=127586 | Parallel Hash Join  (… rows=127586 …) | (actual … rows=100000.00 loops=3) | Execution Time: 176.475 ms | avant | après"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      508,
+      129
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.021
+    }
+   ],
+   "moving": false,
+   "empty": 0.073
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c16_25.jpg",
+   "t": 125.69325000000003,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 666,
+    "cy": 523,
+    "area": 0.169
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "ANALYZE orders;"
+    },
+    {
+     "k": "focus_hidden"
+    }
+   ],
+   "moving": false,
+   "empty": 0.118
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c16_50.jpg",
+   "t": 128.18150000000003,
+   "ntext": 2,
+   "words": 8,
+   "focus": {
+    "cx": 666,
+    "cy": 111,
+    "area": 0.056
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "ANALYZE orders;"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      666,
+      111
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.056
+    }
+   ],
+   "moving": false,
+   "empty": 0.118
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c16_75.jpg",
+   "t": 130.66975000000002,
+   "ntext": 2,
+   "words": 8,
+   "focus": {
+    "cx": 666,
+    "cy": 111,
+    "area": 0.056
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "ANALYZE orders;"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      666,
+      111
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.056
+    }
+   ],
+   "moving": false,
+   "empty": 0.118
+  },
+  {
+   "cue": "c17",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c17_25.jpg",
+   "t": 135.75950000000003,
+   "ntext": 3,
+   "words": 11,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.202
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:foe"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.295
+  },
+  {
+   "cue": "c17",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c17_50.jpg",
+   "t": 138.36100000000005,
+   "ntext": 3,
+   "words": 11,
+   "focus": {
+    "cx": 793,
+    "cy": 617,
+    "area": 0.047
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.104
+  },
+  {
+   "cue": "c17",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c17_75.jpg",
+   "t": 140.96250000000003,
+   "ntext": 3,
+   "words": 11,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.212
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:foe"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.293
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c18_25.jpg",
+   "t": 146.39175000000003,
+   "ntext": 2,
+   "words": 6,
+   "focus": {
+    "cx": 347,
+    "cy": 400,
+    "area": 0.082
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c18_50.jpg",
+   "t": 149.2195,
+   "ntext": 4,
+   "words": 12,
+   "focus": {
+    "cx": 826,
+    "cy": 400,
+    "area": 0.102
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "EXPLAIN (ANALYZE) | sur la requête lente | Rows Removed by Filter | → index"
+    }
+   ],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c18_75.jpg",
+   "t": 152.04725000000002,
+   "ntext": 6,
+   "words": 18,
+   "focus": {
+    "cx": 1305,
+    "cy": 400,
+    "area": 0.089
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Rows Removed by Filter",
+     "v": 34.2
+    },
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "EXPLAIN (ANALYZE) | sur la requête lente | Rows Removed by Filter | → index | rows prévu ≠ réel | → ANALYZE"
+    }
+   ],
+   "moving": false,
+   "empty": 0.012
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c19_25.jpg",
+   "t": 157.06975,
+   "ntext": 6,
+   "words": 18,
+   "focus": {
+    "cx": 1305,
+    "cy": 400,
+    "area": 0.082
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Rows Removed by Filter",
+     "v": 34.2
+    },
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "EXPLAIN (ANALYZE) | sur la requête lente | Rows Removed by Filter | → index | rows prévu ≠ réel | → ANALYZE"
+    }
+   ],
+   "moving": false,
+   "empty": 0.009
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c19_50.jpg",
+   "t": 159.2645,
+   "ntext": 6,
+   "words": 18,
+   "focus": {
+    "cx": 1305,
+    "cy": 400,
+    "area": 0.082
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Rows Removed by Filter",
+     "v": 34.2
+    },
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "EXPLAIN (ANALYZE) | sur la requête lente | Rows Removed by Filter | → index | rows prévu ≠ réel | → ANALYZE"
+    }
+   ],
+   "moving": false,
+   "empty": 0.009
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c19_75.jpg",
+   "t": 161.45925,
+   "ntext": 7,
+   "words": 22,
+   "focus": {
+    "cx": 814,
+    "cy": 590,
+    "area": 0.088
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Rows Removed by Filter",
+     "v": 35.2
+    },
+    {
+     "k": "toomanytext",
+     "v": 7,
+     "s": "EXPLAIN (ANALYZE) | sur la requête lente | Rows Removed by Filter | → index | rows prévu ≠ réel | → ANALYZE | Buffers: shared hit=14104 read=1038"
+    }
+   ],
+   "moving": false,
+   "empty": 0.035
+  }
+ ]
+}

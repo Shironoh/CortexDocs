@@ -6,3 +6,4 @@ versions/*/video.mp4
 versions/*/voice/
 versions/*/soundtrack.wav
 __pycache__/
+gallery/*.mp3

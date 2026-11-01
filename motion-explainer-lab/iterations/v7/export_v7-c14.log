@@ -1,0 +1,12 @@
+w1 frame 0/934
+w3 frame 0/934
+w0 frame 0/934
+w2 frame 0/934
+w0 frame 480/934
+w3 frame 480/934
+w2 frame 480/934
+w1 frame 480/934
+silent video -> versions/v7-c14/_silent.mp4
+soundtrack -> versions/v7-c14/soundtrack.mp3 | voix : piper (timing réel) | video -> versions/v7-c14/video.mp4
+/home/user/CortexDocs/motion-explainer-lab/versions/v7-c14/index.html : 2588 Ko | voix réelle : oui | bande son intégrée : oui
+v7-c14 done in 263s

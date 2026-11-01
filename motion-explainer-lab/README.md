@@ -5,10 +5,22 @@ corriger **le skill** (pas seulement la vidéo), régénérer. Sujet de test : *
 de Google Cloud, côté détection et réponse, pour quelqu'un qui ne connaît pas GCP* (3 min max).
 
 - Protocole : [`PROTOCOL.md`](PROTOCOL.md) (grille 14 critères, étiquettes E/S/C/T/X, 6 garde-fous anti-surapprentissage)
-- Skill final : [`skill/SKILL.md`](skill/SKILL.md) (= `SKILL.v6.md`) ; versions `SKILL.v0.md` → `v6` ; [`skill/CHANGELOG.md`](skill/CHANGELOG.md)
+- Skill courant : [`skill/SKILL.md`](skill/SKILL.md) (= `SKILL.v7.md`) ; versions `SKILL.v0.md` → `v7` ; [`skill/CHANGELOG.md`](skill/CHANGELOG.md)
 - Vidéos : `versions/vN/index.html` (lecteur interactif autonome) et `versions/vN/video_720p.mp4`
 - Revues : `iterations/vN/REVIEW.md`, planches contact `iterations/vN/sheets/`, QA `iterations/vN/QA.md`
 - Validation hors sujet : [`holdout/VALIDATION.md`](holdout/VALIDATION.md) ; sujets témoins : [`holdout/HOLDOUT.md`](holdout/HOLDOUT.md)
+
+## v7 · voix neuronale, recherche sourcée, outillage générique, sujets variés
+
+Skill v7 (`skill/SKILL.md`, installable : `skill/dist/motion-explainer/`) : méthode de recherche (sources primaires, artefacts
+produits soi-même, recoupement, faits datés, `factcheck.py`), voix Piper calée au mot (`tools/voice.py`), bouches synchronisées,
+musique générée (`tools/music.py`), bande son dans le lecteur, kit de scènes générique (`src/kit.js`). Revue : `iterations/v7/REVIEW.md`.
+
+| Version | Sujet | Audience | Durée |
+|---|---|---|---|
+| `versions/v7-c14` | L'horloge d'Ötzi : datation au carbone 14 | grand public | 2:36 |
+| `versions/v7-pgexplain` | Lire un EXPLAIN ANALYZE (PostgreSQL 18, plans réels) | développeurs | 2:46 |
+| `versions/v7-reg-gcp-ep2` | Non-régression : série GCP, épisode 2 | praticien DFIR | 2:39 |
 
 ## v6 · série DFIR (après retour utilisateur)
 

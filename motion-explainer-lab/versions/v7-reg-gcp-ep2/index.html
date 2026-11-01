@@ -1,0 +1,1080 @@
+<title>Admin Activity, épisode 2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+/* Layout: one cinema column — header, 16:9 stage, transport bar, chapters, legend. Single dark look by choice. */
+:root {
+  --ink: #050B1E; --night: #0B1A3A; --panel: #14295C; --line: #26407e;
+  --text: #F8FAFC; --muted: #9fb0d6; --amber: #FFB703; --cyan: #22D3EE; --rose: #EF476F;
+  --f-disp: Poppins, 'DejaVu Sans', system-ui, sans-serif; --f-mono: 'JetBrains Mono', 'DejaVu Sans Mono', monospace;
+  color-scheme: dark;
+}
+html, body { background: var(--ink); color: var(--text); }
+body { font-family: var(--f-disp); font-size: 15px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.app { max-width: 1180px; margin: 0 auto; padding-block: 18px 40px; display: grid; gap: 12px; }
+.top h1 { margin: 0; font-size: clamp(20px, 3vw, 30px); font-weight: 800; text-wrap: balance; letter-spacing: -.01em; }
+.eyebrow { color: var(--amber); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+.stage-wrap { width: 100%; }
+.stage { position: relative; width: 100%; aspect-ratio: 16/9; max-width: 100%; background: var(--night); border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px -20px #000; }
+.stage svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.subs { position: absolute; left: 50%; bottom: 3.2%; transform: translateX(-50%); max-width: 86%; text-align: center; background: rgba(5, 11, 30, .78);
+  color: var(--text); font-size: clamp(13px, 1.9vw, 22px); line-height: 1.35; padding: .35em .8em; border-radius: 10px; font-weight: 600; pointer-events: none; }
+.subs.empty, .subs-m.empty { visibility: hidden; }
+.nosubs .subs, .nosubs .subs-m { display: none; }
+.subs-m { display: none; text-align: center; font-size: 15px; line-height: 1.4; min-height: 3.2em; color: var(--text); font-weight: 600; }
+@media (max-width: 720px) { .subs { display: none; } .subs-m { display: block; } }
+.poster { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(180deg, transparent 40%, rgba(5, 11, 30, .55)); }
+.bigplay { display: flex; gap: .6em; align-items: center; font: 700 clamp(15px, 2.2vw, 22px) var(--f-disp); color: var(--ink); background: var(--amber); border: 0; border-radius: 999px; padding: .7em 1.4em; cursor: pointer; box-shadow: 0 10px 30px -8px var(--amber); }
+.bigplay:focus-visible, button:focus-visible, select:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
+.controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.controls button, .controls select { font: 600 14px var(--f-disp); color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 7px 11px; cursor: pointer; }
+.controls .pp { background: var(--amber); color: var(--ink); border-color: var(--amber); min-width: 46px; }
+.tg[aria-pressed="true"] { background: var(--cyan); color: var(--ink); border-color: var(--cyan); }
+.track { position: relative; flex: 1 1 200px; min-width: 120px; height: 10px; background: var(--panel); border-radius: 99px; cursor: pointer; }
+.bar { position: absolute; left: 0; top: 0; bottom: 0; background: var(--amber); border-radius: 99px; }
+.ticks i { position: absolute; top: -3px; width: 2px; height: 16px; background: var(--muted); opacity: .6; }
+.time { font: 600 13px var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.opts { display: flex; gap: 6px; flex-wrap: wrap; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.chapters { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 6px; }
+.chap { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; text-align: left; font: 600 13px var(--f-disp); color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; cursor: pointer; min-width: 0; }
+.chap .n { font: 700 12px var(--f-mono); color: var(--amber); }
+.chap .tt { min-width: 0; overflow-wrap: anywhere; }
+.chap .ts { font: 500 11px var(--f-mono); color: var(--muted); }
+.chap.on { background: var(--panel); border-color: var(--amber); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); }
+.lg { display: inline-flex; gap: 6px; align-items: center; }
+.lg i { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+.hint { color: var(--muted); font-size: 12px; margin: 0; }
+.hotspots { position: absolute; inset: 0; pointer-events: none; }
+.hot { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; display: flex; align-items: center; gap: 6px; background: rgba(5, 11, 30, .85); color: var(--text); border: 2px solid var(--cyan); border-radius: 999px; padding: 4px 10px 4px 4px; font: 600 12px var(--f-disp); cursor: pointer; }
+.hot .dot { width: 22px; height: 22px; border-radius: 50%; background: var(--cyan); color: var(--ink); display: grid; place-items: center; font-weight: 800; }
+.hotpanel { position: absolute; right: 2%; top: 4%; width: min(520px, 92%); max-height: 84%; overflow: auto; background: rgba(11, 26, 58, .97); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; z-index: 5; }
+.hp-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--amber); }
+.hp-head button { background: none; border: 0; color: var(--text); font-size: 18px; cursor: pointer; }
+.hp-body { font-size: 13px; line-height: 1.5; color: var(--text); }
+.hp-body pre { font: 12px/1.45 var(--f-mono); background: var(--ink); padding: 8px 10px; border-radius: 8px; overflow-x: auto; white-space: pre; }
+.hp-body code { font-family: var(--f-mono); color: var(--cyan); }
+.hp-body .tbd { color: var(--rose); font-weight: 700; }
+.quiz { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(5, 11, 30, .55); z-index: 6; }
+.quiz-card { width: min(560px, 92%); background: var(--night); border: 2px solid var(--amber); border-radius: 14px; padding: 14px 16px; display: grid; gap: 8px; }
+.quiz-k { color: var(--amber); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: 12px; }
+.quiz-card p { margin: 0; font-size: 16px; font-weight: 600; }
+.quiz-c { display: grid; gap: 6px; }
+.quiz-c button { text-align: left; font: 600 14px var(--f-disp); color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; cursor: pointer; }
+.quiz-c button.ok { background: #06D6A0; color: var(--ink); } .quiz-c button.ko { background: var(--rose); } .quiz-c button.dim { opacity: .5; }
+.quiz-why { font-weight: 500 !important; font-size: 14px !important; color: var(--muted); }
+.quiz-go { justify-self: end; font: 700 14px var(--f-disp); background: var(--amber); color: var(--ink); border: 0; border-radius: 10px; padding: 8px 14px; cursor: pointer; }
+.footer { color: var(--muted); font-size: 12px; line-height: 1.5; border-top: 1px solid var(--line); padding-top: 10px; }
+.footer a { color: var(--cyan); }
+/* export: stage fullscreen 1920x1080, no chrome */
+html.export, html.export body { margin: 0; padding: 0; overflow: hidden; background: #000; }
+html.export .app { max-width: none; padding: 0; display: block; }
+html.export .top, html.export .controls, html.export .chapters, html.export .legend, html.export .hint, html.export .subs-m,
+html.export .hotspots, html.export .quiz, html.export .hotpanel, html.export .poster, html.export .footer { display: none !important; }
+html.export .stage { width: 1920px; height: 1080px; border-radius: 0; box-shadow: none; }
+html.export .subs { display: block; font-size: 34px; bottom: 34px; }
+@media (prefers-reduced-motion: reduce) { .bigplay { box-shadow: none; } }
+html.export body.nosubs .subs { display: none !important; }
+
+</style>
+<div class="app">
+  <header class="top">
+    <div class="eyebrow">Série Admin Activity · <a href='ep1.html' style='color:inherit'>Ép. 1</a> · <b>Ép. 2</b> · <a href='ep3.html' style='color:inherit'>Ép. 3</a></div>
+    <h1>Épisode 2 · Les portes de persistance</h1>
+  </header>
+  <div class="stage-wrap">
+    <div class="stage" id="stage">
+      <svg id="svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Épisode 2 · Les portes de persistance"></svg>
+      <div id="hotspots" class="hotspots"></div>
+      <audio id="snd" preload="auto"></audio>
+      <div id="subs" class="subs empty" aria-live="polite"></div>
+      <div id="poster" class="poster">
+        <button id="bigplay" class="bigplay" type="button"><span class="tri">▶</span><span>Lire · <b id="dur"></b></span></button>
+      </div>
+      <div id="quiz" class="quiz" hidden>
+        <div class="quiz-card">
+          <div class="quiz-k">Devinez</div>
+          <p id="quizq"></p>
+          <div id="quizc" class="quiz-c"></div>
+          <p id="quizwhy" class="quiz-why" hidden></p>
+          <button id="quizgo" class="quiz-go" type="button" hidden>Continuer ▶</button>
+        </div>
+      </div>
+      <div id="hotpanel" class="hotpanel" hidden>
+        <div class="hp-head"><b id="hottitle"></b><button id="hotclose" type="button" aria-label="Fermer">✕</button></div>
+        <div id="hotbody" class="hp-body"></div>
+      </div>
+    </div>
+  </div>
+  <div id="subsM" class="subs-m empty"></div>
+  <div class="controls">
+    <button id="prev" type="button" aria-label="Scène précédente">⏮</button>
+    <button id="play" type="button" class="pp" aria-label="Lecture">▶</button>
+    <button id="next" type="button" aria-label="Scène suivante">⏭</button>
+    <div id="track" class="track"><div id="ticks" class="ticks"></div><div id="bar" class="bar"></div></div>
+    <span id="time" class="time">0:00</span>
+    <div class="opts">
+      <label class="sel"><span class="sr">Vitesse</span><select id="speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option></select></label>
+      <button id="cc" type="button" class="tg">CC</button>
+      <button id="voice" type="button" class="tg">Voix</button>
+      <button id="quizb" type="button" class="tg">Quiz</button>
+    </div>
+  </div>
+  <nav id="chapters" class="chapters" aria-label="Chapitres"></nav>
+  <div id="legend" class="legend"></div>
+  <p class="hint">Pause = points <b>+</b> cliquables pour le détail technique. Raccourcis : espace, ← →, Échap.</p>
+  <p class='footer'>v6, skill v6. Sources : documentation Google Cloud (Cloud Audit Logs, journaux d'audit Service Account Credentials, audit SSH Compute Engine), règles Elastic (GCP Service Account Creation, GCP Service Account Key Creation), règles Datadog (GCE instance SSH key persistence). Compte Gmail et IP fictifs.</p>
+</div>
+<script>
+/* motion-explainer engine — pure function of time, no library.
+   Everything is created once; render(t) only mutates attributes. */
+'use strict';
+const NS = 'http://www.w3.org/2000/svg';
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, p) => a + (b - a) * p;
+const P = (t, a, d) => d <= 0 ? (t >= a ? 1 : 0) : clamp((t - a) / d);
+const E = {
+  lin: p => p, oc: p => 1 - (1 - p) ** 3, ic: p => p ** 3,
+  ioc: p => p < .5 ? 4 * p ** 3 : 1 - (-2 * p + 2) ** 3 / 2,
+  ob: p => 1 + 2.6 * (p - 1) ** 3 + 1.6 * (p - 1) ** 2,
+};
+let AMBIENT = true;
+let FRAMING = false; // true while resolving frame(): actors measured at full size, ignoring pop/out
+const WPS = 2.6;            // words per second (timing model)
+const GUESS_PAUSE = 1.5;    // silence for "devinez"
+
+function S(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs || {}) if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const words = s => s.replace(/\|/g, ' ').trim().split(/\s+/).filter(w => /[\p{L}\p{N}]/u.test(w)); // French spacing: lone ':' '?' are not words
+const norm = w => w.toLowerCase().replace(/œ/g, 'oe').replace(/æ/g, 'ae').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9_%@.\-]/g, '');
+
+/* ---------------- Actor ---------------- */
+class Actor {
+  constructor(el, o) { this.el = el; this.o = o; this.bx = o.x || 0; this.by = o.y || 0; this.bs = o.s == null ? 1 : o.s; this.br = o.r || 0;
+    if (o.dash) { this.len = o.len || (el.getTotalLength ? el.getTotalLength() : 1000); el.setAttribute('stroke-dasharray', this.len); } }
+  update(t) {
+    const o = this.o; let x = this.bx, y = this.by, s = this.bs, r = this.br, a = o.a == null ? 1 : o.a;
+    if (o.pop != null && !FRAMING) { const p = P(t, o.pop, .6); s *= p <= 0 ? 0.001 : .4 + .6 * E.ob(p); a *= Math.min(1, p * 3); }
+    if (o.fin && !FRAMING) { a *= E.oc(P(t, o.fin[0], o.fin[1])); }
+    for (const m of o.moves || []) { const p = (m[3] || E.ioc)(P(t, m[0], m[1]));
+      if (p <= 0) continue; const v = m[2];
+      if ('x' in v) x = lerp(x, v.x, p); if ('y' in v) y = lerp(y, v.y, p); if ('s' in v) s = lerp(s, v.s, p);
+      if ('r' in v) r = lerp(r, v.r, p); if ('a' in v) a *= lerp(1, v.a, p); }
+    if (o.out != null && !FRAMING) a *= 1 - P(t, o.out, o.outd || .4);
+    if (FRAMING) a = 1;
+    const st = { x, y, s, r, a };
+    if (o.fn) o.fn(st, t);
+    if (o.dash) this.el.setAttribute('stroke-dashoffset', this.len * (1 - E.ioc(P(t, o.dash[0], o.dash[1]))));
+    this.el.setAttribute('opacity', st.a.toFixed(3));
+    this.el.setAttribute('visibility', st.a > 0.001 ? 'visible' : 'hidden');
+    this.el.setAttribute('transform', `translate(${st.x.toFixed(2)} ${st.y.toFixed(2)}) rotate(${st.r.toFixed(2)}) scale(${Math.max(st.s, 0.0001).toFixed(4)})`);
+  }
+}
+
+/* ---------------- Characters ---------------- */
+const SHAPES = {
+  blob: 'M -58 0 C -66 -44 -56 -128 0 -130 C 56 -128 66 -44 58 0 Q 0 10 -58 0 Z',
+  robot: 'M -54 -8 Q -58 -120 -40 -122 L 40 -122 Q 58 -120 54 -8 Q 0 4 -54 -8 Z',
+};
+const MOUTH = {
+  neutral: 'M -13 -50 Q 0 -46 13 -50', happy: 'M -17 -54 Q 0 -36 17 -54', smug: 'M -15 -50 Q 5 -44 17 -56',
+  angry: 'M -14 -44 Q 0 -54 14 -44', surprise: 'M -8 -50 a 8 10 0 1 0 16 0 a 8 10 0 1 0 -16 0', worried: 'M -14 -46 Q -4 -52 4 -48 Q 10 -45 14 -48',
+};
+const VISEME = { // mouth shapes for lip-sync (tools/voice.py): M closed, F lip on teeth, O round, A open, E spread, C small
+  M: 'M -13 -50 Q 0 -49 13 -50 Q 0 -47 -13 -50 Z', F: 'M -14 -51 Q 0 -46 14 -51 Q 0 -53 -14 -51 Z',
+  O: 'M -9 -50 a 9 10 0 1 0 18 0 a 9 10 0 1 0 -18 0', A: 'M -15 -55 Q 0 -30 15 -55 Q 0 -58 -15 -55 Z',
+  E: 'M -18 -53 Q 0 -40 18 -53 Q 0 -56 -18 -53 Z', C: 'M -12 -52 Q 0 -43 12 -52 Q 0 -55 -12 -52 Z',
+};
+const BROWS = { // [left, right] as dy at inner, dy at outer
+  neutral: [[0, 0], [0, 0]], happy: [[-4, -4], [-4, -4]], smug: [[2, 2], [-10, -4]], angry: [[8, -4], [8, -4]],
+  surprise: [[-12, -10], [-12, -10]], worried: [[-8, 2], [-8, 2]],
+};
+class Char {
+  constructor(K, parent, o) {
+    this.K = K; this.o = o; this.x = o.x; this.y = o.y; this.s = o.s || 1; this.dir = o.dir || 1;
+    this.moves = []; this.poses = []; this.exprs = [[-1, o.expr || 'neutral']]; this.looks = [];
+    this.popT = o.pop; this.outT = null;
+    const col = o.color, dark = o.dark || '#0B1A3A';
+    this.root = S('g', { 'data-char': o.name || '' }, parent);
+    S('ellipse', { cx: 0, cy: 2, rx: 60, ry: 11, fill: '#000', opacity: .28 }, this.root);
+    this.body = S('g', {}, this.root);
+    const shape = SHAPES[o.shape || 'blob'];
+    S('path', { d: shape, fill: dark, opacity: .45, transform: 'translate(7 7)' }, this.body);
+    this.armL = S('path', { fill: 'none', stroke: o.limb || col, 'stroke-width': 13, 'stroke-linecap': 'round' }, this.body);
+    this.armR = S('path', { fill: 'none', stroke: o.limb || col, 'stroke-width': 13, 'stroke-linecap': 'round' }, this.body);
+    if (o.ghost) S('path', { d: shape, fill: col, 'fill-opacity': .12, stroke: col, 'stroke-width': 6, 'stroke-dasharray': '16 12' }, this.body);
+    else { S('path', { d: shape, fill: col }, this.body);
+      S('ellipse', { cx: -18, cy: -96, rx: 16, ry: 9, fill: '#fff', opacity: .25, transform: 'rotate(-25 -18 -96)' }, this.body); }
+    if (o.shape === 'robot') {
+      S('line', { x1: 0, y1: -122, x2: 0, y2: -150, stroke: col, 'stroke-width': 6 }, this.body);
+      this.bulb = S('circle', { cx: 0, cy: -154, r: 9, fill: '#FFB703' }, this.body);
+      S('rect', { x: -40, y: -108, width: 80, height: 52, rx: 14, fill: '#0B1A3A', opacity: .55 }, this.body);
+    }
+    if (o.mask) { S('path', { d: 'M -50 -100 Q 0 -112 50 -100 L 48 -72 Q 0 -80 -48 -72 Z', fill: '#2A0F2E' }, this.body);
+      S('path', { d: 'M -46 -118 Q 0 -150 46 -118 Q 0 -128 -46 -118 Z', fill: '#2A0F2E' }, this.body); }
+    this.face = S('g', { opacity: o.ghost ? .35 : 1 }, this.body);
+    this.eyes = S('g', {}, this.face);
+    this.pupils = [];
+    for (const ex of [-20, 20]) {
+      S('ellipse', { cx: ex, cy: -86, rx: 14, ry: 16, fill: '#fff' }, this.eyes);
+      this.pupils.push(S('circle', { cx: ex, cy: -86, r: 7, fill: '#0B1A3A' }, this.eyes));
+    }
+    this.browL = S('path', { stroke: '#0B1A3A', 'stroke-width': 5, 'stroke-linecap': 'round', fill: 'none' }, this.face);
+    this.browR = S('path', { stroke: '#0B1A3A', 'stroke-width': 5, 'stroke-linecap': 'round', fill: 'none' }, this.face);
+    this.mouth = S('path', { stroke: '#0B1A3A', 'stroke-width': 5, 'stroke-linecap': 'round', fill: '#0B1A3A', 'fill-opacity': 0 }, this.face);
+    if (o.headset) { S('path', { d: 'M -60 -84 Q -62 -150 0 -150 Q 62 -150 60 -84', stroke: '#0B1A3A', 'stroke-width': 8, fill: 'none' }, this.body);
+      S('rect', { x: -68, y: -98, width: 16, height: 30, rx: 6, fill: '#0B1A3A' }, this.body);
+      S('path', { d: 'M -60 -74 Q -50 -50 -22 -50', stroke: '#0B1A3A', 'stroke-width': 5, fill: 'none' }, this.body); }
+    this.feet = [-26, 26].map(fx => { const f = S('ellipse', { cx: fx, cy: -2, rx: 17, ry: 9, fill: o.limb || dark, opacity: o.ghost ? .3 : .9 }); this.root.insertBefore(f, this.body); return f; });
+    this.handL = S('circle', { r: 10, fill: o.limb || col }, this.body);
+    this.handR = S('circle', { r: 10, fill: o.limb || col }, this.body);
+    this.loupe = S('g', { visibility: 'hidden' }, this.body);
+    S('line', { x1: 0, y1: 0, x2: 24, y2: 30, stroke: '#7c5a3a', 'stroke-width': 10, 'stroke-linecap': 'round' }, this.loupe);
+    S('circle', { cx: -14, cy: -18, r: 30, fill: '#bfefff', 'fill-opacity': .25, stroke: '#F8FAFC', 'stroke-width': 7 }, this.loupe);
+    this.prop = null; this.talk = (K.R.talk || []).filter(q => q.who === (o.name || ''));
+  }
+  visemeAt(t) { // current mouth shape if this character is speaking at t, else null
+    for (const q of this.talk) { if (t < q.t || t > q.end) continue; let v = 'X';
+      for (const e of q.vis) { if (t - q.t >= e[0]) v = e[1]; else break; } return v === 'X' ? null : v; }
+    return null; }
+  /* timeline API (times absolute, coords in parent space) */
+  pop(t) { this.popT = t; this.K.ev(t, 'pop'); this.K.mark(t); return this; }
+  out(t) { this.outT = t; return this; }
+  walk(t, d, x, y) { this.moves.push({ t, d, x, y: y == null ? null : y, walk: true }); this.K.mark(t); return this; }
+  slide(t, d, x, y) { this.moves.push({ t, d, x, y: y == null ? null : y, walk: false }); this.K.mark(t); return this; }
+  pose(t, d, name, p) { this.poses.push({ t, d, name, p: p || {} }); if (name !== 'type') this.K.mark(t); return this; }
+  expr(t, e) { this.exprs.push([t, e]); this.exprs.sort((a, b) => a[0] - b[0]); return this; }
+  look(t, x, y) { this.looks.push([t, x, y]); this.looks.sort((a, b) => a[0] - b[0]); return this; }
+  hold(el) { this.prop = el; return this; }
+  posAt(t) {
+    let x = this.x, y = this.y, walking = 0, phase = 0;
+    for (const m of this.moves) { const p = E.ioc(P(t, m.t, m.d)); if (p <= 0) continue;
+      const nx = lerp(x, m.x, p), ny = m.y == null ? y : lerp(y, m.y, p);
+      if (m.walk && p > 0 && p < 1) { walking = Math.sin(Math.PI * p); phase = (t - m.t) * 9; this._wd = Math.sign(m.x - x) || this._wd; }
+      x = nx; y = ny; }
+    return { x, y, walking, phase };
+  }
+  update(t) {
+    const st = this.posAt(t);
+    let a = 1, sc = this.s;
+    if (this.popT != null && !FRAMING) { const p = P(t, this.popT, .6); sc *= p <= 0 ? 0.001 : .4 + .6 * E.ob(p); a = Math.min(1, p * 3); }
+    if (this.outT != null && !FRAMING) a *= 1 - P(t, this.outT, .4);
+    // expression
+    let ex = 'neutral'; for (const e of this.exprs) if (t >= e[0]) ex = e[1];
+    // pose
+    let rest = { L: [-62, -22], R: [62, -22] }, H = { L: rest.L.slice(), R: rest.R.slice() };
+    let bodyDy = 0, bodyRot = 0, sy = 1, sx = 1, loupe = 0, gaze = null;
+    if (st.walking > 0) { const sw = Math.sin(st.phase) * 22 * st.walking; H.L = [-58 + sw, -24]; H.R = [58 - sw, -24];
+      bodyDy -= Math.abs(Math.sin(st.phase)) * 10 * st.walking; bodyRot = 4 * st.walking * (this._wd || 1); }
+    for (const q of this.poses) {
+      const pin = P(t, q.t, .28), pout = 1 - P(t, q.t + q.d - .25, .25); let w = E.oc(Math.min(pin, pout));
+      if (t < q.t - .15 || t > q.t + q.d) continue;
+      if (t < q.t) { const ant = 1 - Math.abs((t - (q.t - .075)) / .075); bodyDy += 5 * ant; sy *= 1 - .04 * ant; continue; } // anticipation
+      const n = q.name, p = q.p;
+      if (n === 'point') { const dx = p.x - st.x, dy = p.y - (st.y - 70 * this.s); const L = Math.hypot(dx, dy) || 1;
+        const side = dx < 0 ? 'L' : 'R'; const sh = side === 'L' ? [-48, -62] : [48, -62];
+        const tgt = [sh[0] + dx / L * 82, sh[1] + dy / L * 82]; H[side] = [lerp(H[side][0], tgt[0], w), lerp(H[side][1], tgt[1], w)];
+        bodyRot += (dx < 0 ? -5 : 5) * w; gaze = [p.x, p.y]; }
+      if (n === 'loupe') { H.R = [lerp(H.R[0], 52, w), lerp(H.R[1], -50, w)]; loupe = w; }
+      if (n === 'shrug') { H.L = [lerp(H.L[0], -86, w), lerp(H.L[1], -96, w)]; H.R = [lerp(H.R[0], 86, w), lerp(H.R[1], -96, w)]; bodyDy += 6 * w; }
+      if (n === 'cheer') { H.L = [lerp(H.L[0], -74, w), lerp(H.L[1], -132, w)]; H.R = [lerp(H.R[0], 74, w), lerp(H.R[1], -132, w)];
+        bodyDy -= 14 * Math.abs(Math.sin((t - q.t) * 7)) * w; }
+      if (n === 'hold') { H.L = [lerp(H.L[0], -40, w), lerp(H.L[1], -70, w)]; H.R = [lerp(H.R[0], 40, w), lerp(H.R[1], -70, w)]; }
+      if (n === 'type') { const j = Math.sin((t - q.t) * 22); H.L = [lerp(H.L[0], -34, w), lerp(H.L[1], -26 + 6 * j, w)]; H.R = [lerp(H.R[0], 34, w), lerp(H.R[1], -26 - 6 * j, w)]; }
+      if (n === 'jump') { const k = P(t, q.t, Math.min(.7, q.d)); const h = Math.sin(Math.PI * k);
+        bodyDy -= 48 * h; sy *= k < .12 ? 1 - .2 * Math.sin(k / .12 * Math.PI) : 1 + .1 * h; sx = 2 - sy;
+        H.L = [lerp(H.L[0], -80, w), lerp(H.L[1], -118, w)]; H.R = [lerp(H.R[0], 80, w), lerp(H.R[1], -118, w)]; }
+      if (n === 'nod') { bodyDy += 7 * Math.abs(Math.sin((t - q.t) * 9)) * w; }
+      if (n === 'lean') { bodyRot += (p.dir || 1) * 10 * w; }
+      if (n === 'walkcycle') { const sw = Math.sin((t - q.t) * 9) * 22 * w; H.L = [-58 + sw, -24]; H.R = [58 - sw, -24]; bodyDy -= Math.abs(Math.sin((t - q.t) * 9)) * 10 * w; }
+    }
+    // feet: step during walks, settle otherwise
+    const fl = st.walking > 0 ? Math.max(0, Math.sin(st.phase)) * 14 * st.walking : 0, fr = st.walking > 0 ? Math.max(0, -Math.sin(st.phase)) * 14 * st.walking : 0;
+    this.feet[0].setAttribute('cy', (-2 - fl).toFixed(1)); this.feet[1].setAttribute('cy', (-2 - fr).toFixed(1));
+    // speaking: viseme mouth + small head bob on open vowels
+    const vis = this.visemeAt(t); if (vis === 'A' || vis === 'O') bodyDy -= 2;
+    // gaze
+    if (!gaze) { let L = null; for (const l of this.looks) if (t >= l[0]) L = l; if (L && L[1] != null) gaze = [L[1], L[2]]; }
+    let px = 0, py = 0;
+    if (!gaze && AMBIENT) { const k = Math.floor((t + this.x * .01) / 1.7); px = 3 * Math.sin(k * 12.9898 + this.x) ; py = 2 * Math.sin(k * 78.233); }
+    if (gaze) { const dx = gaze[0] - st.x, dy = gaze[1] - (st.y - 86 * this.s); const L = Math.hypot(dx, dy) || 1; px = dx / L * 6; py = dy / L * 6; }
+    // ambient: breathing + blink
+    let blink = 1;
+    if (AMBIENT) { sy *= 1 + .018 * Math.sin(t * 2.3 + this.x); const bt = (t + (this.x % 3)) % 3.7; if (bt < .12) blink = .12; }
+    // write
+    this.root.setAttribute('opacity', a.toFixed(3));
+    this.root.setAttribute('visibility', a > .001 ? 'visible' : 'hidden');
+    this.root.setAttribute('transform', `translate(${st.x.toFixed(1)} ${st.y.toFixed(1)}) scale(${(sc * this.dir).toFixed(4)} ${sc.toFixed(4)})`);
+    this.body.setAttribute('transform', `translate(0 ${bodyDy.toFixed(1)}) rotate(${bodyRot.toFixed(1)} 0 -40) scale(${sx.toFixed(3)} ${sy.toFixed(3)})`);
+    const ddir = this.dir; px *= ddir;
+    this.pupils[0].setAttribute('cx', -20 + px); this.pupils[0].setAttribute('cy', -86 + py);
+    this.pupils[1].setAttribute('cx', 20 + px); this.pupils[1].setAttribute('cy', -86 + py);
+    this.eyes.setAttribute('transform', `translate(0 ${-86 * (1 - blink)}) scale(1 ${blink})`);
+    const b = BROWS[ex] || BROWS.neutral;
+    this.browL.setAttribute('d', `M -34 ${-108 + b[0][1]} L -8 ${-108 + b[0][0]}`);
+    this.browR.setAttribute('d', `M 8 ${-108 + b[1][0]} L 34 ${-108 + b[1][1]}`);
+    this.mouth.setAttribute('d', vis ? VISEME[vis] : (MOUTH[ex] || MOUTH.neutral));
+    this.mouth.setAttribute('fill-opacity', vis && vis !== 'M' ? 1 : (ex === 'surprise' ? 1 : 0));
+    const arm = (el, sh, h) => { const mx = (sh[0] + h[0]) / 2 + (h[0] > 0 ? 8 : -8), my = (sh[1] + h[1]) / 2 + 10;
+      el.setAttribute('d', `M ${sh[0]} ${sh[1]} Q ${mx} ${my} ${h[0]} ${h[1]}`); };
+    arm(this.armL, [-46, -60], H.L); arm(this.armR, [46, -60], H.R);
+    this.handL.setAttribute('cx', H.L[0]); this.handL.setAttribute('cy', H.L[1]);
+    this.handR.setAttribute('cx', H.R[0]); this.handR.setAttribute('cy', H.R[1]);
+    this.loupe.setAttribute('visibility', loupe > .02 && a > .001 ? 'visible' : 'hidden');
+    this.loupe.setAttribute('transform', `translate(${H.R[0] - 26} ${H.R[1] - 26}) scale(${(.5 + .5 * loupe).toFixed(3)})`);
+    if (this.bulb) this.bulb.setAttribute('opacity', AMBIENT ? (.6 + .4 * Math.sin(t * 5)).toFixed(2) : 1);
+    if (this.prop) { const hx = (H.L[0] + H.R[0]) / 2, hy = Math.min(H.L[1], H.R[1]) - 20;
+      this.prop.setAttribute('transform', `translate(${(st.x + hx * sc * this.dir).toFixed(1)} ${(st.y + (hy + bodyDy) * sc).toFixed(1)})`); }
+  }
+}
+
+/* ---------------- Episode runtime ---------------- */
+function Runtime(ep, svg) {
+  const R = { ep, svg, actors: [], chars: [], camMoves: [], frames: [], focusKeys: [], hots: [], events: [], marks: [], fx: [] };
+  // ---- timing
+  let t0 = ep.lead || 0.6;
+  const TM = ep.timing && ep.timing.cues ? ep.timing.cues : null; // real narration (tools/voice.py)
+  R.voiced = !!TM; R.talk = [];
+  const cues = ep.cues.map(c => {
+    const parts = c.say.split('|'); const w1 = words(parts[0]).length, wAll = words(c.say).length;
+    const guess = parts.length > 1; const tm = TM && TM[c.id];
+    if (tm && tm.parts.length === parts.length) {
+      // cue = lead-in, spoken part(s) with their measured length, guess silence, breath after the idea
+      const pre = ep.voicePre == null ? .2 : ep.voicePre, breath = c.breath == null ? (ep.breath == null ? .45 : ep.breath) : c.breath;
+      let t = t0 + pre, pauseAt = null; const wt = [], ps = [];
+      tm.parts.forEach((p, i) => {
+        if (i === 1) { pauseAt = t + .1; t = pauseAt + GUESS_PAUSE; }
+        for (const w of p.words) wt.push([t + w[0], t + w[1]]);
+        ps.push({ t, dur: p.dur, wav: p.wav, vis: p.vis }); if (c.who) R.talk.push({ who: c.who, t, vis: p.vis, end: t + p.dur });
+        t += p.dur; });
+      const dur = Math.max(2.2, t - t0 + breath) + (c.extra || 0);
+      const o = { ...c, start: t0, dur, end: t0 + dur, guess, w1, wAll, pauseAt, wt: wt.length === wAll ? wt : null, parts: ps };
+      t0 += dur; return o;
+    }
+    const dur = Math.max(3.6, wAll / WPS + 1.0) + (guess ? GUESS_PAUSE : 0) + (c.extra || 0);
+    const o = { ...c, start: t0, dur, end: t0 + dur, guess, w1, wAll, pauseAt: guess ? t0 + w1 / WPS : null };
+    t0 += dur; return o;
+  });
+  // scenes: start = first cue start minus travel lead
+  const scenes = ep.scenes.map(s => { const cs = cues.filter(c => c.sc === s.id); return { ...s, start: cs[0].start, end: cs[cs.length - 1].end, cues: cs }; });
+  R.duration = t0 + (ep.tail || 1.5);
+  for (const c of cues) if (c.guess) R.events.push({ t: +(c.pauseAt + GUESS_PAUSE).toFixed(3), type: 'reveal' }); // semantic sound: reveal chime
+  R.cues = cues; R.scenes = scenes;
+  const cueById = Object.fromEntries(cues.map(c => [c.id, c]));
+  // ---- kit
+  const K = R.K = {}; K.R = R;
+  K.S = S; K.E = E; K.P = P; K.lerp = lerp; K.clamp = clamp; K.Z = ep.zones;
+  K.cue = id => { const c = cueById[id]; if (!c) throw new Error('cue inconnu ' + id); return c; };
+  K.T = (id, word, n = 0, after = false) => {
+    const c = K.cue(id); if (word == null) return c.start; if (word === '$end') return c.end;
+    const ws = words(c.say); const target = norm(word); let k = -1, seen = 0;
+    for (let i = 0; i < ws.length; i++) if (norm(ws[i]).startsWith(target) || norm(ws[i].split(/['’]/).pop()).startsWith(target)) { /* « l'azote » matches azote */ if (seen === n) { k = i; break; } seen++; }
+    if (k < 0) throw new Error(`mot "${word}" absent du cue ${id}`);
+    if (c.wt) return after ? c.wt[k][1] : c.wt[k][0];
+    const idx = after ? k + 1 : k;
+    let t = c.start + idx / WPS; if (c.guess && idx >= c.w1) t += GUESS_PAUSE; return t;
+  };
+  K.reveal = id => { const c = K.cue(id); return c.pauseAt + GUESS_PAUSE; };
+  K.sc = id => scenes.find(s => s.id === id);
+  K.layers = {};
+  K.A = (el, o) => { const a = new Actor(el, o || {}); R.actors.push(a);
+    if (o && o.pop != null) { K.ev(o.pop, 'pop'); K.mark(o.pop); }
+    if (o && o.fin) K.mark(o.fin[0]); if (o && o.out != null) K.mark(o.out); if (o && o.dash) K.mark(o.dash[0]);
+    for (const m of (o && o.moves) || []) K.mark(m[0]);
+    return a; };
+  K.g = (parent, attrs) => S('g', attrs || {}, parent);
+  K.tx = (parent, x, y, str, o = {}) => { // o.deco: a lone symbol (?, €, !) — not a text to read, not counted as a text block
+    const e = S('text', { x, y, 'font-size': o.size || 48, fill: o.fill || '#F8FAFC', 'font-weight': o.weight || 600,
+      'text-anchor': o.anchor || 'middle', 'font-family': o.mono ? "'JetBrains Mono','DejaVu Sans Mono',monospace" : "Poppins,'DejaVu Sans',sans-serif",
+      'data-txt': o.deco ? null : (o.mono ? 'code' : 'txt'), 'dominant-baseline': 'middle', 'letter-spacing': o.ls || null }, parent);
+    if (o.mono) e.setAttribute('style', 'white-space:pre');
+    if (o.bleed) e.setAttribute('data-bleed', '1');
+    if (o.block) e.setAttribute('data-block', o.block); // lines of one artifact panel = one text block
+    if (o.axis) e.setAttribute('data-axis', '1'); // chart reading aid (axis title, tick): counted as one text block with its siblings
+    e.textContent = str; return e;
+  };
+  K.char = (parent, o) => { const c = new Char(K, parent, o); R.chars.push(c); return c; };
+  K.cam = (t, d, x, y, z) => { R.camMoves.push({ t, d, x, y, z }); if (d > 0.9) K.ev(t, 'whoosh'); K.mark(t); };
+  // frame(t, d, targets, part, o): camera computed from the subject's bounding box at arrival time.
+  // part = share of the frame taken by the subject's dominant dimension (ensemble ~.9, travail ~.55, gros plan ~.7).
+  // Subject is centred at screen y=400 and kept inside y 60..740 (subtitle band free). o.focus adds a spotlight key.
+  K.frame = (t, d, targets, part = .55, o = {}) => { R.frames.push({ t, d, targets: [].concat(targets), part, o }); if (d > 0.9) K.ev(t, 'whoosh'); K.mark(t);
+    if (o.focus !== false) K.focus(t + Math.min(d, .4), [].concat(targets)[0], o.r || null); };
+  K.focus = (t, target, r) => R.focusKeys.push({ t, target: target && target.root ? target.root : target, r: r || null });
+  K.hot = (h) => R.hots.push(h);
+  K.ev = (t, type) => R.events.push({ t: +t.toFixed(3), type });
+  K.mark = t => R.marks.push(+t.toFixed(3));
+  K.fx = fn => R.fx.push(fn); // custom per-frame function (t) => void
+  return R;
+}
+function worldBBox(R, els) {
+  const main = R.K.layers.main, inv = main.getCTM().inverse(); let x1 = 1e9, y1 = 1e9, x2 = -1e9, y2 = -1e9;
+  for (let el of els) { if (el && el.root) el = el.root; if (!el) continue; let bb; try { bb = el.getBBox(); } catch (e) { continue; }
+    if (!bb || (bb.width === 0 && bb.height === 0)) continue; const m = inv.multiply(el.getCTM());
+    for (const [px, py] of [[bb.x, bb.y], [bb.x + bb.width, bb.y], [bb.x, bb.y + bb.height], [bb.x + bb.width, bb.y + bb.height]]) {
+      const p = R.svg.createSVGPoint(); p.x = px; p.y = py; const q = p.matrixTransform(m);
+      x1 = Math.min(x1, q.x); y1 = Math.min(y1, q.y); x2 = Math.max(x2, q.x); y2 = Math.max(y2, q.y); } }
+  return x1 > x2 ? null : { x: x1, y: y1, w: x2 - x1, h: y2 - y1 };
+}
+function camFor(bb, part, o = {}) {
+  let z = part / Math.max(bb.w / 1600, bb.h / 900); z = Math.min(z, 680 / bb.h, 1480 / bb.w, o.zmax || 3); if (o.zmin) z = Math.max(z, o.zmin);
+  return { x: bb.x + bb.w / 2 + (o.dx || 0), y: bb.y + bb.h / 2 + 50 / z + (o.dy || 0), z };
+}
+
+function camAt(R, t) {
+  const m0 = R.camMoves[0]; let x = m0.x, y = m0.y, z = m0.z;
+  for (const m of R.camMoves) { const p = E.ioc(P(t, m.t, m.d)); if (p <= 0) break;
+    x = lerp(x, m.x, p); y = lerp(y, m.y, p); z = Math.exp(lerp(Math.log(z), Math.log(m.z), p)); }
+  return { x, y, z };
+}
+function worldCenter(R, el) {
+  const bb = el.getBBox(); const m = el.getCTM(), base = R.K.layers.main.getCTM();
+  if (!m || !base) return [0, 0];
+  const pt = R.svg.createSVGPoint(); pt.x = bb.x + bb.width / 2; pt.y = bb.y + bb.height / 2;
+  const p = pt.matrixTransform(base.inverse().multiply(m)); return [p.x, p.y];
+}
+function focusAt(R, t) {
+  let f = null; for (const k of R.focusKeys) if (t >= k.t) f = k; return f;
+}
+
+/* Flat vector icon kit: each icon drawn around (0,0), ~100 units, returns <g>. Shared by episodes. */
+'use strict';
+const ICO = {
+  crown(g, c = '#FFB703') { S('path', { d: 'M -46 22 L -52 -26 L -22 2 L 0 -36 L 22 2 L 52 -26 L 46 22 Z', fill: c }, g); S('rect', { x: -48, y: 22, width: 96, height: 16, rx: 5, fill: c }, g);
+    S('path', { d: 'M -46 22 L -52 -26 L -22 2 Z', fill: '#000', opacity: .12 }, g); for (const x of [-52, 0, 52]) S('circle', { cx: x, cy: x ? -28 : -38, r: 7, fill: '#fff', opacity: .9 }, g); },
+  key(g, c = '#FB8500') { S('circle', { cx: -34, cy: 0, r: 26, fill: c }, g); S('circle', { cx: -34, cy: 0, r: 10, fill: '#0B1A3A' }, g);
+    S('rect', { x: -12, y: -8, width: 66, height: 16, rx: 6, fill: c }, g); S('rect', { x: 30, y: 4, width: 10, height: 18, rx: 3, fill: c }, g); S('rect', { x: 44, y: 4, width: 10, height: 13, rx: 3, fill: c }, g); },
+  laptop(g, c = '#22D3EE') { S('rect', { x: -44, y: -40, width: 88, height: 58, rx: 8, fill: '#0B1A3A', stroke: c, 'stroke-width': 7 }, g); S('path', { d: 'M -58 22 L 58 22 L 50 36 L -50 36 Z', fill: c }, g);
+    S('rect', { x: -30, y: -26, width: 40, height: 7, rx: 3, fill: c, opacity: .7 }, g); S('rect', { x: -30, y: -12, width: 56, height: 7, rx: 3, fill: c, opacity: .4 }, g); },
+  terminal(g, c = '#06D6A0') { S('rect', { x: -48, y: -38, width: 96, height: 76, rx: 10, fill: '#0B1A3A', stroke: c, 'stroke-width': 7 }, g);
+    S('path', { d: 'M -30 -14 L -14 0 L -30 14', fill: 'none', stroke: c, 'stroke-width': 7, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g); S('rect', { x: -6, y: 12, width: 28, height: 7, rx: 3, fill: c }, g); },
+  gear(g, c = '#A78BFA') { for (let i = 0; i < 8; i++) S('rect', { x: -9, y: -48, width: 18, height: 22, rx: 4, fill: c, transform: `rotate(${i * 45})` }, g);
+    S('circle', { r: 32, fill: c }, g); S('circle', { r: 13, fill: '#0B1A3A' }, g); },
+  person(g, c = '#F8FAFC') { S('circle', { cx: 0, cy: -22, r: 20, fill: c }, g); S('path', { d: 'M -34 34 Q -34 2 0 2 Q 34 2 34 34 Z', fill: c }, g); },
+  clock(g, c = '#F8FAFC') { S('circle', { r: 38, fill: 'none', stroke: c, 'stroke-width': 8 }, g); S('path', { d: 'M 0 -22 L 0 0 L 16 10', fill: 'none', stroke: c, 'stroke-width': 7, 'stroke-linecap': 'round' }, g); },
+  pin(g, c = '#F8FAFC') { S('path', { d: 'M 0 44 C -10 22 -34 4 -34 -14 A 34 34 0 1 1 34 -14 C 34 4 10 22 0 44 Z', fill: c }, g); S('circle', { cx: 0, cy: -14, r: 12, fill: '#0B1A3A' }, g); },
+  steps(g, c = '#EF476F') { for (const [x, y, r] of [[-26, 18, -12], [8, -2, 10], [-10, -30, -12], [26, -42, 10]]) { S('ellipse', { cx: x, cy: y, rx: 10, ry: 15, fill: c, transform: `rotate(${r} ${x} ${y})` }, g); } },
+  wrench(g, c = '#F8FAFC') { S('path', { d: 'M -36 30 L 8 -14 A 22 22 0 1 1 22 0 L -22 44 Z', fill: c }, g); S('circle', { cx: 24, cy: -20, r: 8, fill: '#0B1A3A' }, g); },
+  plusminus(g, c = '#06D6A0') { S('rect', { x: -40, y: -10, width: 80, height: 20, rx: 6, fill: c }, g); S('rect', { x: -10, y: -40, width: 20, height: 80, rx: 6, fill: c }, g); },
+  doc(g, c = '#F8FAFC') { S('path', { d: 'M -30 -40 L 14 -40 L 30 -24 L 30 40 L -30 40 Z', fill: c }, g); for (const y of [-16, 0, 16]) S('rect', { x: -18, y, width: 36, height: 6, rx: 3, fill: '#0B1A3A', opacity: .35 }, g); },
+  slip(g, c = '#FFB703') { S('rect', { x: -26, y: -18, width: 52, height: 36, rx: 5, fill: c }, g); S('rect', { x: -16, y: -8, width: 32, height: 5, rx: 2, fill: '#0B1A3A', opacity: .4 }, g); S('rect', { x: -16, y: 3, width: 22, height: 5, rx: 2, fill: '#0B1A3A', opacity: .4 }, g); },
+  padlock(g, c = '#F8FAFC') { S('path', { d: 'M -22 -6 L -22 -26 A 22 22 0 0 1 22 -26 L 22 -6', fill: 'none', stroke: c, 'stroke-width': 10 }, g); S('rect', { x: -34, y: -8, width: 68, height: 52, rx: 10, fill: c }, g); S('circle', { cx: 0, cy: 14, r: 7, fill: '#0B1A3A' }, g); },
+  bell(g, c = '#FFB703') { S('path', { d: 'M -36 24 Q -30 18 -30 -4 Q -30 -36 0 -38 Q 30 -36 30 -4 Q 30 18 36 24 Z', fill: c }, g); S('circle', { cx: 0, cy: 32, r: 9, fill: c }, g); S('rect', { x: -4, y: -48, width: 8, height: 12, rx: 3, fill: c }, g); },
+  funnel(g, c = '#22D3EE') { S('path', { d: 'M -50 -36 L 50 -36 L 12 6 L 12 40 L -12 48 L -12 6 Z', fill: c }, g); S('rect', { x: -50, y: -44, width: 100, height: 12, rx: 5, fill: c }, g); },
+  cam(g, c = '#A78BFA', on = false) { S('rect', { x: -46, y: -22, width: 80, height: 44, rx: 10, fill: c }, g); S('path', { d: 'M 34 -12 L 56 -24 L 56 24 L 34 12 Z', fill: c }, g);
+    S('rect', { x: -10, y: -52, width: 10, height: 32, fill: c }, g); },
+  door(g, c = '#EF476F') { S('rect', { x: -32, y: -50, width: 64, height: 100, rx: 8, fill: '#0B1A3A', stroke: c, 'stroke-width': 7 }, g); S('circle', { cx: 16, cy: 4, r: 6, fill: c }, g); },
+  book(g, c = '#FFB703') { S('path', { d: 'M 0 -30 Q -30 -42 -60 -34 L -60 36 Q -30 28 0 40 Q 30 28 60 36 L 60 -34 Q 30 -42 0 -30 Z', fill: '#F8FAFC' }, g); S('path', { d: 'M 0 -30 L 0 40', stroke: c, 'stroke-width': 6 }, g);
+    S('path', { d: 'M -64 36 Q -30 30 0 44 Q 30 30 64 36 L 64 44 Q 30 38 0 52 Q -30 38 -64 44 Z', fill: c }, g); },
+  server(g, c = '#22D3EE') { for (const y of [-30, 0, 30]) { S('rect', { x: -40, y: y - 12, width: 80, height: 24, rx: 6, fill: '#14295C', stroke: c, 'stroke-width': 4 }, g); S('circle', { cx: 26, cy: y, r: 4, fill: c }, g); } },
+  barrel(g, c = '#F8FAFC') { S('rect', { x: -34, y: -38, width: 68, height: 76, rx: 14, fill: c }, g); for (const y of [-16, 12]) S('rect', { x: -34, y, width: 68, height: 6, fill: '#0B1A3A', opacity: .3 }, g); },
+  check(g, c = '#06D6A0') { S('circle', { r: 30, fill: c }, g); S('path', { d: 'M -14 0 L -4 12 L 16 -12', fill: 'none', stroke: '#0B1A3A', 'stroke-width': 8, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g); },
+  cross(g, c = '#EF476F') { S('path', { d: 'M -30 -30 L 30 30 M 30 -30 L -30 30', stroke: c, 'stroke-width': 16, 'stroke-linecap': 'round' }, g); },
+  mask(g, c = '#2A0F2E') { S('path', { d: 'M -40 -10 Q 0 -24 40 -10 L 36 14 Q 0 6 -36 14 Z', fill: c }, g); for (const x of [-16, 16]) S('ellipse', { cx: x, cy: 0, rx: 8, ry: 6, fill: '#F8FAFC' }, g); },
+  plant(g, c = '#06121f') { S('path', { d: 'M -30 60 L 30 60 L 22 100 L -22 100 Z', fill: c }, g); for (const [r, l] of [[-40, 120], [-10, 150], [20, 130], [45, 100]]) S('ellipse', { cx: 0, cy: -l / 2 + 60, rx: 22, ry: l / 2, fill: c, transform: `rotate(${r} 0 60)` }, g); },
+};
+function ico(name, parent, x, y, s, c, extra) { const g = S('g', {}, parent); const inner = S('g', {}, g); ICO[name](inner, c, extra); g._x = x; g._y = y; g._s = s; return g; }
+Object.assign(ICO, {
+  globe(g, c = '#22D3EE') { S('circle', { r: 46, fill: 'none', stroke: c, 'stroke-width': 8 }, g); S('ellipse', { rx: 20, ry: 46, fill: 'none', stroke: c, 'stroke-width': 6 }, g);
+    S('path', { d: 'M -46 0 L 46 0 M -40 -22 L 40 -22 M -40 22 L 40 22', stroke: c, 'stroke-width': 5 }, g); },
+  wall(g, c = '#FB8500') { for (let r = 0; r < 4; r++) for (let k = 0; k < 3; k++) S('rect', { x: -60 + k * 42 + (r % 2) * 20 - 10, y: -60 + r * 31, width: 38, height: 27, rx: 4, fill: c }, g); },
+  ticket(g, c = '#FB8500') { S('path', { d: 'M -50 -30 L 50 -30 L 50 -8 A 10 10 0 0 0 50 8 L 50 30 L -50 30 L -50 8 A 10 10 0 0 0 -50 -8 Z', fill: c }, g);
+    S('circle', { cx: 18, cy: 0, r: 14, fill: 'none', stroke: '#0B1A3A', 'stroke-width': 5 }, g); S('path', { d: 'M 18 -8 L 18 0 L 24 4', stroke: '#0B1A3A', 'stroke-width': 4, fill: 'none' }, g); },
+  pipe(g, c = '#22D3EE') { S('path', { d: 'M -90 0 L 90 0', stroke: c, 'stroke-width': 26, 'stroke-linecap': 'round' }, g); S('rect', { x: -14, y: -24, width: 28, height: 48, rx: 6, fill: c }, g); },
+});
+
+/* Generic scene kit (any topic). Everything stays a pure function of time.
+   Usage in an episode: const k = sceneKit(K); then k.room(...), k.hero(...), k.card(...), k.doc(...), k.counter(...)...
+   Conventions: zone-relative coordinates (K.Z[name]), floor at y = FLOOR (characters stand on it, above the subtitle band
+   once framed), every element gets an entry (pop/fin) and an exit (out) unless it carries the case thread. */
+'use strict';
+function sceneKit(K) {
+  const { S, E, Z } = K; const T = K.T, P = K.P;
+  const C = { amber: '#FFB703', orange: '#FB8500', cyan: '#22D3EE', rose: '#EF476F', green: '#06D6A0', violet: '#A78BFA', teal: '#2DD4BF',
+    text: '#F8FAFC', ink: '#0B1A3A', p1: '#14295C', p2: '#1E3A8A', paper: '#E8EEF9', muted: '#94A3B8' };
+  const FLOOR = 250, main = K.layers.main, far = K.layers.far, front = K.layers.front;
+  const sc = id => K.sc(id).start;
+  const G = (parent, x, y, o = {}) => { const g = K.g(parent); g._a = K.A(g, { x, y, ...o }); return g; };
+  const I = (name, parent, x, y, s, c, o = {}) => { const g = ico(name, parent, 0, 0, 1, c); g._a = K.A(g, { x, y, s, ...o }); return g; };
+  const F = (t, d, tg, part, o) => K.frame(t, d, tg, part, o);
+  const mono = (len, maxW, base = 44, min = 36) => Math.max(min, Math.min(base, maxW / (len * .6)));
+  const typeIn = (el, str, t0, dur = 1.2) => { K.mark(t0); K.fx(t => { const n = FRAMING ? str.length : Math.round(str.length * K.clamp((t - t0) / dur)); el.textContent = str.slice(0, Math.max(1, n)); }); };
+
+  /* ---- worlds: one zone = one place. decor: 'room' (walls, shelves, floor), 'outdoor' (sky, hills, sun), 'lab' (benches, screens), 'void' (platform) */
+  function room(name, tint, o = {}) {
+    const g = K.g(main, { transform: `translate(${Z[name][0]} ${Z[name][1]})` }); const d = o.decor || 'room', seed = o.seed || 0;
+    const r = S('rect', { x: -1000, y: -560, width: 2000, height: 1120, rx: 80, fill: tint }, g);
+    const acc = [C.cyan, C.amber, C.rose, C.violet, C.green];
+    if (d === 'outdoor') {
+      if (o.sun) S('circle', { cx: o.sun[0], cy: o.sun[1], r: 90, fill: C.amber, opacity: .85 }, g); // opt-in: a sun is an object, it must not collide with the beat
+      for (let k = 0; k < 3; k++) S('ellipse', { cx: -700 + k * 700 + seed * 40, cy: FLOOR + 40, rx: 560, ry: 200 - k * 30, fill: ['#1E3A8A', '#24408F', '#1B3270'][k] }, g);
+      for (let k = 0; k < 4; k++) S('ellipse', { cx: -760 + k * 480, cy: -420 + (k % 2) * 60, rx: 120, ry: 34, fill: '#F8FAFC', opacity: .12 }, g);
+    } else {
+      for (const sx of [-1, 1]) { const x = sx * 860;
+        S('rect', { x: x - 80, y: -440, width: 160, height: 220, rx: 14, fill: C.p2, opacity: .55 }, g);
+        for (let k = 0; k < 4; k++) S('rect', { x: x - 64 + (k % 2) * 68, y: -420 + Math.floor(k / 2) * 92, width: 60, height: 76, rx: 8, fill: acc[(k + seed) % 5], opacity: .22 }, g); }
+      S('path', { d: 'M -1000 -500 L 1000 -500', stroke: '#2c4a8f', 'stroke-width': 16, opacity: .7 }, g);
+      if (d === 'lab') for (const x of [-600, 600]) { S('rect', { x: x - 150, y: FLOOR - 120, width: 300, height: 26, rx: 10, fill: C.p2 }, g);
+        S('rect', { x: x - 130, y: FLOOR - 94, width: 20, height: 94, fill: C.p1 }, g); S('rect', { x: x + 110, y: FLOOR - 94, width: 20, height: 94, fill: C.p1 }, g); }
+    }
+    if (d !== 'void') { S('rect', { x: -1000, y: FLOOR, width: 2000, height: 560 - FLOOR, rx: 40, fill: d === 'outdoor' ? '#173064' : '#1B3270' }, g);
+      S('rect', { x: -1000, y: FLOOR - 6, width: 2000, height: 12, fill: '#2c4a8f' }, g);
+      for (let k = 0; k < 9; k++) S('rect', { x: -1000 + k * 230, y: 300 + (k % 2) * 60, width: 150, height: 10, rx: 5, fill: '#2c4a8f', opacity: .7 }, g); }
+    else S('rect', { x: -700, y: FLOOR, width: 1400, height: 40, rx: 20, fill: C.p2 }, g);
+    g._room = r; return g;
+  }
+  /* far layer (stars / dust), inhabited paths between consecutive zones, dark foreground silhouettes crossing during travels */
+  function world(zoneNames, o = {}) {
+    for (let i = 0; i < (o.stars || 140); i++) { const x = -800 + (i * 977) % (zoneNames.length * 2400), y = -700 + (i * 613) % 1600;
+      const st = S('circle', { cx: x, cy: y, r: 2 + (i % 3), fill: '#cfe3ff', opacity: .3 }, far);
+      if (i % 7 === 0) K.fx(t => st.setAttribute('opacity', AMBIENT ? (.2 + .3 * Math.abs(Math.sin(t * .8 + i))).toFixed(2) : .35)); }
+    const zs = zoneNames.map(n => Z[n]);
+    for (let i = 0; i + 1 < zs.length; i++) { const mx = (zs[i][0] + zs[i + 1][0]) / 2, my = (zs[i][1] + zs[i + 1][1]) / 2;
+      const g = ico(o.silhouette || 'plant', front, 0, 0, 1, '#040916'); g.setAttribute('transform', `translate(${mx * 1.3} ${(my + 380) * 1.3}) scale(3)`);
+      S('path', { d: `M ${zs[i][0] + 1000} 320 L ${zs[i + 1][0] - 1000} 320`, stroke: C.p1, 'stroke-width': 70 }, main);
+      S('path', { d: `M ${zs[i][0] + 1000} 320 L ${zs[i + 1][0] - 1000} 320`, stroke: C.amber, 'stroke-width': 6, 'stroke-dasharray': '18 26', opacity: .4 }, main); }
+  }
+  /* ---- characters: protagonist (learns / acts) and antagonist (the problem, the opposing force). name = cue.who for lip-sync */
+  const hero = (g, x, o = {}) => K.char(g, { name: o.name || 'hero', color: o.color || C.cyan, x, y: o.y == null ? FLOOR : o.y, s: o.s || 1.4, dir: o.dir || 1, headset: o.headset, shape: o.shape, expr: o.expr });
+  const foe = (g, x, o = {}) => K.char(g, { name: o.name || 'foe', color: o.color || C.rose, x, y: o.y == null ? FLOOR : o.y, s: o.s || 1.4, dir: o.dir || -1, mask: o.mask !== false, expr: o.expr || 'smug', shape: o.shape, ghost: o.ghost });
+  /* speech bubble tied to a character (dialogue cues): one short line, visible [t0, t1] */
+  function bubble(g, ch, text, t0, t1, o = {}) { const w = Math.max(220, text.length * (o.size || 44) * .55 + 70), h = (o.size || 44) + 50;
+    const b = G(g, (o.x != null ? o.x : ch.x) + (o.dx || 0), (o.y != null ? o.y : ch.y - 300 * ch.s / 1.4) + (o.dy || 0), { pop: t0, out: t1 });
+    S('rect', { x: -w / 2, y: -h / 2, width: w, height: h, rx: h / 2, fill: C.paper }, b); S('path', { d: `M -20 ${h / 2 - 2} L 0 ${h / 2 + 30} L 22 ${h / 2 - 2} Z`, fill: C.paper }, b);
+    K.tx(b, 0, 2, text, { size: o.size || 44, fill: C.ink, weight: 700 }); return b; }
+  /* ---- real artifact card: header band (what it is), main value typed in, a second line lit when the narration explains it.
+     spec: { head, value, note, col, w, mono (value), noteMono, icon } — 3 texts max, the real name/value as it appears in real life */
+  function card(g, x, y, spec, tPop, tValue, tNote, tOut) {
+    const W = spec.w || 1040, H = spec.note ? 400 : 290; const cd = G(g, x, y, { pop: tPop, out: tOut });
+    S('rect', { x: -W / 2 + 10, y: -H / 2 + 12, width: W, height: H, rx: 30, fill: '#000', opacity: .25 }, cd);
+    S('rect', { x: -W / 2, y: -H / 2, width: W, height: H, rx: 30, fill: C.paper }, cd);
+    S('rect', { x: -W / 2, y: -H / 2, width: W, height: 96, rx: 30, fill: spec.col || C.cyan }, cd); S('rect', { x: -W / 2, y: -H / 2 + 60, width: W, height: 36, fill: spec.col || C.cyan }, cd);
+    K.tx(cd, -W / 2 + 40, -H / 2 + 50, spec.head, { size: 46, fill: C.ink, weight: 800, anchor: 'start' });
+    if (spec.icon) { const ic = ico(spec.icon, cd, 0, 0, 1, C.ink); ic.setAttribute('transform', `translate(${W / 2 - 80} ${-H / 2 + 48}) scale(.55)`); }
+    const vy = spec.note ? -20 : 40;
+    const v = K.tx(cd, -W / 2 + 40, vy, spec.value, { size: spec.mono === false ? 52 : mono(spec.value.length, W - 80, 52), mono: spec.mono !== false, fill: C.ink, weight: 700, anchor: 'start' });
+    if (tValue != null) typeIn(v, spec.value, tValue, Math.min(1.6, .04 * spec.value.length + .4)); cd._v = v;
+    if (spec.note) { const hl = S('rect', { x: -W / 2 + 24, y: 50, width: W - 48, height: 92, rx: 18, fill: spec.col || C.cyan, 'fill-opacity': .25 }, cd); K.A(hl, { fin: [tNote, .3] });
+      const ng = G(cd, 0, 0, { fin: [tNote, .3] }); K.tx(ng, -W / 2 + 40, 96, spec.note, { size: spec.noteMono ? mono(spec.note.length, W - 80, 46) : 46, mono: !!spec.noteMono, fill: C.ink, weight: 700, anchor: 'start' }); cd._n = ng; }
+    return cd;
+  }
+  /* ---- long artifact (output, form, label, code): unrolls line by line, 3 lines readable at a time, the rest greyed.
+     lines: [str]; steps: [[t, i]] = at t, line i becomes the lit line (the window follows it). Returns g with ._line(i) */
+  function doc(g, x, y, lines, steps, o = {}) {
+    const W = o.w || 1200, lh = o.lh || 70, vis = o.visible || 3, size = o.size || mono(Math.max(...lines.map(l => l.length)), W - 80, 44);
+    const d = G(g, x, y, { pop: o.pop, out: o.out }); const Hh = lh * (vis + 2) + 40;
+    S('rect', { x: -W / 2 + 10, y: -Hh / 2 + 12, width: W, height: Hh, rx: 28, fill: '#000', opacity: .25 }, d);
+    S('rect', { x: -W / 2, y: -Hh / 2, width: W, height: Hh, rx: 28, fill: o.bg || '#071028', stroke: o.col || C.cyan, 'stroke-width': 6 }, d);
+    if (o.title) K.tx(d, -W / 2 + 30, -Hh / 2 - 40, o.title, { size: 40, fill: o.col || C.cyan, weight: 700, anchor: 'start' });
+    const clip = 'clip' + Math.random().toString(36).slice(2, 8); const cp = S('clipPath', { id: clip }, d); S('rect', { x: -W / 2, y: -Hh / 2 + 10, width: W, height: Hh - 20 }, cp);
+    const inner = K.g(d, { 'clip-path': `url(#${clip})` }); const hl = S('rect', { x: -W / 2 + 14, y: -lh / 2, width: W - 28, height: lh, rx: 14, fill: o.col || C.cyan, 'fill-opacity': .22 }, inner);
+    const els = lines.map((l, i) => K.tx(inner, -W / 2 + 34, i * lh, l, { size, mono: o.mono !== false, fill: C.text, weight: 600, anchor: 'start' }));
+    const st = [...steps].sort((a, b) => a[0] - b[0]); for (const s of st) K.mark(s[0]);
+    K.fx(t => { let cur = 0, prev = 0, p = 1; for (const s of st) if (t >= s[0]) { prev = cur; cur = s[1]; p = E.ioc(P(t, s[0], .45)); }
+      const pos = FRAMING ? (st.length ? st[0][1] : 0) : prev + (cur - prev) * p;
+      inner.setAttribute('transform', `translate(0 ${(-pos * lh).toFixed(1)})`); hl.setAttribute('y', (pos * lh - lh / 2).toFixed(1));
+      els.forEach((e, i) => e.setAttribute('fill-opacity', Math.abs(i - pos) <= (vis - 1) / 2 + .01 ? 1 : .28)); });
+    d._lines = els; return d;
+  }
+  /* ---- number that counts up (a real value being computed). fmt(v) -> string. Emits ticks for the sound. */
+  function counter(g, x, y, o) { const c = G(g, x, y, { pop: o.pop, out: o.out }); const el = K.tx(c, 0, 0, o.fmt(o.from), { size: o.size || 120, fill: o.fill || C.text, weight: 800, mono: o.mono });
+    K.mark(o.t0); for (let k = 0; k < 8; k++) K.ev(o.t0 + k * o.dur / 8, 'tick');
+    K.fx(t => { const p = FRAMING ? 1 : E.oc(P(t, o.t0, o.dur)); el.textContent = o.fmt(o.from + (o.to - o.from) * p); }); c._t = el; return c; }
+  /* ---- bars growing (comparison of real values). vals: [{v, label, col}], max, w, h */
+  function bars(g, x, y, o) { const b = G(g, x, y, { pop: o.pop, out: o.out }); const n = o.vals.length, bw = (o.w || 900) / n * .62, H = o.h || 420;
+    S('rect', { x: -(o.w || 900) / 2 - 20, y: 0, width: (o.w || 900) + 40, height: 8, rx: 4, fill: C.muted }, b);
+    o.vals.forEach((it, i) => { const cx = -(o.w || 900) / 2 + (i + .5) * (o.w || 900) / n, t0 = o.t0 + i * (o.stagger || .35);
+      const r = S('rect', { x: cx - bw / 2, width: bw, rx: 12, fill: it.col || C.cyan }, b); K.mark(t0);
+      K.fx(t => { const h = H * it.v / o.max * (FRAMING ? 1 : E.oc(P(t, t0, .8))); r.setAttribute('y', -h); r.setAttribute('height', Math.max(0, h)); });
+      if (it.label) K.tx(b, cx, 50, it.label, { size: o.lsize || 48, fill: C.text, weight: 700, axis: true });
+      if (it.top) { const tg = G(b, cx, -H * it.v / o.max - 40, { fin: [t0 + .6, .3] }); K.tx(tg, 0, 0, it.top, { size: o.lsize || 40, fill: it.col || C.cyan, weight: 800, deco: it.top.length <= 4 }); } });
+    return b; }
+  /* ---- curve drawn over time (pts in local units, y up = negative) */
+  function curve(g, pts, o) { const d = 'M ' + pts.map(p => p.join(' ')).join(' L '); const el = S('path', { d, fill: 'none', stroke: o.col || C.amber, 'stroke-width': o.sw || 10, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
+    el._a = K.A(el, { dash: [o.t0, o.dur || 1.5], out: o.out }); return el; }
+  /* ---- arrow drawn from a to b */
+  function arrow(g, x1, y1, x2, y2, o = {}) { const a = K.g(g); const ang = Math.atan2(y2 - y1, x2 - x1);
+    const ln = S('path', { d: `M ${x1} ${y1} L ${x2} ${y2}`, stroke: o.col || C.text, 'stroke-width': o.sw || 10, 'stroke-linecap': 'round', fill: 'none', 'stroke-dasharray': o.dashed ? '18 16' : null }, a);
+    const hd = S('path', { d: 'M 0 0 L -34 -18 L -34 18 Z', fill: o.col || C.text, transform: `translate(${x2} ${y2}) rotate(${ang * 180 / Math.PI})` }, a);
+    if (!o.dashed) K.A(ln, { dash: [o.t, o.d || .6], out: o.out }); else K.A(ln, { fin: [o.t, .3], out: o.out });
+    K.A(hd, { fin: [o.t + (o.d || .6) * .8, .2], out: o.out }); return a; }
+  /* ---- pill label (a keyword on screen; the sentence stays in the subtitles) */
+  function label(g, x, y, text, o = {}) { const l = G(g, x, y, { pop: o.pop, out: o.out, fin: o.fin }); const w = text.length * (o.size || 44) * .58 + 60, h = (o.size || 44) + 36;
+    S('rect', { x: -w / 2, y: -h / 2, width: w, height: h, rx: h / 2, fill: o.bg || (o.col || C.cyan), 'fill-opacity': o.bg ? 1 : .2, stroke: o.col || C.cyan, 'stroke-width': 4 }, l);
+    K.tx(l, 0, 2, text, { size: o.size || 44, fill: o.fill || C.text, weight: 700, mono: o.mono }); return l; }
+  /* ---- timeline (frieze): ticks [[pos 0..1, label]], a cursor that travels; returns {g, at(p)} */
+  function timeline(g, x, y, o) { const tl = G(g, x, y, { pop: o.pop, out: o.out }); const W = o.w || 1300;
+    S('rect', { x: -W / 2, y: -6, width: W, height: 12, rx: 6, fill: C.muted }, tl);
+    (o.ticks || []).forEach(([p, lab], i) => { const tx = -W / 2 + p * W; const tk = G(tl, tx, 0, { pop: (o.t0 || 0) + i * (o.stagger || .3) });
+      S('circle', { r: 16, fill: o.col || C.amber }, tk); if (lab) K.tx(tk, 0, i % 2 ? 64 : -60, lab, { size: o.lsize || 50, fill: C.text, weight: 700, axis: true }); });
+    return tl; }
+  /* ---- balance: a trade-off that tilts at t (tilt in degrees, + = right side heavier) */
+  function balance(g, x, y, o) { const b = G(g, x, y, { pop: o.pop, out: o.out });
+    S('path', { d: 'M -40 120 L 40 120 L 0 0 Z', fill: C.p2 }, b);
+    const beam = K.g(b); S('rect', { x: -360, y: -10, width: 720, height: 20, rx: 10, fill: C.muted }, beam);
+    for (const sx of [-1, 1]) { S('path', { d: `M ${sx * 340} 0 L ${sx * 340 - 70} 120 L ${sx * 340 + 70} 120 Z`, fill: 'none', stroke: C.muted, 'stroke-width': 5 }, beam);
+      S('rect', { x: sx * 340 - 100, y: 112, width: 200, height: 18, rx: 8, fill: C.muted }, beam); }
+    K.mark(o.t); K.fx(t => beam.setAttribute('transform', `rotate(${((o.tilt || 12) * (FRAMING ? 1 : E.ob(P(t, o.t, .9)))).toFixed(2)})`));
+    b._beam = beam; return b; }
+  /* ---- uncertainty: what the narration does not know is drawn dashed / faded, never as a fact */
+  function unknown(el) { el.setAttribute('stroke-dasharray', '16 12'); el.setAttribute('fill-opacity', .15); return el; }
+  /* ---- question mark suspended above an object during a "devinez" silence */
+  function suspense(g, x, y, t0, t1, o = {}) { const q = G(g, x, y, { pop: t0, out: t1, fn: (s, t) => { s.y += AMBIENT ? 8 * Math.sin(t * 3) : 0; } });
+    K.tx(q, 0, 0, '?', { size: o.size || 140, fill: o.col || C.amber, weight: 800, deco: true }); return q; }
+  /* ---- artifact panel: real text lines (monospace), wrapped only at natural breaks; segments lit by hi(line, from, len, t).
+     lines: [str]; o: { w, size, title, col, pop, out, bg }. Returns g with ._hi(line, from, len, t0, o) and ._els */
+  function panel(g, x, y, lines, o = {}) {
+    const W = o.w || 1440, size = o.size || mono(Math.max(...lines.map(l => l.length)), W - 70, 48, 34), lh = size * 1.5, H = lh * lines.length + 60;
+    const p = G(g, x, y, { pop: o.pop, out: o.out });
+    S('rect', { x: -W / 2 + 10, y: -H / 2 + 12, width: W, height: H, rx: 26, fill: '#000', opacity: .25 }, p);
+    S('rect', { x: -W / 2, y: -H / 2, width: W, height: H, rx: 26, fill: o.bg || '#071028', stroke: o.col || C.cyan, 'stroke-width': 6 }, p);
+    if (o.title) { const tt = G(p, -W / 2 + 20, -H / 2 - 48); K.tx(tt, 0, 0, o.title, { size: 52, fill: o.col || C.cyan, weight: 700, anchor: 'start' }); }
+    const hlg = K.g(p); const x0 = -W / 2 + 34, y0 = -H / 2 + 30 + lh / 2, cw = size * .6;
+    const bid = 'p' + Math.random().toString(36).slice(2, 8); const els = lines.map((l, i) => { const e = K.tx(p, x0, y0 + i * lh, l, { size, mono: true, fill: o.fill || C.text, weight: 600, anchor: 'start', block: bid });
+      if (o.typeAt != null && i === 0) typeIn(e, l, o.typeAt, Math.min(1.6, .04 * l.length + .4)); return e; });
+    p._els = els; p._lh = lh;
+    p._hi = (li, from, len, t0, ho = {}) => { const r = S('rect', { x: x0 + from * cw - 8, y: y0 + li * lh - lh / 2 + 4, width: len * cw + 16, height: lh - 8, rx: 10,
+        fill: ho.col || C.amber, 'fill-opacity': ho.box ? 0 : .32, stroke: ho.box ? (ho.col || C.amber) : 'none', 'stroke-width': 6 }, hlg);
+      const a = K.A(r, { fin: [t0, .25], out: ho.out }); r._a = a; return r; };
+    p._dim = (t0, keep = [], t1) => els.forEach((e, i) => { if (keep.includes(i)) return; K.fx(t => e.setAttribute('fill-opacity', t >= t0 && (t1 == null || t < t1) ? .3 : 1)); });
+    return p;
+  }
+  /* ---- pulse: a short scale bump on an element that already has an actor (g._a) — a beat that re-points attention */
+  function pulse(el, t, amt = 1.14) { const a = el._a || el; const s0 = a.bs == null ? 1 : a.bs; a.o.moves = a.o.moves || [];
+    a.o.moves.push([t, .18, { s: s0 * amt }, E.oc], [t + .18, .32, { s: s0 }, E.ioc]); K.mark(t); return el; }
+  return { panel, pulse, C, FLOOR, sc, G, I, F, mono, typeIn, room, world, hero, foe, bubble, card, doc, counter, bars, curve, arrow, label, timeline, balance, unknown, suspense };
+}
+
+/* Series kit: shared world helpers + "event room" grammar (action stage -> real log card -> rule).
+   Used by the v6 series episodes. Everything still a pure function of time. */
+'use strict';
+function seriesKit(K) {
+  const { S, E, Z } = K; const T = K.T, R = K.reveal;
+  const C = { amber: '#FFB703', orange: '#FB8500', cyan: '#22D3EE', rose: '#EF476F', green: '#06D6A0', violet: '#A78BFA', teal: '#2DD4BF', text: '#F8FAFC', ink: '#0B1A3A', p1: '#14295C', p2: '#1E3A8A', paper: '#E8EEF9' };
+  const FLOOR = 250, main = K.layers.main, far = K.layers.far, front = K.layers.front;
+  const sc = id => K.sc(id).start;
+  const G = (parent, x, y, o = {}) => { const g = K.g(parent); g._a = K.A(g, { x, y, ...o }); return g; };
+  const I = (name, parent, x, y, s, c, o = {}) => { const g = ico(name, parent, 0, 0, 1, c); g._a = K.A(g, { x, y, s, ...o }); return g; };
+  const F = (t, d, tg, part, o) => K.frame(t, d, tg, part, o);
+  const zg = (name, tint, seed = 0) => { const g = K.g(main, { transform: `translate(${Z[name][0]} ${Z[name][1]})` });
+    const room = S('rect', { x: -1000, y: -560, width: 2000, height: 1120, rx: 80, fill: tint }, g);
+    S('rect', { x: -1000, y: FLOOR, width: 2000, height: 560 - FLOOR, rx: 40, fill: '#1B3270' }, g);
+    S('rect', { x: -1000, y: FLOOR - 6, width: 2000, height: 12, fill: '#2c4a8f' }, g);
+    for (const sx of [-1, 1]) { const x = sx * 860; S('rect', { x: x - 80, y: -440, width: 160, height: 220, rx: 14, fill: '#1E3A8A', opacity: .55 }, g);
+      for (let k = 0; k < 4; k++) S('rect', { x: x - 64 + (k % 2) * 68, y: -420 + Math.floor(k / 2) * 92, width: 60, height: 76, rx: 8, fill: ['#22D3EE', '#FFB703', '#EF476F', '#A78BFA'][(k + seed) % 4], opacity: .25 }, g); }
+    for (let k = 0; k < 9; k++) S('rect', { x: -1000 + k * 230, y: 300 + (k % 2) * 60, width: 150, height: 10, rx: 5, fill: '#2c4a8f', opacity: .7 }, g);
+    S('path', { d: 'M -1000 -500 L 1000 -500', stroke: '#2c4a8f', 'stroke-width': 16, opacity: .7 }, g);
+    g._room = room; return g; };
+  function backdrop(zoneNames) {
+    for (let i = 0; i < 140; i++) { const x = -800 + (i * 977) % 9000, y = -700 + (i * 613) % 1600;
+      const st = S('circle', { cx: x, cy: y, r: 2 + (i % 3), fill: '#cfe3ff', opacity: .3 }, far);
+      if (i % 7 === 0) K.fx(t => st.setAttribute('opacity', AMBIENT ? (.2 + .3 * Math.abs(Math.sin(t * .8 + i))).toFixed(2) : .35)); }
+    const zs = zoneNames.map(n => Z[n]);
+    for (let i = 0; i + 1 < zs.length; i++) { const mx = (zs[i][0] + zs[i + 1][0]) / 2, my = (zs[i][1] + zs[i + 1][1]) / 2;
+      const g = ico('plant', front, 0, 0, 1, '#040916'); g.setAttribute('transform', `translate(${mx * 1.3} ${(my + 380) * 1.3}) scale(3)`);
+      S('path', { d: `M ${zs[i][0] + 1000} 320 L ${zs[i + 1][0] - 1000} 320`, stroke: '#14295C', 'stroke-width': 70 }, main);
+      S('path', { d: `M ${zs[i][0] + 1000} 320 L ${zs[i + 1][0] - 1000} 320`, stroke: C.amber, 'stroke-width': 6, 'stroke-dasharray': '18 26', opacity: .4 }, main); }
+  }
+  const analyst = (g, x, o = {}) => K.char(g, { name: 'analyste', color: C.cyan, x, y: FLOOR, s: o.s || 1.4, dir: o.dir || 1, headset: true });
+  const villain = (g, x, o = {}) => K.char(g, { name: 'attaquant', color: C.rose, x, y: FLOOR, s: o.s || 1.4, dir: o.dir || -1, mask: true, expr: 'smug' });
+  // typewriter on a <text> (a real value "s'écrit")
+  const typeIn = (el, str, t0, dur = 1.2) => K.fx(t => { const n = FRAMING ? str.length : Math.round(str.length * K.clamp((t - t0) / dur)); el.textContent = str.slice(0, Math.max(1, n)); });
+  const mono = (len, maxW, base = 44, min = 36) => Math.max(min, Math.min(base, maxW / (len * .6)));
+  /* Real log card: tactic band (+ colored log book: amber = activity, violet = data_access), method (typed), condition (lit). 3 texts max. */
+  function logCard(g, x, y, spec, tPop, tMethod, tCond, tOut) {
+    const W = spec.w || 1040, H = 400; const card = G(g, x, y, { pop: tPop, out: tOut });
+    S('rect', { x: -W / 2 + 10, y: -H / 2 + 12, width: W, height: H, rx: 30, fill: '#000', opacity: .25 }, card);
+    S('rect', { x: -W / 2, y: -H / 2, width: W, height: H, rx: 30, fill: C.paper }, card);
+    S('rect', { x: -W / 2, y: -H / 2, width: W, height: 96, rx: 30, fill: spec.col }, card); S('rect', { x: -W / 2, y: -H / 2 + 60, width: W, height: 36, fill: spec.col }, card);
+    K.tx(card, -W / 2 + 40, -H / 2 + 50, spec.tactic, { size: 46, fill: C.ink, weight: 800, anchor: 'start' });
+    const bk = ico('book', card, 0, 0, 1, spec.log === 'data_access' ? C.violet : C.amber); bk.setAttribute('transform', `translate(${W / 2 - 80} ${-H / 2 + 48}) scale(.62)`);
+    const mEl = K.tx(card, -W / 2 + 40, -20, spec.method, { size: mono(spec.method.length, W - 80, 52), mono: true, fill: C.ink, weight: 700, anchor: 'start' });
+    typeIn(mEl, spec.method, tMethod, Math.min(1.6, .04 * spec.method.length + .4)); K.mark(tMethod); card._m = mEl;
+    const hl = S('rect', { x: -W / 2 + 24, y: 50, width: W - 48, height: 92, rx: 18, fill: spec.col, 'fill-opacity': .25 }, card); K.A(hl, { fin: [tCond, .3] });
+    const cg = G(card, 0, 0, { fin: [tCond, .3] });
+    K.tx(cg, -W / 2 + 40, 96, spec.cond, { size: spec.condMono === false ? 46 : mono(spec.cond.length, W - 80, 46), mono: spec.condMono !== false, fill: C.ink, weight: 700, anchor: 'start' });
+    card._c = cg; return card;
+  }
+  /* Event room: one scene = action (cue A) + detection (cue B). spec.stage(g, kit, times) builds the action and returns framing targets. */
+  function eventRoom(spec) {
+    const g = zg(spec.zone, spec.tint, spec.seed || 0); const s0 = sc(spec.scene);
+    const tA = T(spec.cueA, spec.wAct), tB = K.cue(spec.cueB).start, tM = T(spec.cueB, spec.wMethod), tC = T(spec.cueB, spec.wCond);
+    const tR = spec.wRule ? T(spec.cueB, spec.wRule) : K.cue(spec.cueB).end - 1.2;
+    const vil = spec.noVillain ? null : villain(g, -980, { dir: 1 });
+    if (vil) vil.pop(s0 - .4).walk(s0 - .2, 1.2, -720).expr(tA, 'smug').pose(tA, 1.2, 'point', { x: -380, y: -60 }).walk(tB - .4, 1.0, -1250).out(tB + .4);
+    const stage = spec.stage(g, kit, { s0, tA, tB });
+    // the call flies from the stage to the card (the entry is written)
+    const slip = I('slip', g, -380, -120, 1.4, spec.log === 'data_access' ? C.violet : C.amber, { pop: K.cue(spec.cueA).end - 1.3, moves: [[K.cue(spec.cueA).end - 1.1, 1.0, { x: 450, y: -150, s: .6 }, E.ioc]], out: K.cue(spec.cueA).end - .1 });
+    const card = logCard(g, 450, -150, spec, tB - .2, tM, tC, spec.tOut);
+    const an = analyst(g, -1050, { s: 1.35 });
+    an.pop(tB - .6).walk(tB - .4, 1.1, -600).pose(tM, 1.0, 'point', { x: 200, y: -170 }).pose(tC, 1.0, 'point', { x: 200, y: -60 }).expr(tC, 'happy');
+    const bell = G(g, 830, 120, { pop: tR, fn: (s, t) => { s.r = 14 * Math.sin((t - tR) * 14) * (1 - P(t, tR + .3, 1.2)); } }); ico('bell', bell, 0, 0, 1, C.amber).setAttribute('transform', 'scale(1.2)');
+    K.ev(tR, 'impact');
+    // filler beats (skill: >= ceil(dur/2) visible changes per cue): reaction, push-in, pulse, nods
+    const eA = K.cue(spec.cueA).end, eB = K.cue(spec.cueB).end;
+    if (vil) vil.pose(tA + 1.6, 1.0, 'cheer');
+    if (vil && tA - K.cue(spec.cueA).start > 2.6) vil.pose(K.cue(spec.cueA).start + 1.4, 1.0, 'point', { x: -380, y: -60 });
+    an.pose((tC + tR) / 2, .8, 'nod').pose(tR + .4, 1.0, 'cheer');
+    const ul = S('rect', { x: 450 - 500, y: -150 + 12, width: 1000, height: 10, rx: 5, fill: spec.col }, g); K.A(ul, { fin: [(tM + tC) / 2, .2], out: tC + .2 });
+    const pulse = S('rect', { x: 450 - 540, y: -150 - 210, width: 1080, height: 420, rx: 36, fill: 'none', stroke: spec.col, 'stroke-width': 10 }, g);
+    K.A(pulse, { fin: [(tC + tR) / 2, .2], out: (tC + tR) / 2 + .8 });
+    F(s0 - 1.3, 1.5, [g._room], .96, { focus: false }); K.focus(s0, stage[0]);
+    F((tA + eA) / 2, 1.2, [...stage, card], .9, { focus: false });
+    if (tA - K.cue(spec.cueA).start > 3) F(K.cue(spec.cueA).start + 1.4, .9, stage, .8, { focus: false });
+    F(tA - .5, .8, stage, .62, { focus: false }); K.focus(tA, stage[0]);
+    F(tB - .4, .9, [card], .82, { focus: false }); K.focus(tB, card);
+    F(tM - .4, .7, [card._m], .62, { focus: false, zmax: 2.4 }); K.focus(tM, card._m);
+    F(tC - .3, .7, [card._c], .66, { focus: false, zmax: 2.4 }); K.focus(tC, card._c);
+    F(tC + .9, .9, [card, bell], .86, { focus: false });
+    if (spec.hot) K.hot({ x: Z[spec.zone][0] + 450, y: Z[spec.zone][1] - 330, at: s0, until: K.cue(spec.cueB).end + 1, title: spec.hot[0], html: spec.hot[1] });
+    return { g, card, an, vil, stage, bell };
+  }
+  /* Hook room: the analyst's desk, a monitor showing a short line, used to open each episode. */
+  function hookRoom(zone, tint, o) {
+    const g = zg(zone, tint, 1);
+    S('rect', { x: -560, y: 60, width: 900, height: 44, rx: 14, fill: C.p2 }, g); S('rect', { x: -520, y: 104, width: 28, height: 146, fill: C.p1 }, g); S('rect', { x: 280, y: 104, width: 28, height: 146, fill: C.p1 }, g);
+    const mon = G(g, -110, -170); S('rect', { x: -330, y: -190, width: 660, height: 380, rx: 24, fill: C.p1, stroke: '#26407e', 'stroke-width': 6 }, mon);
+    S('rect', { x: -305, y: -168, width: 610, height: 334, rx: 14, fill: '#071028' }, mon); S('rect', { x: -40, y: 190, width: 80, height: 40, fill: C.p1 }, mon);
+    const an = analyst(g, 520, { s: 1.5, dir: -1 });
+    return { g, mon, an };
+  }
+  const kit = { C, FLOOR, sc, G, I, F, zg, backdrop, analyst, villain, typeIn, mono, logCard, eventRoom, hookRoom };
+  return kit;
+}
+
+</script>
+<script>
+/* Player: layers, render(t), controls, voice-driven clock, quiz, hotspots, export hooks. */
+'use strict';
+function boot(ep) {
+  const svg = document.getElementById('svg');
+  const $ = id => document.getElementById(id);
+  const R = Runtime(ep, svg), K = R.K;
+  // ---- layers
+  const defs = S('defs', {}, svg);
+  const grad = S('radialGradient', { id: 'spotG', gradientUnits: 'userSpaceOnUse', cx: 800, cy: 450, r: 700 }, defs);
+  S('stop', { offset: 0, 'stop-color': '#050B1E', 'stop-opacity': 0 }, grad);
+  S('stop', { offset: .55, 'stop-color': '#050B1E', 'stop-opacity': 0 }, grad);
+  S('stop', { offset: 1, 'stop-color': '#050B1E', 'stop-opacity': ep.spotDark == null ? .42 : ep.spotDark }, grad);
+  S('rect', { x: -10, y: -10, width: 1620, height: 920, fill: ep.bg || '#0B1A3A' }, svg);
+  K.layers.far = S('g', { id: 'L-far' }, svg);
+  K.layers.main = S('g', { id: 'L-main' }, svg);
+  K.layers.front = S('g', { id: 'L-front' }, svg);
+  const spot = S('rect', { x: -10, y: -10, width: 1620, height: 920, fill: 'url(#spotG)', 'pointer-events': 'none' }, svg);
+  K.layers.hud = S('g', { id: 'L-hud' }, svg);
+  ep.build(K);
+  function layout(t) { AMBIENT = false; FRAMING = true; for (const a of R.actors) a.update(t); for (const ch of R.chars) ch.update(t); for (const fn of R.fx) fn(t); FRAMING = false; }
+  for (const fr of R.frames) { layout(fr.t + fr.d); const bb = worldBBox(R, fr.targets);
+    if (!bb) { console.warn('frame: cible vide', fr); continue; } const c = camFor(bb, fr.part, fr.o); R.camMoves.push({ t: fr.t, d: fr.d, x: c.x, y: c.y, z: c.z }); }
+  R.camMoves.sort((a, b) => a.t - b.t); R.focusKeys.sort((a, b) => a.t - b.t);
+  R.events.sort((a, b) => a.t - b.t);
+  const PAR = ep.parallax || { far: .5, front: 1.3 };
+
+  function cueAt(t) { for (const c of R.cues) if (t >= c.start && t < c.end) return c; return null; }
+  function sceneAt(t) { let s = R.scenes[0]; for (const sc of R.scenes) if (t >= sc.start - 1e-6) s = sc; return s; }
+  let fPrev = null, fCur = null;
+  function focusPoint(t) {
+    let cur = null, prev = null;
+    for (const k of R.focusKeys) { if (t >= k.t) { prev = cur; cur = k; } }
+    if (!cur) return null;
+    const pos = k => { if (Array.isArray(k.target)) return [k.target[0], k.target[1], k.r || 420];
+      const bb = worldBBox(R, [k.target]); if (!bb) return [0, 0, 420]; return [bb.x + bb.w / 2, bb.y + bb.h / 2, k.r || Math.max(260, .75 * Math.hypot(bb.w, bb.h))]; };
+    const pc = pos(cur); if (!prev) return { x: pc[0], y: pc[1], r: pc[2] };
+    const pp = pos(prev); const p = E.ioc(P(t, cur.t, .6));
+    return { x: lerp(pp[0], pc[0], p), y: lerp(pp[1], pc[1], p), r: lerp(pp[2], pc[2], p) };
+  }
+  const subEls = [$('subs'), $('subsM')];
+  let lastSub = null;
+  function render(t, opts = {}) {
+    AMBIENT = opts.ambient !== false;
+    const c = camAt(R, t);
+    const tf = f => `translate(800 450) scale(${c.z.toFixed(4)}) translate(${(-c.x * f).toFixed(2)} ${(-c.y * f).toFixed(2)})`;
+    K.layers.far.setAttribute('transform', tf(PAR.far));
+    K.layers.main.setAttribute('transform', tf(1));
+    K.layers.front.setAttribute('transform', tf(PAR.front));
+    for (const a of R.actors) a.update(t);
+    for (const ch of R.chars) ch.update(t);
+    for (const fn of R.fx) fn(t);
+    const f = focusPoint(t);
+    if (f) { grad.setAttribute('cx', 800 + (f.x - c.x) * c.z); grad.setAttribute('cy', 450 + (f.y - c.y) * c.z); grad.setAttribute('r', Math.max(380, f.r * c.z)); }
+    else { grad.setAttribute('cx', 800); grad.setAttribute('cy', 430); grad.setAttribute('r', 760); }
+    // subtitles
+    const cu = cueAt(t); let sub = '';
+    if (cu) { const parts = cu.sub.split('|'); sub = (cu.guess && t < cu.pauseAt + GUESS_PAUSE) ? parts[0] : parts.join(' '); }
+    if (sub !== lastSub) { for (const e of subEls) { e.textContent = sub; e.classList.toggle('empty', !sub); } lastSub = sub; }
+    R.t = t; R.cam = c;
+    return c;
+  }
+  R.render = render;
+
+  /* -------- player state -------- */
+  const snd = $('snd'), hasSnd = !!(snd && snd.getAttribute('src')); // pre-rendered soundtrack (voice + music + effects)
+  const st = { t: 0, playing: false, speed: 1, subs: true, voice: hasSnd, quiz: false, last: 0, waitStart: null, spoken: {}, pending: false, quizDone: {} };
+  const synth = (() => { try { return window.speechSynthesis || null; } catch (e) { return null; } })();
+  let frVoice = null;
+  function pickVoice() { try { const vs = synth.getVoices(); frVoice = vs.find(v => /fr[-_]FR/i.test(v.lang)) || vs.find(v => /^fr/i.test(v.lang)) || null; } catch (e) { } }
+  if (synth) { pickVoice(); try { synth.onvoiceschanged = pickVoice; } catch (e) { } }
+  function sndSync(play) { if (!hasSnd) return; try { snd.playbackRate = st.speed; if (Math.abs(snd.currentTime - st.t) > .08) snd.currentTime = st.t;
+      if (play && st.voice) { const p = snd.play(); if (p && p.catch) p.catch(() => { }); } else snd.pause(); } catch (e) { } }
+  function speak(text) {
+    if (hasSnd || !synth || !st.voice) return;
+    try { const u = new SpeechSynthesisUtterance(text); u.lang = 'fr-FR'; if (frVoice) u.voice = frVoice; u.rate = 1.05 * st.speed;
+      st.pending = true; u.onend = u.onerror = () => { st.pending = false; }; synth.speak(u); } catch (e) { st.pending = false; }
+  }
+  function cancelSpeech() { try { synth && synth.cancel(); } catch (e) { } st.pending = false; }
+  function sayParts(c) { return c.say.split('|').map(s => s.trim()); }
+  function voiceStep(prevT, t) {
+    if (hasSnd || !st.voice) return;
+    for (const c of R.cues) {
+      const parts = sayParts(c);
+      if (prevT <= c.start + .02 && t >= c.start && !st.spoken[c.id + 'a']) { st.spoken[c.id + 'a'] = 1; cancelSpeech(); speak(parts[0]); }
+      if (c.guess) { const tr = c.pauseAt + GUESS_PAUSE; if (prevT <= tr && t >= tr && !st.spoken[c.id + 'b']) { st.spoken[c.id + 'b'] = 1; speak(parts[1]); } }
+    }
+  }
+  function resetSpoken(t) { st.spoken = {}; for (const c of R.cues) { if (c.start < t - .05) st.spoken[c.id + 'a'] = 1; if (c.guess && c.pauseAt + GUESS_PAUSE < t - .05) st.spoken[c.id + 'b'] = 1; } }
+
+  function seek(t) { st.t = clamp(t, 0, R.duration); cancelSpeech(); resetSpoken(st.t); st.waitStart = null; sndSync(st.playing); render(st.t); ui(); }
+  function play() { if (st.t >= R.duration - .05) seek(0); st.playing = true; st.last = performance.now(); $('poster').hidden = true; closeHot(); resetSpoken(st.t);
+    if (st.voice) { const c = cueAt(st.t); if (c && st.t - c.start < .3) { st.spoken[c.id + 'a'] = 0; } }
+    sndSync(true); requestAnimationFrame(loop); ui(); }
+  function pause() { st.playing = false; cancelSpeech(); sndSync(false); ui(); }
+  function loop(now) {
+    if (!st.playing) return;
+    const dt = Math.min(.1, (now - st.last) / 1000); st.last = now;
+    let nt = st.t + dt * st.speed; const c = cueAt(st.t);
+    if (hasSnd && st.voice && !snd.paused && !snd.ended && snd.readyState > 1) nt = snd.currentTime; // the soundtrack is the clock
+    if (!hasSnd && st.voice && c && st.pending && nt >= c.end - .02) {
+      if (st.waitStart == null) st.waitStart = now;
+      if (now - st.waitStart < 20000) nt = c.end - .021; else st.pending = false;
+    } else st.waitStart = null;
+    // quiz pause
+    if (st.quiz && c && c.guess && ep.quiz && ep.quiz[c.id] && !st.quizDone[c.id] && st.t < c.pauseAt + .3 && nt >= c.pauseAt + .3) {
+      st.quizDone[c.id] = 1; st.t = c.pauseAt + .3; render(st.t); pause(); showQuiz(c); return;
+    }
+    voiceStep(st.t, nt);
+    st.t = nt;
+    if (st.t >= R.duration) { st.t = R.duration; render(st.t); pause(); return; }
+    render(st.t); ui(); requestAnimationFrame(loop);
+  }
+
+  /* -------- UI -------- */
+  const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const chap = $('chapters');
+  R.scenes.forEach((s, i) => { const b = document.createElement('button'); b.className = 'chap'; b.type = 'button';
+    b.innerHTML = `<span class="n">${i + 1}</span><span class="tt">${s.title}</span><span class="ts">${fmt(s.start)}</span>`;
+    b.onclick = () => { seek(s.start - (i ? 1.4 : .6)); }; chap.appendChild(b); });
+  const ticks = $('ticks');
+  R.scenes.forEach(s => { const d = document.createElement('i'); d.style.left = (s.start / R.duration * 100) + '%'; ticks.appendChild(d); });
+  const leg = $('legend');
+  (ep.legend || []).forEach(([col, label]) => { const d = document.createElement('span'); d.className = 'lg'; d.innerHTML = `<i style="background:${col}"></i>${label}`; leg.appendChild(d); });
+  function ui() {
+    $('play').textContent = st.playing ? '❚❚' : '▶'; $('play').setAttribute('aria-label', st.playing ? 'Pause' : 'Lecture');
+    $('time').textContent = `${fmt(st.t)} / ${fmt(R.duration)}`;
+    $('bar').style.width = (st.t / R.duration * 100) + '%';
+    const sc = sceneAt(st.t); [...chap.children].forEach((b, i) => b.classList.toggle('on', R.scenes[i] === sc));
+    document.body.classList.toggle('paused', !st.playing);
+    if (!st.playing) drawHots(); else clearHots();
+  }
+  $('play').onclick = () => st.playing ? pause() : play();
+  $('bigplay').onclick = play;
+  $('prev').onclick = () => { const i = R.scenes.indexOf(sceneAt(st.t)); const s = R.scenes[Math.max(0, st.t - sceneAt(st.t).start > 2 ? i : i - 1)]; seek(s.start - (s === R.scenes[0] ? .6 : 1.4)); };
+  $('next').onclick = () => { const i = R.scenes.indexOf(sceneAt(st.t)); if (i < R.scenes.length - 1) seek(R.scenes[i + 1].start - 1.4); };
+  $('track').onclick = e => { const r = e.currentTarget.getBoundingClientRect(); seek((e.clientX - r.left) / r.width * R.duration); };
+  $('speed').onchange = e => { st.speed = +e.target.value; sndSync(st.playing); };
+  const tog = (id, key, cb) => { const b = $(id); b.onclick = () => { st[key] = !st[key]; b.setAttribute('aria-pressed', st[key]); cb && cb(); }; b.setAttribute('aria-pressed', st[key]); };
+  tog('cc', 'subs', () => document.body.classList.toggle('nosubs', !st.subs));
+  if (hasSnd) { $('voice').textContent = 'Son'; $('voice').setAttribute('aria-label', 'Son (voix, musique, bruitages)'); }
+  tog('voice', 'voice', () => { if (!st.voice) cancelSpeech(); else resetSpoken(st.t); sndSync(st.playing); });
+  tog('quizb', 'quiz', () => { st.quizDone = {}; });
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'SELECT') return;
+    if (e.code === 'Space') { e.preventDefault(); st.playing ? pause() : play(); }
+    if (e.code === 'ArrowRight') $('next').click(); if (e.code === 'ArrowLeft') $('prev').click();
+    if (e.code === 'Escape') { closeHot(); $('quiz').hidden = true; }
+  });
+  // hotspots
+  const hl = $('hotspots');
+  function clearHots() { hl.innerHTML = ''; }
+  function drawHots() {
+    clearHots(); if (document.documentElement.classList.contains('export')) return;
+    const c = R.cam || camAt(R, st.t);
+    for (const h of R.hots) {
+      if (st.t < h.at || st.t > h.until) continue;
+      const sx = 800 + (h.x - c.x) * c.z, sy = 450 + (h.y - c.y) * c.z;
+      if (sx < 40 || sx > 1560 || sy < 40 || sy > 740) continue;
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'hot';
+      b.style.left = (sx / 16) + '%'; b.style.top = (sy / 9) + '%';
+      b.innerHTML = `<span class="dot">+</span><span class="lbl">${h.title}</span>`;
+      b.onclick = () => openHot(h); hl.appendChild(b);
+    }
+  }
+  function openHot(h) { $('hotpanel').hidden = false; $('hottitle').textContent = h.title; $('hotbody').innerHTML = h.html; }
+  function closeHot() { $('hotpanel').hidden = true; }
+  $('hotclose').onclick = closeHot;
+  // quiz
+  function showQuiz(c) {
+    const q = ep.quiz[c.id], box = $('quiz'); box.hidden = false;
+    $('quizq').textContent = q.q; const ch = $('quizc'); ch.innerHTML = ''; $('quizwhy').hidden = true; $('quizgo').hidden = true;
+    q.choices.forEach((txt, i) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = txt;
+      b.onclick = () => { [...ch.children].forEach((x, j) => { x.disabled = true; x.classList.add(j === q.answer ? 'ok' : (j === i ? 'ko' : 'dim')); });
+        $('quizwhy').textContent = q.why; $('quizwhy').hidden = false; $('quizgo').hidden = false; $('quizgo').focus(); };
+      ch.appendChild(b); });
+  }
+  $('quizgo').onclick = () => { $('quiz').hidden = true; play(); };
+  // poster
+  $('dur').textContent = fmt(R.duration);
+  const posterT = ep.poster != null ? (typeof ep.poster === 'function' ? ep.poster(K) : ep.poster) : 2;
+  // hash routing for scenes (#s3)
+  function fromHash() { const m = /^#(s\d+)$/.exec(location.hash); if (m) { const s = K.sc(m[1]); if (s) { seek(s.start - .6); $('poster').hidden = true; return true; } } return false; }
+  window.addEventListener('hashchange', fromHash);
+  if (!fromHash()) { st.t = posterT; render(st.t); ui(); }
+  window.addEventListener('resize', () => { if (!st.playing) drawHots(); });
+
+  /* -------- test / export hooks -------- */
+  window.__mx = {
+    setEp() { }, render: (t, o) => render(t, o), duration: R.duration, cues: R.cues, scenes: R.scenes, events: R.events,
+    marks: R.marks, focusAt: t => { const f = focusAt(R, t); return f && !Array.isArray(f.target) ? f.target : null; },
+    charRoots: () => R.chars.map(c => c.root),
+    guessWindows: R.cues.filter(c => c.guess).map(c => [c.pauseAt, c.pauseAt + GUESS_PAUSE]),
+    exportMode(w = 1920, subs = true) { document.documentElement.classList.add('export'); $('poster').hidden = true; clearHots();
+      const stg = $('stage'); stg.style.width = w + 'px'; stg.style.height = Math.round(w * 9 / 16) + 'px';
+      $('subs').style.fontSize = Math.round(34 * w / 1920) + 'px'; $('subs').style.bottom = Math.round(34 * w / 1920) + 'px';
+      document.body.classList.toggle('nosubs', !subs); },
+    pause, seek, R,
+  };
+}
+
+</script>
+<script>
+/*META{"title":"Admin Activity, épisode 2","h1":"Épisode 2 · Les portes de persistance","eyebrow":"Série Admin Activity · <a href='ep1.html' style='color:inherit'>Ép. 1</a> · <b>Ép. 2</b> · <a href='ep3.html' style='color:inherit'>Ép. 3</a>","footer":"<p class='footer'>v6, skill v6. Sources : documentation Google Cloud (Cloud Audit Logs, journaux d'audit Service Account Credentials, audit SSH Compute Engine), règles Elastic (GCP Service Account Creation, GCP Service Account Key Creation), règles Datadog (GCE instance SSH key persistence). Compte Gmail et IP fictifs.</p>"}META*/
+/* ---------- FICHE (skill v6) ----------
+Audience : métier = détection/réponse, praticien ; outil = Google Cloud, débutant (épisode 1 vu).
+Doit savoir faire après : reconnaître dans les journaux les 5 façons de rester dans un projet, et écrire la condition d'alerte de chacune.
+Inventaire de valeur (tout à l'écran, tel quel) :
+ 1 SetIamPolicy + bindingDeltas ADD roles/owner|editor, membre hors domaine (activity)
+ 2 google.iam.admin.v1.CreateServiceAccount, créateur hors pipelines (activity)
+ 3 google.iam.admin.v1.CreateServiceAccountKey, hors rotation / IP inconnue ; par défaut une clé utilisateur n'expire pas (activity)
+ 4 v1.compute.projects.setCommonInstanceMetadata + projectMetadataDelta ssh-keys ; instance : v1.compute.instances.setMetadata (activity)
+ 5 GenerateAccessToken (iamcredentials.googleapis.com) : journal data_access, éteint par défaut ; trace visible : SetIamPolicy qui accorde roles/iam.serviceAccountTokenCreator
+Idées reçues : « retirer Owner suffit » ; « l'usurpation se voit dans activity ». Devinez : journal de GenerateAccessToken ; nombre de portes.
+Test du praticien : « demain je sais écrire 5 règles de persistance GCP et je sais laquelle est aveugle par défaut ».
+------------------------------------ */
+const EP = {
+  bg: '#0B1A3A', lead: .6, tail: 2, spotDark: .25,
+  zones: { bureau: [0, 0], z1: [2300, 0], z2: [4600, 0], z3: [6900, 0], z4: [9200, 0], z5: [11500, 0], fin: [13800, 0] },
+  legend: [['#FFB703', 'journal activity (toujours écrit)'], ['#A78BFA', 'journal data_access (éteint par défaut)'], ['#EF476F', 'Attaquant'], ['#FB8500', 'Compte de service / clé'], ['#22D3EE', 'Défense']],
+  scenes: [{ id: 's1', title: 'Combien de portes ?' }, { id: 's2', title: 'SetIamPolicy' }, { id: 's3', title: 'CreateServiceAccount' }, { id: 's4', title: 'CreateServiceAccountKey' },
+    { id: 's5', title: 'setCommonInstanceMetadata' }, { id: 's6', title: 'GenerateAccessToken' }, { id: 's7', title: 'Fermer toutes les portes' }],
+  cues: [
+    { id: 'c1', sc: 's1', sub: 'Épisode 2. 3 h 07 : l\'attaquant est devenu propriétaire. Mais un attaquant prudent ne garde pas une seule porte. Il en ouvre plusieurs. Lesquelles ?', say: 'Épisode deux. Trois heures sept : l\'attaquant est devenu propriétaire. Mais un attaquant prudent ne garde pas une seule porte. Il en ouvre plusieurs. Lesquelles ?' },
+    { id: 'c2', sc: 's1', sub: 'Pour chacune, une fiche : la tactique, le nom exact de la méthode, et la condition qui transforme un événement banal en alerte.', say: 'Pour chacune, une fiche : la tactique, le nom exact de la méthode, et la condition qui transforme un événement banal en alerte.' },
+    { id: 'c3', sc: 's2', sub: 'Première porte, la plus directe : il se donne un rôle. Owner ou Editor, accordé à un compte extérieur à votre entreprise.', say: 'Première porte, la plus directe : il se donne un rôle. Owner ou Editor, accordé à un compte extérieur à votre entreprise.' },
+    { id: 'c4', sc: 's2', sub: 'Méthode : SetIamPolicy. Condition : dans bindingDeltas, une action ADD, un rôle Owner ou Editor, et un membre hors de votre domaine.', say: 'Méthode : Set I A M Policy. Condition : dans binding deltas, une action ADD, un rôle Owner ou Editor, et un membre hors de votre domaine.' },
+    { id: 'c5', sc: 's3', sub: 'Deuxième porte : il crée son propre robot. Un nouveau compte de service, plus discret qu\'un compte Gmail.', say: 'Deuxième porte : il crée son propre robot. Un nouveau compte de service, plus discret qu\'un compte Gmail.' },
+    { id: 'c6', sc: 's3', sub: 'Méthode : google.iam.admin.v1.CreateServiceAccount. Condition : un créateur qui n\'est pas l\'un de vos pipelines habituels.', say: 'Méthode : google I A M admin v1, Create Service Account. Condition : un créateur qui n\'est pas l\'un de vos pipelines habituels.' },
+    { id: 'c7', sc: 's4', sub: 'Troisième porte : il fabrique une clé pour ce robot. Par défaut, une clé créée ainsi n\'expire jamais.', say: 'Troisième porte : il fabrique une clé pour ce robot. Par défaut, une clé créée ainsi n\'expire jamais.' },
+    { id: 'c8', sc: 's4', sub: 'Méthode : CreateServiceAccountKey. Condition : une clé créée hors rotation prévue, ou depuis une adresse inconnue. Réflexe : lister toutes les clés du robot.', say: 'Méthode : Create Service Account Key. Condition : une clé créée hors rotation prévue, ou depuis une adresse inconnue. Réflexe : lister toutes les clés du robot.' },
+    { id: 'c9', sc: 's5', sub: 'Quatrième porte : une clé SSH, posée dans les métadonnées du projet. Elle ouvre les machines virtuelles qui en héritent.', say: 'Quatrième porte : une clé S S H, posée dans les métadonnées du projet. Elle ouvre les machines virtuelles qui en héritent.' },
+    { id: 'c10', sc: 's5', sub: 'Méthode : v1.compute.projects.setCommonInstanceMetadata. Condition : projectMetadataDelta contient ssh-keys. Pour une seule machine : instances.setMetadata.', say: 'Méthode : v1 compute projects, set Common Instance Metadata. Condition : project metadata delta contient ssh keys. Pour une seule machine : instances set Metadata.' },
+    { id: 'c11', sc: 's6', sub: 'Cinquième porte, la plus discrète : emprunter l\'identité d\'un robot existant, avec un jeton temporaire.', say: 'Cinquième porte, la plus discrète : emprunter l\'identité d\'un robot existant, avec un jeton temporaire.' },
+    { id: 'c12', sc: 's6', sub: 'Méthode : GenerateAccessToken. Devinez : dans quel journal ?|Data Access. Éteint par défaut : sans réglage, cette usurpation est invisible.', say: 'Méthode : Generate Access Token. Devinez : dans quel journal ? | Data access. Éteint par défaut : sans réglage, cette usurpation est invisible.' },
+    { id: 'c13', sc: 's6', sub: 'Ce qui reste dans activity : le SetIamPolicy qui a donné le rôle Service Account Token Creator. C\'est ce rôle-là qu\'il faut surveiller.', say: 'Ce qui reste dans activity : le Set I A M Policy qui a donné le rôle Service Account Token Creator. C\'est ce rôle-là qu\'il faut surveiller.' },
+    { id: 'c14', sc: 's7', sub: 'On croit qu\'il suffit de retirer Owner. Faux : chaque porte se ferme séparément. Rôles, robots, clés, clés SSH, et droits d\'emprunt.', say: 'On croit qu\'il suffit de retirer Owner. Faux : chaque porte se ferme séparément. Rôles, robots, clés, clés S S H, et droits d\'emprunt.' },
+    { id: 'c15', sc: 's7', sub: 'Vos règles de persistance : SetIamPolicy, CreateServiceAccount, CreateServiceAccountKey, setCommonInstanceMetadata, et le rôle Token Creator. Épisode 3 : effacer ses traces.', say: 'Vos règles de persistance : Set I A M Policy, Create Service Account, Create Service Account Key, set Common Instance Metadata, et le rôle Token Creator. Épisode trois : effacer ses traces.' },
+  ],
+  quiz: { c12: { q: 'Dans quel journal apparaît GenerateAccessToken (usurpation d\'un compte de service) ?', choices: ['activity (Admin Activity)', 'data_access (Data Access)', 'system_event'], answer: 1, why: 'La documentation Google classe GenerateAccessToken (iamcredentials.googleapis.com, permission iam.serviceAccounts.getAccessToken, ADMIN_READ) en Data Access : éteint par défaut.' } },
+  poster: K => K.T('c1', 'plusieurs'),
+  build(K) {
+    const kit = seriesKit(K); const { C, G, I, F, sc, FLOOR } = kit; const { S, E, Z } = K; const T = K.T, R = K.reveal;
+    kit.backdrop(['bureau', 'z1', 'z2', 'z3', 'z4', 'z5', 'fin']);
+    /* s1: hook — the monitor shows the 03:07 owner, five doors appear with "?" ; then the card template */
+    const H = kit.hookRoom('bureau', '#1F3B80', {});
+    const own = G(H.mon, 0, -60, { pop: .3 }); ico('crown', own, 0, 0, 1, C.amber).setAttribute('transform', 'translate(-150 0)'); K.tx(own, 40, 6, '03:07', { size: 60, mono: true, fill: C.rose, weight: 700 });
+    const bigc = I('crown', H.g, -110, -470, 2.2, C.amber, { pop: T('c1', 'devenu'), out: T('c1', 'mais') }); H.an.pose(T('c1', 'devenu'), 1.2, 'loupe').pose(T('c1', 'prudent'), 1.0, 'shrug');
+    const one = I('door', H.g, 640, -330, 1.6, C.rose, { pop: T('c1', 'porte'), out: T('c1', 'plusieurs') }); K.focus(T('c1', 'porte'), one);
+    F(T('c1', 'trois') - .2, 1.2, [H.mon], .7, { focus: false }); F(T('c1', 'prudent') - .3, 1.0, [H.mon, H.an], .9, { focus: false });
+    const doors = [0, 1, 2, 3, 4].map(i => I('door', H.g, -480 + i * 190, -470, 1.3, C.rose, { pop: T('c1', 'plusieurs') + i * .25, out: T('c2', 'pour') }));
+    const qd = G(H.g, 470, -470, { pop: T('c1', 'lesquelles'), out: T('c2', 'pour') }); K.tx(qd, 0, 0, '?', { size: 110, fill: C.rose, weight: 800, deco: true });
+    H.an.expr(T('c1', 'prudent'), 'worried').pose(T('c1', 'plusieurs'), 1.4, 'point', { x: -100, y: -470 }).pose(T('c2', 'fiche'), 1.2, 'nod');
+    const tpl = kit.logCard(H.g, -110, -170, { tactic: 'Tactique', method: 'methodName', cond: 'condition qui alerte', col: C.cyan, w: 860 }, T('c2', 'fiche'), T('c2', 'methode'), T('c2', 'condition'));
+    F(0, 0, [H.g._room], .98, { focus: false }); K.focus(0, H.mon);
+    F(T('c1', 'plusieurs') - .5, .9, [...doors, qd, H.mon], .8, { focus: false }); K.focus(T('c1', 'plusieurs'), doors[2]);
+    F(T('c2', 'fiche') - .3, .8, [tpl], .72);
+    const tb = S('rect', { x: -110 - 430, y: -170 - 200, width: 860, height: 96, rx: 30, fill: 'none', stroke: C.text, 'stroke-width': 8 }, H.g); K.A(tb, { fin: [T('c2', 'tactique'), .2], out: T('c2', 'methode') });
+    const bl2 = G(H.g, 380, 80, { pop: T('c2', 'transforme'), fn: (s, t) => { s.r = 14 * Math.sin((t - T('c2', 'alerte')) * 14) * (t > T('c2', 'alerte') ? 1 - P(t, T('c2', 'alerte') + .3, 1.2) : 0); } }); ico('bell', bl2, 0, 0, 1, C.amber).setAttribute('transform', 'scale(1.2)'); K.mark(T('c2', 'alerte'));
+    /* s2..s6: one room per persistence door */
+    const R1 = kit.eventRoom({ zone: 'z1', tint: '#24356F', scene: 's2', cueA: 'c3', cueB: 'c4', wAct: 'donne', wMethod: 'set', wCond: 'condition', wRule: 'membre', seed: 1,
+      tactic: 'Persistance · élévation', col: C.amber, log: 'activity', method: 'SetIamPolicy', cond: 'bindingDeltas: ADD roles/owner',
+      hot: ['Requête complète', '<pre>logName:"cloudaudit.googleapis.com%2Factivity"\nprotoPayload.methodName="SetIamPolicy"\nprotoPayload.serviceData.policyDelta.bindingDeltas.action="ADD"\nprotoPayload.serviceData.policyDelta.bindingDeltas.role=("roles/owner" OR "roles/editor")</pre><p>Puis exclure votre domaine dans <code>bindingDeltas.member</code>. Même méthode aux niveaux dossier et organisation.</p>'],
+      stage: (g, k, t) => { const ped = G(g, -520, 60); S('rect', { x: -80, y: -40, width: 160, height: 230, rx: 16, fill: C.p2 }, ped);
+        const cr = I('crown', g, -520, -40, 1.3, C.amber, { moves: [[t.tA + .2, 1.0, { x: -230, y: -190 }]] });
+        const ext = I('person', g, -230, -60, 2.2, C.rose, { pop: t.s0 + .6 });
+        return [ped, cr, ext]; } });
+    const R2 = kit.eventRoom({ zone: 'z2', tint: '#2B3478', scene: 's3', cueA: 'c5', cueB: 'c6', wAct: 'cree', wMethod: 'google', wCond: 'condition', wRule: 'pipelines', seed: 2,
+      tactic: 'Persistance', col: C.amber, log: 'activity', method: 'google.iam.admin.v1.CreateServiceAccount', cond: 'créateur ≠ vos pipelines', condMono: false,
+      hot: ['Règle', '<pre>protoPayload.methodName:"google.iam.admin.v1.CreateServiceAccount"</pre><p>Faux positifs : déploiements automatisés (Terraform…). Liste blanche par <code>principalEmail</code> du pipeline.</p>'],
+      stage: (g, k, t) => { const rb = K.char(g, { name: 'robot', color: C.orange, shape: 'robot', x: -380, y: FLOOR, s: 1.7 }); rb.pop(t.tA).pose(t.tA + .6, 1.2, 'cheer');
+        const sp = G(g, -380, -260, { pop: t.tA + .2 }); for (let i = 0; i < 6; i++) S('path', { d: `M 0 -20 L 0 -60`, stroke: C.amber, 'stroke-width': 8, 'stroke-linecap': 'round', transform: `rotate(${i * 60})` }, sp);
+        return [rb, sp]; } });
+    const R3 = kit.eventRoom({ zone: 'z3', tint: '#1C4473', scene: 's4', cueA: 'c7', cueB: 'c8', wAct: 'fabrique', wMethod: 'create', wCond: 'condition', wRule: 'reflexe', seed: 3,
+      tactic: 'Persistance', col: C.amber, log: 'activity', method: 'google.iam.admin.v1.CreateServiceAccountKey', cond: 'callerIp inconnue · hors rotation', condMono: false,
+      hot: ['Règle et réponse', '<pre>protoPayload.methodName:"google.iam.admin.v1.CreateServiceAccountKey"</pre><p>MITRE T1098.001. Réponse : lister et supprimer <b>toutes</b> les clés du compte (<code>gcloud iam service-accounts keys list --iam-account=…</code>). Expiration possible via la contrainte d\'organisation <code>iam.serviceAccountKeyExpiryHours</code>.</p>'],
+      stage: (g, k, t) => { const rb = K.char(g, { name: 'robot', color: C.orange, shape: 'robot', x: -520, y: FLOOR, s: 1.6 }); rb.pop(t.s0 + .2).expr(t.tA, 'worried');
+        const key = I('key', g, -520, -120, 1.6, C.orange, { pop: t.tA, moves: [[t.tA + .7, 1.0, { x: -200, y: -60 }]] });
+        const inf = G(g, -200, -200, { pop: T('c7', 'jamais') }); S('path', { d: 'M -50 0 C -50 -40 0 -40 0 0 C 0 40 50 40 50 0 C 50 -40 0 -40 0 0 C 0 40 -50 40 -50 0 Z', fill: 'none', stroke: C.text, 'stroke-width': 10 }, inf);
+        return [rb, key, inf]; } });
+    const R4 = kit.eventRoom({ zone: 'z4', tint: '#25406E', scene: 's5', cueA: 'c9', cueB: 'c10', wAct: 'posee', wMethod: 'v1', wCond: 'condition', wRule: 'seule', seed: 0,
+      tactic: 'Persistance', col: C.amber, log: 'activity', method: 'v1.compute.projects.setCommonInstanceMetadata', cond: 'projectMetadataDelta: ssh-keys',
+      hot: ['Les deux niveaux', '<p>Projet : <code>v1.compute.projects.setCommonInstanceMetadata</code> (toutes les VM qui héritent des métadonnées du projet). Instance : <code>v1.compute.instances.setMetadata</code>. Regarder les clés <code>ssh-keys</code> / <code>sshKeys</code> dans le delta de métadonnées (doc Google « Auditing SSH »).</p>'],
+      stage: (g, k, t) => { const roof = G(g, -400, -250); S('rect', { x: -330, y: -50, width: 660, height: 100, rx: 20, fill: C.p2, stroke: C.text, 'stroke-width': 5 }, roof);
+        const vms = [0, 1, 2].map(i => { const v = G(g, -620 + i * 220, 60); ico('server', v, 0, 0, 1, C.cyan).setAttribute('transform', 'scale(1.5)');
+          const lock = I('padlock', g, -620 + i * 220, -60, .7, C.rose, { pop: t.tA + .8 + i * .25 }); return v; });
+        const key = I('key', g, -800, -250, 1.4, C.rose, { pop: t.s0 + .5, moves: [[t.tA - .2, .8, { x: -400, y: -250 }]] });
+        return [roof, ...vms, key]; } });
+    const R5 = kit.eventRoom({ zone: 'z5', tint: '#33307A', scene: 's6', cueA: 'c11', cueB: 'c12', wAct: 'emprunter', wMethod: 'generate', wCond: 'data', wRule: 'invisible', seed: 2, tOut: K.cue('c13').start + 1.2,
+      tactic: 'Élévation · usurpation', col: C.violet, log: 'data_access', method: 'GenerateAccessToken', cond: 'serviceName: iamcredentials.googleapis.com',
+      hot: ['Où le voir', '<p>Journal <code>data_access</code> (permission <code>iam.serviceAccounts.getAccessToken</code>, type ADMIN_READ) : à activer pour <b>IAM Service Account Credentials API</b>. Les appels faits ensuite avec le jeton portent l\'appelant d\'origine dans <code>authenticationInfo.serviceAccountDelegationInfo</code>.</p><p class="tbd">Un éditeur classe cet événement en Admin Activity : vérifiez dans votre projet.</p>'],
+      stage: (g, k, t) => { const rb = K.char(g, { name: 'robot', color: C.orange, shape: 'robot', x: -560, y: FLOOR, s: 1.6 }); rb.pop(t.s0 + .2);
+        const tk = I('ticket', g, -560, -140, 1.6, C.orange, { pop: t.tA, moves: [[t.tA + .6, 1.0, { x: -240, y: -120 }]] });
+        const clk = I('clock', g, -240, -280, 1, C.text, { pop: T('c11', 'temporaire') });
+        return [rb, tk, clk]; } });
+    // s6 extras: data_access camera OFF during the guess ; then the visible trace (TokenCreator role) in activity
+    const camOff = G(R5.g, -300, -420, { pop: R('c12') - .1, out: K.cue('c13').start + .3 }); ico('cam', camOff, 0, 0, 1, C.violet).setAttribute('transform', 'scale(1.5)'); S('circle', { cx: 60, cy: 0, r: 16, fill: '#2b2350' }, camOff);
+    const offT = G(R5.g, -300, -300, { pop: T('c12', 'eteint'), out: K.cue('c13').start + .3 }); S('rect', { x: -80, y: -40, width: 160, height: 80, rx: 40, fill: '#2b2350', stroke: C.violet, 'stroke-width': 5 }, offT); K.tx(offT, 0, 2, 'OFF', { size: 46, fill: C.violet, weight: 800 });
+    const trace = kit.logCard(R5.g, 450, -150, { tactic: 'Ce qui reste visible', method: 'SetIamPolicy', cond: 'role: roles/iam.serviceAccountTokenCreator', col: C.amber, log: 'activity' },
+      K.cue('c13').start + .4, T('c13', 'set'), T('c13', 'service'), K.cue('c14').start + .5);
+    F(T('c13', 'set') - .5, .8, [trace._m], .6, { zmax: 2.4 }); F(T('c13', 'role') - .3, .8, [trace._c], .7, { zmax: 2.4 }); F(T('c13', 'faut') - .2, .8, [trace, R5.an], .9, { focus: false });
+    F(R('c12') - .2, .6, [R5.card, camOff], .85, { focus: false }); K.focus(R('c12'), camOff);
+    R5.an.pose(T('c12', 'devinez'), 1.2, 'shrug'); const qj = G(R5.g, -300, -360, { pop: T('c12', 'journal'), out: R('c12') }); K.tx(qj, 0, 0, '?', { size: 110, fill: C.violet, weight: 800, deco: true });
+    R5.an.pose(T('c13', 'policy'), .8, 'point', { x: 200, y: -170 }).pose(T('c13', 'role'), 1.0, 'point', { x: 200, y: -60 }).pose(T('c13', 'surveiller'), .8, 'nod'); const bl6 = I('bell', R5.g, 830, 120, 1.2, C.amber, { pop: T('c13', 'faut') }); K.ev(T('c13', 'faut'), 'impact');
+    const rp = S('rect', { x: 450 - 520, y: -150 + 50, width: 1040, height: 92, rx: 18, fill: 'none', stroke: C.amber, 'stroke-width': 8 }, R5.g); K.A(rp, { fin: [T('c13', 'creator'), .2], out: T('c13', 'faut') });
+    /* s7: close every door ; rule names lit one at a time */
+    const g7 = kit.zg('fin', '#1F3B80', 3); const s7 = sc('s7');
+    const dIcons = ['crown', 'person', 'key', 'server', 'ticket'], dCol = [C.amber, C.orange, C.orange, C.cyan, C.violet];
+    const doors7 = dIcons.map((n, i) => { const d = G(g7, -720 + i * 360, -220, { pop: s7 + .2 + i * .15 }); S('rect', { x: -130, y: -170, width: 260, height: 340, rx: 24, fill: C.p1, stroke: dCol[i], 'stroke-width': 7 }, d);
+      ico(n, d, 0, 0, 1, dCol[i]).setAttribute('transform', 'scale(1.3)'); return d; });
+    const wordsClose = ['roles', 'robots', 'cles', 'cles', 'droits'];
+    doors7.forEach((d, i) => I('cross', g7, -720 + i * 360, -220, 1.4, C.green, { pop: T('c14', wordsClose[i], i === 3 ? 1 : 0) + .1 }));
+    K.ev(T('c14', 'faux'), 'myth');
+    const rules = ['SetIamPolicy', 'CreateServiceAccount', 'CreateServiceAccountKey', 'setCommonInstanceMetadata', 'roles/iam.serviceAccountTokenCreator'];
+    const rw = [['set', 0], ['create', 0], ['create', 1], ['set', 1], ['token', 0]];
+    rules.forEach((r, i) => { const t0 = T('c15', rw[i][0], rw[i][1]); const t1 = i < 4 ? T('c15', rw[i + 1][0], rw[i + 1][1]) : T('c15', 'episode');
+      const rg = G(g7, 0, 110, { pop: t0, out: t1 }); K.tx(rg, 0, 0, r, { size: kit.mono(r.length, 1500, 56, 40), mono: true, fill: dCol[i], weight: 700 });
+      const hl = S('rect', { x: -720 + i * 360 - 140, y: -400, width: 280, height: 360, rx: 28, fill: 'none', stroke: C.text, 'stroke-width': 8 }, g7); K.A(hl, { fin: [t0, .2], out: t1 }); });
+    const an7 = kit.analyst(g7, -1050); an7.pop(s7 - .5).walk(s7 - .2, 1.2, -880).expr(T('c14', 'croit'), 'smug').expr(T('c14', 'faux'), 'surprise').pose(T('c14', 'faux'), .7, 'jump').expr(T('c15', 'vos'), 'happy').pose(T('c15', 'et'), 1.0, 'nod').pose(T('c15', 'episode'), 1.5, 'cheer');
+    F(s7 - 1.3, 1.5, [g7._room], .96, { focus: false }); F(T('c14', 'chaque') - .3, .9, doors7, .9, { focus: false }); K.focus(T('c14', 'roles'), doors7[0]); K.focus(T('c14', 'droits'), doors7[4]);
+    F(T('c15', 'vos') - .3, .9, [...doors7], .92, { focus: false }); F(T('c15', 'traces'), 2.2, [g7._room], .99, { focus: false });
+    K.hot({ x: Z.fin[0], y: Z.fin[1] + 110, at: s7, until: 9999, title: 'Les 5 règles', html: '<ol><li><code>SetIamPolicy</code> + <code>bindingDeltas.action="ADD"</code> + rôle owner/editor + membre hors domaine</li><li><code>google.iam.admin.v1.CreateServiceAccount</code> hors pipelines</li><li><code>google.iam.admin.v1.CreateServiceAccountKey</code> hors rotation / IP inconnue</li><li><code>v1.compute.projects.setCommonInstanceMetadata</code> / <code>v1.compute.instances.setMetadata</code> avec <code>ssh-keys</code></li><li><code>SetIamPolicy</code> accordant <code>roles/iam.serviceAccountTokenCreator</code> (+ <code>GenerateAccessToken</code> si Data Access IAM Credentials activé)</li></ol>' });
+  },
+};
+
+</script>
+<script>EP.timing = {"engine":"piper:fr_FR-siwis-medium","cues":{"c1":{"parts":[{"wav":"voice/fec34147b152.wav","dur":11.756,"words":[[0.174,0.697],[0.766,0.987],[1.755,1.999],[2.045,2.138],[2.208,2.591],[2.881,3.485],[3.52,3.543],[3.566,3.937],[3.961,4.808],[5.448,5.623],[5.657,5.75],[5.82,6.145],[6.215,6.621],[6.691,6.818],[6.9,7.19],[7.26,7.387],[7.434,7.515],[7.55,7.794],[7.852,8.188],[8.98,9.119],[9.154,9.316],[9.386,9.56],[9.653,10.245],[10.932,11.501]],"vis":[[0.0,"X"],[0.174,"E"],[0.36,"M"],[0.418,"E"],[0.488,"C"],[0.592,"O"],[0.639,"C"],[0.697,"X"],[0.766,"C"],[0.94,"O"],[0.987,"X"],[1.755,"C"],[1.824,"O"],[1.906,"A"],[1.952,"C"],[1.999,"X"],[2.08,"C"],[2.138,"X"],[2.208,"C"],[2.359,"E"],[2.463,"C"],[2.591,"X"],[2.881,"C"],[2.997,"A"],[3.09,"C"],[3.171,"A"],[3.276,"C"],[3.38,"A"],[3.485,"X"],[3.566,"C"],[3.694,"F"],[3.763,"C"],[3.879,"O"],[3.937,"X"],[3.996,"C"],[4.042,"O"],[4.1,"M"],[4.146,"C"],[4.204,"E"],[4.344,"C"],[4.611,"E"],[4.715,"C"],[4.808,"X"],[5.448,"M"],[5.506,"E"],[5.553,"C"],[5.623,"X"],[5.657,"O"],[5.75,"X"],[5.855,"C"],[5.924,"A"],[5.971,"C"],[6.075,"A"],[6.145,"X"],[6.215,"M"],[6.284,"O"],[6.366,"C"],[6.459,"A"],[6.621,"X"],[6.691,"C"],[6.818,"X"],[6.9,"C"],[6.969,"A"],[7.016,"C"],[7.19,"X"],[7.26,"M"],[7.341,"C"],[7.387,"X"],[7.469,"C"],[7.515,"X"],[7.55,"C"],[7.794,"X"],[7.852,"M"],[7.979,"C"],[8.188,"X"],[8.98,"E"],[9.119,"X"],[9.154,"A"],[9.27,"C"],[9.316,"X"],[9.456,"C"],[9.56,"X"],[9.653,"M"],[9.699,"C"],[9.746,"O"],[9.792,"C"],[9.874,"E"],[10.036,"O"],[10.152,"C"],[10.245,"X"],[10.932,"C"],[11.059,"E"],[11.164,"C"],[11.361,"E"],[11.443,"C"],[11.501,"X"]]}]},"c2":{"parts":[{"wav":"voice/ce5662aa0281.wav","dur":7.918,"words":[[0.035,0.232],[0.29,0.882],[1.115,1.254],[1.289,1.73],[1.916,2.02],[2.136,2.635],[2.914,3.042],[3.1,3.262],[3.413,3.855],[3.936,3.982],[4.04,4.087],[4.156,4.644],[4.853,4.946],[4.969,5.027],[5.085,5.573],[5.619,5.7],[5.747,6.177],[6.211,6.339],[6.374,6.734],[6.78,7.047],[7.082,7.175],[7.221,7.639]],"vis":[[0.0,"X"],[0.035,"M"],[0.093,"O"],[0.151,"C"],[0.232,"X"],[0.29,"C"],[0.383,"A"],[0.488,"C"],[0.697,"O"],[0.766,"C"],[0.882,"X"],[1.115,"O"],[1.207,"C"],[1.254,"X"],[1.289,"F"],[1.486,"E"],[1.556,"C"],[1.73,"X"],[1.916,"C"],[2.02,"X"],[2.136,"C"],[2.45,"E"],[2.508,"C"],[2.635,"X"],[2.914,"C"],[3.042,"X"],[3.1,"C"],[3.204,"O"],[3.262,"X"],[3.413,"E"],[3.46,"C"],[3.657,"A"],[3.727,"C"],[3.855,"X"],[3.936,"C"],[3.982,"X"],[4.226,"C"],[4.458,"O"],[4.528,"C"],[4.644,"X"],[4.853,"E"],[4.946,"X"],[5.085,"C"],[5.132,"O"],[5.213,"C"],[5.271,"E"],[5.468,"O"],[5.573,"X"],[5.619,"C"],[5.7,"X"],[5.747,"C"],[5.828,"A"],[5.909,"C"],[5.968,"F"],[6.06,"O"],[6.177,"X"],[6.211,"O"],[6.281,"C"],[6.339,"X"],[6.374,"E"],[6.42,"F"],[6.525,"C"],[6.571,"M"],[6.676,"A"],[6.734,"X"],[6.78,"M"],[6.827,"A"],[6.908,"C"],[7.047,"X"],[7.082,"A"],[7.175,"X"],[7.221,"A"],[7.268,"C"],[7.384,"E"],[7.454,"C"],[7.639,"X"]]}]},"c3":{"parts":[{"wav":"voice/7032dce51e41.wav","dur":8.291,"words":[[0.186,0.58],[0.685,1.022],[1.474,1.614],[1.707,1.8],[1.823,2.241],[2.694,2.821],[2.914,2.984],[3.053,3.228],[3.251,3.379],[3.437,3.75],[4.367,4.797],[4.843,4.878],[4.924,5.516],[5.783,6.19],[6.225,6.248],[6.271,6.364],[6.399,6.55],[6.585,7.107],[7.13,7.177],[7.223,7.386],[7.409,8.001]],"vis":[[0.0,"X"],[0.186,"M"],[0.244,"C"],[0.43,"E"],[0.511,"C"],[0.58,"X"],[0.685,"M"],[0.859,"C"],[1.022,"X"],[1.474,"C"],[1.614,"X"],[1.753,"O"],[1.8,"X"],[1.823,"C"],[1.892,"E"],[1.95,"C"],[2.055,"E"],[2.101,"C"],[2.241,"X"],[2.694,"E"],[2.763,"C"],[2.821,"X"],[2.914,"C"],[2.984,"X"],[3.053,"C"],[3.228,"X"],[3.251,"O"],[3.379,"X"],[3.437,"C"],[3.541,"O"],[3.669,"C"],[3.75,"X"],[4.367,"O"],[4.472,"C"],[4.797,"X"],[4.924,"E"],[4.982,"C"],[5.029,"E"],[5.11,"C"],[5.365,"O"],[5.458,"C"],[5.516,"X"],[5.783,"A"],[5.888,"C"],[5.934,"O"],[5.981,"C"],[6.19,"X"],[6.271,"O"],[6.364,"X"],[6.399,"C"],[6.457,"O"],[6.503,"C"],[6.55,"X"],[6.619,"C"],[6.875,"E"],[7.049,"C"],[7.107,"X"],[7.13,"A"],[7.177,"X"],[7.246,"O"],[7.293,"C"],[7.386,"X"],[7.409,"A"],[7.467,"C"],[7.641,"M"],[7.711,"C"],[7.815,"E"],[7.931,"C"],[8.001,"X"]]}]},"c4":{"parts":[{"wav":"voice/6d43676bd15d.wav","dur":10.044,"words":[[0.197,0.813],[1.231,1.474],[1.579,1.672],[1.695,1.73],[1.811,1.904],[1.974,2.426],[2.985,3.647],[4.146,4.321],[4.39,4.797],[4.831,5.331],[5.505,5.621],[5.691,5.934],[6.004,6.468],[6.585,6.759],[6.782,6.968],[7.211,7.513],[7.56,7.583],[7.629,8.233],[8.384,8.489],[8.57,8.651],[8.674,8.918],[8.976,9.081],[9.104,9.174],[9.22,9.406],[9.487,9.928]],"vis":[[0.0,"X"],[0.197,"M"],[0.29,"E"],[0.36,"C"],[0.604,"O"],[0.708,"C"],[0.813,"X"],[1.231,"C"],[1.382,"E"],[1.428,"C"],[1.474,"X"],[1.579,"E"],[1.672,"X"],[1.834,"M"],[1.904,"X"],[1.974,"M"],[2.055,"C"],[2.334,"E"],[2.426,"X"],[3.02,"O"],[3.136,"C"],[3.183,"E"],[3.287,"C"],[3.369,"E"],[3.496,"O"],[3.647,"X"],[4.146,"C"],[4.216,"A"],[4.321,"X"],[4.39,"M"],[4.518,"E"],[4.588,"C"],[4.797,"X"],[4.831,"C"],[4.878,"E"],[4.971,"C"],[5.226,"A"],[5.331,"X"],[5.505,"O"],[5.574,"C"],[5.621,"X"],[5.725,"C"],[5.807,"E"],[5.888,"O"],[5.934,"X"],[6.039,"C"],[6.468,"X"],[6.585,"O"],[6.759,"X"],[6.782,"C"],[6.852,"O"],[6.968,"X"],[7.211,"O"],[7.281,"C"],[7.513,"X"],[7.629,"E"],[7.676,"C"],[7.746,"E"],[7.792,"C"],[7.966,"O"],[8.163,"C"],[8.233,"X"],[8.384,"E"],[8.489,"X"],[8.57,"O"],[8.651,"X"],[8.674,"M"],[8.779,"A"],[8.872,"C"],[8.918,"X"],[8.976,"O"],[9.034,"C"],[9.081,"X"],[9.104,"C"],[9.174,"X"],[9.243,"O"],[9.301,"C"],[9.406,"X"],[9.51,"O"],[9.58,"M"],[9.719,"E"],[9.859,"C"],[9.928,"X"]]}]},"c5":{"parts":[{"wav":"voice/a4ba2c40c369.wav","dur":7.223,"words":[[0.186,0.627],[0.743,1.115],[1.416,1.591],[1.683,1.869],[1.904,2.067],[2.101,2.392],[2.461,2.833],[3.369,3.496],[3.554,3.798],[3.891,4.17],[4.228,4.297],[4.413,4.959],[5.354,5.482],[5.528,5.934],[5.969,6.143],[6.19,6.434],[6.503,7.037]],"vis":[[0.0,"X"],[0.186,"C"],[0.302,"O"],[0.348,"C"],[0.406,"E"],[0.569,"M"],[0.627,"X"],[0.743,"M"],[0.882,"O"],[0.952,"C"],[1.115,"X"],[1.416,"E"],[1.521,"C"],[1.591,"X"],[1.683,"C"],[1.869,"X"],[1.904,"C"],[1.962,"O"],[2.067,"X"],[2.101,"M"],[2.148,"C"],[2.218,"O"],[2.31,"C"],[2.392,"X"],[2.461,"C"],[2.566,"M"],[2.705,"O"],[2.833,"X"],[3.369,"O"],[3.496,"X"],[3.624,"F"],[3.798,"X"],[3.891,"C"],[3.972,"O"],[4.1,"C"],[4.17,"X"],[4.228,"C"],[4.297,"X"],[4.413,"C"],[4.588,"F"],[4.739,"E"],[4.82,"C"],[4.959,"X"],[5.354,"M"],[5.482,"X"],[5.528,"C"],[5.865,"E"],[5.934,"X"],[5.992,"O"],[6.143,"X"],[6.19,"C"],[6.259,"O"],[6.341,"C"],[6.434,"X"],[6.503,"C"],[6.608,"E"],[6.666,"M"],[6.84,"E"],[6.968,"C"],[7.037,"X"]]}]},"c6":{"parts":[{"wav":"voice/57f1b67ee403.wav","dur":8.837,"words":[[0.197,0.813],[1.231,1.567],[1.66,1.776],[1.8,1.823],[1.892,1.962],[1.997,2.334],[2.357,2.705],[2.821,3.1],[3.135,3.483],[3.529,4.11],[4.913,5.586],[6.062,6.201],[6.248,6.817],[6.863,6.944],[6.979,7.142],[7.177,7.246],[7.27,7.362],[7.409,7.455],[7.513,7.571],[7.641,8.024],[8.059,8.628]],"vis":[[0.0,"X"],[0.197,"M"],[0.302,"E"],[0.372,"C"],[0.58,"O"],[0.697,"C"],[0.813,"X"],[1.231,"C"],[1.312,"O"],[1.382,"C"],[1.567,"X"],[1.66,"E"],[1.776,"X"],[1.892,"E"],[1.962,"X"],[2.032,"C"],[2.101,"M"],[2.264,"C"],[2.334,"X"],[2.357,"F"],[2.438,"E"],[2.508,"X"],[2.589,"O"],[2.705,"X"],[2.821,"C"],[2.926,"E"],[3.042,"C"],[3.1,"X"],[3.135,"C"],[3.181,"E"],[3.228,"C"],[3.297,"F"],[3.39,"E"],[3.483,"X"],[3.529,"A"],[3.587,"C"],[3.692,"E"],[3.75,"C"],[3.878,"A"],[3.924,"C"],[4.11,"X"],[4.913,"C"],[4.982,"O"],[5.075,"C"],[5.296,"E"],[5.435,"O"],[5.586,"X"],[6.062,"O"],[6.201,"X"],[6.248,"C"],[6.352,"E"],[6.434,"A"],[6.48,"C"],[6.689,"O"],[6.817,"X"],[6.898,"E"],[6.944,"X"],[6.979,"C"],[7.026,"E"],[7.142,"X"],[7.293,"O"],[7.362,"X"],[7.409,"C"],[7.455,"X"],[7.664,"E"],[7.757,"M"],[7.804,"C"],[7.896,"E"],[7.943,"C"],[8.024,"X"],[8.059,"A"],[8.105,"M"],[8.152,"E"],[8.245,"C"],[8.303,"O"],[8.477,"E"],[8.57,"C"],[8.628,"X"]]}]},"c7":{"parts":[{"wav":"voice/4ac209dd17d2.wav","dur":7.502,"words":[[0.232,0.72],[0.824,1.149],[1.649,1.823],[1.916,2.299],[2.345,2.45],[2.508,2.647],[2.682,2.775],[2.833,2.926],[2.984,3.332],[4.042,4.193],[4.228,4.669],[4.866,5.075],[5.157,5.331],[5.377,5.691],[5.714,6.178],[6.468,6.91],[6.968,7.316]],"vis":[[0.0,"X"],[0.232,"C"],[0.395,"A"],[0.441,"C"],[0.511,"E"],[0.627,"M"],[0.72,"X"],[0.824,"M"],[0.917,"O"],[0.987,"C"],[1.149,"X"],[1.649,"E"],[1.765,"C"],[1.823,"X"],[1.916,"F"],[1.974,"A"],[2.067,"M"],[2.113,"C"],[2.299,"X"],[2.345,"O"],[2.403,"C"],[2.45,"X"],[2.508,"C"],[2.601,"E"],[2.647,"X"],[2.833,"C"],[2.926,"X"],[2.984,"C"],[3.065,"M"],[3.262,"O"],[3.332,"X"],[4.077,"A"],[4.146,"C"],[4.193,"X"],[4.228,"C"],[4.274,"E"],[4.344,"F"],[4.599,"O"],[4.669,"X"],[4.866,"O"],[4.982,"C"],[5.075,"X"],[5.157,"C"],[5.331,"X"],[5.377,"C"],[5.516,"E"],[5.691,"X"],[5.714,"E"],[5.83,"C"],[6.12,"E"],[6.178,"X"],[6.468,"C"],[6.526,"E"],[6.573,"C"],[6.677,"M"],[6.817,"E"],[6.863,"C"],[6.91,"X"],[6.968,"C"],[7.014,"A"],[7.084,"M"],[7.211,"E"],[7.316,"X"]]}]},"c8":{"parts":[{"wav":"voice/4cdf6df0d617.wav","dur":11.59,"words":[[0.197,0.813],[1.312,1.602],[1.66,2.043],[2.101,2.624],[2.705,2.984],[3.624,4.355],[4.622,4.808],[4.89,5.04],[5.122,5.551],[5.772,5.83],[5.876,6.318],[6.352,6.875],[6.968,7.061],[7.095,7.316],[7.339,7.432],[7.455,7.722],[7.757,8.187],[8.966,9.593],[9.825,10.394],[10.418,10.58],[10.615,10.685],[10.743,10.859],[10.894,10.975],[11.044,11.451]],"vis":[[0.0,"X"],[0.197,"M"],[0.325,"E"],[0.383,"C"],[0.58,"O"],[0.673,"C"],[0.813,"X"],[1.312,"C"],[1.451,"E"],[1.602,"X"],[1.66,"C"],[1.707,"E"],[1.776,"C"],[1.823,"F"],[1.904,"E"],[1.985,"C"],[2.043,"X"],[2.101,"A"],[2.148,"C"],[2.287,"E"],[2.345,"C"],[2.624,"X"],[2.705,"C"],[2.856,"E"],[2.984,"X"],[3.659,"O"],[3.798,"C"],[4.019,"E"],[4.17,"O"],[4.355,"X"],[4.622,"O"],[4.715,"C"],[4.808,"X"],[4.889,"C"],[5.04,"X"],[5.122,"C"],[5.342,"E"],[5.551,"X"],[5.876,"C"],[5.923,"O"],[6.004,"A"],[6.109,"C"],[6.155,"E"],[6.236,"O"],[6.318,"X"],[6.387,"C"],[6.445,"E"],[6.515,"F"],[6.724,"O"],[6.875,"X"],[6.968,"O"],[7.061,"X"],[7.095,"C"],[7.223,"O"],[7.316,"X"],[7.362,"C"],[7.432,"X"],[7.49,"C"],[7.722,"X"],[7.757,"E"],[7.896,"C"],[7.966,"O"],[8.024,"C"],[8.14,"O"],[8.187,"X"],[8.966,"C"],[9.036,"E"],[9.082,"F"],[9.187,"C"],[9.338,"E"],[9.419,"C"],[9.593,"X"],[9.825,"C"],[9.941,"E"],[10.011,"C"],[10.267,"E"],[10.394,"X"],[10.418,"C"],[10.58,"X"],[10.743,"C"],[10.859,"X"],[10.894,"C"],[10.975,"X"],[11.044,"C"],[11.091,"O"],[11.149,"M"],[11.358,"O"],[11.451,"X"]]}]},"c9":{"parts":[{"wav":"voice/6471b98c13d0.wav","dur":7.687,"words":[[0.058,0.557],[0.662,1.01],[1.393,1.579],[1.649,1.811],[1.881,1.974],[2.043,2.183],[2.31,2.508],[2.949,3.181],[3.204,3.286],[3.32,3.367],[3.425,3.831],[3.866,3.936],[4.005,4.423],[5.029,5.215],[5.505,5.667],[5.725,5.772],[5.842,6.178],[6.236,6.724],[6.805,6.91],[6.944,7.026],[7.072,7.42]],"vis":[[0.0,"X"],[0.058,"C"],[0.128,"A"],[0.197,"C"],[0.348,"E"],[0.511,"M"],[0.557,"X"],[0.662,"M"],[0.813,"C"],[1.01,"X"],[1.393,"O"],[1.509,"C"],[1.579,"X"],[1.649,"C"],[1.811,"X"],[1.904,"C"],[1.974,"X"],[2.078,"C"],[2.183,"X"],[2.31,"A"],[2.415,"C"],[2.508,"X"],[2.972,"O"],[3.053,"C"],[3.123,"E"],[3.181,"X"],[3.228,"A"],[3.286,"X"],[3.46,"E"],[3.529,"C"],[3.611,"A"],[3.657,"C"],[3.831,"X"],[3.866,"C"],[3.936,"X"],[4.005,"M"],[4.063,"C"],[4.11,"O"],[4.18,"C"],[4.354,"E"],[4.423,"X"],[5.029,"E"],[5.133,"C"],[5.215,"X"],[5.505,"O"],[5.598,"C"],[5.667,"X"],[5.841,"M"],[5.9,"A"],[5.946,"C"],[6.178,"X"],[6.259,"E"],[6.318,"C"],[6.434,"O"],[6.619,"E"],[6.677,"C"],[6.724,"X"],[6.805,"C"],[6.852,"E"],[6.91,"X"],[6.944,"A"],[7.026,"X"],[7.107,"C"],[7.246,"E"],[7.293,"C"],[7.42,"X"]]}]},"c10":{"parts":[{"wav":"voice/7858592d4790.wav","dur":12.078,"words":[[0.197,0.778],[1.335,1.776],[1.8,2.113],[2.171,2.752],[3.007,3.286],[3.332,3.541],[3.564,3.959],[4.017,4.598],[5.331,6.016],[6.225,6.619],[6.643,7.13],[7.235,7.606],[7.653,7.943],[8.001,8.454],[8.512,8.674],[9.257,9.419],[9.466,9.535],[9.593,9.767],[9.802,10.325],[10.534,10.986],[11.01,11.219],[11.277,11.88]],"vis":[[0.0,"X"],[0.197,"M"],[0.279,"E"],[0.36,"C"],[0.615,"O"],[0.685,"C"],[0.778,"X"],[1.335,"F"],[1.486,"E"],[1.556,"X"],[1.718,"O"],[1.776,"X"],[1.8,"C"],[1.846,"O"],[1.916,"M"],[2.067,"C"],[2.113,"X"],[2.206,"C"],[2.299,"O"],[2.345,"C"],[2.508,"E"],[2.577,"C"],[2.752,"X"],[3.007,"C"],[3.17,"E"],[3.216,"C"],[3.286,"X"],[3.39,"M"],[3.471,"O"],[3.541,"X"],[3.564,"E"],[3.669,"C"],[3.808,"A"],[3.959,"X"],[4.052,"C"],[4.156,"A"],[4.214,"C"],[4.261,"A"],[4.319,"C"],[4.528,"A"],[4.598,"X"],[5.331,"C"],[5.389,"O"],[5.493,"C"],[5.574,"E"],[5.656,"C"],[5.749,"E"],[5.865,"O"],[6.016,"X"],[6.225,"M"],[6.271,"C"],[6.318,"O"],[6.387,"C"],[6.619,"X"],[6.643,"M"],[6.712,"C"],[6.84,"A"],[6.979,"C"],[7.13,"X"],[7.235,"C"],[7.293,"E"],[7.339,"C"],[7.548,"A"],[7.606,"X"],[7.653,"C"],[7.699,"O"],[7.804,"E"],[7.943,"X"],[8.024,"C"],[8.094,"E"],[8.14,"C"],[8.303,"A"],[8.349,"C"],[8.454,"X"],[8.512,"C"],[8.616,"E"],[8.674,"X"],[9.257,"M"],[9.419,"X"],[9.489,"C"],[9.535,"X"],[9.593,"C"],[9.767,"X"],[9.802,"M"],[9.849,"A"],[9.918,"C"],[10.162,"E"],[10.267,"C"],[10.325,"X"],[10.534,"E"],[10.685,"C"],[10.824,"A"],[10.94,"C"],[10.986,"X"],[11.01,"C"],[11.114,"E"],[11.161,"C"],[11.219,"X"],[11.3,"C"],[11.462,"A"],[11.59,"C"],[11.776,"A"],[11.88,"X"]]}]},"c11":{"parts":[{"wav":"voice/5aa5be4788b7.wav","dur":6.954,"words":[[0.221,0.755],[0.848,1.173],[1.44,1.579],[1.672,1.776],[1.8,2.415],[3.088,3.599],[3.634,4.11],[4.145,4.307],[4.365,4.632],[4.69,5.271],[5.41,5.654],[5.7,5.817],[5.875,6.13],[6.165,6.861]],"vis":[[0.0,"X"],[0.221,"C"],[0.337,"E"],[0.453,"C"],[0.499,"E"],[0.639,"M"],[0.755,"X"],[0.848,"M"],[0.964,"O"],[1.01,"C"],[1.173,"X"],[1.44,"C"],[1.579,"X"],[1.672,"M"],[1.776,"X"],[1.8,"C"],[2.218,"E"],[2.299,"C"],[2.415,"X"],[3.088,"A"],[3.228,"M"],[3.297,"C"],[3.367,"O"],[3.448,"C"],[3.553,"E"],[3.599,"X"],[3.634,"C"],[3.68,"E"],[3.738,"C"],[3.785,"A"],[3.901,"E"],[3.971,"C"],[4.063,"E"],[4.11,"X"],[4.145,"C"],[4.191,"O"],[4.307,"X"],[4.4,"O"],[4.458,"M"],[4.574,"O"],[4.632,"X"],[4.69,"E"],[4.748,"C"],[4.841,"E"],[4.934,"C"],[5.132,"A"],[5.271,"X"],[5.41,"A"],[5.492,"F"],[5.584,"C"],[5.654,"X"],[5.7,"O"],[5.817,"X"],[5.875,"C"],[6.037,"O"],[6.13,"X"],[6.165,"C"],[6.223,"A"],[6.304,"M"],[6.362,"O"],[6.444,"C"],[6.629,"E"],[6.757,"C"],[6.861,"X"]]}]},"c12":{"parts":[{"wav":"voice/f93aa03b79fb.wav","dur":5.354,"words":[[0.197,0.789],[1.382,1.753],[1.788,2.171],[2.252,2.752],[3.438,4.019],[4.251,4.448],[4.495,4.634],[4.669,5.203]],"vis":[[0.0,"X"],[0.197,"M"],[0.313,"E"],[0.372,"C"],[0.592,"O"],[0.72,"C"],[0.789,"X"],[1.382,"C"],[1.753,"X"],[1.788,"A"],[1.846,"C"],[2.171,"X"],[2.252,"C"],[2.392,"O"],[2.45,"C"],[2.752,"X"],[3.438,"C"],[3.566,"F"],[3.647,"E"],[3.717,"C"],[3.914,"E"],[4.019,"X"],[4.251,"C"],[4.309,"A"],[4.448,"X"],[4.495,"C"],[4.634,"X"],[4.669,"C"],[4.727,"O"],[4.773,"C"],[4.971,"A"],[5.098,"C"],[5.203,"X"]]},{"wav":"voice/adffce7f3598.wav","dur":6.341,"words":[[0.186,0.488],[0.569,1.149],[1.917,2.289],[2.324,2.475],[2.509,3.009],[3.206,3.438],[3.508,4.042],[4.472,4.657],[4.692,5.331],[5.366,5.47],[5.516,6.12]],"vis":[[0.0,"X"],[0.186,"C"],[0.441,"A"],[0.488,"X"],[0.569,"A"],[0.65,"C"],[0.929,"E"],[0.998,"C"],[1.149,"X"],[1.917,"E"],[2.057,"C"],[2.219,"E"],[2.289,"X"],[2.347,"A"],[2.417,"C"],[2.475,"X"],[2.509,"C"],[2.579,"E"],[2.626,"F"],[2.869,"O"],[3.009,"X"],[3.206,"C"],[3.334,"A"],[3.438,"X"],[3.508,"C"],[3.578,"E"],[3.624,"C"],[3.891,"A"],[3.961,"C"],[4.042,"X"],[4.472,"C"],[4.553,"E"],[4.611,"C"],[4.657,"X"],[4.692,"O"],[4.739,"C"],[4.797,"O"],[4.855,"C"],[4.936,"M"],[4.982,"A"],[5.087,"C"],[5.191,"E"],[5.249,"O"],[5.331,"X"],[5.365,"E"],[5.412,"C"],[5.47,"X"],[5.516,"E"],[5.586,"F"],[5.667,"E"],[5.714,"C"],[5.9,"E"],[5.992,"M"],[6.039,"C"],[6.12,"X"]]}]},"c13":{"parts":[{"wav":"voice/0c830d71021c.wav","dur":8.999,"words":[[0.023,0.116],[0.209,0.325],[0.372,0.662],[0.778,0.987],[1.254,1.985],[2.183,2.287],[2.38,2.589],[2.728,2.891],[2.937,2.984],[3.03,3.111],[3.158,3.727],[3.82,3.913],[3.936,3.971],[4.005,4.214],[4.238,4.296],[4.377,4.54],[4.632,5.05],[5.074,5.561],[5.619,5.909],[5.944,6.571],[7.188,7.328],[7.386,7.502],[7.571,7.908],[7.955,8.059],[8.094,8.21],[8.28,8.802]],"vis":[[0.0,"X"],[0.023,"C"],[0.116,"X"],[0.209,"C"],[0.255,"E"],[0.325,"X"],[0.372,"C"],[0.476,"E"],[0.534,"C"],[0.662,"X"],[0.778,"C"],[0.824,"A"],[0.987,"X"],[1.254,"A"],[1.347,"C"],[1.544,"E"],[1.591,"F"],[1.695,"E"],[1.788,"C"],[1.869,"E"],[1.985,"X"],[2.183,"C"],[2.287,"X"],[2.38,"C"],[2.461,"E"],[2.519,"C"],[2.589,"X"],[2.728,"E"],[2.891,"X"],[2.937,"A"],[2.984,"X"],[3.03,"E"],[3.111,"X"],[3.158,"M"],[3.228,"O"],[3.274,"C"],[3.344,"E"],[3.413,"C"],[3.611,"E"],[3.727,"X"],[3.855,"E"],[3.913,"X"],[4.005,"C"],[4.168,"E"],[4.214,"X"],[4.238,"C"],[4.296,"X"],[4.377,"C"],[4.435,"O"],[4.481,"C"],[4.54,"X"],[4.632,"C"],[4.679,"E"],[4.748,"C"],[4.795,"F"],[4.923,"E"],[4.981,"C"],[5.05,"X"],[5.074,"A"],[5.143,"C"],[5.248,"E"],[5.329,"C"],[5.561,"X"],[5.619,"C"],[5.909,"X"],[5.944,"C"],[6.049,"E"],[6.362,"C"],[6.571,"X"],[7.188,"C"],[7.27,"E"],[7.328,"X"],[7.386,"C"],[7.502,"X"],[7.571,"C"],[7.629,"O"],[7.699,"C"],[7.908,"X"],[7.955,"C"],[8.059,"X"],[8.094,"F"],[8.152,"O"],[8.21,"X"],[8.314,"O"],[8.372,"C"],[8.442,"F"],[8.512,"E"],[8.802,"X"]]}]},"c14":{"parts":[{"wav":"voice/44b496bd2c60.wav","dur":9.953,"words":[[0.197,0.372],[0.406,0.639],[0.685,0.789],[0.871,1.149],[1.184,1.265],[1.324,1.765],[1.881,2.426],[3.044,3.403],[3.752,3.949],[4.088,4.355],[4.402,4.506],[4.576,4.831],[4.878,5.528],[6.261,6.633],[6.877,7.376],[7.48,7.77],[7.898,8.084],[8.142,8.27],[8.339,8.479],[8.653,8.897],[9.036,9.14],[9.175,9.361],[9.384,9.883]],"vis":[[0.0,"X"],[0.197,"O"],[0.372,"X"],[0.406,"C"],[0.511,"O"],[0.592,"A"],[0.639,"X"],[0.743,"C"],[0.789,"X"],[0.871,"C"],[0.917,"O"],[0.998,"F"],[1.149,"X"],[1.184,"C"],[1.265,"X"],[1.324,"C"],[1.474,"E"],[1.567,"C"],[1.695,"E"],[1.765,"X"],[1.881,"O"],[2.009,"C"],[2.183,"O"],[2.345,"C"],[2.426,"X"],[3.043,"F"],[3.311,"O"],[3.403,"X"],[3.752,"C"],[3.821,"A"],[3.868,"C"],[3.949,"X"],[4.088,"M"],[4.17,"O"],[4.251,"C"],[4.355,"X"],[4.402,"C"],[4.506,"X"],[4.576,"F"],[4.704,"C"],[4.773,"M"],[4.831,"X"],[4.878,"C"],[4.959,"E"],[5.052,"M"],[5.098,"A"],[5.168,"C"],[5.215,"E"],[5.273,"M"],[5.412,"A"],[5.528,"X"],[6.261,"C"],[6.493,"O"],[6.633,"X"],[6.876,"C"],[6.958,"O"],[7.039,"M"],[7.26,"O"],[7.376,"X"],[7.48,"C"],[7.689,"E"],[7.77,"X"],[7.898,"C"],[8.084,"X"],[8.142,"E"],[8.2,"C"],[8.27,"X"],[8.339,"E"],[8.386,"C"],[8.479,"X"],[8.653,"A"],[8.769,"C"],[8.897,"X"],[9.036,"E"],[9.14,"X"],[9.175,"C"],[9.257,"O"],[9.361,"X"],[9.384,"C"],[9.442,"A"],[9.535,"M"],[9.582,"C"],[9.767,"O"],[9.883,"X"]]}]},"c15":{"parts":[{"wav":"voice/6af1c681fcfa.wav","dur":14.41,"words":[[0.163,0.348],[0.418,0.708],[0.743,0.813],[0.882,1.695],[2.206,2.45],[2.519,2.577],[2.601,2.624],[2.763,2.868],[2.937,3.495],[3.68,4.017],[4.122,4.574],[4.76,5.468],[5.689,6.026],[6.118,6.571],[6.711,7.279],[7.338,7.57],[7.779,8.185],[8.301,8.58],[8.615,8.986],[9.033,9.683],[9.903,9.973],[10.019,10.066],[10.136,10.321],[10.391,10.681],[10.704,11.297],[11.844,12.471],[12.54,12.9],[13.144,13.551],[13.609,13.69],[13.794,14.189]],"vis":[[0.0,"X"],[0.163,"F"],[0.267,"O"],[0.348,"X"],[0.418,"C"],[0.522,"E"],[0.58,"C"],[0.708,"X"],[0.743,"C"],[0.813,"X"],[0.882,"M"],[0.929,"E"],[0.975,"C"],[1.103,"E"],[1.184,"C"],[1.451,"A"],[1.556,"C"],[1.695,"X"],[2.206,"C"],[2.45,"X"],[2.519,"E"],[2.577,"X"],[2.763,"E"],[2.821,"M"],[2.868,"X"],[2.937,"M"],[2.995,"O"],[3.042,"C"],[3.1,"E"],[3.204,"C"],[3.448,"E"],[3.495,"X"],[3.68,"C"],[3.831,"E"],[4.017,"X"],[4.156,"E"],[4.226,"C"],[4.272,"F"],[4.447,"C"],[4.574,"X"],[4.76,"A"],[4.807,"C"],[4.934,"E"],[5.05,"C"],[5.213,"A"],[5.294,"C"],[5.468,"X"],[5.689,"C"],[5.817,"E"],[5.968,"C"],[6.026,"X"],[6.118,"C"],[6.188,"E"],[6.293,"F"],[6.42,"E"],[6.478,"C"],[6.571,"X"],[6.711,"A"],[6.792,"C"],[6.908,"E"],[6.989,"C"],[7.082,"A"],[7.163,"C"],[7.279,"X"],[7.338,"C"],[7.454,"E"],[7.57,"X"],[7.779,"C"],[8.185,"X"],[8.301,"C"],[8.348,"O"],[8.394,"M"],[8.51,"O"],[8.58,"X"],[8.615,"E"],[8.696,"C"],[8.835,"A"],[8.916,"C"],[8.986,"X"],[9.067,"C"],[9.207,"A"],[9.369,"C"],[9.59,"A"],[9.683,"X"],[9.903,"E"],[9.973,"X"],[10.019,"C"],[10.066,"X"],[10.136,"C"],[10.194,"O"],[10.321,"X"],[10.391,"C"],[10.461,"O"],[10.519,"C"],[10.681,"X"],[10.704,"C"],[10.832,"E"],[11.111,"C"],[11.297,"X"],[11.844,"E"],[12.134,"C"],[12.297,"O"],[12.355,"C"],[12.471,"X"],[12.54,"C"],[12.645,"O"],[12.807,"A"],[12.9,"X"],[13.144,"E"],[13.26,"F"],[13.365,"A"],[13.423,"C"],[13.551,"X"],[13.643,"E"],[13.69,"X"],[13.794,"C"],[14.189,"X"]]}]}}};</script>
+<script>boot(EP);</script>

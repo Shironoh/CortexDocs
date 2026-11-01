@@ -1,0 +1,1471 @@
+{
+ "summary": {
+  "beat_gaps_gt2_5s": [],
+  "cues_under_beat_quota": [],
+  "moving_captures": 10,
+  "duration_s": 155.6,
+  "cues": 20,
+  "scenes": 7,
+  "say_words": 405,
+  "words_per_min": 156.1,
+  "captures": 60,
+  "captures_with_issue": 37,
+  "issues": {
+   "subj_cut": 10,
+   "focus_hidden": 4,
+   "focus_small": 23,
+   "focus_offcenter": 11,
+   "subj_in_band": 11,
+   "small": 13,
+   "subband": 1,
+   "overlap": 2,
+   "cut": 1
+  },
+  "frozen_windows_gt2_5s": [],
+  "avg_text_blocks": 1.47,
+  "avg_onscreen_words": 3.83,
+  "avg_empty": 0.088,
+  "shot_values_per_scene": {
+   "s1": [
+    0.61,
+    1.02,
+    1.5
+   ],
+   "s2": [
+    0.61,
+    0.88,
+    1.36
+   ],
+   "s3": [
+    0.61,
+    0.89,
+    1.24
+   ],
+   "s4": [
+    0.61,
+    0.87,
+    1.18,
+    1.78,
+    3
+   ],
+   "s5": [
+    0.61,
+    0.88,
+    1.59
+   ],
+   "s6": [
+    0.61,
+    1.07
+   ],
+   "s7": [
+    0.79
+   ]
+  },
+  "scenes_lt3_shot_values": [
+   "s6",
+   "s7"
+  ],
+  "analyst_acting_scenes": "7/7",
+  "villain_scenes": "4/7",
+  "js_errors": [],
+  "mobile_hscroll": false,
+  "sound_events": 82
+ },
+ "captures": [
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c1_25.jpg",
+   "t": 2.92525,
+   "ntext": 1,
+   "words": 1,
+   "focus": null,
+   "issues": [],
+   "moving": true,
+   "empty": 0.233
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c1_50.jpg",
+   "t": 5.2505,
+   "ntext": 1,
+   "words": 1,
+   "focus": null,
+   "issues": [],
+   "moving": true,
+   "empty": 0.245
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c1_75.jpg",
+   "t": 7.575749999999999,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.266
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.007
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c2_25.jpg",
+   "t": 10.800749999999999,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1255,
+    "cy": 272,
+    "area": 0.011
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.011
+    }
+   ],
+   "moving": false,
+   "empty": 0.149
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c2_50.jpg",
+   "t": 11.7005,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 820,
+    "cy": 230,
+    "area": 0.011
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.011
+    }
+   ],
+   "moving": false,
+   "empty": 0.149
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c2_75.jpg",
+   "t": 12.600249999999999,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 820,
+    "cy": 230,
+    "area": 0.01
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.01
+    }
+   ],
+   "moving": false,
+   "empty": 0.149
+  },
+  {
+   "cue": "c3",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c3_25.jpg",
+   "t": 14.81225,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 820,
+    "cy": 230,
+    "area": 0.01
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.01
+    }
+   ],
+   "moving": false,
+   "empty": 0.149
+  },
+  {
+   "cue": "c3",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c3_50.jpg",
+   "t": 16.1245,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 373,
+    "cy": 260,
+    "area": 0.01
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.01
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c3",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c3_75.jpg",
+   "t": 17.43675,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 798,
+    "cy": 230,
+    "area": 0.04
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.0
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c4_25.jpg",
+   "t": 20.177,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 588,
+    "cy": 235,
+    "area": 0.104
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.215
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c4_50.jpg",
+   "t": 21.605,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 737,
+    "cy": 399,
+    "area": 0.295
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.128
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c4_75.jpg",
+   "t": 23.033,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 913,
+    "cy": 535,
+    "area": 0.016
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.016
+    }
+   ],
+   "moving": false,
+   "empty": 0.128
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c5_25.jpg",
+   "t": 26.388749999999998,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 67,
+    "cy": 370,
+    "area": 0.024
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      67,
+      370
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.024
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c5_50.jpg",
+   "t": 28.316499999999998,
+   "ntext": 1,
+   "words": 7,
+   "focus": {
+    "cx": 800,
+    "cy": 655,
+    "area": 0.085
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c5_75.jpg",
+   "t": 30.244249999999997,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1330,
+    "cy": 418,
+    "area": 0.032
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.032
+    }
+   ],
+   "moving": false,
+   "empty": 0.071
+  },
+  {
+   "cue": "c6",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c6_25.jpg",
+   "t": 33.91325,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1085,
+    "cy": 489,
+    "area": 0.013
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.013
+    }
+   ],
+   "moving": false,
+   "empty": 0.071
+  },
+  {
+   "cue": "c6",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c6_50.jpg",
+   "t": 35.6545,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1004,
+    "cy": 336,
+    "area": 0.066
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c6",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c6_75.jpg",
+   "t": 37.39575,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1004,
+    "cy": 83,
+    "area": 0.006
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1004,
+      83
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.006
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c7_25.jpg",
+   "t": 40.864000000000004,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 515,
+    "cy": 364,
+    "area": 0.04
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.219
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c7_50.jpg",
+   "t": 42.591,
+   "ntext": 1,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 129,
+    "area": 0.051
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      800,
+      129
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.122
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c7_75.jpg",
+   "t": 44.318000000000005,
+   "ntext": 1,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 111,
+    "area": 0.055
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      800,
+      111
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.099
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c8_25.jpg",
+   "t": 49.22050000000001,
+   "ntext": 4,
+   "words": 7,
+   "focus": {
+    "cx": 1076,
+    "cy": 434,
+    "area": 0.242
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c8_50.jpg",
+   "t": 52.39600000000001,
+   "ntext": 4,
+   "words": 7,
+   "focus": {
+    "cx": 800,
+    "cy": 341,
+    "area": 0.016
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.031
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c8_75.jpg",
+   "t": 55.571500000000015,
+   "ntext": 4,
+   "words": 7,
+   "focus": {
+    "cx": 800,
+    "cy": 404,
+    "area": 0.448
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.028
+  },
+  {
+   "cue": "c9",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c9_25.jpg",
+   "t": 59.948000000000015,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 917,
+    "cy": 359,
+    "area": 0.164
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.111
+  },
+  {
+   "cue": "c9",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c9_50.jpg",
+   "t": 61.149000000000015,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 917,
+    "cy": 359,
+    "area": 0.127
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.111
+  },
+  {
+   "cue": "c9",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c9_75.jpg",
+   "t": 62.350000000000016,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 887,
+    "cy": 359,
+    "area": 0.125
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.135
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c10_25.jpg",
+   "t": 65.59150000000001,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 805,
+    "cy": 474,
+    "area": 0.126
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.168
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c10_50.jpg",
+   "t": 67.63200000000002,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 806,
+    "cy": 476,
+    "area": 0.127
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.219
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c10_75.jpg",
+   "t": 69.67250000000001,
+   "ntext": 1,
+   "words": 3,
+   "focus": {
+    "cx": 800,
+    "cy": 390,
+    "area": 0.206
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c11_25.jpg",
+   "t": 73.37025000000003,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.444
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c11_50.jpg",
+   "t": 75.02750000000002,
+   "ntext": 2,
+   "words": 8,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.089
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c11_75.jpg",
+   "t": 76.68475000000002,
+   "ntext": 2,
+   "words": 8,
+   "focus": {
+    "cx": 794,
+    "cy": 399,
+    "area": 0.09
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c12_25.jpg",
+   "t": 80.53700000000002,
+   "ntext": 3,
+   "words": 11,
+   "focus": {
+    "cx": 1174,
+    "cy": 172,
+    "area": 0.036
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Rapport · ETH-8342",
+     "v": 40
+    },
+    {
+     "k": "focus_small",
+     "v": 0.036
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c12_50.jpg",
+   "t": 82.73200000000003,
+   "ntext": 3,
+   "words": 12,
+   "focus": {
+    "cx": 370,
+    "cy": 513,
+    "area": 0.028
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.028
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c12_75.jpg",
+   "t": 84.92700000000002,
+   "ntext": 3,
+   "words": 12,
+   "focus": {
+    "cx": 370,
+    "cy": 513,
+    "area": 0.028
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.028
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c13_25.jpg",
+   "t": 88.51225000000002,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 618,
+    "cy": 327,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false,
+   "empty": 0.215
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c13_50.jpg",
+   "t": 89.90250000000003,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 777,
+    "cy": 389,
+    "area": 0.036
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.0
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c13_75.jpg",
+   "t": 91.29275000000003,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.053
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c14_25.jpg",
+   "t": 94.24150000000003,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 749,
+    "cy": 347,
+    "area": 0.178
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.139
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c14_50.jpg",
+   "t": 95.80000000000004,
+   "ntext": 1,
+   "words": 5,
+   "focus": {
+    "cx": 800,
+    "cy": 338,
+    "area": 0.131
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "1 cerne = 1 année",
+     "v": 39.9
+    }
+   ],
+   "moving": false,
+   "empty": 0.106
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c14_75.jpg",
+   "t": 97.35850000000003,
+   "ntext": 3,
+   "words": 11,
+   "focus": {
+    "cx": 1024,
+    "cy": 392,
+    "area": 0.39
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.007
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c15_25.jpg",
+   "t": 102.41975000000004,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 853,
+    "cy": 127,
+    "area": 0.007
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "année réelle (av. J.-C.)"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      853,
+      127
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.007
+    }
+   ],
+   "moving": false,
+   "empty": 0.144
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c15_50.jpg",
+   "t": 105.92250000000004,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 853,
+    "cy": 127,
+    "area": 0.007
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "année réelle (av. J.-C.)",
+     "v": 42.2
+    },
+    {
+     "k": "small",
+     "s": "âge BP",
+     "v": 42.2
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      853,
+      127
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.007
+    }
+   ],
+   "moving": false,
+   "empty": 0.144
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c15_75.jpg",
+   "t": 109.42525000000003,
+   "ntext": 4,
+   "words": 13,
+   "focus": {
+    "cx": 858,
+    "cy": 98,
+    "area": 0.031
+   },
+   "issues": [
+    {
+     "k": "overlap",
+     "s": "âge BP / 3239 – 3105 av. J.-C."
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      858,
+      98
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.031
+    }
+   ],
+   "moving": false,
+   "empty": 0.071
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c16_25.jpg",
+   "t": 113.61450000000004,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": -801,
+    "cy": -80,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -801,
+      -80
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false,
+   "empty": 0.092
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c16_50.jpg",
+   "t": 114.30100000000004,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": -801,
+    "cy": -80,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -801,
+      -80
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false,
+   "empty": 0.092
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c16_75.jpg",
+   "t": 114.98750000000004,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 957,
+    "cy": 177,
+    "area": 0.029
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.029
+    }
+   ],
+   "moving": false,
+   "empty": 0.092
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c17_25.jpg",
+   "t": 118.65750000000006,
+   "ntext": 1,
+   "words": 4,
+   "focus": {
+    "cx": 1118,
+    "cy": 396,
+    "area": 0.226
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c17_50.jpg",
+   "t": 121.64100000000005,
+   "ntext": 1,
+   "words": 4,
+   "focus": {
+    "cx": 1118,
+    "cy": 396,
+    "area": 0.226
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c17_75.jpg",
+   "t": 124.62450000000005,
+   "ntext": 2,
+   "words": 8,
+   "focus": {
+    "cx": 1516,
+    "cy": 741,
+    "area": 0.096
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "≈ 50 000 ans"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1516,
+      741
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:foe"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:foe"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "focus"
+    }
+   ],
+   "moving": false,
+   "empty": 0.111
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c18_25.jpg",
+   "t": 129.99375000000006,
+   "ntext": 4,
+   "words": 10,
+   "focus": {
+    "cx": 767,
+    "cy": 308,
+    "area": 0.06
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "3300",
+     "v": 42.6
+    },
+    {
+     "k": "small",
+     "s": "3100 av. J.-C.",
+     "v": 42.6
+    },
+    {
+     "k": "small",
+     "s": "aujourd'hui",
+     "v": 42.6
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.26
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c18_50.jpg",
+   "t": 132.37950000000006,
+   "ntext": 4,
+   "words": 10,
+   "focus": {
+    "cx": 767,
+    "cy": 308,
+    "area": 0.06
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "3300",
+     "v": 42.6
+    },
+    {
+     "k": "small",
+     "s": "3100 av. J.-C.",
+     "v": 42.6
+    },
+    {
+     "k": "small",
+     "s": "aujourd'hui",
+     "v": 42.6
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.26
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c18_75.jpg",
+   "t": 134.76525000000007,
+   "ntext": 5,
+   "words": 12,
+   "focus": {
+    "cx": 767,
+    "cy": 308,
+    "area": 0.06
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "3300",
+     "v": 42.6
+    },
+    {
+     "k": "small",
+     "s": "3100 av. J.-C.",
+     "v": 42.6
+    },
+    {
+     "k": "small",
+     "s": "aujourd'hui",
+     "v": 42.6
+    },
+    {
+     "k": "overlap",
+     "s": "+ de 5 000 ans / calibration 1994"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.26
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c19_25.jpg",
+   "t": 139.41200000000006,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 302,
+    "cy": 401,
+    "area": 0.079
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c19_50.jpg",
+   "t": 141.67300000000006,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 302,
+    "cy": 401,
+    "area": 0.071
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c19_75.jpg",
+   "t": 143.93400000000005,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 401,
+    "area": 0.071
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.036
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c20_25.jpg",
+   "t": 148.00650000000005,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 1302,
+    "cy": 298,
+    "area": 0.057
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.057
+    }
+   ],
+   "moving": false,
+   "empty": 0.095
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c20_50.jpg",
+   "t": 149.81800000000004,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 1302,
+    "cy": 298,
+    "area": 0.057
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.057
+    }
+   ],
+   "moving": false,
+   "empty": 0.089
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c20_75.jpg",
+   "t": 151.62950000000004,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 1460,
+    "cy": 495,
+    "area": 0.028
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1460,
+      495
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.028
+    }
+   ],
+   "moving": false,
+   "empty": 0.09
+  }
+ ]
+}

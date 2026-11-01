@@ -1,0 +1,294 @@
+{
+ "engine": "piper:fr_FR-siwis-medium",
+ "wer_mean": 0.067,
+ "to_fix": [
+  [
+   "c11",
+   0.21,
+   [
+    [
+     "n",
+     ""
+    ],
+    [
+     "pas",
+     "par"
+    ],
+    [
+     "par colonne",
+     "parcolone"
+    ]
+   ]
+  ],
+  [
+   "c13",
+   0.33,
+   [
+    [
+     "cent mille",
+     "cents zero"
+    ],
+    [
+     "cent mille allers",
+     "cents zero a les"
+    ]
+   ]
+  ]
+ ],
+ "often_misheard": [
+  [
+   "cent",
+   3
+  ],
+  [
+   "mille",
+   2
+  ],
+  [
+   "est",
+   1
+  ],
+  [
+   "elle",
+   1
+  ],
+  [
+   "s",
+   1
+  ],
+  [
+   "y",
+   1
+  ],
+  [
+   "six",
+   1
+  ],
+  [
+   "huit",
+   1
+  ],
+  [
+   "virgule",
+   1
+  ],
+  [
+   "milliseconde",
+   1
+  ],
+  [
+   "n",
+   1
+  ],
+  [
+   "pas",
+   1
+  ],
+  [
+   "par",
+   1
+  ],
+  [
+   "colonne",
+   1
+  ],
+  [
+   "allers",
+   1
+  ]
+ ],
+ "parts": [
+  {
+   "cue": "c1",
+   "wer": 0.105,
+   "heard": "La page « Mes commandes » met du temps à s 'afficher. Vous avez la requête. Mais pourquoi était lente ?",
+   "errors": [
+    [
+     "est elle",
+     "etait"
+    ]
+   ]
+  },
+  {
+   "cue": "c2",
+   "wer": 0.118,
+   "heard": "Ajoutez X -Play in Analyse devant, la base exécute la requête et raconte comment elle -ci est prise.",
+   "errors": [
+    [
+     "s y",
+     "ci"
+    ]
+   ]
+  },
+  {
+   "cue": "c3",
+   "wer": 0.0,
+   "heard": "Facile. Le coste, c 'est le temps en millisecondes.",
+   "errors": []
+  },
+  {
+   "cue": "c4",
+   "wer": 0.0,
+   "heard": "Non. Le cost est une estimation faite avant d 'exécuter en unités arbitraires. Le vrai temps, en millisecondes, est dans actual time.",
+   "errors": []
+  },
+  {
+   "cue": "c5",
+   "wer": 0.0,
+   "heard": "Sur chaque ligne, comparez les roses. Les lignes prévues, puis les lignes réelles. C 'est le premier indice.",
+   "errors": []
+  },
+  {
+   "cue": "c6",
+   "wer": 0.0,
+   "heard": "Un plan se lit de l 'intérieur vers l 'extérieur. Le nœud le plus indenté travaille d 'abord et passe ses lignes à son parent.",
+   "errors": []
+  },
+  {
+   "cue": "c7",
+   "wer": 0.0,
+   "heard": "Tout en bas, une lecture de toute la table par trois processus. Loops égal 3, les chiffres sont des moyennes par processus.",
+   "errors": []
+  },
+  {
+   "cue": "c8",
+   "wer": 0.059,
+   "heard": "Chacun écarte 660 000 lignes. Devinez combien de lignes lues pour en garder huit ?",
+   "errors": [
+    [
+     "six",
+     ""
+    ]
+   ]
+  },
+  {
+   "cue": "c8",
+   "wer": 0.111,
+   "heard": "2 millions. Toute la table pour en garder vite.",
+   "errors": [
+    [
+     "huit",
+     "vite"
+    ]
+   ]
+  },
+  {
+   "cue": "c9",
+   "wer": 0.0,
+   "heard": "Le remède, un index sur le client et la date. Comme un catalogue trié, il mène droit au bon carton.",
+   "errors": []
+  },
+  {
+   "cue": "c10",
+   "wer": 0.118,
+   "heard": "Nouveau plan, un parcours du nouvel index. Exécution 0 ,16 ms au lieu de 48.",
+   "errors": [
+    [
+     "virgule",
+     ""
+    ],
+    [
+     "milliseconde",
+     "ms"
+    ]
+   ]
+  },
+  {
+   "cue": "c11",
+   "wer": 0.211,
+   "heard": "Le prix. Chaque écriture doit aussi mettre l 'index à jour. On en crée par un parcolone.",
+   "errors": [
+    [
+     "n",
+     ""
+    ],
+    [
+     "pas",
+     "par"
+    ],
+    [
+     "par colonne",
+     "parcolone"
+    ]
+   ]
+  },
+  {
+   "cue": "c12",
+   "wer": 0.0,
+   "heard": "Deuxième requête, un rapport, plus d 'une seconde. Le planificateur avait prévu une seule ligne.",
+   "errors": []
+  },
+  {
+   "cue": "c13",
+   "wer": 0.0,
+   "heard": "Devinez combien il en a trouvé.",
+   "errors": []
+  },
+  {
+   "cue": "c13",
+   "wer": 0.333,
+   "heard": "300 .000. Il a choisi une boucle imbriquée. Faites pour une ligne. 300 .000 à les retours.",
+   "errors": [
+    [
+     "cent mille",
+     "cents zero"
+    ],
+    [
+     "cent mille allers",
+     "cents zero a les"
+    ]
+   ]
+  },
+  {
+   "cue": "c14",
+   "wer": 0.059,
+   "heard": "Pourquoi 300 000 commandes venaient d 'être chargées et ces statistiques n 'étaient pas à jour ?",
+   "errors": [
+    [
+     "ses",
+     "ces"
+    ]
+   ]
+  },
+  {
+   "cue": "c15",
+   "wer": 0.2,
+   "heard": "Analyse ordre rafraîchie, les statistiques. Nouveau plan, une jointure par hachage. 176 millisecondes.",
+   "errors": [
+    [
+     "analyze orders rafraichit",
+     "analyse ordre rafraichie"
+    ]
+   ]
+  },
+  {
+   "cue": "c16",
+   "wer": 0.087,
+   "heard": "D 'habitude, l 'auto vacuum s 'en charge après environ 10 % de lignes modifiées. Après un gros chargement, lancez -le vous -même.",
+   "errors": [
+    [
+     "pour cent",
+     ""
+    ]
+   ]
+  },
+  {
+   "cue": "c17",
+   "wer": 0.0,
+   "heard": "On croit qu 'Exp. Analyse ne fait que d 'écrire. Faux, il exécute. Pour une mise à jour, encadrez -le dans une transaction puis annulez -la.",
+   "errors": []
+  },
+  {
+   "cue": "c18",
+   "wer": 0.0,
+   "heard": "Vos réflexes expliquent une analyse sur la requête lente. Des lignes écartées par millions, ils manquent un index. Prévue loin du réel, lancez une analyse.",
+   "errors": []
+  },
+  {
+   "cue": "c19",
+   "wer": 0.0,
+   "heard": "Vous savez lire un plan. Depuis poste reste 18. Il affiche aussi les buffers. Cache ou disque, ce sera l 'étape suivante.",
+   "errors": []
+  }
+ ]
+}

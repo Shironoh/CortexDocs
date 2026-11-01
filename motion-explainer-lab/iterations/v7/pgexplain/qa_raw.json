@@ -1,0 +1,3786 @@
+{
+ "meta": {
+  "duration": 165.85399999999996,
+  "cues": [
+   {
+    "id": "c1",
+    "sc": "s1",
+    "start": 0.6,
+    "end": 7.79,
+    "dur": 7.19,
+    "words": 17,
+    "sub": "La page « Mes commandes » met du temps à s'afficher. Vous avez la requête. Mais pourquoi est-elle lente ?",
+    "guess": false
+   },
+   {
+    "id": "c2",
+    "sc": "s1",
+    "start": 7.79,
+    "end": 14.257000000000001,
+    "dur": 6.4670000000000005,
+    "words": 16,
+    "sub": "Ajoutez EXPLAIN ANALYZE devant : la base exécute la requête et raconte comment elle s'y est prise.",
+    "guess": false
+   },
+   {
+    "id": "c3",
+    "sc": "s2",
+    "start": 14.257000000000001,
+    "end": 18.529,
+    "dur": 4.271999999999999,
+    "words": 8,
+    "sub": "Facile : « cost », c'est le temps en millisecondes !",
+    "guess": false
+   },
+   {
+    "id": "c4",
+    "sc": "s2",
+    "start": 18.529,
+    "end": 28.668,
+    "dur": 10.139,
+    "words": 21,
+    "sub": "Non. « cost » est une estimation faite avant d'exécuter, en unités arbitraires. Le vrai temps, en millisecondes, est dans « actual time ».",
+    "guess": false
+   },
+   {
+    "id": "c5",
+    "sc": "s2",
+    "start": 28.668,
+    "end": 36.717,
+    "dur": 8.049000000000003,
+    "words": 17,
+    "sub": "Sur chaque ligne, comparez « rows » : les lignes prévues, puis les lignes réelles. C'est le premier indice.",
+    "guess": false
+   },
+   {
+    "id": "c6",
+    "sc": "s3",
+    "start": 36.717,
+    "end": 43.718,
+    "dur": 7.001000000000002,
+    "words": 22,
+    "sub": "Un plan se lit de l'intérieur vers l'extérieur : le nœud le plus indenté travaille d'abord et passe ses lignes à son parent.",
+    "guess": false
+   },
+   {
+    "id": "c7",
+    "sc": "s3",
+    "start": 43.718,
+    "end": 53.147000000000006,
+    "dur": 9.428999999999998,
+    "words": 22,
+    "sub": "Tout en bas : Parallel Seq Scan, la lecture de toute la table, par trois processus. « loops=3 » : les chiffres sont des moyennes par processus.",
+    "guess": false
+   },
+   {
+    "id": "c8",
+    "sc": "s3",
+    "start": 53.147000000000006,
+    "end": 65.44300000000001,
+    "dur": 12.296000000000003,
+    "words": 25,
+    "sub": "Chacun écarte 666 664 lignes. Devinez : combien de lignes lues pour en garder 8 ?|2 millions. Toute la table, pour en garder 8.",
+    "guess": true
+   },
+   {
+    "id": "c9",
+    "sc": "s4",
+    "start": 65.44300000000001,
+    "end": 73.38600000000002,
+    "dur": 7.943000000000009,
+    "words": 20,
+    "sub": "Le remède : un index sur le client et la date. Comme un catalogue trié, il mène droit aux bons cartons.",
+    "guess": false
+   },
+   {
+    "id": "c10",
+    "sc": "s4",
+    "start": 73.38600000000002,
+    "end": 81.52600000000002,
+    "dur": 8.139999999999997,
+    "words": 16,
+    "sub": "Nouveau plan : Bitmap Index Scan sur le nouvel index. Exécution : 0,159 ms au lieu de 48.",
+    "guess": false
+   },
+   {
+    "id": "c11",
+    "sc": "s4",
+    "start": 81.52600000000002,
+    "end": 88.94800000000002,
+    "dur": 7.422,
+    "words": 17,
+    "sub": "Le prix : chaque écriture doit aussi mettre l'index à jour. On n'en crée pas un par colonne.",
+    "guess": false
+   },
+   {
+    "id": "c12",
+    "sc": "s5",
+    "start": 88.94800000000002,
+    "end": 96.26400000000002,
+    "dur": 7.316,
+    "words": 14,
+    "sub": "Deuxième requête, un rapport : plus d'une seconde. Le planificateur avait prévu une seule ligne.",
+    "guess": false
+   },
+   {
+    "id": "c13",
+    "sc": "s5",
+    "start": 96.26400000000002,
+    "end": 107.62900000000002,
+    "dur": 11.364999999999991,
+    "words": 23,
+    "sub": "Devinez combien il en a trouvé.|300 000. Il a choisi une boucle imbriquée, faite pour une ligne : 300 000 allers-retours.",
+    "guess": true
+   },
+   {
+    "id": "c14",
+    "sc": "s5",
+    "start": 107.62900000000002,
+    "end": 114.52900000000002,
+    "dur": 6.900000000000008,
+    "words": 15,
+    "sub": "Pourquoi ? 300 000 commandes venaient d'être chargées, et ses statistiques n'étaient pas à jour.",
+    "guess": false
+   },
+   {
+    "id": "c15",
+    "sc": "s6",
+    "start": 114.52900000000002,
+    "end": 123.20500000000003,
+    "dur": 8.675999999999998,
+    "words": 14,
+    "sub": "ANALYZE orders rafraîchit les statistiques. Nouveau plan : Hash Join, une jointure par hachage. 176 ms.",
+    "guess": false
+   },
+   {
+    "id": "c16",
+    "sc": "s6",
+    "start": 123.20500000000003,
+    "end": 133.15800000000004,
+    "dur": 9.953000000000007,
+    "words": 18,
+    "sub": "D'habitude, l'autovacuum s'en charge, après environ 10 % de lignes modifiées. Après un gros chargement, lancez-le vous-même.",
+    "guess": false
+   },
+   {
+    "id": "c17",
+    "sc": "s7",
+    "start": 133.15800000000004,
+    "end": 143.56400000000002,
+    "dur": 10.405999999999988,
+    "words": 22,
+    "sub": "On croit qu'EXPLAIN ANALYZE ne fait que décrire. Faux : il exécute. Pour un UPDATE, encadrez-le : BEGIN, puis ROLLBACK.",
+    "guess": false
+   },
+   {
+    "id": "c18",
+    "sc": "s7",
+    "start": 143.56400000000002,
+    "end": 154.875,
+    "dur": 11.31099999999999,
+    "words": 23,
+    "sub": "Vos réflexes : EXPLAIN ANALYZE sur la requête lente ; des lignes écartées par millions, il manque un index ; prévu loin du réel, lancez ANALYZE.",
+    "guess": false
+   },
+   {
+    "id": "c19",
+    "sc": "s7",
+    "start": 154.875,
+    "end": 163.65399999999997,
+    "dur": 8.778999999999979,
+    "words": 20,
+    "sub": "Vous savez lire un plan. Depuis PostgreSQL 18, il affiche aussi les Buffers : cache ou disque, ce sera l'étape suivante.",
+    "guess": false
+   }
+  ],
+  "scenes": [
+   {
+    "id": "s1",
+    "title": "Une page lente",
+    "start": 0.6,
+    "end": 14.257000000000001
+   },
+   {
+    "id": "s2",
+    "title": "Lire une ligne",
+    "start": 14.257000000000001,
+    "end": 36.717
+   },
+   {
+    "id": "s3",
+    "title": "Lire l'arbre",
+    "start": 36.717,
+    "end": 65.44300000000001
+   },
+   {
+    "id": "s4",
+    "title": "L'index",
+    "start": 65.44300000000001,
+    "end": 88.94800000000002
+   },
+   {
+    "id": "s5",
+    "title": "Prévu : 1 ligne",
+    "start": 88.94800000000002,
+    "end": 114.52900000000002
+   },
+   {
+    "id": "s6",
+    "title": "ANALYZE",
+    "start": 114.52900000000002,
+    "end": 133.15800000000004
+   },
+   {
+    "id": "s7",
+    "title": "Vos réflexes",
+    "start": 133.15800000000004,
+    "end": 163.65399999999997
+   }
+  ],
+  "guess": [
+   [
+    59.83400000000001,
+    61.33400000000001
+   ],
+   [
+    98.45600000000002,
+    99.95600000000002
+   ]
+  ],
+  "events": 84,
+  "marks": [
+   2.356,
+   0.2,
+   4.679,
+   8.106,
+   8.006,
+   8.594,
+   6.121,
+   8.106,
+   12.135,
+   0,
+   0.4,
+   4.379,
+   5.821,
+   8.294,
+   11.935,
+   6.724,
+   13.957,
+   16.001,
+   27.138,
+   27.138,
+   30.18,
+   32.13,
+   33.582,
+   13.857,
+   13.957,
+   16.001,
+   17.113,
+   26.838,
+   18.799,
+   30.18,
+   21.432,
+   27.138,
+   27.138,
+   30.18,
+   33.782,
+   18.299,
+   18.399,
+   18.799,
+   30.18,
+   12.857,
+   14.057,
+   15.801,
+   16.788,
+   20.532,
+   26.838,
+   27.626,
+   29.88,
+   23.328,
+   35.244,
+   36.517,
+   36.617,
+   36.717,
+   36.817,
+   40.4,
+   41,
+   40.9,
+   41.5,
+   41.4,
+   42,
+   41.9,
+   42.5,
+   44.498,
+   41.874,
+   42.354,
+   44.498,
+   45.207,
+   46.607,
+   48.007,
+   44.498,
+   45.207,
+   44.648,
+   45.207,
+   44.798,
+   45.207,
+   48.668,
+   53.556,
+   53.556,
+   56.797,
+   61.334,
+   61.334,
+   61.334,
+   62.534,
+   36.417,
+   36.517,
+   40.4,
+   44.498,
+   61.534,
+   35.317,
+   40.1,
+   41.674,
+   42.75,
+   44.198,
+   53.256,
+   61.034,
+   39.759,
+   47.331,
+   51.234,
+   58.097,
+   59.129,
+   58.629,
+   65.243,
+   81.526,
+   67.199,
+   69.717,
+   73.086,
+   73.086,
+   73.086,
+   71.728,
+   72.208,
+   73.086,
+   73.186,
+   81.526,
+   78.116,
+   79.669,
+   81.526,
+   79.869,
+   80.469,
+   80.219,
+   80.819,
+   81.526,
+   83.317,
+   65.143,
+   65.243,
+   71.728,
+   80.169,
+   82.167,
+   64.043,
+   66.899,
+   69.617,
+   73.186,
+   77.816,
+   79.469,
+   81.426,
+   84.498,
+   70.567,
+   72.239,
+   75.002,
+   87.533,
+   88.648,
+   93.083,
+   88.748,
+   107.629,
+   94.363,
+   99.956,
+   91.725,
+   96.638,
+   99.956,
+   99.956,
+   99.956,
+   102.814,
+   102.814,
+   103.314,
+   103.814,
+   104.314,
+   104.814,
+   105.314,
+   106.32,
+   109.265,
+   109.265,
+   111.558,
+   114.529,
+   94.363,
+   111.558,
+   88.648,
+   96.638,
+   107.899,
+   87.548,
+   88.748,
+   92.983,
+   96.338,
+   102.514,
+   107.529,
+   95.257,
+   104.277,
+   110.582,
+   114.329,
+   114.926,
+   114.229,
+   115.855,
+   114.329,
+   115.855,
+   115.855,
+   118.06,
+   123.405,
+   119.166,
+   121.06,
+   120.76,
+   123.405,
+   121.06,
+   121.66,
+   121.41,
+   122.01,
+   124.856,
+   126.029,
+   127.399,
+   131.014,
+   131.014,
+   114.229,
+   114.329,
+   131.789,
+   113.129,
+   114.726,
+   115.555,
+   116.355,
+   117.96,
+   123.105,
+   130.714,
+   116.772,
+   128.293,
+   127.016,
+   132.858,
+   132.958,
+   135.901,
+   132.958,
+   143.564,
+   143.564,
+   137.876,
+   144.217,
+   148.561,
+   151.604,
+   159.814,
+   132.858,
+   132.958,
+   137.237,
+   140.304,
+   146.574,
+   148.561,
+   151.604,
+   155.505,
+   143.564,
+   131.758,
+   133.553,
+   137.576,
+   140.004,
+   138.276,
+   143.464,
+   159.414,
+   135.901,
+   149.141,
+   153.125,
+   161.207,
+   10.498,
+   11.264,
+   23.015,
+   25.733,
+   24.921,
+   37.985,
+   38.775,
+   39.959,
+   50.491,
+   54.52,
+   56.497,
+   76.955,
+   73.783,
+   84.698,
+   85.557,
+   86.848,
+   97.091,
+   102.047,
+   126.029,
+   129.801,
+   131.278,
+   139.387,
+   142.18,
+   27.626,
+   90.681,
+   97.799,
+   133.753,
+   134.473,
+   144.217,
+   146.945,
+   159.105,
+   157.085,
+   162.681
+  ],
+  "cams": [
+   {
+    "t": 0,
+    "d": 0,
+    "z": 1.6
+   },
+   {
+    "t": 0.4,
+    "d": 3,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 4.3790000000000004,
+    "d": 0.9,
+    "z": 1.015683345780433
+   },
+   {
+    "t": 5.821,
+    "d": 0.7,
+    "z": 1.1297827648176801
+   },
+   {
+    "t": 8.293999999999999,
+    "d": 0.8,
+    "z": 1.0786516853932584
+   },
+   {
+    "t": 11.935,
+    "d": 0.9,
+    "z": 0.9927650829541594
+   },
+   {
+    "t": 12.857000000000001,
+    "d": 1.5,
+    "z": 0.9536423841059604
+   },
+   {
+    "t": 14.057000000000002,
+    "d": 0.9,
+    "z": 0.9801324503311258
+   },
+   {
+    "t": 15.801000000000002,
+    "d": 0.6,
+    "z": 2.1024965462204928
+   },
+   {
+    "t": 16.788,
+    "d": 0.7,
+    "z": 0.9752240536433717
+   },
+   {
+    "t": 20.532,
+    "d": 0.8,
+    "z": 0.9536423841059604
+   },
+   {
+    "t": 26.837999999999997,
+    "d": 0.8,
+    "z": 0.9536423841059604
+   },
+   {
+    "t": 27.625999999999998,
+    "d": 0.6,
+    "z": 0.7778463541843289
+   },
+   {
+    "t": 29.88,
+    "d": 0.9,
+    "z": 0.9536423841059604
+   },
+   {
+    "t": 35.317,
+    "d": 1.5,
+    "z": 1.1168454383501631
+   },
+   {
+    "t": 39.759,
+    "d": 0.6,
+    "z": 1.0779067466265275
+   },
+   {
+    "t": 40.1,
+    "d": 0.8,
+    "z": 1.286771888385262
+   },
+   {
+    "t": 41.674,
+    "d": 0.9,
+    "z": 1.0862552124329004
+   },
+   {
+    "t": 42.75,
+    "d": 0.6,
+    "z": 1.2258059689209106
+   },
+   {
+    "t": 44.19800000000001,
+    "d": 0.9,
+    "z": 1.142569082650538
+   },
+   {
+    "t": 53.256000000000014,
+    "d": 0.8,
+    "z": 1.0534568159219975
+   },
+   {
+    "t": 58.629000000000005,
+    "d": 0.6,
+    "z": 1.3855637182563072
+   },
+   {
+    "t": 61.03400000000001,
+    "d": 0.8,
+    "z": 0.9061936030749247
+   },
+   {
+    "t": 64.043,
+    "d": 1.5,
+    "z": 0.941987855271324
+   },
+   {
+    "t": 66.89900000000002,
+    "d": 0.7,
+    "z": 0.8373225380189546
+   },
+   {
+    "t": 69.61700000000002,
+    "d": 0.9,
+    "z": 0.9772727272727273
+   },
+   {
+    "t": 73.18600000000002,
+    "d": 0.8,
+    "z": 0.8688741721854304
+   },
+   {
+    "t": 77.81600000000003,
+    "d": 0.6,
+    "z": 2.6
+   },
+   {
+    "t": 79.46900000000002,
+    "d": 0.8,
+    "z": 0.9536423841059604
+   },
+   {
+    "t": 81.42600000000003,
+    "d": 0.9,
+    "z": 0.7937979688723542
+   },
+   {
+    "t": 84.49800000000002,
+    "d": 0.7,
+    "z": 1.0383155665357966
+   },
+   {
+    "t": 87.54800000000002,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 88.74800000000002,
+    "d": 0.8,
+    "z": 1.1008
+   },
+   {
+    "t": 92.98300000000003,
+    "d": 0.9,
+    "z": 1.1524163278240767
+   },
+   {
+    "t": 96.33800000000004,
+    "d": 0.8,
+    "z": 1.1008
+   },
+   {
+    "t": 102.51400000000002,
+    "d": 0.9,
+    "z": 1.6321383492272588
+   },
+   {
+    "t": 107.52900000000002,
+    "d": 0.9,
+    "z": 0.7507140690656067
+   },
+   {
+    "t": 113.12900000000002,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 114.72600000000003,
+    "d": 0.7,
+    "z": 1.6623376623376624
+   },
+   {
+    "t": 115.55500000000004,
+    "d": 0.7,
+    "z": 1.1555187555450956
+   },
+   {
+    "t": 116.35500000000003,
+    "d": 0.6,
+    "z": 1.5202702702702702
+   },
+   {
+    "t": 117.96000000000004,
+    "d": 0.8,
+    "z": 1.145876439728973
+   },
+   {
+    "t": 123.10500000000003,
+    "d": 0.9,
+    "z": 1.1083041537431397
+   },
+   {
+    "t": 130.71400000000003,
+    "d": 0.8,
+    "z": 1.0982532775843459
+   },
+   {
+    "t": 131.75800000000004,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 133.55300000000005,
+    "d": 0.8,
+    "z": 0.8438249207497805
+   },
+   {
+    "t": 137.57600000000002,
+    "d": 0.8,
+    "z": 0.8438249207497805
+   },
+   {
+    "t": 138.27600000000004,
+    "d": 0.6,
+    "z": 2.4
+   },
+   {
+    "t": 140.00400000000002,
+    "d": 0.8,
+    "z": 0.8649205437685249
+   },
+   {
+    "t": 143.46400000000003,
+    "d": 0.9,
+    "z": 0.8552293240676228
+   },
+   {
+    "t": 159.414,
+    "d": 0.9,
+    "z": 0.8805469951984531
+   }
+  ],
+  "chars": [
+   {
+    "name": "hero",
+    "pop": 0.2,
+    "poses": [
+     [
+      4.679,
+      "type"
+     ],
+     [
+      8.594,
+      "type"
+     ],
+     [
+      12.135,
+      "point"
+     ],
+     [
+      11.264,
+      "nod"
+     ]
+    ],
+    "walks": [],
+    "exprs": [
+     -1,
+     6.1209999999999996,
+     12.135
+    ]
+   },
+   {
+    "name": "foe",
+    "pop": 13.857000000000001,
+    "poses": [
+     [
+      16.001,
+      "point"
+     ],
+     [
+      17.113000000000003,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     13.957,
+     26.837999999999997
+    ],
+    "exprs": [
+     -1,
+     18.799
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 18.299,
+    "poses": [
+     [
+      18.799,
+      "shrug"
+     ],
+     [
+      30.18,
+      "point"
+     ],
+     [
+      24.921,
+      "nod"
+     ]
+    ],
+    "walks": [
+     18.399
+    ],
+    "exprs": [
+     -1,
+     35.244
+    ]
+   },
+   {
+    "name": "robot0",
+    "pop": 44.498000000000005,
+    "poses": [],
+    "walks": [
+     45.20700000000001
+    ],
+    "exprs": [
+     -1
+    ]
+   },
+   {
+    "name": "robot1",
+    "pop": 44.648,
+    "poses": [],
+    "walks": [
+     45.20700000000001
+    ],
+    "exprs": [
+     -1
+    ]
+   },
+   {
+    "name": "robot2",
+    "pop": 44.798,
+    "poses": [],
+    "walks": [
+     45.20700000000001
+    ],
+    "exprs": [
+     -1
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 36.417,
+    "poses": [
+     [
+      40.4,
+      "point"
+     ],
+     [
+      44.498000000000005,
+      "point"
+     ],
+     [
+      61.53400000000001,
+      "jump"
+     ]
+    ],
+    "walks": [
+     36.516999999999996
+    ],
+    "exprs": [
+     -1,
+     56.79700000000001,
+     61.33400000000001
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 65.14300000000001,
+    "poses": [
+     [
+      67.19900000000001,
+      "type"
+     ],
+     [
+      71.72800000000001,
+      "point"
+     ],
+     [
+      80.16900000000003,
+      "cheer"
+     ],
+     [
+      82.16700000000003,
+      "shrug"
+     ],
+     [
+      73.78300000000003,
+      "nod"
+     ],
+     [
+      85.55700000000003,
+      "nod"
+     ]
+    ],
+    "walks": [
+     65.24300000000001
+    ],
+    "exprs": [
+     -1,
+     79.86900000000003,
+     82.16700000000003
+    ]
+   },
+   {
+    "name": "planner",
+    "pop": 88.64800000000002,
+    "poses": [
+     [
+      94.36300000000003,
+      "hold"
+     ],
+     [
+      111.55800000000002,
+      "shrug"
+     ]
+    ],
+    "walks": [],
+    "exprs": [
+     -1,
+     99.95600000000002,
+     111.55800000000002
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 88.64800000000002,
+    "poses": [
+     [
+      96.63800000000003,
+      "loupe"
+     ],
+     [
+      107.89900000000002,
+      "shrug"
+     ]
+    ],
+    "walks": [],
+    "exprs": [
+     -1,
+     91.72500000000002
+    ]
+   },
+   {
+    "name": "planner6",
+    "pop": 114.22900000000003,
+    "poses": [
+     [
+      115.85500000000003,
+      "cheer"
+     ]
+    ],
+    "walks": [],
+    "exprs": [
+     -1,
+     115.85500000000003
+    ]
+   },
+   {
+    "name": "autovac",
+    "pop": 124.85600000000002,
+    "poses": [
+     [
+      126.02900000000002,
+      "nod"
+     ]
+    ],
+    "walks": [],
+    "exprs": [
+     -1
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 114.22900000000003,
+    "poses": [
+     [
+      114.92600000000003,
+      "type"
+     ],
+     [
+      131.78900000000004,
+      "point"
+     ],
+     [
+      131.27800000000002,
+      "nod"
+     ]
+    ],
+    "walks": [
+     114.32900000000002
+    ],
+    "exprs": [
+     -1
+    ]
+   },
+   {
+    "name": "foe",
+    "pop": 132.85800000000003,
+    "poses": [
+     [
+      135.90100000000004,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     132.95800000000006,
+     143.56400000000002
+    ],
+    "exprs": [
+     -1,
+     137.23700000000002
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 132.85800000000003,
+    "poses": [
+     [
+      137.23700000000002,
+      "shrug"
+     ],
+     [
+      140.30400000000003,
+      "point"
+     ],
+     [
+      146.574,
+      "point"
+     ],
+     [
+      148.561,
+      "point"
+     ],
+     [
+      151.604,
+      "point"
+     ],
+     [
+      155.505,
+      "cheer"
+     ],
+     [
+      157.08499999999998,
+      "nod"
+     ]
+    ],
+    "walks": [
+     132.95800000000006
+    ],
+    "exprs": [
+     -1,
+     155.505
+    ]
+   }
+  ],
+  "says": [
+   "La page Mes commandes met du temps à s'afficher. Vous avez la requête. Mais pourquoi est-elle lente ?",
+   "Ajoutez explain analyze devant : la base exécute la requête et raconte comment elle s'y est prise.",
+   "Facile : le cost, c'est le temps en millisecondes !",
+   "Non. Le cost est une estimation faite avant d'exécuter, en unités arbitraires. Le vrai temps, en millisecondes, est dans actual time.",
+   "Sur chaque ligne, comparez les rows : les lignes prévues, puis les lignes réelles. C'est le premier indice.",
+   "Un plan se lit de l'intérieur vers l'extérieur : le nœud le plus indenté travaille d'abord et passe ses lignes à son parent.",
+   "Tout en bas : une lecture de toute la table, par trois processus. Loops égale trois : les chiffres sont des moyennes par processus.",
+   "Chacun écarte six cent soixante-six mille lignes. Devinez : combien de lignes lues pour en garder huit ? | Deux millions. Toute la table, pour en garder huit.",
+   "Le remède : un index sur le client et la date. Comme un catalogue trié, il mène droit aux bons cartons.",
+   "Nouveau plan : un parcours du nouvel index. Exécution : zéro virgule seize milliseconde au lieu de quarante-huit.",
+   "Le prix : chaque écriture doit aussi mettre l'index à jour. On n'en crée pas un par colonne.",
+   "Deuxième requête, un rapport : plus d'une seconde. Le planificateur avait prévu une seule ligne.",
+   "Devinez combien il en a trouvé. | Trois cent mille. Il a choisi une boucle imbriquée, faite pour une ligne : trois cent mille allers-retours.",
+   "Pourquoi ? Trois cent mille commandes venaient d'être chargées, et ses statistiques n'étaient pas à jour.",
+   "Analyze orders rafraîchit les statistiques. Nouveau plan : une jointure par hachage. Cent soixante-seize millisecondes.",
+   "D'habitude, l'autovacuum s'en charge, après environ dix pour cent de lignes modifiées. Après un gros chargement, lancez-le vous-même.",
+   "On croit qu'explain analyze ne fait que décrire. Faux : il exécute. Pour une mise à jour, encadrez-le dans une transaction, puis annulez-la.",
+   "Vos réflexes : explain analyze sur la requête lente. Des lignes écartées par millions : il manque un index. Prévu loin du réel : lancez analyze.",
+   "Vous savez lire un plan. Depuis Postgres dix-huit, il affiche aussi les buffers : cache ou disque, ce sera l'étape suivante."
+  ]
+ },
+ "caps": [
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c1_25.jpg",
+   "t": 2.3975,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 712,
+    "cy": 294,
+    "area": 0.113
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c1_50.jpg",
+   "t": 4.195,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 715,
+    "cy": 297,
+    "area": 0.085
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c1_75.jpg",
+   "t": 5.9925,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 598,
+    "cy": 330,
+    "area": 0.164
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c2_25.jpg",
+   "t": 9.40675,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.106
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c2_50.jpg",
+   "t": 11.0235,
+   "ntext": 2,
+   "words": 6,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.106
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c2_75.jpg",
+   "t": 12.640250000000002,
+   "ntext": 2,
+   "words": 6,
+   "focus": {
+    "cx": 542,
+    "cy": 317,
+    "area": 0.09
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c3_25.jpg",
+   "t": 15.325000000000001,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 800,
+    "cy": 260,
+    "area": 0.397
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c3_50.jpg",
+   "t": 16.393,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.131
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "une ligne du plan (sortie réelle)"
+    },
+    {
+     "k": "cut",
+     "s": "Parallel Seq Scan on orders"
+    },
+    {
+     "k": "cut",
+     "s": "(cost=0.00..25555.67 rows=5 width=20)"
+    },
+    {
+     "k": "cut",
+     "s": "(actual time=13.111..38.517 rows=2.67 lo"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:foe"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c3_75.jpg",
+   "t": 17.461000000000002,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 420,
+    "cy": 298,
+    "area": 0.028
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.028
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c4_25.jpg",
+   "t": 21.06375,
+   "ntext": 5,
+   "words": 21,
+   "focus": {
+    "cx": 528,
+    "cy": 618,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c4_50.jpg",
+   "t": 23.5985,
+   "ntext": 5,
+   "words": 20,
+   "focus": {
+    "cx": 528,
+    "cy": 625,
+    "area": 0.031
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.031
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c4_75.jpg",
+   "t": 26.13325,
+   "ntext": 5,
+   "words": 20,
+   "focus": {
+    "cx": 528,
+    "cy": 625,
+    "area": 0.031
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.031
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c5_25.jpg",
+   "t": 30.68025,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 529,
+    "cy": 418,
+    "area": 0.036
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.036
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c5_50.jpg",
+   "t": 32.6925,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 827,
+    "cy": 344,
+    "area": 0.009
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.009
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c5_75.jpg",
+   "t": 34.704750000000004,
+   "ntext": 5,
+   "words": 23,
+   "focus": {
+    "cx": 1079,
+    "cy": 418,
+    "area": 0.013
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.013
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c6_25.jpg",
+   "t": 38.46725,
+   "ntext": 4,
+   "words": 12,
+   "focus": {
+    "cx": 294,
+    "cy": 199,
+    "area": 0.024
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.024
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c6_50.jpg",
+   "t": 40.2175,
+   "ntext": 4,
+   "words": 12,
+   "focus": {
+    "cx": 164,
+    "cy": 21,
+    "area": 0.016
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "-> Limit"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      164,
+      21
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.016
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c6_75.jpg",
+   "t": 41.96775,
+   "ntext": 4,
+   "words": 12,
+   "focus": {
+    "cx": 246,
+    "cy": 350,
+    "area": 0.265
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "-> Limit"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c7_25.jpg",
+   "t": 46.075250000000004,
+   "ntext": 3,
+   "words": 10,
+   "focus": {
+    "cx": 821,
+    "cy": 570,
+    "area": 0.274
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c7_50.jpg",
+   "t": 48.432500000000005,
+   "ntext": 3,
+   "words": 10,
+   "focus": {
+    "cx": 859,
+    "cy": 570,
+    "area": 0.256
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c7_75.jpg",
+   "t": 50.789750000000005,
+   "ntext": 4,
+   "words": 11,
+   "focus": {
+    "cx": 1202,
+    "cy": 115,
+    "area": 0.033
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1202,
+      115
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.033
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c8_25.jpg",
+   "t": 56.221000000000004,
+   "ntext": 5,
+   "words": 17,
+   "focus": {
+    "cx": 945,
+    "cy": 135,
+    "area": 0.069
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "-> Limit"
+    },
+    {
+     "k": "cut",
+     "s": "-> Sort"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c8_50.jpg",
+   "t": 59.29500000000001,
+   "ntext": 2,
+   "words": 8,
+   "focus": {
+    "cx": 872,
+    "cy": -67,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "-> Gather"
+    },
+    {
+     "k": "cut",
+     "s": "-> Parallel Seq Scan on orders"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      872,
+      -67
+     ]
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c8_75.jpg",
+   "t": 62.36900000000001,
+   "ntext": 6,
+   "words": 21,
+   "focus": {
+    "cx": 725,
+    "cy": 111,
+    "area": 0.048
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "-> Limit"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      725,
+      111
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.048
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c9_25.jpg",
+   "t": 67.42875000000001,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 792,
+    "cy": 386,
+    "area": 0.105
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c9",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c9_50.jpg",
+   "t": 69.41450000000002,
+   "ntext": 1,
+   "words": 7,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.105
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c9_75.jpg",
+   "t": 71.40025000000001,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 278,
+    "cy": 402,
+    "area": 0.083
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c10_25.jpg",
+   "t": 75.42100000000002,
+   "ntext": 3,
+   "words": 16,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.169
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c10_50.jpg",
+   "t": 77.45600000000002,
+   "ntext": 3,
+   "words": 16,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.166
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c10_75.jpg",
+   "t": 79.49100000000003,
+   "ntext": 2,
+   "words": 9,
+   "focus": {
+    "cx": 1239,
+    "cy": 326,
+    "area": 0.607
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Bitmap Index Scan on orders_customer_cre"
+    },
+    {
+     "k": "cut",
+     "s": "Execution Time: 0.159 ms"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c11_25.jpg",
+   "t": 83.38150000000003,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 1053,
+    "cy": 356,
+    "area": 0.085
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c11_50.jpg",
+   "t": 85.23700000000002,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 801,
+    "cy": 400,
+    "area": 0.254
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c11_75.jpg",
+   "t": 87.09250000000003,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 802,
+    "cy": 408,
+    "area": 0.327
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c12_25.jpg",
+   "t": 90.77700000000002,
+   "ntext": 3,
+   "words": 13,
+   "focus": {
+    "cx": 801,
+    "cy": 401,
+    "area": 0.324
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c12_50.jpg",
+   "t": 92.60600000000002,
+   "ntext": 3,
+   "words": 13,
+   "focus": {
+    "cx": 689,
+    "cy": 456,
+    "area": 0.011
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.011
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c12_75.jpg",
+   "t": 94.43500000000002,
+   "ntext": 3,
+   "words": 9,
+   "focus": {
+    "cx": 945,
+    "cy": 292,
+    "area": 0.06
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "(actual time=61.397..920.280 rows=300000"
+    },
+    {
+     "k": "cut",
+     "s": "Execution Time: 1077.072 ms"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c13_25.jpg",
+   "t": 99.10525000000003,
+   "ntext": 4,
+   "words": 14,
+   "focus": {
+    "cx": 794,
+    "cy": 552,
+    "area": 0.012
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.012
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c13_50.jpg",
+   "t": 101.94650000000001,
+   "ntext": 5,
+   "words": 16,
+   "focus": {
+    "cx": 794,
+    "cy": 576,
+    "area": 0.057
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.057
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c13_75.jpg",
+   "t": 104.78775000000002,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 769,
+    "cy": 565,
+    "area": 0.014
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.014
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c14_25.jpg",
+   "t": 109.35400000000003,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 830,
+    "cy": 514,
+    "area": 0.003
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "+300 000",
+     "v": 25.3
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.003
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c14_50.jpg",
+   "t": 111.07900000000002,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 887,
+    "cy": 462,
+    "area": 0.029
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "+300 000",
+     "v": 34.5
+    },
+    {
+     "k": "focus_small",
+     "v": 0.029
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c14_75.jpg",
+   "t": 112.80400000000003,
+   "ntext": 2,
+   "words": 3,
+   "focus": {
+    "cx": 335,
+    "cy": 329,
+    "area": 0.025
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "+300 000",
+     "v": 34.5
+    },
+    {
+     "k": "focus_small",
+     "v": 0.025
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c15_25.jpg",
+   "t": 116.69800000000002,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 852,
+    "cy": 359,
+    "area": 0.088
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c15",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c15_50.jpg",
+   "t": 118.86700000000002,
+   "ntext": 5,
+   "words": 17,
+   "focus": {
+    "cx": -54,
+    "cy": 383,
+    "area": 0.017
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "ANALYZE orders;"
+    },
+    {
+     "k": "cut",
+     "s": "rows=127586"
+    },
+    {
+     "k": "small",
+     "s": "rows=127586",
+     "v": 34.4
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -54,
+      383
+     ]
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c15_75.jpg",
+   "t": 121.03600000000003,
+   "ntext": 7,
+   "words": 19,
+   "focus": {
+    "cx": 508,
+    "cy": 129,
+    "area": 0.021
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "ANALYZE orders;"
+    },
+    {
+     "k": "cut",
+     "s": "rows=127586"
+    },
+    {
+     "k": "small",
+     "s": "rows=127586",
+     "v": 34.4
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "ANALYZE orders; | rows=127586 | Parallel Hash Join  (… rows=127586 …) | (actual … rows=100000.00 loops=3) | Execution Time: 176.475 ms | avant | après"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      508,
+      129
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.021
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c16_25.jpg",
+   "t": 125.69325000000003,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 666,
+    "cy": 523,
+    "area": 0.169
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "ANALYZE orders;"
+    },
+    {
+     "k": "focus_hidden"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c16_50.jpg",
+   "t": 128.18150000000003,
+   "ntext": 2,
+   "words": 8,
+   "focus": {
+    "cx": 666,
+    "cy": 111,
+    "area": 0.056
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "ANALYZE orders;"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      666,
+      111
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.056
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c16_75.jpg",
+   "t": 130.66975000000002,
+   "ntext": 2,
+   "words": 8,
+   "focus": {
+    "cx": 666,
+    "cy": 111,
+    "area": 0.056
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "ANALYZE orders;"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      666,
+      111
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.056
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c17_25.jpg",
+   "t": 135.75950000000003,
+   "ntext": 3,
+   "words": 11,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.202
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:foe"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c17_50.jpg",
+   "t": 138.36100000000005,
+   "ntext": 3,
+   "words": 11,
+   "focus": {
+    "cx": 793,
+    "cy": 617,
+    "area": 0.047
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.047
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:foe"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c17",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c17_75.jpg",
+   "t": 140.96250000000003,
+   "ntext": 3,
+   "words": 11,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.212
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:foe"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c18_25.jpg",
+   "t": 146.39175000000003,
+   "ntext": 2,
+   "words": 6,
+   "focus": {
+    "cx": 347,
+    "cy": 400,
+    "area": 0.082
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c18_50.jpg",
+   "t": 149.2195,
+   "ntext": 4,
+   "words": 12,
+   "focus": {
+    "cx": 826,
+    "cy": 400,
+    "area": 0.102
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "EXPLAIN (ANALYZE) | sur la requête lente | Rows Removed by Filter | → index"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c18_75.jpg",
+   "t": 152.04725000000002,
+   "ntext": 6,
+   "words": 18,
+   "focus": {
+    "cx": 1305,
+    "cy": 400,
+    "area": 0.089
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Rows Removed by Filter",
+     "v": 34.2
+    },
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "EXPLAIN (ANALYZE) | sur la requête lente | Rows Removed by Filter | → index | rows prévu ≠ réel | → ANALYZE"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c19_25.jpg",
+   "t": 157.06975,
+   "ntext": 6,
+   "words": 18,
+   "focus": {
+    "cx": 1305,
+    "cy": 400,
+    "area": 0.082
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Rows Removed by Filter",
+     "v": 34.2
+    },
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "EXPLAIN (ANALYZE) | sur la requête lente | Rows Removed by Filter | → index | rows prévu ≠ réel | → ANALYZE"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c19_50.jpg",
+   "t": 159.2645,
+   "ntext": 6,
+   "words": 18,
+   "focus": {
+    "cx": 1305,
+    "cy": 400,
+    "area": 0.082
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Rows Removed by Filter",
+     "v": 34.2
+    },
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "EXPLAIN (ANALYZE) | sur la requête lente | Rows Removed by Filter | → index | rows prévu ≠ réel | → ANALYZE"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c19_75.jpg",
+   "t": 161.45925,
+   "ntext": 7,
+   "words": 22,
+   "focus": {
+    "cx": 814,
+    "cy": 590,
+    "area": 0.088
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Rows Removed by Filter",
+     "v": 35.2
+    },
+    {
+     "k": "toomanytext",
+     "v": 7,
+     "s": "EXPLAIN (ANALYZE) | sur la requête lente | Rows Removed by Filter | → index | rows prévu ≠ réel | → ANALYZE | Buffers: shared hit=14104 read=1038"
+    }
+   ],
+   "moving": false
+  }
+ ],
+ "frozen": [
+  {
+   "t": 0,
+   "file": "frozen/f0000.png"
+  },
+  {
+   "t": 0.5,
+   "file": "frozen/f0001.png"
+  },
+  {
+   "t": 1,
+   "file": "frozen/f0002.png"
+  },
+  {
+   "t": 1.5,
+   "file": "frozen/f0003.png"
+  },
+  {
+   "t": 2,
+   "file": "frozen/f0004.png"
+  },
+  {
+   "t": 2.5,
+   "file": "frozen/f0005.png"
+  },
+  {
+   "t": 3,
+   "file": "frozen/f0006.png"
+  },
+  {
+   "t": 3.5,
+   "file": "frozen/f0007.png"
+  },
+  {
+   "t": 4,
+   "file": "frozen/f0008.png"
+  },
+  {
+   "t": 4.5,
+   "file": "frozen/f0009.png"
+  },
+  {
+   "t": 5,
+   "file": "frozen/f0010.png"
+  },
+  {
+   "t": 5.5,
+   "file": "frozen/f0011.png"
+  },
+  {
+   "t": 6,
+   "file": "frozen/f0012.png"
+  },
+  {
+   "t": 6.5,
+   "file": "frozen/f0013.png"
+  },
+  {
+   "t": 7,
+   "file": "frozen/f0014.png"
+  },
+  {
+   "t": 7.5,
+   "file": "frozen/f0015.png"
+  },
+  {
+   "t": 8,
+   "file": "frozen/f0016.png"
+  },
+  {
+   "t": 8.5,
+   "file": "frozen/f0017.png"
+  },
+  {
+   "t": 9,
+   "file": "frozen/f0018.png"
+  },
+  {
+   "t": 9.5,
+   "file": "frozen/f0019.png"
+  },
+  {
+   "t": 10,
+   "file": "frozen/f0020.png"
+  },
+  {
+   "t": 10.5,
+   "file": "frozen/f0021.png"
+  },
+  {
+   "t": 11,
+   "file": "frozen/f0022.png"
+  },
+  {
+   "t": 11.5,
+   "file": "frozen/f0023.png"
+  },
+  {
+   "t": 12,
+   "file": "frozen/f0024.png"
+  },
+  {
+   "t": 12.5,
+   "file": "frozen/f0025.png"
+  },
+  {
+   "t": 13,
+   "file": "frozen/f0026.png"
+  },
+  {
+   "t": 13.5,
+   "file": "frozen/f0027.png"
+  },
+  {
+   "t": 14,
+   "file": "frozen/f0028.png"
+  },
+  {
+   "t": 14.5,
+   "file": "frozen/f0029.png"
+  },
+  {
+   "t": 15,
+   "file": "frozen/f0030.png"
+  },
+  {
+   "t": 15.5,
+   "file": "frozen/f0031.png"
+  },
+  {
+   "t": 16,
+   "file": "frozen/f0032.png"
+  },
+  {
+   "t": 16.5,
+   "file": "frozen/f0033.png"
+  },
+  {
+   "t": 17,
+   "file": "frozen/f0034.png"
+  },
+  {
+   "t": 17.5,
+   "file": "frozen/f0035.png"
+  },
+  {
+   "t": 18,
+   "file": "frozen/f0036.png"
+  },
+  {
+   "t": 18.5,
+   "file": "frozen/f0037.png"
+  },
+  {
+   "t": 19,
+   "file": "frozen/f0038.png"
+  },
+  {
+   "t": 19.5,
+   "file": "frozen/f0039.png"
+  },
+  {
+   "t": 20,
+   "file": "frozen/f0040.png"
+  },
+  {
+   "t": 20.5,
+   "file": "frozen/f0041.png"
+  },
+  {
+   "t": 21,
+   "file": "frozen/f0042.png"
+  },
+  {
+   "t": 21.5,
+   "file": "frozen/f0043.png"
+  },
+  {
+   "t": 22,
+   "file": "frozen/f0044.png"
+  },
+  {
+   "t": 22.5,
+   "file": "frozen/f0045.png"
+  },
+  {
+   "t": 23,
+   "file": "frozen/f0046.png"
+  },
+  {
+   "t": 23.5,
+   "file": "frozen/f0047.png"
+  },
+  {
+   "t": 24,
+   "file": "frozen/f0048.png"
+  },
+  {
+   "t": 24.5,
+   "file": "frozen/f0049.png"
+  },
+  {
+   "t": 25,
+   "file": "frozen/f0050.png"
+  },
+  {
+   "t": 25.5,
+   "file": "frozen/f0051.png"
+  },
+  {
+   "t": 26,
+   "file": "frozen/f0052.png"
+  },
+  {
+   "t": 26.5,
+   "file": "frozen/f0053.png"
+  },
+  {
+   "t": 27,
+   "file": "frozen/f0054.png"
+  },
+  {
+   "t": 27.5,
+   "file": "frozen/f0055.png"
+  },
+  {
+   "t": 28,
+   "file": "frozen/f0056.png"
+  },
+  {
+   "t": 28.5,
+   "file": "frozen/f0057.png"
+  },
+  {
+   "t": 29,
+   "file": "frozen/f0058.png"
+  },
+  {
+   "t": 29.5,
+   "file": "frozen/f0059.png"
+  },
+  {
+   "t": 30,
+   "file": "frozen/f0060.png"
+  },
+  {
+   "t": 30.5,
+   "file": "frozen/f0061.png"
+  },
+  {
+   "t": 31,
+   "file": "frozen/f0062.png"
+  },
+  {
+   "t": 31.5,
+   "file": "frozen/f0063.png"
+  },
+  {
+   "t": 32,
+   "file": "frozen/f0064.png"
+  },
+  {
+   "t": 32.5,
+   "file": "frozen/f0065.png"
+  },
+  {
+   "t": 33,
+   "file": "frozen/f0066.png"
+  },
+  {
+   "t": 33.5,
+   "file": "frozen/f0067.png"
+  },
+  {
+   "t": 34,
+   "file": "frozen/f0068.png"
+  },
+  {
+   "t": 34.5,
+   "file": "frozen/f0069.png"
+  },
+  {
+   "t": 35,
+   "file": "frozen/f0070.png"
+  },
+  {
+   "t": 35.5,
+   "file": "frozen/f0071.png"
+  },
+  {
+   "t": 36,
+   "file": "frozen/f0072.png"
+  },
+  {
+   "t": 36.5,
+   "file": "frozen/f0073.png"
+  },
+  {
+   "t": 37,
+   "file": "frozen/f0074.png"
+  },
+  {
+   "t": 37.5,
+   "file": "frozen/f0075.png"
+  },
+  {
+   "t": 38,
+   "file": "frozen/f0076.png"
+  },
+  {
+   "t": 38.5,
+   "file": "frozen/f0077.png"
+  },
+  {
+   "t": 39,
+   "file": "frozen/f0078.png"
+  },
+  {
+   "t": 39.5,
+   "file": "frozen/f0079.png"
+  },
+  {
+   "t": 40,
+   "file": "frozen/f0080.png"
+  },
+  {
+   "t": 40.5,
+   "file": "frozen/f0081.png"
+  },
+  {
+   "t": 41,
+   "file": "frozen/f0082.png"
+  },
+  {
+   "t": 41.5,
+   "file": "frozen/f0083.png"
+  },
+  {
+   "t": 42,
+   "file": "frozen/f0084.png"
+  },
+  {
+   "t": 42.5,
+   "file": "frozen/f0085.png"
+  },
+  {
+   "t": 43,
+   "file": "frozen/f0086.png"
+  },
+  {
+   "t": 43.5,
+   "file": "frozen/f0087.png"
+  },
+  {
+   "t": 44,
+   "file": "frozen/f0088.png"
+  },
+  {
+   "t": 44.5,
+   "file": "frozen/f0089.png"
+  },
+  {
+   "t": 45,
+   "file": "frozen/f0090.png"
+  },
+  {
+   "t": 45.5,
+   "file": "frozen/f0091.png"
+  },
+  {
+   "t": 46,
+   "file": "frozen/f0092.png"
+  },
+  {
+   "t": 46.5,
+   "file": "frozen/f0093.png"
+  },
+  {
+   "t": 47,
+   "file": "frozen/f0094.png"
+  },
+  {
+   "t": 47.5,
+   "file": "frozen/f0095.png"
+  },
+  {
+   "t": 48,
+   "file": "frozen/f0096.png"
+  },
+  {
+   "t": 48.5,
+   "file": "frozen/f0097.png"
+  },
+  {
+   "t": 49,
+   "file": "frozen/f0098.png"
+  },
+  {
+   "t": 49.5,
+   "file": "frozen/f0099.png"
+  },
+  {
+   "t": 50,
+   "file": "frozen/f0100.png"
+  },
+  {
+   "t": 50.5,
+   "file": "frozen/f0101.png"
+  },
+  {
+   "t": 51,
+   "file": "frozen/f0102.png"
+  },
+  {
+   "t": 51.5,
+   "file": "frozen/f0103.png"
+  },
+  {
+   "t": 52,
+   "file": "frozen/f0104.png"
+  },
+  {
+   "t": 52.5,
+   "file": "frozen/f0105.png"
+  },
+  {
+   "t": 53,
+   "file": "frozen/f0106.png"
+  },
+  {
+   "t": 53.5,
+   "file": "frozen/f0107.png"
+  },
+  {
+   "t": 54,
+   "file": "frozen/f0108.png"
+  },
+  {
+   "t": 54.5,
+   "file": "frozen/f0109.png"
+  },
+  {
+   "t": 55,
+   "file": "frozen/f0110.png"
+  },
+  {
+   "t": 55.5,
+   "file": "frozen/f0111.png"
+  },
+  {
+   "t": 56,
+   "file": "frozen/f0112.png"
+  },
+  {
+   "t": 56.5,
+   "file": "frozen/f0113.png"
+  },
+  {
+   "t": 57,
+   "file": "frozen/f0114.png"
+  },
+  {
+   "t": 57.5,
+   "file": "frozen/f0115.png"
+  },
+  {
+   "t": 58,
+   "file": "frozen/f0116.png"
+  },
+  {
+   "t": 58.5,
+   "file": "frozen/f0117.png"
+  },
+  {
+   "t": 59,
+   "file": "frozen/f0118.png"
+  },
+  {
+   "t": 59.5,
+   "file": "frozen/f0119.png"
+  },
+  {
+   "t": 60,
+   "file": "frozen/f0120.png"
+  },
+  {
+   "t": 60.5,
+   "file": "frozen/f0121.png"
+  },
+  {
+   "t": 61,
+   "file": "frozen/f0122.png"
+  },
+  {
+   "t": 61.5,
+   "file": "frozen/f0123.png"
+  },
+  {
+   "t": 62,
+   "file": "frozen/f0124.png"
+  },
+  {
+   "t": 62.5,
+   "file": "frozen/f0125.png"
+  },
+  {
+   "t": 63,
+   "file": "frozen/f0126.png"
+  },
+  {
+   "t": 63.5,
+   "file": "frozen/f0127.png"
+  },
+  {
+   "t": 64,
+   "file": "frozen/f0128.png"
+  },
+  {
+   "t": 64.5,
+   "file": "frozen/f0129.png"
+  },
+  {
+   "t": 65,
+   "file": "frozen/f0130.png"
+  },
+  {
+   "t": 65.5,
+   "file": "frozen/f0131.png"
+  },
+  {
+   "t": 66,
+   "file": "frozen/f0132.png"
+  },
+  {
+   "t": 66.5,
+   "file": "frozen/f0133.png"
+  },
+  {
+   "t": 67,
+   "file": "frozen/f0134.png"
+  },
+  {
+   "t": 67.5,
+   "file": "frozen/f0135.png"
+  },
+  {
+   "t": 68,
+   "file": "frozen/f0136.png"
+  },
+  {
+   "t": 68.5,
+   "file": "frozen/f0137.png"
+  },
+  {
+   "t": 69,
+   "file": "frozen/f0138.png"
+  },
+  {
+   "t": 69.5,
+   "file": "frozen/f0139.png"
+  },
+  {
+   "t": 70,
+   "file": "frozen/f0140.png"
+  },
+  {
+   "t": 70.5,
+   "file": "frozen/f0141.png"
+  },
+  {
+   "t": 71,
+   "file": "frozen/f0142.png"
+  },
+  {
+   "t": 71.5,
+   "file": "frozen/f0143.png"
+  },
+  {
+   "t": 72,
+   "file": "frozen/f0144.png"
+  },
+  {
+   "t": 72.5,
+   "file": "frozen/f0145.png"
+  },
+  {
+   "t": 73,
+   "file": "frozen/f0146.png"
+  },
+  {
+   "t": 73.5,
+   "file": "frozen/f0147.png"
+  },
+  {
+   "t": 74,
+   "file": "frozen/f0148.png"
+  },
+  {
+   "t": 74.5,
+   "file": "frozen/f0149.png"
+  },
+  {
+   "t": 75,
+   "file": "frozen/f0150.png"
+  },
+  {
+   "t": 75.5,
+   "file": "frozen/f0151.png"
+  },
+  {
+   "t": 76,
+   "file": "frozen/f0152.png"
+  },
+  {
+   "t": 76.5,
+   "file": "frozen/f0153.png"
+  },
+  {
+   "t": 77,
+   "file": "frozen/f0154.png"
+  },
+  {
+   "t": 77.5,
+   "file": "frozen/f0155.png"
+  },
+  {
+   "t": 78,
+   "file": "frozen/f0156.png"
+  },
+  {
+   "t": 78.5,
+   "file": "frozen/f0157.png"
+  },
+  {
+   "t": 79,
+   "file": "frozen/f0158.png"
+  },
+  {
+   "t": 79.5,
+   "file": "frozen/f0159.png"
+  },
+  {
+   "t": 80,
+   "file": "frozen/f0160.png"
+  },
+  {
+   "t": 80.5,
+   "file": "frozen/f0161.png"
+  },
+  {
+   "t": 81,
+   "file": "frozen/f0162.png"
+  },
+  {
+   "t": 81.5,
+   "file": "frozen/f0163.png"
+  },
+  {
+   "t": 82,
+   "file": "frozen/f0164.png"
+  },
+  {
+   "t": 82.5,
+   "file": "frozen/f0165.png"
+  },
+  {
+   "t": 83,
+   "file": "frozen/f0166.png"
+  },
+  {
+   "t": 83.5,
+   "file": "frozen/f0167.png"
+  },
+  {
+   "t": 84,
+   "file": "frozen/f0168.png"
+  },
+  {
+   "t": 84.5,
+   "file": "frozen/f0169.png"
+  },
+  {
+   "t": 85,
+   "file": "frozen/f0170.png"
+  },
+  {
+   "t": 85.5,
+   "file": "frozen/f0171.png"
+  },
+  {
+   "t": 86,
+   "file": "frozen/f0172.png"
+  },
+  {
+   "t": 86.5,
+   "file": "frozen/f0173.png"
+  },
+  {
+   "t": 87,
+   "file": "frozen/f0174.png"
+  },
+  {
+   "t": 87.5,
+   "file": "frozen/f0175.png"
+  },
+  {
+   "t": 88,
+   "file": "frozen/f0176.png"
+  },
+  {
+   "t": 88.5,
+   "file": "frozen/f0177.png"
+  },
+  {
+   "t": 89,
+   "file": "frozen/f0178.png"
+  },
+  {
+   "t": 89.5,
+   "file": "frozen/f0179.png"
+  },
+  {
+   "t": 90,
+   "file": "frozen/f0180.png"
+  },
+  {
+   "t": 90.5,
+   "file": "frozen/f0181.png"
+  },
+  {
+   "t": 91,
+   "file": "frozen/f0182.png"
+  },
+  {
+   "t": 91.5,
+   "file": "frozen/f0183.png"
+  },
+  {
+   "t": 92,
+   "file": "frozen/f0184.png"
+  },
+  {
+   "t": 92.5,
+   "file": "frozen/f0185.png"
+  },
+  {
+   "t": 93,
+   "file": "frozen/f0186.png"
+  },
+  {
+   "t": 93.5,
+   "file": "frozen/f0187.png"
+  },
+  {
+   "t": 94,
+   "file": "frozen/f0188.png"
+  },
+  {
+   "t": 94.5,
+   "file": "frozen/f0189.png"
+  },
+  {
+   "t": 95,
+   "file": "frozen/f0190.png"
+  },
+  {
+   "t": 95.5,
+   "file": "frozen/f0191.png"
+  },
+  {
+   "t": 96,
+   "file": "frozen/f0192.png"
+  },
+  {
+   "t": 96.5,
+   "file": "frozen/f0193.png"
+  },
+  {
+   "t": 97,
+   "file": "frozen/f0194.png"
+  },
+  {
+   "t": 97.5,
+   "file": "frozen/f0195.png"
+  },
+  {
+   "t": 98,
+   "file": "frozen/f0196.png"
+  },
+  {
+   "t": 98.5,
+   "file": "frozen/f0197.png"
+  },
+  {
+   "t": 99,
+   "file": "frozen/f0198.png"
+  },
+  {
+   "t": 99.5,
+   "file": "frozen/f0199.png"
+  },
+  {
+   "t": 100,
+   "file": "frozen/f0200.png"
+  },
+  {
+   "t": 100.5,
+   "file": "frozen/f0201.png"
+  },
+  {
+   "t": 101,
+   "file": "frozen/f0202.png"
+  },
+  {
+   "t": 101.5,
+   "file": "frozen/f0203.png"
+  },
+  {
+   "t": 102,
+   "file": "frozen/f0204.png"
+  },
+  {
+   "t": 102.5,
+   "file": "frozen/f0205.png"
+  },
+  {
+   "t": 103,
+   "file": "frozen/f0206.png"
+  },
+  {
+   "t": 103.5,
+   "file": "frozen/f0207.png"
+  },
+  {
+   "t": 104,
+   "file": "frozen/f0208.png"
+  },
+  {
+   "t": 104.5,
+   "file": "frozen/f0209.png"
+  },
+  {
+   "t": 105,
+   "file": "frozen/f0210.png"
+  },
+  {
+   "t": 105.5,
+   "file": "frozen/f0211.png"
+  },
+  {
+   "t": 106,
+   "file": "frozen/f0212.png"
+  },
+  {
+   "t": 106.5,
+   "file": "frozen/f0213.png"
+  },
+  {
+   "t": 107,
+   "file": "frozen/f0214.png"
+  },
+  {
+   "t": 107.5,
+   "file": "frozen/f0215.png"
+  },
+  {
+   "t": 108,
+   "file": "frozen/f0216.png"
+  },
+  {
+   "t": 108.5,
+   "file": "frozen/f0217.png"
+  },
+  {
+   "t": 109,
+   "file": "frozen/f0218.png"
+  },
+  {
+   "t": 109.5,
+   "file": "frozen/f0219.png"
+  },
+  {
+   "t": 110,
+   "file": "frozen/f0220.png"
+  },
+  {
+   "t": 110.5,
+   "file": "frozen/f0221.png"
+  },
+  {
+   "t": 111,
+   "file": "frozen/f0222.png"
+  },
+  {
+   "t": 111.5,
+   "file": "frozen/f0223.png"
+  },
+  {
+   "t": 112,
+   "file": "frozen/f0224.png"
+  },
+  {
+   "t": 112.5,
+   "file": "frozen/f0225.png"
+  },
+  {
+   "t": 113,
+   "file": "frozen/f0226.png"
+  },
+  {
+   "t": 113.5,
+   "file": "frozen/f0227.png"
+  },
+  {
+   "t": 114,
+   "file": "frozen/f0228.png"
+  },
+  {
+   "t": 114.5,
+   "file": "frozen/f0229.png"
+  },
+  {
+   "t": 115,
+   "file": "frozen/f0230.png"
+  },
+  {
+   "t": 115.5,
+   "file": "frozen/f0231.png"
+  },
+  {
+   "t": 116,
+   "file": "frozen/f0232.png"
+  },
+  {
+   "t": 116.5,
+   "file": "frozen/f0233.png"
+  },
+  {
+   "t": 117,
+   "file": "frozen/f0234.png"
+  },
+  {
+   "t": 117.5,
+   "file": "frozen/f0235.png"
+  },
+  {
+   "t": 118,
+   "file": "frozen/f0236.png"
+  },
+  {
+   "t": 118.5,
+   "file": "frozen/f0237.png"
+  },
+  {
+   "t": 119,
+   "file": "frozen/f0238.png"
+  },
+  {
+   "t": 119.5,
+   "file": "frozen/f0239.png"
+  },
+  {
+   "t": 120,
+   "file": "frozen/f0240.png"
+  },
+  {
+   "t": 120.5,
+   "file": "frozen/f0241.png"
+  },
+  {
+   "t": 121,
+   "file": "frozen/f0242.png"
+  },
+  {
+   "t": 121.5,
+   "file": "frozen/f0243.png"
+  },
+  {
+   "t": 122,
+   "file": "frozen/f0244.png"
+  },
+  {
+   "t": 122.5,
+   "file": "frozen/f0245.png"
+  },
+  {
+   "t": 123,
+   "file": "frozen/f0246.png"
+  },
+  {
+   "t": 123.5,
+   "file": "frozen/f0247.png"
+  },
+  {
+   "t": 124,
+   "file": "frozen/f0248.png"
+  },
+  {
+   "t": 124.5,
+   "file": "frozen/f0249.png"
+  },
+  {
+   "t": 125,
+   "file": "frozen/f0250.png"
+  },
+  {
+   "t": 125.5,
+   "file": "frozen/f0251.png"
+  },
+  {
+   "t": 126,
+   "file": "frozen/f0252.png"
+  },
+  {
+   "t": 126.5,
+   "file": "frozen/f0253.png"
+  },
+  {
+   "t": 127,
+   "file": "frozen/f0254.png"
+  },
+  {
+   "t": 127.5,
+   "file": "frozen/f0255.png"
+  },
+  {
+   "t": 128,
+   "file": "frozen/f0256.png"
+  },
+  {
+   "t": 128.5,
+   "file": "frozen/f0257.png"
+  },
+  {
+   "t": 129,
+   "file": "frozen/f0258.png"
+  },
+  {
+   "t": 129.5,
+   "file": "frozen/f0259.png"
+  },
+  {
+   "t": 130,
+   "file": "frozen/f0260.png"
+  },
+  {
+   "t": 130.5,
+   "file": "frozen/f0261.png"
+  },
+  {
+   "t": 131,
+   "file": "frozen/f0262.png"
+  },
+  {
+   "t": 131.5,
+   "file": "frozen/f0263.png"
+  },
+  {
+   "t": 132,
+   "file": "frozen/f0264.png"
+  },
+  {
+   "t": 132.5,
+   "file": "frozen/f0265.png"
+  },
+  {
+   "t": 133,
+   "file": "frozen/f0266.png"
+  },
+  {
+   "t": 133.5,
+   "file": "frozen/f0267.png"
+  },
+  {
+   "t": 134,
+   "file": "frozen/f0268.png"
+  },
+  {
+   "t": 134.5,
+   "file": "frozen/f0269.png"
+  },
+  {
+   "t": 135,
+   "file": "frozen/f0270.png"
+  },
+  {
+   "t": 135.5,
+   "file": "frozen/f0271.png"
+  },
+  {
+   "t": 136,
+   "file": "frozen/f0272.png"
+  },
+  {
+   "t": 136.5,
+   "file": "frozen/f0273.png"
+  },
+  {
+   "t": 137,
+   "file": "frozen/f0274.png"
+  },
+  {
+   "t": 137.5,
+   "file": "frozen/f0275.png"
+  },
+  {
+   "t": 138,
+   "file": "frozen/f0276.png"
+  },
+  {
+   "t": 138.5,
+   "file": "frozen/f0277.png"
+  },
+  {
+   "t": 139,
+   "file": "frozen/f0278.png"
+  },
+  {
+   "t": 139.5,
+   "file": "frozen/f0279.png"
+  },
+  {
+   "t": 140,
+   "file": "frozen/f0280.png"
+  },
+  {
+   "t": 140.5,
+   "file": "frozen/f0281.png"
+  },
+  {
+   "t": 141,
+   "file": "frozen/f0282.png"
+  },
+  {
+   "t": 141.5,
+   "file": "frozen/f0283.png"
+  },
+  {
+   "t": 142,
+   "file": "frozen/f0284.png"
+  },
+  {
+   "t": 142.5,
+   "file": "frozen/f0285.png"
+  },
+  {
+   "t": 143,
+   "file": "frozen/f0286.png"
+  },
+  {
+   "t": 143.5,
+   "file": "frozen/f0287.png"
+  },
+  {
+   "t": 144,
+   "file": "frozen/f0288.png"
+  },
+  {
+   "t": 144.5,
+   "file": "frozen/f0289.png"
+  },
+  {
+   "t": 145,
+   "file": "frozen/f0290.png"
+  },
+  {
+   "t": 145.5,
+   "file": "frozen/f0291.png"
+  },
+  {
+   "t": 146,
+   "file": "frozen/f0292.png"
+  },
+  {
+   "t": 146.5,
+   "file": "frozen/f0293.png"
+  },
+  {
+   "t": 147,
+   "file": "frozen/f0294.png"
+  },
+  {
+   "t": 147.5,
+   "file": "frozen/f0295.png"
+  },
+  {
+   "t": 148,
+   "file": "frozen/f0296.png"
+  },
+  {
+   "t": 148.5,
+   "file": "frozen/f0297.png"
+  },
+  {
+   "t": 149,
+   "file": "frozen/f0298.png"
+  },
+  {
+   "t": 149.5,
+   "file": "frozen/f0299.png"
+  },
+  {
+   "t": 150,
+   "file": "frozen/f0300.png"
+  },
+  {
+   "t": 150.5,
+   "file": "frozen/f0301.png"
+  },
+  {
+   "t": 151,
+   "file": "frozen/f0302.png"
+  },
+  {
+   "t": 151.5,
+   "file": "frozen/f0303.png"
+  },
+  {
+   "t": 152,
+   "file": "frozen/f0304.png"
+  },
+  {
+   "t": 152.5,
+   "file": "frozen/f0305.png"
+  },
+  {
+   "t": 153,
+   "file": "frozen/f0306.png"
+  },
+  {
+   "t": 153.5,
+   "file": "frozen/f0307.png"
+  },
+  {
+   "t": 154,
+   "file": "frozen/f0308.png"
+  },
+  {
+   "t": 154.5,
+   "file": "frozen/f0309.png"
+  },
+  {
+   "t": 155,
+   "file": "frozen/f0310.png"
+  },
+  {
+   "t": 155.5,
+   "file": "frozen/f0311.png"
+  },
+  {
+   "t": 156,
+   "file": "frozen/f0312.png"
+  },
+  {
+   "t": 156.5,
+   "file": "frozen/f0313.png"
+  },
+  {
+   "t": 157,
+   "file": "frozen/f0314.png"
+  },
+  {
+   "t": 157.5,
+   "file": "frozen/f0315.png"
+  },
+  {
+   "t": 158,
+   "file": "frozen/f0316.png"
+  },
+  {
+   "t": 158.5,
+   "file": "frozen/f0317.png"
+  },
+  {
+   "t": 159,
+   "file": "frozen/f0318.png"
+  },
+  {
+   "t": 159.5,
+   "file": "frozen/f0319.png"
+  },
+  {
+   "t": 160,
+   "file": "frozen/f0320.png"
+  },
+  {
+   "t": 160.5,
+   "file": "frozen/f0321.png"
+  },
+  {
+   "t": 161,
+   "file": "frozen/f0322.png"
+  },
+  {
+   "t": 161.5,
+   "file": "frozen/f0323.png"
+  },
+  {
+   "t": 162,
+   "file": "frozen/f0324.png"
+  },
+  {
+   "t": 162.5,
+   "file": "frozen/f0325.png"
+  },
+  {
+   "t": 163,
+   "file": "frozen/f0326.png"
+  },
+  {
+   "t": 163.5,
+   "file": "frozen/f0327.png"
+  },
+  {
+   "t": 164,
+   "file": "frozen/f0328.png"
+  },
+  {
+   "t": 164.5,
+   "file": "frozen/f0329.png"
+  },
+  {
+   "t": 165,
+   "file": "frozen/f0330.png"
+  },
+  {
+   "t": 165.5,
+   "file": "frozen/f0331.png"
+  }
+ ],
+ "errors": [],
+ "mobileHScroll": false
+}

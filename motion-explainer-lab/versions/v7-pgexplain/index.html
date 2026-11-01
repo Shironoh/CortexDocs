@@ -1,0 +1,1200 @@
+<title>Lire un EXPLAIN ANALYZE</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+/* Layout: one cinema column — header, 16:9 stage, transport bar, chapters, legend. Single dark look by choice. */
+:root {
+  --ink: #050B1E; --night: #0B1A3A; --panel: #14295C; --line: #26407e;
+  --text: #F8FAFC; --muted: #9fb0d6; --amber: #FFB703; --cyan: #22D3EE; --rose: #EF476F;
+  --f-disp: Poppins, 'DejaVu Sans', system-ui, sans-serif; --f-mono: 'JetBrains Mono', 'DejaVu Sans Mono', monospace;
+  color-scheme: dark;
+}
+html, body { background: var(--ink); color: var(--text); }
+body { font-family: var(--f-disp); font-size: 15px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.app { max-width: 1180px; margin: 0 auto; padding-block: 18px 40px; display: grid; gap: 12px; }
+.top h1 { margin: 0; font-size: clamp(20px, 3vw, 30px); font-weight: 800; text-wrap: balance; letter-spacing: -.01em; }
+.eyebrow { color: var(--amber); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+.stage-wrap { width: 100%; }
+.stage { position: relative; width: 100%; aspect-ratio: 16/9; max-width: 100%; background: var(--night); border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px -20px #000; }
+.stage svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.subs { position: absolute; left: 50%; bottom: 3.2%; transform: translateX(-50%); max-width: 86%; text-align: center; background: rgba(5, 11, 30, .78);
+  color: var(--text); font-size: clamp(13px, 1.9vw, 22px); line-height: 1.35; padding: .35em .8em; border-radius: 10px; font-weight: 600; pointer-events: none; }
+.subs.empty, .subs-m.empty { visibility: hidden; }
+.nosubs .subs, .nosubs .subs-m { display: none; }
+.subs-m { display: none; text-align: center; font-size: 15px; line-height: 1.4; min-height: 3.2em; color: var(--text); font-weight: 600; }
+@media (max-width: 720px) { .subs { display: none; } .subs-m { display: block; } }
+.poster { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(180deg, transparent 40%, rgba(5, 11, 30, .55)); }
+.bigplay { display: flex; gap: .6em; align-items: center; font: 700 clamp(15px, 2.2vw, 22px) var(--f-disp); color: var(--ink); background: var(--amber); border: 0; border-radius: 999px; padding: .7em 1.4em; cursor: pointer; box-shadow: 0 10px 30px -8px var(--amber); }
+.bigplay:focus-visible, button:focus-visible, select:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
+.controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.controls button, .controls select { font: 600 14px var(--f-disp); color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 7px 11px; cursor: pointer; }
+.controls .pp { background: var(--amber); color: var(--ink); border-color: var(--amber); min-width: 46px; }
+.tg[aria-pressed="true"] { background: var(--cyan); color: var(--ink); border-color: var(--cyan); }
+.track { position: relative; flex: 1 1 200px; min-width: 120px; height: 10px; background: var(--panel); border-radius: 99px; cursor: pointer; }
+.bar { position: absolute; left: 0; top: 0; bottom: 0; background: var(--amber); border-radius: 99px; }
+.ticks i { position: absolute; top: -3px; width: 2px; height: 16px; background: var(--muted); opacity: .6; }
+.time { font: 600 13px var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.opts { display: flex; gap: 6px; flex-wrap: wrap; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.chapters { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 6px; }
+.chap { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; text-align: left; font: 600 13px var(--f-disp); color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; cursor: pointer; min-width: 0; }
+.chap .n { font: 700 12px var(--f-mono); color: var(--amber); }
+.chap .tt { min-width: 0; overflow-wrap: anywhere; }
+.chap .ts { font: 500 11px var(--f-mono); color: var(--muted); }
+.chap.on { background: var(--panel); border-color: var(--amber); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); }
+.lg { display: inline-flex; gap: 6px; align-items: center; }
+.lg i { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+.hint { color: var(--muted); font-size: 12px; margin: 0; }
+.hotspots { position: absolute; inset: 0; pointer-events: none; }
+.hot { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; display: flex; align-items: center; gap: 6px; background: rgba(5, 11, 30, .85); color: var(--text); border: 2px solid var(--cyan); border-radius: 999px; padding: 4px 10px 4px 4px; font: 600 12px var(--f-disp); cursor: pointer; }
+.hot .dot { width: 22px; height: 22px; border-radius: 50%; background: var(--cyan); color: var(--ink); display: grid; place-items: center; font-weight: 800; }
+.hotpanel { position: absolute; right: 2%; top: 4%; width: min(520px, 92%); max-height: 84%; overflow: auto; background: rgba(11, 26, 58, .97); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; z-index: 5; }
+.hp-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--amber); }
+.hp-head button { background: none; border: 0; color: var(--text); font-size: 18px; cursor: pointer; }
+.hp-body { font-size: 13px; line-height: 1.5; color: var(--text); }
+.hp-body pre { font: 12px/1.45 var(--f-mono); background: var(--ink); padding: 8px 10px; border-radius: 8px; overflow-x: auto; white-space: pre; }
+.hp-body code { font-family: var(--f-mono); color: var(--cyan); }
+.hp-body .tbd { color: var(--rose); font-weight: 700; }
+.quiz { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(5, 11, 30, .55); z-index: 6; }
+.quiz-card { width: min(560px, 92%); background: var(--night); border: 2px solid var(--amber); border-radius: 14px; padding: 14px 16px; display: grid; gap: 8px; }
+.quiz-k { color: var(--amber); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: 12px; }
+.quiz-card p { margin: 0; font-size: 16px; font-weight: 600; }
+.quiz-c { display: grid; gap: 6px; }
+.quiz-c button { text-align: left; font: 600 14px var(--f-disp); color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; cursor: pointer; }
+.quiz-c button.ok { background: #06D6A0; color: var(--ink); } .quiz-c button.ko { background: var(--rose); } .quiz-c button.dim { opacity: .5; }
+.quiz-why { font-weight: 500 !important; font-size: 14px !important; color: var(--muted); }
+.quiz-go { justify-self: end; font: 700 14px var(--f-disp); background: var(--amber); color: var(--ink); border: 0; border-radius: 10px; padding: 8px 14px; cursor: pointer; }
+.footer { color: var(--muted); font-size: 12px; line-height: 1.5; border-top: 1px solid var(--line); padding-top: 10px; }
+.footer a { color: var(--cyan); }
+/* export: stage fullscreen 1920x1080, no chrome */
+html.export, html.export body { margin: 0; padding: 0; overflow: hidden; background: #000; }
+html.export .app { max-width: none; padding: 0; display: block; }
+html.export .top, html.export .controls, html.export .chapters, html.export .legend, html.export .hint, html.export .subs-m,
+html.export .hotspots, html.export .quiz, html.export .hotpanel, html.export .poster, html.export .footer { display: none !important; }
+html.export .stage { width: 1920px; height: 1080px; border-radius: 0; box-shadow: none; }
+html.export .subs { display: block; font-size: 34px; bottom: 34px; }
+@media (prefers-reduced-motion: reduce) { .bigplay { box-shadow: none; } }
+html.export body.nosubs .subs { display: none !important; }
+
+</style>
+<div class="app">
+  <header class="top">
+    <div class="eyebrow">Motion explainer · skill v7 · technique, développeurs</div>
+    <h1>Lire un EXPLAIN ANALYZE · PostgreSQL 18</h1>
+  </header>
+  <div class="stage-wrap">
+    <div class="stage" id="stage">
+      <svg id="svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Lire un EXPLAIN ANALYZE · PostgreSQL 18"></svg>
+      <div id="hotspots" class="hotspots"></div>
+      <audio id="snd" preload="auto"></audio>
+      <div id="subs" class="subs empty" aria-live="polite"></div>
+      <div id="poster" class="poster">
+        <button id="bigplay" class="bigplay" type="button"><span class="tri">▶</span><span>Lire · <b id="dur"></b></span></button>
+      </div>
+      <div id="quiz" class="quiz" hidden>
+        <div class="quiz-card">
+          <div class="quiz-k">Devinez</div>
+          <p id="quizq"></p>
+          <div id="quizc" class="quiz-c"></div>
+          <p id="quizwhy" class="quiz-why" hidden></p>
+          <button id="quizgo" class="quiz-go" type="button" hidden>Continuer ▶</button>
+        </div>
+      </div>
+      <div id="hotpanel" class="hotpanel" hidden>
+        <div class="hp-head"><b id="hottitle"></b><button id="hotclose" type="button" aria-label="Fermer">✕</button></div>
+        <div id="hotbody" class="hp-body"></div>
+      </div>
+    </div>
+  </div>
+  <div id="subsM" class="subs-m empty"></div>
+  <div class="controls">
+    <button id="prev" type="button" aria-label="Scène précédente">⏮</button>
+    <button id="play" type="button" class="pp" aria-label="Lecture">▶</button>
+    <button id="next" type="button" aria-label="Scène suivante">⏭</button>
+    <div id="track" class="track"><div id="ticks" class="ticks"></div><div id="bar" class="bar"></div></div>
+    <span id="time" class="time">0:00</span>
+    <div class="opts">
+      <label class="sel"><span class="sr">Vitesse</span><select id="speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option></select></label>
+      <button id="cc" type="button" class="tg">CC</button>
+      <button id="voice" type="button" class="tg">Voix</button>
+      <button id="quizb" type="button" class="tg">Quiz</button>
+    </div>
+  </div>
+  <nav id="chapters" class="chapters" aria-label="Chapitres"></nav>
+  <div id="legend" class="legend"></div>
+  <p class="hint">Pause = points <b>+</b> cliquables pour le détail technique. Raccourcis : espace, ← →, Échap.</p>
+  <p class='footer'>v7-pgexplain, skill v7. Plans réels produits sur PostgreSQL 18.6 (2 000 000 de commandes, 200 000 clients ; script dans research/pg-explain/). Sources : documentation PostgreSQL 18 (Using EXPLAIN, Indexes, Populating a Database, Routine Vacuuming), notes de version 18.0. Voix Piper (siwis, tom), musique générée.</p>
+</div>
+<script>
+/* motion-explainer engine — pure function of time, no library.
+   Everything is created once; render(t) only mutates attributes. */
+'use strict';
+const NS = 'http://www.w3.org/2000/svg';
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, p) => a + (b - a) * p;
+const P = (t, a, d) => d <= 0 ? (t >= a ? 1 : 0) : clamp((t - a) / d);
+const E = {
+  lin: p => p, oc: p => 1 - (1 - p) ** 3, ic: p => p ** 3,
+  ioc: p => p < .5 ? 4 * p ** 3 : 1 - (-2 * p + 2) ** 3 / 2,
+  ob: p => 1 + 2.6 * (p - 1) ** 3 + 1.6 * (p - 1) ** 2,
+};
+let AMBIENT = true;
+let FRAMING = false; // true while resolving frame(): actors measured at full size, ignoring pop/out
+const WPS = 2.6;            // words per second (timing model)
+const GUESS_PAUSE = 1.5;    // silence for "devinez"
+
+function S(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs || {}) if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const words = s => s.replace(/\|/g, ' ').trim().split(/\s+/).filter(w => /[\p{L}\p{N}]/u.test(w)); // French spacing: lone ':' '?' are not words
+const norm = w => w.toLowerCase().replace(/œ/g, 'oe').replace(/æ/g, 'ae').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9_%@.\-]/g, '');
+
+/* ---------------- Actor ---------------- */
+class Actor {
+  constructor(el, o) { this.el = el; this.o = o; this.bx = o.x || 0; this.by = o.y || 0; this.bs = o.s == null ? 1 : o.s; this.br = o.r || 0;
+    if (o.dash) { this.len = o.len || (el.getTotalLength ? el.getTotalLength() : 1000); el.setAttribute('stroke-dasharray', this.len); } }
+  update(t) {
+    const o = this.o; let x = this.bx, y = this.by, s = this.bs, r = this.br, a = o.a == null ? 1 : o.a;
+    if (o.pop != null && !FRAMING) { const p = P(t, o.pop, .6); s *= p <= 0 ? 0.001 : .4 + .6 * E.ob(p); a *= Math.min(1, p * 3); }
+    if (o.fin && !FRAMING) { a *= E.oc(P(t, o.fin[0], o.fin[1])); }
+    for (const m of o.moves || []) { const p = (m[3] || E.ioc)(P(t, m[0], m[1]));
+      if (p <= 0) continue; const v = m[2];
+      if ('x' in v) x = lerp(x, v.x, p); if ('y' in v) y = lerp(y, v.y, p); if ('s' in v) s = lerp(s, v.s, p);
+      if ('r' in v) r = lerp(r, v.r, p); if ('a' in v) a *= lerp(1, v.a, p); }
+    if (o.out != null && !FRAMING) a *= 1 - P(t, o.out, o.outd || .4);
+    if (FRAMING) a = 1;
+    const st = { x, y, s, r, a };
+    if (o.fn) o.fn(st, t);
+    if (o.dash) this.el.setAttribute('stroke-dashoffset', this.len * (1 - E.ioc(P(t, o.dash[0], o.dash[1]))));
+    this.el.setAttribute('opacity', st.a.toFixed(3));
+    this.el.setAttribute('visibility', st.a > 0.001 ? 'visible' : 'hidden');
+    this.el.setAttribute('transform', `translate(${st.x.toFixed(2)} ${st.y.toFixed(2)}) rotate(${st.r.toFixed(2)}) scale(${Math.max(st.s, 0.0001).toFixed(4)})`);
+  }
+}
+
+/* ---------------- Characters ---------------- */
+const SHAPES = {
+  blob: 'M -58 0 C -66 -44 -56 -128 0 -130 C 56 -128 66 -44 58 0 Q 0 10 -58 0 Z',
+  robot: 'M -54 -8 Q -58 -120 -40 -122 L 40 -122 Q 58 -120 54 -8 Q 0 4 -54 -8 Z',
+};
+const MOUTH = {
+  neutral: 'M -13 -50 Q 0 -46 13 -50', happy: 'M -17 -54 Q 0 -36 17 -54', smug: 'M -15 -50 Q 5 -44 17 -56',
+  angry: 'M -14 -44 Q 0 -54 14 -44', surprise: 'M -8 -50 a 8 10 0 1 0 16 0 a 8 10 0 1 0 -16 0', worried: 'M -14 -46 Q -4 -52 4 -48 Q 10 -45 14 -48',
+};
+const VISEME = { // mouth shapes for lip-sync (tools/voice.py): M closed, F lip on teeth, O round, A open, E spread, C small
+  M: 'M -13 -50 Q 0 -49 13 -50 Q 0 -47 -13 -50 Z', F: 'M -14 -51 Q 0 -46 14 -51 Q 0 -53 -14 -51 Z',
+  O: 'M -9 -50 a 9 10 0 1 0 18 0 a 9 10 0 1 0 -18 0', A: 'M -15 -55 Q 0 -30 15 -55 Q 0 -58 -15 -55 Z',
+  E: 'M -18 -53 Q 0 -40 18 -53 Q 0 -56 -18 -53 Z', C: 'M -12 -52 Q 0 -43 12 -52 Q 0 -55 -12 -52 Z',
+};
+const BROWS = { // [left, right] as dy at inner, dy at outer
+  neutral: [[0, 0], [0, 0]], happy: [[-4, -4], [-4, -4]], smug: [[2, 2], [-10, -4]], angry: [[8, -4], [8, -4]],
+  surprise: [[-12, -10], [-12, -10]], worried: [[-8, 2], [-8, 2]],
+};
+class Char {
+  constructor(K, parent, o) {
+    this.K = K; this.o = o; this.x = o.x; this.y = o.y; this.s = o.s || 1; this.dir = o.dir || 1;
+    this.moves = []; this.poses = []; this.exprs = [[-1, o.expr || 'neutral']]; this.looks = [];
+    this.popT = o.pop; this.outT = null;
+    const col = o.color, dark = o.dark || '#0B1A3A';
+    this.root = S('g', { 'data-char': o.name || '' }, parent);
+    S('ellipse', { cx: 0, cy: 2, rx: 60, ry: 11, fill: '#000', opacity: .28 }, this.root);
+    this.body = S('g', {}, this.root);
+    const shape = SHAPES[o.shape || 'blob'];
+    S('path', { d: shape, fill: dark, opacity: .45, transform: 'translate(7 7)' }, this.body);
+    this.armL = S('path', { fill: 'none', stroke: o.limb || col, 'stroke-width': 13, 'stroke-linecap': 'round' }, this.body);
+    this.armR = S('path', { fill: 'none', stroke: o.limb || col, 'stroke-width': 13, 'stroke-linecap': 'round' }, this.body);
+    if (o.ghost) S('path', { d: shape, fill: col, 'fill-opacity': .12, stroke: col, 'stroke-width': 6, 'stroke-dasharray': '16 12' }, this.body);
+    else { S('path', { d: shape, fill: col }, this.body);
+      S('ellipse', { cx: -18, cy: -96, rx: 16, ry: 9, fill: '#fff', opacity: .25, transform: 'rotate(-25 -18 -96)' }, this.body); }
+    if (o.shape === 'robot') {
+      S('line', { x1: 0, y1: -122, x2: 0, y2: -150, stroke: col, 'stroke-width': 6 }, this.body);
+      this.bulb = S('circle', { cx: 0, cy: -154, r: 9, fill: '#FFB703' }, this.body);
+      S('rect', { x: -40, y: -108, width: 80, height: 52, rx: 14, fill: '#0B1A3A', opacity: .55 }, this.body);
+    }
+    if (o.mask) { S('path', { d: 'M -50 -100 Q 0 -112 50 -100 L 48 -72 Q 0 -80 -48 -72 Z', fill: '#2A0F2E' }, this.body);
+      S('path', { d: 'M -46 -118 Q 0 -150 46 -118 Q 0 -128 -46 -118 Z', fill: '#2A0F2E' }, this.body); }
+    this.face = S('g', { opacity: o.ghost ? .35 : 1 }, this.body);
+    this.eyes = S('g', {}, this.face);
+    this.pupils = [];
+    for (const ex of [-20, 20]) {
+      S('ellipse', { cx: ex, cy: -86, rx: 14, ry: 16, fill: '#fff' }, this.eyes);
+      this.pupils.push(S('circle', { cx: ex, cy: -86, r: 7, fill: '#0B1A3A' }, this.eyes));
+    }
+    this.browL = S('path', { stroke: '#0B1A3A', 'stroke-width': 5, 'stroke-linecap': 'round', fill: 'none' }, this.face);
+    this.browR = S('path', { stroke: '#0B1A3A', 'stroke-width': 5, 'stroke-linecap': 'round', fill: 'none' }, this.face);
+    this.mouth = S('path', { stroke: '#0B1A3A', 'stroke-width': 5, 'stroke-linecap': 'round', fill: '#0B1A3A', 'fill-opacity': 0 }, this.face);
+    if (o.headset) { S('path', { d: 'M -60 -84 Q -62 -150 0 -150 Q 62 -150 60 -84', stroke: '#0B1A3A', 'stroke-width': 8, fill: 'none' }, this.body);
+      S('rect', { x: -68, y: -98, width: 16, height: 30, rx: 6, fill: '#0B1A3A' }, this.body);
+      S('path', { d: 'M -60 -74 Q -50 -50 -22 -50', stroke: '#0B1A3A', 'stroke-width': 5, fill: 'none' }, this.body); }
+    this.feet = [-26, 26].map(fx => { const f = S('ellipse', { cx: fx, cy: -2, rx: 17, ry: 9, fill: o.limb || dark, opacity: o.ghost ? .3 : .9 }); this.root.insertBefore(f, this.body); return f; });
+    this.handL = S('circle', { r: 10, fill: o.limb || col }, this.body);
+    this.handR = S('circle', { r: 10, fill: o.limb || col }, this.body);
+    this.loupe = S('g', { visibility: 'hidden' }, this.body);
+    S('line', { x1: 0, y1: 0, x2: 24, y2: 30, stroke: '#7c5a3a', 'stroke-width': 10, 'stroke-linecap': 'round' }, this.loupe);
+    S('circle', { cx: -14, cy: -18, r: 30, fill: '#bfefff', 'fill-opacity': .25, stroke: '#F8FAFC', 'stroke-width': 7 }, this.loupe);
+    this.prop = null; this.talk = (K.R.talk || []).filter(q => q.who === (o.name || ''));
+  }
+  visemeAt(t) { // current mouth shape if this character is speaking at t, else null
+    for (const q of this.talk) { if (t < q.t || t > q.end) continue; let v = 'X';
+      for (const e of q.vis) { if (t - q.t >= e[0]) v = e[1]; else break; } return v === 'X' ? null : v; }
+    return null; }
+  /* timeline API (times absolute, coords in parent space) */
+  pop(t) { this.popT = t; this.K.ev(t, 'pop'); this.K.mark(t); return this; }
+  out(t) { this.outT = t; return this; }
+  walk(t, d, x, y) { this.moves.push({ t, d, x, y: y == null ? null : y, walk: true }); this.K.mark(t); return this; }
+  slide(t, d, x, y) { this.moves.push({ t, d, x, y: y == null ? null : y, walk: false }); this.K.mark(t); return this; }
+  pose(t, d, name, p) { this.poses.push({ t, d, name, p: p || {} }); if (name !== 'type') this.K.mark(t); return this; }
+  expr(t, e) { this.exprs.push([t, e]); this.exprs.sort((a, b) => a[0] - b[0]); return this; }
+  look(t, x, y) { this.looks.push([t, x, y]); this.looks.sort((a, b) => a[0] - b[0]); return this; }
+  hold(el) { this.prop = el; return this; }
+  posAt(t) {
+    let x = this.x, y = this.y, walking = 0, phase = 0;
+    for (const m of this.moves) { const p = E.ioc(P(t, m.t, m.d)); if (p <= 0) continue;
+      const nx = lerp(x, m.x, p), ny = m.y == null ? y : lerp(y, m.y, p);
+      if (m.walk && p > 0 && p < 1) { walking = Math.sin(Math.PI * p); phase = (t - m.t) * 9; this._wd = Math.sign(m.x - x) || this._wd; }
+      x = nx; y = ny; }
+    return { x, y, walking, phase };
+  }
+  update(t) {
+    const st = this.posAt(t);
+    let a = 1, sc = this.s;
+    if (this.popT != null && !FRAMING) { const p = P(t, this.popT, .6); sc *= p <= 0 ? 0.001 : .4 + .6 * E.ob(p); a = Math.min(1, p * 3); }
+    if (this.outT != null && !FRAMING) a *= 1 - P(t, this.outT, .4);
+    // expression
+    let ex = 'neutral'; for (const e of this.exprs) if (t >= e[0]) ex = e[1];
+    // pose
+    let rest = { L: [-62, -22], R: [62, -22] }, H = { L: rest.L.slice(), R: rest.R.slice() };
+    let bodyDy = 0, bodyRot = 0, sy = 1, sx = 1, loupe = 0, gaze = null;
+    if (st.walking > 0) { const sw = Math.sin(st.phase) * 22 * st.walking; H.L = [-58 + sw, -24]; H.R = [58 - sw, -24];
+      bodyDy -= Math.abs(Math.sin(st.phase)) * 10 * st.walking; bodyRot = 4 * st.walking * (this._wd || 1); }
+    for (const q of this.poses) {
+      const pin = P(t, q.t, .28), pout = 1 - P(t, q.t + q.d - .25, .25); let w = E.oc(Math.min(pin, pout));
+      if (t < q.t - .15 || t > q.t + q.d) continue;
+      if (t < q.t) { const ant = 1 - Math.abs((t - (q.t - .075)) / .075); bodyDy += 5 * ant; sy *= 1 - .04 * ant; continue; } // anticipation
+      const n = q.name, p = q.p;
+      if (n === 'point') { const dx = p.x - st.x, dy = p.y - (st.y - 70 * this.s); const L = Math.hypot(dx, dy) || 1;
+        const side = dx < 0 ? 'L' : 'R'; const sh = side === 'L' ? [-48, -62] : [48, -62];
+        const tgt = [sh[0] + dx / L * 82, sh[1] + dy / L * 82]; H[side] = [lerp(H[side][0], tgt[0], w), lerp(H[side][1], tgt[1], w)];
+        bodyRot += (dx < 0 ? -5 : 5) * w; gaze = [p.x, p.y]; }
+      if (n === 'loupe') { H.R = [lerp(H.R[0], 52, w), lerp(H.R[1], -50, w)]; loupe = w; }
+      if (n === 'shrug') { H.L = [lerp(H.L[0], -86, w), lerp(H.L[1], -96, w)]; H.R = [lerp(H.R[0], 86, w), lerp(H.R[1], -96, w)]; bodyDy += 6 * w; }
+      if (n === 'cheer') { H.L = [lerp(H.L[0], -74, w), lerp(H.L[1], -132, w)]; H.R = [lerp(H.R[0], 74, w), lerp(H.R[1], -132, w)];
+        bodyDy -= 14 * Math.abs(Math.sin((t - q.t) * 7)) * w; }
+      if (n === 'hold') { H.L = [lerp(H.L[0], -40, w), lerp(H.L[1], -70, w)]; H.R = [lerp(H.R[0], 40, w), lerp(H.R[1], -70, w)]; }
+      if (n === 'type') { const j = Math.sin((t - q.t) * 22); H.L = [lerp(H.L[0], -34, w), lerp(H.L[1], -26 + 6 * j, w)]; H.R = [lerp(H.R[0], 34, w), lerp(H.R[1], -26 - 6 * j, w)]; }
+      if (n === 'jump') { const k = P(t, q.t, Math.min(.7, q.d)); const h = Math.sin(Math.PI * k);
+        bodyDy -= 48 * h; sy *= k < .12 ? 1 - .2 * Math.sin(k / .12 * Math.PI) : 1 + .1 * h; sx = 2 - sy;
+        H.L = [lerp(H.L[0], -80, w), lerp(H.L[1], -118, w)]; H.R = [lerp(H.R[0], 80, w), lerp(H.R[1], -118, w)]; }
+      if (n === 'nod') { bodyDy += 7 * Math.abs(Math.sin((t - q.t) * 9)) * w; }
+      if (n === 'lean') { bodyRot += (p.dir || 1) * 10 * w; }
+      if (n === 'walkcycle') { const sw = Math.sin((t - q.t) * 9) * 22 * w; H.L = [-58 + sw, -24]; H.R = [58 - sw, -24]; bodyDy -= Math.abs(Math.sin((t - q.t) * 9)) * 10 * w; }
+    }
+    // feet: step during walks, settle otherwise
+    const fl = st.walking > 0 ? Math.max(0, Math.sin(st.phase)) * 14 * st.walking : 0, fr = st.walking > 0 ? Math.max(0, -Math.sin(st.phase)) * 14 * st.walking : 0;
+    this.feet[0].setAttribute('cy', (-2 - fl).toFixed(1)); this.feet[1].setAttribute('cy', (-2 - fr).toFixed(1));
+    // speaking: viseme mouth + small head bob on open vowels
+    const vis = this.visemeAt(t); if (vis === 'A' || vis === 'O') bodyDy -= 2;
+    // gaze
+    if (!gaze) { let L = null; for (const l of this.looks) if (t >= l[0]) L = l; if (L && L[1] != null) gaze = [L[1], L[2]]; }
+    let px = 0, py = 0;
+    if (!gaze && AMBIENT) { const k = Math.floor((t + this.x * .01) / 1.7); px = 3 * Math.sin(k * 12.9898 + this.x) ; py = 2 * Math.sin(k * 78.233); }
+    if (gaze) { const dx = gaze[0] - st.x, dy = gaze[1] - (st.y - 86 * this.s); const L = Math.hypot(dx, dy) || 1; px = dx / L * 6; py = dy / L * 6; }
+    // ambient: breathing + blink
+    let blink = 1;
+    if (AMBIENT) { sy *= 1 + .018 * Math.sin(t * 2.3 + this.x); const bt = (t + (this.x % 3)) % 3.7; if (bt < .12) blink = .12; }
+    // write
+    this.root.setAttribute('opacity', a.toFixed(3));
+    this.root.setAttribute('visibility', a > .001 ? 'visible' : 'hidden');
+    this.root.setAttribute('transform', `translate(${st.x.toFixed(1)} ${st.y.toFixed(1)}) scale(${(sc * this.dir).toFixed(4)} ${sc.toFixed(4)})`);
+    this.body.setAttribute('transform', `translate(0 ${bodyDy.toFixed(1)}) rotate(${bodyRot.toFixed(1)} 0 -40) scale(${sx.toFixed(3)} ${sy.toFixed(3)})`);
+    const ddir = this.dir; px *= ddir;
+    this.pupils[0].setAttribute('cx', -20 + px); this.pupils[0].setAttribute('cy', -86 + py);
+    this.pupils[1].setAttribute('cx', 20 + px); this.pupils[1].setAttribute('cy', -86 + py);
+    this.eyes.setAttribute('transform', `translate(0 ${-86 * (1 - blink)}) scale(1 ${blink})`);
+    const b = BROWS[ex] || BROWS.neutral;
+    this.browL.setAttribute('d', `M -34 ${-108 + b[0][1]} L -8 ${-108 + b[0][0]}`);
+    this.browR.setAttribute('d', `M 8 ${-108 + b[1][0]} L 34 ${-108 + b[1][1]}`);
+    this.mouth.setAttribute('d', vis ? VISEME[vis] : (MOUTH[ex] || MOUTH.neutral));
+    this.mouth.setAttribute('fill-opacity', vis && vis !== 'M' ? 1 : (ex === 'surprise' ? 1 : 0));
+    const arm = (el, sh, h) => { const mx = (sh[0] + h[0]) / 2 + (h[0] > 0 ? 8 : -8), my = (sh[1] + h[1]) / 2 + 10;
+      el.setAttribute('d', `M ${sh[0]} ${sh[1]} Q ${mx} ${my} ${h[0]} ${h[1]}`); };
+    arm(this.armL, [-46, -60], H.L); arm(this.armR, [46, -60], H.R);
+    this.handL.setAttribute('cx', H.L[0]); this.handL.setAttribute('cy', H.L[1]);
+    this.handR.setAttribute('cx', H.R[0]); this.handR.setAttribute('cy', H.R[1]);
+    this.loupe.setAttribute('visibility', loupe > .02 && a > .001 ? 'visible' : 'hidden');
+    this.loupe.setAttribute('transform', `translate(${H.R[0] - 26} ${H.R[1] - 26}) scale(${(.5 + .5 * loupe).toFixed(3)})`);
+    if (this.bulb) this.bulb.setAttribute('opacity', AMBIENT ? (.6 + .4 * Math.sin(t * 5)).toFixed(2) : 1);
+    if (this.prop) { const hx = (H.L[0] + H.R[0]) / 2, hy = Math.min(H.L[1], H.R[1]) - 20;
+      this.prop.setAttribute('transform', `translate(${(st.x + hx * sc * this.dir).toFixed(1)} ${(st.y + (hy + bodyDy) * sc).toFixed(1)})`); }
+  }
+}
+
+/* ---------------- Episode runtime ---------------- */
+function Runtime(ep, svg) {
+  const R = { ep, svg, actors: [], chars: [], camMoves: [], frames: [], focusKeys: [], hots: [], events: [], marks: [], fx: [] };
+  // ---- timing
+  let t0 = ep.lead || 0.6;
+  const TM = ep.timing && ep.timing.cues ? ep.timing.cues : null; // real narration (tools/voice.py)
+  R.voiced = !!TM; R.talk = [];
+  const cues = ep.cues.map(c => {
+    const parts = c.say.split('|'); const w1 = words(parts[0]).length, wAll = words(c.say).length;
+    const guess = parts.length > 1; const tm = TM && TM[c.id];
+    if (tm && tm.parts.length === parts.length) {
+      // cue = lead-in, spoken part(s) with their measured length, guess silence, breath after the idea
+      const pre = ep.voicePre == null ? .2 : ep.voicePre, breath = c.breath == null ? (ep.breath == null ? .45 : ep.breath) : c.breath;
+      let t = t0 + pre, pauseAt = null; const wt = [], ps = [];
+      tm.parts.forEach((p, i) => {
+        if (i === 1) { pauseAt = t + .1; t = pauseAt + GUESS_PAUSE; }
+        for (const w of p.words) wt.push([t + w[0], t + w[1]]);
+        ps.push({ t, dur: p.dur, wav: p.wav, vis: p.vis }); if (c.who) R.talk.push({ who: c.who, t, vis: p.vis, end: t + p.dur });
+        t += p.dur; });
+      const dur = Math.max(2.2, t - t0 + breath) + (c.extra || 0);
+      const o = { ...c, start: t0, dur, end: t0 + dur, guess, w1, wAll, pauseAt, wt: wt.length === wAll ? wt : null, parts: ps };
+      t0 += dur; return o;
+    }
+    const dur = Math.max(3.6, wAll / WPS + 1.0) + (guess ? GUESS_PAUSE : 0) + (c.extra || 0);
+    const o = { ...c, start: t0, dur, end: t0 + dur, guess, w1, wAll, pauseAt: guess ? t0 + w1 / WPS : null };
+    t0 += dur; return o;
+  });
+  // scenes: start = first cue start minus travel lead
+  const scenes = ep.scenes.map(s => { const cs = cues.filter(c => c.sc === s.id); return { ...s, start: cs[0].start, end: cs[cs.length - 1].end, cues: cs }; });
+  R.duration = t0 + (ep.tail || 1.5);
+  for (const c of cues) if (c.guess) R.events.push({ t: +(c.pauseAt + GUESS_PAUSE).toFixed(3), type: 'reveal' }); // semantic sound: reveal chime
+  R.cues = cues; R.scenes = scenes;
+  const cueById = Object.fromEntries(cues.map(c => [c.id, c]));
+  // ---- kit
+  const K = R.K = {}; K.R = R;
+  K.S = S; K.E = E; K.P = P; K.lerp = lerp; K.clamp = clamp; K.Z = ep.zones;
+  K.cue = id => { const c = cueById[id]; if (!c) throw new Error('cue inconnu ' + id); return c; };
+  K.T = (id, word, n = 0, after = false) => {
+    const c = K.cue(id); if (word == null) return c.start; if (word === '$end') return c.end;
+    const ws = words(c.say); const target = norm(word); let k = -1, seen = 0;
+    for (let i = 0; i < ws.length; i++) if (norm(ws[i]).startsWith(target) || norm(ws[i].split(/['’]/).pop()).startsWith(target)) { /* « l'azote » matches azote */ if (seen === n) { k = i; break; } seen++; }
+    if (k < 0) throw new Error(`mot "${word}" absent du cue ${id}`);
+    if (c.wt) return after ? c.wt[k][1] : c.wt[k][0];
+    const idx = after ? k + 1 : k;
+    let t = c.start + idx / WPS; if (c.guess && idx >= c.w1) t += GUESS_PAUSE; return t;
+  };
+  K.reveal = id => { const c = K.cue(id); return c.pauseAt + GUESS_PAUSE; };
+  K.sc = id => scenes.find(s => s.id === id);
+  K.layers = {};
+  K.A = (el, o) => { const a = new Actor(el, o || {}); R.actors.push(a);
+    if (o && o.pop != null) { K.ev(o.pop, 'pop'); K.mark(o.pop); }
+    if (o && o.fin) K.mark(o.fin[0]); if (o && o.out != null) K.mark(o.out); if (o && o.dash) K.mark(o.dash[0]);
+    for (const m of (o && o.moves) || []) K.mark(m[0]);
+    return a; };
+  K.g = (parent, attrs) => S('g', attrs || {}, parent);
+  K.tx = (parent, x, y, str, o = {}) => { // o.deco: a lone symbol (?, €, !) — not a text to read, not counted as a text block
+    const e = S('text', { x, y, 'font-size': o.size || 48, fill: o.fill || '#F8FAFC', 'font-weight': o.weight || 600,
+      'text-anchor': o.anchor || 'middle', 'font-family': o.mono ? "'JetBrains Mono','DejaVu Sans Mono',monospace" : "Poppins,'DejaVu Sans',sans-serif",
+      'data-txt': o.deco ? null : (o.mono ? 'code' : 'txt'), 'dominant-baseline': 'middle', 'letter-spacing': o.ls || null }, parent);
+    if (o.mono) e.setAttribute('style', 'white-space:pre');
+    if (o.bleed) e.setAttribute('data-bleed', '1');
+    if (o.block) e.setAttribute('data-block', o.block); // lines of one artifact panel = one text block
+    if (o.axis) e.setAttribute('data-axis', '1'); // chart reading aid (axis title, tick): counted as one text block with its siblings
+    e.textContent = str; return e;
+  };
+  K.char = (parent, o) => { const c = new Char(K, parent, o); R.chars.push(c); return c; };
+  K.cam = (t, d, x, y, z) => { R.camMoves.push({ t, d, x, y, z }); if (d > 0.9) K.ev(t, 'whoosh'); K.mark(t); };
+  // frame(t, d, targets, part, o): camera computed from the subject's bounding box at arrival time.
+  // part = share of the frame taken by the subject's dominant dimension (ensemble ~.9, travail ~.55, gros plan ~.7).
+  // Subject is centred at screen y=400 and kept inside y 60..740 (subtitle band free). o.focus adds a spotlight key.
+  K.frame = (t, d, targets, part = .55, o = {}) => { R.frames.push({ t, d, targets: [].concat(targets), part, o }); if (d > 0.9) K.ev(t, 'whoosh'); K.mark(t);
+    if (o.focus !== false) K.focus(t + Math.min(d, .4), [].concat(targets)[0], o.r || null); };
+  K.focus = (t, target, r) => R.focusKeys.push({ t, target: target && target.root ? target.root : target, r: r || null });
+  K.hot = (h) => R.hots.push(h);
+  K.ev = (t, type) => R.events.push({ t: +t.toFixed(3), type });
+  K.mark = t => R.marks.push(+t.toFixed(3));
+  K.fx = fn => R.fx.push(fn); // custom per-frame function (t) => void
+  return R;
+}
+function worldBBox(R, els) {
+  const main = R.K.layers.main, inv = main.getCTM().inverse(); let x1 = 1e9, y1 = 1e9, x2 = -1e9, y2 = -1e9;
+  for (let el of els) { if (el && el.root) el = el.root; if (!el) continue; let bb; try { bb = el.getBBox(); } catch (e) { continue; }
+    if (!bb || (bb.width === 0 && bb.height === 0)) continue; const m = inv.multiply(el.getCTM());
+    for (const [px, py] of [[bb.x, bb.y], [bb.x + bb.width, bb.y], [bb.x, bb.y + bb.height], [bb.x + bb.width, bb.y + bb.height]]) {
+      const p = R.svg.createSVGPoint(); p.x = px; p.y = py; const q = p.matrixTransform(m);
+      x1 = Math.min(x1, q.x); y1 = Math.min(y1, q.y); x2 = Math.max(x2, q.x); y2 = Math.max(y2, q.y); } }
+  return x1 > x2 ? null : { x: x1, y: y1, w: x2 - x1, h: y2 - y1 };
+}
+function camFor(bb, part, o = {}) {
+  let z = part / Math.max(bb.w / 1600, bb.h / 900); z = Math.min(z, 680 / bb.h, 1480 / bb.w, o.zmax || 3); if (o.zmin) z = Math.max(z, o.zmin);
+  return { x: bb.x + bb.w / 2 + (o.dx || 0), y: bb.y + bb.h / 2 + 50 / z + (o.dy || 0), z };
+}
+
+function camAt(R, t) {
+  const m0 = R.camMoves[0]; let x = m0.x, y = m0.y, z = m0.z;
+  for (const m of R.camMoves) { const p = E.ioc(P(t, m.t, m.d)); if (p <= 0) break;
+    x = lerp(x, m.x, p); y = lerp(y, m.y, p); z = Math.exp(lerp(Math.log(z), Math.log(m.z), p)); }
+  return { x, y, z };
+}
+function worldCenter(R, el) {
+  const bb = el.getBBox(); const m = el.getCTM(), base = R.K.layers.main.getCTM();
+  if (!m || !base) return [0, 0];
+  const pt = R.svg.createSVGPoint(); pt.x = bb.x + bb.width / 2; pt.y = bb.y + bb.height / 2;
+  const p = pt.matrixTransform(base.inverse().multiply(m)); return [p.x, p.y];
+}
+function focusAt(R, t) {
+  let f = null; for (const k of R.focusKeys) if (t >= k.t) f = k; return f;
+}
+
+/* Flat vector icon kit: each icon drawn around (0,0), ~100 units, returns <g>. Shared by episodes. */
+'use strict';
+const ICO = {
+  crown(g, c = '#FFB703') { S('path', { d: 'M -46 22 L -52 -26 L -22 2 L 0 -36 L 22 2 L 52 -26 L 46 22 Z', fill: c }, g); S('rect', { x: -48, y: 22, width: 96, height: 16, rx: 5, fill: c }, g);
+    S('path', { d: 'M -46 22 L -52 -26 L -22 2 Z', fill: '#000', opacity: .12 }, g); for (const x of [-52, 0, 52]) S('circle', { cx: x, cy: x ? -28 : -38, r: 7, fill: '#fff', opacity: .9 }, g); },
+  key(g, c = '#FB8500') { S('circle', { cx: -34, cy: 0, r: 26, fill: c }, g); S('circle', { cx: -34, cy: 0, r: 10, fill: '#0B1A3A' }, g);
+    S('rect', { x: -12, y: -8, width: 66, height: 16, rx: 6, fill: c }, g); S('rect', { x: 30, y: 4, width: 10, height: 18, rx: 3, fill: c }, g); S('rect', { x: 44, y: 4, width: 10, height: 13, rx: 3, fill: c }, g); },
+  laptop(g, c = '#22D3EE') { S('rect', { x: -44, y: -40, width: 88, height: 58, rx: 8, fill: '#0B1A3A', stroke: c, 'stroke-width': 7 }, g); S('path', { d: 'M -58 22 L 58 22 L 50 36 L -50 36 Z', fill: c }, g);
+    S('rect', { x: -30, y: -26, width: 40, height: 7, rx: 3, fill: c, opacity: .7 }, g); S('rect', { x: -30, y: -12, width: 56, height: 7, rx: 3, fill: c, opacity: .4 }, g); },
+  terminal(g, c = '#06D6A0') { S('rect', { x: -48, y: -38, width: 96, height: 76, rx: 10, fill: '#0B1A3A', stroke: c, 'stroke-width': 7 }, g);
+    S('path', { d: 'M -30 -14 L -14 0 L -30 14', fill: 'none', stroke: c, 'stroke-width': 7, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g); S('rect', { x: -6, y: 12, width: 28, height: 7, rx: 3, fill: c }, g); },
+  gear(g, c = '#A78BFA') { for (let i = 0; i < 8; i++) S('rect', { x: -9, y: -48, width: 18, height: 22, rx: 4, fill: c, transform: `rotate(${i * 45})` }, g);
+    S('circle', { r: 32, fill: c }, g); S('circle', { r: 13, fill: '#0B1A3A' }, g); },
+  person(g, c = '#F8FAFC') { S('circle', { cx: 0, cy: -22, r: 20, fill: c }, g); S('path', { d: 'M -34 34 Q -34 2 0 2 Q 34 2 34 34 Z', fill: c }, g); },
+  clock(g, c = '#F8FAFC') { S('circle', { r: 38, fill: 'none', stroke: c, 'stroke-width': 8 }, g); S('path', { d: 'M 0 -22 L 0 0 L 16 10', fill: 'none', stroke: c, 'stroke-width': 7, 'stroke-linecap': 'round' }, g); },
+  pin(g, c = '#F8FAFC') { S('path', { d: 'M 0 44 C -10 22 -34 4 -34 -14 A 34 34 0 1 1 34 -14 C 34 4 10 22 0 44 Z', fill: c }, g); S('circle', { cx: 0, cy: -14, r: 12, fill: '#0B1A3A' }, g); },
+  steps(g, c = '#EF476F') { for (const [x, y, r] of [[-26, 18, -12], [8, -2, 10], [-10, -30, -12], [26, -42, 10]]) { S('ellipse', { cx: x, cy: y, rx: 10, ry: 15, fill: c, transform: `rotate(${r} ${x} ${y})` }, g); } },
+  wrench(g, c = '#F8FAFC') { S('path', { d: 'M -36 30 L 8 -14 A 22 22 0 1 1 22 0 L -22 44 Z', fill: c }, g); S('circle', { cx: 24, cy: -20, r: 8, fill: '#0B1A3A' }, g); },
+  plusminus(g, c = '#06D6A0') { S('rect', { x: -40, y: -10, width: 80, height: 20, rx: 6, fill: c }, g); S('rect', { x: -10, y: -40, width: 20, height: 80, rx: 6, fill: c }, g); },
+  doc(g, c = '#F8FAFC') { S('path', { d: 'M -30 -40 L 14 -40 L 30 -24 L 30 40 L -30 40 Z', fill: c }, g); for (const y of [-16, 0, 16]) S('rect', { x: -18, y, width: 36, height: 6, rx: 3, fill: '#0B1A3A', opacity: .35 }, g); },
+  slip(g, c = '#FFB703') { S('rect', { x: -26, y: -18, width: 52, height: 36, rx: 5, fill: c }, g); S('rect', { x: -16, y: -8, width: 32, height: 5, rx: 2, fill: '#0B1A3A', opacity: .4 }, g); S('rect', { x: -16, y: 3, width: 22, height: 5, rx: 2, fill: '#0B1A3A', opacity: .4 }, g); },
+  padlock(g, c = '#F8FAFC') { S('path', { d: 'M -22 -6 L -22 -26 A 22 22 0 0 1 22 -26 L 22 -6', fill: 'none', stroke: c, 'stroke-width': 10 }, g); S('rect', { x: -34, y: -8, width: 68, height: 52, rx: 10, fill: c }, g); S('circle', { cx: 0, cy: 14, r: 7, fill: '#0B1A3A' }, g); },
+  bell(g, c = '#FFB703') { S('path', { d: 'M -36 24 Q -30 18 -30 -4 Q -30 -36 0 -38 Q 30 -36 30 -4 Q 30 18 36 24 Z', fill: c }, g); S('circle', { cx: 0, cy: 32, r: 9, fill: c }, g); S('rect', { x: -4, y: -48, width: 8, height: 12, rx: 3, fill: c }, g); },
+  funnel(g, c = '#22D3EE') { S('path', { d: 'M -50 -36 L 50 -36 L 12 6 L 12 40 L -12 48 L -12 6 Z', fill: c }, g); S('rect', { x: -50, y: -44, width: 100, height: 12, rx: 5, fill: c }, g); },
+  cam(g, c = '#A78BFA', on = false) { S('rect', { x: -46, y: -22, width: 80, height: 44, rx: 10, fill: c }, g); S('path', { d: 'M 34 -12 L 56 -24 L 56 24 L 34 12 Z', fill: c }, g);
+    S('rect', { x: -10, y: -52, width: 10, height: 32, fill: c }, g); },
+  door(g, c = '#EF476F') { S('rect', { x: -32, y: -50, width: 64, height: 100, rx: 8, fill: '#0B1A3A', stroke: c, 'stroke-width': 7 }, g); S('circle', { cx: 16, cy: 4, r: 6, fill: c }, g); },
+  book(g, c = '#FFB703') { S('path', { d: 'M 0 -30 Q -30 -42 -60 -34 L -60 36 Q -30 28 0 40 Q 30 28 60 36 L 60 -34 Q 30 -42 0 -30 Z', fill: '#F8FAFC' }, g); S('path', { d: 'M 0 -30 L 0 40', stroke: c, 'stroke-width': 6 }, g);
+    S('path', { d: 'M -64 36 Q -30 30 0 44 Q 30 30 64 36 L 64 44 Q 30 38 0 52 Q -30 38 -64 44 Z', fill: c }, g); },
+  server(g, c = '#22D3EE') { for (const y of [-30, 0, 30]) { S('rect', { x: -40, y: y - 12, width: 80, height: 24, rx: 6, fill: '#14295C', stroke: c, 'stroke-width': 4 }, g); S('circle', { cx: 26, cy: y, r: 4, fill: c }, g); } },
+  barrel(g, c = '#F8FAFC') { S('rect', { x: -34, y: -38, width: 68, height: 76, rx: 14, fill: c }, g); for (const y of [-16, 12]) S('rect', { x: -34, y, width: 68, height: 6, fill: '#0B1A3A', opacity: .3 }, g); },
+  check(g, c = '#06D6A0') { S('circle', { r: 30, fill: c }, g); S('path', { d: 'M -14 0 L -4 12 L 16 -12', fill: 'none', stroke: '#0B1A3A', 'stroke-width': 8, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g); },
+  cross(g, c = '#EF476F') { S('path', { d: 'M -30 -30 L 30 30 M 30 -30 L -30 30', stroke: c, 'stroke-width': 16, 'stroke-linecap': 'round' }, g); },
+  mask(g, c = '#2A0F2E') { S('path', { d: 'M -40 -10 Q 0 -24 40 -10 L 36 14 Q 0 6 -36 14 Z', fill: c }, g); for (const x of [-16, 16]) S('ellipse', { cx: x, cy: 0, rx: 8, ry: 6, fill: '#F8FAFC' }, g); },
+  plant(g, c = '#06121f') { S('path', { d: 'M -30 60 L 30 60 L 22 100 L -22 100 Z', fill: c }, g); for (const [r, l] of [[-40, 120], [-10, 150], [20, 130], [45, 100]]) S('ellipse', { cx: 0, cy: -l / 2 + 60, rx: 22, ry: l / 2, fill: c, transform: `rotate(${r} 0 60)` }, g); },
+};
+function ico(name, parent, x, y, s, c, extra) { const g = S('g', {}, parent); const inner = S('g', {}, g); ICO[name](inner, c, extra); g._x = x; g._y = y; g._s = s; return g; }
+Object.assign(ICO, {
+  globe(g, c = '#22D3EE') { S('circle', { r: 46, fill: 'none', stroke: c, 'stroke-width': 8 }, g); S('ellipse', { rx: 20, ry: 46, fill: 'none', stroke: c, 'stroke-width': 6 }, g);
+    S('path', { d: 'M -46 0 L 46 0 M -40 -22 L 40 -22 M -40 22 L 40 22', stroke: c, 'stroke-width': 5 }, g); },
+  wall(g, c = '#FB8500') { for (let r = 0; r < 4; r++) for (let k = 0; k < 3; k++) S('rect', { x: -60 + k * 42 + (r % 2) * 20 - 10, y: -60 + r * 31, width: 38, height: 27, rx: 4, fill: c }, g); },
+  ticket(g, c = '#FB8500') { S('path', { d: 'M -50 -30 L 50 -30 L 50 -8 A 10 10 0 0 0 50 8 L 50 30 L -50 30 L -50 8 A 10 10 0 0 0 -50 -8 Z', fill: c }, g);
+    S('circle', { cx: 18, cy: 0, r: 14, fill: 'none', stroke: '#0B1A3A', 'stroke-width': 5 }, g); S('path', { d: 'M 18 -8 L 18 0 L 24 4', stroke: '#0B1A3A', 'stroke-width': 4, fill: 'none' }, g); },
+  pipe(g, c = '#22D3EE') { S('path', { d: 'M -90 0 L 90 0', stroke: c, 'stroke-width': 26, 'stroke-linecap': 'round' }, g); S('rect', { x: -14, y: -24, width: 28, height: 48, rx: 6, fill: c }, g); },
+});
+
+/* Generic scene kit (any topic). Everything stays a pure function of time.
+   Usage in an episode: const k = sceneKit(K); then k.room(...), k.hero(...), k.card(...), k.doc(...), k.counter(...)...
+   Conventions: zone-relative coordinates (K.Z[name]), floor at y = FLOOR (characters stand on it, above the subtitle band
+   once framed), every element gets an entry (pop/fin) and an exit (out) unless it carries the case thread. */
+'use strict';
+function sceneKit(K) {
+  const { S, E, Z } = K; const T = K.T, P = K.P;
+  const C = { amber: '#FFB703', orange: '#FB8500', cyan: '#22D3EE', rose: '#EF476F', green: '#06D6A0', violet: '#A78BFA', teal: '#2DD4BF',
+    text: '#F8FAFC', ink: '#0B1A3A', p1: '#14295C', p2: '#1E3A8A', paper: '#E8EEF9', muted: '#94A3B8' };
+  const FLOOR = 250, main = K.layers.main, far = K.layers.far, front = K.layers.front;
+  const sc = id => K.sc(id).start;
+  const G = (parent, x, y, o = {}) => { const g = K.g(parent); g._a = K.A(g, { x, y, ...o }); return g; };
+  const I = (name, parent, x, y, s, c, o = {}) => { const g = ico(name, parent, 0, 0, 1, c); g._a = K.A(g, { x, y, s, ...o }); return g; };
+  const F = (t, d, tg, part, o) => K.frame(t, d, tg, part, o);
+  const mono = (len, maxW, base = 44, min = 36) => Math.max(min, Math.min(base, maxW / (len * .6)));
+  const typeIn = (el, str, t0, dur = 1.2) => { K.mark(t0); K.fx(t => { const n = FRAMING ? str.length : Math.round(str.length * K.clamp((t - t0) / dur)); el.textContent = str.slice(0, Math.max(1, n)); }); };
+
+  /* ---- worlds: one zone = one place. decor: 'room' (walls, shelves, floor), 'outdoor' (sky, hills, sun), 'lab' (benches, screens), 'void' (platform) */
+  function room(name, tint, o = {}) {
+    const g = K.g(main, { transform: `translate(${Z[name][0]} ${Z[name][1]})` }); const d = o.decor || 'room', seed = o.seed || 0;
+    const r = S('rect', { x: -1000, y: -560, width: 2000, height: 1120, rx: 80, fill: tint }, g);
+    const acc = [C.cyan, C.amber, C.rose, C.violet, C.green];
+    if (d === 'outdoor') {
+      if (o.sun) S('circle', { cx: o.sun[0], cy: o.sun[1], r: 90, fill: C.amber, opacity: .85 }, g); // opt-in: a sun is an object, it must not collide with the beat
+      for (let k = 0; k < 3; k++) S('ellipse', { cx: -700 + k * 700 + seed * 40, cy: FLOOR + 40, rx: 560, ry: 200 - k * 30, fill: ['#1E3A8A', '#24408F', '#1B3270'][k] }, g);
+      for (let k = 0; k < 4; k++) S('ellipse', { cx: -760 + k * 480, cy: -420 + (k % 2) * 60, rx: 120, ry: 34, fill: '#F8FAFC', opacity: .12 }, g);
+    } else {
+      for (const sx of [-1, 1]) { const x = sx * 860;
+        S('rect', { x: x - 80, y: -440, width: 160, height: 220, rx: 14, fill: C.p2, opacity: .55 }, g);
+        for (let k = 0; k < 4; k++) S('rect', { x: x - 64 + (k % 2) * 68, y: -420 + Math.floor(k / 2) * 92, width: 60, height: 76, rx: 8, fill: acc[(k + seed) % 5], opacity: .22 }, g); }
+      S('path', { d: 'M -1000 -500 L 1000 -500', stroke: '#2c4a8f', 'stroke-width': 16, opacity: .7 }, g);
+      if (d === 'lab') for (const x of [-600, 600]) { S('rect', { x: x - 150, y: FLOOR - 120, width: 300, height: 26, rx: 10, fill: C.p2 }, g);
+        S('rect', { x: x - 130, y: FLOOR - 94, width: 20, height: 94, fill: C.p1 }, g); S('rect', { x: x + 110, y: FLOOR - 94, width: 20, height: 94, fill: C.p1 }, g); }
+    }
+    if (d !== 'void') { S('rect', { x: -1000, y: FLOOR, width: 2000, height: 560 - FLOOR, rx: 40, fill: d === 'outdoor' ? '#173064' : '#1B3270' }, g);
+      S('rect', { x: -1000, y: FLOOR - 6, width: 2000, height: 12, fill: '#2c4a8f' }, g);
+      for (let k = 0; k < 9; k++) S('rect', { x: -1000 + k * 230, y: 300 + (k % 2) * 60, width: 150, height: 10, rx: 5, fill: '#2c4a8f', opacity: .7 }, g); }
+    else S('rect', { x: -700, y: FLOOR, width: 1400, height: 40, rx: 20, fill: C.p2 }, g);
+    g._room = r; return g;
+  }
+  /* far layer (stars / dust), inhabited paths between consecutive zones, dark foreground silhouettes crossing during travels */
+  function world(zoneNames, o = {}) {
+    for (let i = 0; i < (o.stars || 140); i++) { const x = -800 + (i * 977) % (zoneNames.length * 2400), y = -700 + (i * 613) % 1600;
+      const st = S('circle', { cx: x, cy: y, r: 2 + (i % 3), fill: '#cfe3ff', opacity: .3 }, far);
+      if (i % 7 === 0) K.fx(t => st.setAttribute('opacity', AMBIENT ? (.2 + .3 * Math.abs(Math.sin(t * .8 + i))).toFixed(2) : .35)); }
+    const zs = zoneNames.map(n => Z[n]);
+    for (let i = 0; i + 1 < zs.length; i++) { const mx = (zs[i][0] + zs[i + 1][0]) / 2, my = (zs[i][1] + zs[i + 1][1]) / 2;
+      const g = ico(o.silhouette || 'plant', front, 0, 0, 1, '#040916'); g.setAttribute('transform', `translate(${mx * 1.3} ${(my + 380) * 1.3}) scale(3)`);
+      S('path', { d: `M ${zs[i][0] + 1000} 320 L ${zs[i + 1][0] - 1000} 320`, stroke: C.p1, 'stroke-width': 70 }, main);
+      S('path', { d: `M ${zs[i][0] + 1000} 320 L ${zs[i + 1][0] - 1000} 320`, stroke: C.amber, 'stroke-width': 6, 'stroke-dasharray': '18 26', opacity: .4 }, main); }
+  }
+  /* ---- characters: protagonist (learns / acts) and antagonist (the problem, the opposing force). name = cue.who for lip-sync */
+  const hero = (g, x, o = {}) => K.char(g, { name: o.name || 'hero', color: o.color || C.cyan, x, y: o.y == null ? FLOOR : o.y, s: o.s || 1.4, dir: o.dir || 1, headset: o.headset, shape: o.shape, expr: o.expr });
+  const foe = (g, x, o = {}) => K.char(g, { name: o.name || 'foe', color: o.color || C.rose, x, y: o.y == null ? FLOOR : o.y, s: o.s || 1.4, dir: o.dir || -1, mask: o.mask !== false, expr: o.expr || 'smug', shape: o.shape, ghost: o.ghost });
+  /* speech bubble tied to a character (dialogue cues): one short line, visible [t0, t1] */
+  function bubble(g, ch, text, t0, t1, o = {}) { const w = Math.max(220, text.length * (o.size || 44) * .55 + 70), h = (o.size || 44) + 50;
+    const b = G(g, (o.x != null ? o.x : ch.x) + (o.dx || 0), (o.y != null ? o.y : ch.y - 300 * ch.s / 1.4) + (o.dy || 0), { pop: t0, out: t1 });
+    S('rect', { x: -w / 2, y: -h / 2, width: w, height: h, rx: h / 2, fill: C.paper }, b); S('path', { d: `M -20 ${h / 2 - 2} L 0 ${h / 2 + 30} L 22 ${h / 2 - 2} Z`, fill: C.paper }, b);
+    K.tx(b, 0, 2, text, { size: o.size || 44, fill: C.ink, weight: 700 }); return b; }
+  /* ---- real artifact card: header band (what it is), main value typed in, a second line lit when the narration explains it.
+     spec: { head, value, note, col, w, mono (value), noteMono, icon } — 3 texts max, the real name/value as it appears in real life */
+  function card(g, x, y, spec, tPop, tValue, tNote, tOut) {
+    const W = spec.w || 1040, H = spec.note ? 400 : 290; const cd = G(g, x, y, { pop: tPop, out: tOut });
+    S('rect', { x: -W / 2 + 10, y: -H / 2 + 12, width: W, height: H, rx: 30, fill: '#000', opacity: .25 }, cd);
+    S('rect', { x: -W / 2, y: -H / 2, width: W, height: H, rx: 30, fill: C.paper }, cd);
+    S('rect', { x: -W / 2, y: -H / 2, width: W, height: 96, rx: 30, fill: spec.col || C.cyan }, cd); S('rect', { x: -W / 2, y: -H / 2 + 60, width: W, height: 36, fill: spec.col || C.cyan }, cd);
+    K.tx(cd, -W / 2 + 40, -H / 2 + 50, spec.head, { size: 46, fill: C.ink, weight: 800, anchor: 'start' });
+    if (spec.icon) { const ic = ico(spec.icon, cd, 0, 0, 1, C.ink); ic.setAttribute('transform', `translate(${W / 2 - 80} ${-H / 2 + 48}) scale(.55)`); }
+    const vy = spec.note ? -20 : 40;
+    const v = K.tx(cd, -W / 2 + 40, vy, spec.value, { size: spec.mono === false ? 52 : mono(spec.value.length, W - 80, 52), mono: spec.mono !== false, fill: C.ink, weight: 700, anchor: 'start' });
+    if (tValue != null) typeIn(v, spec.value, tValue, Math.min(1.6, .04 * spec.value.length + .4)); cd._v = v;
+    if (spec.note) { const hl = S('rect', { x: -W / 2 + 24, y: 50, width: W - 48, height: 92, rx: 18, fill: spec.col || C.cyan, 'fill-opacity': .25 }, cd); K.A(hl, { fin: [tNote, .3] });
+      const ng = G(cd, 0, 0, { fin: [tNote, .3] }); K.tx(ng, -W / 2 + 40, 96, spec.note, { size: spec.noteMono ? mono(spec.note.length, W - 80, 46) : 46, mono: !!spec.noteMono, fill: C.ink, weight: 700, anchor: 'start' }); cd._n = ng; }
+    return cd;
+  }
+  /* ---- long artifact (output, form, label, code): unrolls line by line, 3 lines readable at a time, the rest greyed.
+     lines: [str]; steps: [[t, i]] = at t, line i becomes the lit line (the window follows it). Returns g with ._line(i) */
+  function doc(g, x, y, lines, steps, o = {}) {
+    const W = o.w || 1200, lh = o.lh || 70, vis = o.visible || 3, size = o.size || mono(Math.max(...lines.map(l => l.length)), W - 80, 44);
+    const d = G(g, x, y, { pop: o.pop, out: o.out }); const Hh = lh * (vis + 2) + 40;
+    S('rect', { x: -W / 2 + 10, y: -Hh / 2 + 12, width: W, height: Hh, rx: 28, fill: '#000', opacity: .25 }, d);
+    S('rect', { x: -W / 2, y: -Hh / 2, width: W, height: Hh, rx: 28, fill: o.bg || '#071028', stroke: o.col || C.cyan, 'stroke-width': 6 }, d);
+    if (o.title) K.tx(d, -W / 2 + 30, -Hh / 2 - 40, o.title, { size: 40, fill: o.col || C.cyan, weight: 700, anchor: 'start' });
+    const clip = 'clip' + Math.random().toString(36).slice(2, 8); const cp = S('clipPath', { id: clip }, d); S('rect', { x: -W / 2, y: -Hh / 2 + 10, width: W, height: Hh - 20 }, cp);
+    const inner = K.g(d, { 'clip-path': `url(#${clip})` }); const hl = S('rect', { x: -W / 2 + 14, y: -lh / 2, width: W - 28, height: lh, rx: 14, fill: o.col || C.cyan, 'fill-opacity': .22 }, inner);
+    const els = lines.map((l, i) => K.tx(inner, -W / 2 + 34, i * lh, l, { size, mono: o.mono !== false, fill: C.text, weight: 600, anchor: 'start' }));
+    const st = [...steps].sort((a, b) => a[0] - b[0]); for (const s of st) K.mark(s[0]);
+    K.fx(t => { let cur = 0, prev = 0, p = 1; for (const s of st) if (t >= s[0]) { prev = cur; cur = s[1]; p = E.ioc(P(t, s[0], .45)); }
+      const pos = FRAMING ? (st.length ? st[0][1] : 0) : prev + (cur - prev) * p;
+      inner.setAttribute('transform', `translate(0 ${(-pos * lh).toFixed(1)})`); hl.setAttribute('y', (pos * lh - lh / 2).toFixed(1));
+      els.forEach((e, i) => e.setAttribute('fill-opacity', Math.abs(i - pos) <= (vis - 1) / 2 + .01 ? 1 : .28)); });
+    d._lines = els; return d;
+  }
+  /* ---- number that counts up (a real value being computed). fmt(v) -> string. Emits ticks for the sound. */
+  function counter(g, x, y, o) { const c = G(g, x, y, { pop: o.pop, out: o.out }); const el = K.tx(c, 0, 0, o.fmt(o.from), { size: o.size || 120, fill: o.fill || C.text, weight: 800, mono: o.mono });
+    K.mark(o.t0); for (let k = 0; k < 8; k++) K.ev(o.t0 + k * o.dur / 8, 'tick');
+    K.fx(t => { const p = FRAMING ? 1 : E.oc(P(t, o.t0, o.dur)); el.textContent = o.fmt(o.from + (o.to - o.from) * p); }); c._t = el; return c; }
+  /* ---- bars growing (comparison of real values). vals: [{v, label, col}], max, w, h */
+  function bars(g, x, y, o) { const b = G(g, x, y, { pop: o.pop, out: o.out }); const n = o.vals.length, bw = (o.w || 900) / n * .62, H = o.h || 420;
+    S('rect', { x: -(o.w || 900) / 2 - 20, y: 0, width: (o.w || 900) + 40, height: 8, rx: 4, fill: C.muted }, b);
+    o.vals.forEach((it, i) => { const cx = -(o.w || 900) / 2 + (i + .5) * (o.w || 900) / n, t0 = o.t0 + i * (o.stagger || .35);
+      const r = S('rect', { x: cx - bw / 2, width: bw, rx: 12, fill: it.col || C.cyan }, b); K.mark(t0);
+      K.fx(t => { const h = H * it.v / o.max * (FRAMING ? 1 : E.oc(P(t, t0, .8))); r.setAttribute('y', -h); r.setAttribute('height', Math.max(0, h)); });
+      if (it.label) K.tx(b, cx, 50, it.label, { size: o.lsize || 48, fill: C.text, weight: 700, axis: true });
+      if (it.top) { const tg = G(b, cx, -H * it.v / o.max - 40, { fin: [t0 + .6, .3] }); K.tx(tg, 0, 0, it.top, { size: o.lsize || 40, fill: it.col || C.cyan, weight: 800, deco: it.top.length <= 4 }); } });
+    return b; }
+  /* ---- curve drawn over time (pts in local units, y up = negative) */
+  function curve(g, pts, o) { const d = 'M ' + pts.map(p => p.join(' ')).join(' L '); const el = S('path', { d, fill: 'none', stroke: o.col || C.amber, 'stroke-width': o.sw || 10, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
+    el._a = K.A(el, { dash: [o.t0, o.dur || 1.5], out: o.out }); return el; }
+  /* ---- arrow drawn from a to b */
+  function arrow(g, x1, y1, x2, y2, o = {}) { const a = K.g(g); const ang = Math.atan2(y2 - y1, x2 - x1);
+    const ln = S('path', { d: `M ${x1} ${y1} L ${x2} ${y2}`, stroke: o.col || C.text, 'stroke-width': o.sw || 10, 'stroke-linecap': 'round', fill: 'none', 'stroke-dasharray': o.dashed ? '18 16' : null }, a);
+    const hd = S('path', { d: 'M 0 0 L -34 -18 L -34 18 Z', fill: o.col || C.text, transform: `translate(${x2} ${y2}) rotate(${ang * 180 / Math.PI})` }, a);
+    if (!o.dashed) K.A(ln, { dash: [o.t, o.d || .6], out: o.out }); else K.A(ln, { fin: [o.t, .3], out: o.out });
+    K.A(hd, { fin: [o.t + (o.d || .6) * .8, .2], out: o.out }); return a; }
+  /* ---- pill label (a keyword on screen; the sentence stays in the subtitles) */
+  function label(g, x, y, text, o = {}) { const l = G(g, x, y, { pop: o.pop, out: o.out, fin: o.fin }); const w = text.length * (o.size || 44) * .58 + 60, h = (o.size || 44) + 36;
+    S('rect', { x: -w / 2, y: -h / 2, width: w, height: h, rx: h / 2, fill: o.bg || (o.col || C.cyan), 'fill-opacity': o.bg ? 1 : .2, stroke: o.col || C.cyan, 'stroke-width': 4 }, l);
+    K.tx(l, 0, 2, text, { size: o.size || 44, fill: o.fill || C.text, weight: 700, mono: o.mono }); return l; }
+  /* ---- timeline (frieze): ticks [[pos 0..1, label]], a cursor that travels; returns {g, at(p)} */
+  function timeline(g, x, y, o) { const tl = G(g, x, y, { pop: o.pop, out: o.out }); const W = o.w || 1300;
+    S('rect', { x: -W / 2, y: -6, width: W, height: 12, rx: 6, fill: C.muted }, tl);
+    (o.ticks || []).forEach(([p, lab], i) => { const tx = -W / 2 + p * W; const tk = G(tl, tx, 0, { pop: (o.t0 || 0) + i * (o.stagger || .3) });
+      S('circle', { r: 16, fill: o.col || C.amber }, tk); if (lab) K.tx(tk, 0, i % 2 ? 64 : -60, lab, { size: o.lsize || 50, fill: C.text, weight: 700, axis: true }); });
+    return tl; }
+  /* ---- balance: a trade-off that tilts at t (tilt in degrees, + = right side heavier) */
+  function balance(g, x, y, o) { const b = G(g, x, y, { pop: o.pop, out: o.out });
+    S('path', { d: 'M -40 120 L 40 120 L 0 0 Z', fill: C.p2 }, b);
+    const beam = K.g(b); S('rect', { x: -360, y: -10, width: 720, height: 20, rx: 10, fill: C.muted }, beam);
+    for (const sx of [-1, 1]) { S('path', { d: `M ${sx * 340} 0 L ${sx * 340 - 70} 120 L ${sx * 340 + 70} 120 Z`, fill: 'none', stroke: C.muted, 'stroke-width': 5 }, beam);
+      S('rect', { x: sx * 340 - 100, y: 112, width: 200, height: 18, rx: 8, fill: C.muted }, beam); }
+    K.mark(o.t); K.fx(t => beam.setAttribute('transform', `rotate(${((o.tilt || 12) * (FRAMING ? 1 : E.ob(P(t, o.t, .9)))).toFixed(2)})`));
+    b._beam = beam; return b; }
+  /* ---- uncertainty: what the narration does not know is drawn dashed / faded, never as a fact */
+  function unknown(el) { el.setAttribute('stroke-dasharray', '16 12'); el.setAttribute('fill-opacity', .15); return el; }
+  /* ---- question mark suspended above an object during a "devinez" silence */
+  function suspense(g, x, y, t0, t1, o = {}) { const q = G(g, x, y, { pop: t0, out: t1, fn: (s, t) => { s.y += AMBIENT ? 8 * Math.sin(t * 3) : 0; } });
+    K.tx(q, 0, 0, '?', { size: o.size || 140, fill: o.col || C.amber, weight: 800, deco: true }); return q; }
+  /* ---- artifact panel: real text lines (monospace), wrapped only at natural breaks; segments lit by hi(line, from, len, t).
+     lines: [str]; o: { w, size, title, col, pop, out, bg }. Returns g with ._hi(line, from, len, t0, o) and ._els */
+  function panel(g, x, y, lines, o = {}) {
+    const W = o.w || 1440, size = o.size || mono(Math.max(...lines.map(l => l.length)), W - 70, 48, 34), lh = size * 1.5, H = lh * lines.length + 60;
+    const p = G(g, x, y, { pop: o.pop, out: o.out });
+    S('rect', { x: -W / 2 + 10, y: -H / 2 + 12, width: W, height: H, rx: 26, fill: '#000', opacity: .25 }, p);
+    S('rect', { x: -W / 2, y: -H / 2, width: W, height: H, rx: 26, fill: o.bg || '#071028', stroke: o.col || C.cyan, 'stroke-width': 6 }, p);
+    if (o.title) { const tt = G(p, -W / 2 + 20, -H / 2 - 48); K.tx(tt, 0, 0, o.title, { size: 52, fill: o.col || C.cyan, weight: 700, anchor: 'start' }); }
+    const hlg = K.g(p); const x0 = -W / 2 + 34, y0 = -H / 2 + 30 + lh / 2, cw = size * .6;
+    const bid = 'p' + Math.random().toString(36).slice(2, 8); const els = lines.map((l, i) => { const e = K.tx(p, x0, y0 + i * lh, l, { size, mono: true, fill: o.fill || C.text, weight: 600, anchor: 'start', block: bid });
+      if (o.typeAt != null && i === 0) typeIn(e, l, o.typeAt, Math.min(1.6, .04 * l.length + .4)); return e; });
+    p._els = els; p._lh = lh;
+    p._hi = (li, from, len, t0, ho = {}) => { const r = S('rect', { x: x0 + from * cw - 8, y: y0 + li * lh - lh / 2 + 4, width: len * cw + 16, height: lh - 8, rx: 10,
+        fill: ho.col || C.amber, 'fill-opacity': ho.box ? 0 : .32, stroke: ho.box ? (ho.col || C.amber) : 'none', 'stroke-width': 6 }, hlg);
+      const a = K.A(r, { fin: [t0, .25], out: ho.out }); r._a = a; return r; };
+    p._dim = (t0, keep = [], t1) => els.forEach((e, i) => { if (keep.includes(i)) return; K.fx(t => e.setAttribute('fill-opacity', t >= t0 && (t1 == null || t < t1) ? .3 : 1)); });
+    return p;
+  }
+  /* ---- pulse: a short scale bump on an element that already has an actor (g._a) — a beat that re-points attention */
+  function pulse(el, t, amt = 1.14) { const a = el._a || el; const s0 = a.bs == null ? 1 : a.bs; a.o.moves = a.o.moves || [];
+    a.o.moves.push([t, .18, { s: s0 * amt }, E.oc], [t + .18, .32, { s: s0 }, E.ioc]); K.mark(t); return el; }
+  return { panel, pulse, C, FLOOR, sc, G, I, F, mono, typeIn, room, world, hero, foe, bubble, card, doc, counter, bars, curve, arrow, label, timeline, balance, unknown, suspense };
+}
+
+/* Series kit: shared world helpers + "event room" grammar (action stage -> real log card -> rule).
+   Used by the v6 series episodes. Everything still a pure function of time. */
+'use strict';
+function seriesKit(K) {
+  const { S, E, Z } = K; const T = K.T, R = K.reveal;
+  const C = { amber: '#FFB703', orange: '#FB8500', cyan: '#22D3EE', rose: '#EF476F', green: '#06D6A0', violet: '#A78BFA', teal: '#2DD4BF', text: '#F8FAFC', ink: '#0B1A3A', p1: '#14295C', p2: '#1E3A8A', paper: '#E8EEF9' };
+  const FLOOR = 250, main = K.layers.main, far = K.layers.far, front = K.layers.front;
+  const sc = id => K.sc(id).start;
+  const G = (parent, x, y, o = {}) => { const g = K.g(parent); g._a = K.A(g, { x, y, ...o }); return g; };
+  const I = (name, parent, x, y, s, c, o = {}) => { const g = ico(name, parent, 0, 0, 1, c); g._a = K.A(g, { x, y, s, ...o }); return g; };
+  const F = (t, d, tg, part, o) => K.frame(t, d, tg, part, o);
+  const zg = (name, tint, seed = 0) => { const g = K.g(main, { transform: `translate(${Z[name][0]} ${Z[name][1]})` });
+    const room = S('rect', { x: -1000, y: -560, width: 2000, height: 1120, rx: 80, fill: tint }, g);
+    S('rect', { x: -1000, y: FLOOR, width: 2000, height: 560 - FLOOR, rx: 40, fill: '#1B3270' }, g);
+    S('rect', { x: -1000, y: FLOOR - 6, width: 2000, height: 12, fill: '#2c4a8f' }, g);
+    for (const sx of [-1, 1]) { const x = sx * 860; S('rect', { x: x - 80, y: -440, width: 160, height: 220, rx: 14, fill: '#1E3A8A', opacity: .55 }, g);
+      for (let k = 0; k < 4; k++) S('rect', { x: x - 64 + (k % 2) * 68, y: -420 + Math.floor(k / 2) * 92, width: 60, height: 76, rx: 8, fill: ['#22D3EE', '#FFB703', '#EF476F', '#A78BFA'][(k + seed) % 4], opacity: .25 }, g); }
+    for (let k = 0; k < 9; k++) S('rect', { x: -1000 + k * 230, y: 300 + (k % 2) * 60, width: 150, height: 10, rx: 5, fill: '#2c4a8f', opacity: .7 }, g);
+    S('path', { d: 'M -1000 -500 L 1000 -500', stroke: '#2c4a8f', 'stroke-width': 16, opacity: .7 }, g);
+    g._room = room; return g; };
+  function backdrop(zoneNames) {
+    for (let i = 0; i < 140; i++) { const x = -800 + (i * 977) % 9000, y = -700 + (i * 613) % 1600;
+      const st = S('circle', { cx: x, cy: y, r: 2 + (i % 3), fill: '#cfe3ff', opacity: .3 }, far);
+      if (i % 7 === 0) K.fx(t => st.setAttribute('opacity', AMBIENT ? (.2 + .3 * Math.abs(Math.sin(t * .8 + i))).toFixed(2) : .35)); }
+    const zs = zoneNames.map(n => Z[n]);
+    for (let i = 0; i + 1 < zs.length; i++) { const mx = (zs[i][0] + zs[i + 1][0]) / 2, my = (zs[i][1] + zs[i + 1][1]) / 2;
+      const g = ico('plant', front, 0, 0, 1, '#040916'); g.setAttribute('transform', `translate(${mx * 1.3} ${(my + 380) * 1.3}) scale(3)`);
+      S('path', { d: `M ${zs[i][0] + 1000} 320 L ${zs[i + 1][0] - 1000} 320`, stroke: '#14295C', 'stroke-width': 70 }, main);
+      S('path', { d: `M ${zs[i][0] + 1000} 320 L ${zs[i + 1][0] - 1000} 320`, stroke: C.amber, 'stroke-width': 6, 'stroke-dasharray': '18 26', opacity: .4 }, main); }
+  }
+  const analyst = (g, x, o = {}) => K.char(g, { name: 'analyste', color: C.cyan, x, y: FLOOR, s: o.s || 1.4, dir: o.dir || 1, headset: true });
+  const villain = (g, x, o = {}) => K.char(g, { name: 'attaquant', color: C.rose, x, y: FLOOR, s: o.s || 1.4, dir: o.dir || -1, mask: true, expr: 'smug' });
+  // typewriter on a <text> (a real value "s'écrit")
+  const typeIn = (el, str, t0, dur = 1.2) => K.fx(t => { const n = FRAMING ? str.length : Math.round(str.length * K.clamp((t - t0) / dur)); el.textContent = str.slice(0, Math.max(1, n)); });
+  const mono = (len, maxW, base = 44, min = 36) => Math.max(min, Math.min(base, maxW / (len * .6)));
+  /* Real log card: tactic band (+ colored log book: amber = activity, violet = data_access), method (typed), condition (lit). 3 texts max. */
+  function logCard(g, x, y, spec, tPop, tMethod, tCond, tOut) {
+    const W = spec.w || 1040, H = 400; const card = G(g, x, y, { pop: tPop, out: tOut });
+    S('rect', { x: -W / 2 + 10, y: -H / 2 + 12, width: W, height: H, rx: 30, fill: '#000', opacity: .25 }, card);
+    S('rect', { x: -W / 2, y: -H / 2, width: W, height: H, rx: 30, fill: C.paper }, card);
+    S('rect', { x: -W / 2, y: -H / 2, width: W, height: 96, rx: 30, fill: spec.col }, card); S('rect', { x: -W / 2, y: -H / 2 + 60, width: W, height: 36, fill: spec.col }, card);
+    K.tx(card, -W / 2 + 40, -H / 2 + 50, spec.tactic, { size: 46, fill: C.ink, weight: 800, anchor: 'start' });
+    const bk = ico('book', card, 0, 0, 1, spec.log === 'data_access' ? C.violet : C.amber); bk.setAttribute('transform', `translate(${W / 2 - 80} ${-H / 2 + 48}) scale(.62)`);
+    const mEl = K.tx(card, -W / 2 + 40, -20, spec.method, { size: mono(spec.method.length, W - 80, 52), mono: true, fill: C.ink, weight: 700, anchor: 'start' });
+    typeIn(mEl, spec.method, tMethod, Math.min(1.6, .04 * spec.method.length + .4)); K.mark(tMethod); card._m = mEl;
+    const hl = S('rect', { x: -W / 2 + 24, y: 50, width: W - 48, height: 92, rx: 18, fill: spec.col, 'fill-opacity': .25 }, card); K.A(hl, { fin: [tCond, .3] });
+    const cg = G(card, 0, 0, { fin: [tCond, .3] });
+    K.tx(cg, -W / 2 + 40, 96, spec.cond, { size: spec.condMono === false ? 46 : mono(spec.cond.length, W - 80, 46), mono: spec.condMono !== false, fill: C.ink, weight: 700, anchor: 'start' });
+    card._c = cg; return card;
+  }
+  /* Event room: one scene = action (cue A) + detection (cue B). spec.stage(g, kit, times) builds the action and returns framing targets. */
+  function eventRoom(spec) {
+    const g = zg(spec.zone, spec.tint, spec.seed || 0); const s0 = sc(spec.scene);
+    const tA = T(spec.cueA, spec.wAct), tB = K.cue(spec.cueB).start, tM = T(spec.cueB, spec.wMethod), tC = T(spec.cueB, spec.wCond);
+    const tR = spec.wRule ? T(spec.cueB, spec.wRule) : K.cue(spec.cueB).end - 1.2;
+    const vil = spec.noVillain ? null : villain(g, -980, { dir: 1 });
+    if (vil) vil.pop(s0 - .4).walk(s0 - .2, 1.2, -720).expr(tA, 'smug').pose(tA, 1.2, 'point', { x: -380, y: -60 }).walk(tB - .4, 1.0, -1250).out(tB + .4);
+    const stage = spec.stage(g, kit, { s0, tA, tB });
+    // the call flies from the stage to the card (the entry is written)
+    const slip = I('slip', g, -380, -120, 1.4, spec.log === 'data_access' ? C.violet : C.amber, { pop: K.cue(spec.cueA).end - 1.3, moves: [[K.cue(spec.cueA).end - 1.1, 1.0, { x: 450, y: -150, s: .6 }, E.ioc]], out: K.cue(spec.cueA).end - .1 });
+    const card = logCard(g, 450, -150, spec, tB - .2, tM, tC, spec.tOut);
+    const an = analyst(g, -1050, { s: 1.35 });
+    an.pop(tB - .6).walk(tB - .4, 1.1, -600).pose(tM, 1.0, 'point', { x: 200, y: -170 }).pose(tC, 1.0, 'point', { x: 200, y: -60 }).expr(tC, 'happy');
+    const bell = G(g, 830, 120, { pop: tR, fn: (s, t) => { s.r = 14 * Math.sin((t - tR) * 14) * (1 - P(t, tR + .3, 1.2)); } }); ico('bell', bell, 0, 0, 1, C.amber).setAttribute('transform', 'scale(1.2)');
+    K.ev(tR, 'impact');
+    // filler beats (skill: >= ceil(dur/2) visible changes per cue): reaction, push-in, pulse, nods
+    const eA = K.cue(spec.cueA).end, eB = K.cue(spec.cueB).end;
+    if (vil) vil.pose(tA + 1.6, 1.0, 'cheer');
+    if (vil && tA - K.cue(spec.cueA).start > 2.6) vil.pose(K.cue(spec.cueA).start + 1.4, 1.0, 'point', { x: -380, y: -60 });
+    an.pose((tC + tR) / 2, .8, 'nod').pose(tR + .4, 1.0, 'cheer');
+    const ul = S('rect', { x: 450 - 500, y: -150 + 12, width: 1000, height: 10, rx: 5, fill: spec.col }, g); K.A(ul, { fin: [(tM + tC) / 2, .2], out: tC + .2 });
+    const pulse = S('rect', { x: 450 - 540, y: -150 - 210, width: 1080, height: 420, rx: 36, fill: 'none', stroke: spec.col, 'stroke-width': 10 }, g);
+    K.A(pulse, { fin: [(tC + tR) / 2, .2], out: (tC + tR) / 2 + .8 });
+    F(s0 - 1.3, 1.5, [g._room], .96, { focus: false }); K.focus(s0, stage[0]);
+    F((tA + eA) / 2, 1.2, [...stage, card], .9, { focus: false });
+    if (tA - K.cue(spec.cueA).start > 3) F(K.cue(spec.cueA).start + 1.4, .9, stage, .8, { focus: false });
+    F(tA - .5, .8, stage, .62, { focus: false }); K.focus(tA, stage[0]);
+    F(tB - .4, .9, [card], .82, { focus: false }); K.focus(tB, card);
+    F(tM - .4, .7, [card._m], .62, { focus: false, zmax: 2.4 }); K.focus(tM, card._m);
+    F(tC - .3, .7, [card._c], .66, { focus: false, zmax: 2.4 }); K.focus(tC, card._c);
+    F(tC + .9, .9, [card, bell], .86, { focus: false });
+    if (spec.hot) K.hot({ x: Z[spec.zone][0] + 450, y: Z[spec.zone][1] - 330, at: s0, until: K.cue(spec.cueB).end + 1, title: spec.hot[0], html: spec.hot[1] });
+    return { g, card, an, vil, stage, bell };
+  }
+  /* Hook room: the analyst's desk, a monitor showing a short line, used to open each episode. */
+  function hookRoom(zone, tint, o) {
+    const g = zg(zone, tint, 1);
+    S('rect', { x: -560, y: 60, width: 900, height: 44, rx: 14, fill: C.p2 }, g); S('rect', { x: -520, y: 104, width: 28, height: 146, fill: C.p1 }, g); S('rect', { x: 280, y: 104, width: 28, height: 146, fill: C.p1 }, g);
+    const mon = G(g, -110, -170); S('rect', { x: -330, y: -190, width: 660, height: 380, rx: 24, fill: C.p1, stroke: '#26407e', 'stroke-width': 6 }, mon);
+    S('rect', { x: -305, y: -168, width: 610, height: 334, rx: 14, fill: '#071028' }, mon); S('rect', { x: -40, y: 190, width: 80, height: 40, fill: C.p1 }, mon);
+    const an = analyst(g, 520, { s: 1.5, dir: -1 });
+    return { g, mon, an };
+  }
+  const kit = { C, FLOOR, sc, G, I, F, zg, backdrop, analyst, villain, typeIn, mono, logCard, eventRoom, hookRoom };
+  return kit;
+}
+
+</script>
+<script>
+/* Player: layers, render(t), controls, voice-driven clock, quiz, hotspots, export hooks. */
+'use strict';
+function boot(ep) {
+  const svg = document.getElementById('svg');
+  const $ = id => document.getElementById(id);
+  const R = Runtime(ep, svg), K = R.K;
+  // ---- layers
+  const defs = S('defs', {}, svg);
+  const grad = S('radialGradient', { id: 'spotG', gradientUnits: 'userSpaceOnUse', cx: 800, cy: 450, r: 700 }, defs);
+  S('stop', { offset: 0, 'stop-color': '#050B1E', 'stop-opacity': 0 }, grad);
+  S('stop', { offset: .55, 'stop-color': '#050B1E', 'stop-opacity': 0 }, grad);
+  S('stop', { offset: 1, 'stop-color': '#050B1E', 'stop-opacity': ep.spotDark == null ? .42 : ep.spotDark }, grad);
+  S('rect', { x: -10, y: -10, width: 1620, height: 920, fill: ep.bg || '#0B1A3A' }, svg);
+  K.layers.far = S('g', { id: 'L-far' }, svg);
+  K.layers.main = S('g', { id: 'L-main' }, svg);
+  K.layers.front = S('g', { id: 'L-front' }, svg);
+  const spot = S('rect', { x: -10, y: -10, width: 1620, height: 920, fill: 'url(#spotG)', 'pointer-events': 'none' }, svg);
+  K.layers.hud = S('g', { id: 'L-hud' }, svg);
+  ep.build(K);
+  function layout(t) { AMBIENT = false; FRAMING = true; for (const a of R.actors) a.update(t); for (const ch of R.chars) ch.update(t); for (const fn of R.fx) fn(t); FRAMING = false; }
+  for (const fr of R.frames) { layout(fr.t + fr.d); const bb = worldBBox(R, fr.targets);
+    if (!bb) { console.warn('frame: cible vide', fr); continue; } const c = camFor(bb, fr.part, fr.o); R.camMoves.push({ t: fr.t, d: fr.d, x: c.x, y: c.y, z: c.z }); }
+  R.camMoves.sort((a, b) => a.t - b.t); R.focusKeys.sort((a, b) => a.t - b.t);
+  R.events.sort((a, b) => a.t - b.t);
+  const PAR = ep.parallax || { far: .5, front: 1.3 };
+
+  function cueAt(t) { for (const c of R.cues) if (t >= c.start && t < c.end) return c; return null; }
+  function sceneAt(t) { let s = R.scenes[0]; for (const sc of R.scenes) if (t >= sc.start - 1e-6) s = sc; return s; }
+  let fPrev = null, fCur = null;
+  function focusPoint(t) {
+    let cur = null, prev = null;
+    for (const k of R.focusKeys) { if (t >= k.t) { prev = cur; cur = k; } }
+    if (!cur) return null;
+    const pos = k => { if (Array.isArray(k.target)) return [k.target[0], k.target[1], k.r || 420];
+      const bb = worldBBox(R, [k.target]); if (!bb) return [0, 0, 420]; return [bb.x + bb.w / 2, bb.y + bb.h / 2, k.r || Math.max(260, .75 * Math.hypot(bb.w, bb.h))]; };
+    const pc = pos(cur); if (!prev) return { x: pc[0], y: pc[1], r: pc[2] };
+    const pp = pos(prev); const p = E.ioc(P(t, cur.t, .6));
+    return { x: lerp(pp[0], pc[0], p), y: lerp(pp[1], pc[1], p), r: lerp(pp[2], pc[2], p) };
+  }
+  const subEls = [$('subs'), $('subsM')];
+  let lastSub = null;
+  function render(t, opts = {}) {
+    AMBIENT = opts.ambient !== false;
+    const c = camAt(R, t);
+    const tf = f => `translate(800 450) scale(${c.z.toFixed(4)}) translate(${(-c.x * f).toFixed(2)} ${(-c.y * f).toFixed(2)})`;
+    K.layers.far.setAttribute('transform', tf(PAR.far));
+    K.layers.main.setAttribute('transform', tf(1));
+    K.layers.front.setAttribute('transform', tf(PAR.front));
+    for (const a of R.actors) a.update(t);
+    for (const ch of R.chars) ch.update(t);
+    for (const fn of R.fx) fn(t);
+    const f = focusPoint(t);
+    if (f) { grad.setAttribute('cx', 800 + (f.x - c.x) * c.z); grad.setAttribute('cy', 450 + (f.y - c.y) * c.z); grad.setAttribute('r', Math.max(380, f.r * c.z)); }
+    else { grad.setAttribute('cx', 800); grad.setAttribute('cy', 430); grad.setAttribute('r', 760); }
+    // subtitles
+    const cu = cueAt(t); let sub = '';
+    if (cu) { const parts = cu.sub.split('|'); sub = (cu.guess && t < cu.pauseAt + GUESS_PAUSE) ? parts[0] : parts.join(' '); }
+    if (sub !== lastSub) { for (const e of subEls) { e.textContent = sub; e.classList.toggle('empty', !sub); } lastSub = sub; }
+    R.t = t; R.cam = c;
+    return c;
+  }
+  R.render = render;
+
+  /* -------- player state -------- */
+  const snd = $('snd'), hasSnd = !!(snd && snd.getAttribute('src')); // pre-rendered soundtrack (voice + music + effects)
+  const st = { t: 0, playing: false, speed: 1, subs: true, voice: hasSnd, quiz: false, last: 0, waitStart: null, spoken: {}, pending: false, quizDone: {} };
+  const synth = (() => { try { return window.speechSynthesis || null; } catch (e) { return null; } })();
+  let frVoice = null;
+  function pickVoice() { try { const vs = synth.getVoices(); frVoice = vs.find(v => /fr[-_]FR/i.test(v.lang)) || vs.find(v => /^fr/i.test(v.lang)) || null; } catch (e) { } }
+  if (synth) { pickVoice(); try { synth.onvoiceschanged = pickVoice; } catch (e) { } }
+  function sndSync(play) { if (!hasSnd) return; try { snd.playbackRate = st.speed; if (Math.abs(snd.currentTime - st.t) > .08) snd.currentTime = st.t;
+      if (play && st.voice) { const p = snd.play(); if (p && p.catch) p.catch(() => { }); } else snd.pause(); } catch (e) { } }
+  function speak(text) {
+    if (hasSnd || !synth || !st.voice) return;
+    try { const u = new SpeechSynthesisUtterance(text); u.lang = 'fr-FR'; if (frVoice) u.voice = frVoice; u.rate = 1.05 * st.speed;
+      st.pending = true; u.onend = u.onerror = () => { st.pending = false; }; synth.speak(u); } catch (e) { st.pending = false; }
+  }
+  function cancelSpeech() { try { synth && synth.cancel(); } catch (e) { } st.pending = false; }
+  function sayParts(c) { return c.say.split('|').map(s => s.trim()); }
+  function voiceStep(prevT, t) {
+    if (hasSnd || !st.voice) return;
+    for (const c of R.cues) {
+      const parts = sayParts(c);
+      if (prevT <= c.start + .02 && t >= c.start && !st.spoken[c.id + 'a']) { st.spoken[c.id + 'a'] = 1; cancelSpeech(); speak(parts[0]); }
+      if (c.guess) { const tr = c.pauseAt + GUESS_PAUSE; if (prevT <= tr && t >= tr && !st.spoken[c.id + 'b']) { st.spoken[c.id + 'b'] = 1; speak(parts[1]); } }
+    }
+  }
+  function resetSpoken(t) { st.spoken = {}; for (const c of R.cues) { if (c.start < t - .05) st.spoken[c.id + 'a'] = 1; if (c.guess && c.pauseAt + GUESS_PAUSE < t - .05) st.spoken[c.id + 'b'] = 1; } }
+
+  function seek(t) { st.t = clamp(t, 0, R.duration); cancelSpeech(); resetSpoken(st.t); st.waitStart = null; sndSync(st.playing); render(st.t); ui(); }
+  function play() { if (st.t >= R.duration - .05) seek(0); st.playing = true; st.last = performance.now(); $('poster').hidden = true; closeHot(); resetSpoken(st.t);
+    if (st.voice) { const c = cueAt(st.t); if (c && st.t - c.start < .3) { st.spoken[c.id + 'a'] = 0; } }
+    sndSync(true); requestAnimationFrame(loop); ui(); }
+  function pause() { st.playing = false; cancelSpeech(); sndSync(false); ui(); }
+  function loop(now) {
+    if (!st.playing) return;
+    const dt = Math.min(.1, (now - st.last) / 1000); st.last = now;
+    let nt = st.t + dt * st.speed; const c = cueAt(st.t);
+    if (hasSnd && st.voice && !snd.paused && !snd.ended && snd.readyState > 1) nt = snd.currentTime; // the soundtrack is the clock
+    if (!hasSnd && st.voice && c && st.pending && nt >= c.end - .02) {
+      if (st.waitStart == null) st.waitStart = now;
+      if (now - st.waitStart < 20000) nt = c.end - .021; else st.pending = false;
+    } else st.waitStart = null;
+    // quiz pause
+    if (st.quiz && c && c.guess && ep.quiz && ep.quiz[c.id] && !st.quizDone[c.id] && st.t < c.pauseAt + .3 && nt >= c.pauseAt + .3) {
+      st.quizDone[c.id] = 1; st.t = c.pauseAt + .3; render(st.t); pause(); showQuiz(c); return;
+    }
+    voiceStep(st.t, nt);
+    st.t = nt;
+    if (st.t >= R.duration) { st.t = R.duration; render(st.t); pause(); return; }
+    render(st.t); ui(); requestAnimationFrame(loop);
+  }
+
+  /* -------- UI -------- */
+  const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const chap = $('chapters');
+  R.scenes.forEach((s, i) => { const b = document.createElement('button'); b.className = 'chap'; b.type = 'button';
+    b.innerHTML = `<span class="n">${i + 1}</span><span class="tt">${s.title}</span><span class="ts">${fmt(s.start)}</span>`;
+    b.onclick = () => { seek(s.start - (i ? 1.4 : .6)); }; chap.appendChild(b); });
+  const ticks = $('ticks');
+  R.scenes.forEach(s => { const d = document.createElement('i'); d.style.left = (s.start / R.duration * 100) + '%'; ticks.appendChild(d); });
+  const leg = $('legend');
+  (ep.legend || []).forEach(([col, label]) => { const d = document.createElement('span'); d.className = 'lg'; d.innerHTML = `<i style="background:${col}"></i>${label}`; leg.appendChild(d); });
+  function ui() {
+    $('play').textContent = st.playing ? '❚❚' : '▶'; $('play').setAttribute('aria-label', st.playing ? 'Pause' : 'Lecture');
+    $('time').textContent = `${fmt(st.t)} / ${fmt(R.duration)}`;
+    $('bar').style.width = (st.t / R.duration * 100) + '%';
+    const sc = sceneAt(st.t); [...chap.children].forEach((b, i) => b.classList.toggle('on', R.scenes[i] === sc));
+    document.body.classList.toggle('paused', !st.playing);
+    if (!st.playing) drawHots(); else clearHots();
+  }
+  $('play').onclick = () => st.playing ? pause() : play();
+  $('bigplay').onclick = play;
+  $('prev').onclick = () => { const i = R.scenes.indexOf(sceneAt(st.t)); const s = R.scenes[Math.max(0, st.t - sceneAt(st.t).start > 2 ? i : i - 1)]; seek(s.start - (s === R.scenes[0] ? .6 : 1.4)); };
+  $('next').onclick = () => { const i = R.scenes.indexOf(sceneAt(st.t)); if (i < R.scenes.length - 1) seek(R.scenes[i + 1].start - 1.4); };
+  $('track').onclick = e => { const r = e.currentTarget.getBoundingClientRect(); seek((e.clientX - r.left) / r.width * R.duration); };
+  $('speed').onchange = e => { st.speed = +e.target.value; sndSync(st.playing); };
+  const tog = (id, key, cb) => { const b = $(id); b.onclick = () => { st[key] = !st[key]; b.setAttribute('aria-pressed', st[key]); cb && cb(); }; b.setAttribute('aria-pressed', st[key]); };
+  tog('cc', 'subs', () => document.body.classList.toggle('nosubs', !st.subs));
+  if (hasSnd) { $('voice').textContent = 'Son'; $('voice').setAttribute('aria-label', 'Son (voix, musique, bruitages)'); }
+  tog('voice', 'voice', () => { if (!st.voice) cancelSpeech(); else resetSpoken(st.t); sndSync(st.playing); });
+  tog('quizb', 'quiz', () => { st.quizDone = {}; });
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'SELECT') return;
+    if (e.code === 'Space') { e.preventDefault(); st.playing ? pause() : play(); }
+    if (e.code === 'ArrowRight') $('next').click(); if (e.code === 'ArrowLeft') $('prev').click();
+    if (e.code === 'Escape') { closeHot(); $('quiz').hidden = true; }
+  });
+  // hotspots
+  const hl = $('hotspots');
+  function clearHots() { hl.innerHTML = ''; }
+  function drawHots() {
+    clearHots(); if (document.documentElement.classList.contains('export')) return;
+    const c = R.cam || camAt(R, st.t);
+    for (const h of R.hots) {
+      if (st.t < h.at || st.t > h.until) continue;
+      const sx = 800 + (h.x - c.x) * c.z, sy = 450 + (h.y - c.y) * c.z;
+      if (sx < 40 || sx > 1560 || sy < 40 || sy > 740) continue;
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'hot';
+      b.style.left = (sx / 16) + '%'; b.style.top = (sy / 9) + '%';
+      b.innerHTML = `<span class="dot">+</span><span class="lbl">${h.title}</span>`;
+      b.onclick = () => openHot(h); hl.appendChild(b);
+    }
+  }
+  function openHot(h) { $('hotpanel').hidden = false; $('hottitle').textContent = h.title; $('hotbody').innerHTML = h.html; }
+  function closeHot() { $('hotpanel').hidden = true; }
+  $('hotclose').onclick = closeHot;
+  // quiz
+  function showQuiz(c) {
+    const q = ep.quiz[c.id], box = $('quiz'); box.hidden = false;
+    $('quizq').textContent = q.q; const ch = $('quizc'); ch.innerHTML = ''; $('quizwhy').hidden = true; $('quizgo').hidden = true;
+    q.choices.forEach((txt, i) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = txt;
+      b.onclick = () => { [...ch.children].forEach((x, j) => { x.disabled = true; x.classList.add(j === q.answer ? 'ok' : (j === i ? 'ko' : 'dim')); });
+        $('quizwhy').textContent = q.why; $('quizwhy').hidden = false; $('quizgo').hidden = false; $('quizgo').focus(); };
+      ch.appendChild(b); });
+  }
+  $('quizgo').onclick = () => { $('quiz').hidden = true; play(); };
+  // poster
+  $('dur').textContent = fmt(R.duration);
+  const posterT = ep.poster != null ? (typeof ep.poster === 'function' ? ep.poster(K) : ep.poster) : 2;
+  // hash routing for scenes (#s3)
+  function fromHash() { const m = /^#(s\d+)$/.exec(location.hash); if (m) { const s = K.sc(m[1]); if (s) { seek(s.start - .6); $('poster').hidden = true; return true; } } return false; }
+  window.addEventListener('hashchange', fromHash);
+  if (!fromHash()) { st.t = posterT; render(st.t); ui(); }
+  window.addEventListener('resize', () => { if (!st.playing) drawHots(); });
+
+  /* -------- test / export hooks -------- */
+  window.__mx = {
+    setEp() { }, render: (t, o) => render(t, o), duration: R.duration, cues: R.cues, scenes: R.scenes, events: R.events,
+    marks: R.marks, focusAt: t => { const f = focusAt(R, t); return f && !Array.isArray(f.target) ? f.target : null; },
+    charRoots: () => R.chars.map(c => c.root),
+    guessWindows: R.cues.filter(c => c.guess).map(c => [c.pauseAt, c.pauseAt + GUESS_PAUSE]),
+    exportMode(w = 1920, subs = true) { document.documentElement.classList.add('export'); $('poster').hidden = true; clearHots();
+      const stg = $('stage'); stg.style.width = w + 'px'; stg.style.height = Math.round(w * 9 / 16) + 'px';
+      $('subs').style.fontSize = Math.round(34 * w / 1920) + 'px'; $('subs').style.bottom = Math.round(34 * w / 1920) + 'px';
+      document.body.classList.toggle('nosubs', !subs); },
+    pause, seek, R,
+  };
+}
+
+</script>
+<script>
+/*META{"title":"Lire un EXPLAIN ANALYZE","h1":"Lire un EXPLAIN ANALYZE · PostgreSQL 18","eyebrow":"Motion explainer · skill v7 · technique, développeurs","voice":{"cast":{"foe":{"voice":"fr_FR-tom-medium","ls":1.0}},"lexicon":{"postgres":"Post-gresse","loops":"Loupse","orders":"Ordeurz","autovacuum":"auto-vakiou-eume","cost":"coste"}},"music":{"mood":"curious","key":"F"},"footer":"<p class='footer'>v7-pgexplain, skill v7. Plans réels produits sur PostgreSQL 18.6 (2 000 000 de commandes, 200 000 clients ; script dans research/pg-explain/). Sources : documentation PostgreSQL 18 (Using EXPLAIN, Indexes, Populating a Database, Routine Vacuuming), notes de version 18.0. Voix Piper (siwis, tom), musique générée.</p>"}META*/
+/* ---------- FICHE (skill v7) ----------
+Audience : métier = développeur back-end, praticien (écrit du SQL chaque jour) ; domaine = optimiseur PostgreSQL, novice.
+Doit savoir faire après : 1. lancer EXPLAIN (ANALYZE) sur une requête lente (dans BEGIN … ROLLBACK si elle écrit) ;
+ 2. lire un plan de l'intérieur vers l'extérieur, trouver le nœud coûteux, repérer « Rows Removed by Filter » énorme → index ;
+ 3. comparer rows prévu / réel ; écart énorme → statistiques périmées → ANALYZE.
+Question centrale : pourquoi cette requête est-elle lente, et que dit le plan ?
+Inventaire (sorties réelles, research/pg-explain/plan*.txt) : EXPLAIN (ANALYZE) ; Parallel Seq Scan on orders (cost=0.00..25555.67 rows=5 width=20)
+ (actual time=13.111..38.517 rows=2.67 loops=3) ; Rows Removed by Filter: 666664 ; Execution Time: 48.466 ms ; CREATE INDEX … (customer_id, created_at DESC) ;
+ Bitmap Index Scan on orders_customer_created_idx ; 0.159 ms ; Nested Loop rows=1 / rows=300000.00 ; loops=300000 ; 1077.072 ms ; ANALYZE orders ;
+ Parallel Hash Join ; 176.475 ms ; autovacuum 50 + 10 % ; BEGIN/ROLLBACK ; Buffers (PG 18).
+Métaphore système : l'entrepôt (table = cartons ; Seq Scan = robots qui ouvrent tout ; index = catalogue trié ; planificateur = chef d'entrepôt et sa fiche d'inventaire).
+Idées reçues : « cost = millisecondes » (antagoniste) ; « EXPLAIN ANALYZE ne fait que décrire ». Devinez : lignes lues pour 8 ; lignes trouvées pour 1 prévue.
+Termes nouveaux : s2 coût estimé ; s3 nœud ; s4 index ; s5 planificateur ; s6 statistiques ; s7 transaction annulée.
+------------------------------------ */
+const EP = {
+  bg: '#0B1A3A', lead: .6, tail: 2.2, spotDark: .25,
+  zones: { bureau: [0, 0], ligne: [2300, 0], arbre: [4600, 0], index: [6900, 0], rapport: [9200, 0], stats: [11500, 0], fin: [13800, 0] },
+  legend: [['#22D3EE', 'sortie réelle de PostgreSQL'], ['#FFB703', 'estimation (avant exécution)'], ['#06D6A0', 'réel (actual)'], ['#EF476F', 'idée reçue / problème'], ['#A78BFA', 'planificateur et statistiques']],
+  scenes: [{ id: 's1', title: 'Une page lente' }, { id: 's2', title: 'Lire une ligne' }, { id: 's3', title: 'Lire l\'arbre' }, { id: 's4', title: 'L\'index' },
+    { id: 's5', title: 'Prévu : 1 ligne' }, { id: 's6', title: 'ANALYZE' }, { id: 's7', title: 'Vos réflexes' }],
+  cues: [
+    { id: 'c1', sc: 's1', sub: 'La page « Mes commandes » met du temps à s\'afficher. Vous avez la requête. Mais pourquoi est-elle lente ?', say: 'La page Mes commandes met du temps à s\'afficher. Vous avez la requête. Mais pourquoi est-elle lente ?' },
+    { id: 'c2', sc: 's1', sub: 'Ajoutez EXPLAIN ANALYZE devant : la base exécute la requête et raconte comment elle s\'y est prise.', say: 'Ajoutez explain analyze devant : la base exécute la requête et raconte comment elle s\'y est prise.' },
+    { id: 'c3', sc: 's2', who: 'foe', sub: 'Facile : « cost », c\'est le temps en millisecondes !', say: 'Facile : le cost, c\'est le temps en millisecondes !' },
+    { id: 'c4', sc: 's2', sub: 'Non. « cost » est une estimation faite avant d\'exécuter, en unités arbitraires. Le vrai temps, en millisecondes, est dans « actual time ».', say: 'Non. Le cost est une estimation faite avant d\'exécuter, en unités arbitraires. Le vrai temps, en millisecondes, est dans actual time.' },
+    { id: 'c5', sc: 's2', sub: 'Sur chaque ligne, comparez « rows » : les lignes prévues, puis les lignes réelles. C\'est le premier indice.', say: 'Sur chaque ligne, comparez les rows : les lignes prévues, puis les lignes réelles. C\'est le premier indice.', breath: .8 },
+    { id: 'c6', sc: 's3', sub: 'Un plan se lit de l\'intérieur vers l\'extérieur : le nœud le plus indenté travaille d\'abord et passe ses lignes à son parent.', say: 'Un plan se lit de l\'intérieur vers l\'extérieur : le nœud le plus indenté travaille d\'abord et passe ses lignes à son parent.' },
+    { id: 'c7', sc: 's3', sub: 'Tout en bas : Parallel Seq Scan, la lecture de toute la table, par trois processus. « loops=3 » : les chiffres sont des moyennes par processus.', say: 'Tout en bas : une lecture de toute la table, par trois processus. Loops égale trois : les chiffres sont des moyennes par processus.' },
+    { id: 'c8', sc: 's3', sub: 'Chacun écarte 666 664 lignes. Devinez : combien de lignes lues pour en garder 8 ?|2 millions. Toute la table, pour en garder 8.', say: 'Chacun écarte six cent soixante-six mille lignes. Devinez : combien de lignes lues pour en garder huit ? | Deux millions. Toute la table, pour en garder huit.' },
+    { id: 'c9', sc: 's4', sub: 'Le remède : un index sur le client et la date. Comme un catalogue trié, il mène droit aux bons cartons.', say: 'Le remède : un index sur le client et la date. Comme un catalogue trié, il mène droit aux bons cartons.' },
+    { id: 'c10', sc: 's4', sub: 'Nouveau plan : Bitmap Index Scan sur le nouvel index. Exécution : 0,159 ms au lieu de 48.', say: 'Nouveau plan : un parcours du nouvel index. Exécution : zéro virgule seize milliseconde au lieu de quarante-huit.' },
+    { id: 'c11', sc: 's4', sub: 'Le prix : chaque écriture doit aussi mettre l\'index à jour. On n\'en crée pas un par colonne.', say: 'Le prix : chaque écriture doit aussi mettre l\'index à jour. On n\'en crée pas un par colonne.', breath: .8 },
+    { id: 'c12', sc: 's5', sub: 'Deuxième requête, un rapport : plus d\'une seconde. Le planificateur avait prévu une seule ligne.', say: 'Deuxième requête, un rapport : plus d\'une seconde. Le planificateur avait prévu une seule ligne.' },
+    { id: 'c13', sc: 's5', sub: 'Devinez combien il en a trouvé.|300 000. Il a choisi une boucle imbriquée, faite pour une ligne : 300 000 allers-retours.', say: 'Devinez combien il en a trouvé. | Trois cent mille. Il a choisi une boucle imbriquée, faite pour une ligne : trois cent mille allers-retours.' },
+    { id: 'c14', sc: 's5', sub: 'Pourquoi ? 300 000 commandes venaient d\'être chargées, et ses statistiques n\'étaient pas à jour.', say: 'Pourquoi ? Trois cent mille commandes venaient d\'être chargées, et ses statistiques n\'étaient pas à jour.', breath: .8 },
+    { id: 'c15', sc: 's6', sub: 'ANALYZE orders rafraîchit les statistiques. Nouveau plan : Hash Join, une jointure par hachage. 176 ms.', say: 'Analyze orders rafraîchit les statistiques. Nouveau plan : une jointure par hachage. Cent soixante-seize millisecondes.' },
+    { id: 'c16', sc: 's6', sub: 'D\'habitude, l\'autovacuum s\'en charge, après environ 10 % de lignes modifiées. Après un gros chargement, lancez-le vous-même.', say: 'D\'habitude, l\'autovacuum s\'en charge, après environ dix pour cent de lignes modifiées. Après un gros chargement, lancez-le vous-même.', breath: .8 },
+    { id: 'c17', sc: 's7', sub: 'On croit qu\'EXPLAIN ANALYZE ne fait que décrire. Faux : il exécute. Pour un UPDATE, encadrez-le : BEGIN, puis ROLLBACK.', say: 'On croit qu\'explain analyze ne fait que décrire. Faux : il exécute. Pour une mise à jour, encadrez-le dans une transaction, puis annulez-la.' },
+    { id: 'c18', sc: 's7', sub: 'Vos réflexes : EXPLAIN ANALYZE sur la requête lente ; des lignes écartées par millions, il manque un index ; prévu loin du réel, lancez ANALYZE.', say: 'Vos réflexes : explain analyze sur la requête lente. Des lignes écartées par millions : il manque un index. Prévu loin du réel : lancez analyze.' },
+    { id: 'c19', sc: 's7', sub: 'Vous savez lire un plan. Depuis PostgreSQL 18, il affiche aussi les Buffers : cache ou disque, ce sera l\'étape suivante.', say: 'Vous savez lire un plan. Depuis Postgres dix-huit, il affiche aussi les buffers : cache ou disque, ce sera l\'étape suivante.' },
+  ],
+  quiz: {
+    c8: { q: 'Trois processus écartent chacun 666 664 lignes en moyenne. Combien de lignes ont été lues pour en garder 8 ?', choices: ['666 664', 'environ 2 millions', '8'], answer: 1, why: 'Les chiffres d\'un nœud sont des moyennes par boucle : 666 664 × 3 + 8 ≈ 2 000 000, toute la table.' },
+    c13: { q: 'Le planificateur prévoyait 1 ligne (rows=1). Combien le nœud en a-t-il produit ?', choices: ['1', '300', '300 000'], answer: 2, why: 'actual … rows=300000.00 : 300 000 commandes insérées sans ANALYZE, les statistiques ignoraient leur statut.' },
+  },
+  poster: K => K.T('c2', 'analyze') + .8,
+  build(K) {
+    const k = sceneKit(K); const { C, G, I, F, FLOOR } = k; const { S, E, Z, P } = K; const T = K.T, R = K.reveal, cue = K.cue, pu = k.pulse;
+    k.world(['bureau', 'ligne', 'arbre', 'index', 'rapport', 'stats', 'fin'], { silhouette: 'server' });
+    const carton = (g, x, y, s, col, o = {}) => { const c = G(g, x, y, { s, ...o }); S('rect', { x: -40, y: -34, width: 80, height: 68, rx: 8, fill: col || '#B7854F' }, c);
+      S('rect', { x: -40, y: -34, width: 80, height: 16, rx: 6, fill: '#000', opacity: .15 }, c); S('rect', { x: -6, y: -34, width: 12, height: 30, fill: '#E7DCC4', opacity: .7 }, c); return c; };
+    /* ================= s1 : a slow page ================= */
+    const g1 = k.room('bureau', '#1F3B80', { seed: 1 });
+    S('rect', { x: -620, y: 60, width: 960, height: 44, rx: 14, fill: C.p2 }, g1); S('rect', { x: -580, y: 104, width: 28, height: 146, fill: C.p1 }, g1); S('rect', { x: 280, y: 104, width: 28, height: 146, fill: C.p1 }, g1);
+    const mon = G(g1, -140, -190); S('rect', { x: -360, y: -210, width: 720, height: 420, rx: 24, fill: C.p1, stroke: '#26407e', 'stroke-width': 6 }, mon);
+    S('rect', { x: -335, y: -188, width: 670, height: 376, rx: 14, fill: '#E8EEF9' }, mon); S('rect', { x: -40, y: 210, width: 80, height: 40, fill: C.p1 }, mon);
+    K.tx(mon, -300, -130, 'Mes commandes', { size: 72, fill: C.ink, weight: 800, anchor: 'start' });
+    for (let i = 0; i < 3; i++) S('rect', { x: -300, y: -70 + i * 70, width: 600, height: 44, rx: 10, fill: '#CBD5E1' }, mon);
+    const spin = G(mon, 0, 0, { pop: T('c1', 'temps') }); const arc = S('path', { d: 'M 0 -70 A 70 70 0 1 1 -66 -24', fill: 'none', stroke: C.rose, 'stroke-width': 16, 'stroke-linecap': 'round' }, spin);
+    K.fx(t => arc.setAttribute('transform', `rotate(${((t * 300) % 360).toFixed(1)})`)); spin._a.o.out = T('c2', 'ajoutez');
+    const hero = k.hero(g1, 560, { s: 1.5, dir: -1 }); hero.pop(.2).pose(T('c1', 'requete'), 1.2, 'type').expr(T('c1', 'pourquoi'), 'worried').look(T('c1', 'page'), -140, -190);
+    const qsql = k.panel(g1, -140, -150, ['SELECT id, total_cents, created_at', 'FROM orders WHERE customer_id = 4217', 'ORDER BY created_at DESC LIMIT 20;'], { w: 880, size: 40, pop: T('c1', 'requete'), out: T('c2', 'ajoutez'), col: C.cyan });
+    const ex = k.panel(g1, -140, -150, ['EXPLAIN (ANALYZE) SELECT …'], { w: 880, size: 50, pop: T('c2', 'ajoutez') - .1, col: C.green, typeAt: T('c2', 'explain') });
+    const q1 = k.suspense(g1, 300, -450, T('c1', 'pourquoi'), T('c2', 'ajoutez'));
+    hero.pose(T('c2', 'explain'), 1.4, 'type').pose(T('c2', 'raconte'), 1.0, 'point', { x: -140, y: -190 }).expr(T('c2', 'raconte'), 'happy');
+    K.cam(0, 0, Z.bureau[0] - 100, Z.bureau[1] - 120, 1.6); F(.4, 3.0, [g1._room], .92, { focus: false }); K.focus(0, mon);
+    F(T('c1', 'requete') - .3, .9, [mon, hero], .8, { focus: false }); K.focus(T('c1', 'requete'), qsql);
+    F(T('c1', 'pourquoi') - .3, .7, [mon, q1], .8, { focus: false }); K.focus(T('c1', 'pourquoi'), q1);
+    F(T('c2', 'explain') - .3, .8, [ex], .6, { focus: false, zmax: 2.2 }); K.focus(T('c2', 'explain'), ex);
+    F(T('c2', 'raconte') - .2, .9, [mon, hero], .86, { focus: false });
+    pu(mon, T('c1', 'lente'));
+    /* ================= s2 : read one line ================= */
+    const g2 = k.room('ligne', '#1E3570', { seed: 2 }); const s2 = k.sc('s2');
+    const L = ['Parallel Seq Scan on orders', '(cost=0.00..25555.67 rows=5 width=20)', '(actual time=13.111..38.517 rows=2.67 loops=3)'];
+    const ln = k.panel(g2, 0, -170, L, { w: 1500, size: 52, pop: s2 - .3, col: C.cyan, title: 'une ligne du plan (sortie réelle)' });
+    const hCost = ln._hi(1, 1, 19, T('c3', 'cost'), { col: C.amber, box: true, out: T('c4', 'actual') });
+    const hAct = ln._hi(2, 1, 26, T('c4', 'actual'), { col: C.green, out: T('c5', 'comparez') });
+    const hR1 = ln._hi(1, L[1].indexOf('rows=5'), 6, T('c5', 'prevues'), { col: C.amber });
+    const hR2 = ln._hi(2, L[2].indexOf('rows=2.67'), 9, T('c5', 'reelles'), { col: C.green });
+    const foe = k.foe(g2, -1100, { s: 1.4, dir: 1, mask: false }); foe.pop(cue('c3').start - .4).walk(cue('c3').start - .3, .9, -640).pose(T('c3', 'cost'), 1.0, 'point', { x: -300, y: -170 }).pose(T('c3', 'millisecondes') - .2, .9, 'cheer')
+      .expr(T('c4', 'non'), 'worried').walk(T('c4', 'actual') - .3, .9, -1250).out(T('c4', 'actual') + .3);
+    const nonms = k.label(g2, -280, 120, 'cost ≠ ms', { pop: T('c4', 'non'), out: T('c5', 'comparez'), size: 64, col: C.rose }); K.ev(T('c4', 'non'), 'myth');
+    const est = k.label(g2, -280, 120, 'estimé, avant', { pop: T('c4', 'estimation') + .6, out: T('c4', 'actual'), size: 60, col: C.amber }); nonms._a.o.out = T('c4', 'estimation') + .5;
+    const ms = k.label(g2, 380, 120, 'réel, en ms', { pop: T('c4', 'actual'), out: T('c5', 'comparez'), size: 60, col: C.green });
+    const vs = k.label(g2, 0, 130, '5 prévues  ·  2,67 réelles', { pop: T('c5', 'reelles') + .2, size: 60, col: C.text });
+    const hero2 = k.hero(g2, 1000, { s: 1.4, dir: -1 }); hero2.pop(T('c4', 'non') - .5).walk(T('c4', 'non') - .4, .9, 760).pose(T('c4', 'non'), .8, 'shrug').pose(T('c5', 'comparez'), 1.0, 'point', { x: 200, y: -110 }).expr(T('c5', 'indice'), 'happy');
+    F(s2 - 1.4, 1.5, [ln], .9, { focus: false }); K.focus(s2, ln);
+    F(cue('c3').start - .2, .9, [ln, foe], .95, { focus: false }); F(T('c3', 'cost') - .2, .6, [hCost], .8, { focus: false, zmax: 2.6 }); F(T('c3', 'temps') - .2, .7, [ln, foe], .95, { focus: false }); K.focus(T('c3', 'cost'), hCost);
+    F(T('c4', 'estimation') - .3, .8, [ln, est], .9, { focus: false }); K.focus(T('c4', 'estimation'), est);
+    F(T('c4', 'actual') - .3, .8, [ln, ms], .9, { focus: false }); F(T('c4', 'time'), .6, [ln._els[2]], .7, { focus: false, zmax: 2.4 }); K.focus(T('c4', 'actual'), hAct);
+    F(T('c5', 'comparez') - .3, .9, [ln, vs], .9, { focus: false }); K.focus(T('c5', 'prevues'), hR1); K.focus(T('c5', 'reelles'), hR2);
+    pu(ln, T('c4', 'arbitraires')); pu(vs, T('c5', 'indice'));
+    K.hot({ x: Z.ligne[0], y: Z.ligne[1] - 330, at: s2, until: cue('c5').end, title: 'Les champs', html: '<p><code>cost=démarrage..total</code> : coût estimé, unités arbitraires (seq_page_cost = 1). <code>rows</code> : lignes <b>émises</b> estimées. <code>width</code> : octets par ligne. <code>actual time</code> : ms réelles ; <code>rows</code>, <code>loops</code> : réels, moyennes par exécution. Depuis la version 18, les lignes réelles sont fractionnaires.</p><p class="src">docs PostgreSQL 18, « Using EXPLAIN » ; notes de version 18.0.</p>' });
+    /* ================= s3 : read the tree ================= */
+    const g3 = k.room('arbre', '#262F72', { decor: 'lab', seed: 3 }); const s3 = k.sc('s3');
+    const nodes = [['Limit', 'rows=8.00'], ['Sort', 'rows=8.00'], ['Gather', 'rows=8.00'], ['Parallel Seq Scan on orders', 'rows=2.67 loops=3']].map(([n, r], i) => {
+      const nd = G(g3, -520 + i * 90, -470 + i * 120, { pop: s3 - .2 + i * .1 }); const w = 120 + n.length * 26;
+      S('rect', { x: 0, y: -44, width: w, height: 88, rx: 18, fill: C.p1, stroke: i === 3 ? C.rose : C.cyan, 'stroke-width': 6 }, nd);
+      K.tx(nd, 30, 0, '-> ' + n, { size: 48, fill: C.text, weight: 700, anchor: 'start', mono: true, block: 'tree' }); nd._w = w; return nd; });
+    const order = [3, 2, 1, 0].map((ni, j) => { const tg = nodes[ni]; const r = S('rect', { x: -8, y: -52, width: tg._w + 16, height: 104, rx: 22, fill: 'none', stroke: C.amber, 'stroke-width': 8 }, tg);
+      K.A(r, { fin: [T('c6', 'indente') + j * .5, .2], out: T('c6', 'indente') + j * .5 + .6 }); return r; });
+    const up = k.arrow(g3, -620, -60, -620, -460, { t: T('c6', 'passe'), col: C.amber, sw: 12, out: T('c7', 'bas') });
+    // warehouse: 3 robots sweep the cartons (one per process)
+    const wh = G(g3, 260, 120); const cartons = [];
+    for (let r = 0; r < 3; r++) for (let c = 0; c < 9; c++) { const cc = carton(wh, -440 + c * 110, -150 + r * 100, .9, '#B7854F'); cartons.push([cc, r, c]); }
+    const tScan = T('c7', 'lecture');
+    for (const [cc, r, c] of cartons) { const kept = (r * 9 + c) % 13 === 4; const tt = tScan + c * .35 + r * .05; const rr = cc.firstChild;
+      K.fx(t => rr.setAttribute('fill', t > tt ? (kept ? C.amber : '#4B5675') : '#B7854F')); }
+    K.mark(tScan); K.mark(tScan + 1.4); K.mark(tScan + 2.8);
+    const bots = [0, 1, 2].map(i => { const b = K.char(wh, { name: 'robot' + i, color: C.orange, shape: 'robot', x: -540, y: -150 + i * 100 + 40, s: .55 });
+      b.pop(T('c7', 'bas') + i * .15).slide(tScan, 4.2, 480); return b; });
+    const lp = k.label(g3, 560, -330, 'loops=3', { pop: T('c7', 'loops'), size: 60, col: C.cyan, mono: true, out: T('c8', 'chacun') });
+    const rr = k.label(g3, 560, -330, 'Rows Removed by Filter: 666664', { pop: T('c8', 'chacun'), size: 54, col: C.rose, mono: true });
+    const q3 = k.suspense(g3, 260, 470 - 600, T('c8', 'devinez'), R('c8'));
+    const tot = k.counter(g3, 360, -470, { pop: R('c8'), t0: R('c8'), dur: 1.2, from: 0, to: 2000000, size: 96, fill: C.amber, fmt: v => Math.round(v).toLocaleString('fr-FR') + ' lues' });
+    const kept8 = k.label(g3, 900, -330, '→ 8 gardées', { pop: R('c8') + 1.2, size: 54, col: C.amber });
+    const hero3 = k.hero(g3, -980, { s: 1.35 }); hero3.pop(s3 - .3).walk(s3 - .2, .9, -880).pose(T('c6', 'indente'), 1.0, 'point', { x: -260, y: -110 }).pose(T('c7', 'bas'), 1.0, 'point', { x: 0, y: 0 })
+      .expr(T('c8', 'devinez'), 'worried').expr(R('c8'), 'surprise').pose(R('c8') + .2, 1.0, 'jump');
+    F(s3 - 1.4, 1.5, [...nodes], .82, { focus: false }); K.focus(s3, nodes[0]);
+    F(T('c6', 'indente') - .3, .8, [nodes[2], nodes[3]], .8, { focus: false }); K.focus(T('c6', 'indente'), nodes[3]);
+    F(T('c6', 'passe') - .2, .9, [...nodes, up], .86, { focus: false }); F(T('c6', 'parent') - .1, .6, [...nodes], .9, { focus: false }); K.focus(T('c6', 'passe'), up);
+    F(T('c7', 'bas') - .3, .9, [wh, lp], .82, { focus: false }); K.focus(T('c7', 'bas'), wh); K.focus(T('c7', 'loops'), lp);
+    F(T('c8', 'chacun') - .3, .8, [wh, rr], .84, { focus: false }); K.focus(T('c8', 'chacun'), rr);
+    F(R('c8') - .3, .8, [wh, tot, kept8], .9, { focus: false }); K.focus(R('c8'), tot); F(T('c6', 'noeud') - .2, .6, [nodes[3]], .62, { focus: false, zmax: 2.4 });
+    pu(wh, T('c7', 'processus')); pu(nodes[3], T('c7', 'moyennes')); pu(rr, T('c8', 'lignes', 1)); pu(wh, T('c8', 'garder') + .3); F(T('c8', 'garder') - .2, .6, [cartons[4][0], cartons[17][0]], .5, { focus: false, zmax: 2.6 });
+    K.hot({ x: Z.arbre[0] - 100, y: Z.arbre[1] - 470, at: s3, until: cue('c8').end, title: 'Plan complet', html: '<pre>Limit  (cost=26556.96..26556.98 rows=11 width=20) (actual time=41.693..48.426 rows=8.00 loops=1)\n  -&gt;  Sort  (…) (actual … rows=8.00 loops=1)\n        Sort Key: created_at DESC\n        -&gt;  Gather  (…) (actual … rows=8.00 loops=1)\n              Workers Launched: 2\n              -&gt;  Parallel Seq Scan on orders  (cost=0.00..25555.67 rows=5 width=20)\n                    (actual time=13.111..38.517 rows=2.67 loops=3)\n                    Filter: (customer_id = 4217)\n                    Rows Removed by Filter: 666664\nExecution Time: 48.466 ms</pre><p class="src">Sortie réelle, PostgreSQL 18.6 (research/pg-explain/plan1_before.txt).</p>' });
+    /* ================= s4 : the index ================= */
+    const g4 = k.room('index', '#1E3A72', { decor: 'lab', seed: 4 }); const s4 = k.sc('s4');
+    const ci = k.panel(g4, -40, -420, ['CREATE INDEX ON orders (customer_id, created_at DESC);'], { w: 1500, size: 46, pop: s4 - .2, col: C.green, typeAt: T('c9', 'index'), out: cue('c11').start });
+    const drawer = G(g4, -520, 0, { pop: T('c9', 'catalogue') - .2, out: cue('c10').start - .3 }); S('rect', { x: -170, y: -150, width: 340, height: 300, rx: 20, fill: C.p2, stroke: C.violet, 'stroke-width': 6 }, drawer);
+    for (let i = 0; i < 6; i++) { const cd = S('rect', { x: -140, y: -120 + i * 44, width: 280, height: 34, rx: 8, fill: i === 3 ? C.amber : C.paper }, drawer); }
+    K.tx(drawer, 0, 190, 'client 4217', { size: 50, fill: C.amber, weight: 800, mono: true });
+    const shelf = G(g4, 360, 40, { out: cue('c10').start - .3 }); const sc8 = []; for (let i = 0; i < 12; i++) { const amb = [2, 5, 9].includes(i); sc8.push(carton(shelf, -330 + (i % 6) * 130, -60 + Math.floor(i / 6) * 110, .95, amb ? C.amber : '#B7854F')); }
+    const jump = k.arrow(g4, -340, -40, 120, -60, { t: T('c9', 'droit'), col: C.amber, sw: 12, out: cue('c10').start - .3 });
+    const np = k.panel(g4, -40, -80, ['Bitmap Index Scan on orders_customer_created_idx', 'Execution Time: 0.159 ms'], { w: 1500, size: 46, pop: cue('c10').start - .2, col: C.cyan, out: cue('c11').start });
+    const hNP = np._hi(1, 16, 8, T('c10', 'zero'), { col: C.green });
+    const cmp = k.bars(g4, 0, 300, { pop: T('c10', 'lieu') - .2, t0: T('c10', 'lieu'), max: 48.466, h: 300, w: 560, lsize: 48, out: cue('c11').start,
+      vals: [{ v: 48.466, label: 'avant', col: C.rose, top: '48 ms' }, { v: .159, label: 'après', col: C.green, top: '0,16' }] });
+    const bal = k.balance(g4, 120, -80, { pop: cue('c11').start, t: T('c11', 'ecriture'), tilt: -14 });
+    const pen = G(bal._beam, -340, 60); K.tx(pen, 0, 0, 'écritures', { size: 56, fill: C.rose, weight: 800 }); const look = G(bal._beam, 340, 60); K.tx(look, 0, 0, 'lectures', { size: 56, fill: C.green, weight: 800 });
+    const hero4 = k.hero(g4, -980, { s: 1.35 }); hero4.pop(s4 - .3).walk(s4 - .2, .9, -880).pose(T('c9', 'index'), 1.2, 'type').pose(T('c9', 'droit'), 1.0, 'point', { x: 360, y: 0 }).expr(T('c10', 'lieu'), 'happy').pose(T('c10', 'lieu') + .3, 1.0, 'cheer')
+      .pose(T('c11', 'prix'), 1.0, 'shrug').expr(T('c11', 'prix'), 'neutral');
+    F(s4 - 1.4, 1.5, [ci, drawer, shelf], .9, { focus: false }); K.focus(s4, ci);
+    F(T('c9', 'index') - .3, .7, [ci], .8, { focus: false }); K.focus(T('c9', 'index'), ci);
+    F(T('c9', 'catalogue') - .3, .9, [drawer, shelf], .86, { focus: false }); K.focus(T('c9', 'catalogue'), drawer); K.focus(T('c9', 'droit'), shelf);
+    F(cue('c10').start - .2, .8, [np], .82, { focus: false }); K.focus(cue('c10').start, np);
+    F(T('c10', 'zero') - .3, .6, [hNP], .7, { focus: false, zmax: 2.6 }); F(T('c10', 'lieu') - .4, .8, [np, cmp], .9, { focus: false }); K.focus(T('c10', 'lieu'), cmp);
+    F(cue('c11').start - .1, .9, [bal, hero4], .8, { focus: false }); F(T('c11', 'mettre') - .2, .7, [bal], .62, { focus: false }); K.focus(T('c11', 'ecriture'), bal);
+    pu(drawer, T('c9', 'trie')); pu(shelf, T('c9', 'cartons')); pu(np, T('c10', 'parcours')); pu(bal, T('c11', 'colonne'));
+    K.hot({ x: Z.index[0] - 40, y: Z.index[1] - 420, at: s4, until: cue('c11').end, title: 'Plan après index', html: '<pre>Limit (…) (actual time=0.134..0.135 rows=8.00 loops=1)\n  -&gt;  Sort (…)\n        -&gt;  Bitmap Heap Scan on orders (…)\n              Recheck Cond: (customer_id = 4217)\n              -&gt;  Bitmap Index Scan on orders_customer_created_idx\n                    Index Cond: (customer_id = 4217)\nExecution Time: 0.159 ms</pre><p>Coût d\'un index : « the system has to keep it synchronized with the table. This adds overhead to data manipulation operations » (docs, Indexes).</p>' });
+    /* ================= s5 : estimated 1 row ================= */
+    const g5 = k.room('rapport', '#2B2D6E', { seed: 0 }); const s5 = k.sc('s5');
+    const boss = K.char(g5, { name: 'planner', color: C.violet, shape: 'robot', x: -560, y: FLOOR, s: 1.4 }); boss.pop(s5 - .3);
+    const clip = G(g5, -300, -60, { pop: T('c12', 'planificateur') - .2 }); S('rect', { x: -110, y: -140, width: 220, height: 280, rx: 16, fill: C.paper }, clip); S('rect', { x: -50, y: -156, width: 100, height: 34, rx: 10, fill: '#8B5E34' }, clip);
+    K.tx(clip, 0, -40, 'rows=1', { size: 50, fill: C.ink, weight: 800, mono: true });
+    const p2 = k.panel(g5, 330, -330, ['Nested Loop  (cost=1000.42..30784.38 rows=1 width=9)', '(actual time=61.397..920.280 rows=300000.00 loops=1)', 'Execution Time: 1077.072 ms'], { w: 1240, size: 38, pop: cue('c12').start - .2, col: C.rose, out: cue('c14').start });
+    const hEst = p2._hi(0, 'Nested Loop  (cost=1000.42..30784.38 '.length, 6, T('c12', 'prevu'), { col: C.amber, box: true });
+    const hAct2 = p2._hi(1, '(actual time=61.397..920.280 '.length, 16, R('c13'), { col: C.green, box: true });
+    const hTime = p2._hi(2, 16, 11, T('c12', 'seconde'), { col: C.rose });
+    const q5 = k.suspense(g5, 330, -80, T('c13', 'devinez'), R('c13'));
+    const big = k.counter(g5, 330, -60, { pop: R('c13'), t0: R('c13'), dur: 1.0, from: 1, to: 300000, size: 110, fill: C.green, fmt: v => Math.round(v).toLocaleString('fr-FR') });
+    const cart = G(g5, 100, 170, { pop: T('c13', 'boucle'), fn: (s, t) => { s.x += AMBIENT || true ? 260 * Math.abs(Math.sin((t - T('c13', 'boucle')) * 6)) : 0; } });
+    S('rect', { x: -50, y: -30, width: 100, height: 60, rx: 10, fill: C.orange }, cart); S('circle', { cx: -30, cy: 34, r: 12, fill: C.ink }, cart); S('circle', { cx: 30, cy: 34, r: 12, fill: C.ink }, cart);
+    for (let i = 0; i < 6; i++) K.mark(T('c13', 'boucle') + i * .5);
+    const lp2 = k.label(g5, 230, 300 - 60, 'loops=300000', { pop: T('c13', 'allers'), size: 54, col: C.rose, mono: true }); big._a.o.out = T('c14', 'pourquoi');
+    cart._a.o.out = T('c14', 'pourquoi'); lp2._a.o.out = T('c14', 'pourquoi');
+    const truck = G(g5, 1100, 120, { pop: T('c14', 'commandes') - .4, moves: [[T('c14', 'commandes') - .4, 1.2, { x: 420 }, E.oc]] });
+    S('rect', { x: -170, y: -110, width: 260, height: 160, rx: 14, fill: '#B7854F' }, truck); S('rect', { x: 90, y: -60, width: 110, height: 110, rx: 14, fill: C.cyan }, truck);
+    for (const x of [-110, 0, 140]) S('circle', { cx: x, cy: 62, r: 26, fill: C.ink }, truck);
+    K.tx(truck, -40, -30, '+300 000', { size: 46, fill: C.ink, weight: 800 });
+    const stale = S('rect', { x: -300 - 126, y: -60 - 156, width: 252, height: 316, rx: 18, fill: 'none', stroke: C.rose, 'stroke-width': 8, 'stroke-dasharray': '18 12' }, g5); K.A(stale, { fin: [T('c14', 'statistiques'), .3], out: cue('c15').start });
+    boss.pose(T('c12', 'prevu'), 1.0, 'hold').expr(R('c13'), 'surprise').pose(T('c14', 'statistiques'), 1.0, 'shrug').expr(T('c14', 'statistiques'), 'worried');
+    const hero5 = k.hero(g5, -980, { s: 1.35 }); hero5.pop(s5 - .3).expr(T('c12', 'seconde'), 'worried').pose(T('c13', 'devinez'), 1.0, 'loupe').pose(T('c14', 'pourquoi'), 1.0, 'shrug');
+    F(s5 - 1.4, 1.5, [g5._room], .95, { focus: false }); K.focus(s5, p2);
+    F(cue('c12').start - .2, .8, [p2], .86, { focus: false }); K.focus(T('c12', 'seconde'), hTime);
+    F(T('c12', 'planificateur') - .3, .9, [boss, clip], .62, { focus: false }); K.focus(T('c12', 'prevu'), clip);
+    F(T('c13', 'devinez') - .3, .8, [p2, q5], .86, { focus: false }); K.focus(T('c13', 'devinez'), q5); K.focus(R('c13'), big);
+    F(T('c13', 'boucle') - .3, .9, [big, cart, lp2], .82, { focus: false }); K.focus(T('c13', 'boucle'), cart);
+    F(cue('c14').start - .1, .9, [boss, clip, truck], .92, { focus: false }); K.focus(T('c14', 'commandes'), truck); K.focus(T('c14', 'statistiques'), clip);
+    pu(clip, T('c12', 'ligne')); pu(p2, T('c13', 'faite')); pu(truck, T('c14', 'chargees'));
+    K.hot({ x: Z.rapport[0] + 330, y: Z.rapport[1] - 470, at: s5, until: cue('c14').end, title: 'Plan avec statistiques périmées', html: '<pre>GroupAggregate (…) (actual time=1032.917..1075.988 rows=5.00 loops=1)\n  -&gt;  Sort (… rows=1 …) (actual … rows=300000.00 loops=1)\n        Sort Method: external merge  Disk: 6488kB\n        -&gt;  Nested Loop (… rows=1 …) (actual … rows=300000.00 loops=1)\n              -&gt;  Gather … -&gt; Parallel Seq Scan on orders o\n                    Filter: (status = \'disputed\'::text)\n              -&gt;  Index Scan using customers_pkey on customers c\n                    (actual time=0.002..0.002 rows=1.00 loops=300000)\nExecution Time: 1077.072 ms</pre><p>Le tri, prévu pour 1 ligne, déborde sur disque (6 488 kB). 300 000 lignes insérées sans ANALYZE (autovacuum coupé pour figer la situation).</p>' });
+    /* ================= s6 : ANALYZE ================= */
+    const g6 = k.room('stats', '#1F3A6E', { seed: 5 }); const s6 = k.sc('s6');
+    const an = k.panel(g6, -100, -430, ['ANALYZE orders;'], { w: 760, size: 60, pop: s6 - .2, col: C.green, typeAt: T('c15', 'analyze') });
+    const boss6 = K.char(g6, { name: 'planner6', color: C.violet, shape: 'robot', x: -620, y: FLOOR, s: 1.3 }); boss6.pop(s6 - .3).pose(T('c15', 'rafraichit'), 1.0, 'cheer').expr(T('c15', 'rafraichit'), 'happy');
+    const clip6 = G(g6, -380, -60, { pop: s6 - .2 }); S('rect', { x: -110, y: -140, width: 220, height: 280, rx: 16, fill: C.paper }, clip6); S('rect', { x: -50, y: -156, width: 100, height: 34, rx: 10, fill: '#8B5E34' }, clip6);
+    const r1 = G(clip6, 0, -40, { out: T('c15', 'rafraichit') }); K.tx(r1, 0, 0, 'rows=1', { size: 50, fill: C.ink, weight: 800, mono: true });
+    const r2 = G(clip6, 0, -40, { pop: T('c15', 'rafraichit') }); K.tx(r2, 0, 0, 'rows=127586', { size: 30, fill: C.ink, weight: 800, mono: true });
+    const p3 = k.panel(g6, 360, -230, ['Parallel Hash Join  (… rows=127586 …)', '(actual … rows=100000.00 loops=3)', 'Execution Time: 176.475 ms'], { w: 1000, size: 40, pop: T('c15', 'plan') - .2, col: C.cyan, out: cue('c16').start + .2 });
+    const hJ = p3._hi(0, 0, 18, T('c15', 'jointure'), { col: C.cyan }); const hT = p3._hi(2, 16, 10, T('c15', 'cent'), { col: C.green });
+    const cmp6 = k.bars(g6, 360, 170, { pop: T('c15', 'cent') - .3, t0: T('c15', 'cent'), max: 1077, h: 200, w: 520, lsize: 46, out: cue('c16').start + .2,
+      vals: [{ v: 1077, label: 'avant', col: C.rose, top: '1 077' }, { v: 176, label: 'après', col: C.green, top: '176' }] });
+    const av = K.char(g6, { name: 'autovac', color: C.teal, shape: 'robot', x: 300, y: FLOOR, s: 1.3 }); av.pop(T('c16', 'autovacuum')).pose(T('c16', 'charge'), 1.0, 'nod');
+    const thr = k.label(g6, 360, -300, '50 + 10 % des lignes', { pop: T('c16', 'dix'), size: 56, col: C.teal, out: T('c16', 'apres', 1) + 1.5 });
+    const bulk = k.label(g6, 360, -300, 'gros chargement → ANALYZE', { pop: T('c16', 'apres', 1) + 1.5, size: 54, col: C.amber });
+    const hero6 = k.hero(g6, 980, { s: 1.35, dir: -1 }); hero6.pop(s6 - .3).walk(s6 - .2, .9, 860).pose(T('c15', 'analyze'), 1.2, 'type').pose(T('c16', 'vous'), 1.0, 'point', { x: 360, y: -300 });
+    F(s6 - 1.4, 1.5, [g6._room], .95, { focus: false }); F(T('c15', 'analyze') - .2, .7, [an], .8, { focus: false }); K.focus(s6, an);
+    F(T('c15', 'rafraichit') - .3, .7, [clip6, boss6], .62, { focus: false }); F(T('c15', 'rafraichit') + .5, .6, [clip6], .5, { focus: false, zmax: 2.4 }); K.focus(T('c15', 'rafraichit'), clip6);
+    F(T('c15', 'plan') - .3, .8, [p3, cmp6], .86, { focus: false }); K.focus(T('c15', 'jointure'), hJ); K.focus(T('c15', 'cent'), cmp6);
+    F(cue('c16').start - .1, .9, [av, thr, hero6], .84, { focus: false }); K.focus(T('c16', 'dix'), thr);
+    F(T('c16', 'apres', 1) + 1.2, .8, [bulk, av, hero6], .8, { focus: false }); K.focus(T('c16', 'vous'), bulk);
+    pu(an, T('c15', 'statistiques')); pu(av, T('c16', 'modifiees')); pu(thr, T('c16', 'environ'));
+    K.hot({ x: Z.stats[0] + 360, y: Z.stats[1] - 230, at: s6, until: cue('c16').end, title: 'Après ANALYZE', html: '<pre>Finalize GroupAggregate (…) (actual … rows=5.00 loops=1)\n  -&gt;  Gather Merge … -&gt; Sort … -&gt; Partial HashAggregate\n        -&gt;  Parallel Hash Join (… rows=127586 …)\n              (actual time=85.071..149.852 rows=100000.00 loops=3)\nExecution Time: 176.475 ms</pre><p>Seuil d\'autovacuum (analyse) : <code>autovacuum_analyze_threshold</code> (50) + <code>autovacuum_analyze_scale_factor</code> (0,1) × lignes de la table. Docs : « Whenever you have significantly altered the distribution of data within a table, running ANALYZE is strongly recommended ».</p>' });
+    /* ================= s7 : reflexes ================= */
+    const g7 = k.room('fin', '#1F3B80', { seed: 1 }); const s7 = k.sc('s7');
+    const foe7 = k.foe(g7, -1100, { s: 1.35, dir: 1, mask: false }); foe7.pop(s7 - .3).walk(s7 - .2, .9, -820).pose(T('c17', 'decrire'), 1.0, 'cheer').expr(T('c17', 'faux'), 'surprise');
+    const up7 = k.panel(g7, 0, -380, ['BEGIN;', 'EXPLAIN ANALYZE UPDATE orders SET status = \'refunded\' …;', 'ROLLBACK;'], { w: 1500, size: 44, pop: s7 - .2, col: C.amber, out: cue('c18').start });
+    up7._dim(s7 - .2, [1], T('c17', 'transaction'));
+    const box7 = G(g7, 0, 60, { out: cue('c18').start }); const bx = []; for (let i = 0; i < 5; i++) bx.push(carton(box7, -360 + i * 180, 0, 1.6, '#B7854F'));
+    K.fx(t => bx[2].firstChild.setAttribute('fill', t > T('c17', 'execute') && t < T('c17', 'annulez') + .4 ? C.rose : '#B7854F')); K.mark(T('c17', 'execute')); K.ev(T('c17', 'faux'), 'myth');
+    const recap = [['EXPLAIN (ANALYZE)', 'reflexes', C.green], ['Rows Removed by Filter', 'ecartees', C.rose], ['rows prévu ≠ réel', 'prevu', C.violet]].map(([a, w, col], i) => {
+      const r = G(g7, -560 + i * 560, -120, { pop: T('c18', w) }); S('rect', { x: -270, y: -150, width: 540, height: 300, rx: 30, fill: C.p1, stroke: col, 'stroke-width': 8 }, r);
+      K.tx(r, 0, -60, a, { size: a.length > 18 ? 40 : 46, fill: col, weight: 800, mono: true });
+      K.tx(r, 0, 50, ['sur la requête lente', '→ index', '→ ANALYZE'][i], { size: 52, fill: C.text, weight: 700 }); return r; });
+    const buf = k.panel(g7, 0, 230, ['Buffers: shared hit=14104 read=1038'], { w: 1100, size: 50, pop: T('c19', 'buffers'), col: C.cyan });
+    const hero7 = k.hero(g7, 980, { s: 1.35, dir: -1 }); hero7.pop(s7 - .3).walk(s7 - .2, .9, 820).pose(T('c17', 'faux'), .9, 'shrug').pose(T('c17', 'encadrez'), 1.0, 'point', { x: 0, y: -380 })
+      .pose(T('c18', 'requete'), .8, 'point', { x: -560, y: -120 }).pose(T('c18', 'ecartees'), .8, 'point', { x: 0, y: -120 }).pose(T('c18', 'prevu'), .8, 'point', { x: 540, y: -120 }).pose(T('c19', 'savez'), 1.2, 'cheer').expr(T('c19', 'savez'), 'happy');
+    foe7.walk(cue('c18').start, 1.0, -1250).out(cue('c18').start + .8);
+    F(s7 - 1.4, 1.5, [g7._room], .95, { focus: false }); F(T('c17', 'croit') - .2, .8, [up7], .8, { focus: false }); K.focus(s7, up7);
+    F(T('c17', 'execute') - .3, .8, [box7, up7], .8, { focus: false }); K.focus(T('c17', 'execute'), box7);
+    F(T('c17', 'encadrez') - .3, .8, [up7], .82, { focus: false }); F(T('c17', 'execute') + .4, .6, [bx[2]], .4, { focus: false, zmax: 2.4 }); K.focus(T('c17', 'encadrez'), up7);
+    F(cue('c18').start - .1, .9, recap, .92, { focus: false }); K.focus(T('c18', 'reflexes'), recap[0]); K.focus(T('c18', 'ecartees'), recap[1]); K.focus(T('c18', 'prevu'), recap[2]);
+    F(T('c19', 'buffers') - .4, .9, [...recap, buf], .94, { focus: false }); K.focus(T('c19', 'buffers'), buf);
+    pu(up7, T('c17', 'decrire')); pu(recap[1], T('c18', 'millions')); pu(recap[2], T('c18', 'lancez')); pu(buf, T('c19', 'disque'));
+    K.hot({ x: Z.fin[0], y: Z.fin[1] - 380, at: s7, until: cue('c19').end + 1, title: 'Sans effet de bord', html: '<pre>BEGIN;\nEXPLAIN ANALYZE UPDATE orders SET status = \'refunded\' WHERE customer_id = 4217;\nROLLBACK;</pre><p>Docs : « because EXPLAIN ANALYZE actually runs the query, any side-effects will happen as usual ». Depuis PostgreSQL 18, ANALYZE active BUFFERS par défaut (<code>BUFFERS OFF</code> pour le retirer) : <code>hit</code> = pages trouvées en cache, <code>read</code> = lues hors du cache partagé.</p>' });
+    /* ---- extra beats (beats.mjs) ---- */
+    pu(ex, T('c2', 'base')); hero.pose(T('c2', 'requete'), .8, 'nod');
+    pu(est, T('c4', 'unites')); pu(ln, T('c4', 'millisecondes')); hero2.pose(T('c4', 'vrai'), .8, 'nod');
+    pu(nodes[3], T('c6', 'interieur')); pu(nodes[0], T('c6', 'exterieur')); pu(nodes[3], T('c6', 'noeud'));
+    pu(lp, T('c7', 'chiffres')); pu(rr, T('c8', 'six')); pu(rr, T('c8', 'devinez') - .3);
+    pu(np, T('c10', 'execution')); hero4.pose(T('c10', 'nouveau'), .8, 'nod');
+    pu(bal, T('c11', 'mettre')); hero4.pose(T('c11', 'jour'), .8, 'nod'); pu(bal, T('c11', 'cree'));
+    pu(p2, T('c13', 'combien')); pu(big, T('c13', 'choisi'));
+    pu(av, T('c16', 'charge')); pu(av, T('c16', 'gros') - .2); hero6.pose(T('c16', 'lancez'), .8, 'nod');
+    pu(up7, T('c17', 'mise')); pu(up7, T('c17', 'puis') + .1);
+    pu(ms, T('c4', 'time')); pu(p2, T('c12', 'rapport')); pu(q5, T('c13', 'trouve')); pu(up7, T('c17', 'croit')); pu(up7, T('c17', 'analyze'));
+    pu(recap[0], T('c18', 'reflexes')); pu(recap[0], T('c18', 'lente'));
+    pu(buf, T('c19', 'affiche')); hero7.pose(T('c19', 'depuis'), .8, 'nod'); pu(buf, T('c19', 'suivante'));
+  },
+};
+
+</script>
+<script>EP.timing = {"engine":"piper:fr_FR-siwis-medium","cues":{"c1":{"parts":[{"wav":"voice/c49e7b39b31d.wav","dur":6.54,"words":[[0.07,0.197],[0.302,0.569],[0.604,0.708],[0.766,1.161],[1.207,1.312],[1.335,1.428],[1.556,1.73],[1.823,1.904],[1.962,2.519],[3.264,3.485],[3.52,3.682],[3.717,3.775],[3.879,4.344],[5.019,5.216],[5.321,5.634],[5.669,5.866],[5.924,6.308]],"vis":[[0.0,"X"],[0.07,"C"],[0.139,"A"],[0.197,"X"],[0.302,"M"],[0.488,"C"],[0.569,"X"],[0.604,"M"],[0.708,"X"],[0.801,"O"],[0.848,"M"],[1.01,"A"],[1.091,"C"],[1.161,"X"],[1.207,"M"],[1.312,"X"],[1.335,"C"],[1.382,"O"],[1.428,"X"],[1.556,"C"],[1.625,"A"],[1.73,"X"],[1.823,"A"],[1.904,"X"],[1.962,"C"],[2.02,"A"],[2.148,"F"],[2.276,"C"],[2.45,"E"],[2.519,"X"],[3.264,"F"],[3.38,"O"],[3.427,"C"],[3.485,"X"],[3.52,"A"],[3.566,"F"],[3.624,"E"],[3.682,"X"],[3.879,"C"],[4.135,"E"],[4.204,"C"],[4.344,"X"],[5.019,"M"],[5.112,"E"],[5.216,"X"],[5.356,"O"],[5.414,"C"],[5.518,"O"],[5.634,"X"],[5.669,"E"],[5.727,"C"],[5.785,"E"],[5.866,"X"],[5.924,"C"],[6.064,"A"],[6.157,"C"],[6.308,"X"]]}]},"c2":{"parts":[{"wav":"voice/ca61cbeb60fc.wav","dur":5.817,"words":[[0.116,0.58],[0.604,1.08],[1.126,1.521],[1.567,1.974],[2.287,2.415],[2.508,2.705],[2.74,3.1],[3.158,3.204],[3.274,3.855],[4.052,4.098],[4.145,4.481],[4.528,4.737],[4.772,4.876],[4.946,5.108],[5.143,5.19],[5.224,5.515]],"vis":[[0.0,"X"],[0.116,"A"],[0.221,"C"],[0.302,"O"],[0.372,"C"],[0.499,"E"],[0.58,"X"],[0.639,"C"],[0.743,"M"],[0.824,"C"],[0.894,"E"],[1.08,"X"],[1.126,"A"],[1.265,"C"],[1.312,"A"],[1.463,"C"],[1.521,"X"],[1.567,"C"],[1.672,"F"],[1.834,"A"],[1.974,"X"],[2.287,"C"],[2.415,"X"],[2.508,"M"],[2.647,"C"],[2.705,"X"],[2.775,"C"],[2.856,"E"],[2.926,"C"],[3.019,"O"],[3.1,"X"],[3.274,"C"],[3.495,"E"],[3.599,"C"],[3.855,"X"],[4.052,"E"],[4.098,"X"],[4.145,"C"],[4.319,"O"],[4.423,"C"],[4.481,"X"],[4.563,"O"],[4.609,"M"],[4.69,"A"],[4.737,"X"],[4.807,"C"],[4.876,"X"],[4.946,"C"],[5.004,"E"],[5.108,"X"],[5.143,"E"],[5.19,"X"],[5.224,"M"],[5.283,"C"],[5.399,"E"],[5.468,"C"],[5.515,"X"]]}]},"c3":{"parts":[{"wav":"voice/463a039787c4.wav","dur":3.622,"words":[[0.459,1.057],[1.329,1.445],[1.544,1.875],[2.119,2.281],[2.322,2.403],[2.531,2.659],[2.717,2.804],[2.856,3.5]],"vis":[[0.0,"X"],[0.459,"F"],[0.546,"A"],[0.61,"C"],[0.859,"E"],[0.929,"C"],[1.057,"X"],[1.329,"C"],[1.445,"X"],[1.544,"C"],[1.875,"X"],[2.119,"C"],[2.229,"E"],[2.281,"X"],[2.322,"C"],[2.403,"X"],[2.531,"C"],[2.589,"A"],[2.659,"X"],[2.717,"A"],[2.804,"X"],[2.856,"M"],[2.984,"E"],[3.048,"C"],[3.222,"O"],[3.402,"C"],[3.5,"X"]]}]},"c4":{"parts":[{"wav":"voice/1980e802c68b.wav","dur":9.489,"words":[[0.07,0.395],[1.07,1.209],[1.29,1.72],[1.836,1.929],[1.975,2.068],[2.103,2.649],[2.684,2.881],[2.904,3.055],[3.09,3.787],[4.042,4.228],[4.286,4.576],[4.599,5.307],[5.994,6.122],[6.192,6.366],[6.447,6.679],[6.83,6.969],[7.004,7.701],[8.049,8.13],[8.177,8.351],[8.409,8.85],[8.897,9.338]],"vis":[[0.0,"X"],[0.07,"C"],[0.279,"O"],[0.395,"X"],[1.07,"C"],[1.209,"X"],[1.29,"C"],[1.43,"O"],[1.476,"C"],[1.72,"X"],[1.836,"E"],[1.929,"X"],[2.01,"C"],[2.068,"X"],[2.138,"C"],[2.254,"E"],[2.312,"M"],[2.37,"A"],[2.475,"E"],[2.556,"O"],[2.649,"X"],[2.684,"F"],[2.835,"C"],[2.881,"X"],[2.939,"F"],[3.009,"A"],[3.055,"X"],[3.09,"C"],[3.148,"E"],[3.194,"C"],[3.311,"E"],[3.415,"O"],[3.473,"C"],[3.694,"E"],[3.787,"X"],[4.042,"A"],[4.228,"X"],[4.355,"E"],[4.413,"C"],[4.576,"X"],[4.599,"A"],[4.692,"M"],[4.75,"E"],[4.831,"C"],[5.075,"E"],[5.226,"C"],[5.307,"X"],[5.994,"C"],[6.122,"X"],[6.226,"C"],[6.319,"E"],[6.366,"X"],[6.447,"C"],[6.575,"A"],[6.679,"X"],[6.83,"A"],[6.969,"X"],[7.004,"M"],[7.109,"C"],[7.155,"E"],[7.213,"C"],[7.422,"O"],[7.631,"C"],[7.701,"X"],[8.049,"E"],[8.13,"X"],[8.212,"A"],[8.351,"X"],[8.432,"C"],[8.606,"O"],[8.676,"E"],[8.757,"C"],[8.85,"X"],[8.897,"C"],[8.989,"A"],[9.129,"E"],[9.222,"M"],[9.338,"X"]]}]},"c5":{"parts":[{"wav":"voice/ec2ebb1e5e5d.wav","dur":7.049,"words":[[0.116,0.348],[0.406,0.627],[0.673,0.964],[1.312,1.73],[1.765,1.846],[1.927,2.322],[2.786,2.902],[2.961,3.181],[3.262,3.715],[4.052,4.191],[4.214,4.272],[4.354,4.621],[4.714,5.143],[5.702,5.795],[5.842,5.923],[6.027,6.318],[6.376,6.84]],"vis":[[0.0,"X"],[0.116,"C"],[0.209,"O"],[0.29,"C"],[0.348,"X"],[0.406,"C"],[0.499,"A"],[0.557,"C"],[0.627,"X"],[0.673,"C"],[0.813,"E"],[0.871,"C"],[0.964,"X"],[1.312,"C"],[1.358,"O"],[1.451,"M"],[1.498,"A"],[1.579,"C"],[1.66,"E"],[1.73,"X"],[1.765,"C"],[1.846,"X"],[1.927,"C"],[2.078,"O"],[2.241,"C"],[2.322,"X"],[2.786,"C"],[2.856,"E"],[2.902,"X"],[2.961,"C"],[3.042,"E"],[3.088,"C"],[3.181,"X"],[3.286,"C"],[3.425,"F"],[3.599,"O"],[3.715,"X"],[4.075,"O"],[4.191,"X"],[4.354,"C"],[4.423,"E"],[4.47,"C"],[4.528,"E"],[4.621,"X"],[4.737,"E"],[5.039,"C"],[5.143,"X"],[5.737,"E"],[5.795,"X"],[5.841,"C"],[5.923,"X"],[6.027,"M"],[6.074,"C"],[6.19,"E"],[6.318,"X"],[6.376,"E"],[6.468,"C"],[6.84,"X"]]}]},"c6":{"parts":[{"wav":"voice/de0b871eb763.wav","dur":6.351,"words":[[0.07,0.232],[0.313,0.511],[0.604,0.673],[0.743,0.882],[0.917,0.987],[1.068,1.637],[1.683,1.811],[1.858,2.647],[2.821,2.961],[3.042,3.135],[3.181,3.251],[3.332,3.448],[3.483,3.808],[3.843,4.168],[4.203,4.702],[4.795,4.888],[4.957,5.178],[5.213,5.271],[5.375,5.619],[5.654,5.677],[5.724,5.875],[5.933,6.258]],"vis":[[0.0,"X"],[0.07,"O"],[0.232,"X"],[0.348,"C"],[0.43,"A"],[0.511,"X"],[0.604,"C"],[0.673,"X"],[0.743,"C"],[0.836,"E"],[0.882,"X"],[0.917,"C"],[0.987,"X"],[1.103,"E"],[1.3,"C"],[1.358,"E"],[1.498,"O"],[1.579,"C"],[1.637,"X"],[1.683,"F"],[1.765,"C"],[1.811,"X"],[1.858,"C"],[1.904,"E"],[1.95,"C"],[2.09,"E"],[2.392,"O"],[2.554,"C"],[2.647,"X"],[2.821,"C"],[2.961,"X"],[3.042,"C"],[3.135,"X"],[3.181,"C"],[3.251,"X"],[3.483,"E"],[3.576,"A"],[3.669,"C"],[3.808,"X"],[3.843,"C"],[3.924,"A"],[3.982,"F"],[4.11,"E"],[4.168,"X"],[4.226,"A"],[4.307,"M"],[4.505,"O"],[4.656,"C"],[4.702,"X"],[4.795,"E"],[4.888,"X"],[4.957,"M"],[5.097,"C"],[5.178,"X"],[5.375,"C"],[5.48,"E"],[5.619,"X"],[5.759,"O"],[5.875,"X"],[5.933,"M"],[5.991,"A"],[6.06,"C"],[6.142,"A"],[6.258,"X"]]}]},"c7":{"parts":[{"wav":"voice/5addbbc3ed68.wav","dur":8.779,"words":[[0.186,0.383],[0.441,0.546],[0.58,0.882],[1.103,1.265],[1.289,1.637],[1.672,1.741],[1.904,2.078],[2.113,2.206],[2.334,2.659],[2.984,3.111],[3.193,3.379],[3.413,4.11],[4.75,5.203],[5.342,5.633],[5.667,6.027],[6.352,6.492],[6.573,6.91],[6.956,7.142],[7.177,7.235],[7.316,7.653],[7.688,7.792],[7.862,8.581]],"vis":[[0.0,"X"],[0.186,"C"],[0.255,"O"],[0.313,"C"],[0.383,"X"],[0.441,"A"],[0.546,"X"],[0.58,"M"],[0.778,"A"],[0.882,"X"],[1.103,"O"],[1.219,"C"],[1.265,"X"],[1.289,"C"],[1.556,"O"],[1.637,"X"],[1.672,"C"],[1.741,"X"],[1.904,"C"],[2.078,"X"],[2.113,"C"],[2.159,"A"],[2.206,"X"],[2.334,"C"],[2.508,"A"],[2.659,"X"],[2.984,"M"],[3.03,"A"],[3.111,"X"],[3.193,"C"],[3.262,"O"],[3.32,"A"],[3.379,"X"],[3.437,"C"],[3.495,"O"],[3.576,"C"],[3.634,"E"],[3.692,"C"],[3.831,"O"],[3.924,"C"],[4.11,"X"],[4.75,"C"],[4.948,"O"],[5.052,"M"],[5.122,"C"],[5.203,"X"],[5.342,"E"],[5.4,"C"],[5.528,"A"],[5.574,"C"],[5.633,"X"],[5.667,"C"],[5.76,"O"],[5.946,"A"],[6.027,"X"],[6.352,"C"],[6.492,"X"],[6.573,"C"],[6.759,"F"],[6.84,"C"],[6.91,"X"],[6.956,"C"],[7.084,"O"],[7.142,"X"],[7.397,"E"],[7.583,"C"],[7.653,"X"],[7.862,"M"],[7.908,"C"],[7.966,"O"],[8.036,"C"],[8.117,"E"],[8.175,"C"],[8.361,"O"],[8.407,"C"],[8.581,"X"]]}]},"c8":{"parts":[{"wav":"voice/d17dbc1bc8c8.wav","dur":6.387,"words":[[0.209,0.662],[0.72,1.068],[1.173,1.382],[1.405,1.544],[1.579,2.032],[2.067,2.229],[2.264,2.635],[3.45,4.03],[4.239,4.576],[4.611,4.692],[4.75,5.04],[5.11,5.215],[5.249,5.366],[5.389,5.458],[5.482,5.818],[5.888,6.132]],"vis":[[0.0,"X"],[0.209,"C"],[0.383,"A"],[0.464,"C"],[0.569,"O"],[0.662,"X"],[0.72,"E"],[0.766,"C"],[0.894,"A"],[0.952,"C"],[1.068,"X"],[1.173,"C"],[1.335,"E"],[1.382,"X"],[1.405,"C"],[1.486,"A"],[1.544,"X"],[1.649,"A"],[1.695,"C"],[1.823,"A"],[1.869,"C"],[2.032,"X"],[2.067,"M"],[2.171,"C"],[2.229,"X"],[2.264,"C"],[2.38,"E"],[2.426,"C"],[2.508,"E"],[2.635,"X"],[3.45,"C"],[3.601,"F"],[3.705,"C"],[3.914,"E"],[4.03,"X"],[4.239,"C"],[4.286,"O"],[4.413,"E"],[4.576,"X"],[4.611,"C"],[4.692,"X"],[4.75,"C"],[4.936,"E"],[5.04,"X"],[5.11,"C"],[5.215,"X"],[5.249,"M"],[5.365,"X"],[5.389,"A"],[5.458,"X"],[5.482,"C"],[5.528,"A"],[5.598,"C"],[5.818,"X"],[5.888,"O"],[5.969,"E"],[6.016,"C"],[6.132,"X"]]},{"wav":"voice/864a1ed57436.wav","dur":3.659,"words":[[0.221,0.337],[0.372,0.824],[1.534,1.743],[1.766,1.859],[1.975,2.382],[2.637,2.765],[2.8,2.893],[2.927,3.299],[3.345,3.624]],"vis":[[0.0,"X"],[0.221,"C"],[0.337,"X"],[0.372,"M"],[0.441,"E"],[0.488,"C"],[0.569,"E"],[0.673,"O"],[0.824,"X"],[1.534,"C"],[1.592,"O"],[1.685,"C"],[1.743,"X"],[1.766,"C"],[1.859,"X"],[1.975,"C"],[2.138,"A"],[2.242,"M"],[2.312,"C"],[2.382,"X"],[2.672,"O"],[2.765,"X"],[2.8,"A"],[2.893,"X"],[2.962,"A"],[3.043,"C"],[3.299,"X"],[3.345,"O"],[3.461,"E"],[3.508,"C"],[3.624,"X"]]}]},"c9":{"parts":[{"wav":"voice/5d67524170b5.wav","dur":7.293,"words":[[0.197,0.337],[0.418,0.859],[1.3,1.533],[1.556,1.834],[1.892,2.009],[2.032,2.136],[2.194,2.67],[2.763,2.798],[2.833,2.902],[2.961,3.309],[3.914,4.1],[4.17,4.228],[4.274,4.773],[4.924,5.377],[5.586,5.749],[5.772,6.016],[6.085,6.306],[6.341,6.364],[6.41,6.55],[6.596,7.153]],"vis":[[0.0,"X"],[0.197,"C"],[0.337,"X"],[0.418,"C"],[0.511,"M"],[0.662,"E"],[0.743,"C"],[0.859,"X"],[1.3,"O"],[1.474,"C"],[1.533,"X"],[1.556,"E"],[1.625,"C"],[1.834,"X"],[1.892,"C"],[2.009,"X"],[2.032,"C"],[2.136,"X"],[2.194,"C"],[2.322,"E"],[2.415,"A"],[2.67,"X"],[2.961,"C"],[3.111,"A"],[3.228,"C"],[3.309,"X"],[3.914,"C"],[3.984,"O"],[4.042,"M"],[4.1,"X"],[4.17,"O"],[4.228,"X"],[4.274,"C"],[4.332,"A"],[4.413,"C"],[4.46,"A"],[4.53,"C"],[4.773,"X"],[4.924,"C"],[5.052,"E"],[5.377,"X"],[5.586,"E"],[5.691,"C"],[5.749,"X"],[5.772,"M"],[5.958,"C"],[6.016,"X"],[6.085,"C"],[6.178,"O"],[6.306,"X"],[6.41,"M"],[6.48,"O"],[6.55,"X"],[6.631,"A"],[6.689,"C"],[6.991,"O"],[7.153,"X"]]}]},"c10":{"parts":[{"wav":"voice/a5103efc332b.wav","dur":7.49,"words":[[0.197,0.569],[0.604,0.882],[1.207,1.347],[1.416,1.73],[1.753,1.823],[1.881,2.136],[2.171,2.635],[3.369,4.205],[4.53,4.808],[4.843,5.215],[5.296,5.505],[5.551,6.097],[6.213,6.259],[6.283,6.445],[6.468,6.55],[6.619,7.246]],"vis":[[0.0,"X"],[0.197,"C"],[0.279,"O"],[0.348,"F"],[0.488,"O"],[0.569,"X"],[0.604,"M"],[0.662,"C"],[0.778,"A"],[0.882,"X"],[1.207,"O"],[1.347,"X"],[1.451,"A"],[1.509,"C"],[1.637,"O"],[1.683,"C"],[1.73,"X"],[1.753,"C"],[1.823,"X"],[1.916,"O"],[1.974,"F"],[2.136,"X"],[2.171,"E"],[2.252,"C"],[2.403,"E"],[2.485,"C"],[2.635,"X"],[3.369,"E"],[3.508,"C"],[3.647,"E"],[3.705,"C"],[3.763,"O"],[3.833,"C"],[3.926,"E"],[4.065,"O"],[4.204,"X"],[4.53,"C"],[4.576,"E"],[4.68,"C"],[4.808,"X"],[4.843,"F"],[4.924,"E"],[4.971,"C"],[5.215,"X"],[5.296,"C"],[5.505,"X"],[5.551,"M"],[5.633,"C"],[5.691,"E"],[5.749,"C"],[5.923,"O"],[6.05,"C"],[6.097,"X"],[6.213,"O"],[6.259,"X"],[6.318,"E"],[6.399,"O"],[6.445,"X"],[6.468,"C"],[6.55,"X"],[6.654,"A"],[6.712,"C"],[6.794,"A"],[6.898,"C"],[6.979,"O"],[7.095,"E"],[7.142,"C"],[7.246,"X"]]}]},"c11":{"parts":[{"wav":"voice/575a88c91dac.wav","dur":6.422,"words":[[0.197,0.313],[0.441,0.685],[1.115,1.428],[1.591,2.218],[2.566,2.694],[2.74,2.949],[2.972,3.228],[3.297,3.646],[3.692,3.727],[3.831,4.156],[4.82,4.924],[4.959,5.075],[5.122,5.273],[5.307,5.435],[5.493,5.551],[5.586,5.749],[5.807,6.259]],"vis":[[0.0,"X"],[0.197,"C"],[0.313,"X"],[0.441,"M"],[0.488,"C"],[0.639,"E"],[0.685,"X"],[1.115,"C"],[1.277,"A"],[1.347,"C"],[1.428,"X"],[1.625,"C"],[2.02,"O"],[2.148,"C"],[2.218,"X"],[2.589,"O"],[2.647,"A"],[2.694,"X"],[2.74,"O"],[2.798,"C"],[2.949,"X"],[2.972,"M"],[3.088,"C"],[3.228,"X"],[3.297,"C"],[3.355,"E"],[3.413,"C"],[3.646,"X"],[3.831,"C"],[4.017,"O"],[4.098,"C"],[4.156,"X"],[4.82,"O"],[4.924,"X"],[4.959,"C"],[5.006,"A"],[5.075,"X"],[5.122,"C"],[5.273,"X"],[5.342,"A"],[5.435,"X"],[5.493,"O"],[5.551,"X"],[5.586,"M"],[5.633,"A"],[5.679,"C"],[5.749,"X"],[5.807,"C"],[6.12,"O"],[6.167,"C"],[6.259,"X"]]}]},"c12":{"parts":[{"wav":"voice/8ebfc2309100.wav","dur":6.666,"words":[[0.197,0.58],[0.65,1.126],[1.312,1.474],[1.533,2.067],[2.218,2.357],[2.38,2.531],[2.577,3.065],[3.891,4.019],[4.135,4.971],[5.017,5.191],[5.215,5.551],[5.714,5.783],[5.842,6.062],[6.109,6.376]],"vis":[[0.0,"X"],[0.197,"C"],[0.29,"O"],[0.406,"E"],[0.58,"X"],[0.65,"C"],[0.929,"E"],[0.975,"C"],[1.126,"X"],[1.312,"O"],[1.474,"X"],[1.533,"C"],[1.591,"A"],[1.637,"M"],[1.8,"O"],[1.974,"C"],[2.067,"X"],[2.218,"M"],[2.357,"X"],[2.38,"C"],[2.426,"O"],[2.485,"C"],[2.531,"X"],[2.577,"C"],[2.868,"O"],[2.995,"C"],[3.065,"X"],[3.891,"C"],[4.019,"X"],[4.17,"C"],[4.228,"A"],[4.297,"C"],[4.367,"E"],[4.425,"F"],[4.483,"E"],[4.541,"C"],[4.599,"A"],[4.669,"C"],[4.855,"O"],[4.971,"X"],[5.052,"F"],[5.133,"E"],[5.191,"X"],[5.215,"M"],[5.261,"C"],[5.342,"E"],[5.389,"F"],[5.505,"O"],[5.551,"X"],[5.841,"C"],[5.946,"O"],[6.004,"C"],[6.062,"X"],[6.109,"C"],[6.213,"E"],[6.283,"C"],[6.376,"X"]]}]},"c13":{"parts":[{"wav":"voice/83bf42a1b605.wav","dur":1.892,"words":[[0.174,0.58],[0.627,0.964],[0.998,1.057],[1.103,1.219],[1.254,1.289],[1.335,1.695]],"vis":[[0.0,"X"],[0.174,"C"],[0.325,"F"],[0.418,"C"],[0.58,"X"],[0.627,"C"],[0.673,"O"],[0.778,"M"],[0.824,"E"],[0.964,"X"],[1.103,"A"],[1.149,"C"],[1.219,"X"],[1.335,"C"],[1.486,"F"],[1.695,"X"]]},{"wav":"voice/a352e83ad5b5.wav","dur":7.223,"words":[[0.209,0.476],[0.569,0.697],[0.731,1.022],[1.79,1.929],[2.01,2.057],[2.091,2.533],[2.707,2.823],[2.858,3.148],[3.276,3.926],[4.321,4.634],[4.704,4.82],[4.866,4.948],[4.994,5.296],[5.76,6.004],[6.027,6.178],[6.201,6.341],[6.364,7.107]],"vis":[[0.0,"X"],[0.209,"C"],[0.325,"O"],[0.43,"A"],[0.476,"X"],[0.569,"C"],[0.615,"A"],[0.697,"X"],[0.731,"M"],[0.848,"E"],[0.94,"C"],[1.022,"X"],[1.79,"E"],[1.882,"C"],[1.929,"X"],[2.01,"A"],[2.057,"X"],[2.091,"C"],[2.161,"O"],[2.277,"C"],[2.405,"E"],[2.533,"X"],[2.707,"O"],[2.765,"C"],[2.823,"X"],[2.858,"M"],[2.962,"O"],[3.02,"C"],[3.148,"X"],[3.276,"E"],[3.38,"M"],[3.438,"C"],[3.496,"E"],[3.554,"C"],[3.787,"E"],[3.926,"X"],[4.321,"F"],[4.518,"E"],[4.588,"C"],[4.634,"X"],[4.739,"O"],[4.82,"X"],[4.901,"C"],[4.948,"X"],[4.994,"C"],[5.11,"E"],[5.18,"C"],[5.296,"X"],[5.76,"C"],[5.853,"O"],[5.946,"A"],[6.004,"X"],[6.027,"C"],[6.109,"A"],[6.178,"X"],[6.201,"M"],[6.271,"E"],[6.341,"X"],[6.364,"A"],[6.422,"C"],[6.91,"O"],[7.037,"C"],[7.107,"X"]]}]},"c14":{"parts":[{"wav":"voice/3a38e6bc53a9.wav","dur":5.9,"words":[[0.07,0.604],[1.151,1.372],[1.395,1.557],[1.581,1.743],[1.836,2.208],[2.242,2.417],[2.451,2.66],[2.753,3.252],[3.427,3.52],[3.624,3.682],[3.729,4.541],[4.855,5.064],[5.11,5.249],[5.319,5.377],[5.424,5.76]],"vis":[[0.0,"X"],[0.07,"M"],[0.139,"O"],[0.221,"C"],[0.372,"O"],[0.511,"A"],[0.604,"X"],[1.151,"C"],[1.232,"O"],[1.29,"A"],[1.372,"X"],[1.395,"C"],[1.465,"A"],[1.557,"X"],[1.581,"M"],[1.697,"C"],[1.743,"X"],[1.836,"C"],[1.906,"M"],[2.01,"A"],[2.208,"X"],[2.242,"F"],[2.289,"C"],[2.417,"X"],[2.451,"C"],[2.66,"X"],[2.753,"C"],[2.811,"A"],[2.904,"C"],[3.171,"E"],[3.252,"X"],[3.427,"E"],[3.52,"X"],[3.728,"C"],[3.856,"A"],[3.937,"C"],[3.984,"E"],[4.054,"C"],[4.297,"E"],[4.39,"C"],[4.541,"X"],[4.855,"C"],[5.017,"E"],[5.064,"X"],[5.11,"M"],[5.168,"A"],[5.249,"X"],[5.319,"A"],[5.377,"X"],[5.424,"C"],[5.586,"O"],[5.691,"C"],[5.76,"X"]]}]},"c15":{"parts":[{"wav":"voice/90b7b8d7c4e0.wav","dur":8.026,"words":[[0.197,0.72],[0.766,1.091],[1.126,1.683],[1.939,1.985],[2.043,2.682],[3.136,3.485],[3.531,3.821],[4.181,4.344],[4.437,4.855],[4.913,5.052],[5.122,5.563],[6.331,6.517],[6.551,7.19],[7.236,7.77]],"vis":[[0.0,"X"],[0.197,"A"],[0.337,"C"],[0.395,"A"],[0.464,"C"],[0.511,"A"],[0.615,"E"],[0.673,"C"],[0.72,"X"],[0.766,"O"],[0.813,"C"],[0.964,"O"],[1.045,"C"],[1.091,"X"],[1.126,"C"],[1.219,"F"],[1.289,"C"],[1.591,"E"],[1.683,"X"],[2.043,"C"],[2.136,"A"],[2.229,"E"],[2.287,"C"],[2.508,"E"],[2.577,"C"],[2.682,"X"],[3.136,"C"],[3.229,"O"],[3.287,"F"],[3.415,"O"],[3.485,"X"],[3.531,"M"],[3.578,"C"],[3.694,"A"],[3.821,"X"],[4.181,"O"],[4.286,"C"],[4.344,"X"],[4.472,"O"],[4.518,"E"],[4.599,"C"],[4.855,"X"],[4.913,"M"],[5.052,"X"],[5.157,"C"],[5.435,"A"],[5.482,"C"],[5.563,"X"],[6.331,"C"],[6.447,"A"],[6.517,"X"],[6.621,"A"],[6.667,"C"],[6.807,"A"],[6.865,"C"],[7.074,"E"],[7.12,"C"],[7.19,"X"],[7.271,"E"],[7.318,"C"],[7.376,"E"],[7.422,"C"],[7.573,"O"],[7.712,"C"],[7.77,"X"]]}]},"c16":{"parts":[{"wav":"voice/9c9dcc1e3e78.wav","dur":8.953,"words":[[0.29,0.882],[1.451,2.334],[2.426,2.577],[2.624,3.03],[3.309,3.576],[3.611,3.971],[3.994,4.122],[4.145,4.284],[4.307,4.447],[4.481,4.551],[4.621,4.83],[4.888,5.375],[6.109,6.445],[6.468,6.55],[6.596,6.852],[6.968,7.571],[7.873,8.314],[8.384,8.849]],"vis":[[0.0,"X"],[0.29,"C"],[0.441,"E"],[0.488,"C"],[0.685,"O"],[0.824,"C"],[0.882,"X"],[1.451,"C"],[1.753,"O"],[1.811,"F"],[1.892,"A"],[1.939,"C"],[2.009,"E"],[2.125,"O"],[2.264,"M"],[2.334,"X"],[2.461,"A"],[2.577,"X"],[2.624,"C"],[2.763,"A"],[2.868,"C"],[3.03,"X"],[3.309,"A"],[3.425,"C"],[3.576,"X"],[3.611,"A"],[3.669,"F"],[3.727,"E"],[3.785,"C"],[3.878,"O"],[3.971,"X"],[3.994,"C"],[4.122,"X"],[4.18,"O"],[4.226,"C"],[4.284,"X"],[4.307,"C"],[4.4,"A"],[4.447,"X"],[4.481,"C"],[4.551,"X"],[4.621,"C"],[4.702,"E"],[4.83,"X"],[4.923,"O"],[4.981,"C"],[5.05,"E"],[5.097,"F"],[5.213,"E"],[5.375,"X"],[6.109,"A"],[6.294,"C"],[6.445,"X"],[6.468,"O"],[6.55,"X"],[6.596,"C"],[6.852,"X"],[6.968,"C"],[7.281,"M"],[7.42,"A"],[7.571,"X"],[7.873,"C"],[7.966,"A"],[8.082,"C"],[8.314,"X"],[8.407,"O"],[8.465,"M"],[8.581,"E"],[8.732,"M"],[8.848,"X"]]}]},"c17":{"parts":[{"wav":"voice/de103667327f.wav","dur":9.756,"words":[[0.197,0.348],[0.395,0.592],[0.65,1.08],[1.115,1.858],[2.171,2.264],[2.31,2.426],[2.45,2.519],[2.543,3.088],[3.879,4.181],[4.344,4.472],[4.518,5.122],[5.716,5.866],[5.924,6.006],[6.029,6.203],[6.273,6.366],[6.412,6.726],[6.946,7.445],[7.503,7.654],[7.701,7.817],[7.84,8.525],[8.722,8.966],[9.024,9.547]],"vis":[[0.0,"X"],[0.197,"O"],[0.348,"X"],[0.395,"C"],[0.464,"O"],[0.592,"X"],[0.708,"C"],[0.813,"M"],[0.906,"E"],[1.033,"C"],[1.08,"X"],[1.115,"A"],[1.161,"C"],[1.219,"A"],[1.3,"C"],[1.37,"A"],[1.567,"E"],[1.683,"C"],[1.858,"X"],[2.171,"C"],[2.264,"X"],[2.31,"F"],[2.426,"X"],[2.45,"C"],[2.519,"X"],[2.543,"C"],[2.612,"E"],[2.682,"C"],[2.949,"E"],[3.03,"C"],[3.088,"X"],[3.879,"F"],[4.135,"O"],[4.181,"X"],[4.344,"E"],[4.472,"X"],[4.518,"E"],[4.564,"C"],[4.669,"E"],[4.715,"C"],[4.843,"O"],[4.936,"C"],[5.122,"X"],[5.715,"M"],[5.762,"O"],[5.866,"X"],[5.959,"C"],[6.006,"X"],[6.029,"M"],[6.145,"C"],[6.203,"X"],[6.273,"A"],[6.366,"X"],[6.412,"C"],[6.551,"O"],[6.679,"C"],[6.726,"X"],[6.946,"A"],[7.027,"C"],[7.074,"A"],[7.155,"C"],[7.341,"E"],[7.387,"C"],[7.445,"X"],[7.503,"C"],[7.55,"A"],[7.654,"X"],[7.701,"O"],[7.759,"C"],[7.817,"X"],[7.84,"C"],[7.921,"A"],[7.991,"C"],[8.072,"A"],[8.165,"C"],[8.316,"E"],[8.409,"O"],[8.525,"X"],[8.722,"M"],[8.769,"O"],[8.92,"C"],[8.966,"X"],[9.024,"A"],[9.094,"C"],[9.164,"O"],[9.222,"C"],[9.291,"E"],[9.373,"C"],[9.465,"A"],[9.547,"X"]]}]},"c18":{"parts":[{"wav":"voice/8e886552aa51.wav","dur":10.661,"words":[[0.197,0.395],[0.453,1.033],[1.312,1.858],[1.927,2.461],[2.485,2.624],[2.659,2.728],[2.81,3.111],[3.181,3.529],[4.321,4.413],[4.483,4.739],[4.797,5.168],[5.203,5.319],[5.377,5.818],[6.039,6.178],[6.225,6.41],[6.445,6.561],[6.596,7.049],[7.84,8.165],[8.188,8.363],[8.386,8.502],[8.572,8.99],[9.361,9.791],[9.825,10.371]],"vis":[[0.0,"X"],[0.197,"F"],[0.325,"O"],[0.395,"X"],[0.453,"C"],[0.511,"E"],[0.627,"C"],[0.813,"E"],[0.859,"C"],[1.033,"X"],[1.312,"E"],[1.44,"C"],[1.544,"M"],[1.614,"C"],[1.66,"E"],[1.858,"X"],[1.927,"A"],[1.974,"C"],[2.055,"A"],[2.299,"E"],[2.38,"C"],[2.461,"X"],[2.485,"C"],[2.624,"X"],[2.682,"A"],[2.728,"X"],[2.81,"C"],[2.995,"E"],[3.042,"C"],[3.111,"X"],[3.181,"C"],[3.286,"A"],[3.413,"C"],[3.529,"X"],[4.355,"E"],[4.413,"X"],[4.483,"C"],[4.622,"E"],[4.739,"X"],[4.831,"C"],[4.878,"A"],[4.959,"C"],[5.168,"X"],[5.238,"A"],[5.319,"X"],[5.377,"M"],[5.435,"E"],[5.505,"C"],[5.551,"E"],[5.679,"O"],[5.818,"X"],[6.039,"E"],[6.12,"C"],[6.178,"X"],[6.225,"M"],[6.329,"A"],[6.41,"X"],[6.445,"O"],[6.515,"C"],[6.561,"X"],[6.596,"E"],[6.654,"C"],[6.794,"E"],[6.886,"C"],[7.049,"X"],[7.875,"C"],[7.991,"E"],[8.037,"F"],[8.165,"X"],[8.188,"C"],[8.235,"O"],[8.281,"E"],[8.363,"X"],[8.386,"C"],[8.444,"O"],[8.502,"X"],[8.572,"C"],[8.641,"E"],[8.92,"C"],[8.989,"X"],[9.361,"C"],[9.524,"A"],[9.616,"C"],[9.791,"X"],[9.86,"C"],[9.918,"A"],[9.976,"C"],[10.058,"A"],[10.255,"E"],[10.313,"C"],[10.371,"X"]]}]},"c19":{"parts":[{"wav":"voice/cd700dce2382.wav","dur":8.129,"words":[[0.255,0.406],[0.43,0.685],[0.72,0.906],[0.964,1.057],[1.115,1.382],[2.01,2.289],[2.324,2.8],[2.835,3.403],[3.833,3.961],[4.03,4.309],[4.355,4.564],[4.599,4.657],[4.739,5.307],[5.725,5.981],[6.027,6.074],[6.132,6.468],[6.921,7.026],[7.084,7.293],[7.316,7.56],[7.606,8.082]],"vis":[[0.0,"X"],[0.255,"F"],[0.348,"O"],[0.406,"X"],[0.43,"C"],[0.557,"F"],[0.627,"E"],[0.685,"X"],[0.72,"C"],[0.813,"E"],[0.906,"X"],[0.964,"O"],[1.057,"X"],[1.115,"M"],[1.173,"C"],[1.254,"A"],[1.382,"X"],[2.01,"C"],[2.161,"O"],[2.289,"X"],[2.324,"M"],[2.417,"C"],[2.695,"E"],[2.753,"C"],[2.8,"X"],[2.835,"C"],[2.951,"E"],[2.997,"C"],[3.055,"O"],[3.16,"E"],[3.206,"C"],[3.403,"X"],[3.833,"E"],[3.961,"X"],[4.065,"F"],[4.216,"E"],[4.309,"X"],[4.355,"O"],[4.402,"C"],[4.564,"X"],[4.739,"M"],[4.831,"F"],[5.064,"O"],[5.133,"C"],[5.307,"X"],[5.725,"C"],[5.841,"A"],[5.911,"C"],[5.981,"X"],[6.027,"O"],[6.074,"X"],[6.132,"C"],[6.259,"E"],[6.306,"C"],[6.468,"X"],[6.921,"C"],[7.026,"X"],[7.084,"C"],[7.293,"X"],[7.316,"C"],[7.362,"E"],[7.409,"C"],[7.467,"A"],[7.513,"M"],[7.56,"X"],[7.641,"O"],[7.699,"E"],[7.757,"F"],[7.862,"A"],[7.966,"C"],[8.082,"X"]]}]}}};</script>
+<script>boot(EP);</script>
