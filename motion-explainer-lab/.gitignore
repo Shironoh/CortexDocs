@@ -5,3 +5,4 @@ versions/*/_seg*
 versions/*/video.mp4
 versions/*/voice/
 versions/*/soundtrack.wav
+__pycache__/
