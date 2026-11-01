@@ -24,7 +24,7 @@ const analyze = (t) => {
   const toVB = r => ({ x1: (r.left - sr.left) * k, y1: (r.top - sr.top) * k, x2: (r.right - sr.left) * k, y2: (r.bottom - sr.top) * k });
   const effOpacity = el => { let a = 1; for (let e = el; e && e !== svg; e = e.parentNode) { if (e.getAttribute) { if (e.getAttribute('visibility') === 'hidden' || e.getAttribute('display') === 'none') return 0; const o = e.getAttribute('opacity'); if (o != null) a *= +o; } } return a; };
   const scaleOf = el => { const m = el.getScreenCTM(), b = svg.getScreenCTM(); return Math.hypot(m.a, m.b) / Math.hypot(b.a, b.b); };
-  const txts = [...svg.querySelectorAll('text[data-txt]')].map(el => { const r = toVB(el.getBoundingClientRect()); return { el, r, a: effOpacity(el), code: el.dataset.txt === 'code', bleed: el.hasAttribute('data-bleed'),
+  const txts = [...svg.querySelectorAll('text[data-txt]')].map(el => { const r = toVB(el.getBoundingClientRect()); return { el, r, a: effOpacity(el), code: el.dataset.txt === 'code', axis: el.hasAttribute('data-axis'), bleed: el.hasAttribute('data-bleed'),
     size: (+el.getAttribute('font-size')) * scaleOf(el), s: el.textContent.slice(0, 40) }; })
     .filter(o => o.a > .3 && o.r.x2 > 0 && o.r.x1 < 1600 && o.r.y2 > 0 && o.r.y1 < 900 && (o.r.x2 - o.r.x1) > 2);
   const issues = [];
@@ -37,7 +37,8 @@ const analyze = (t) => {
   for (let i = 0; i < txts.length; i++) for (let j = i + 1; j < txts.length; j++) { const a = txts[i].r, b = txts[j].r;
     const ix = Math.max(0, Math.min(a.x2, b.x2) - Math.max(a.x1, b.x1)), iy = Math.max(0, Math.min(a.y2, b.y2) - Math.max(a.y1, b.y1));
     const ar = Math.min((a.x2 - a.x1) * (a.y2 - a.y1), (b.x2 - b.x1) * (b.y2 - b.y1)); if (ix * iy > .12 * ar) issues.push({ k: 'overlap', s: txts[i].s + ' / ' + txts[j].s }); }
-  if (txts.length > 3) issues.push({ k: 'toomanytext', v: txts.length, s: txts.map(o => o.s).join(' | ') });
+  const blocks = txts.filter(o => !o.axis).length + (txts.some(o => o.axis) ? 1 : 0); // a chart's axis/tick labels read as one block
+  if (blocks > 3) issues.push({ k: 'toomanytext', v: blocks, s: txts.map(o => o.s).join(' | ') });
   let focus = null; const f = __mx.focusAt(t);
   if (f && effOpacity(f) < .3) issues.push({ k: 'focus_hidden' });
   if (f) { const r = toVB(f.getBoundingClientRect()); const cx = (r.x1 + r.x2) / 2, cy = (r.y1 + r.y2) / 2;

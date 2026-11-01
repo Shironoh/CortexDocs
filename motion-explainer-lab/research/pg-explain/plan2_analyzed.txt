@@ -1,0 +1,39 @@
+                                                                           QUERY PLAN                                                                            
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize GroupAggregate  (cost=35852.18..35853.71 rows=5 width=21) (actual time=172.125..176.379 rows=5.00 loops=1)
+   Group Key: c.city
+   Buffers: shared hit=4350 read=14600
+   ->  Gather Merge  (cost=35852.18..35853.57 rows=12 width=21) (actual time=172.114..176.363 rows=15.00 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         Buffers: shared hit=4350 read=14600
+         ->  Sort  (cost=34852.15..34852.16 rows=5 width=21) (actual time=167.595..167.599 rows=5.00 loops=3)
+               Sort Key: c.city
+               Sort Method: quicksort  Memory: 25kB
+               Buffers: shared hit=4350 read=14600
+               Worker 0:  Sort Method: quicksort  Memory: 25kB
+               Worker 1:  Sort Method: quicksort  Memory: 25kB
+               ->  Partial HashAggregate  (cost=34852.04..34852.09 rows=5 width=21) (actual time=167.555..167.559 rows=5.00 loops=3)
+                     Group Key: c.city
+                     Batches: 1  Memory Usage: 32kB
+                     Buffers: shared hit=4334 read=14600
+                     Worker 0:  Batches: 1  Memory Usage: 32kB
+                     Worker 1:  Batches: 1  Memory Usage: 32kB
+                     ->  Parallel Hash Join  (cost=3942.06..33895.15 rows=127586 width=9) (actual time=85.071..149.852 rows=100000.00 loops=3)
+                           Hash Cond: (o.customer_id = c.id)
+                           Buffers: shared hit=4334 read=14600
+                           ->  Parallel Seq Scan on orders o  (cost=0.00..29618.17 rows=127586 width=8) (actual time=53.121..68.028 rows=100000.00 loops=3)
+                                 Filter: (status = 'disputed'::text)
+                                 Rows Removed by Filter: 666667
+                                 Buffers: shared hit=3039 read=14600
+                           ->  Parallel Hash  (cost=2471.47..2471.47 rows=117647 width=9) (actual time=31.314..31.315 rows=66666.67 loops=3)
+                                 Buckets: 262144  Batches: 1  Memory Usage: 11456kB
+                                 Buffers: shared hit=1295
+                                 ->  Parallel Seq Scan on customers c  (cost=0.00..2471.47 rows=117647 width=9) (actual time=0.017..8.413 rows=66666.67 loops=3)
+                                       Buffers: shared hit=1295
+ Planning:
+   Buffers: shared hit=161 read=2
+ Planning Time: 0.589 ms
+ Execution Time: 176.475 ms
+(35 rows)
+

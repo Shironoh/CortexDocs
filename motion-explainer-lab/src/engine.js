@@ -244,7 +244,7 @@ function Runtime(ep, svg) {
   K.T = (id, word, n = 0, after = false) => {
     const c = K.cue(id); if (word == null) return c.start; if (word === '$end') return c.end;
     const ws = words(c.say); const target = norm(word); let k = -1, seen = 0;
-    for (let i = 0; i < ws.length; i++) if (norm(ws[i]).startsWith(target)) { if (seen === n) { k = i; break; } seen++; }
+    for (let i = 0; i < ws.length; i++) if (norm(ws[i]).startsWith(target) || norm(ws[i].split(/['’]/).pop()).startsWith(target)) { /* « l'azote » matches azote */ if (seen === n) { k = i; break; } seen++; }
     if (k < 0) throw new Error(`mot "${word}" absent du cue ${id}`);
     if (c.wt) return after ? c.wt[k][1] : c.wt[k][0];
     const idx = after ? k + 1 : k;
@@ -265,6 +265,7 @@ function Runtime(ep, svg) {
       'data-txt': o.deco ? null : (o.mono ? 'code' : 'txt'), 'dominant-baseline': 'middle', 'letter-spacing': o.ls || null }, parent);
     if (o.mono) e.setAttribute('style', 'white-space:pre');
     if (o.bleed) e.setAttribute('data-bleed', '1');
+    if (o.axis) e.setAttribute('data-axis', '1'); // chart reading aid (axis title, tick): counted as one text block with its siblings
     e.textContent = str; return e;
   };
   K.char = (parent, o) => { const c = new Char(K, parent, o); R.chars.push(c); return c; };

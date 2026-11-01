@@ -70,11 +70,11 @@ scn = {s['id']: s for s in meta['scenes']}
 def chars_in(sc, name):
     s = scn[sc]; n = 0
     for ch in meta['chars']:
-        if ch['name'] != name: continue
+        if ch['name'] not in name: continue
         n += sum(1 for t, _ in ch['poses'] if s['start'] - .5 <= t <= s['end']) + sum(1 for t in ch['walks'] if s['start'] - 1.5 <= t <= s['end'])
     return n
-analyst_scenes = sum(1 for s in meta['scenes'] if chars_in(s['id'], 'analyste') > 0)
-villain_scenes = sum(1 for s in meta['scenes'] if any(ch['name'] == 'attaquant' and ch['pop'] is not None and ch['pop'] <= scn[s['id']]['end'] and ch['pop'] >= scn[s['id']]['start'] - 2 for ch in meta['chars']))
+analyst_scenes = sum(1 for s in meta['scenes'] if chars_in(s['id'], ('analyste', 'hero')) > 0)
+villain_scenes = sum(1 for s in meta['scenes'] if any(ch['name'] in ('attaquant', 'foe') and ch['pop'] is not None and ch['pop'] <= scn[s['id']]['end'] and ch['pop'] >= scn[s['id']]['start'] - 2 for ch in meta['chars']))
 # audit de la feuille de beats (sans rendu) : trous > 2,5 s entre deux marques, hors silences devinez, et quota par cue
 marks = sorted(set(round(m, 2) for m in meta['marks']))
 beat_gaps = []

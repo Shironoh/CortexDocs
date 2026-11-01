@@ -1,0 +1,29 @@
+                                                                      QUERY PLAN                                                                      
+------------------------------------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=30784.39..30784.41 rows=1 width=21) (actual time=1032.917..1075.988 rows=5.00 loops=1)
+   Group Key: c.city
+   Buffers: shared hit=1202504 read=15138 dirtied=2144 written=169, temp read=811 written=815
+   ->  Sort  (cost=30784.39..30784.39 rows=1 width=9) (actual time=1022.087..1048.706 rows=300000.00 loops=1)
+         Sort Key: c.city
+         Sort Method: external merge  Disk: 6488kB
+         Buffers: shared hit=1202504 read=15138 dirtied=2144 written=169, temp read=811 written=815
+         ->  Nested Loop  (cost=1000.42..30784.38 rows=1 width=9) (actual time=61.397..920.280 rows=300000.00 loops=1)
+               Buffers: shared hit=1202501 read=15138 dirtied=2144 written=169
+               ->  Gather  (cost=1000.00..30775.94 rows=1 width=8) (actual time=61.367..108.598 rows=300000.00 loops=1)
+                     Workers Planned: 2
+                     Workers Launched: 2
+                     Buffers: shared hit=2501 read=15138 dirtied=2144 written=169
+                     ->  Parallel Seq Scan on orders o  (cost=0.00..29775.84 rows=1 width=8) (actual time=57.976..87.909 rows=100000.00 loops=3)
+                           Filter: (status = 'disputed'::text)
+                           Rows Removed by Filter: 666667
+                           Buffers: shared hit=2501 read=15138 dirtied=2144 written=169
+               ->  Index Scan using customers_pkey on customers c  (cost=0.42..8.44 rows=1 width=9) (actual time=0.002..0.002 rows=1.00 loops=300000)
+                     Index Cond: (id = o.customer_id)
+                     Index Searches: 300000
+                     Buffers: shared hit=1200000
+ Planning:
+   Buffers: shared hit=149 read=15 dirtied=1
+ Planning Time: 0.808 ms
+ Execution Time: 1077.072 ms
+(25 rows)
+

@@ -3,4 +3,4 @@
 import fs from 'fs';
 const src = fs.readFileSync(process.argv[2], 'utf8');
 const EP = new Function(src + '\n;return EP;')();
-console.log(JSON.stringify(EP.cues.map(c => ({ id: c.id, sc: c.sc, say: c.say, who: c.who || null, breath: c.breath ?? null }))));
+console.log(JSON.stringify(EP.cues.map(c => ({ id: c.id, sc: c.sc, say: c.say, sub: c.sub, who: c.who || null, breath: c.breath ?? null }))));

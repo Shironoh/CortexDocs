@@ -207,22 +207,31 @@ def main():
         if k in ("voice", "ls", "pause", "speaker"): setattr(a, k, v)
     load_lexicon(meta_voice.get("lexicon"))
     cues = json.loads(subprocess.run(["node", str(LAB / "tools/cues.mjs"), str(vdir / "episode.js")], capture_output=True, text=True, check=True).stdout)
-    eng = None
-    if a.engine == "piper":
-        try: eng = Piper(a.voice, a.ls, a.pause, a.speaker, a.noise, a.noise_w)
-        except Exception as e: print(f"[voice] piper indisponible ({e}) -> repli espeak-ng", file=sys.stderr)
-    if eng is None:
-        try: eng = Espeak()
-        except Exception as e: sys.exit(f"[voice] aucune synthèse vocale ({e}) : pas de timing.json, le moteur garde 2,6 mots/s")
+    cast = meta_voice.get("cast", {})  # who -> {voice, ls, speaker}: one voice per speaking character
+    ENG = {}
+    def engine_for(who):
+        c = {"voice": a.voice, "ls": a.ls, "speaker": a.speaker, **cast.get(who or "", {})}
+        k = json.dumps(c, sort_keys=True)
+        if k not in ENG:
+            e = None
+            if a.engine == "piper":
+                try: e = Piper(c["voice"], c["ls"], a.pause, c["speaker"], a.noise, a.noise_w)
+                except Exception as ex: print(f"[voice] piper indisponible ({ex}) -> repli espeak-ng", file=sys.stderr)
+            if e is None:
+                try: e = Espeak()
+                except Exception as ex: sys.exit(f"[voice] aucune synthèse vocale ({ex}) : pas de timing.json, le moteur garde 2,6 mots/s")
+            ENG[k] = (e, c)
+        return ENG[k]
+    eng, _ = engine_for(None)
     settings = {"lex": hashlib.sha1(json.dumps(LEX, sort_keys=True).encode()).hexdigest()[:8], "engine": eng.name, "ls": a.ls, "pause": a.pause, "speaker": a.speaker, "noise": a.noise, "noise_w": a.noise_w}
     out = {"engine": eng.name, "settings": settings, "cues": {}}
     report = {"engine": eng.name, "parts": [], "align": {}}
     total_words = total_speech = 0.0
     for c in cues:
         parts = [p.strip() for p in c["say"].split("|")]
-        cp = []
+        cp = []; eng, cconf = engine_for(c.get("who"))
         for pi, text in enumerate(parts):
-            key = hashlib.sha1(json.dumps([settings, text], ensure_ascii=False).encode()).hexdigest()[:12]
+            key = hashlib.sha1(json.dumps([settings, cconf, eng.name, text], ensure_ascii=False).encode()).hexdigest()[:12]
             wavp, js = cache / f"{key}.wav", cache / f"{key}.json"
             if wavp.exists() and js.exists():
                 info = json.loads(js.read_text()); cp.append(info); continue
@@ -252,11 +261,11 @@ def main():
         out["cues"][c["id"]] = {"parts": cp}
         for p in cp:
             report["align"][p["align"]] = report["align"].get(p["align"], 0) + 1
-            total_words += len(words(p["text"]))
-            if p["words"]: total_speech += p["words"][-1][1] - p["words"][0][0]
-    out["wpm_speech"] = round(total_words / max(1e-6, total_speech) * 60, 1)
+            total_speech += p["dur"]
+        total_words += len(words(c.get("sub") or c["say"]))  # words as read (a number = one word)
+    out["wpm"] = round(total_words / max(1e-6, total_speech) * 60, 1)
     (vdir / "timing.json").write_text(json.dumps(out, ensure_ascii=False))
-    print(f"[voice] {eng.name} | {sum(len(c['parts']) for c in out['cues'].values())} parties | alignement {report['align']} | débit parlé {out['wpm_speech']} mots/min")
+    print(f"[voice] {eng.name} | {sum(len(c['parts']) for c in out['cues'].values())} parties | alignement {report['align']} | débit {out['wpm']} mots/min (mots du sous-titre / durée des voix)")
     if a.check: check(out, vdir, a.whisper)
 
 def cmp_tokens(s):

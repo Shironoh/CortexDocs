@@ -21,7 +21,7 @@ function sceneKit(K) {
     const r = S('rect', { x: -1000, y: -560, width: 2000, height: 1120, rx: 80, fill: tint }, g);
     const acc = [C.cyan, C.amber, C.rose, C.violet, C.green];
     if (d === 'outdoor') {
-      S('circle', { cx: 620 - seed * 90, cy: -330, r: 90, fill: C.amber, opacity: .85 }, g);
+      if (o.sun) S('circle', { cx: o.sun[0], cy: o.sun[1], r: 90, fill: C.amber, opacity: .85 }, g); // opt-in: a sun is an object, it must not collide with the beat
       for (let k = 0; k < 3; k++) S('ellipse', { cx: -700 + k * 700 + seed * 40, cy: FLOOR + 40, rx: 560, ry: 200 - k * 30, fill: ['#1E3A8A', '#24408F', '#1B3270'][k] }, g);
       for (let k = 0; k < 4; k++) S('ellipse', { cx: -760 + k * 480, cy: -420 + (k % 2) * 60, rx: 120, ry: 34, fill: '#F8FAFC', opacity: .12 }, g);
     } else {
@@ -101,8 +101,8 @@ function sceneKit(K) {
     o.vals.forEach((it, i) => { const cx = -(o.w || 900) / 2 + (i + .5) * (o.w || 900) / n, t0 = o.t0 + i * (o.stagger || .35);
       const r = S('rect', { x: cx - bw / 2, width: bw, rx: 12, fill: it.col || C.cyan }, b); K.mark(t0);
       K.fx(t => { const h = H * it.v / o.max * (FRAMING ? 1 : E.oc(P(t, t0, .8))); r.setAttribute('y', -h); r.setAttribute('height', Math.max(0, h)); });
-      if (it.label) K.tx(b, cx, 50, it.label, { size: o.lsize || 40, fill: C.text, weight: 700 });
-      if (it.top) { const tg = G(b, cx, -H * it.v / o.max - 40, { fin: [t0 + .6, .3] }); K.tx(tg, 0, 0, it.top, { size: o.lsize || 40, fill: it.col || C.cyan, weight: 800 }); } });
+      if (it.label) K.tx(b, cx, 50, it.label, { size: o.lsize || 48, fill: C.text, weight: 700, axis: true });
+      if (it.top) { const tg = G(b, cx, -H * it.v / o.max - 40, { fin: [t0 + .6, .3] }); K.tx(tg, 0, 0, it.top, { size: o.lsize || 40, fill: it.col || C.cyan, weight: 800, deco: it.top.length <= 4 }); } });
     return b; }
   /* ---- curve drawn over time (pts in local units, y up = negative) */
   function curve(g, pts, o) { const d = 'M ' + pts.map(p => p.join(' ')).join(' L '); const el = S('path', { d, fill: 'none', stroke: o.col || C.amber, 'stroke-width': o.sw || 10, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
@@ -121,7 +121,7 @@ function sceneKit(K) {
   function timeline(g, x, y, o) { const tl = G(g, x, y, { pop: o.pop, out: o.out }); const W = o.w || 1300;
     S('rect', { x: -W / 2, y: -6, width: W, height: 12, rx: 6, fill: C.muted }, tl);
     (o.ticks || []).forEach(([p, lab], i) => { const tx = -W / 2 + p * W; const tk = G(tl, tx, 0, { pop: (o.t0 || 0) + i * (o.stagger || .3) });
-      S('circle', { r: 16, fill: o.col || C.amber }, tk); if (lab) K.tx(tk, 0, i % 2 ? 64 : -60, lab, { size: o.lsize || 40, fill: C.text, weight: 700 }); });
+      S('circle', { r: 16, fill: o.col || C.amber }, tk); if (lab) K.tx(tk, 0, i % 2 ? 64 : -60, lab, { size: o.lsize || 50, fill: C.text, weight: 700, axis: true }); });
     return tl; }
   /* ---- balance: a trade-off that tilts at t (tilt in degrees, + = right side heavier) */
   function balance(g, x, y, o) { const b = G(g, x, y, { pop: o.pop, out: o.out });
@@ -136,5 +136,8 @@ function sceneKit(K) {
   /* ---- question mark suspended above an object during a "devinez" silence */
   function suspense(g, x, y, t0, t1, o = {}) { const q = G(g, x, y, { pop: t0, out: t1, fn: (s, t) => { s.y += AMBIENT ? 8 * Math.sin(t * 3) : 0; } });
     K.tx(q, 0, 0, '?', { size: o.size || 140, fill: o.col || C.amber, weight: 800, deco: true }); return q; }
-  return { C, FLOOR, sc, G, I, F, mono, typeIn, room, world, hero, foe, bubble, card, doc, counter, bars, curve, arrow, label, timeline, balance, unknown, suspense };
+  /* ---- pulse: a short scale bump on an element that already has an actor (g._a) — a beat that re-points attention */
+  function pulse(el, t, amt = 1.14) { const a = el._a || el; const s0 = a.bs == null ? 1 : a.bs; a.o.moves = a.o.moves || [];
+    a.o.moves.push([t, .18, { s: s0 * amt }, E.oc], [t + .18, .32, { s: s0 }, E.ioc]); K.mark(t); return el; }
+  return { pulse, C, FLOOR, sc, G, I, F, mono, typeIn, room, world, hero, foe, bubble, card, doc, counter, bars, curve, arrow, label, timeline, balance, unknown, suspense };
 }
