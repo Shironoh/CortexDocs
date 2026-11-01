@@ -2,3 +2,15 @@ w1 frame 0/996
 w0 frame 0/996
 w2 frame 0/996
 w3 frame 0/996
+w1 frame 480/996
+w0 frame 480/996
+w3 frame 480/996
+w2 frame 480/996
+w1 frame 960/996
+w0 frame 960/996
+w3 frame 960/996
+w2 frame 960/996
+silent video -> versions/v7-pgexplain/_silent.mp4
+soundtrack -> versions/v7-pgexplain/soundtrack.mp3 | voix : piper (timing réel) | video -> versions/v7-pgexplain/video.mp4
+/home/user/CortexDocs/motion-explainer-lab/versions/v7-pgexplain/index.html : 2747 Ko | voix réelle : oui | bande son intégrée : oui
+v7-pgexplain done in 293s
