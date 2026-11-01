@@ -1,0 +1,501 @@
+{
+ "duration": 144.48461538461538,
+ "events": [
+  {
+   "t": 0.3,
+   "type": "pop"
+  },
+  {
+   "t": 1.169,
+   "type": "whoosh"
+  },
+  {
+   "t": 3.292,
+   "type": "pop"
+  },
+  {
+   "t": 4.915,
+   "type": "whoosh"
+  },
+  {
+   "t": 7.523,
+   "type": "pop"
+  },
+  {
+   "t": 9.062,
+   "type": "pop"
+  },
+  {
+   "t": 9.312,
+   "type": "pop"
+  },
+  {
+   "t": 9.446,
+   "type": "pop"
+  },
+  {
+   "t": 9.562,
+   "type": "pop"
+  },
+  {
+   "t": 9.812,
+   "type": "pop"
+  },
+  {
+   "t": 10.062,
+   "type": "pop"
+  },
+  {
+   "t": 11.985,
+   "type": "pop"
+  },
+  {
+   "t": 16.985,
+   "type": "pop"
+  },
+  {
+   "t": 18.992,
+   "type": "whoosh"
+  },
+  {
+   "t": 19.892,
+   "type": "pop"
+  },
+  {
+   "t": 20.892,
+   "type": "pop"
+  },
+  {
+   "t": 26.177,
+   "type": "whoosh"
+  },
+  {
+   "t": 28.069,
+   "type": "pop"
+  },
+  {
+   "t": 28.769,
+   "type": "pop"
+  },
+  {
+   "t": 29.169,
+   "type": "pop"
+  },
+  {
+   "t": 37.062,
+   "type": "pop"
+  },
+  {
+   "t": 37.062,
+   "type": "impact"
+  },
+  {
+   "t": 38.685,
+   "type": "whoosh"
+  },
+  {
+   "t": 39.585,
+   "type": "pop"
+  },
+  {
+   "t": 41.138,
+   "type": "pop"
+  },
+  {
+   "t": 41.338,
+   "type": "pop"
+  },
+  {
+   "t": 44.331,
+   "type": "whoosh"
+  },
+  {
+   "t": 46.223,
+   "type": "pop"
+  },
+  {
+   "t": 46.923,
+   "type": "pop"
+  },
+  {
+   "t": 47.323,
+   "type": "pop"
+  },
+  {
+   "t": 54.831,
+   "type": "pop"
+  },
+  {
+   "t": 54.831,
+   "type": "impact"
+  },
+  {
+   "t": 55.3,
+   "type": "whoosh"
+  },
+  {
+   "t": 56.2,
+   "type": "pop"
+  },
+  {
+   "t": 56.8,
+   "type": "pop"
+  },
+  {
+   "t": 57.754,
+   "type": "pop"
+  },
+  {
+   "t": 60.946,
+   "type": "whoosh"
+  },
+  {
+   "t": 62.754,
+   "type": "pop"
+  },
+  {
+   "t": 62.838,
+   "type": "pop"
+  },
+  {
+   "t": 63.538,
+   "type": "pop"
+  },
+  {
+   "t": 63.938,
+   "type": "pop"
+  },
+  {
+   "t": 70.677,
+   "type": "pop"
+  },
+  {
+   "t": 70.677,
+   "type": "impact"
+  },
+  {
+   "t": 73.069,
+   "type": "whoosh"
+  },
+  {
+   "t": 73.969,
+   "type": "pop"
+  },
+  {
+   "t": 74.869,
+   "type": "pop"
+  },
+  {
+   "t": 77.862,
+   "type": "pop"
+  },
+  {
+   "t": 78.112,
+   "type": "pop"
+  },
+  {
+   "t": 78.362,
+   "type": "pop"
+  },
+  {
+   "t": 80.254,
+   "type": "whoosh"
+  },
+  {
+   "t": 82.146,
+   "type": "pop"
+  },
+  {
+   "t": 82.846,
+   "type": "pop"
+  },
+  {
+   "t": 83.246,
+   "type": "pop"
+  },
+  {
+   "t": 89.985,
+   "type": "pop"
+  },
+  {
+   "t": 89.985,
+   "type": "impact"
+  },
+  {
+   "t": 91.608,
+   "type": "whoosh"
+  },
+  {
+   "t": 92.508,
+   "type": "pop"
+  },
+  {
+   "t": 93.108,
+   "type": "pop"
+  },
+  {
+   "t": 94.831,
+   "type": "pop"
+  },
+  {
+   "t": 97.062,
+   "type": "whoosh"
+  },
+  {
+   "t": 97.908,
+   "type": "pop"
+  },
+  {
+   "t": 97.992,
+   "type": "pop"
+  },
+  {
+   "t": 98.692,
+   "type": "pop"
+  },
+  {
+   "t": 99.092,
+   "type": "pop"
+  },
+  {
+   "t": 101.985,
+   "type": "pop"
+  },
+  {
+   "t": 103.769,
+   "type": "pop"
+  },
+  {
+   "t": 103.869,
+   "type": "reveal"
+  },
+  {
+   "t": 104.638,
+   "type": "pop"
+  },
+  {
+   "t": 107.715,
+   "type": "pop"
+  },
+  {
+   "t": 107.715,
+   "type": "impact"
+  },
+  {
+   "t": 109.5,
+   "type": "pop"
+  },
+  {
+   "t": 118.331,
+   "type": "pop"
+  },
+  {
+   "t": 118.331,
+   "type": "impact"
+  },
+  {
+   "t": 118.8,
+   "type": "whoosh"
+  },
+  {
+   "t": 119.6,
+   "type": "pop"
+  },
+  {
+   "t": 120.3,
+   "type": "pop"
+  },
+  {
+   "t": 120.45,
+   "type": "pop"
+  },
+  {
+   "t": 120.6,
+   "type": "pop"
+  },
+  {
+   "t": 120.75,
+   "type": "pop"
+  },
+  {
+   "t": 120.9,
+   "type": "pop"
+  },
+  {
+   "t": 122.792,
+   "type": "myth"
+  },
+  {
+   "t": 125.2,
+   "type": "pop"
+  },
+  {
+   "t": 125.585,
+   "type": "pop"
+  },
+  {
+   "t": 125.969,
+   "type": "pop"
+  },
+  {
+   "t": 126.354,
+   "type": "pop"
+  },
+  {
+   "t": 128.277,
+   "type": "pop"
+  },
+  {
+   "t": 131.485,
+   "type": "pop"
+  },
+  {
+   "t": 133.408,
+   "type": "pop"
+  },
+  {
+   "t": 134.562,
+   "type": "pop"
+  },
+  {
+   "t": 136.1,
+   "type": "pop"
+  },
+  {
+   "t": 138.792,
+   "type": "pop"
+  },
+  {
+   "t": 141.1,
+   "type": "whoosh"
+  }
+ ],
+ "guess": [
+  [
+   102.36923076923077,
+   103.86923076923077
+  ]
+ ],
+ "cues": [
+  {
+   "id": "c1",
+   "start": 0.6,
+   "end": 10.83076923076923,
+   "say": "Épisode deux. Trois heures sept : l'attaquant est devenu propriétaire. Mais un attaquant prudent ne garde pas une seule porte. Il en ouvre plusieurs. Lesquelles ?",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c2",
+   "start": 10.83076923076923,
+   "end": 20.29230769230769,
+   "say": "Pour chacune, une fiche : la tactique, le nom exact de la méthode, et la condition qui transforme un événement banal en alerte.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c3",
+   "start": 20.29230769230769,
+   "end": 29.369230769230768,
+   "say": "Première porte, la plus directe : il se donne un rôle. Owner ou Editor, accordé à un compte extérieur à votre entreprise.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c4",
+   "start": 29.369230769230768,
+   "end": 39.98461538461538,
+   "say": "Méthode : Set I A M Policy. Condition : dans binding deltas, une action ADD, un rôle Owner ou Editor, et un membre hors de votre domaine.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c5",
+   "start": 39.98461538461538,
+   "end": 47.52307692307692,
+   "say": "Deuxième porte : il crée son propre robot. Un nouveau compte de service, plus discret qu'un compte Gmail.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c6",
+   "start": 47.52307692307692,
+   "end": 56.599999999999994,
+   "say": "Méthode : google I A M admin v1, Create Service Account. Condition : un créateur qui n'est pas l'un de vos pipelines habituels.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c7",
+   "start": 56.599999999999994,
+   "end": 64.13846153846153,
+   "say": "Troisième porte : il fabrique une clé pour ce robot. Par défaut, une clé créée ainsi n'expire jamais.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c8",
+   "start": 64.13846153846153,
+   "end": 74.36923076923075,
+   "say": "Méthode : Create Service Account Key. Condition : une clé créée hors rotation prévue, ou depuis une adresse inconnue. Réflexe : lister toutes les clés du robot.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c9",
+   "start": 74.36923076923075,
+   "end": 83.44615384615383,
+   "say": "Quatrième porte : une clé S S H, posée dans les métadonnées du projet. Elle ouvre les machines virtuelles qui en héritent.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c10",
+   "start": 83.44615384615383,
+   "end": 92.9076923076923,
+   "say": "Méthode : v1 compute projects, set Common Instance Metadata. Condition : project metadata delta contient ssh keys. Pour une seule machine : instances set Metadata.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c11",
+   "start": 92.9076923076923,
+   "end": 99.29230769230769,
+   "say": "Cinquième porte, la plus discrète : emprunter l'identité d'un robot existant, avec un jeton temporaire.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c12",
+   "start": 99.29230769230769,
+   "end": 109.1,
+   "say": "Méthode : Generate Access Token. Devinez : dans quel journal ? | Data access. Éteint par défaut : sans réglage, cette usurpation est invisible.",
+   "guess": true,
+   "pauseAt": 102.36923076923077
+  },
+  {
+   "id": "c13",
+   "start": 109.1,
+   "end": 120.1,
+   "say": "Ce qui reste dans activity : le Set I A M Policy qui a donné le rôle Service Account Token Creator. C'est ce rôle-là qu'il faut surveiller.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c14",
+   "start": 120.1,
+   "end": 129.94615384615383,
+   "say": "On croit qu'il suffit de retirer Owner. Faux : chaque porte se ferme séparément. Rôles, robots, clés, clés S S H, et droits d'emprunt.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c15",
+   "start": 129.94615384615383,
+   "end": 142.48461538461538,
+   "say": "Vos règles de persistance : Set I A M Policy, Create Service Account, Create Service Account Key, set Common Instance Metadata, et le rôle Token Creator. Épisode trois : effacer ses traces.",
+   "guess": false,
+   "pauseAt": null
+  }
+ ]
+}

@@ -38,12 +38,26 @@ button { justify-self: start; font: 700 14px var(--f-disp); background: var(--am
 <main>
   <header>
     <div class="eyebrow">Skill motion-explainer · boucle d'amélioration continue</div>
-    <h1>Cinq itérations, cinq vidéos, un skill réécrit</h1>
+    <h1>Six itérations, un skill réécrit, une série DFIR</h1>
     <p>Sujet de test : <b>les journaux Admin Activity de Google Cloud, côté détection et réponse</b>, pour quelqu'un qui ne connaît pas GCP, en moins de 3 minutes.
     Chaque vidéo est générée avec la version précédente du skill, mesurée, notée, puis le skill est corrigé par des règles valables pour n'importe quel sujet.</p>
   </header>
   <section>
-    <h2>Progression</h2>
+    <h2>v6 · La série DFIR (après ton retour)</h2>
+    <p class="note" style="margin-bottom:12px">Ton retour : « superficiel et abstrait ». Le skill v6 cadre l'audience sur deux axes (métier détection/réponse, outil GCP), part d'un inventaire des artefacts à reconnaître et montre les vrais noms de méthodes et de champs à l'écran. Résultat : 3 épisodes, 15 événements et champs réels, chacun avec sa condition d'alerte.</p>
+    <div class="vers">
+<article class="ver"><div class="vh"><span class="tag">EP1</span><span class="by">Lire une entrée, champ par champ</span></div>
+  <video controls preload="metadata" playsinline src="ep1.mp4"></video><p>Les 4 journaux et ce que chacun voit, puis une vraie entrée déroulée ligne par ligne : serviceName, methodName, resourceName, principalEmail, callerIp, callerSuppliedUserAgent, bindingDeltas.</p>
+  <a class="open" href="ep1.html" target="_blank" rel="noopener">Ouvrir le lecteur interactif (requêtes complètes en pause)</a></article>
+<article class="ver"><div class="vh"><span class="tag">EP2</span><span class="by">Les portes de persistance</span></div>
+  <video controls preload="metadata" playsinline src="ep2.mp4"></video><p>SetIamPolicy · CreateServiceAccount · CreateServiceAccountKey · setCommonInstanceMetadata (ssh-keys) · GenerateAccessToken, invisible par défaut.</p>
+  <a class="open" href="ep2.html" target="_blank" rel="noopener">Ouvrir le lecteur interactif (requêtes complètes en pause)</a></article>
+<article class="ver"><div class="vh"><span class="tag">EP3</span><span class="by">Effacer, exposer, exploiter</span></div>
+  <video controls preload="metadata" playsinline src="ep3.mp4"></video><p>DeleteSink / UpdateSink · auditConfigDeltas · firewalls.insert 0.0.0.0/0 · storage.setIamPermissions allUsers · instances.insert.</p>
+  <a class="open" href="ep3.html" target="_blank" rel="noopener">Ouvrir le lecteur interactif (requêtes complètes en pause)</a></article></div>
+  </section>
+  <section>
+    <h2>Progression (itérations 1 à 5)</h2>
     <div class="tw"><table>
       <thead><tr><th></th><th>v1</th><th>v2</th><th>v3</th><th>v4</th><th>v5</th></tr></thead>
       <tbody><tr><th scope='row'>Note fond (/4)</th><td class='sc'>2.71</td><td class='sc'>3.43</td><td class='sc'>3.57</td><td class='sc'>3.57</td><td class='sc'>3.71</td></tr><tr><th scope='row'>Note forme (/4)</th><td class='sc'>2.00</td><td class='sc'>2.57</td><td class='sc'>2.71</td><td class='sc'>3.29</td><td class='sc'>3.57</td></tr><tr><th scope='row'>Captures avec défaut</th><td>61/63</td><td>53/57</td><td>47/57</td><td>29/57</td><td>24/57</td></tr><tr><th scope='row'>Fenêtres figées &gt; 2,5 s</th><td>5</td><td>4</td><td>1</td><td>0</td><td>0</td></tr><tr><th scope='row'>Surface vide moyenne</th><td>53 %</td><td>48 %</td><td>42 %</td><td>7 %</td><td>7 %</td></tr><tr><th scope='row'>Personnage sous les sous-titres</th><td>33</td><td>4</td><td>5</td><td>5</td><td>5</td></tr><tr><th scope='row'>Personnage masqué (1er plan)</th><td>18</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><th scope='row'>Plus de 3 textes à l'écran</th><td>7</td><td>5</td><td>2</td><td>2</td><td>0</td></tr><tr><th scope='row'>Spot sur un objet invisible</th><td>4</td><td>3</td><td>3</td><td>3</td><td>0</td></tr><tr><th scope='row'>Scènes sous 3 échelles de plan</th><td>6/8</td><td>2/7</td><td>2/7</td><td>1/7</td><td>0/7</td></tr><tr><th scope='row'>Durée</th><td>2:56</td><td>2:54</td><td>2:52</td><td>2:55</td><td>2:56</td></tr></tbody>
@@ -100,7 +114,7 @@ button { justify-self: start; font: 700 14px var(--f-disp); background: var(--am
   </section>
   <section>
     <details>
-      <summary>Skill final (v5), à copier</summary>
+      <summary>Skill final (v6), à copier</summary>
       <div class="sk"><button type="button" id="cp">Copier le skill</button><pre id="skill">---
 name: &quot;motion-explainer&quot;
 description: &quot;Use when the user wants to understand a topic through an animated motion-design explainer (flat vector, Kurzgesagt-like style) built as an interactive HTML artifact.&quot;
@@ -115,7 +129,8 @@ Objectif : transformer un sujet complexe en une courte &quot;vidéo&quot; animé
 
 ## 0. Cadrer
 
-- **Niveau d&#x27;audience** : déduire du contexte (rôle de l&#x27;utilisateur, mémoire, vocabulaire de la demande) entre débutant, praticien, expert. Ne demander que si c&#x27;est vraiment ambigu.
+- **Niveau d&#x27;audience, sur deux axes** : le métier (ce que la personne fait : débutant, praticien, expert) et l&#x27;outil ou le domaine du sujet (le connaît-elle ?). Les deux se règlent séparément : un praticien qui découvre l&#x27;outil garde la profondeur de son métier, le contexte de l&#x27;outil se limite à ce qu&#x27;il faut pour lire les artefacts. Ne demander que si c&#x27;est vraiment ambigu ; si la demande ne dit pas ce que le spectateur doit savoir faire après, le demander.
+- **Inventaire de valeur** (avant le script) : la liste des artefacts concrets que le spectateur doit reconnaître après la vidéo (noms exacts, champs, valeurs, seuils, commandes), chacun avec ce qu&#x27;on en fait. Pour un praticien, c&#x27;est le cœur de l&#x27;épisode : chaque artefact apparaît à l&#x27;écran tel qu&#x27;il est en vrai et la narration dit à quoi il sert. Si l&#x27;inventaire dépasse le budget d&#x27;un épisode, découper en épisodes par famille plutôt que de rester en surface.
 - **Fiche pertinence** (écrite avant le script, non publiée) :
   - ce que l&#x27;audience sait déjà : à réduire à une ligne de rappel, 15 % du temps au maximum
   - ce qu&#x27;elle ignore ou croit à tort : c&#x27;est le cœur de l&#x27;épisode
@@ -154,7 +169,7 @@ Structure, 6 à 8 scènes :
 
 **Précision** :
 - **Précision conditionnelle** : chaque affirmation porte sa condition quand elle en a une (&quot;par défaut&quot;, &quot;si l&#x27;option est activée&quot;, &quot;à partir de la version N&quot;, &quot;pour les écritures&quot;). Exemple de faute à éviter : &quot;le cache évite la requête&quot; alors qu&#x27;il ne l&#x27;évite que si l&#x27;entrée n&#x27;a pas expiré.
-- **Un seul terme nouveau par scène**, défini par son rôle à sa première apparition (&quot;hash, l&#x27;empreinte d&#x27;un fichier&quot;). Dans la fiche, lister les termes nouveaux scène par scène ; si une scène en a deux, dire le second par sa fonction (« un changement de droits ») et laisser son nom exact à l&#x27;écran ou au hotspot, ou l&#x27;introduire dans une scène précédente.
+- **Un seul concept nouveau par scène** (les artefacts de l&#x27;inventaire n&#x27;entrent pas dans ce compte : ils sont montrés tels quels et expliqués par leur usage), défini par son rôle à sa première apparition (&quot;hash, l&#x27;empreinte d&#x27;un fichier&quot;). Dans la fiche, lister les termes nouveaux scène par scène ; si une scène en a deux, dire le second par sa fonction (« un changement de droits ») et laisser son nom exact à l&#x27;écran ou au hotspot, ou l&#x27;introduire dans une scène précédente.
 
 **Récap actionnable** :
 - 3 actions concrètes au maximum (un geste, un réglage, un réflexe), formulées comme des actions, chacune avec son lieu dit dans la narration (l&#x27;outil, l&#x27;écran, la commande où on la fait). Le lieu est introduit dans la scène qui explique l&#x27;action (il y compte comme son terme nouveau) ; le récap ne fait que le rappeler ; à l&#x27;écran, chaque action est un objet manipulé avec son déclencheur (« quand… → … »), pas une étiquette ; son détail exécutable va dans un hotspot de la scène
@@ -191,6 +206,7 @@ Règles générales :
   - anticipation avant chaque geste (petit recul de 0,15 s), regard qui suit la cible du beat courant
   - expressions : neutre, surprise, satisfait, contrarié ; le protagoniste incarne l&#x27;idée reçue puis la correction (sûr de lui, puis surpris)
 - **Montrer plutôt qu&#x27;écrire** : une liste devient des objets qui arrivent, une table devient un tri d&#x27;objets dans des bacs, l&#x27;anatomie d&#x27;un message devient une cassette qui se déroule et dont chaque segment s&#x27;allume. Une carte de plus de 3 lignes ou une table va dans un hotspot, pas dans la scène.
+- **Icônes pour les concepts, vrais artefacts pour les artefacts** : une métaphore aide à comprendre un mécanisme, elle ne remplace jamais ce que le spectateur aura sous les yeux dans son métier (le vrai nom, le vrai champ, la vraie valeur). Un artefact long se déroule ligne par ligne, 3 lignes lisibles à la fois, les autres en grisé.
 - **Le visuel n&#x27;en sait pas plus que la narration** : ce que la narration déclare inconnu, improuvable ou hypothétique est montré comme incertain (silhouette en pointillés, ombre, point d&#x27;interrogation), jamais joué comme un fait.
 
 ## 3. Direction artistique
@@ -269,6 +285,7 @@ class Actor{ // el = &lt;g&gt; dessiné autour de (0,0)
 - chaque affirmation qui dépend d&#x27;une condition la nomme ; relire spécialement les phrases avec &quot;part dans&quot;, &quot;toujours&quot;, &quot;jamais&quot;, &quot;tout&quot;
 - le déjà-connu de l&#x27;audience ne dépasse pas 15 % du temps
 - le récap contient des actions, pas des résumés
+- test du praticien : un expert du métier se demande « qu&#x27;est-ce que je sais faire demain que je ne savais pas ? » ; la réponse cite les artefacts de l&#x27;inventaire, sinon l&#x27;épisode est trop superficiel
 - écrire les 3 questions que le spectateur doit savoir résoudre après la vidéo, dont « où est-ce que je fais ça ? », et vérifier que la narration (pas seulement un hotspot) y répond
 - chaque fait de la narration est confirmé par une source consultée
 

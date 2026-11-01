@@ -1,0 +1,533 @@
+{
+ "duration": 143.71538461538458,
+ "events": [
+  {
+   "t": 0.3,
+   "type": "pop"
+  },
+  {
+   "t": 3.277,
+   "type": "whoosh"
+  },
+  {
+   "t": 4.446,
+   "type": "pop"
+  },
+  {
+   "t": 8.323,
+   "type": "pop"
+  },
+  {
+   "t": 8.323,
+   "type": "whoosh"
+  },
+  {
+   "t": 10.831,
+   "type": "pop"
+  },
+  {
+   "t": 11.215,
+   "type": "pop"
+  },
+  {
+   "t": 11.215,
+   "type": "myth"
+  },
+  {
+   "t": 14.677,
+   "type": "pop"
+  },
+  {
+   "t": 15.831,
+   "type": "pop"
+  },
+  {
+   "t": 17.454,
+   "type": "whoosh"
+  },
+  {
+   "t": 18.354,
+   "type": "pop"
+  },
+  {
+   "t": 24.523,
+   "type": "impact"
+  },
+  {
+   "t": 24.623,
+   "type": "pop"
+  },
+  {
+   "t": 25.677,
+   "type": "pop"
+  },
+  {
+   "t": 26.754,
+   "type": "whoosh"
+  },
+  {
+   "t": 27.685,
+   "type": "pop"
+  },
+  {
+   "t": 28.385,
+   "type": "pop"
+  },
+  {
+   "t": 28.785,
+   "type": "pop"
+  },
+  {
+   "t": 36.292,
+   "type": "pop"
+  },
+  {
+   "t": 36.292,
+   "type": "impact"
+  },
+  {
+   "t": 38.3,
+   "type": "whoosh"
+  },
+  {
+   "t": 39.2,
+   "type": "pop"
+  },
+  {
+   "t": 41.354,
+   "type": "pop"
+  },
+  {
+   "t": 43.562,
+   "type": "whoosh"
+  },
+  {
+   "t": 45.069,
+   "type": "pop"
+  },
+  {
+   "t": 45.769,
+   "type": "pop"
+  },
+  {
+   "t": 46.169,
+   "type": "pop"
+  },
+  {
+   "t": 54.062,
+   "type": "pop"
+  },
+  {
+   "t": 54.062,
+   "type": "impact"
+  },
+  {
+   "t": 55.685,
+   "type": "whoosh"
+  },
+  {
+   "t": 56.585,
+   "type": "pop"
+  },
+  {
+   "t": 60.831,
+   "type": "pop"
+  },
+  {
+   "t": 62.677,
+   "type": "whoosh"
+  },
+  {
+   "t": 63.138,
+   "type": "pop"
+  },
+  {
+   "t": 63.223,
+   "type": "pop"
+  },
+  {
+   "t": 63.438,
+   "type": "pop"
+  },
+  {
+   "t": 63.588,
+   "type": "pop"
+  },
+  {
+   "t": 63.738,
+   "type": "pop"
+  },
+  {
+   "t": 63.923,
+   "type": "pop"
+  },
+  {
+   "t": 64.323,
+   "type": "pop"
+  },
+  {
+   "t": 71.831,
+   "type": "pop"
+  },
+  {
+   "t": 71.831,
+   "type": "impact"
+  },
+  {
+   "t": 71.915,
+   "type": "whoosh"
+  },
+  {
+   "t": 72.815,
+   "type": "pop"
+  },
+  {
+   "t": 75.138,
+   "type": "pop"
+  },
+  {
+   "t": 75.523,
+   "type": "pop"
+  },
+  {
+   "t": 75.673,
+   "type": "pop"
+  },
+  {
+   "t": 75.823,
+   "type": "pop"
+  },
+  {
+   "t": 75.973,
+   "type": "pop"
+  },
+  {
+   "t": 77.562,
+   "type": "whoosh"
+  },
+  {
+   "t": 77.831,
+   "type": "pop"
+  },
+  {
+   "t": 78.031,
+   "type": "pop"
+  },
+  {
+   "t": 78.231,
+   "type": "pop"
+  },
+  {
+   "t": 78.431,
+   "type": "pop"
+  },
+  {
+   "t": 78.685,
+   "type": "pop"
+  },
+  {
+   "t": 79.385,
+   "type": "pop"
+  },
+  {
+   "t": 79.785,
+   "type": "pop"
+  },
+  {
+   "t": 86.523,
+   "type": "pop"
+  },
+  {
+   "t": 86.523,
+   "type": "impact"
+  },
+  {
+   "t": 88.915,
+   "type": "whoosh"
+  },
+  {
+   "t": 89.815,
+   "type": "pop"
+  },
+  {
+   "t": 90.985,
+   "type": "pop"
+  },
+  {
+   "t": 94.446,
+   "type": "pop"
+  },
+  {
+   "t": 97.869,
+   "type": "reveal"
+  },
+  {
+   "t": 98.254,
+   "type": "pop"
+  },
+  {
+   "t": 98.434,
+   "type": "pop"
+  },
+  {
+   "t": 98.614,
+   "type": "pop"
+  },
+  {
+   "t": 98.794,
+   "type": "pop"
+  },
+  {
+   "t": 98.974,
+   "type": "pop"
+  },
+  {
+   "t": 99.154,
+   "type": "pop"
+  },
+  {
+   "t": 99.334,
+   "type": "pop"
+  },
+  {
+   "t": 99.514,
+   "type": "pop"
+  },
+  {
+   "t": 100.292,
+   "type": "whoosh"
+  },
+  {
+   "t": 101.031,
+   "type": "pop"
+  },
+  {
+   "t": 101.731,
+   "type": "pop"
+  },
+  {
+   "t": 102.131,
+   "type": "pop"
+  },
+  {
+   "t": 109.638,
+   "type": "pop"
+  },
+  {
+   "t": 109.638,
+   "type": "impact"
+  },
+  {
+   "t": 109.723,
+   "type": "whoosh"
+  },
+  {
+   "t": 110.523,
+   "type": "pop"
+  },
+  {
+   "t": 111.023,
+   "type": "pop"
+  },
+  {
+   "t": 111.223,
+   "type": "pop"
+  },
+  {
+   "t": 111.792,
+   "type": "pop"
+  },
+  {
+   "t": 114.485,
+   "type": "pop"
+  },
+  {
+   "t": 116.408,
+   "type": "pop"
+  },
+  {
+   "t": 121.638,
+   "type": "pop"
+  },
+  {
+   "t": 121.738,
+   "type": "pop"
+  },
+  {
+   "t": 121.838,
+   "type": "pop"
+  },
+  {
+   "t": 121.938,
+   "type": "pop"
+  },
+  {
+   "t": 122.038,
+   "type": "pop"
+  },
+  {
+   "t": 122.408,
+   "type": "pop"
+  },
+  {
+   "t": 124.331,
+   "type": "pop"
+  },
+  {
+   "t": 125.485,
+   "type": "pop"
+  },
+  {
+   "t": 127.408,
+   "type": "pop"
+  },
+  {
+   "t": 130.1,
+   "type": "pop"
+  },
+  {
+   "t": 134.562,
+   "type": "pop"
+  },
+  {
+   "t": 137.254,
+   "type": "pop"
+  },
+  {
+   "t": 138.408,
+   "type": "pop"
+  },
+  {
+   "t": 140.631,
+   "type": "whoosh"
+  }
+ ],
+ "guess": [
+  [
+   96.36923076923077,
+   97.86923076923077
+  ]
+ ],
+ "cues": [
+  {
+   "id": "c1",
+   "start": 0.6,
+   "end": 8.523076923076923,
+   "say": "Épisode trois. Trois heures quatorze : votre sim ne reçoit plus rien du projet prod paiements. Panne, ou attaque ?",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c2",
+   "start": 8.523076923076923,
+   "end": 18.753846153846155,
+   "say": "On croit que l'attaquant efface les journaux. Impossible pour activity. Alors il coupe ce qui les copie, et il éteint ceux qui sont optionnels.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c3",
+   "start": 18.753846153846155,
+   "end": 28.984615384615385,
+   "say": "Première coupure : le sink, le tuyau qui copie les journaux vers votre sim. Il le supprime, ou le redirige vers un projet à lui.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c4",
+   "start": 28.984615384615385,
+   "end": 39.6,
+   "say": "Méthodes : google logging v2, Config Service V2, Delete Sink, ou Update Sink. Condition : un sink de sécurité visé. Les journaux, eux, restent dans le projet.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c5",
+   "start": 39.6,
+   "end": 46.36923076923077,
+   "say": "Deuxième coupure : il éteint Data Access, là où vous l'aviez allumé. Les lectures redeviennent invisibles.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c6",
+   "start": 46.36923076923077,
+   "end": 56.98461538461538,
+   "say": "Méthode : Set I A M Policy, encore. Mais cette fois, le champ à lire est audit config deltas : c'est la configuration des journaux qui change.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c7",
+   "start": 56.98461538461538,
+   "end": 64.52307692307691,
+   "say": "Puis il expose. Il crée une règle de pare-feu qui ouvre un port d'administration à tout Internet.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c8",
+   "start": 64.52307692307691,
+   "end": 73.21538461538461,
+   "say": "Méthode : v1 compute firewalls insert. Condition : source ranges vaut zéro point zéro point zéro point zéro, slash zéro. Tout Internet.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c9",
+   "start": 73.21538461538461,
+   "end": 79.98461538461538,
+   "say": "Il rend aussi un bucket public : n'importe qui, sur Internet, peut alors lire les fichiers.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c10",
+   "start": 79.98461538461538,
+   "end": 90.21538461538461,
+   "say": "Méthode : storage set I A M Permissions. Condition : un membre all Users, ou all Authenticated Users. Une seule ligne, et vos données sont publiques.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c11",
+   "start": 90.21538461538461,
+   "end": 102.33076923076922,
+   "say": "Dernière étape, l'argent. Devinez ce qu'il lance en rafale, dans une région que vous n'utilisez jamais ? | Des machines virtuelles, souvent pour miner de la cryptomonnaie.",
+   "guess": true,
+   "pauseAt": 96.36923076923077
+  },
+  {
+   "id": "c12",
+   "start": 102.33076923076922,
+   "end": 111.02307692307691,
+   "say": "Méthode : v1 compute instances insert. Seule, elle est banale. Ce qui alerte : le volume, la région, et les processeurs graphiques.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c13",
+   "start": 111.02307692307691,
+   "end": 121.63846153846153,
+   "say": "Retour à trois heures quatorze : le sink a été supprimé. Mais les journaux sont intacts dans le projet. On recrée le tuyau, et l'enquête continue.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c14",
+   "start": 121.63846153846153,
+   "end": 132.6384615384615,
+   "say": "Vos règles : Delete Sink et Update Sink, audit config deltas, firewalls insert ouvert au monde, set I A M Permissions public, et instances insert hors normes.",
+   "guess": false,
+   "pauseAt": null
+  },
+  {
+   "id": "c15",
+   "start": 132.6384615384615,
+   "end": 141.71538461538458,
+   "say": "Avec l'épisode deux, cela fait dix règles. Et l'épisode un donne la clé de toutes : lire une entrée, champ par champ.",
+   "guess": false,
+   "pauseAt": null
+  }
+ ]
+}

@@ -1,3 +1,34 @@
 w1 frame 0/1216
 w0 frame 0/1216
 w2 frame 0/1216
+w2 frame 480/1216
+w0 frame 480/1216
+w1 frame 480/1216
+w1 frame 960/1216
+w0 frame 960/1216
+w2 frame 960/1216
+silent video -> versions/v6-ep1/_silent.mp4
+video -> versions/v6-ep1/video.mp4 | voice parts 18, overruns 0, max speed 165
+w2 frame 0/1156
+w0 frame 0/1156
+w1 frame 0/1156
+w0 frame 480/1156
+w1 frame 480/1156
+w2 frame 480/1156
+w0 frame 960/1156
+w1 frame 960/1156
+w2 frame 960/1156
+silent video -> versions/v6-ep2/_silent.mp4
+video -> versions/v6-ep2/video.mp4 | voice parts 16, overruns 0, max speed 205
+w0 frame 0/1150
+w2 frame 0/1150
+w1 frame 0/1150
+w0 frame 480/1150
+w2 frame 480/1150
+w1 frame 480/1150
+w0 frame 960/1150
+w2 frame 960/1150
+w1 frame 960/1150
+silent video -> versions/v6-ep3/_silent.mp4
+video -> versions/v6-ep3/video.mp4 | voice parts 16, overruns 0, max speed 165
+ALL_DONE
