@@ -9,7 +9,7 @@ def main(ver):
     vdir = LAB / "versions" / ver
     src = LAB / "src"
     # snapshot engine sources next to the episode (frozen per version)
-    for f in ("engine.js", "icons.js", "player.js", "style.css", "shell.html"):
+    for f in ("engine.js", "icons.js", "kit.js", "player.js", "style.css", "shell.html"):
         shutil.copy(src / f, vdir / f"_{f}")
     ep = (vdir / "episode.js").read_text(encoding="utf-8")
     meta = json.loads(re.search(r"/\*META(.*?)META\*/", ep, re.S).group(1))
@@ -17,7 +17,7 @@ def main(ver):
     rep = {
         "{{TITLE}}": meta["title"], "{{H1}}": meta["h1"], "{{EYEBROW}}": meta["eyebrow"],
         "{{CSS}}": (src / "style.css").read_text(encoding="utf-8"),
-        "{{ENGINE}}": (src / "engine.js").read_text(encoding="utf-8") + "\n" + (src / "icons.js").read_text(encoding="utf-8"),
+        "{{ENGINE}}": "\n".join((src / f).read_text(encoding="utf-8") for f in ("engine.js", "icons.js", "kit.js")),
         "{{PLAYER}}": (src / "player.js").read_text(encoding="utf-8"),
         "{{EPISODE}}": ep, "{{FOOTER}}": meta.get("footer", ""),
     }

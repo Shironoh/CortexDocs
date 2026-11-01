@@ -5,10 +5,23 @@ corriger **le skill** (pas seulement la vidéo), régénérer. Sujet de test : *
 de Google Cloud, côté détection et réponse, pour quelqu'un qui ne connaît pas GCP* (3 min max).
 
 - Protocole : [`PROTOCOL.md`](PROTOCOL.md) (grille 14 critères, étiquettes E/S/C/T/X, 6 garde-fous anti-surapprentissage)
-- Skill final : [`skill/SKILL.md`](skill/SKILL.md) (= `SKILL.v5.md`) ; versions `SKILL.v0.md` → `v5` ; [`skill/CHANGELOG.md`](skill/CHANGELOG.md)
+- Skill final : [`skill/SKILL.md`](skill/SKILL.md) (= `SKILL.v6.md`) ; versions `SKILL.v0.md` → `v6` ; [`skill/CHANGELOG.md`](skill/CHANGELOG.md)
 - Vidéos : `versions/vN/index.html` (lecteur interactif autonome) et `versions/vN/video_720p.mp4`
 - Revues : `iterations/vN/REVIEW.md`, planches contact `iterations/vN/sheets/`, QA `iterations/vN/QA.md`
 - Validation hors sujet : [`holdout/VALIDATION.md`](holdout/VALIDATION.md) ; sujets témoins : [`holdout/HOLDOUT.md`](holdout/HOLDOUT.md)
+
+## v6 · série DFIR (après retour utilisateur)
+
+Retour sur v5 : « superficiel et abstrait », « la voix est horrible ». Objectif précisé : connaître les événements
+utiles en DFIR et en détection, en plusieurs épisodes. Diagnostic et correctifs : [`iterations/v6/REVIEW.md`](iterations/v6/REVIEW.md).
+Skill v6 : audience sur deux axes (métier × outil), inventaire de valeur, vrais artefacts à l'écran, découpage par famille,
+test du praticien. Protocole : critère F8 « profondeur métier », retour humain prioritaire sur l'auto-notation.
+
+| Épisode | Contenu | Durée |
+|---|---|---|
+| `versions/v6-ep1` | 4 journaux + une entrée réelle lue champ par champ + premier filtre Logs Explorer | 2:32 |
+| `versions/v6-ep2` | 5 persistances : SetIamPolicy, CreateServiceAccount, CreateServiceAccountKey, setCommonInstanceMetadata, GenerateAccessToken / TokenCreator | 2:25 |
+| `versions/v6-ep3` | DeleteSink/UpdateSink, auditConfigDeltas, firewalls.insert, storage.setIamPermissions, instances.insert | 2:24 |
 
 ## Résultats
 

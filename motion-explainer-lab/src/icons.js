@@ -35,3 +35,11 @@ const ICO = {
   plant(g, c = '#06121f') { S('path', { d: 'M -30 60 L 30 60 L 22 100 L -22 100 Z', fill: c }, g); for (const [r, l] of [[-40, 120], [-10, 150], [20, 130], [45, 100]]) S('ellipse', { cx: 0, cy: -l / 2 + 60, rx: 22, ry: l / 2, fill: c, transform: `rotate(${r} 0 60)` }, g); },
 };
 function ico(name, parent, x, y, s, c, extra) { const g = S('g', {}, parent); const inner = S('g', {}, g); ICO[name](inner, c, extra); g._x = x; g._y = y; g._s = s; return g; }
+Object.assign(ICO, {
+  globe(g, c = '#22D3EE') { S('circle', { r: 46, fill: 'none', stroke: c, 'stroke-width': 8 }, g); S('ellipse', { rx: 20, ry: 46, fill: 'none', stroke: c, 'stroke-width': 6 }, g);
+    S('path', { d: 'M -46 0 L 46 0 M -40 -22 L 40 -22 M -40 22 L 40 22', stroke: c, 'stroke-width': 5 }, g); },
+  wall(g, c = '#FB8500') { for (let r = 0; r < 4; r++) for (let k = 0; k < 3; k++) S('rect', { x: -60 + k * 42 + (r % 2) * 20 - 10, y: -60 + r * 31, width: 38, height: 27, rx: 4, fill: c }, g); },
+  ticket(g, c = '#FB8500') { S('path', { d: 'M -50 -30 L 50 -30 L 50 -8 A 10 10 0 0 0 50 8 L 50 30 L -50 30 L -50 8 A 10 10 0 0 0 -50 -8 Z', fill: c }, g);
+    S('circle', { cx: 18, cy: 0, r: 14, fill: 'none', stroke: '#0B1A3A', 'stroke-width': 5 }, g); S('path', { d: 'M 18 -8 L 18 0 L 24 4', stroke: '#0B1A3A', 'stroke-width': 4, fill: 'none' }, g); },
+  pipe(g, c = '#22D3EE') { S('path', { d: 'M -90 0 L 90 0', stroke: c, 'stroke-width': 26, 'stroke-linecap': 'round' }, g); S('rect', { x: -14, y: -24, width: 28, height: 48, rx: 6, fill: c }, g); },
+});

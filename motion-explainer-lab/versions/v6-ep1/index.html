@@ -1,0 +1,916 @@
+<title>Admin Activity, épisode 1</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+/* Layout: one cinema column — header, 16:9 stage, transport bar, chapters, legend. Single dark look by choice. */
+:root {
+  --ink: #050B1E; --night: #0B1A3A; --panel: #14295C; --line: #26407e;
+  --text: #F8FAFC; --muted: #9fb0d6; --amber: #FFB703; --cyan: #22D3EE; --rose: #EF476F;
+  --f-disp: Poppins, 'DejaVu Sans', system-ui, sans-serif; --f-mono: 'JetBrains Mono', 'DejaVu Sans Mono', monospace;
+  color-scheme: dark;
+}
+html, body { background: var(--ink); color: var(--text); }
+body { font-family: var(--f-disp); font-size: 15px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.app { max-width: 1180px; margin: 0 auto; padding-block: 18px 40px; display: grid; gap: 12px; }
+.top h1 { margin: 0; font-size: clamp(20px, 3vw, 30px); font-weight: 800; text-wrap: balance; letter-spacing: -.01em; }
+.eyebrow { color: var(--amber); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+.stage-wrap { width: 100%; }
+.stage { position: relative; width: 100%; aspect-ratio: 16/9; max-width: 100%; background: var(--night); border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px -20px #000; }
+.stage svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.subs { position: absolute; left: 50%; bottom: 3.2%; transform: translateX(-50%); max-width: 86%; text-align: center; background: rgba(5, 11, 30, .78);
+  color: var(--text); font-size: clamp(13px, 1.9vw, 22px); line-height: 1.35; padding: .35em .8em; border-radius: 10px; font-weight: 600; pointer-events: none; }
+.subs.empty, .subs-m.empty { visibility: hidden; }
+.nosubs .subs, .nosubs .subs-m { display: none; }
+.subs-m { display: none; text-align: center; font-size: 15px; line-height: 1.4; min-height: 3.2em; color: var(--text); font-weight: 600; }
+@media (max-width: 720px) { .subs { display: none; } .subs-m { display: block; } }
+.poster { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(180deg, transparent 40%, rgba(5, 11, 30, .55)); }
+.bigplay { display: flex; gap: .6em; align-items: center; font: 700 clamp(15px, 2.2vw, 22px) var(--f-disp); color: var(--ink); background: var(--amber); border: 0; border-radius: 999px; padding: .7em 1.4em; cursor: pointer; box-shadow: 0 10px 30px -8px var(--amber); }
+.bigplay:focus-visible, button:focus-visible, select:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
+.controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.controls button, .controls select { font: 600 14px var(--f-disp); color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 7px 11px; cursor: pointer; }
+.controls .pp { background: var(--amber); color: var(--ink); border-color: var(--amber); min-width: 46px; }
+.tg[aria-pressed="true"] { background: var(--cyan); color: var(--ink); border-color: var(--cyan); }
+.track { position: relative; flex: 1 1 200px; min-width: 120px; height: 10px; background: var(--panel); border-radius: 99px; cursor: pointer; }
+.bar { position: absolute; left: 0; top: 0; bottom: 0; background: var(--amber); border-radius: 99px; }
+.ticks i { position: absolute; top: -3px; width: 2px; height: 16px; background: var(--muted); opacity: .6; }
+.time { font: 600 13px var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.opts { display: flex; gap: 6px; flex-wrap: wrap; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.chapters { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 6px; }
+.chap { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; text-align: left; font: 600 13px var(--f-disp); color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; cursor: pointer; min-width: 0; }
+.chap .n { font: 700 12px var(--f-mono); color: var(--amber); }
+.chap .tt { min-width: 0; overflow-wrap: anywhere; }
+.chap .ts { font: 500 11px var(--f-mono); color: var(--muted); }
+.chap.on { background: var(--panel); border-color: var(--amber); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); }
+.lg { display: inline-flex; gap: 6px; align-items: center; }
+.lg i { width: 12px; height: 12px; border-radius: 4px; display: inline-block; }
+.hint { color: var(--muted); font-size: 12px; margin: 0; }
+.hotspots { position: absolute; inset: 0; pointer-events: none; }
+.hot { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; display: flex; align-items: center; gap: 6px; background: rgba(5, 11, 30, .85); color: var(--text); border: 2px solid var(--cyan); border-radius: 999px; padding: 4px 10px 4px 4px; font: 600 12px var(--f-disp); cursor: pointer; }
+.hot .dot { width: 22px; height: 22px; border-radius: 50%; background: var(--cyan); color: var(--ink); display: grid; place-items: center; font-weight: 800; }
+.hotpanel { position: absolute; right: 2%; top: 4%; width: min(520px, 92%); max-height: 84%; overflow: auto; background: rgba(11, 26, 58, .97); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; z-index: 5; }
+.hp-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; color: var(--amber); }
+.hp-head button { background: none; border: 0; color: var(--text); font-size: 18px; cursor: pointer; }
+.hp-body { font-size: 13px; line-height: 1.5; color: var(--text); }
+.hp-body pre { font: 12px/1.45 var(--f-mono); background: var(--ink); padding: 8px 10px; border-radius: 8px; overflow-x: auto; white-space: pre; }
+.hp-body code { font-family: var(--f-mono); color: var(--cyan); }
+.hp-body .tbd { color: var(--rose); font-weight: 700; }
+.quiz { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(5, 11, 30, .55); z-index: 6; }
+.quiz-card { width: min(560px, 92%); background: var(--night); border: 2px solid var(--amber); border-radius: 14px; padding: 14px 16px; display: grid; gap: 8px; }
+.quiz-k { color: var(--amber); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: 12px; }
+.quiz-card p { margin: 0; font-size: 16px; font-weight: 600; }
+.quiz-c { display: grid; gap: 6px; }
+.quiz-c button { text-align: left; font: 600 14px var(--f-disp); color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; cursor: pointer; }
+.quiz-c button.ok { background: #06D6A0; color: var(--ink); } .quiz-c button.ko { background: var(--rose); } .quiz-c button.dim { opacity: .5; }
+.quiz-why { font-weight: 500 !important; font-size: 14px !important; color: var(--muted); }
+.quiz-go { justify-self: end; font: 700 14px var(--f-disp); background: var(--amber); color: var(--ink); border: 0; border-radius: 10px; padding: 8px 14px; cursor: pointer; }
+.footer { color: var(--muted); font-size: 12px; line-height: 1.5; border-top: 1px solid var(--line); padding-top: 10px; }
+.footer a { color: var(--cyan); }
+/* export: stage fullscreen 1920x1080, no chrome */
+html.export, html.export body { margin: 0; padding: 0; overflow: hidden; background: #000; }
+html.export .app { max-width: none; padding: 0; display: block; }
+html.export .top, html.export .controls, html.export .chapters, html.export .legend, html.export .hint, html.export .subs-m,
+html.export .hotspots, html.export .quiz, html.export .hotpanel, html.export .poster, html.export .footer { display: none !important; }
+html.export .stage { width: 1920px; height: 1080px; border-radius: 0; box-shadow: none; }
+html.export .subs { display: block; font-size: 34px; bottom: 34px; }
+@media (prefers-reduced-motion: reduce) { .bigplay { box-shadow: none; } }
+html.export body.nosubs .subs { display: none !important; }
+
+</style>
+<div class="app">
+  <header class="top">
+    <div class="eyebrow">Série Admin Activity · <b>Ép. 1</b> · <a href='ep2.html' style='color:inherit'>Ép. 2</a> · <a href='ep3.html' style='color:inherit'>Ép. 3</a></div>
+    <h1>Épisode 1 · Lire une entrée, champ par champ</h1>
+  </header>
+  <div class="stage-wrap">
+    <div class="stage" id="stage">
+      <svg id="svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Épisode 1 · Lire une entrée, champ par champ"></svg>
+      <div id="hotspots" class="hotspots"></div>
+      <div id="subs" class="subs empty" aria-live="polite"></div>
+      <div id="poster" class="poster">
+        <button id="bigplay" class="bigplay" type="button"><span class="tri">▶</span><span>Lire · <b id="dur"></b></span></button>
+      </div>
+      <div id="quiz" class="quiz" hidden>
+        <div class="quiz-card">
+          <div class="quiz-k">Devinez</div>
+          <p id="quizq"></p>
+          <div id="quizc" class="quiz-c"></div>
+          <p id="quizwhy" class="quiz-why" hidden></p>
+          <button id="quizgo" class="quiz-go" type="button" hidden>Continuer ▶</button>
+        </div>
+      </div>
+      <div id="hotpanel" class="hotpanel" hidden>
+        <div class="hp-head"><b id="hottitle"></b><button id="hotclose" type="button" aria-label="Fermer">✕</button></div>
+        <div id="hotbody" class="hp-body"></div>
+      </div>
+    </div>
+  </div>
+  <div id="subsM" class="subs-m empty"></div>
+  <div class="controls">
+    <button id="prev" type="button" aria-label="Scène précédente">⏮</button>
+    <button id="play" type="button" class="pp" aria-label="Lecture">▶</button>
+    <button id="next" type="button" aria-label="Scène suivante">⏭</button>
+    <div id="track" class="track"><div id="ticks" class="ticks"></div><div id="bar" class="bar"></div></div>
+    <span id="time" class="time">0:00</span>
+    <div class="opts">
+      <label class="sel"><span class="sr">Vitesse</span><select id="speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option></select></label>
+      <button id="cc" type="button" class="tg">CC</button>
+      <button id="voice" type="button" class="tg">Voix</button>
+      <button id="quizb" type="button" class="tg">Quiz</button>
+    </div>
+  </div>
+  <nav id="chapters" class="chapters" aria-label="Chapitres"></nav>
+  <div id="legend" class="legend"></div>
+  <p class="hint">Pause = points <b>+</b> cliquables pour le détail technique. Raccourcis : espace, ← →, Échap.</p>
+  <p class='footer'>v6, skill v6. Sources : documentation Google Cloud (Cloud Audit Logs overview, Store log entries, AuditLog reference, Enable Data Access audit logs). IP 203.0.113.47 = plage de documentation, compte Gmail fictif.</p>
+</div>
+<script>
+/* motion-explainer engine — pure function of time, no library.
+   Everything is created once; render(t) only mutates attributes. */
+'use strict';
+const NS = 'http://www.w3.org/2000/svg';
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, p) => a + (b - a) * p;
+const P = (t, a, d) => d <= 0 ? (t >= a ? 1 : 0) : clamp((t - a) / d);
+const E = {
+  lin: p => p, oc: p => 1 - (1 - p) ** 3, ic: p => p ** 3,
+  ioc: p => p < .5 ? 4 * p ** 3 : 1 - (-2 * p + 2) ** 3 / 2,
+  ob: p => 1 + 2.6 * (p - 1) ** 3 + 1.6 * (p - 1) ** 2,
+};
+let AMBIENT = true;
+let FRAMING = false; // true while resolving frame(): actors measured at full size, ignoring pop/out
+const WPS = 2.6;            // words per second (timing model)
+const GUESS_PAUSE = 1.5;    // silence for "devinez"
+
+function S(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs || {}) if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const words = s => s.replace(/\|/g, ' ').trim().split(/\s+/).filter(w => /[\p{L}\p{N}]/u.test(w)); // French spacing: lone ':' '?' are not words
+const norm = w => w.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9_%@.\-]/g, '');
+
+/* ---------------- Actor ---------------- */
+class Actor {
+  constructor(el, o) { this.el = el; this.o = o; this.bx = o.x || 0; this.by = o.y || 0; this.bs = o.s == null ? 1 : o.s; this.br = o.r || 0;
+    if (o.dash) { this.len = o.len || (el.getTotalLength ? el.getTotalLength() : 1000); el.setAttribute('stroke-dasharray', this.len); } }
+  update(t) {
+    const o = this.o; let x = this.bx, y = this.by, s = this.bs, r = this.br, a = o.a == null ? 1 : o.a;
+    if (o.pop != null && !FRAMING) { const p = P(t, o.pop, .6); s *= p <= 0 ? 0.001 : .4 + .6 * E.ob(p); a *= Math.min(1, p * 3); }
+    if (o.fin && !FRAMING) { a *= E.oc(P(t, o.fin[0], o.fin[1])); }
+    for (const m of o.moves || []) { const p = (m[3] || E.ioc)(P(t, m[0], m[1]));
+      if (p <= 0) continue; const v = m[2];
+      if ('x' in v) x = lerp(x, v.x, p); if ('y' in v) y = lerp(y, v.y, p); if ('s' in v) s = lerp(s, v.s, p);
+      if ('r' in v) r = lerp(r, v.r, p); if ('a' in v) a *= lerp(1, v.a, p); }
+    if (o.out != null && !FRAMING) a *= 1 - P(t, o.out, o.outd || .4);
+    if (FRAMING) a = 1;
+    const st = { x, y, s, r, a };
+    if (o.fn) o.fn(st, t);
+    if (o.dash) this.el.setAttribute('stroke-dashoffset', this.len * (1 - E.ioc(P(t, o.dash[0], o.dash[1]))));
+    this.el.setAttribute('opacity', st.a.toFixed(3));
+    this.el.setAttribute('visibility', st.a > 0.001 ? 'visible' : 'hidden');
+    this.el.setAttribute('transform', `translate(${st.x.toFixed(2)} ${st.y.toFixed(2)}) rotate(${st.r.toFixed(2)}) scale(${Math.max(st.s, 0.0001).toFixed(4)})`);
+  }
+}
+
+/* ---------------- Characters ---------------- */
+const SHAPES = {
+  blob: 'M -58 0 C -66 -44 -56 -128 0 -130 C 56 -128 66 -44 58 0 Q 0 10 -58 0 Z',
+  robot: 'M -54 -8 Q -58 -120 -40 -122 L 40 -122 Q 58 -120 54 -8 Q 0 4 -54 -8 Z',
+};
+const MOUTH = {
+  neutral: 'M -13 -50 Q 0 -46 13 -50', happy: 'M -17 -54 Q 0 -36 17 -54', smug: 'M -15 -50 Q 5 -44 17 -56',
+  angry: 'M -14 -44 Q 0 -54 14 -44', surprise: 'M -8 -50 a 8 10 0 1 0 16 0 a 8 10 0 1 0 -16 0', worried: 'M -14 -46 Q -4 -52 4 -48 Q 10 -45 14 -48',
+};
+const BROWS = { // [left, right] as dy at inner, dy at outer
+  neutral: [[0, 0], [0, 0]], happy: [[-4, -4], [-4, -4]], smug: [[2, 2], [-10, -4]], angry: [[8, -4], [8, -4]],
+  surprise: [[-12, -10], [-12, -10]], worried: [[-8, 2], [-8, 2]],
+};
+class Char {
+  constructor(K, parent, o) {
+    this.K = K; this.o = o; this.x = o.x; this.y = o.y; this.s = o.s || 1; this.dir = o.dir || 1;
+    this.moves = []; this.poses = []; this.exprs = [[-1, o.expr || 'neutral']]; this.looks = [];
+    this.popT = o.pop; this.outT = null;
+    const col = o.color, dark = o.dark || '#0B1A3A';
+    this.root = S('g', { 'data-char': o.name || '' }, parent);
+    S('ellipse', { cx: 0, cy: 2, rx: 60, ry: 11, fill: '#000', opacity: .28 }, this.root);
+    this.body = S('g', {}, this.root);
+    const shape = SHAPES[o.shape || 'blob'];
+    S('path', { d: shape, fill: dark, opacity: .45, transform: 'translate(7 7)' }, this.body);
+    this.armL = S('path', { fill: 'none', stroke: o.limb || col, 'stroke-width': 13, 'stroke-linecap': 'round' }, this.body);
+    this.armR = S('path', { fill: 'none', stroke: o.limb || col, 'stroke-width': 13, 'stroke-linecap': 'round' }, this.body);
+    if (o.ghost) S('path', { d: shape, fill: col, 'fill-opacity': .12, stroke: col, 'stroke-width': 6, 'stroke-dasharray': '16 12' }, this.body);
+    else { S('path', { d: shape, fill: col }, this.body);
+      S('ellipse', { cx: -18, cy: -96, rx: 16, ry: 9, fill: '#fff', opacity: .25, transform: 'rotate(-25 -18 -96)' }, this.body); }
+    if (o.shape === 'robot') {
+      S('line', { x1: 0, y1: -122, x2: 0, y2: -150, stroke: col, 'stroke-width': 6 }, this.body);
+      this.bulb = S('circle', { cx: 0, cy: -154, r: 9, fill: '#FFB703' }, this.body);
+      S('rect', { x: -40, y: -108, width: 80, height: 52, rx: 14, fill: '#0B1A3A', opacity: .55 }, this.body);
+    }
+    if (o.mask) { S('path', { d: 'M -50 -100 Q 0 -112 50 -100 L 48 -72 Q 0 -80 -48 -72 Z', fill: '#2A0F2E' }, this.body);
+      S('path', { d: 'M -46 -118 Q 0 -150 46 -118 Q 0 -128 -46 -118 Z', fill: '#2A0F2E' }, this.body); }
+    this.face = S('g', { opacity: o.ghost ? .35 : 1 }, this.body);
+    this.eyes = S('g', {}, this.face);
+    this.pupils = [];
+    for (const ex of [-20, 20]) {
+      S('ellipse', { cx: ex, cy: -86, rx: 14, ry: 16, fill: '#fff' }, this.eyes);
+      this.pupils.push(S('circle', { cx: ex, cy: -86, r: 7, fill: '#0B1A3A' }, this.eyes));
+    }
+    this.browL = S('path', { stroke: '#0B1A3A', 'stroke-width': 5, 'stroke-linecap': 'round', fill: 'none' }, this.face);
+    this.browR = S('path', { stroke: '#0B1A3A', 'stroke-width': 5, 'stroke-linecap': 'round', fill: 'none' }, this.face);
+    this.mouth = S('path', { stroke: '#0B1A3A', 'stroke-width': 5, 'stroke-linecap': 'round', fill: '#0B1A3A', 'fill-opacity': 0 }, this.face);
+    if (o.headset) { S('path', { d: 'M -60 -84 Q -62 -150 0 -150 Q 62 -150 60 -84', stroke: '#0B1A3A', 'stroke-width': 8, fill: 'none' }, this.body);
+      S('rect', { x: -68, y: -98, width: 16, height: 30, rx: 6, fill: '#0B1A3A' }, this.body);
+      S('path', { d: 'M -60 -74 Q -50 -50 -22 -50', stroke: '#0B1A3A', 'stroke-width': 5, fill: 'none' }, this.body); }
+    this.handL = S('circle', { r: 10, fill: o.limb || col }, this.body);
+    this.handR = S('circle', { r: 10, fill: o.limb || col }, this.body);
+    this.loupe = S('g', { visibility: 'hidden' }, this.body);
+    S('line', { x1: 0, y1: 0, x2: 24, y2: 30, stroke: '#7c5a3a', 'stroke-width': 10, 'stroke-linecap': 'round' }, this.loupe);
+    S('circle', { cx: -14, cy: -18, r: 30, fill: '#bfefff', 'fill-opacity': .25, stroke: '#F8FAFC', 'stroke-width': 7 }, this.loupe);
+    this.prop = null;
+  }
+  /* timeline API (times absolute, coords in parent space) */
+  pop(t) { this.popT = t; this.K.ev(t, 'pop'); this.K.mark(t); return this; }
+  out(t) { this.outT = t; return this; }
+  walk(t, d, x, y) { this.moves.push({ t, d, x, y: y == null ? null : y, walk: true }); this.K.mark(t); return this; }
+  slide(t, d, x, y) { this.moves.push({ t, d, x, y: y == null ? null : y, walk: false }); this.K.mark(t); return this; }
+  pose(t, d, name, p) { this.poses.push({ t, d, name, p: p || {} }); if (name !== 'type') this.K.mark(t); return this; }
+  expr(t, e) { this.exprs.push([t, e]); this.exprs.sort((a, b) => a[0] - b[0]); return this; }
+  look(t, x, y) { this.looks.push([t, x, y]); this.looks.sort((a, b) => a[0] - b[0]); return this; }
+  hold(el) { this.prop = el; return this; }
+  posAt(t) {
+    let x = this.x, y = this.y, walking = 0, phase = 0;
+    for (const m of this.moves) { const p = E.ioc(P(t, m.t, m.d)); if (p <= 0) continue;
+      const nx = lerp(x, m.x, p), ny = m.y == null ? y : lerp(y, m.y, p);
+      if (m.walk && p > 0 && p < 1) { walking = Math.sin(Math.PI * p); phase = (t - m.t) * 9; this._wd = Math.sign(m.x - x) || this._wd; }
+      x = nx; y = ny; }
+    return { x, y, walking, phase };
+  }
+  update(t) {
+    const st = this.posAt(t);
+    let a = 1, sc = this.s;
+    if (this.popT != null && !FRAMING) { const p = P(t, this.popT, .6); sc *= p <= 0 ? 0.001 : .4 + .6 * E.ob(p); a = Math.min(1, p * 3); }
+    if (this.outT != null && !FRAMING) a *= 1 - P(t, this.outT, .4);
+    // expression
+    let ex = 'neutral'; for (const e of this.exprs) if (t >= e[0]) ex = e[1];
+    // pose
+    let rest = { L: [-62, -22], R: [62, -22] }, H = { L: rest.L.slice(), R: rest.R.slice() };
+    let bodyDy = 0, bodyRot = 0, sy = 1, sx = 1, loupe = 0, gaze = null;
+    if (st.walking > 0) { const sw = Math.sin(st.phase) * 22 * st.walking; H.L = [-58 + sw, -24]; H.R = [58 - sw, -24];
+      bodyDy -= Math.abs(Math.sin(st.phase)) * 10 * st.walking; bodyRot = 4 * st.walking * (this._wd || 1); }
+    for (const q of this.poses) {
+      const pin = P(t, q.t, .28), pout = 1 - P(t, q.t + q.d - .25, .25); let w = E.oc(Math.min(pin, pout));
+      if (t < q.t - .15 || t > q.t + q.d) continue;
+      if (t < q.t) { const ant = 1 - Math.abs((t - (q.t - .075)) / .075); bodyDy += 5 * ant; sy *= 1 - .04 * ant; continue; } // anticipation
+      const n = q.name, p = q.p;
+      if (n === 'point') { const dx = p.x - st.x, dy = p.y - (st.y - 70 * this.s); const L = Math.hypot(dx, dy) || 1;
+        const side = dx < 0 ? 'L' : 'R'; const sh = side === 'L' ? [-48, -62] : [48, -62];
+        const tgt = [sh[0] + dx / L * 82, sh[1] + dy / L * 82]; H[side] = [lerp(H[side][0], tgt[0], w), lerp(H[side][1], tgt[1], w)];
+        bodyRot += (dx < 0 ? -5 : 5) * w; gaze = [p.x, p.y]; }
+      if (n === 'loupe') { H.R = [lerp(H.R[0], 52, w), lerp(H.R[1], -50, w)]; loupe = w; }
+      if (n === 'shrug') { H.L = [lerp(H.L[0], -86, w), lerp(H.L[1], -96, w)]; H.R = [lerp(H.R[0], 86, w), lerp(H.R[1], -96, w)]; bodyDy += 6 * w; }
+      if (n === 'cheer') { H.L = [lerp(H.L[0], -74, w), lerp(H.L[1], -132, w)]; H.R = [lerp(H.R[0], 74, w), lerp(H.R[1], -132, w)];
+        bodyDy -= 14 * Math.abs(Math.sin((t - q.t) * 7)) * w; }
+      if (n === 'hold') { H.L = [lerp(H.L[0], -40, w), lerp(H.L[1], -70, w)]; H.R = [lerp(H.R[0], 40, w), lerp(H.R[1], -70, w)]; }
+      if (n === 'type') { const j = Math.sin((t - q.t) * 22); H.L = [lerp(H.L[0], -34, w), lerp(H.L[1], -26 + 6 * j, w)]; H.R = [lerp(H.R[0], 34, w), lerp(H.R[1], -26 - 6 * j, w)]; }
+      if (n === 'jump') { const k = P(t, q.t, Math.min(.7, q.d)); const h = Math.sin(Math.PI * k);
+        bodyDy -= 48 * h; sy *= k < .12 ? 1 - .2 * Math.sin(k / .12 * Math.PI) : 1 + .1 * h; sx = 2 - sy;
+        H.L = [lerp(H.L[0], -80, w), lerp(H.L[1], -118, w)]; H.R = [lerp(H.R[0], 80, w), lerp(H.R[1], -118, w)]; }
+      if (n === 'nod') { bodyDy += 7 * Math.abs(Math.sin((t - q.t) * 9)) * w; }
+      if (n === 'lean') { bodyRot += (p.dir || 1) * 10 * w; }
+      if (n === 'walkcycle') { const sw = Math.sin((t - q.t) * 9) * 22 * w; H.L = [-58 + sw, -24]; H.R = [58 - sw, -24]; bodyDy -= Math.abs(Math.sin((t - q.t) * 9)) * 10 * w; }
+    }
+    // gaze
+    if (!gaze) { let L = null; for (const l of this.looks) if (t >= l[0]) L = l; if (L && L[1] != null) gaze = [L[1], L[2]]; }
+    let px = 0, py = 0;
+    if (gaze) { const dx = gaze[0] - st.x, dy = gaze[1] - (st.y - 86 * this.s); const L = Math.hypot(dx, dy) || 1; px = dx / L * 6; py = dy / L * 6; }
+    // ambient: breathing + blink
+    let blink = 1;
+    if (AMBIENT) { sy *= 1 + .018 * Math.sin(t * 2.3 + this.x); const bt = (t + (this.x % 3)) % 3.7; if (bt < .12) blink = .12; }
+    // write
+    this.root.setAttribute('opacity', a.toFixed(3));
+    this.root.setAttribute('visibility', a > .001 ? 'visible' : 'hidden');
+    this.root.setAttribute('transform', `translate(${st.x.toFixed(1)} ${st.y.toFixed(1)}) scale(${(sc * this.dir).toFixed(4)} ${sc.toFixed(4)})`);
+    this.body.setAttribute('transform', `translate(0 ${bodyDy.toFixed(1)}) rotate(${bodyRot.toFixed(1)} 0 -40) scale(${sx.toFixed(3)} ${sy.toFixed(3)})`);
+    const ddir = this.dir; px *= ddir;
+    this.pupils[0].setAttribute('cx', -20 + px); this.pupils[0].setAttribute('cy', -86 + py);
+    this.pupils[1].setAttribute('cx', 20 + px); this.pupils[1].setAttribute('cy', -86 + py);
+    this.eyes.setAttribute('transform', `translate(0 ${-86 * (1 - blink)}) scale(1 ${blink})`);
+    const b = BROWS[ex] || BROWS.neutral;
+    this.browL.setAttribute('d', `M -34 ${-108 + b[0][1]} L -8 ${-108 + b[0][0]}`);
+    this.browR.setAttribute('d', `M 8 ${-108 + b[1][0]} L 34 ${-108 + b[1][1]}`);
+    this.mouth.setAttribute('d', MOUTH[ex] || MOUTH.neutral);
+    this.mouth.setAttribute('fill-opacity', ex === 'surprise' ? 1 : 0);
+    const arm = (el, sh, h) => { const mx = (sh[0] + h[0]) / 2 + (h[0] > 0 ? 8 : -8), my = (sh[1] + h[1]) / 2 + 10;
+      el.setAttribute('d', `M ${sh[0]} ${sh[1]} Q ${mx} ${my} ${h[0]} ${h[1]}`); };
+    arm(this.armL, [-46, -60], H.L); arm(this.armR, [46, -60], H.R);
+    this.handL.setAttribute('cx', H.L[0]); this.handL.setAttribute('cy', H.L[1]);
+    this.handR.setAttribute('cx', H.R[0]); this.handR.setAttribute('cy', H.R[1]);
+    this.loupe.setAttribute('visibility', loupe > .02 && a > .001 ? 'visible' : 'hidden');
+    this.loupe.setAttribute('transform', `translate(${H.R[0] - 26} ${H.R[1] - 26}) scale(${(.5 + .5 * loupe).toFixed(3)})`);
+    if (this.bulb) this.bulb.setAttribute('opacity', AMBIENT ? (.6 + .4 * Math.sin(t * 5)).toFixed(2) : 1);
+    if (this.prop) { const hx = (H.L[0] + H.R[0]) / 2, hy = Math.min(H.L[1], H.R[1]) - 20;
+      this.prop.setAttribute('transform', `translate(${(st.x + hx * sc * this.dir).toFixed(1)} ${(st.y + (hy + bodyDy) * sc).toFixed(1)})`); }
+  }
+}
+
+/* ---------------- Episode runtime ---------------- */
+function Runtime(ep, svg) {
+  const R = { ep, svg, actors: [], chars: [], camMoves: [], frames: [], focusKeys: [], hots: [], events: [], marks: [], fx: [] };
+  // ---- timing
+  let t0 = ep.lead || 0.6;
+  const cues = ep.cues.map(c => {
+    const parts = c.say.split('|'); const w1 = words(parts[0]).length, wAll = words(c.say).length;
+    const guess = parts.length > 1;
+    const dur = Math.max(3.6, wAll / WPS + 1.0) + (guess ? GUESS_PAUSE : 0) + (c.extra || 0);
+    const o = { ...c, start: t0, dur, end: t0 + dur, guess, w1, wAll, pauseAt: guess ? t0 + w1 / WPS : null };
+    t0 += dur; return o;
+  });
+  // scenes: start = first cue start minus travel lead
+  const scenes = ep.scenes.map(s => { const cs = cues.filter(c => c.sc === s.id); return { ...s, start: cs[0].start, end: cs[cs.length - 1].end, cues: cs }; });
+  R.duration = t0 + (ep.tail || 1.5);
+  for (const c of cues) if (c.guess) R.events.push({ t: +(c.pauseAt + GUESS_PAUSE).toFixed(3), type: 'reveal' }); // semantic sound: reveal chime
+  R.cues = cues; R.scenes = scenes;
+  const cueById = Object.fromEntries(cues.map(c => [c.id, c]));
+  // ---- kit
+  const K = R.K = {};
+  K.S = S; K.E = E; K.P = P; K.lerp = lerp; K.clamp = clamp; K.Z = ep.zones;
+  K.cue = id => { const c = cueById[id]; if (!c) throw new Error('cue inconnu ' + id); return c; };
+  K.T = (id, word, n = 0, after = false) => {
+    const c = K.cue(id); if (word == null) return c.start; if (word === '$end') return c.end;
+    const ws = words(c.say); const target = norm(word); let k = -1, seen = 0;
+    for (let i = 0; i < ws.length; i++) if (norm(ws[i]).startsWith(target)) { if (seen === n) { k = i; break; } seen++; }
+    if (k < 0) throw new Error(`mot "${word}" absent du cue ${id}`);
+    const idx = after ? k + 1 : k;
+    let t = c.start + idx / WPS; if (c.guess && idx >= c.w1) t += GUESS_PAUSE; return t;
+  };
+  K.reveal = id => { const c = K.cue(id); return c.pauseAt + GUESS_PAUSE; };
+  K.sc = id => scenes.find(s => s.id === id);
+  K.layers = {};
+  K.A = (el, o) => { const a = new Actor(el, o || {}); R.actors.push(a);
+    if (o && o.pop != null) { K.ev(o.pop, 'pop'); K.mark(o.pop); }
+    if (o && o.fin) K.mark(o.fin[0]); if (o && o.out != null) K.mark(o.out); if (o && o.dash) K.mark(o.dash[0]);
+    for (const m of (o && o.moves) || []) K.mark(m[0]);
+    return a; };
+  K.g = (parent, attrs) => S('g', attrs || {}, parent);
+  K.tx = (parent, x, y, str, o = {}) => { // o.deco: a lone symbol (?, €, !) — not a text to read, not counted as a text block
+    const e = S('text', { x, y, 'font-size': o.size || 48, fill: o.fill || '#F8FAFC', 'font-weight': o.weight || 600,
+      'text-anchor': o.anchor || 'middle', 'font-family': o.mono ? "'JetBrains Mono','DejaVu Sans Mono',monospace" : "Poppins,'DejaVu Sans',sans-serif",
+      'data-txt': o.deco ? null : (o.mono ? 'code' : 'txt'), 'dominant-baseline': 'middle', 'letter-spacing': o.ls || null }, parent);
+    if (o.mono) e.setAttribute('style', 'white-space:pre');
+    if (o.bleed) e.setAttribute('data-bleed', '1');
+    e.textContent = str; return e;
+  };
+  K.char = (parent, o) => { const c = new Char(K, parent, o); R.chars.push(c); return c; };
+  K.cam = (t, d, x, y, z) => { R.camMoves.push({ t, d, x, y, z }); if (d > 0.9) K.ev(t, 'whoosh'); K.mark(t); };
+  // frame(t, d, targets, part, o): camera computed from the subject's bounding box at arrival time.
+  // part = share of the frame taken by the subject's dominant dimension (ensemble ~.9, travail ~.55, gros plan ~.7).
+  // Subject is centred at screen y=400 and kept inside y 60..740 (subtitle band free). o.focus adds a spotlight key.
+  K.frame = (t, d, targets, part = .55, o = {}) => { R.frames.push({ t, d, targets: [].concat(targets), part, o }); if (d > 0.9) K.ev(t, 'whoosh'); K.mark(t);
+    if (o.focus !== false) K.focus(t + Math.min(d, .4), [].concat(targets)[0], o.r || null); };
+  K.focus = (t, target, r) => R.focusKeys.push({ t, target: target && target.root ? target.root : target, r: r || null });
+  K.hot = (h) => R.hots.push(h);
+  K.ev = (t, type) => R.events.push({ t: +t.toFixed(3), type });
+  K.mark = t => R.marks.push(+t.toFixed(3));
+  K.fx = fn => R.fx.push(fn); // custom per-frame function (t) => void
+  return R;
+}
+function worldBBox(R, els) {
+  const main = R.K.layers.main, inv = main.getCTM().inverse(); let x1 = 1e9, y1 = 1e9, x2 = -1e9, y2 = -1e9;
+  for (let el of els) { if (el && el.root) el = el.root; if (!el) continue; let bb; try { bb = el.getBBox(); } catch (e) { continue; }
+    if (!bb || (bb.width === 0 && bb.height === 0)) continue; const m = inv.multiply(el.getCTM());
+    for (const [px, py] of [[bb.x, bb.y], [bb.x + bb.width, bb.y], [bb.x, bb.y + bb.height], [bb.x + bb.width, bb.y + bb.height]]) {
+      const p = R.svg.createSVGPoint(); p.x = px; p.y = py; const q = p.matrixTransform(m);
+      x1 = Math.min(x1, q.x); y1 = Math.min(y1, q.y); x2 = Math.max(x2, q.x); y2 = Math.max(y2, q.y); } }
+  return x1 > x2 ? null : { x: x1, y: y1, w: x2 - x1, h: y2 - y1 };
+}
+function camFor(bb, part, o = {}) {
+  let z = part / Math.max(bb.w / 1600, bb.h / 900); z = Math.min(z, 680 / bb.h, 1480 / bb.w, o.zmax || 3); if (o.zmin) z = Math.max(z, o.zmin);
+  return { x: bb.x + bb.w / 2 + (o.dx || 0), y: bb.y + bb.h / 2 + 50 / z + (o.dy || 0), z };
+}
+
+function camAt(R, t) {
+  const m0 = R.camMoves[0]; let x = m0.x, y = m0.y, z = m0.z;
+  for (const m of R.camMoves) { const p = E.ioc(P(t, m.t, m.d)); if (p <= 0) break;
+    x = lerp(x, m.x, p); y = lerp(y, m.y, p); z = Math.exp(lerp(Math.log(z), Math.log(m.z), p)); }
+  return { x, y, z };
+}
+function worldCenter(R, el) {
+  const bb = el.getBBox(); const m = el.getCTM(), base = R.K.layers.main.getCTM();
+  if (!m || !base) return [0, 0];
+  const pt = R.svg.createSVGPoint(); pt.x = bb.x + bb.width / 2; pt.y = bb.y + bb.height / 2;
+  const p = pt.matrixTransform(base.inverse().multiply(m)); return [p.x, p.y];
+}
+function focusAt(R, t) {
+  let f = null; for (const k of R.focusKeys) if (t >= k.t) f = k; return f;
+}
+
+/* Flat vector icon kit: each icon drawn around (0,0), ~100 units, returns <g>. Shared by episodes. */
+'use strict';
+const ICO = {
+  crown(g, c = '#FFB703') { S('path', { d: 'M -46 22 L -52 -26 L -22 2 L 0 -36 L 22 2 L 52 -26 L 46 22 Z', fill: c }, g); S('rect', { x: -48, y: 22, width: 96, height: 16, rx: 5, fill: c }, g);
+    S('path', { d: 'M -46 22 L -52 -26 L -22 2 Z', fill: '#000', opacity: .12 }, g); for (const x of [-52, 0, 52]) S('circle', { cx: x, cy: x ? -28 : -38, r: 7, fill: '#fff', opacity: .9 }, g); },
+  key(g, c = '#FB8500') { S('circle', { cx: -34, cy: 0, r: 26, fill: c }, g); S('circle', { cx: -34, cy: 0, r: 10, fill: '#0B1A3A' }, g);
+    S('rect', { x: -12, y: -8, width: 66, height: 16, rx: 6, fill: c }, g); S('rect', { x: 30, y: 4, width: 10, height: 18, rx: 3, fill: c }, g); S('rect', { x: 44, y: 4, width: 10, height: 13, rx: 3, fill: c }, g); },
+  laptop(g, c = '#22D3EE') { S('rect', { x: -44, y: -40, width: 88, height: 58, rx: 8, fill: '#0B1A3A', stroke: c, 'stroke-width': 7 }, g); S('path', { d: 'M -58 22 L 58 22 L 50 36 L -50 36 Z', fill: c }, g);
+    S('rect', { x: -30, y: -26, width: 40, height: 7, rx: 3, fill: c, opacity: .7 }, g); S('rect', { x: -30, y: -12, width: 56, height: 7, rx: 3, fill: c, opacity: .4 }, g); },
+  terminal(g, c = '#06D6A0') { S('rect', { x: -48, y: -38, width: 96, height: 76, rx: 10, fill: '#0B1A3A', stroke: c, 'stroke-width': 7 }, g);
+    S('path', { d: 'M -30 -14 L -14 0 L -30 14', fill: 'none', stroke: c, 'stroke-width': 7, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g); S('rect', { x: -6, y: 12, width: 28, height: 7, rx: 3, fill: c }, g); },
+  gear(g, c = '#A78BFA') { for (let i = 0; i < 8; i++) S('rect', { x: -9, y: -48, width: 18, height: 22, rx: 4, fill: c, transform: `rotate(${i * 45})` }, g);
+    S('circle', { r: 32, fill: c }, g); S('circle', { r: 13, fill: '#0B1A3A' }, g); },
+  person(g, c = '#F8FAFC') { S('circle', { cx: 0, cy: -22, r: 20, fill: c }, g); S('path', { d: 'M -34 34 Q -34 2 0 2 Q 34 2 34 34 Z', fill: c }, g); },
+  clock(g, c = '#F8FAFC') { S('circle', { r: 38, fill: 'none', stroke: c, 'stroke-width': 8 }, g); S('path', { d: 'M 0 -22 L 0 0 L 16 10', fill: 'none', stroke: c, 'stroke-width': 7, 'stroke-linecap': 'round' }, g); },
+  pin(g, c = '#F8FAFC') { S('path', { d: 'M 0 44 C -10 22 -34 4 -34 -14 A 34 34 0 1 1 34 -14 C 34 4 10 22 0 44 Z', fill: c }, g); S('circle', { cx: 0, cy: -14, r: 12, fill: '#0B1A3A' }, g); },
+  steps(g, c = '#EF476F') { for (const [x, y, r] of [[-26, 18, -12], [8, -2, 10], [-10, -30, -12], [26, -42, 10]]) { S('ellipse', { cx: x, cy: y, rx: 10, ry: 15, fill: c, transform: `rotate(${r} ${x} ${y})` }, g); } },
+  wrench(g, c = '#F8FAFC') { S('path', { d: 'M -36 30 L 8 -14 A 22 22 0 1 1 22 0 L -22 44 Z', fill: c }, g); S('circle', { cx: 24, cy: -20, r: 8, fill: '#0B1A3A' }, g); },
+  plusminus(g, c = '#06D6A0') { S('rect', { x: -40, y: -10, width: 80, height: 20, rx: 6, fill: c }, g); S('rect', { x: -10, y: -40, width: 20, height: 80, rx: 6, fill: c }, g); },
+  doc(g, c = '#F8FAFC') { S('path', { d: 'M -30 -40 L 14 -40 L 30 -24 L 30 40 L -30 40 Z', fill: c }, g); for (const y of [-16, 0, 16]) S('rect', { x: -18, y, width: 36, height: 6, rx: 3, fill: '#0B1A3A', opacity: .35 }, g); },
+  slip(g, c = '#FFB703') { S('rect', { x: -26, y: -18, width: 52, height: 36, rx: 5, fill: c }, g); S('rect', { x: -16, y: -8, width: 32, height: 5, rx: 2, fill: '#0B1A3A', opacity: .4 }, g); S('rect', { x: -16, y: 3, width: 22, height: 5, rx: 2, fill: '#0B1A3A', opacity: .4 }, g); },
+  padlock(g, c = '#F8FAFC') { S('path', { d: 'M -22 -6 L -22 -26 A 22 22 0 0 1 22 -26 L 22 -6', fill: 'none', stroke: c, 'stroke-width': 10 }, g); S('rect', { x: -34, y: -8, width: 68, height: 52, rx: 10, fill: c }, g); S('circle', { cx: 0, cy: 14, r: 7, fill: '#0B1A3A' }, g); },
+  bell(g, c = '#FFB703') { S('path', { d: 'M -36 24 Q -30 18 -30 -4 Q -30 -36 0 -38 Q 30 -36 30 -4 Q 30 18 36 24 Z', fill: c }, g); S('circle', { cx: 0, cy: 32, r: 9, fill: c }, g); S('rect', { x: -4, y: -48, width: 8, height: 12, rx: 3, fill: c }, g); },
+  funnel(g, c = '#22D3EE') { S('path', { d: 'M -50 -36 L 50 -36 L 12 6 L 12 40 L -12 48 L -12 6 Z', fill: c }, g); S('rect', { x: -50, y: -44, width: 100, height: 12, rx: 5, fill: c }, g); },
+  cam(g, c = '#A78BFA', on = false) { S('rect', { x: -46, y: -22, width: 80, height: 44, rx: 10, fill: c }, g); S('path', { d: 'M 34 -12 L 56 -24 L 56 24 L 34 12 Z', fill: c }, g);
+    S('rect', { x: -10, y: -52, width: 10, height: 32, fill: c }, g); },
+  door(g, c = '#EF476F') { S('rect', { x: -32, y: -50, width: 64, height: 100, rx: 8, fill: '#0B1A3A', stroke: c, 'stroke-width': 7 }, g); S('circle', { cx: 16, cy: 4, r: 6, fill: c }, g); },
+  book(g, c = '#FFB703') { S('path', { d: 'M 0 -30 Q -30 -42 -60 -34 L -60 36 Q -30 28 0 40 Q 30 28 60 36 L 60 -34 Q 30 -42 0 -30 Z', fill: '#F8FAFC' }, g); S('path', { d: 'M 0 -30 L 0 40', stroke: c, 'stroke-width': 6 }, g);
+    S('path', { d: 'M -64 36 Q -30 30 0 44 Q 30 30 64 36 L 64 44 Q 30 38 0 52 Q -30 38 -64 44 Z', fill: c }, g); },
+  server(g, c = '#22D3EE') { for (const y of [-30, 0, 30]) { S('rect', { x: -40, y: y - 12, width: 80, height: 24, rx: 6, fill: '#14295C', stroke: c, 'stroke-width': 4 }, g); S('circle', { cx: 26, cy: y, r: 4, fill: c }, g); } },
+  barrel(g, c = '#F8FAFC') { S('rect', { x: -34, y: -38, width: 68, height: 76, rx: 14, fill: c }, g); for (const y of [-16, 12]) S('rect', { x: -34, y, width: 68, height: 6, fill: '#0B1A3A', opacity: .3 }, g); },
+  check(g, c = '#06D6A0') { S('circle', { r: 30, fill: c }, g); S('path', { d: 'M -14 0 L -4 12 L 16 -12', fill: 'none', stroke: '#0B1A3A', 'stroke-width': 8, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g); },
+  cross(g, c = '#EF476F') { S('path', { d: 'M -30 -30 L 30 30 M 30 -30 L -30 30', stroke: c, 'stroke-width': 16, 'stroke-linecap': 'round' }, g); },
+  mask(g, c = '#2A0F2E') { S('path', { d: 'M -40 -10 Q 0 -24 40 -10 L 36 14 Q 0 6 -36 14 Z', fill: c }, g); for (const x of [-16, 16]) S('ellipse', { cx: x, cy: 0, rx: 8, ry: 6, fill: '#F8FAFC' }, g); },
+  plant(g, c = '#06121f') { S('path', { d: 'M -30 60 L 30 60 L 22 100 L -22 100 Z', fill: c }, g); for (const [r, l] of [[-40, 120], [-10, 150], [20, 130], [45, 100]]) S('ellipse', { cx: 0, cy: -l / 2 + 60, rx: 22, ry: l / 2, fill: c, transform: `rotate(${r} 0 60)` }, g); },
+};
+function ico(name, parent, x, y, s, c, extra) { const g = S('g', {}, parent); const inner = S('g', {}, g); ICO[name](inner, c, extra); g._x = x; g._y = y; g._s = s; return g; }
+Object.assign(ICO, {
+  globe(g, c = '#22D3EE') { S('circle', { r: 46, fill: 'none', stroke: c, 'stroke-width': 8 }, g); S('ellipse', { rx: 20, ry: 46, fill: 'none', stroke: c, 'stroke-width': 6 }, g);
+    S('path', { d: 'M -46 0 L 46 0 M -40 -22 L 40 -22 M -40 22 L 40 22', stroke: c, 'stroke-width': 5 }, g); },
+  wall(g, c = '#FB8500') { for (let r = 0; r < 4; r++) for (let k = 0; k < 3; k++) S('rect', { x: -60 + k * 42 + (r % 2) * 20 - 10, y: -60 + r * 31, width: 38, height: 27, rx: 4, fill: c }, g); },
+  ticket(g, c = '#FB8500') { S('path', { d: 'M -50 -30 L 50 -30 L 50 -8 A 10 10 0 0 0 50 8 L 50 30 L -50 30 L -50 8 A 10 10 0 0 0 -50 -8 Z', fill: c }, g);
+    S('circle', { cx: 18, cy: 0, r: 14, fill: 'none', stroke: '#0B1A3A', 'stroke-width': 5 }, g); S('path', { d: 'M 18 -8 L 18 0 L 24 4', stroke: '#0B1A3A', 'stroke-width': 4, fill: 'none' }, g); },
+  pipe(g, c = '#22D3EE') { S('path', { d: 'M -90 0 L 90 0', stroke: c, 'stroke-width': 26, 'stroke-linecap': 'round' }, g); S('rect', { x: -14, y: -24, width: 28, height: 48, rx: 6, fill: c }, g); },
+});
+
+/* Series kit: shared world helpers + "event room" grammar (action stage -> real log card -> rule).
+   Used by the v6 series episodes. Everything still a pure function of time. */
+'use strict';
+function seriesKit(K) {
+  const { S, E, Z } = K; const T = K.T, R = K.reveal;
+  const C = { amber: '#FFB703', orange: '#FB8500', cyan: '#22D3EE', rose: '#EF476F', green: '#06D6A0', violet: '#A78BFA', teal: '#2DD4BF', text: '#F8FAFC', ink: '#0B1A3A', p1: '#14295C', p2: '#1E3A8A', paper: '#E8EEF9' };
+  const FLOOR = 250, main = K.layers.main, far = K.layers.far, front = K.layers.front;
+  const sc = id => K.sc(id).start;
+  const G = (parent, x, y, o = {}) => { const g = K.g(parent); g._a = K.A(g, { x, y, ...o }); return g; };
+  const I = (name, parent, x, y, s, c, o = {}) => { const g = ico(name, parent, 0, 0, 1, c); g._a = K.A(g, { x, y, s, ...o }); return g; };
+  const F = (t, d, tg, part, o) => K.frame(t, d, tg, part, o);
+  const zg = (name, tint, seed = 0) => { const g = K.g(main, { transform: `translate(${Z[name][0]} ${Z[name][1]})` });
+    const room = S('rect', { x: -1000, y: -560, width: 2000, height: 1120, rx: 80, fill: tint }, g);
+    S('rect', { x: -1000, y: FLOOR, width: 2000, height: 560 - FLOOR, rx: 40, fill: '#1B3270' }, g);
+    S('rect', { x: -1000, y: FLOOR - 6, width: 2000, height: 12, fill: '#2c4a8f' }, g);
+    for (const sx of [-1, 1]) { const x = sx * 860; S('rect', { x: x - 80, y: -440, width: 160, height: 220, rx: 14, fill: '#1E3A8A', opacity: .55 }, g);
+      for (let k = 0; k < 4; k++) S('rect', { x: x - 64 + (k % 2) * 68, y: -420 + Math.floor(k / 2) * 92, width: 60, height: 76, rx: 8, fill: ['#22D3EE', '#FFB703', '#EF476F', '#A78BFA'][(k + seed) % 4], opacity: .25 }, g); }
+    for (let k = 0; k < 9; k++) S('rect', { x: -1000 + k * 230, y: 300 + (k % 2) * 60, width: 150, height: 10, rx: 5, fill: '#2c4a8f', opacity: .7 }, g);
+    S('path', { d: 'M -1000 -500 L 1000 -500', stroke: '#2c4a8f', 'stroke-width': 16, opacity: .7 }, g);
+    g._room = room; return g; };
+  function backdrop(zoneNames) {
+    for (let i = 0; i < 140; i++) { const x = -800 + (i * 977) % 9000, y = -700 + (i * 613) % 1600;
+      const st = S('circle', { cx: x, cy: y, r: 2 + (i % 3), fill: '#cfe3ff', opacity: .3 }, far);
+      if (i % 7 === 0) K.fx(t => st.setAttribute('opacity', AMBIENT ? (.2 + .3 * Math.abs(Math.sin(t * .8 + i))).toFixed(2) : .35)); }
+    const zs = zoneNames.map(n => Z[n]);
+    for (let i = 0; i + 1 < zs.length; i++) { const mx = (zs[i][0] + zs[i + 1][0]) / 2, my = (zs[i][1] + zs[i + 1][1]) / 2;
+      const g = ico('plant', front, 0, 0, 1, '#040916'); g.setAttribute('transform', `translate(${mx * 1.3} ${(my + 380) * 1.3}) scale(3)`);
+      S('path', { d: `M ${zs[i][0] + 1000} 320 L ${zs[i + 1][0] - 1000} 320`, stroke: '#14295C', 'stroke-width': 70 }, main);
+      S('path', { d: `M ${zs[i][0] + 1000} 320 L ${zs[i + 1][0] - 1000} 320`, stroke: C.amber, 'stroke-width': 6, 'stroke-dasharray': '18 26', opacity: .4 }, main); }
+  }
+  const analyst = (g, x, o = {}) => K.char(g, { name: 'analyste', color: C.cyan, x, y: FLOOR, s: o.s || 1.4, dir: o.dir || 1, headset: true });
+  const villain = (g, x, o = {}) => K.char(g, { name: 'attaquant', color: C.rose, x, y: FLOOR, s: o.s || 1.4, dir: o.dir || -1, mask: true, expr: 'smug' });
+  // typewriter on a <text> (a real value "s'écrit")
+  const typeIn = (el, str, t0, dur = 1.2) => K.fx(t => { const n = FRAMING ? str.length : Math.round(str.length * K.clamp((t - t0) / dur)); el.textContent = str.slice(0, Math.max(1, n)); });
+  const mono = (len, maxW, base = 44, min = 36) => Math.max(min, Math.min(base, maxW / (len * .6)));
+  /* Real log card: tactic band (+ colored log book: amber = activity, violet = data_access), method (typed), condition (lit). 3 texts max. */
+  function logCard(g, x, y, spec, tPop, tMethod, tCond, tOut) {
+    const W = spec.w || 1040, H = 400; const card = G(g, x, y, { pop: tPop, out: tOut });
+    S('rect', { x: -W / 2 + 10, y: -H / 2 + 12, width: W, height: H, rx: 30, fill: '#000', opacity: .25 }, card);
+    S('rect', { x: -W / 2, y: -H / 2, width: W, height: H, rx: 30, fill: C.paper }, card);
+    S('rect', { x: -W / 2, y: -H / 2, width: W, height: 96, rx: 30, fill: spec.col }, card); S('rect', { x: -W / 2, y: -H / 2 + 60, width: W, height: 36, fill: spec.col }, card);
+    K.tx(card, -W / 2 + 40, -H / 2 + 50, spec.tactic, { size: 46, fill: C.ink, weight: 800, anchor: 'start' });
+    const bk = ico('book', card, 0, 0, 1, spec.log === 'data_access' ? C.violet : C.amber); bk.setAttribute('transform', `translate(${W / 2 - 80} ${-H / 2 + 48}) scale(.62)`);
+    const mEl = K.tx(card, -W / 2 + 40, -20, spec.method, { size: mono(spec.method.length, W - 80, 52), mono: true, fill: C.ink, weight: 700, anchor: 'start' });
+    typeIn(mEl, spec.method, tMethod, Math.min(1.6, .04 * spec.method.length + .4)); K.mark(tMethod); card._m = mEl;
+    const hl = S('rect', { x: -W / 2 + 24, y: 50, width: W - 48, height: 92, rx: 18, fill: spec.col, 'fill-opacity': .25 }, card); K.A(hl, { fin: [tCond, .3] });
+    const cg = G(card, 0, 0, { fin: [tCond, .3] });
+    K.tx(cg, -W / 2 + 40, 96, spec.cond, { size: spec.condMono === false ? 46 : mono(spec.cond.length, W - 80, 46), mono: spec.condMono !== false, fill: C.ink, weight: 700, anchor: 'start' });
+    card._c = cg; return card;
+  }
+  /* Event room: one scene = action (cue A) + detection (cue B). spec.stage(g, kit, times) builds the action and returns framing targets. */
+  function eventRoom(spec) {
+    const g = zg(spec.zone, spec.tint, spec.seed || 0); const s0 = sc(spec.scene);
+    const tA = T(spec.cueA, spec.wAct), tB = K.cue(spec.cueB).start, tM = T(spec.cueB, spec.wMethod), tC = T(spec.cueB, spec.wCond);
+    const tR = spec.wRule ? T(spec.cueB, spec.wRule) : K.cue(spec.cueB).end - 1.2;
+    const vil = spec.noVillain ? null : villain(g, -980, { dir: 1 });
+    if (vil) vil.pop(s0 - .4).walk(s0 - .2, 1.2, -720).expr(tA, 'smug').pose(tA, 1.2, 'point', { x: -380, y: -60 }).walk(tB - .4, 1.0, -1250).out(tB + .4);
+    const stage = spec.stage(g, kit, { s0, tA, tB });
+    // the call flies from the stage to the card (the entry is written)
+    const slip = I('slip', g, -380, -120, 1.4, spec.log === 'data_access' ? C.violet : C.amber, { pop: K.cue(spec.cueA).end - 1.3, moves: [[K.cue(spec.cueA).end - 1.1, 1.0, { x: 450, y: -150, s: .6 }, E.ioc]], out: K.cue(spec.cueA).end - .1 });
+    const card = logCard(g, 450, -150, spec, tB - .2, tM, tC, spec.tOut);
+    const an = analyst(g, -1050, { s: 1.35 });
+    an.pop(tB - .6).walk(tB - .4, 1.1, -600).pose(tM, 1.0, 'point', { x: 200, y: -170 }).pose(tC, 1.0, 'point', { x: 200, y: -60 }).expr(tC, 'happy');
+    const bell = G(g, 830, 120, { pop: tR, fn: (s, t) => { s.r = 14 * Math.sin((t - tR) * 14) * (1 - P(t, tR + .3, 1.2)); } }); ico('bell', bell, 0, 0, 1, C.amber).setAttribute('transform', 'scale(1.2)');
+    K.ev(tR, 'impact');
+    // filler beats (skill: >= ceil(dur/2) visible changes per cue): reaction, push-in, pulse, nods
+    const eA = K.cue(spec.cueA).end, eB = K.cue(spec.cueB).end;
+    if (vil) vil.pose(tA + 1.6, 1.0, 'cheer');
+    if (vil && tA - K.cue(spec.cueA).start > 2.6) vil.pose(K.cue(spec.cueA).start + 1.4, 1.0, 'point', { x: -380, y: -60 });
+    an.pose((tC + tR) / 2, .8, 'nod').pose(tR + .4, 1.0, 'cheer');
+    const ul = S('rect', { x: 450 - 500, y: -150 + 12, width: 1000, height: 10, rx: 5, fill: spec.col }, g); K.A(ul, { fin: [(tM + tC) / 2, .2], out: tC + .2 });
+    const pulse = S('rect', { x: 450 - 540, y: -150 - 210, width: 1080, height: 420, rx: 36, fill: 'none', stroke: spec.col, 'stroke-width': 10 }, g);
+    K.A(pulse, { fin: [(tC + tR) / 2, .2], out: (tC + tR) / 2 + .8 });
+    F(s0 - 1.3, 1.5, [g._room], .96, { focus: false }); K.focus(s0, stage[0]);
+    F((tA + eA) / 2, 1.2, [...stage, card], .9, { focus: false });
+    if (tA - K.cue(spec.cueA).start > 3) F(K.cue(spec.cueA).start + 1.4, .9, stage, .8, { focus: false });
+    F(tA - .5, .8, stage, .62, { focus: false }); K.focus(tA, stage[0]);
+    F(tB - .4, .9, [card], .82, { focus: false }); K.focus(tB, card);
+    F(tM - .4, .7, [card._m], .62, { focus: false, zmax: 2.4 }); K.focus(tM, card._m);
+    F(tC - .3, .7, [card._c], .66, { focus: false, zmax: 2.4 }); K.focus(tC, card._c);
+    F(tC + .9, .9, [card, bell], .86, { focus: false });
+    if (spec.hot) K.hot({ x: Z[spec.zone][0] + 450, y: Z[spec.zone][1] - 330, at: s0, until: K.cue(spec.cueB).end + 1, title: spec.hot[0], html: spec.hot[1] });
+    return { g, card, an, vil, stage, bell };
+  }
+  /* Hook room: the analyst's desk, a monitor showing a short line, used to open each episode. */
+  function hookRoom(zone, tint, o) {
+    const g = zg(zone, tint, 1);
+    S('rect', { x: -560, y: 60, width: 900, height: 44, rx: 14, fill: C.p2 }, g); S('rect', { x: -520, y: 104, width: 28, height: 146, fill: C.p1 }, g); S('rect', { x: 280, y: 104, width: 28, height: 146, fill: C.p1 }, g);
+    const mon = G(g, -110, -170); S('rect', { x: -330, y: -190, width: 660, height: 380, rx: 24, fill: C.p1, stroke: '#26407e', 'stroke-width': 6 }, mon);
+    S('rect', { x: -305, y: -168, width: 610, height: 334, rx: 14, fill: '#071028' }, mon); S('rect', { x: -40, y: 190, width: 80, height: 40, fill: C.p1 }, mon);
+    const an = analyst(g, 520, { s: 1.5, dir: -1 });
+    return { g, mon, an };
+  }
+  const kit = { C, FLOOR, sc, G, I, F, zg, backdrop, analyst, villain, typeIn, mono, logCard, eventRoom, hookRoom };
+  return kit;
+}
+
+</script>
+<script>
+/* Player: layers, render(t), controls, voice-driven clock, quiz, hotspots, export hooks. */
+'use strict';
+function boot(ep) {
+  const svg = document.getElementById('svg');
+  const $ = id => document.getElementById(id);
+  const R = Runtime(ep, svg), K = R.K;
+  // ---- layers
+  const defs = S('defs', {}, svg);
+  const grad = S('radialGradient', { id: 'spotG', gradientUnits: 'userSpaceOnUse', cx: 800, cy: 450, r: 700 }, defs);
+  S('stop', { offset: 0, 'stop-color': '#050B1E', 'stop-opacity': 0 }, grad);
+  S('stop', { offset: .55, 'stop-color': '#050B1E', 'stop-opacity': 0 }, grad);
+  S('stop', { offset: 1, 'stop-color': '#050B1E', 'stop-opacity': ep.spotDark == null ? .42 : ep.spotDark }, grad);
+  S('rect', { x: -10, y: -10, width: 1620, height: 920, fill: ep.bg || '#0B1A3A' }, svg);
+  K.layers.far = S('g', { id: 'L-far' }, svg);
+  K.layers.main = S('g', { id: 'L-main' }, svg);
+  K.layers.front = S('g', { id: 'L-front' }, svg);
+  const spot = S('rect', { x: -10, y: -10, width: 1620, height: 920, fill: 'url(#spotG)', 'pointer-events': 'none' }, svg);
+  K.layers.hud = S('g', { id: 'L-hud' }, svg);
+  ep.build(K);
+  function layout(t) { AMBIENT = false; FRAMING = true; for (const a of R.actors) a.update(t); for (const ch of R.chars) ch.update(t); for (const fn of R.fx) fn(t); FRAMING = false; }
+  for (const fr of R.frames) { layout(fr.t + fr.d); const bb = worldBBox(R, fr.targets);
+    if (!bb) { console.warn('frame: cible vide', fr); continue; } const c = camFor(bb, fr.part, fr.o); R.camMoves.push({ t: fr.t, d: fr.d, x: c.x, y: c.y, z: c.z }); }
+  R.camMoves.sort((a, b) => a.t - b.t); R.focusKeys.sort((a, b) => a.t - b.t);
+  R.events.sort((a, b) => a.t - b.t);
+  const PAR = ep.parallax || { far: .5, front: 1.3 };
+
+  function cueAt(t) { for (const c of R.cues) if (t >= c.start && t < c.end) return c; return null; }
+  function sceneAt(t) { let s = R.scenes[0]; for (const sc of R.scenes) if (t >= sc.start - 1e-6) s = sc; return s; }
+  let fPrev = null, fCur = null;
+  function focusPoint(t) {
+    let cur = null, prev = null;
+    for (const k of R.focusKeys) { if (t >= k.t) { prev = cur; cur = k; } }
+    if (!cur) return null;
+    const pos = k => { if (Array.isArray(k.target)) return [k.target[0], k.target[1], k.r || 420];
+      const bb = worldBBox(R, [k.target]); if (!bb) return [0, 0, 420]; return [bb.x + bb.w / 2, bb.y + bb.h / 2, k.r || Math.max(260, .75 * Math.hypot(bb.w, bb.h))]; };
+    const pc = pos(cur); if (!prev) return { x: pc[0], y: pc[1], r: pc[2] };
+    const pp = pos(prev); const p = E.ioc(P(t, cur.t, .6));
+    return { x: lerp(pp[0], pc[0], p), y: lerp(pp[1], pc[1], p), r: lerp(pp[2], pc[2], p) };
+  }
+  const subEls = [$('subs'), $('subsM')];
+  let lastSub = null;
+  function render(t, opts = {}) {
+    AMBIENT = opts.ambient !== false;
+    const c = camAt(R, t);
+    const tf = f => `translate(800 450) scale(${c.z.toFixed(4)}) translate(${(-c.x * f).toFixed(2)} ${(-c.y * f).toFixed(2)})`;
+    K.layers.far.setAttribute('transform', tf(PAR.far));
+    K.layers.main.setAttribute('transform', tf(1));
+    K.layers.front.setAttribute('transform', tf(PAR.front));
+    for (const a of R.actors) a.update(t);
+    for (const ch of R.chars) ch.update(t);
+    for (const fn of R.fx) fn(t);
+    const f = focusPoint(t);
+    if (f) { grad.setAttribute('cx', 800 + (f.x - c.x) * c.z); grad.setAttribute('cy', 450 + (f.y - c.y) * c.z); grad.setAttribute('r', Math.max(380, f.r * c.z)); }
+    else { grad.setAttribute('cx', 800); grad.setAttribute('cy', 430); grad.setAttribute('r', 760); }
+    // subtitles
+    const cu = cueAt(t); let sub = '';
+    if (cu) { const parts = cu.sub.split('|'); sub = (cu.guess && t < cu.pauseAt + GUESS_PAUSE) ? parts[0] : parts.join(' '); }
+    if (sub !== lastSub) { for (const e of subEls) { e.textContent = sub; e.classList.toggle('empty', !sub); } lastSub = sub; }
+    R.t = t; R.cam = c;
+    return c;
+  }
+  R.render = render;
+
+  /* -------- player state -------- */
+  const st = { t: 0, playing: false, speed: 1, subs: true, voice: false, quiz: false, last: 0, waitStart: null, spoken: {}, pending: false, quizDone: {} };
+  const synth = (() => { try { return window.speechSynthesis || null; } catch (e) { return null; } })();
+  let frVoice = null;
+  function pickVoice() { try { const vs = synth.getVoices(); frVoice = vs.find(v => /fr[-_]FR/i.test(v.lang)) || vs.find(v => /^fr/i.test(v.lang)) || null; } catch (e) { } }
+  if (synth) { pickVoice(); try { synth.onvoiceschanged = pickVoice; } catch (e) { } }
+  function speak(text) {
+    if (!synth || !st.voice) return;
+    try { const u = new SpeechSynthesisUtterance(text); u.lang = 'fr-FR'; if (frVoice) u.voice = frVoice; u.rate = 1.05 * st.speed;
+      st.pending = true; u.onend = u.onerror = () => { st.pending = false; }; synth.speak(u); } catch (e) { st.pending = false; }
+  }
+  function cancelSpeech() { try { synth && synth.cancel(); } catch (e) { } st.pending = false; }
+  function sayParts(c) { return c.say.split('|').map(s => s.trim()); }
+  function voiceStep(prevT, t) {
+    if (!st.voice) return;
+    for (const c of R.cues) {
+      const parts = sayParts(c);
+      if (prevT <= c.start + .02 && t >= c.start && !st.spoken[c.id + 'a']) { st.spoken[c.id + 'a'] = 1; cancelSpeech(); speak(parts[0]); }
+      if (c.guess) { const tr = c.pauseAt + GUESS_PAUSE; if (prevT <= tr && t >= tr && !st.spoken[c.id + 'b']) { st.spoken[c.id + 'b'] = 1; speak(parts[1]); } }
+    }
+  }
+  function resetSpoken(t) { st.spoken = {}; for (const c of R.cues) { if (c.start < t - .05) st.spoken[c.id + 'a'] = 1; if (c.guess && c.pauseAt + GUESS_PAUSE < t - .05) st.spoken[c.id + 'b'] = 1; } }
+
+  function seek(t) { st.t = clamp(t, 0, R.duration); cancelSpeech(); resetSpoken(st.t); st.waitStart = null; render(st.t); ui(); }
+  function play() { if (st.t >= R.duration - .05) seek(0); st.playing = true; st.last = performance.now(); $('poster').hidden = true; closeHot(); resetSpoken(st.t);
+    if (st.voice) { const c = cueAt(st.t); if (c && st.t - c.start < .3) { st.spoken[c.id + 'a'] = 0; } }
+    requestAnimationFrame(loop); ui(); }
+  function pause() { st.playing = false; cancelSpeech(); ui(); }
+  function loop(now) {
+    if (!st.playing) return;
+    const dt = Math.min(.1, (now - st.last) / 1000); st.last = now;
+    let nt = st.t + dt * st.speed; const c = cueAt(st.t);
+    if (st.voice && c && st.pending && nt >= c.end - .02) {
+      if (st.waitStart == null) st.waitStart = now;
+      if (now - st.waitStart < 20000) nt = c.end - .021; else st.pending = false;
+    } else st.waitStart = null;
+    // quiz pause
+    if (st.quiz && c && c.guess && ep.quiz && ep.quiz[c.id] && !st.quizDone[c.id] && st.t < c.pauseAt + .3 && nt >= c.pauseAt + .3) {
+      st.quizDone[c.id] = 1; st.t = c.pauseAt + .3; render(st.t); pause(); showQuiz(c); return;
+    }
+    voiceStep(st.t, nt);
+    st.t = nt;
+    if (st.t >= R.duration) { st.t = R.duration; render(st.t); pause(); return; }
+    render(st.t); ui(); requestAnimationFrame(loop);
+  }
+
+  /* -------- UI -------- */
+  const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  const chap = $('chapters');
+  R.scenes.forEach((s, i) => { const b = document.createElement('button'); b.className = 'chap'; b.type = 'button';
+    b.innerHTML = `<span class="n">${i + 1}</span><span class="tt">${s.title}</span><span class="ts">${fmt(s.start)}</span>`;
+    b.onclick = () => { seek(s.start - (i ? 1.4 : .6)); }; chap.appendChild(b); });
+  const ticks = $('ticks');
+  R.scenes.forEach(s => { const d = document.createElement('i'); d.style.left = (s.start / R.duration * 100) + '%'; ticks.appendChild(d); });
+  const leg = $('legend');
+  (ep.legend || []).forEach(([col, label]) => { const d = document.createElement('span'); d.className = 'lg'; d.innerHTML = `<i style="background:${col}"></i>${label}`; leg.appendChild(d); });
+  function ui() {
+    $('play').textContent = st.playing ? '❚❚' : '▶'; $('play').setAttribute('aria-label', st.playing ? 'Pause' : 'Lecture');
+    $('time').textContent = `${fmt(st.t)} / ${fmt(R.duration)}`;
+    $('bar').style.width = (st.t / R.duration * 100) + '%';
+    const sc = sceneAt(st.t); [...chap.children].forEach((b, i) => b.classList.toggle('on', R.scenes[i] === sc));
+    document.body.classList.toggle('paused', !st.playing);
+    if (!st.playing) drawHots(); else clearHots();
+  }
+  $('play').onclick = () => st.playing ? pause() : play();
+  $('bigplay').onclick = play;
+  $('prev').onclick = () => { const i = R.scenes.indexOf(sceneAt(st.t)); const s = R.scenes[Math.max(0, st.t - sceneAt(st.t).start > 2 ? i : i - 1)]; seek(s.start - (s === R.scenes[0] ? .6 : 1.4)); };
+  $('next').onclick = () => { const i = R.scenes.indexOf(sceneAt(st.t)); if (i < R.scenes.length - 1) seek(R.scenes[i + 1].start - 1.4); };
+  $('track').onclick = e => { const r = e.currentTarget.getBoundingClientRect(); seek((e.clientX - r.left) / r.width * R.duration); };
+  $('speed').onchange = e => { st.speed = +e.target.value; };
+  const tog = (id, key, cb) => { const b = $(id); b.onclick = () => { st[key] = !st[key]; b.setAttribute('aria-pressed', st[key]); cb && cb(); }; b.setAttribute('aria-pressed', st[key]); };
+  tog('cc', 'subs', () => document.body.classList.toggle('nosubs', !st.subs));
+  tog('voice', 'voice', () => { if (!st.voice) cancelSpeech(); else resetSpoken(st.t); });
+  tog('quizb', 'quiz', () => { st.quizDone = {}; });
+  document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'SELECT') return;
+    if (e.code === 'Space') { e.preventDefault(); st.playing ? pause() : play(); }
+    if (e.code === 'ArrowRight') $('next').click(); if (e.code === 'ArrowLeft') $('prev').click();
+    if (e.code === 'Escape') { closeHot(); $('quiz').hidden = true; }
+  });
+  // hotspots
+  const hl = $('hotspots');
+  function clearHots() { hl.innerHTML = ''; }
+  function drawHots() {
+    clearHots(); if (document.documentElement.classList.contains('export')) return;
+    const c = R.cam || camAt(R, st.t);
+    for (const h of R.hots) {
+      if (st.t < h.at || st.t > h.until) continue;
+      const sx = 800 + (h.x - c.x) * c.z, sy = 450 + (h.y - c.y) * c.z;
+      if (sx < 40 || sx > 1560 || sy < 40 || sy > 740) continue;
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'hot';
+      b.style.left = (sx / 16) + '%'; b.style.top = (sy / 9) + '%';
+      b.innerHTML = `<span class="dot">+</span><span class="lbl">${h.title}</span>`;
+      b.onclick = () => openHot(h); hl.appendChild(b);
+    }
+  }
+  function openHot(h) { $('hotpanel').hidden = false; $('hottitle').textContent = h.title; $('hotbody').innerHTML = h.html; }
+  function closeHot() { $('hotpanel').hidden = true; }
+  $('hotclose').onclick = closeHot;
+  // quiz
+  function showQuiz(c) {
+    const q = ep.quiz[c.id], box = $('quiz'); box.hidden = false;
+    $('quizq').textContent = q.q; const ch = $('quizc'); ch.innerHTML = ''; $('quizwhy').hidden = true; $('quizgo').hidden = true;
+    q.choices.forEach((txt, i) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = txt;
+      b.onclick = () => { [...ch.children].forEach((x, j) => { x.disabled = true; x.classList.add(j === q.answer ? 'ok' : (j === i ? 'ko' : 'dim')); });
+        $('quizwhy').textContent = q.why; $('quizwhy').hidden = false; $('quizgo').hidden = false; $('quizgo').focus(); };
+      ch.appendChild(b); });
+  }
+  $('quizgo').onclick = () => { $('quiz').hidden = true; play(); };
+  // poster
+  $('dur').textContent = fmt(R.duration);
+  const posterT = ep.poster != null ? (typeof ep.poster === 'function' ? ep.poster(K) : ep.poster) : 2;
+  // hash routing for scenes (#s3)
+  function fromHash() { const m = /^#(s\d+)$/.exec(location.hash); if (m) { const s = K.sc(m[1]); if (s) { seek(s.start - .6); $('poster').hidden = true; return true; } } return false; }
+  window.addEventListener('hashchange', fromHash);
+  if (!fromHash()) { st.t = posterT; render(st.t); ui(); }
+  window.addEventListener('resize', () => { if (!st.playing) drawHots(); });
+
+  /* -------- test / export hooks -------- */
+  window.__mx = {
+    setEp() { }, render: (t, o) => render(t, o), duration: R.duration, cues: R.cues, scenes: R.scenes, events: R.events,
+    marks: R.marks, focusAt: t => { const f = focusAt(R, t); return f && !Array.isArray(f.target) ? f.target : null; },
+    charRoots: () => R.chars.map(c => c.root),
+    guessWindows: R.cues.filter(c => c.guess).map(c => [c.pauseAt, c.pauseAt + GUESS_PAUSE]),
+    exportMode(w = 1920, subs = true) { document.documentElement.classList.add('export'); $('poster').hidden = true; clearHots();
+      const stg = $('stage'); stg.style.width = w + 'px'; stg.style.height = Math.round(w * 9 / 16) + 'px';
+      $('subs').style.fontSize = Math.round(34 * w / 1920) + 'px'; $('subs').style.bottom = Math.round(34 * w / 1920) + 'px';
+      document.body.classList.toggle('nosubs', !subs); },
+    pause, seek, R,
+  };
+}
+
+</script>
+<script>
+/*META{"title":"Admin Activity, épisode 1","h1":"Épisode 1 · Lire une entrée, champ par champ","eyebrow":"Série Admin Activity · <b>Ép. 1</b> · <a href='ep2.html' style='color:inherit'>Ép. 2</a> · <a href='ep3.html' style='color:inherit'>Ép. 3</a>","footer":"<p class='footer'>v6, skill v6. Sources : documentation Google Cloud (Cloud Audit Logs overview, Store log entries, AuditLog reference, Enable Data Access audit logs). IP 203.0.113.47 = plage de documentation, compte Gmail fictif.</p>"}META*/
+/* ---------- FICHE (skill v6) ----------
+Audience : métier = détection/réponse, praticien ; outil = Google Cloud, débutant. Contexte outil limité à 1 cue (tout est un appel d'API).
+Doit savoir faire après : savoir dans quel journal chercher, et lire une entrée d'audit réelle pour en tirer qui / quoi / où / d'où / quel changement.
+Inventaire de valeur (à l'écran, tel quel) :
+ journaux : cloudaudit.googleapis.com/activity (toujours, 400 j) · data_access (éteint par défaut sauf certains BigQuery) · system_event · policy
+ champs : serviceName · methodName · resourceName · authenticationInfo.principalEmail · requestMetadata.callerIp (gce-internal-ip / private) ·
+          requestMetadata.callerSuppliedUserAgent (non authentifié) · serviceData.policyDelta.bindingDeltas (action, role, member)
+ piège : principalEmail masqué pour une lecture refusée, sauf compte de service
+ filtre : logName:"cloudaudit.googleapis.com%2Factivity" protoPayload.methodName="SetIamPolicy"
+Idées reçues : « il faut activer les journaux » ; « principalEmail est toujours rempli ». Devinez : journal d'un téléchargement ; signataire.
+------------------------------------ */
+const EP = {
+  bg: '#0B1A3A', lead: .6, tail: 2, spotDark: .25,
+  zones: { bureau: [0, 0], z1: [2300, 0], z2: [4600, 0], z3: [6900, 0], fin: [9200, 0] },
+  legend: [['#FFB703', 'activity'], ['#A78BFA', 'data_access'], ['#2DD4BF', 'system_event'], ['#EF476F', 'policy / attaquant'], ['#22D3EE', 'champ pivot']],
+  scenes: [{ id: 's1', title: '3 h 12, un témoin' }, { id: 's2', title: 'Quatre journaux' }, { id: 's3', title: 'Quoi, où' }, { id: 's4', title: 'Qui, d\'où' },
+    { id: 's5', title: 'Ce qui a changé' }, { id: 's6', title: 'Premier filtre' }, { id: 's7', title: 'Six champs pivots' }],
+  cues: [
+    { id: 'c1', sc: 's1', sub: '3 h 12. Alerte : un compte Gmail inconnu est propriétaire du projet prod-paiements. Votre seul témoin : les journaux d\'audit de Google Cloud.', say: 'Trois heures douze. Alerte : un compte Gmail inconnu est propriétaire du projet prod paiements. Votre seul témoin : les journaux d\'audit de Google Cloud.' },
+    { id: 'c2', sc: 's1', sub: 'Google Cloud en une phrase : chaque action, console, ligne de commande ou script, est un appel d\'API. Et chaque appel peut laisser une entrée de journal.', say: 'Google Cloud en une phrase : chaque action, console, ligne de commande ou script, est un appel d\'API. Et chaque appel peut laisser une entrée de journal.' },
+    { id: 'c3', sc: 's2', sub: 'Ces entrées tombent dans quatre journaux. Le premier, activity : toutes les modifications de configuration. On croit qu\'il faut l\'activer : non, il est toujours écrit, et gardé 400 jours.', say: 'Ces entrées tombent dans quatre journaux. Le premier, activity : toutes les modifications de configuration. On croit qu\'il faut l\'activer : non, il est toujours écrit, et gardé quatre cents jours.' },
+    { id: 'c4', sc: 's2', sub: 'Le deuxième, data_access : les lectures, de configuration ou de données. Éteint par défaut, sauf pour certains services BigQuery.', say: 'Le deuxième, data access : les lectures, de configuration ou de données. Éteint par défaut, sauf pour certains services BigQuery.' },
+    { id: 'c5', sc: 's2', sub: 'Le troisième, system_event : les actions de Google lui-même. Le quatrième, policy : les accès refusés par une politique de sécurité.', say: 'Le troisième, system event : les actions de Google lui-même. Le quatrième, policy : les accès refusés par une politique de sécurité.' },
+    { id: 'c6', sc: 's2', sub: 'Devinez : votre attaquant télécharge un fichier client. Dans quel journal ?|Data Access, s\'il était allumé. Sinon, nulle part.', say: 'Devinez : votre attaquant télécharge un fichier client. Dans quel journal ? | Data access, s\'il était allumé. Sinon, nulle part.' },
+    { id: 'c7', sc: 's3', sub: 'Ouvrons l\'entrée de 3 h 07, dans activity. Première ligne : serviceName, Cloud Resource Manager. Le service qui a reçu l\'appel.', say: 'Ouvrons l\'entrée de trois heures sept, dans activity. Première ligne : service name, cloud resource manager. Le service qui a reçu l\'appel.' },
+    { id: 'c8', sc: 's3', sub: 'Deuxième ligne : methodName, SetIamPolicy. L\'action exacte. C\'est le champ sur lequel s\'écrivent la plupart des règles.', say: 'Deuxième ligne : method name, Set I A M Policy. L\'action exacte. C\'est le champ sur lequel s\'écrivent la plupart des règles.' },
+    { id: 'c9', sc: 's3', sub: 'Troisième ligne : resourceName, projects/prod-paiements. La cible de l\'action.', say: 'Troisième ligne : resource name, projects slash prod paiements. La cible de l\'action.' },
+    { id: 'c10', sc: 's4', sub: 'Puis le qui : authenticationInfo, principalEmail. Devinez qui a signé ?|ci-deployer, un compte de service : l\'identité d\'un robot. Pas le compte Gmail.', say: 'Puis le qui : authentication info, principal email. Devinez qui a signé ? | ci déployeur, un compte de service : l\'identité d\'un robot. Pas le compte Gmail.' },
+    { id: 'c11', sc: 's4', sub: 'Le d\'où : callerIp, une adresse externe. Attention : pour certains appels internes, vous lirez gce-internal-ip, ou private.', say: 'Le d\'où : caller I P, une adresse externe. Attention : pour certains appels internes, vous lirez gce internal ip, ou private.' },
+    { id: 'c12', sc: 's4', sub: 'Et callerSuppliedUserAgent : le nom de l\'outil, déclaré par l\'appelant lui-même. Un indice, jamais une preuve.', say: 'Et caller supplied user agent : le nom de l\'outil, déclaré par l\'appelant lui-même. Un indice, jamais une preuve.' },
+    { id: 'c13', sc: 's5', sub: 'Enfin, ce qui a changé : serviceData, policyDelta, bindingDeltas. Action ADD, rôle roles/owner, membre : le compte Gmail.', say: 'Enfin, ce qui a changé : service data, policy delta, binding deltas. Action ADD, rôle roles slash owner, membre : le compte Gmail.' },
+    { id: 'c14', sc: 's5', sub: 'On croit que principalEmail est toujours rempli. Faux : pour une lecture refusée, il peut être masqué, sauf si l\'appelant est un compte de service.', say: 'On croit que principal email est toujours rempli. Faux : pour une lecture refusée, il peut être masqué, sauf si l\'appelant est un compte de service.' },
+    { id: 'c15', sc: 's6', sub: 'Votre premier filtre, dans Logs Explorer : logName contient activity, et methodName égal SetIamPolicy. Toute la série part de là.', say: 'Votre premier filtre, dans Logs Explorer : log name contient activity, et method name égal Set I A M Policy. Toute la série part de là.' },
+    { id: 'c16', sc: 's7', sub: 'Retenez : quatre journaux, un seul toujours allumé ; et six champs pivots. Épisode 2 : les portes de persistance.', say: 'Retenez : quatre journaux, un seul toujours allumé ; et six champs pivots. Épisode deux : les portes de persistance.' },
+  ],
+  quiz: {
+    c6: { q: 'L\'attaquant télécharge un fichier d\'un bucket. Dans quel journal ?', choices: ['activity', 'data_access, s\'il est activé', 'system_event'], answer: 1, why: 'Lire des données relève de Data Access (DATA_READ), éteint par défaut pour Cloud Storage : sans réglage, la lecture n\'est journalisée nulle part.' },
+    c10: { q: 'Qui a signé le SetIamPolicy de 3 h 07 ?', choices: ['Le compte Gmail', 'Le compte de service ci-deployer', 'Un administrateur'], answer: 1, why: 'principalEmail = ci-deployer@prod-paiements.iam.gserviceaccount.com : le robot dont la clé a servi.' },
+  },
+  poster: K => K.T('c1', 'proprietaire'),
+  build(K) {
+    const kit = seriesKit(K); const { C, G, I, F, sc, FLOOR } = kit; const { S, E, Z } = K; const T = K.T, R = K.reveal;
+    kit.backdrop(['bureau', 'z1', 'z2', 'z3', 'fin']);
+    const chain = (el, f) => { if (el._a) { const prev = el._a.o.fn; el._a.o.fn = prev ? (s, t) => { prev(s, t); f(s, t); } : f; } else K.A(el, { fn: f }); };
+    const lit = (el, on, off, dim = .22) => chain(el, (s, t) => { s.a *= t < on ? 0 : (off != null && t >= off ? dim : 1); });
+    /* s1 hook + "everything is an API call" */
+    const H = kit.hookRoom('bureau', '#1F3B80', {});
+    const al = G(H.mon, 0, -126, { pop: T('c1', 'alerte') }); S('rect', { x: -305, y: -42, width: 610, height: 84, rx: 14, fill: C.rose }, al); K.tx(al, 0, 2, 'ALERTE', { size: 56, fill: C.ink, weight: 800 });
+    const ml = G(H.mon, 0, 0, { pop: T('c1', 'gmail'), out: K.cue('c2').start }); K.tx(ml, 0, 0, 'nuitblanche42@gmail.com', { size: 44, mono: true, fill: C.rose, weight: 700 });
+    const cw = G(H.mon, 0, 100, { pop: T('c1', 'proprietaire'), out: K.cue('c2').start }); ico('crown', cw, 0, 0, 1, C.amber); K.ev(T('c1', 'alerte'), 'impact');
+    const bk0 = I('book', H.g, 640, -360, 2, C.amber, { pop: T('c1', 'temoin'), moves: [[T('c1', 'journaux'), .4, { s: 2.4 }, E.ob]] });
+    H.an.pose(0, T('c1', 'alerte') - .1, 'type').pose(T('c1', 'alerte'), .8, 'jump').expr(T('c1', 'alerte'), 'surprise').pose(T('c1', 'temoin'), 1.2, 'point', { x: 640, y: -360 }).pose(T('c2', 'phrase'), 1.0, 'nod');
+    const tools = [['laptop', C.cyan, 'console'], ['terminal', C.green, 'ligne'], ['gear', C.violet, 'script']].map(([n, c, w], i) => I(n, H.g, -560 + i * 220, -470, 1.3, c, { pop: T('c2', w), moves: [[T('c2', 'appel') + i * .1, .7, { x: -110, y: -170, s: .3, a: 0 }]] }));
+    const api = G(H.mon, 0, 0, { pop: T('c2', 'dapi'), moves: [[T('c2', 'chaque', 1), .4, { s: 1.25 }, E.ob]] }); S('rect', { x: -170, y: -44, width: 340, height: 88, rx: 18, fill: C.amber }, api); K.tx(api, 0, 2, 'API', { size: 60, fill: C.ink, weight: 800 });
+    const sl0 = I('slip', H.g, -110, -170, 1.4, C.amber, { pop: T('c2', 'entree'), moves: [[T('c2', 'entree') + .1, 1.0, { x: 640, y: -360, s: .5 }]], out: T('c2', 'entree') + 1.1 });
+    F(0, 0, [H.g._room], .98, { focus: false }); K.focus(0, H.mon); F(T('c1', 'alerte') - .3, 1.0, [H.mon], .72);
+    F(T('c1', 'temoin') - .3, .9, [H.mon, bk0, H.an], .9, { focus: false }); K.focus(T('c1', 'temoin'), bk0); F(T('c1', 'google') - .2, .9, [bk0], .5);
+    F(K.cue('c2').start - .1, 1.0, [...tools, H.mon], .85, { focus: false }); K.focus(T('c2', 'dapi'), api);
+    /* s2 four journals = four bins (labels lit one at a time) */
+    const g2 = kit.zg('z1', '#24356F', 1), s2 = sc('s2');
+    const LOGS = [['activity', C.amber, K.cue('c3').start, K.cue('c4').start], ['data_access', C.violet, K.cue('c4').start, K.cue('c5').start],
+      ['system_event', C.teal, K.cue('c5').start, T('c5', 'quatrieme')], ['policy', C.rose, T('c5', 'quatrieme'), K.cue('c6').start]];
+    const bins = LOGS.map(([name, col, on, off], i) => { const x = -660 + i * 440; const b = G(g2, x, 40, { pop: s2 + .3 + i * .15 });
+      S('rect', { x: -170, y: -120, width: 340, height: 330, rx: 26, fill: C.p1, stroke: col, 'stroke-width': 8 }, b); ico('book', b, 0, 0, 1, col).setAttribute('transform', 'translate(0 20) scale(1.7)');
+      const lb = G(g2, x, -170); K.tx(lb, 0, 0, name, { size: kit.mono(name.length, 400, 48, 38), mono: true, fill: col, weight: 700 }); lit(lb, on, off); return b; });
+    const api2 = G(g2, 0, -420, { pop: s2 }); S('rect', { x: -150, y: -44, width: 300, height: 88, rx: 18, fill: C.amber }, api2); K.tx(api2, 0, 2, 'API', { size: 56, fill: C.ink, weight: 800 });
+    const drop = (i, t, col) => I('slip', g2, 0, -380, 1.2, col, { pop: t, moves: [[t + .1, .9, { x: -660 + i * 440, y: 40, s: .5 }]], out: t + 1.0 });
+    drop(0, T('c3', 'modifications'), C.amber); drop(0, T('c3', 'modifications') + .3, C.amber); drop(1, T('c4', 'lectures'), C.violet); drop(2, T('c5', 'google'), C.teal); drop(3, T('c5', 'refuses'), C.rose);
+    const d400 = G(g2, -660, 300, { pop: T('c3', 'quatre'), out: K.cue('c4').start, moves: [[T('c3', 'jours'), .4, { s: 1.2 }, E.ob]] }); S('rect', { x: -130, y: -40, width: 260, height: 80, rx: 40, fill: C.text }, d400); K.tx(d400, 0, 2, '400 jours', { size: 44, fill: C.ink, weight: 800 });
+    const lock = I('padlock', g2, -500, -30, .9, C.text, { pop: T('c3', 'toujours') }); K.ev(T('c3', 'non'), 'myth');
+    const off = G(g2, -220, 300, { pop: T('c4', 'eteint') }); S('rect', { x: -90, y: -40, width: 180, height: 80, rx: 40, fill: '#2b2350', stroke: C.violet, 'stroke-width': 5 }, off); K.tx(off, 0, 2, 'OFF', { size: 46, fill: C.violet, weight: 800 });
+    const lid = G(g2, -220, -80, { pop: T('c4', 'eteint') + .2 }); const bq = I('barrel', g2, -60, 230, .8, C.text, { pop: T('c4', 'bigquery') }); I('check', g2, -10, 190, .5, C.green, { pop: T('c4', 'sauf') + .1 }); S('rect', { x: -175, y: -14, width: 350, height: 28, rx: 12, fill: C.violet }, lid);
+    const vil = kit.villain(g2, 1150); vil.pop(K.cue('c6').start - .3).walk(K.cue('c6').start, 1.2, 760).pose(T('c6', 'telecharge'), 1.4, 'hold');
+    const dl = I('doc', g2, 760, -120, 1.2, C.text, { pop: T('c6', 'telecharge') });
+    const dSlip = I('slip', g2, 760, -120, 1.2, C.violet, { pop: T('c6', 'journal'), moves: [[T('c6', 'journal') + .2, 1.0, { x: -150, y: -110 }], [R('c6') + .4, .5, { a: 0, s: .2 }]] });
+    const nowhere = I('cross', g2, -220, -110, 1.1, C.rose, { pop: T('c6', 'nulle') }); dl._a.o.out = T('c6', 'nulle') + .5;
+    const an2 = kit.analyst(g2, -1100); an2.pop(s2 - .5).walk(s2 - .2, 1.2, -960).pose(T('c3', 'premier'), 1.0, 'point', { x: -660, y: 40 }).expr(T('c3', 'croit'), 'smug').expr(T('c3', 'non'), 'surprise').pose(T('c3', 'non'), .6, 'jump')
+      .expr(T('c4', 'deuxieme'), 'neutral').pose(T('c4', 'deuxieme'), 1.0, 'point', { x: -220, y: 40 }).pose(T('c5', 'troisieme'), 1.0, 'point', { x: 220, y: 40 }).pose(T('c5', 'quatrieme'), 1.0, 'point', { x: 660, y: 40 })
+      .expr(T('c6', 'devinez'), 'worried').expr(T('c6', 'nulle'), 'angry').pose(T('c6', 'nulle'), 1.2, 'shrug');
+    F(s2 - 1.3, 1.5, [...bins, api2], .95, { focus: false }); K.focus(s2, api2);
+    F(T('c3', 'premier') - .3, .8, [bins[0], d400], .6, { focus: false }); K.focus(T('c3', 'premier'), bins[0]); F(T('c3', 'croit') - .3, .8, [bins[0], an2], .8, { focus: false }); F(T('c3', 'garde') - .2, .8, [bins[0], d400], .55, { focus: false });
+    F(T('c4', 'deuxieme') - .4, .8, [bins[1], off], .6, { focus: false }); K.focus(T('c4', 'deuxieme'), bins[1]); F(T('c4', 'lectures') - .2, .8, [bins[1]], .45, { focus: false });
+    F(T('c5', 'troisieme') - .4, .8, [bins[2], bins[3]], .7, { focus: false }); K.focus(T('c5', 'troisieme'), bins[2]); K.focus(T('c5', 'quatrieme'), bins[3]); F(T('c5', 'quatrieme') - .3, .8, [bins[3]], .45, { focus: false });
+    F(K.cue('c6').start - .2, 1.0, [bins[1], vil, dl], .85, { focus: false }); K.focus(T('c6', 'telecharge'), dl); K.focus(R('c6'), bins[1]); F(T('c6', 'journal') - .2, .7, [dl, vil], .6, { focus: false });
+    K.hot({ x: Z.z1[0], y: Z.z1[1] - 420, at: s2, until: sc('s3'), title: 'Noms complets et rétention', html: '<p><code>projects/ID/logs/cloudaudit.googleapis.com%2Factivity</code>, <code>…%2Fdata_access</code>, <code>…%2Fsystem_event</code>, <code>…%2Fpolicy</code>.</p><p>activity et system_event → bucket <code>_Required</code>, 400 jours fixes. data_access et policy → <code>_Default</code>, 30 jours par défaut (configurable).</p>' });
+    /* s3-s5 the real entry, unrolled line by line (3 readable lines max, others greyed) */
+    const g3 = kit.zg('z2', '#1C4473', 2), s3 = sc('s3');
+    const card = G(g3, 180, -60, { pop: s3 - .2 }); S('rect', { x: -760, y: -460, width: 1520, height: 900, rx: 34, fill: C.paper }, card); S('rect', { x: -760, y: -460, width: 1520, height: 100, rx: 34, fill: C.amber }, card); S('rect', { x: -760, y: -400, width: 1520, height: 40, fill: C.amber }, card);
+    const hd = G(card, 0, -410, { moves: [[T('c7', 'ouvrons'), .5, { x: 0 }]] }); K.mark(T('c7', 'ouvrons')); K.tx(hd, -720, 0, 'activity · 03:07:12', { size: 46, mono: true, fill: C.ink, weight: 700, anchor: 'start' }); lit(hd, s3 - .2, T('c7', 'premiere'));
+    const LINES = [
+      ['serviceName: "cloudresourcemanager.googleapis.com"', T('c7', 'service'), K.cue('c8').start, 'wrench'],
+      ['methodName: "SetIamPolicy"', T('c8', 'method'), K.cue('c9').start, 'wrench'],
+      ['resourceName: "projects/prod-paiements"', T('c9', 'resource'), K.cue('c10').start, 'pin'],
+      ['principalEmail: "ci-deployer@prod-paiements.iam…"', R('c10'), K.cue('c11').start, 'person'],
+      ['callerIp: "203.0.113.47"', T('c11', 'caller'), K.cue('c12').start, 'pin'],
+      ['callerSuppliedUserAgent: "google-cloud-sdk gcloud/…"', T('c12', 'caller'), K.cue('c13').start, 'terminal'],
+      ['bindingDeltas: action ADD · role roles/owner', T('c13', 'binding'), K.cue('c14').start, 'plusminus'],
+      ['member: "user:nuitblanche42@gmail.com"', T('c13', 'membre'), K.cue('c14').start, 'person'],
+    ];
+    const lineEls = LINES.map(([txt, on, off, icn], i) => { const y = -300 + i * 96; const lg = G(card, 0, y); const piv = [1, 2, 3, 4, 6].includes(i);
+      const bg = S('rect', { x: -730, y: -40, width: 1460, height: 80, rx: 14, fill: piv ? C.cyan : C.amber, opacity: .18 }, lg);
+      ico(icn, lg, 0, 0, 1, C.ink).setAttribute('transform', 'translate(-680 0) scale(.5)');
+      const te = K.tx(lg, -620, 2, txt, { size: kit.mono(txt.length, 1320, 46, 36), mono: true, fill: C.ink, weight: 700, anchor: 'start' });
+      kit.typeIn(te, txt, on, Math.min(1.4, .03 * txt.length + .3)); lit(lg, on, off); K.mark(on); lg._t = te; return lg; });
+    // guess c10: "?" in the principal line until the reveal ; robot appears ; c11 chips ; c12 dashed doubt ; c14 redaction
+    const qP = G(card, 0, -300 + 3 * 96, { pop: T('c10', 'principal'), out: R('c10') }); K.tx(qP, -200, 0, 'principalEmail: ?', { size: 46, mono: true, fill: C.rose, weight: 700 });
+    const rb = K.char(g3, { name: 'robot', color: C.orange, shape: 'robot', x: -880, y: FLOOR, s: 1.5, dir: 1 }); rb.pop(R('c10')).pose(T('c10', 'robot'), 1.2, 'cheer').out(K.cue('c12').start);
+    const chips = G(card, 300, -300 + 4 * 96 + 70, { pop: T('c11', 'gce'), out: K.cue('c12').start }); S('rect', { x: -330, y: -34, width: 660, height: 68, rx: 34, fill: C.ink }, chips); K.tx(chips, 0, 2, 'gce-internal-ip · private', { size: 40, mono: true, fill: C.cyan, weight: 700 });
+    const dbt = G(card, 0, -300 + 5 * 96, { fin: [T('c12', 'indice'), .2], out: K.cue('c13').start }); S('rect', { x: -740, y: -46, width: 1480, height: 92, rx: 18, fill: 'none', stroke: C.rose, 'stroke-width': 6, 'stroke-dasharray': '16 12' }, dbt);
+    const red = G(card, 0, -300 + 3 * 96, { fin: [T('c14', 'masque'), .2] }); lit(red, T('c14', 'masque'), sc('s6')); S('rect', { x: -140, y: -30, width: 640, height: 60, rx: 10, fill: C.ink }, red);
+    const ref = G(card, 420, -300 + 3 * 96 - 74, { pop: T('c14', 'refusee'), out: sc('s6') }); S('rect', { x: -230, y: -32, width: 460, height: 64, rx: 32, fill: C.rose }, ref); K.tx(ref, 0, 2, 'lecture refusée', { size: 40, fill: C.ink, weight: 800 });
+    K.ev(T('c14', 'faux'), 'myth'); chain(lineEls[3], (s, t) => { if (t >= T('c14', 'principal') && t < sc('s6')) s.a = 1; });
+    const flash = (i, t, col = C.cyan) => { const r = S('rect', { x: -730, y: -300 + i * 96 - 40, width: 1460, height: 80, rx: 14, fill: col, 'fill-opacity': .45 }, card); card.insertBefore(r, lineEls[i]); K.A(r, { fin: [t, .15], out: t + .8 }); };
+    flash(0, T('c7', 'cloud')); flash(0, T('c7', 'lappel'), C.amber); flash(1, T('c8', 'set')); flash(1, T('c8', 'exacte'), C.amber); flash(2, T('c9', 'projects')); flash(2, T('c9', 'cible'), C.amber);
+    flash(4, T('c11', 'adresse')); flash(5, T('c12', 'loutil')); flash(5, T('c12', 'preuve'), C.rose); flash(6, T('c13', 'service')); flash(6, T('c13', 'policy'), C.amber); flash(6, T('c13', 'action'));
+    flash(6, T('c13', 'owner'), C.amber); flash(7, T('c13', 'gmail'), C.rose); flash(3, T('c14', 'principal'), C.rose); flash(3, T('c14', 'rempli'), C.amber);
+    flash(3, T('c10', 'compte')); flash(3, T('c10', 'signe'), C.rose); flash(5, T('c12', 'agent')); flash(3, T('c14', 'peut'), C.rose); flash(3, T('c14', 'lappelant'), C.green);
+    const hfl = S('rect', { x: -760, y: -460, width: 1520, height: 100, rx: 34, fill: C.text, 'fill-opacity': .4 }, card); K.A(hfl, { fin: [T('c7', 'trois'), .15], out: T('c7', 'trois') + .8 });
+    const hb = I('book', card, 640, -410, .6, C.amber, { pop: T('c7', 'activity') });
+    const gm = I('person', g3, -880, -260, 1.4, C.rose, { pop: T('c10', 'gmail'), out: K.cue('c11').start }); I('cross', g3, -880, -260, .9, C.rose, { pop: T('c10', 'gmail') + .2, out: K.cue('c11').start });
+    const svc = I('check', g3, -880, -260, 1.1, C.green, { pop: T('c14', 'sauf'), out: sc('s6') });
+    const an3 = kit.analyst(g3, -1150); an3.pop(s3 - .5).walk(s3 - .2, 1.2, -880).pose(T('c7', 'service'), 1.0, 'loupe').pose(T('c8', 'champ'), .8, 'point', { x: 0, y: -206 }).pose(T('c8', 'regles'), 1.0, 'nod').pose(T('c9', 'cible'), 1.0, 'point', { x: 0, y: -110 })
+      .walk(K.cue('c10').start, .8, -1150).walk(K.cue('c12').start, 1.0, -880).pose(T('c10', 'devinez'), 1.0, 'shrug').pose(T('c11', 'attention'), .9, 'jump').pose(T('c11', 'private'), .8, 'nod').pose(T('c12', 'declare'), .8, 'point', { x: 0, y: 180 }).pose(T('c12', 'indice'), 1.2, 'shrug').pose(T('c13', 'owner'), 1.0, 'point', { x: 0, y: 270 })
+      .expr(T('c14', 'croit'), 'smug').expr(T('c14', 'faux'), 'surprise').pose(T('c14', 'faux'), .6, 'jump').expr(T('c14', 'service'), 'neutral').pose(T('c14', 'service'), .8, 'nod');
+    F(s3 - 1.3, 1.5, [card, an3], .94, { focus: false }); K.focus(s3, card);
+    LINES.forEach(([txt, on], i) => { if (i === 7) return; F(on - .4, .7, [lineEls[i]._t], .92, { zmax: 2.2 }); });
+    F(T('c8', 'regles') - .3, .8, [lineEls[1], an3], .8, { focus: false }); F(T('c9', 'cible') + .6, .9, [card], .9, { focus: false });
+    F(K.cue('c10').start - .2, .8, [qP], .6, { focus: false }); K.focus(K.cue('c10').start, qP); F(R('c10') - .1, .6, [lineEls[3]._t, rb], .95, { focus: false });
+    F(T('c11', 'gce') - .3, .7, [lineEls[4]._t, chips], .9, { focus: false, zmax: 2.2 }); K.focus(T('c11', 'gce'), chips);
+    F(T('c13', 'membre') - .3, .7, [lineEls[6]._t, lineEls[7]._t], .92, { focus: false, zmax: 2.2 }); K.focus(T('c13', 'membre'), lineEls[7]);
+    F(K.cue('c14').start - .2, .9, [lineEls[3]._t, ref], .92, { focus: false, zmax: 2.2 }); K.focus(T('c14', 'masque'), red);
+    K.hot({ x: Z.z2[0] + 180, y: Z.z2[1] - 470, at: s3, until: sc('s6'), title: 'Chemins complets', html: '<pre>protoPayload.serviceName\nprotoPayload.methodName\nprotoPayload.resourceName\nprotoPayload.authenticationInfo.principalEmail\nprotoPayload.authenticationInfo.serviceAccountDelegationInfo\nprotoPayload.requestMetadata.callerIp\nprotoPayload.requestMetadata.callerSuppliedUserAgent\nprotoPayload.serviceData.policyDelta.bindingDeltas</pre><p>serviceAccountDelegationInfo : la chaîne d\'usurpation quand un compte de service agit pour un autre (ép. 2).</p>' });
+    /* s6 Logs Explorer: the first filter is typed */
+    const g6 = kit.zg('z3', '#25406E', 3), s6 = sc('s6');
+    const win = G(g6, 120, -120, { pop: s6 - .2 }); S('rect', { x: -800, y: -380, width: 1600, height: 760, rx: 28, fill: '#0e1838', stroke: C.cyan, 'stroke-width': 7 }, win); S('rect', { x: -800, y: -380, width: 1600, height: 90, rx: 28, fill: C.cyan }, win);
+    const wt = G(win, 0, -335); K.tx(wt, -760, 0, 'Logs Explorer', { size: 48, fill: C.ink, weight: 800, anchor: 'start' });
+    S('rect', { x: -760, y: -260, width: 1520, height: 230, rx: 18, fill: '#071028', stroke: '#26407e', 'stroke-width': 4 }, win);
+    const q1 = K.tx(win, -730, -195, '', { size: 44, mono: true, fill: C.amber, weight: 700, anchor: 'start' }); const q2 = K.tx(win, -730, -105, '', { size: 44, mono: true, fill: C.cyan, weight: 700, anchor: 'start' });
+    kit.typeIn(q1, 'logName:"cloudaudit.googleapis.com%2Factivity"', T('c15', 'log'), 1.6); for (const [w, yy] of [['contient', -195], ['egal', -105]]) { const r = S('rect', { x: -750, y: yy - 40, width: 1500, height: 80, rx: 14, fill: C.cyan, 'fill-opacity': .22 }, win); K.A(r, { fin: [T('c15', w), .15], out: T('c15', w) + .9 }); } kit.typeIn(q2, 'protoPayload.methodName="SetIamPolicy"', T('c15', 'method'), 1.4);
+    K.mark(T('c15', 'log')); K.mark(T('c15', 'method'));
+    const rows = [0, 1, 2].map(i => { const r = G(win, 0, 60 + i * 100, { pop: T('c15', 'serie') - .6 + i * .2 }); S('rect', { x: -760, y: -38, width: 1520, height: 76, rx: 14, fill: i === 0 ? C.amber : C.p1, opacity: i === 0 ? .9 : .7 }, r);
+      if (i === 0) ico('crown', r, 0, 0, 1, C.ink).setAttribute('transform', 'translate(-700 0) scale(.5)'); for (let k = 0; k < 3; k++) S('rect', { x: -620 + k * 380, y: -10, width: 300, height: 20, rx: 10, fill: i === 0 ? C.ink : '#3a4f8f', opacity: .6 }, r); return r; });
+    const an6 = kit.analyst(g6, -1150); an6.pop(s6 - .5).walk(s6 - .2, 1.1, -890).pose(T('c15', 'filtre'), 1.4, 'type').pose(T('c15', 'toute'), .8, 'nod').pose(T('c15', 'serie'), 1.2, 'cheer');
+    F(s6 - 1.3, 1.5, [win, an6], .92, { focus: false }); K.focus(s6, win); F(T('c15', 'log') - .4, .7, [q1, q2], .72, { zmax: 2.2 }); K.focus(T('c15', 'log'), q1); K.focus(T('c15', 'method'), q2);
+    F(T('c15', 'serie') - .7, .8, [win], .9, { focus: false }); K.focus(T('c15', 'serie'), rows[0]);
+    /* s7 recap: 4 journals (one lit) and the six pivot fields lit one by one */
+    const g7 = kit.zg('fin', '#1F3B80', 0), s7 = sc('s7');
+    const mini = LOGS.map(([n, col], i) => I('book', g7, -540 + i * 360, -330, 1.5, col, { pop: s7 + .1 * i, fn: (s, t) => { if (i > 0 && t > T('c16', 'seul')) s.a *= .3; } }));
+    const allume = I('check', g7, -460, -420, .8, C.green, { pop: T('c16', 'allume') });
+    const PIV = ['serviceName', 'methodName', 'resourceName', 'principalEmail', 'callerIp', 'serviceData'];
+    const tP = T('c16', 'six'), dP = (T('c16', 'episode') - tP) / 6;
+    PIV.forEach((p, i) => { const t0 = tP + i * dP; const pg = G(g7, 0, 30); K.tx(pg, 0, 0, p, { size: 76, mono: true, fill: C.cyan, weight: 700 }); lit(pg, t0, t0 + dP, 0); K.mark(t0);
+      const dot = I('check', g7, -540 + i * 216, 200, .55, C.cyan, { pop: t0 }); });
+    const door = I('door', g7, 700, 160, 1.6, C.rose, { pop: T('c16', 'portes') });
+    const an7 = kit.analyst(g7, -1150); an7.pop(s7 - .5).walk(s7 - .2, 1.1, -880).pose(T('c16', 'retenez'), 1.0, 'point', { x: -540, y: -330 }).pose(T('c16', 'six'), 1.2, 'nod').pose(T('c16', 'portes'), 1.2, 'point', { x: 700, y: 160 });
+    F(s7 - 1.3, 1.5, [...mini, an7], .92, { focus: false }); F(tP - .3, .7, [g7._room], .9, { focus: false }); K.focus(tP, g7._room); F(T('c16', 'portes') - .3, .8, [door, an7], .7, { focus: false }); F(T('c16', 'persistance'), 1.8, [g7._room], .99, { focus: false });
+    K.hot({ x: Z.fin[0], y: Z.fin[1] + 30, at: s7, until: 9999, title: 'À retenir', html: '<p>Journaux : <code>activity</code> (toujours, 400 j) · <code>data_access</code> (éteint par défaut) · <code>system_event</code> · <code>policy</code>.</p><p>Pivots : <code>methodName</code>, <code>authenticationInfo.principalEmail</code>, <code>requestMetadata.callerIp</code>, <code>resourceName</code>, <code>serviceName</code>, <code>serviceData</code>.</p>' });
+  },
+};
+
+</script>
+<script>boot(EP);</script>

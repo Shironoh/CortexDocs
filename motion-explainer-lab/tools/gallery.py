@@ -24,6 +24,16 @@ def wrap_player(v):
     (G / f"{v}.html").write_text(page, encoding="utf-8")
 
 for v in VERS: wrap_player(v)
+EPS = [("ep1", "Lire une entrée, champ par champ", "Les 4 journaux et ce que chacun voit, puis une vraie entrée déroulée ligne par ligne : serviceName, methodName, resourceName, principalEmail, callerIp, callerSuppliedUserAgent, bindingDeltas."),
+       ("ep2", "Les portes de persistance", "SetIamPolicy · CreateServiceAccount · CreateServiceAccountKey · setCommonInstanceMetadata (ssh-keys) · GenerateAccessToken, invisible par défaut."),
+       ("ep3", "Effacer, exposer, exploiter", "DeleteSink / UpdateSink · auditConfigDeltas · firewalls.insert 0.0.0.0/0 · storage.setIamPermissions allUsers · instances.insert.")]
+for e, _, _ in EPS:
+    src = (LAB / f"versions/v6-{e}/index.html").read_text(encoding="utf-8")
+    (G / f"{e}.html").write_text('<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}</style></head><body>' + src + '</body></html>', encoding="utf-8")
+series = "".join(f'''
+<article class="ver"><div class="vh"><span class="tag">{e.upper()}</span><span class="by">{t}</span></div>
+  <video controls preload="metadata" playsinline src="{e}.mp4"></video><p>{d}</p>
+  <a class="open" href="{e}.html" target="_blank" rel="noopener">Ouvrir le lecteur interactif (requêtes complètes en pause)</a></article>''' for e, t, d in EPS)
 
 def row(label, fn, best=None):
     cells = "".join(f"<td>{fn(cmp[v])}</td>" for v in VERS)
@@ -94,12 +104,17 @@ button {{ justify-self: start; font: 700 14px var(--f-disp); background: var(--a
 <main>
   <header>
     <div class="eyebrow">Skill motion-explainer · boucle d'amélioration continue</div>
-    <h1>Cinq itérations, cinq vidéos, un skill réécrit</h1>
+    <h1>Six itérations, un skill réécrit, une série DFIR</h1>
     <p>Sujet de test : <b>les journaux Admin Activity de Google Cloud, côté détection et réponse</b>, pour quelqu'un qui ne connaît pas GCP, en moins de 3 minutes.
     Chaque vidéo est générée avec la version précédente du skill, mesurée, notée, puis le skill est corrigé par des règles valables pour n'importe quel sujet.</p>
   </header>
   <section>
-    <h2>Progression</h2>
+    <h2>v6 · La série DFIR (après ton retour)</h2>
+    <p class="note" style="margin-bottom:12px">Ton retour : « superficiel et abstrait ». Le skill v6 cadre l'audience sur deux axes (métier détection/réponse, outil GCP), part d'un inventaire des artefacts à reconnaître et montre les vrais noms de méthodes et de champs à l'écran. Résultat : 3 épisodes, 15 événements et champs réels, chacun avec sa condition d'alerte.</p>
+    <div class="vers">{series}</div>
+  </section>
+  <section>
+    <h2>Progression (itérations 1 à 5)</h2>
     <div class="tw"><table>
       <thead><tr><th></th>{''.join(f'<th>{v}</th>' for v in VERS)}</tr></thead>
       <tbody>{score_rows}{rows}</tbody>
@@ -126,7 +141,7 @@ button {{ justify-self: start; font: 700 14px var(--f-disp); background: var(--a
   </section>
   <section>
     <details>
-      <summary>Skill final (v5), à copier</summary>
+      <summary>Skill final (v6), à copier</summary>
       <div class="sk"><button type="button" id="cp">Copier le skill</button><pre id="skill">{skill}</pre></div>
     </details>
   </section>

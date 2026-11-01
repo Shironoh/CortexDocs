@@ -1,0 +1,3194 @@
+{
+ "meta": {
+  "duration": 143.71538461538458,
+  "cues": [
+   {
+    "id": "c1",
+    "sc": "s1",
+    "start": 0.6,
+    "end": 8.523076923076923,
+    "dur": 7.9230769230769225,
+    "words": 18,
+    "sub": "Épisode 3. 3 h 14 : votre SIEM ne reçoit plus rien du projet prod-paiements. Panne, ou attaque ?",
+    "guess": false
+   },
+   {
+    "id": "c2",
+    "sc": "s1",
+    "start": 8.523076923076923,
+    "end": 18.753846153846155,
+    "dur": 10.23076923076923,
+    "words": 24,
+    "sub": "On croit que l'attaquant efface les journaux. Impossible pour activity. Alors il coupe ce qui les copie, et il éteint ceux qui sont optionnels.",
+    "guess": false
+   },
+   {
+    "id": "c3",
+    "sc": "s2",
+    "start": 18.753846153846155,
+    "end": 28.984615384615385,
+    "dur": 10.23076923076923,
+    "words": 24,
+    "sub": "Première coupure : le sink, le tuyau qui copie les journaux vers votre SIEM. Il le supprime, ou le redirige vers un projet à lui.",
+    "guess": false
+   },
+   {
+    "id": "c4",
+    "sc": "s2",
+    "start": 28.984615384615385,
+    "end": 39.6,
+    "dur": 10.615384615384615,
+    "words": 25,
+    "sub": "Méthodes : google.logging.v2.ConfigServiceV2, DeleteSink ou UpdateSink. Condition : un sink de sécurité visé. Les journaux, eux, restent dans le projet.",
+    "guess": false
+   },
+   {
+    "id": "c5",
+    "sc": "s3",
+    "start": 39.6,
+    "end": 46.36923076923077,
+    "dur": 6.769230769230769,
+    "words": 15,
+    "sub": "Deuxième coupure : il éteint Data Access, là où vous l'aviez allumé. Les lectures redeviennent invisibles.",
+    "guess": false
+   },
+   {
+    "id": "c6",
+    "sc": "s3",
+    "start": 46.36923076923077,
+    "end": 56.98461538461538,
+    "dur": 10.615384615384615,
+    "words": 25,
+    "sub": "Méthode : SetIamPolicy, encore. Mais cette fois, le champ à lire est auditConfigDeltas : c'est la configuration des journaux qui change.",
+    "guess": false
+   },
+   {
+    "id": "c7",
+    "sc": "s4",
+    "start": 56.98461538461538,
+    "end": 64.52307692307691,
+    "dur": 7.538461538461538,
+    "words": 17,
+    "sub": "Puis il expose. Il crée une règle de pare-feu qui ouvre un port d'administration à tout Internet.",
+    "guess": false
+   },
+   {
+    "id": "c8",
+    "sc": "s4",
+    "start": 64.52307692307691,
+    "end": 73.21538461538461,
+    "dur": 8.692307692307692,
+    "words": 20,
+    "sub": "Méthode : v1.compute.firewalls.insert. Condition : sourceRanges vaut 0.0.0.0/0. Tout Internet.",
+    "guess": false
+   },
+   {
+    "id": "c9",
+    "sc": "s5",
+    "start": 73.21538461538461,
+    "end": 79.98461538461538,
+    "dur": 6.769230769230769,
+    "words": 15,
+    "sub": "Il rend aussi un bucket public : n'importe qui, sur Internet, peut alors lire les fichiers.",
+    "guess": false
+   },
+   {
+    "id": "c10",
+    "sc": "s5",
+    "start": 79.98461538461538,
+    "end": 90.21538461538461,
+    "dur": 10.23076923076923,
+    "words": 24,
+    "sub": "Méthode : storage.setIamPermissions. Condition : un membre allUsers ou allAuthenticatedUsers. Une seule ligne, et vos données sont publiques.",
+    "guess": false
+   },
+   {
+    "id": "c11",
+    "sc": "s6",
+    "start": 90.21538461538461,
+    "end": 102.33076923076922,
+    "dur": 12.115384615384615,
+    "words": 25,
+    "sub": "Dernière étape, l'argent. Devinez ce qu'il lance en rafale, dans une région que vous n'utilisez jamais ?|Des machines virtuelles, souvent pour miner de la cryptomonnaie.",
+    "guess": true
+   },
+   {
+    "id": "c12",
+    "sc": "s6",
+    "start": 102.33076923076922,
+    "end": 111.02307692307691,
+    "dur": 8.692307692307692,
+    "words": 20,
+    "sub": "Méthode : v1.compute.instances.insert. Seule, elle est banale. Ce qui alerte : le volume, la région, et les processeurs graphiques.",
+    "guess": false
+   },
+   {
+    "id": "c13",
+    "sc": "s7",
+    "start": 111.02307692307691,
+    "end": 121.63846153846153,
+    "dur": 10.615384615384615,
+    "words": 25,
+    "sub": "Retour à 3 h 14 : le sink a été supprimé. Mais les journaux sont intacts dans le projet. On recrée le tuyau, et l'enquête continue.",
+    "guess": false
+   },
+   {
+    "id": "c14",
+    "sc": "s7",
+    "start": 121.63846153846153,
+    "end": 132.6384615384615,
+    "dur": 11,
+    "words": 26,
+    "sub": "Vos règles : DeleteSink et UpdateSink, auditConfigDeltas, firewalls.insert ouvert au monde, setIamPermissions public, et instances.insert hors normes.",
+    "guess": false
+   },
+   {
+    "id": "c15",
+    "sc": "s7",
+    "start": 132.6384615384615,
+    "end": 141.71538461538458,
+    "dur": 9.076923076923077,
+    "words": 21,
+    "sub": "Avec l'épisode 2, cela fait dix règles. Et l'épisode 1 donne la clé de toutes : lire une entrée, champ par champ.",
+    "guess": false
+   }
+  ],
+  "scenes": [
+   {
+    "id": "s1",
+    "title": "Le SIEM se tait",
+    "start": 0.6,
+    "end": 18.753846153846155
+   },
+   {
+    "id": "s2",
+    "title": "DeleteSink / UpdateSink",
+    "start": 18.753846153846155,
+    "end": 39.6
+   },
+   {
+    "id": "s3",
+    "title": "auditConfigDeltas",
+    "start": 39.6,
+    "end": 56.98461538461538
+   },
+   {
+    "id": "s4",
+    "title": "firewalls.insert",
+    "start": 56.98461538461538,
+    "end": 73.21538461538461
+   },
+   {
+    "id": "s5",
+    "title": "setIamPermissions",
+    "start": 73.21538461538461,
+    "end": 90.21538461538461
+   },
+   {
+    "id": "s6",
+    "title": "instances.insert",
+    "start": 90.21538461538461,
+    "end": 111.02307692307691
+   },
+   {
+    "id": "s7",
+    "title": "Dix règles",
+    "start": 111.02307692307691,
+    "end": 141.71538461538458
+   }
+  ],
+  "guess": [
+   [
+    96.36923076923077,
+    97.86923076923077
+   ]
+  ],
+  "events": 100,
+  "marks": [
+   0.3,
+   3.677,
+   4.446,
+   3.677,
+   6.369,
+   8.323,
+   8.523,
+   10.062,
+   13.138,
+   8.523,
+   10.831,
+   11.215,
+   14.677,
+   15.831,
+   17.369,
+   18.569,
+   0,
+   5.015,
+   1.738,
+   3.277,
+   8.323,
+   11.015,
+   12.938,
+   18.354,
+   18.554,
+   24.523,
+   28.585,
+   23.369,
+   20.677,
+   21.446,
+   24.523,
+   25.677,
+   24.623,
+   27.685,
+   28.885,
+   27.885,
+   28.785,
+   29.369,
+   33.6,
+   33.6,
+   28.385,
+   28.585,
+   29.369,
+   33.6,
+   36.292,
+   26.123,
+   20.154,
+   34.946,
+   36.692,
+   31.485,
+   33.8,
+   34.946,
+   35.746,
+   17.454,
+   26.754,
+   20.154,
+   24.023,
+   28.585,
+   28.969,
+   33.3,
+   34.5,
+   39.2,
+   39.4,
+   40.754,
+   45.969,
+   40.754,
+   41.354,
+   44.985,
+   45.069,
+   46.269,
+   45.269,
+   46.169,
+   46.754,
+   52.138,
+   52.138,
+   45.769,
+   45.969,
+   46.754,
+   52.138,
+   54.062,
+   42.354,
+   53.1,
+   54.462,
+   49.446,
+   52.338,
+   53.1,
+   53.9,
+   38.3,
+   43.562,
+   40.254,
+   45.969,
+   46.354,
+   51.838,
+   53.038,
+   48.677,
+   56.585,
+   56.785,
+   60.831,
+   64.123,
+   60.831,
+   63.138,
+   63.438,
+   63.438,
+   63.588,
+   63.588,
+   63.738,
+   63.738,
+   63.223,
+   64.423,
+   63.423,
+   64.323,
+   64.908,
+   66.446,
+   66.446,
+   63.923,
+   64.123,
+   64.908,
+   66.446,
+   71.831,
+   62.431,
+   58.385,
+   69.138,
+   72.231,
+   65.677,
+   66.646,
+   69.138,
+   69.938,
+   55.685,
+   62.677,
+   58.385,
+   60.331,
+   64.123,
+   64.508,
+   66.146,
+   67.346,
+   72.815,
+   73.015,
+   75.138,
+   79.585,
+   75.138,
+   75.523,
+   75.673,
+   75.823,
+   75.973,
+   77.831,
+   78.831,
+   77.831,
+   78.031,
+   79.031,
+   78.031,
+   78.231,
+   79.231,
+   78.231,
+   78.431,
+   79.431,
+   78.431,
+   78.685,
+   79.885,
+   78.885,
+   79.785,
+   80.369,
+   82.677,
+   82.677,
+   79.385,
+   79.585,
+   80.369,
+   82.677,
+   86.523,
+   76.738,
+   84.6,
+   86.923,
+   81.523,
+   82.877,
+   84.6,
+   85.4,
+   71.915,
+   77.562,
+   74.638,
+   79.585,
+   79.969,
+   82.377,
+   83.577,
+   89.815,
+   90.015,
+   98.254,
+   101.931,
+   90.985,
+   91.369,
+   94.446,
+   95.215,
+   95.985,
+   98.254,
+   98.434,
+   98.614,
+   98.794,
+   98.974,
+   99.154,
+   99.334,
+   99.514,
+   101.031,
+   102.231,
+   101.231,
+   102.131,
+   102.715,
+   106.562,
+   106.562,
+   101.731,
+   101.931,
+   102.715,
+   106.562,
+   109.638,
+   99.854,
+   91.615,
+   108.1,
+   110.038,
+   104.638,
+   106.762,
+   108.1,
+   108.9,
+   88.915,
+   100.292,
+   91.615,
+   97.754,
+   101.931,
+   102.315,
+   106.262,
+   107.462,
+   93.292,
+   94.146,
+   111.023,
+   111.223,
+   113.331,
+   118.331,
+   114.485,
+   118.331,
+   116.408,
+   111.792,
+   121.538,
+   121.638,
+   121.738,
+   121.838,
+   121.938,
+   122.038,
+   121.538,
+   118.331,
+   122.408,
+   124.331,
+   122.408,
+   124.331,
+   124.331,
+   125.485,
+   124.331,
+   125.485,
+   125.485,
+   127.408,
+   125.485,
+   127.408,
+   127.408,
+   130.1,
+   127.408,
+   130.1,
+   130.1,
+   133.038,
+   130.1,
+   133.038,
+   134.562,
+   135.715,
+   137.254,
+   138.408,
+   139.562,
+   110.523,
+   110.823,
+   118.331,
+   120.254,
+   121.638,
+   129.331,
+   131.254,
+   134.562,
+   140.331,
+   109.723,
+   121.338,
+   134.262,
+   138.108,
+   140.631
+  ],
+  "cams": [
+   {
+    "t": 0,
+    "d": 0,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 1.7384615384615385,
+    "d": 0.9,
+    "z": 3
+   },
+   {
+    "t": 3.276923076923077,
+    "d": 1,
+    "z": 1.5428571428571427
+   },
+   {
+    "t": 5.015384615384614,
+    "d": 0.8,
+    "z": 3
+   },
+   {
+    "t": 8.323076923076924,
+    "d": 1,
+    "z": 0.7911576497963932
+   },
+   {
+    "t": 11.015384615384615,
+    "d": 0.7,
+    "z": 2.132701318981234
+   },
+   {
+    "t": 12.938461538461539,
+    "d": 0.8,
+    "z": 0.8788324315097277
+   },
+   {
+    "t": 17.453846153846154,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 20.153846153846153,
+    "d": 0.9,
+    "z": 1.152542372881356
+   },
+   {
+    "t": 24.023076923076925,
+    "d": 0.8,
+    "z": 0.9159553558688016
+   },
+   {
+    "t": 26.753846153846155,
+    "d": 1.2,
+    "z": 0.7815892210802388
+   },
+   {
+    "t": 28.584615384615386,
+    "d": 0.9,
+    "z": 1.2495238095238095
+   },
+   {
+    "t": 28.96923076923077,
+    "d": 0.7,
+    "z": 1.0306266070122743
+   },
+   {
+    "t": 33.300000000000004,
+    "d": 0.7,
+    "z": 1.2306963912574376
+   },
+   {
+    "t": 34.5,
+    "d": 0.9,
+    "z": 1.307752670726807
+   },
+   {
+    "t": 38.300000000000004,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 40.253846153846155,
+    "d": 0.8,
+    "z": 1.2269129616907757
+   },
+   {
+    "t": 43.56153846153846,
+    "d": 1.2,
+    "z": 0.9533898921507425
+   },
+   {
+    "t": 45.96923076923077,
+    "d": 0.9,
+    "z": 1.2495238095238095
+   },
+   {
+    "t": 46.353846153846156,
+    "d": 0.7,
+    "z": 2.4
+   },
+   {
+    "t": 51.83846153846154,
+    "d": 0.7,
+    "z": 1.315540459161266
+   },
+   {
+    "t": 53.03846153846153,
+    "d": 0.9,
+    "z": 1.287621434823145
+   },
+   {
+    "t": 55.684615384615384,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 58.38461538461538,
+    "d": 0.9,
+    "z": 2.1828107318641043
+   },
+   {
+    "t": 60.33076923076923,
+    "d": 0.8,
+    "z": 1.6916783171946805
+   },
+   {
+    "t": 62.676923076923075,
+    "d": 1.2,
+    "z": 0.7940008394689323
+   },
+   {
+    "t": 64.12307692307691,
+    "d": 0.9,
+    "z": 1.2495238095238095
+   },
+   {
+    "t": 64.5076923076923,
+    "d": 0.7,
+    "z": 1.173758307989536
+   },
+   {
+    "t": 66.14615384615384,
+    "d": 0.7,
+    "z": 1.6587307613545113
+   },
+   {
+    "t": 67.34615384615384,
+    "d": 0.9,
+    "z": 1.3075857554027044
+   },
+   {
+    "t": 71.91538461538461,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 74.63846153846153,
+    "d": 0.8,
+    "z": 0.9123610339321693
+   },
+   {
+    "t": 77.56153846153845,
+    "d": 1.2,
+    "z": 0.8148482576108814
+   },
+   {
+    "t": 79.58461538461538,
+    "d": 0.9,
+    "z": 1.2495238095238095
+   },
+   {
+    "t": 79.96923076923076,
+    "d": 0.7,
+    "z": 1.2676636013193183
+   },
+   {
+    "t": 82.37692307692308,
+    "d": 0.7,
+    "z": 1.2717056132469335
+   },
+   {
+    "t": 83.57692307692308,
+    "d": 0.9,
+    "z": 1.3005922878544771
+   },
+   {
+    "t": 88.91538461538461,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 91.61538461538461,
+    "d": 0.9,
+    "z": 1.3009079401236159
+   },
+   {
+    "t": 94.14615384615384,
+    "d": 0.7,
+    "z": 3
+   },
+   {
+    "t": 97.75384615384614,
+    "d": 0.8,
+    "z": 0.9602147657773759
+   },
+   {
+    "t": 100.29230769230767,
+    "d": 1.2,
+    "z": 0.8011305015378145
+   },
+   {
+    "t": 101.93076923076922,
+    "d": 0.9,
+    "z": 1.2495238095238095
+   },
+   {
+    "t": 102.3153846153846,
+    "d": 0.7,
+    "z": 1.173758307989536
+   },
+   {
+    "t": 106.26153846153845,
+    "d": 0.7,
+    "z": 1.1875906059727457
+   },
+   {
+    "t": 107.46153846153845,
+    "d": 0.9,
+    "z": 1.2906539748899202
+   },
+   {
+    "t": 109.72307692307692,
+    "d": 1.5,
+    "z": 0.7795150578639419
+   },
+   {
+    "t": 121.33846153846153,
+    "d": 0.9,
+    "z": 0.8658823529411765
+   },
+   {
+    "t": 134.26153846153844,
+    "d": 0.7,
+    "z": 1.6957081527296511
+   },
+   {
+    "t": 138.10769230769228,
+    "d": 0.8,
+    "z": 1.1076923076923075
+   },
+   {
+    "t": 140.6307692307692,
+    "d": 2,
+    "z": 0.6071428571428571
+   }
+  ],
+  "chars": [
+   {
+    "name": "analyste",
+    "poses": [
+     [
+      3.6769230769230767,
+      "point"
+     ],
+     [
+      6.369230769230769,
+      "shrug"
+     ]
+    ],
+    "walks": [
+     8.523076923076923
+    ],
+    "exprs": [
+     -1,
+     4.4461538461538455
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 8.323076923076924,
+    "poses": [
+     [
+      10.061538461538461,
+      "point"
+     ],
+     [
+      13.138461538461538,
+      "point"
+     ],
+     [
+      17.369230769230768,
+      "point"
+     ]
+    ],
+    "walks": [
+     8.523076923076923,
+     18.569230769230767
+    ],
+    "exprs": [
+     -1,
+     11.215384615384615
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 18.353846153846156,
+    "poses": [
+     [
+      24.523076923076925,
+      "point"
+     ],
+     [
+      26.123076923076926,
+      "cheer"
+     ],
+     [
+      20.153846153846153,
+      "point"
+     ]
+    ],
+    "walks": [
+     18.553846153846155,
+     28.584615384615386
+    ],
+    "exprs": [
+     -1,
+     24.523076923076925
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 28.384615384615383,
+    "poses": [
+     [
+      29.369230769230768,
+      "point"
+     ],
+     [
+      33.6,
+      "point"
+     ],
+     [
+      34.94615384615385,
+      "nod"
+     ],
+     [
+      36.69230769230769,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     28.584615384615386
+    ],
+    "exprs": [
+     -1,
+     33.6
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 39.2,
+    "poses": [
+     [
+      40.753846153846155,
+      "point"
+     ],
+     [
+      42.353846153846156,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     39.4,
+     45.96923076923077
+    ],
+    "exprs": [
+     -1,
+     40.753846153846155
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 45.76923076923077,
+    "poses": [
+     [
+      46.753846153846155,
+      "point"
+     ],
+     [
+      52.138461538461534,
+      "point"
+     ],
+     [
+      53.099999999999994,
+      "nod"
+     ],
+     [
+      54.46153846153846,
+      "cheer"
+     ],
+     [
+      48.676923076923075,
+      "nod"
+     ]
+    ],
+    "walks": [
+     45.96923076923077
+    ],
+    "exprs": [
+     -1,
+     52.138461538461534
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 56.58461538461538,
+    "poses": [
+     [
+      60.83076923076923,
+      "point"
+     ],
+     [
+      62.43076923076923,
+      "cheer"
+     ],
+     [
+      58.38461538461538,
+      "point"
+     ]
+    ],
+    "walks": [
+     56.78461538461538,
+     64.12307692307691
+    ],
+    "exprs": [
+     -1,
+     60.83076923076923
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 63.92307692307691,
+    "poses": [
+     [
+      64.9076923076923,
+      "point"
+     ],
+     [
+      66.44615384615383,
+      "point"
+     ],
+     [
+      69.13846153846153,
+      "nod"
+     ],
+     [
+      72.23076923076923,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     64.12307692307691
+    ],
+    "exprs": [
+     -1,
+     66.44615384615383
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 72.8153846153846,
+    "poses": [
+     [
+      75.13846153846153,
+      "point"
+     ],
+     [
+      76.73846153846152,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     73.0153846153846,
+     79.58461538461538
+    ],
+    "exprs": [
+     -1,
+     75.13846153846153
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 79.38461538461539,
+    "poses": [
+     [
+      80.36923076923077,
+      "point"
+     ],
+     [
+      82.67692307692307,
+      "point"
+     ],
+     [
+      84.6,
+      "nod"
+     ],
+     [
+      86.92307692307692,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     79.58461538461538
+    ],
+    "exprs": [
+     -1,
+     82.67692307692307
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 89.8153846153846,
+    "poses": [
+     [
+      98.25384615384614,
+      "point"
+     ],
+     [
+      99.85384615384613,
+      "cheer"
+     ],
+     [
+      91.61538461538461,
+      "point"
+     ],
+     [
+      93.29230769230769,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     90.0153846153846,
+     101.93076923076922
+    ],
+    "exprs": [
+     -1,
+     98.25384615384614
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 101.73076923076923,
+    "poses": [
+     [
+      102.71538461538461,
+      "point"
+     ],
+     [
+      106.56153846153845,
+      "point"
+     ],
+     [
+      108.1,
+      "nod"
+     ],
+     [
+      110.03846153846153,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     101.93076923076922
+    ],
+    "exprs": [
+     -1,
+     106.56153846153845
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 110.52307692307691,
+    "poses": [
+     [
+      118.33076923076922,
+      "point"
+     ],
+     [
+      120.25384615384614,
+      "cheer"
+     ],
+     [
+      121.63846153846153,
+      "nod"
+     ],
+     [
+      129.33076923076922,
+      "nod"
+     ],
+     [
+      131.25384615384615,
+      "point"
+     ],
+     [
+      134.56153846153845,
+      "cheer"
+     ],
+     [
+      140.3307692307692,
+      "nod"
+     ]
+    ],
+    "walks": [
+     110.82307692307691
+    ],
+    "exprs": [
+     -1,
+     116.4076923076923,
+     134.56153846153845
+    ]
+   }
+  ],
+  "says": [
+   "Épisode trois. Trois heures quatorze : votre sim ne reçoit plus rien du projet prod paiements. Panne, ou attaque ?",
+   "On croit que l'attaquant efface les journaux. Impossible pour activity. Alors il coupe ce qui les copie, et il éteint ceux qui sont optionnels.",
+   "Première coupure : le sink, le tuyau qui copie les journaux vers votre sim. Il le supprime, ou le redirige vers un projet à lui.",
+   "Méthodes : google logging v2, Config Service V2, Delete Sink, ou Update Sink. Condition : un sink de sécurité visé. Les journaux, eux, restent dans le projet.",
+   "Deuxième coupure : il éteint Data Access, là où vous l'aviez allumé. Les lectures redeviennent invisibles.",
+   "Méthode : Set I A M Policy, encore. Mais cette fois, le champ à lire est audit config deltas : c'est la configuration des journaux qui change.",
+   "Puis il expose. Il crée une règle de pare-feu qui ouvre un port d'administration à tout Internet.",
+   "Méthode : v1 compute firewalls insert. Condition : source ranges vaut zéro point zéro point zéro point zéro, slash zéro. Tout Internet.",
+   "Il rend aussi un bucket public : n'importe qui, sur Internet, peut alors lire les fichiers.",
+   "Méthode : storage set I A M Permissions. Condition : un membre all Users, ou all Authenticated Users. Une seule ligne, et vos données sont publiques.",
+   "Dernière étape, l'argent. Devinez ce qu'il lance en rafale, dans une région que vous n'utilisez jamais ? | Des machines virtuelles, souvent pour miner de la cryptomonnaie.",
+   "Méthode : v1 compute instances insert. Seule, elle est banale. Ce qui alerte : le volume, la région, et les processeurs graphiques.",
+   "Retour à trois heures quatorze : le sink a été supprimé. Mais les journaux sont intacts dans le projet. On recrée le tuyau, et l'enquête continue.",
+   "Vos règles : Delete Sink et Update Sink, audit config deltas, firewalls insert ouvert au monde, set I A M Permissions public, et instances insert hors normes.",
+   "Avec l'épisode deux, cela fait dix règles. Et l'épisode un donne la clé de toutes : lire une entrée, champ par champ."
+  ]
+ },
+ "caps": [
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c1_25.jpg",
+   "t": 2.5807692307692305,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 800,
+    "cy": 397,
+    "area": 0.089
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c1_50.jpg",
+   "t": 4.561538461538461,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.458
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c1_75.jpg",
+   "t": 6.542307692307691,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 350,
+    "cy": 223,
+    "area": 0.793
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c2_25.jpg",
+   "t": 11.080769230769231,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 346,
+    "cy": 160,
+    "area": 0.034
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.034
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c2_50.jpg",
+   "t": 13.638461538461538,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 49,
+    "cy": 86,
+    "area": 0.025
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      49,
+      86
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.025
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c2_75.jpg",
+   "t": 16.196153846153845,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 505,
+    "cy": 124,
+    "area": 0.009
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      505,
+      124
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.009
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c3_25.jpg",
+   "t": 21.31153846153846,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 404,
+    "cy": 500,
+    "area": 0.027
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.027
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c3_50.jpg",
+   "t": 23.869230769230768,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 404,
+    "cy": 500,
+    "area": 0.027
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.027
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c3_75.jpg",
+   "t": 26.426923076923078,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 481,
+    "cy": 471,
+    "area": 0.017
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.017
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c4_25.jpg",
+   "t": 31.638461538461538,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 799,
+    "cy": 400,
+    "area": 0.034
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c4_50.jpg",
+   "t": 34.292307692307695,
+   "ntext": 3,
+   "words": 6,
+   "focus": {
+    "cx": 798,
+    "cy": 399,
+    "area": 0.055
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c4_75.jpg",
+   "t": 36.94615384615385,
+   "ntext": 3,
+   "words": 6,
+   "focus": {
+    "cx": 725,
+    "cy": 442,
+    "area": 0.061
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c5_25.jpg",
+   "t": 41.292307692307695,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 631,
+    "cy": 233,
+    "area": 0.047
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.047
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c5_50.jpg",
+   "t": 42.98461538461539,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 631,
+    "cy": 233,
+    "area": 0.047
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.047
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c5_75.jpg",
+   "t": 44.676923076923075,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 197,
+    "cy": 301,
+    "area": 0.028
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      197,
+      301
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.028
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c6_25.jpg",
+   "t": 49.02307692307692,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 798,
+    "cy": 399,
+    "area": 0.103
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c6_50.jpg",
+   "t": 51.676923076923075,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 798,
+    "cy": 399,
+    "area": 0.103
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c6_75.jpg",
+   "t": 54.33076923076923,
+   "ntext": 3,
+   "words": 5,
+   "focus": {
+    "cx": 691,
+    "cy": 436,
+    "area": 0.055
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c7_25.jpg",
+   "t": 58.86923076923077,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 682,
+    "cy": 358,
+    "area": 0.119
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c7",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c7_50.jpg",
+   "t": 60.75384615384615,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1031,
+    "cy": 400,
+    "area": 0.241
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c7",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c7_75.jpg",
+   "t": 62.638461538461534,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1008,
+    "cy": 400,
+    "area": 0.195
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c8_25.jpg",
+   "t": 66.69615384615383,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 792,
+    "cy": 406,
+    "area": 0.071
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Exposition"
+    },
+    {
+     "k": "cut",
+     "s": "v1.compute.firewalls.insert"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c8",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c8_50.jpg",
+   "t": 68.86923076923075,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 581,
+    "cy": 442,
+    "area": 0.045
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c8_75.jpg",
+   "t": 71.04230769230769,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 581,
+    "cy": 442,
+    "area": 0.045
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c9_25.jpg",
+   "t": 74.9076923076923,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 578,
+    "cy": 347,
+    "area": 0.046
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c9",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c9_50.jpg",
+   "t": 76.6,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 876,
+    "cy": 417,
+    "area": 0.092
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c9_75.jpg",
+   "t": 78.29230769230769,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 488,
+    "cy": 416,
+    "area": 0.078
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c10",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c10_25.jpg",
+   "t": 82.54230769230769,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 797,
+    "cy": 392,
+    "area": 0.06
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c10",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c10_50.jpg",
+   "t": 85.1,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 708,
+    "cy": 440,
+    "area": 0.059
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c10_75.jpg",
+   "t": 87.6576923076923,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 708,
+    "cy": 440,
+    "area": 0.059
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c11_25.jpg",
+   "t": 93.24423076923077,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 829,
+    "cy": 532,
+    "area": 0.241
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c11_50.jpg",
+   "t": 96.27307692307691,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1687,
+    "cy": 1308,
+    "area": 0.044
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1687,
+      1308
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "focus"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c11_75.jpg",
+   "t": 99.30192307692307,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 828,
+    "cy": 525,
+    "area": 0.131
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c12_25.jpg",
+   "t": 104.50384615384614,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.056
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c12_50.jpg",
+   "t": 106.67692307692306,
+   "ntext": 3,
+   "words": 10,
+   "focus": {
+    "cx": 748,
+    "cy": 437,
+    "area": 0.05
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c12",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c12_75.jpg",
+   "t": 108.85,
+   "ntext": 3,
+   "words": 10,
+   "focus": {
+    "cx": 684,
+    "cy": 438,
+    "area": 0.059
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c13_25.jpg",
+   "t": 113.67692307692307,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 382,
+    "cy": 271,
+    "area": 0.016
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.016
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c13_50.jpg",
+   "t": 116.33076923076922,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 928,
+    "cy": 260,
+    "area": 0.002
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.002
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c13_75.jpg",
+   "t": 118.98461538461538,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 928,
+    "cy": 260,
+    "area": 0
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c14_25.jpg",
+   "t": 124.38846153846153,
+   "ntext": 1,
+   "words": 3,
+   "focus": {
+    "cx": 783,
+    "cy": 374,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c14_50.jpg",
+   "t": 127.13846153846153,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 783,
+    "cy": 374,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c14_75.jpg",
+   "t": 129.8884615384615,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 783,
+    "cy": 374,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c15_25.jpg",
+   "t": 134.9076923076923,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 800,
+    "cy": 401,
+    "area": 0.112
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c15",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c15_50.jpg",
+   "t": 137.17692307692306,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 800,
+    "cy": 672,
+    "area": 0.101
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "10 règles"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c15_75.jpg",
+   "t": 139.44615384615383,
+   "ntext": 3,
+   "words": 8,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.213
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "10 règles"
+    },
+    {
+     "k": "subband",
+     "s": "10 règles"
+    }
+   ],
+   "moving": false
+  }
+ ],
+ "frozen": [
+  {
+   "t": 0,
+   "file": "frozen/f0000.png"
+  },
+  {
+   "t": 0.5,
+   "file": "frozen/f0001.png"
+  },
+  {
+   "t": 1,
+   "file": "frozen/f0002.png"
+  },
+  {
+   "t": 1.5,
+   "file": "frozen/f0003.png"
+  },
+  {
+   "t": 2,
+   "file": "frozen/f0004.png"
+  },
+  {
+   "t": 2.5,
+   "file": "frozen/f0005.png"
+  },
+  {
+   "t": 3,
+   "file": "frozen/f0006.png"
+  },
+  {
+   "t": 3.5,
+   "file": "frozen/f0007.png"
+  },
+  {
+   "t": 4,
+   "file": "frozen/f0008.png"
+  },
+  {
+   "t": 4.5,
+   "file": "frozen/f0009.png"
+  },
+  {
+   "t": 5,
+   "file": "frozen/f0010.png"
+  },
+  {
+   "t": 5.5,
+   "file": "frozen/f0011.png"
+  },
+  {
+   "t": 6,
+   "file": "frozen/f0012.png"
+  },
+  {
+   "t": 6.5,
+   "file": "frozen/f0013.png"
+  },
+  {
+   "t": 7,
+   "file": "frozen/f0014.png"
+  },
+  {
+   "t": 7.5,
+   "file": "frozen/f0015.png"
+  },
+  {
+   "t": 8,
+   "file": "frozen/f0016.png"
+  },
+  {
+   "t": 8.5,
+   "file": "frozen/f0017.png"
+  },
+  {
+   "t": 9,
+   "file": "frozen/f0018.png"
+  },
+  {
+   "t": 9.5,
+   "file": "frozen/f0019.png"
+  },
+  {
+   "t": 10,
+   "file": "frozen/f0020.png"
+  },
+  {
+   "t": 10.5,
+   "file": "frozen/f0021.png"
+  },
+  {
+   "t": 11,
+   "file": "frozen/f0022.png"
+  },
+  {
+   "t": 11.5,
+   "file": "frozen/f0023.png"
+  },
+  {
+   "t": 12,
+   "file": "frozen/f0024.png"
+  },
+  {
+   "t": 12.5,
+   "file": "frozen/f0025.png"
+  },
+  {
+   "t": 13,
+   "file": "frozen/f0026.png"
+  },
+  {
+   "t": 13.5,
+   "file": "frozen/f0027.png"
+  },
+  {
+   "t": 14,
+   "file": "frozen/f0028.png"
+  },
+  {
+   "t": 14.5,
+   "file": "frozen/f0029.png"
+  },
+  {
+   "t": 15,
+   "file": "frozen/f0030.png"
+  },
+  {
+   "t": 15.5,
+   "file": "frozen/f0031.png"
+  },
+  {
+   "t": 16,
+   "file": "frozen/f0032.png"
+  },
+  {
+   "t": 16.5,
+   "file": "frozen/f0033.png"
+  },
+  {
+   "t": 17,
+   "file": "frozen/f0034.png"
+  },
+  {
+   "t": 17.5,
+   "file": "frozen/f0035.png"
+  },
+  {
+   "t": 18,
+   "file": "frozen/f0036.png"
+  },
+  {
+   "t": 18.5,
+   "file": "frozen/f0037.png"
+  },
+  {
+   "t": 19,
+   "file": "frozen/f0038.png"
+  },
+  {
+   "t": 19.5,
+   "file": "frozen/f0039.png"
+  },
+  {
+   "t": 20,
+   "file": "frozen/f0040.png"
+  },
+  {
+   "t": 20.5,
+   "file": "frozen/f0041.png"
+  },
+  {
+   "t": 21,
+   "file": "frozen/f0042.png"
+  },
+  {
+   "t": 21.5,
+   "file": "frozen/f0043.png"
+  },
+  {
+   "t": 22,
+   "file": "frozen/f0044.png"
+  },
+  {
+   "t": 22.5,
+   "file": "frozen/f0045.png"
+  },
+  {
+   "t": 23,
+   "file": "frozen/f0046.png"
+  },
+  {
+   "t": 23.5,
+   "file": "frozen/f0047.png"
+  },
+  {
+   "t": 24,
+   "file": "frozen/f0048.png"
+  },
+  {
+   "t": 24.5,
+   "file": "frozen/f0049.png"
+  },
+  {
+   "t": 25,
+   "file": "frozen/f0050.png"
+  },
+  {
+   "t": 25.5,
+   "file": "frozen/f0051.png"
+  },
+  {
+   "t": 26,
+   "file": "frozen/f0052.png"
+  },
+  {
+   "t": 26.5,
+   "file": "frozen/f0053.png"
+  },
+  {
+   "t": 27,
+   "file": "frozen/f0054.png"
+  },
+  {
+   "t": 27.5,
+   "file": "frozen/f0055.png"
+  },
+  {
+   "t": 28,
+   "file": "frozen/f0056.png"
+  },
+  {
+   "t": 28.5,
+   "file": "frozen/f0057.png"
+  },
+  {
+   "t": 29,
+   "file": "frozen/f0058.png"
+  },
+  {
+   "t": 29.5,
+   "file": "frozen/f0059.png"
+  },
+  {
+   "t": 30,
+   "file": "frozen/f0060.png"
+  },
+  {
+   "t": 30.5,
+   "file": "frozen/f0061.png"
+  },
+  {
+   "t": 31,
+   "file": "frozen/f0062.png"
+  },
+  {
+   "t": 31.5,
+   "file": "frozen/f0063.png"
+  },
+  {
+   "t": 32,
+   "file": "frozen/f0064.png"
+  },
+  {
+   "t": 32.5,
+   "file": "frozen/f0065.png"
+  },
+  {
+   "t": 33,
+   "file": "frozen/f0066.png"
+  },
+  {
+   "t": 33.5,
+   "file": "frozen/f0067.png"
+  },
+  {
+   "t": 34,
+   "file": "frozen/f0068.png"
+  },
+  {
+   "t": 34.5,
+   "file": "frozen/f0069.png"
+  },
+  {
+   "t": 35,
+   "file": "frozen/f0070.png"
+  },
+  {
+   "t": 35.5,
+   "file": "frozen/f0071.png"
+  },
+  {
+   "t": 36,
+   "file": "frozen/f0072.png"
+  },
+  {
+   "t": 36.5,
+   "file": "frozen/f0073.png"
+  },
+  {
+   "t": 37,
+   "file": "frozen/f0074.png"
+  },
+  {
+   "t": 37.5,
+   "file": "frozen/f0075.png"
+  },
+  {
+   "t": 38,
+   "file": "frozen/f0076.png"
+  },
+  {
+   "t": 38.5,
+   "file": "frozen/f0077.png"
+  },
+  {
+   "t": 39,
+   "file": "frozen/f0078.png"
+  },
+  {
+   "t": 39.5,
+   "file": "frozen/f0079.png"
+  },
+  {
+   "t": 40,
+   "file": "frozen/f0080.png"
+  },
+  {
+   "t": 40.5,
+   "file": "frozen/f0081.png"
+  },
+  {
+   "t": 41,
+   "file": "frozen/f0082.png"
+  },
+  {
+   "t": 41.5,
+   "file": "frozen/f0083.png"
+  },
+  {
+   "t": 42,
+   "file": "frozen/f0084.png"
+  },
+  {
+   "t": 42.5,
+   "file": "frozen/f0085.png"
+  },
+  {
+   "t": 43,
+   "file": "frozen/f0086.png"
+  },
+  {
+   "t": 43.5,
+   "file": "frozen/f0087.png"
+  },
+  {
+   "t": 44,
+   "file": "frozen/f0088.png"
+  },
+  {
+   "t": 44.5,
+   "file": "frozen/f0089.png"
+  },
+  {
+   "t": 45,
+   "file": "frozen/f0090.png"
+  },
+  {
+   "t": 45.5,
+   "file": "frozen/f0091.png"
+  },
+  {
+   "t": 46,
+   "file": "frozen/f0092.png"
+  },
+  {
+   "t": 46.5,
+   "file": "frozen/f0093.png"
+  },
+  {
+   "t": 47,
+   "file": "frozen/f0094.png"
+  },
+  {
+   "t": 47.5,
+   "file": "frozen/f0095.png"
+  },
+  {
+   "t": 48,
+   "file": "frozen/f0096.png"
+  },
+  {
+   "t": 48.5,
+   "file": "frozen/f0097.png"
+  },
+  {
+   "t": 49,
+   "file": "frozen/f0098.png"
+  },
+  {
+   "t": 49.5,
+   "file": "frozen/f0099.png"
+  },
+  {
+   "t": 50,
+   "file": "frozen/f0100.png"
+  },
+  {
+   "t": 50.5,
+   "file": "frozen/f0101.png"
+  },
+  {
+   "t": 51,
+   "file": "frozen/f0102.png"
+  },
+  {
+   "t": 51.5,
+   "file": "frozen/f0103.png"
+  },
+  {
+   "t": 52,
+   "file": "frozen/f0104.png"
+  },
+  {
+   "t": 52.5,
+   "file": "frozen/f0105.png"
+  },
+  {
+   "t": 53,
+   "file": "frozen/f0106.png"
+  },
+  {
+   "t": 53.5,
+   "file": "frozen/f0107.png"
+  },
+  {
+   "t": 54,
+   "file": "frozen/f0108.png"
+  },
+  {
+   "t": 54.5,
+   "file": "frozen/f0109.png"
+  },
+  {
+   "t": 55,
+   "file": "frozen/f0110.png"
+  },
+  {
+   "t": 55.5,
+   "file": "frozen/f0111.png"
+  },
+  {
+   "t": 56,
+   "file": "frozen/f0112.png"
+  },
+  {
+   "t": 56.5,
+   "file": "frozen/f0113.png"
+  },
+  {
+   "t": 57,
+   "file": "frozen/f0114.png"
+  },
+  {
+   "t": 57.5,
+   "file": "frozen/f0115.png"
+  },
+  {
+   "t": 58,
+   "file": "frozen/f0116.png"
+  },
+  {
+   "t": 58.5,
+   "file": "frozen/f0117.png"
+  },
+  {
+   "t": 59,
+   "file": "frozen/f0118.png"
+  },
+  {
+   "t": 59.5,
+   "file": "frozen/f0119.png"
+  },
+  {
+   "t": 60,
+   "file": "frozen/f0120.png"
+  },
+  {
+   "t": 60.5,
+   "file": "frozen/f0121.png"
+  },
+  {
+   "t": 61,
+   "file": "frozen/f0122.png"
+  },
+  {
+   "t": 61.5,
+   "file": "frozen/f0123.png"
+  },
+  {
+   "t": 62,
+   "file": "frozen/f0124.png"
+  },
+  {
+   "t": 62.5,
+   "file": "frozen/f0125.png"
+  },
+  {
+   "t": 63,
+   "file": "frozen/f0126.png"
+  },
+  {
+   "t": 63.5,
+   "file": "frozen/f0127.png"
+  },
+  {
+   "t": 64,
+   "file": "frozen/f0128.png"
+  },
+  {
+   "t": 64.5,
+   "file": "frozen/f0129.png"
+  },
+  {
+   "t": 65,
+   "file": "frozen/f0130.png"
+  },
+  {
+   "t": 65.5,
+   "file": "frozen/f0131.png"
+  },
+  {
+   "t": 66,
+   "file": "frozen/f0132.png"
+  },
+  {
+   "t": 66.5,
+   "file": "frozen/f0133.png"
+  },
+  {
+   "t": 67,
+   "file": "frozen/f0134.png"
+  },
+  {
+   "t": 67.5,
+   "file": "frozen/f0135.png"
+  },
+  {
+   "t": 68,
+   "file": "frozen/f0136.png"
+  },
+  {
+   "t": 68.5,
+   "file": "frozen/f0137.png"
+  },
+  {
+   "t": 69,
+   "file": "frozen/f0138.png"
+  },
+  {
+   "t": 69.5,
+   "file": "frozen/f0139.png"
+  },
+  {
+   "t": 70,
+   "file": "frozen/f0140.png"
+  },
+  {
+   "t": 70.5,
+   "file": "frozen/f0141.png"
+  },
+  {
+   "t": 71,
+   "file": "frozen/f0142.png"
+  },
+  {
+   "t": 71.5,
+   "file": "frozen/f0143.png"
+  },
+  {
+   "t": 72,
+   "file": "frozen/f0144.png"
+  },
+  {
+   "t": 72.5,
+   "file": "frozen/f0145.png"
+  },
+  {
+   "t": 73,
+   "file": "frozen/f0146.png"
+  },
+  {
+   "t": 73.5,
+   "file": "frozen/f0147.png"
+  },
+  {
+   "t": 74,
+   "file": "frozen/f0148.png"
+  },
+  {
+   "t": 74.5,
+   "file": "frozen/f0149.png"
+  },
+  {
+   "t": 75,
+   "file": "frozen/f0150.png"
+  },
+  {
+   "t": 75.5,
+   "file": "frozen/f0151.png"
+  },
+  {
+   "t": 76,
+   "file": "frozen/f0152.png"
+  },
+  {
+   "t": 76.5,
+   "file": "frozen/f0153.png"
+  },
+  {
+   "t": 77,
+   "file": "frozen/f0154.png"
+  },
+  {
+   "t": 77.5,
+   "file": "frozen/f0155.png"
+  },
+  {
+   "t": 78,
+   "file": "frozen/f0156.png"
+  },
+  {
+   "t": 78.5,
+   "file": "frozen/f0157.png"
+  },
+  {
+   "t": 79,
+   "file": "frozen/f0158.png"
+  },
+  {
+   "t": 79.5,
+   "file": "frozen/f0159.png"
+  },
+  {
+   "t": 80,
+   "file": "frozen/f0160.png"
+  },
+  {
+   "t": 80.5,
+   "file": "frozen/f0161.png"
+  },
+  {
+   "t": 81,
+   "file": "frozen/f0162.png"
+  },
+  {
+   "t": 81.5,
+   "file": "frozen/f0163.png"
+  },
+  {
+   "t": 82,
+   "file": "frozen/f0164.png"
+  },
+  {
+   "t": 82.5,
+   "file": "frozen/f0165.png"
+  },
+  {
+   "t": 83,
+   "file": "frozen/f0166.png"
+  },
+  {
+   "t": 83.5,
+   "file": "frozen/f0167.png"
+  },
+  {
+   "t": 84,
+   "file": "frozen/f0168.png"
+  },
+  {
+   "t": 84.5,
+   "file": "frozen/f0169.png"
+  },
+  {
+   "t": 85,
+   "file": "frozen/f0170.png"
+  },
+  {
+   "t": 85.5,
+   "file": "frozen/f0171.png"
+  },
+  {
+   "t": 86,
+   "file": "frozen/f0172.png"
+  },
+  {
+   "t": 86.5,
+   "file": "frozen/f0173.png"
+  },
+  {
+   "t": 87,
+   "file": "frozen/f0174.png"
+  },
+  {
+   "t": 87.5,
+   "file": "frozen/f0175.png"
+  },
+  {
+   "t": 88,
+   "file": "frozen/f0176.png"
+  },
+  {
+   "t": 88.5,
+   "file": "frozen/f0177.png"
+  },
+  {
+   "t": 89,
+   "file": "frozen/f0178.png"
+  },
+  {
+   "t": 89.5,
+   "file": "frozen/f0179.png"
+  },
+  {
+   "t": 90,
+   "file": "frozen/f0180.png"
+  },
+  {
+   "t": 90.5,
+   "file": "frozen/f0181.png"
+  },
+  {
+   "t": 91,
+   "file": "frozen/f0182.png"
+  },
+  {
+   "t": 91.5,
+   "file": "frozen/f0183.png"
+  },
+  {
+   "t": 92,
+   "file": "frozen/f0184.png"
+  },
+  {
+   "t": 92.5,
+   "file": "frozen/f0185.png"
+  },
+  {
+   "t": 93,
+   "file": "frozen/f0186.png"
+  },
+  {
+   "t": 93.5,
+   "file": "frozen/f0187.png"
+  },
+  {
+   "t": 94,
+   "file": "frozen/f0188.png"
+  },
+  {
+   "t": 94.5,
+   "file": "frozen/f0189.png"
+  },
+  {
+   "t": 95,
+   "file": "frozen/f0190.png"
+  },
+  {
+   "t": 95.5,
+   "file": "frozen/f0191.png"
+  },
+  {
+   "t": 96,
+   "file": "frozen/f0192.png"
+  },
+  {
+   "t": 96.5,
+   "file": "frozen/f0193.png"
+  },
+  {
+   "t": 97,
+   "file": "frozen/f0194.png"
+  },
+  {
+   "t": 97.5,
+   "file": "frozen/f0195.png"
+  },
+  {
+   "t": 98,
+   "file": "frozen/f0196.png"
+  },
+  {
+   "t": 98.5,
+   "file": "frozen/f0197.png"
+  },
+  {
+   "t": 99,
+   "file": "frozen/f0198.png"
+  },
+  {
+   "t": 99.5,
+   "file": "frozen/f0199.png"
+  },
+  {
+   "t": 100,
+   "file": "frozen/f0200.png"
+  },
+  {
+   "t": 100.5,
+   "file": "frozen/f0201.png"
+  },
+  {
+   "t": 101,
+   "file": "frozen/f0202.png"
+  },
+  {
+   "t": 101.5,
+   "file": "frozen/f0203.png"
+  },
+  {
+   "t": 102,
+   "file": "frozen/f0204.png"
+  },
+  {
+   "t": 102.5,
+   "file": "frozen/f0205.png"
+  },
+  {
+   "t": 103,
+   "file": "frozen/f0206.png"
+  },
+  {
+   "t": 103.5,
+   "file": "frozen/f0207.png"
+  },
+  {
+   "t": 104,
+   "file": "frozen/f0208.png"
+  },
+  {
+   "t": 104.5,
+   "file": "frozen/f0209.png"
+  },
+  {
+   "t": 105,
+   "file": "frozen/f0210.png"
+  },
+  {
+   "t": 105.5,
+   "file": "frozen/f0211.png"
+  },
+  {
+   "t": 106,
+   "file": "frozen/f0212.png"
+  },
+  {
+   "t": 106.5,
+   "file": "frozen/f0213.png"
+  },
+  {
+   "t": 107,
+   "file": "frozen/f0214.png"
+  },
+  {
+   "t": 107.5,
+   "file": "frozen/f0215.png"
+  },
+  {
+   "t": 108,
+   "file": "frozen/f0216.png"
+  },
+  {
+   "t": 108.5,
+   "file": "frozen/f0217.png"
+  },
+  {
+   "t": 109,
+   "file": "frozen/f0218.png"
+  },
+  {
+   "t": 109.5,
+   "file": "frozen/f0219.png"
+  },
+  {
+   "t": 110,
+   "file": "frozen/f0220.png"
+  },
+  {
+   "t": 110.5,
+   "file": "frozen/f0221.png"
+  },
+  {
+   "t": 111,
+   "file": "frozen/f0222.png"
+  },
+  {
+   "t": 111.5,
+   "file": "frozen/f0223.png"
+  },
+  {
+   "t": 112,
+   "file": "frozen/f0224.png"
+  },
+  {
+   "t": 112.5,
+   "file": "frozen/f0225.png"
+  },
+  {
+   "t": 113,
+   "file": "frozen/f0226.png"
+  },
+  {
+   "t": 113.5,
+   "file": "frozen/f0227.png"
+  },
+  {
+   "t": 114,
+   "file": "frozen/f0228.png"
+  },
+  {
+   "t": 114.5,
+   "file": "frozen/f0229.png"
+  },
+  {
+   "t": 115,
+   "file": "frozen/f0230.png"
+  },
+  {
+   "t": 115.5,
+   "file": "frozen/f0231.png"
+  },
+  {
+   "t": 116,
+   "file": "frozen/f0232.png"
+  },
+  {
+   "t": 116.5,
+   "file": "frozen/f0233.png"
+  },
+  {
+   "t": 117,
+   "file": "frozen/f0234.png"
+  },
+  {
+   "t": 117.5,
+   "file": "frozen/f0235.png"
+  },
+  {
+   "t": 118,
+   "file": "frozen/f0236.png"
+  },
+  {
+   "t": 118.5,
+   "file": "frozen/f0237.png"
+  },
+  {
+   "t": 119,
+   "file": "frozen/f0238.png"
+  },
+  {
+   "t": 119.5,
+   "file": "frozen/f0239.png"
+  },
+  {
+   "t": 120,
+   "file": "frozen/f0240.png"
+  },
+  {
+   "t": 120.5,
+   "file": "frozen/f0241.png"
+  },
+  {
+   "t": 121,
+   "file": "frozen/f0242.png"
+  },
+  {
+   "t": 121.5,
+   "file": "frozen/f0243.png"
+  },
+  {
+   "t": 122,
+   "file": "frozen/f0244.png"
+  },
+  {
+   "t": 122.5,
+   "file": "frozen/f0245.png"
+  },
+  {
+   "t": 123,
+   "file": "frozen/f0246.png"
+  },
+  {
+   "t": 123.5,
+   "file": "frozen/f0247.png"
+  },
+  {
+   "t": 124,
+   "file": "frozen/f0248.png"
+  },
+  {
+   "t": 124.5,
+   "file": "frozen/f0249.png"
+  },
+  {
+   "t": 125,
+   "file": "frozen/f0250.png"
+  },
+  {
+   "t": 125.5,
+   "file": "frozen/f0251.png"
+  },
+  {
+   "t": 126,
+   "file": "frozen/f0252.png"
+  },
+  {
+   "t": 126.5,
+   "file": "frozen/f0253.png"
+  },
+  {
+   "t": 127,
+   "file": "frozen/f0254.png"
+  },
+  {
+   "t": 127.5,
+   "file": "frozen/f0255.png"
+  },
+  {
+   "t": 128,
+   "file": "frozen/f0256.png"
+  },
+  {
+   "t": 128.5,
+   "file": "frozen/f0257.png"
+  },
+  {
+   "t": 129,
+   "file": "frozen/f0258.png"
+  },
+  {
+   "t": 129.5,
+   "file": "frozen/f0259.png"
+  },
+  {
+   "t": 130,
+   "file": "frozen/f0260.png"
+  },
+  {
+   "t": 130.5,
+   "file": "frozen/f0261.png"
+  },
+  {
+   "t": 131,
+   "file": "frozen/f0262.png"
+  },
+  {
+   "t": 131.5,
+   "file": "frozen/f0263.png"
+  },
+  {
+   "t": 132,
+   "file": "frozen/f0264.png"
+  },
+  {
+   "t": 132.5,
+   "file": "frozen/f0265.png"
+  },
+  {
+   "t": 133,
+   "file": "frozen/f0266.png"
+  },
+  {
+   "t": 133.5,
+   "file": "frozen/f0267.png"
+  },
+  {
+   "t": 134,
+   "file": "frozen/f0268.png"
+  },
+  {
+   "t": 134.5,
+   "file": "frozen/f0269.png"
+  },
+  {
+   "t": 135,
+   "file": "frozen/f0270.png"
+  },
+  {
+   "t": 135.5,
+   "file": "frozen/f0271.png"
+  },
+  {
+   "t": 136,
+   "file": "frozen/f0272.png"
+  },
+  {
+   "t": 136.5,
+   "file": "frozen/f0273.png"
+  },
+  {
+   "t": 137,
+   "file": "frozen/f0274.png"
+  },
+  {
+   "t": 137.5,
+   "file": "frozen/f0275.png"
+  },
+  {
+   "t": 138,
+   "file": "frozen/f0276.png"
+  },
+  {
+   "t": 138.5,
+   "file": "frozen/f0277.png"
+  },
+  {
+   "t": 139,
+   "file": "frozen/f0278.png"
+  },
+  {
+   "t": 139.5,
+   "file": "frozen/f0279.png"
+  },
+  {
+   "t": 140,
+   "file": "frozen/f0280.png"
+  },
+  {
+   "t": 140.5,
+   "file": "frozen/f0281.png"
+  },
+  {
+   "t": 141,
+   "file": "frozen/f0282.png"
+  },
+  {
+   "t": 141.5,
+   "file": "frozen/f0283.png"
+  },
+  {
+   "t": 142,
+   "file": "frozen/f0284.png"
+  },
+  {
+   "t": 142.5,
+   "file": "frozen/f0285.png"
+  },
+  {
+   "t": 143,
+   "file": "frozen/f0286.png"
+  },
+  {
+   "t": 143.5,
+   "file": "frozen/f0287.png"
+  }
+ ],
+ "errors": [],
+ "mobileHScroll": false
+}

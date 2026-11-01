@@ -46,7 +46,8 @@ const analyze = (t) => {
     focus = { cx: Math.round(cx), cy: Math.round(cy), area: +area.toFixed(3) };
     if (cx < 240 || cx > 1360 || cy < 135 || cy > 765) issues.push({ k: 'focus_offcenter', v: [Math.round(cx), Math.round(cy)] });
     const hfrac = Math.max(0, cl.y2 - cl.y1) / 900; // skill : sujet >= 8 % de la surface OU personnage/sujet >= 25 % de la hauteur
-    if (area < .08 && hfrac < .25) issues.push({ k: 'focus_small', v: +area.toFixed(3) }); }
+    const wfrac = Math.max(0, cl.x2 - cl.x1) / 1600; // une ligne d'artefact qui remplit la moitié de la largeur est un gros plan valide
+    if (area < .08 && hfrac < .25 && wfrac < .5) issues.push({ k: 'focus_small', v: +area.toFixed(3) }); }
   // characters + focus: subtitle band and foreground occlusion
   const frontRects = [...document.getElementById('L-front').children].map(e => toVB(e.getBoundingClientRect())).filter(r => r.x2 > 0 && r.x1 < 1600 && r.y2 > 0 && r.y1 < 900);
   const inter = (a, b) => Math.max(0, Math.min(a.x2, b.x2) - Math.max(a.x1, b.x1)) * Math.max(0, Math.min(a.y2, b.y2) - Math.max(a.y1, b.y1));

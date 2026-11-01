@@ -12,7 +12,8 @@ Objectif : transformer un sujet complexe en une courte "vidéo" animée de 2 à 
 
 ## 0. Cadrer
 
-- **Niveau d'audience** : déduire du contexte (rôle de l'utilisateur, mémoire, vocabulaire de la demande) entre débutant, praticien, expert. Ne demander que si c'est vraiment ambigu.
+- **Niveau d'audience, sur deux axes** : le métier (ce que la personne fait : débutant, praticien, expert) et l'outil ou le domaine du sujet (le connaît-elle ?). Les deux se règlent séparément : un praticien qui découvre l'outil garde la profondeur de son métier, le contexte de l'outil se limite à ce qu'il faut pour lire les artefacts. Ne demander que si c'est vraiment ambigu ; si la demande ne dit pas ce que le spectateur doit savoir faire après, le demander.
+- **Inventaire de valeur** (avant le script) : la liste des artefacts concrets que le spectateur doit reconnaître après la vidéo (noms exacts, champs, valeurs, seuils, commandes), chacun avec ce qu'on en fait. Pour un praticien, c'est le cœur de l'épisode : chaque artefact apparaît à l'écran tel qu'il est en vrai et la narration dit à quoi il sert. Si l'inventaire dépasse le budget d'un épisode, découper en épisodes par famille plutôt que de rester en surface.
 - **Fiche pertinence** (écrite avant le script, non publiée) :
   - ce que l'audience sait déjà : à réduire à une ligne de rappel, 15 % du temps au maximum
   - ce qu'elle ignore ou croit à tort : c'est le cœur de l'épisode
@@ -51,7 +52,7 @@ Structure, 6 à 8 scènes :
 
 **Précision** :
 - **Précision conditionnelle** : chaque affirmation porte sa condition quand elle en a une ("par défaut", "si l'option est activée", "à partir de la version N", "pour les écritures"). Exemple de faute à éviter : "le cache évite la requête" alors qu'il ne l'évite que si l'entrée n'a pas expiré.
-- **Un seul terme nouveau par scène**, défini par son rôle à sa première apparition ("hash, l'empreinte d'un fichier"). Dans la fiche, lister les termes nouveaux scène par scène ; si une scène en a deux, dire le second par sa fonction (« un changement de droits ») et laisser son nom exact à l'écran ou au hotspot, ou l'introduire dans une scène précédente.
+- **Un seul concept nouveau par scène** (les artefacts de l'inventaire n'entrent pas dans ce compte : ils sont montrés tels quels et expliqués par leur usage), défini par son rôle à sa première apparition ("hash, l'empreinte d'un fichier"). Dans la fiche, lister les termes nouveaux scène par scène ; si une scène en a deux, dire le second par sa fonction (« un changement de droits ») et laisser son nom exact à l'écran ou au hotspot, ou l'introduire dans une scène précédente.
 
 **Récap actionnable** :
 - 3 actions concrètes au maximum (un geste, un réglage, un réflexe), formulées comme des actions, chacune avec son lieu dit dans la narration (l'outil, l'écran, la commande où on la fait). Le lieu est introduit dans la scène qui explique l'action (il y compte comme son terme nouveau) ; le récap ne fait que le rappeler ; à l'écran, chaque action est un objet manipulé avec son déclencheur (« quand… → … »), pas une étiquette ; son détail exécutable va dans un hotspot de la scène
@@ -88,6 +89,7 @@ Règles générales :
   - anticipation avant chaque geste (petit recul de 0,15 s), regard qui suit la cible du beat courant
   - expressions : neutre, surprise, satisfait, contrarié ; le protagoniste incarne l'idée reçue puis la correction (sûr de lui, puis surpris)
 - **Montrer plutôt qu'écrire** : une liste devient des objets qui arrivent, une table devient un tri d'objets dans des bacs, l'anatomie d'un message devient une cassette qui se déroule et dont chaque segment s'allume. Une carte de plus de 3 lignes ou une table va dans un hotspot, pas dans la scène.
+- **Icônes pour les concepts, vrais artefacts pour les artefacts** : une métaphore aide à comprendre un mécanisme, elle ne remplace jamais ce que le spectateur aura sous les yeux dans son métier (le vrai nom, le vrai champ, la vraie valeur). Un artefact long se déroule ligne par ligne, 3 lignes lisibles à la fois, les autres en grisé.
 - **Le visuel n'en sait pas plus que la narration** : ce que la narration déclare inconnu, improuvable ou hypothétique est montré comme incertain (silhouette en pointillés, ombre, point d'interrogation), jamais joué comme un fait.
 
 ## 3. Direction artistique
@@ -166,6 +168,7 @@ class Actor{ // el = <g> dessiné autour de (0,0)
 - chaque affirmation qui dépend d'une condition la nomme ; relire spécialement les phrases avec "part dans", "toujours", "jamais", "tout"
 - le déjà-connu de l'audience ne dépasse pas 15 % du temps
 - le récap contient des actions, pas des résumés
+- test du praticien : un expert du métier se demande « qu'est-ce que je sais faire demain que je ne savais pas ? » ; la réponse cite les artefacts de l'inventaire, sinon l'épisode est trop superficiel
 - écrire les 3 questions que le spectateur doit savoir résoudre après la vidéo, dont « où est-ce que je fais ça ? », et vérifier que la narration (pas seulement un hotspot) y répond
 - chaque fait de la narration est confirmé par une source consultée
 

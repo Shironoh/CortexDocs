@@ -1,0 +1,3252 @@
+{
+ "meta": {
+  "duration": 144.48461538461538,
+  "cues": [
+   {
+    "id": "c1",
+    "sc": "s1",
+    "start": 0.6,
+    "end": 10.83076923076923,
+    "dur": 10.23076923076923,
+    "words": 24,
+    "sub": "Épisode 2. 3 h 07 : l'attaquant est devenu propriétaire. Mais un attaquant prudent ne garde pas une seule porte. Il en ouvre plusieurs. Lesquelles ?",
+    "guess": false
+   },
+   {
+    "id": "c2",
+    "sc": "s1",
+    "start": 10.83076923076923,
+    "end": 20.29230769230769,
+    "dur": 9.461538461538462,
+    "words": 22,
+    "sub": "Pour chacune, une fiche : la tactique, le nom exact de la méthode, et la condition qui transforme un événement banal en alerte.",
+    "guess": false
+   },
+   {
+    "id": "c3",
+    "sc": "s2",
+    "start": 20.29230769230769,
+    "end": 29.369230769230768,
+    "dur": 9.076923076923077,
+    "words": 21,
+    "sub": "Première porte, la plus directe : il se donne un rôle. Owner ou Editor, accordé à un compte extérieur à votre entreprise.",
+    "guess": false
+   },
+   {
+    "id": "c4",
+    "sc": "s2",
+    "start": 29.369230769230768,
+    "end": 39.98461538461538,
+    "dur": 10.615384615384615,
+    "words": 25,
+    "sub": "Méthode : SetIamPolicy. Condition : dans bindingDeltas, une action ADD, un rôle Owner ou Editor, et un membre hors de votre domaine.",
+    "guess": false
+   },
+   {
+    "id": "c5",
+    "sc": "s3",
+    "start": 39.98461538461538,
+    "end": 47.52307692307692,
+    "dur": 7.538461538461538,
+    "words": 17,
+    "sub": "Deuxième porte : il crée son propre robot. Un nouveau compte de service, plus discret qu'un compte Gmail.",
+    "guess": false
+   },
+   {
+    "id": "c6",
+    "sc": "s3",
+    "start": 47.52307692307692,
+    "end": 56.599999999999994,
+    "dur": 9.076923076923077,
+    "words": 21,
+    "sub": "Méthode : google.iam.admin.v1.CreateServiceAccount. Condition : un créateur qui n'est pas l'un de vos pipelines habituels.",
+    "guess": false
+   },
+   {
+    "id": "c7",
+    "sc": "s4",
+    "start": 56.599999999999994,
+    "end": 64.13846153846153,
+    "dur": 7.538461538461538,
+    "words": 17,
+    "sub": "Troisième porte : il fabrique une clé pour ce robot. Par défaut, une clé créée ainsi n'expire jamais.",
+    "guess": false
+   },
+   {
+    "id": "c8",
+    "sc": "s4",
+    "start": 64.13846153846153,
+    "end": 74.36923076923075,
+    "dur": 10.23076923076923,
+    "words": 24,
+    "sub": "Méthode : CreateServiceAccountKey. Condition : une clé créée hors rotation prévue, ou depuis une adresse inconnue. Réflexe : lister toutes les clés du robot.",
+    "guess": false
+   },
+   {
+    "id": "c9",
+    "sc": "s5",
+    "start": 74.36923076923075,
+    "end": 83.44615384615383,
+    "dur": 9.076923076923077,
+    "words": 21,
+    "sub": "Quatrième porte : une clé SSH, posée dans les métadonnées du projet. Elle ouvre les machines virtuelles qui en héritent.",
+    "guess": false
+   },
+   {
+    "id": "c10",
+    "sc": "s5",
+    "start": 83.44615384615383,
+    "end": 92.9076923076923,
+    "dur": 9.461538461538462,
+    "words": 22,
+    "sub": "Méthode : v1.compute.projects.setCommonInstanceMetadata. Condition : projectMetadataDelta contient ssh-keys. Pour une seule machine : instances.setMetadata.",
+    "guess": false
+   },
+   {
+    "id": "c11",
+    "sc": "s6",
+    "start": 92.9076923076923,
+    "end": 99.29230769230769,
+    "dur": 6.384615384615384,
+    "words": 14,
+    "sub": "Cinquième porte, la plus discrète : emprunter l'identité d'un robot existant, avec un jeton temporaire.",
+    "guess": false
+   },
+   {
+    "id": "c12",
+    "sc": "s6",
+    "start": 99.29230769230769,
+    "end": 109.1,
+    "dur": 9.807692307692307,
+    "words": 19,
+    "sub": "Méthode : GenerateAccessToken. Devinez : dans quel journal ?|Data Access. Éteint par défaut : sans réglage, cette usurpation est invisible.",
+    "guess": true
+   },
+   {
+    "id": "c13",
+    "sc": "s6",
+    "start": 109.1,
+    "end": 120.1,
+    "dur": 11,
+    "words": 26,
+    "sub": "Ce qui reste dans activity : le SetIamPolicy qui a donné le rôle Service Account Token Creator. C'est ce rôle-là qu'il faut surveiller.",
+    "guess": false
+   },
+   {
+    "id": "c14",
+    "sc": "s7",
+    "start": 120.1,
+    "end": 129.94615384615383,
+    "dur": 9.846153846153847,
+    "words": 23,
+    "sub": "On croit qu'il suffit de retirer Owner. Faux : chaque porte se ferme séparément. Rôles, robots, clés, clés SSH, et droits d'emprunt.",
+    "guess": false
+   },
+   {
+    "id": "c15",
+    "sc": "s7",
+    "start": 129.94615384615383,
+    "end": 142.48461538461538,
+    "dur": 12.538461538461538,
+    "words": 30,
+    "sub": "Vos règles de persistance : SetIamPolicy, CreateServiceAccount, CreateServiceAccountKey, setCommonInstanceMetadata, et le rôle Token Creator. Épisode 3 : effacer ses traces.",
+    "guess": false
+   }
+  ],
+  "scenes": [
+   {
+    "id": "s1",
+    "title": "Combien de portes ?",
+    "start": 0.6,
+    "end": 20.29230769230769
+   },
+   {
+    "id": "s2",
+    "title": "SetIamPolicy",
+    "start": 20.29230769230769,
+    "end": 39.98461538461538
+   },
+   {
+    "id": "s3",
+    "title": "CreateServiceAccount",
+    "start": 39.98461538461538,
+    "end": 56.599999999999994
+   },
+   {
+    "id": "s4",
+    "title": "CreateServiceAccountKey",
+    "start": 56.599999999999994,
+    "end": 74.36923076923075
+   },
+   {
+    "id": "s5",
+    "title": "setCommonInstanceMetadata",
+    "start": 74.36923076923075,
+    "end": 92.9076923076923
+   },
+   {
+    "id": "s6",
+    "title": "GenerateAccessToken",
+    "start": 92.9076923076923,
+    "end": 120.1
+   },
+   {
+    "id": "s7",
+    "title": "Fermer toutes les portes",
+    "start": 120.1,
+    "end": 142.48461538461538
+   }
+  ],
+  "guess": [
+   [
+    102.36923076923077,
+    103.86923076923077
+   ]
+  ],
+  "events": 92,
+  "marks": [
+   0.3,
+   3.292,
+   4.062,
+   3.292,
+   5.215,
+   7.523,
+   9.062,
+   1.169,
+   4.915,
+   9.062,
+   10.831,
+   9.312,
+   10.831,
+   9.562,
+   10.831,
+   9.812,
+   10.831,
+   10.062,
+   10.831,
+   9.446,
+   10.831,
+   9.062,
+   11.985,
+   11.985,
+   15.062,
+   16.215,
+   16.215,
+   0,
+   8.562,
+   11.685,
+   12.754,
+   15.062,
+   16.985,
+   18.908,
+   19.892,
+   20.092,
+   22.985,
+   28.969,
+   23.185,
+   20.892,
+   28.069,
+   29.269,
+   28.269,
+   29.169,
+   29.754,
+   31.677,
+   31.677,
+   28.769,
+   28.969,
+   29.754,
+   31.677,
+   37.062,
+   24.585,
+   21.692,
+   34.369,
+   37.462,
+   30.715,
+   31.877,
+   34.369,
+   35.169,
+   18.992,
+   26.177,
+   22.485,
+   28.969,
+   29.354,
+   31.377,
+   32.577,
+   39.585,
+   39.785,
+   41.138,
+   47.123,
+   41.138,
+   41.738,
+   41.338,
+   46.223,
+   47.423,
+   46.423,
+   47.323,
+   47.908,
+   51.369,
+   51.369,
+   46.923,
+   47.123,
+   47.908,
+   51.369,
+   54.831,
+   42.738,
+   53.1,
+   55.231,
+   49.638,
+   51.569,
+   53.1,
+   53.9,
+   38.685,
+   44.331,
+   40.638,
+   47.123,
+   47.508,
+   51.069,
+   52.269,
+   56.2,
+   56.4,
+   57.754,
+   63.738,
+   56.8,
+   57.754,
+   58.454,
+   62.754,
+   62.838,
+   64.038,
+   63.038,
+   63.938,
+   64.523,
+   66.062,
+   66.062,
+   63.538,
+   63.738,
+   64.523,
+   66.062,
+   70.677,
+   59.354,
+   68.369,
+   71.077,
+   65.292,
+   66.262,
+   68.369,
+   69.169,
+   55.3,
+   60.946,
+   57.254,
+   63.738,
+   64.123,
+   65.762,
+   66.962,
+   73.969,
+   74.169,
+   77.062,
+   83.046,
+   77.862,
+   78.112,
+   78.362,
+   74.869,
+   76.862,
+   82.146,
+   83.346,
+   82.346,
+   83.246,
+   83.831,
+   86.523,
+   86.523,
+   82.846,
+   83.046,
+   83.831,
+   86.523,
+   89.985,
+   78.662,
+   75.769,
+   88.254,
+   90.385,
+   85.177,
+   86.723,
+   88.254,
+   89.054,
+   73.069,
+   80.254,
+   76.562,
+   83.046,
+   83.431,
+   86.223,
+   87.423,
+   92.508,
+   92.708,
+   94.831,
+   98.892,
+   93.108,
+   94.831,
+   95.431,
+   97.908,
+   97.992,
+   99.192,
+   98.192,
+   99.092,
+   110.3,
+   99.677,
+   103.869,
+   103.869,
+   98.692,
+   98.892,
+   99.677,
+   103.869,
+   107.715,
+   96.431,
+   105.792,
+   108.115,
+   101.773,
+   104.069,
+   105.792,
+   106.592,
+   91.608,
+   97.062,
+   94.331,
+   98.892,
+   99.277,
+   103.569,
+   104.769,
+   103.769,
+   109.4,
+   104.638,
+   109.4,
+   109.5,
+   120.6,
+   111.408,
+   115.254,
+   115.254,
+   110.908,
+   114.569,
+   118.131,
+   103.669,
+   100.831,
+   101.985,
+   103.869,
+   112.946,
+   114.869,
+   118.715,
+   118.331,
+   116.408,
+   118.331,
+   120.3,
+   120.45,
+   120.6,
+   120.75,
+   120.9,
+   125.2,
+   125.585,
+   125.969,
+   126.354,
+   128.277,
+   131.485,
+   133.408,
+   131.485,
+   133.408,
+   133.408,
+   134.562,
+   133.408,
+   134.562,
+   134.562,
+   136.1,
+   134.562,
+   136.1,
+   136.1,
+   138.792,
+   136.1,
+   138.792,
+   138.792,
+   139.562,
+   138.792,
+   139.562,
+   119.6,
+   119.9,
+   122.792,
+   137.638,
+   139.562,
+   118.8,
+   122.877,
+   129.646,
+   141.1
+  ],
+  "cams": [
+   {
+    "t": 0,
+    "d": 0,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 1.1692307692307693,
+    "d": 1.2,
+    "z": 1.4999999999999998
+   },
+   {
+    "t": 4.915384615384615,
+    "d": 1,
+    "z": 1.067503924646782
+   },
+   {
+    "t": 8.561538461538461,
+    "d": 0.9,
+    "z": 1.1302602543053109
+   },
+   {
+    "t": 11.684615384615382,
+    "d": 0.8,
+    "z": 1.3241379310344827
+   },
+   {
+    "t": 18.99230769230769,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 22.484615384615385,
+    "d": 0.8,
+    "z": 1.3866798889278489
+   },
+   {
+    "t": 26.176923076923075,
+    "d": 1.2,
+    "z": 0.9113924050632911
+   },
+   {
+    "t": 28.96923076923077,
+    "d": 0.9,
+    "z": 1.2495238095238095
+   },
+   {
+    "t": 29.353846153846153,
+    "d": 0.7,
+    "z": 2.4
+   },
+   {
+    "t": 31.376923076923074,
+    "d": 0.7,
+    "z": 1.271704865457971
+   },
+   {
+    "t": 32.57692307692307,
+    "d": 0.9,
+    "z": 1.3075857554027044
+   },
+   {
+    "t": 38.684615384615384,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 40.638461538461534,
+    "d": 0.8,
+    "z": 0.9424083672487684
+   },
+   {
+    "t": 44.33076923076923,
+    "d": 1.2,
+    "z": 0.9713977973981828
+   },
+   {
+    "t": 47.12307692307692,
+    "d": 0.9,
+    "z": 1.2495238095238095
+   },
+   {
+    "t": 47.50769230769231,
+    "d": 0.7,
+    "z": 1.0298103310715803
+   },
+   {
+    "t": 51.06923076923077,
+    "d": 0.7,
+    "z": 1.6716364381200461
+   },
+   {
+    "t": 52.26923076923077,
+    "d": 0.9,
+    "z": 1.2882300047980009
+   },
+   {
+    "t": 55.3,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 57.25384615384615,
+    "d": 0.8,
+    "z": 1.1142172795552818
+   },
+   {
+    "t": 60.946153846153834,
+    "d": 1.2,
+    "z": 0.8915303528188323
+   },
+   {
+    "t": 63.73846153846153,
+    "d": 0.9,
+    "z": 1.2495238095238095
+   },
+   {
+    "t": 64.12307692307691,
+    "d": 0.7,
+    "z": 1.0299690443913365
+   },
+   {
+    "t": 65.76153846153845,
+    "d": 0.7,
+    "z": 1.2638687677693268
+   },
+   {
+    "t": 66.96153846153845,
+    "d": 0.9,
+    "z": 1.2876085996326696
+   },
+   {
+    "t": 73.06923076923076,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 76.56153846153845,
+    "d": 0.8,
+    "z": 1.319148936170213
+   },
+   {
+    "t": 80.25384615384614,
+    "d": 1.2,
+    "z": 0.8421052631578947
+   },
+   {
+    "t": 83.04615384615383,
+    "d": 0.9,
+    "z": 1.2495238095238095
+   },
+   {
+    "t": 83.43076923076922,
+    "d": 0.7,
+    "z": 1.017214808079574
+   },
+   {
+    "t": 86.22307692307692,
+    "d": 0.7,
+    "z": 1.2717056132469335
+   },
+   {
+    "t": 87.42307692307692,
+    "d": 0.9,
+    "z": 1.2882300047980009
+   },
+   {
+    "t": 91.6076923076923,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 94.33076923076922,
+    "d": 0.8,
+    "z": 0.947690237038866
+   },
+   {
+    "t": 97.06153846153845,
+    "d": 1.2,
+    "z": 0.8699853975839639
+   },
+   {
+    "t": 98.89230769230768,
+    "d": 0.9,
+    "z": 1.2495238095238095
+   },
+   {
+    "t": 99.27692307692307,
+    "d": 0.7,
+    "z": 1.667938655544974
+   },
+   {
+    "t": 103.56923076923077,
+    "d": 0.7,
+    "z": 1.0969013518736237
+   },
+   {
+    "t": 103.66923076923077,
+    "d": 0.6,
+    "z": 1.0081541882876204
+   },
+   {
+    "t": 104.76923076923077,
+    "d": 0.9,
+    "z": 1.3005922878544771
+   },
+   {
+    "t": 110.9076923076923,
+    "d": 0.8,
+    "z": 2.4
+   },
+   {
+    "t": 114.56923076923077,
+    "d": 0.8,
+    "z": 1.1633802216841462
+   },
+   {
+    "t": 118.13076923076922,
+    "d": 0.8,
+    "z": 0.8585737135164689
+   },
+   {
+    "t": 118.8,
+    "d": 1.5,
+    "z": 0.6071428571428571
+   },
+   {
+    "t": 122.87692307692308,
+    "d": 0.9,
+    "z": 0.8470588235294118
+   },
+   {
+    "t": 129.64615384615382,
+    "d": 0.9,
+    "z": 0.8658823529411765
+   },
+   {
+    "t": 141.1,
+    "d": 2.2,
+    "z": 0.6071428571428571
+   }
+  ],
+  "chars": [
+   {
+    "name": "analyste",
+    "poses": [
+     [
+      3.292307692307692,
+      "loupe"
+     ],
+     [
+      5.215384615384615,
+      "shrug"
+     ],
+     [
+      9.061538461538461,
+      "point"
+     ],
+     [
+      11.984615384615383,
+      "nod"
+     ]
+    ],
+    "walks": [],
+    "exprs": [
+     -1,
+     5.215384615384615
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 19.892307692307693,
+    "poses": [
+     [
+      22.984615384615385,
+      "point"
+     ],
+     [
+      24.584615384615386,
+      "cheer"
+     ],
+     [
+      21.69230769230769,
+      "point"
+     ]
+    ],
+    "walks": [
+     20.092307692307692,
+     28.96923076923077
+    ],
+    "exprs": [
+     -1,
+     22.984615384615385
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 28.769230769230766,
+    "poses": [
+     [
+      29.75384615384615,
+      "point"
+     ],
+     [
+      31.676923076923075,
+      "point"
+     ],
+     [
+      34.36923076923077,
+      "nod"
+     ],
+     [
+      37.46153846153846,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     28.96923076923077
+    ],
+    "exprs": [
+     -1,
+     31.676923076923075
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 39.58461538461538,
+    "poses": [
+     [
+      41.138461538461534,
+      "point"
+     ],
+     [
+      42.738461538461536,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     39.78461538461538,
+     47.12307692307692
+    ],
+    "exprs": [
+     -1,
+     41.138461538461534
+    ]
+   },
+   {
+    "name": "robot",
+    "pop": 41.138461538461534,
+    "poses": [
+     [
+      41.738461538461536,
+      "cheer"
+     ]
+    ],
+    "walks": [],
+    "exprs": [
+     -1
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 46.92307692307692,
+    "poses": [
+     [
+      47.90769230769231,
+      "point"
+     ],
+     [
+      51.36923076923077,
+      "point"
+     ],
+     [
+      53.099999999999994,
+      "nod"
+     ],
+     [
+      55.230769230769226,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     47.12307692307692
+    ],
+    "exprs": [
+     -1,
+     51.36923076923077
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 56.199999999999996,
+    "poses": [
+     [
+      57.75384615384615,
+      "point"
+     ],
+     [
+      59.35384615384615,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     56.39999999999999,
+     63.73846153846153
+    ],
+    "exprs": [
+     -1,
+     57.75384615384615
+    ]
+   },
+   {
+    "name": "robot",
+    "pop": 56.8,
+    "poses": [],
+    "walks": [],
+    "exprs": [
+     -1,
+     57.75384615384615
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 63.538461538461526,
+    "poses": [
+     [
+      64.52307692307691,
+      "point"
+     ],
+     [
+      66.06153846153845,
+      "point"
+     ],
+     [
+      68.36923076923075,
+      "nod"
+     ],
+     [
+      71.07692307692307,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     63.73846153846153
+    ],
+    "exprs": [
+     -1,
+     66.06153846153845
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 73.96923076923075,
+    "poses": [
+     [
+      77.06153846153845,
+      "point"
+     ],
+     [
+      78.66153846153844,
+      "cheer"
+     ],
+     [
+      75.76923076923076,
+      "point"
+     ]
+    ],
+    "walks": [
+     74.16923076923075,
+     83.04615384615383
+    ],
+    "exprs": [
+     -1,
+     77.06153846153845
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 82.84615384615384,
+    "poses": [
+     [
+      83.83076923076922,
+      "point"
+     ],
+     [
+      86.52307692307691,
+      "point"
+     ],
+     [
+      88.25384615384614,
+      "nod"
+     ],
+     [
+      90.38461538461537,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     83.04615384615383
+    ],
+    "exprs": [
+     -1,
+     86.52307692307691
+    ]
+   },
+   {
+    "name": "attaquant",
+    "pop": 92.5076923076923,
+    "poses": [
+     [
+      94.83076923076922,
+      "point"
+     ],
+     [
+      96.43076923076922,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     92.7076923076923,
+     98.89230769230768
+    ],
+    "exprs": [
+     -1,
+     94.83076923076922
+    ]
+   },
+   {
+    "name": "robot",
+    "pop": 93.1076923076923,
+    "poses": [],
+    "walks": [],
+    "exprs": [
+     -1
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 98.6923076923077,
+    "poses": [
+     [
+      99.67692307692307,
+      "point"
+     ],
+     [
+      103.86923076923077,
+      "point"
+     ],
+     [
+      105.79230769230769,
+      "nod"
+     ],
+     [
+      108.11538461538461,
+      "cheer"
+     ],
+     [
+      100.83076923076922,
+      "shrug"
+     ],
+     [
+      112.94615384615383,
+      "point"
+     ],
+     [
+      114.86923076923077,
+      "point"
+     ],
+     [
+      118.71538461538461,
+      "nod"
+     ]
+    ],
+    "walks": [
+     98.89230769230768
+    ],
+    "exprs": [
+     -1,
+     103.86923076923077
+    ]
+   },
+   {
+    "name": "analyste",
+    "pop": 119.6,
+    "poses": [
+     [
+      122.79230769230769,
+      "jump"
+     ],
+     [
+      137.6384615384615,
+      "nod"
+     ],
+     [
+      139.56153846153845,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     119.89999999999999
+    ],
+    "exprs": [
+     -1,
+     120.48461538461538,
+     122.79230769230769,
+     129.94615384615383
+    ]
+   }
+  ],
+  "says": [
+   "Épisode deux. Trois heures sept : l'attaquant est devenu propriétaire. Mais un attaquant prudent ne garde pas une seule porte. Il en ouvre plusieurs. Lesquelles ?",
+   "Pour chacune, une fiche : la tactique, le nom exact de la méthode, et la condition qui transforme un événement banal en alerte.",
+   "Première porte, la plus directe : il se donne un rôle. Owner ou Editor, accordé à un compte extérieur à votre entreprise.",
+   "Méthode : Set I A M Policy. Condition : dans binding deltas, une action ADD, un rôle Owner ou Editor, et un membre hors de votre domaine.",
+   "Deuxième porte : il crée son propre robot. Un nouveau compte de service, plus discret qu'un compte Gmail.",
+   "Méthode : google I A M admin v1, Create Service Account. Condition : un créateur qui n'est pas l'un de vos pipelines habituels.",
+   "Troisième porte : il fabrique une clé pour ce robot. Par défaut, une clé créée ainsi n'expire jamais.",
+   "Méthode : Create Service Account Key. Condition : une clé créée hors rotation prévue, ou depuis une adresse inconnue. Réflexe : lister toutes les clés du robot.",
+   "Quatrième porte : une clé S S H, posée dans les métadonnées du projet. Elle ouvre les machines virtuelles qui en héritent.",
+   "Méthode : v1 compute projects, set Common Instance Metadata. Condition : project metadata delta contient ssh keys. Pour une seule machine : instances set Metadata.",
+   "Cinquième porte, la plus discrète : emprunter l'identité d'un robot existant, avec un jeton temporaire.",
+   "Méthode : Generate Access Token. Devinez : dans quel journal ? | Data access. Éteint par défaut : sans réglage, cette usurpation est invisible.",
+   "Ce qui reste dans activity : le Set I A M Policy qui a donné le rôle Service Account Token Creator. C'est ce rôle-là qu'il faut surveiller.",
+   "On croit qu'il suffit de retirer Owner. Faux : chaque porte se ferme séparément. Rôles, robots, clés, clés S S H, et droits d'emprunt.",
+   "Vos règles de persistance : Set I A M Policy, Create Service Account, Create Service Account Key, set Common Instance Metadata, et le rôle Token Creator. Épisode trois : effacer ses traces."
+  ]
+ },
+ "caps": [
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c1_25.jpg",
+   "t": 3.1576923076923076,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.433
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c1_50.jpg",
+   "t": 5.715384615384615,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 568,
+    "cy": 287,
+    "area": 0.224
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c1_75.jpg",
+   "t": 8.273076923076923,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1364,
+    "cy": 92,
+    "area": 0.013
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1364,
+      92
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.013
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c2_25.jpg",
+   "t": 13.196153846153845,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.436
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c2_50.jpg",
+   "t": 15.561538461538461,
+   "ntext": 3,
+   "words": 3,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.436
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c2_75.jpg",
+   "t": 17.926923076923075,
+   "ntext": 4,
+   "words": 6,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.436
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "03:07 | Tactique | methodName | condition qui alerte"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c3_25.jpg",
+   "t": 22.56153846153846,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 484,
+    "cy": 482,
+    "area": 0.009
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.009
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c3_50.jpg",
+   "t": 24.830769230769228,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 603,
+    "cy": 520,
+    "area": 0.049
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c3_75.jpg",
+   "t": 27.099999999999998,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 165,
+    "cy": 567,
+    "area": 0.022
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      165,
+      567
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.022
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:attaquant"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c4_25.jpg",
+   "t": 32.02307692307692,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 799,
+    "cy": 399,
+    "area": 0.057
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c4_50.jpg",
+   "t": 34.676923076923075,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 707,
+    "cy": 442,
+    "area": 0.059
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c4_75.jpg",
+   "t": 37.33076923076923,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 707,
+    "cy": 442,
+    "area": 0.059
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c5_25.jpg",
+   "t": 41.86923076923077,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 800,
+    "cy": 529,
+    "area": 0.055
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c5_50.jpg",
+   "t": 43.75384615384615,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 800,
+    "cy": 538,
+    "area": 0.045
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c5_75.jpg",
+   "t": 45.638461538461534,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 199,
+    "cy": 557,
+    "area": 0.048
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      199,
+      557
+     ]
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c6_25.jpg",
+   "t": 49.79230769230769,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 798,
+    "cy": 399,
+    "area": 0.038
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:robot"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:robot"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c6_50.jpg",
+   "t": 52.06153846153846,
+   "ntext": 3,
+   "words": 6,
+   "focus": {
+    "cx": 751,
+    "cy": 400,
+    "area": 0.072
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Persistance"
+    },
+    {
+     "k": "cut",
+     "s": "google.iam.admin.v1.CreateServiceAccount"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c6_75.jpg",
+   "t": 54.33076923076923,
+   "ntext": 3,
+   "words": 6,
+   "focus": {
+    "cx": 544,
+    "cy": 437,
+    "area": 0.043
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.043
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c7_25.jpg",
+   "t": 58.48461538461538,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 658,
+    "cy": 522,
+    "area": 0.056
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c7_50.jpg",
+   "t": 60.36923076923076,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 658,
+    "cy": 522,
+    "area": 0.056
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c7_75.jpg",
+   "t": 62.25384615384615,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 183,
+    "cy": 551,
+    "area": 0.036
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      183,
+      551
+     ]
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:attaquant"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c8_25.jpg",
+   "t": 66.69615384615383,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 747,
+    "cy": 399,
+    "area": 0.054
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c8_50.jpg",
+   "t": 69.25384615384614,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 660,
+    "cy": 437,
+    "area": 0.056
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c8_75.jpg",
+   "t": 71.81153846153845,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 660,
+    "cy": 437,
+    "area": 0.056
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c9_25.jpg",
+   "t": 76.63846153846153,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 557,
+    "cy": 248,
+    "area": 0.017
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.017
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c9",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c9_50.jpg",
+   "t": 78.90769230769229,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 800,
+    "cy": 187,
+    "area": 0.08
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:attaquant"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c9_75.jpg",
+   "t": 81.17692307692306,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 370,
+    "cy": 281,
+    "area": 0.034
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.034
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c10",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c10_25.jpg",
+   "t": 85.81153846153845,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.033
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c10_50.jpg",
+   "t": 88.17692307692306,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 710,
+    "cy": 436,
+    "area": 0.057
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c10",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c10_75.jpg",
+   "t": 90.54230769230767,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 708,
+    "cy": 436,
+    "area": 0.057
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c11_25.jpg",
+   "t": 94.50384615384614,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 465,
+    "cy": 481,
+    "area": 0.017
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.017
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c11",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c11_50.jpg",
+   "t": 96.1,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 685,
+    "cy": 546,
+    "area": 0.04
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c11_75.jpg",
+   "t": 97.69615384615383,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 381,
+    "cy": 547,
+    "area": 0.037
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c12",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c12_25.jpg",
+   "t": 101.74423076923077,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 798,
+    "cy": 399,
+    "area": 0.079
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c12_50.jpg",
+   "t": 104.19615384615383,
+   "ntext": 3,
+   "words": 6,
+   "focus": {
+    "cx": 196,
+    "cy": 173,
+    "area": 0.013
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      196,
+      173
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.013
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:robot"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:robot"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c12",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c12_75.jpg",
+   "t": 106.64807692307691,
+   "ntext": 3,
+   "words": 6,
+   "focus": {
+    "cx": -172,
+    "cy": -58,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -172,
+      -58
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c13_25.jpg",
+   "t": 111.85,
+   "ntext": 2,
+   "words": 5,
+   "focus": {
+    "cx": 574,
+    "cy": 399,
+    "area": 0.051
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.051
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c13_50.jpg",
+   "t": 114.6,
+   "ntext": 2,
+   "words": 5,
+   "focus": {
+    "cx": 798,
+    "cy": 399,
+    "area": 0.103
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c13",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c13_75.jpg",
+   "t": 117.35,
+   "ntext": 3,
+   "words": 7,
+   "focus": {
+    "cx": 798,
+    "cy": 399,
+    "area": 0.046
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c14_25.jpg",
+   "t": 122.56153846153846,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": -323,
+    "cy": 365,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -323,
+      365
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c14_50.jpg",
+   "t": 125.02307692307691,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": -767,
+    "cy": 538,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -767,
+      538
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c14_75.jpg",
+   "t": 127.48461538461538,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 190,
+    "cy": 400,
+    "area": 0.044
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      190,
+      400
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c15_25.jpg",
+   "t": 133.08076923076922,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1423,
+    "cy": 400,
+    "area": 0.046
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1423,
+      400
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c15_50.jpg",
+   "t": 136.2153846153846,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 1423,
+    "cy": 400,
+    "area": 0.046
+   },
+   "issues": [
+    {
+     "k": "overlap",
+     "s": "CreateServiceAccountKey / setCommonInstanceMetadata"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1423,
+      400
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c15_75.jpg",
+   "t": 139.35,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 1423,
+    "cy": 400,
+    "area": 0.046
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1423,
+      400
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:analyste"
+    }
+   ],
+   "moving": false
+  }
+ ],
+ "frozen": [
+  {
+   "t": 0,
+   "file": "frozen/f0000.png"
+  },
+  {
+   "t": 0.5,
+   "file": "frozen/f0001.png"
+  },
+  {
+   "t": 1,
+   "file": "frozen/f0002.png"
+  },
+  {
+   "t": 1.5,
+   "file": "frozen/f0003.png"
+  },
+  {
+   "t": 2,
+   "file": "frozen/f0004.png"
+  },
+  {
+   "t": 2.5,
+   "file": "frozen/f0005.png"
+  },
+  {
+   "t": 3,
+   "file": "frozen/f0006.png"
+  },
+  {
+   "t": 3.5,
+   "file": "frozen/f0007.png"
+  },
+  {
+   "t": 4,
+   "file": "frozen/f0008.png"
+  },
+  {
+   "t": 4.5,
+   "file": "frozen/f0009.png"
+  },
+  {
+   "t": 5,
+   "file": "frozen/f0010.png"
+  },
+  {
+   "t": 5.5,
+   "file": "frozen/f0011.png"
+  },
+  {
+   "t": 6,
+   "file": "frozen/f0012.png"
+  },
+  {
+   "t": 6.5,
+   "file": "frozen/f0013.png"
+  },
+  {
+   "t": 7,
+   "file": "frozen/f0014.png"
+  },
+  {
+   "t": 7.5,
+   "file": "frozen/f0015.png"
+  },
+  {
+   "t": 8,
+   "file": "frozen/f0016.png"
+  },
+  {
+   "t": 8.5,
+   "file": "frozen/f0017.png"
+  },
+  {
+   "t": 9,
+   "file": "frozen/f0018.png"
+  },
+  {
+   "t": 9.5,
+   "file": "frozen/f0019.png"
+  },
+  {
+   "t": 10,
+   "file": "frozen/f0020.png"
+  },
+  {
+   "t": 10.5,
+   "file": "frozen/f0021.png"
+  },
+  {
+   "t": 11,
+   "file": "frozen/f0022.png"
+  },
+  {
+   "t": 11.5,
+   "file": "frozen/f0023.png"
+  },
+  {
+   "t": 12,
+   "file": "frozen/f0024.png"
+  },
+  {
+   "t": 12.5,
+   "file": "frozen/f0025.png"
+  },
+  {
+   "t": 13,
+   "file": "frozen/f0026.png"
+  },
+  {
+   "t": 13.5,
+   "file": "frozen/f0027.png"
+  },
+  {
+   "t": 14,
+   "file": "frozen/f0028.png"
+  },
+  {
+   "t": 14.5,
+   "file": "frozen/f0029.png"
+  },
+  {
+   "t": 15,
+   "file": "frozen/f0030.png"
+  },
+  {
+   "t": 15.5,
+   "file": "frozen/f0031.png"
+  },
+  {
+   "t": 16,
+   "file": "frozen/f0032.png"
+  },
+  {
+   "t": 16.5,
+   "file": "frozen/f0033.png"
+  },
+  {
+   "t": 17,
+   "file": "frozen/f0034.png"
+  },
+  {
+   "t": 17.5,
+   "file": "frozen/f0035.png"
+  },
+  {
+   "t": 18,
+   "file": "frozen/f0036.png"
+  },
+  {
+   "t": 18.5,
+   "file": "frozen/f0037.png"
+  },
+  {
+   "t": 19,
+   "file": "frozen/f0038.png"
+  },
+  {
+   "t": 19.5,
+   "file": "frozen/f0039.png"
+  },
+  {
+   "t": 20,
+   "file": "frozen/f0040.png"
+  },
+  {
+   "t": 20.5,
+   "file": "frozen/f0041.png"
+  },
+  {
+   "t": 21,
+   "file": "frozen/f0042.png"
+  },
+  {
+   "t": 21.5,
+   "file": "frozen/f0043.png"
+  },
+  {
+   "t": 22,
+   "file": "frozen/f0044.png"
+  },
+  {
+   "t": 22.5,
+   "file": "frozen/f0045.png"
+  },
+  {
+   "t": 23,
+   "file": "frozen/f0046.png"
+  },
+  {
+   "t": 23.5,
+   "file": "frozen/f0047.png"
+  },
+  {
+   "t": 24,
+   "file": "frozen/f0048.png"
+  },
+  {
+   "t": 24.5,
+   "file": "frozen/f0049.png"
+  },
+  {
+   "t": 25,
+   "file": "frozen/f0050.png"
+  },
+  {
+   "t": 25.5,
+   "file": "frozen/f0051.png"
+  },
+  {
+   "t": 26,
+   "file": "frozen/f0052.png"
+  },
+  {
+   "t": 26.5,
+   "file": "frozen/f0053.png"
+  },
+  {
+   "t": 27,
+   "file": "frozen/f0054.png"
+  },
+  {
+   "t": 27.5,
+   "file": "frozen/f0055.png"
+  },
+  {
+   "t": 28,
+   "file": "frozen/f0056.png"
+  },
+  {
+   "t": 28.5,
+   "file": "frozen/f0057.png"
+  },
+  {
+   "t": 29,
+   "file": "frozen/f0058.png"
+  },
+  {
+   "t": 29.5,
+   "file": "frozen/f0059.png"
+  },
+  {
+   "t": 30,
+   "file": "frozen/f0060.png"
+  },
+  {
+   "t": 30.5,
+   "file": "frozen/f0061.png"
+  },
+  {
+   "t": 31,
+   "file": "frozen/f0062.png"
+  },
+  {
+   "t": 31.5,
+   "file": "frozen/f0063.png"
+  },
+  {
+   "t": 32,
+   "file": "frozen/f0064.png"
+  },
+  {
+   "t": 32.5,
+   "file": "frozen/f0065.png"
+  },
+  {
+   "t": 33,
+   "file": "frozen/f0066.png"
+  },
+  {
+   "t": 33.5,
+   "file": "frozen/f0067.png"
+  },
+  {
+   "t": 34,
+   "file": "frozen/f0068.png"
+  },
+  {
+   "t": 34.5,
+   "file": "frozen/f0069.png"
+  },
+  {
+   "t": 35,
+   "file": "frozen/f0070.png"
+  },
+  {
+   "t": 35.5,
+   "file": "frozen/f0071.png"
+  },
+  {
+   "t": 36,
+   "file": "frozen/f0072.png"
+  },
+  {
+   "t": 36.5,
+   "file": "frozen/f0073.png"
+  },
+  {
+   "t": 37,
+   "file": "frozen/f0074.png"
+  },
+  {
+   "t": 37.5,
+   "file": "frozen/f0075.png"
+  },
+  {
+   "t": 38,
+   "file": "frozen/f0076.png"
+  },
+  {
+   "t": 38.5,
+   "file": "frozen/f0077.png"
+  },
+  {
+   "t": 39,
+   "file": "frozen/f0078.png"
+  },
+  {
+   "t": 39.5,
+   "file": "frozen/f0079.png"
+  },
+  {
+   "t": 40,
+   "file": "frozen/f0080.png"
+  },
+  {
+   "t": 40.5,
+   "file": "frozen/f0081.png"
+  },
+  {
+   "t": 41,
+   "file": "frozen/f0082.png"
+  },
+  {
+   "t": 41.5,
+   "file": "frozen/f0083.png"
+  },
+  {
+   "t": 42,
+   "file": "frozen/f0084.png"
+  },
+  {
+   "t": 42.5,
+   "file": "frozen/f0085.png"
+  },
+  {
+   "t": 43,
+   "file": "frozen/f0086.png"
+  },
+  {
+   "t": 43.5,
+   "file": "frozen/f0087.png"
+  },
+  {
+   "t": 44,
+   "file": "frozen/f0088.png"
+  },
+  {
+   "t": 44.5,
+   "file": "frozen/f0089.png"
+  },
+  {
+   "t": 45,
+   "file": "frozen/f0090.png"
+  },
+  {
+   "t": 45.5,
+   "file": "frozen/f0091.png"
+  },
+  {
+   "t": 46,
+   "file": "frozen/f0092.png"
+  },
+  {
+   "t": 46.5,
+   "file": "frozen/f0093.png"
+  },
+  {
+   "t": 47,
+   "file": "frozen/f0094.png"
+  },
+  {
+   "t": 47.5,
+   "file": "frozen/f0095.png"
+  },
+  {
+   "t": 48,
+   "file": "frozen/f0096.png"
+  },
+  {
+   "t": 48.5,
+   "file": "frozen/f0097.png"
+  },
+  {
+   "t": 49,
+   "file": "frozen/f0098.png"
+  },
+  {
+   "t": 49.5,
+   "file": "frozen/f0099.png"
+  },
+  {
+   "t": 50,
+   "file": "frozen/f0100.png"
+  },
+  {
+   "t": 50.5,
+   "file": "frozen/f0101.png"
+  },
+  {
+   "t": 51,
+   "file": "frozen/f0102.png"
+  },
+  {
+   "t": 51.5,
+   "file": "frozen/f0103.png"
+  },
+  {
+   "t": 52,
+   "file": "frozen/f0104.png"
+  },
+  {
+   "t": 52.5,
+   "file": "frozen/f0105.png"
+  },
+  {
+   "t": 53,
+   "file": "frozen/f0106.png"
+  },
+  {
+   "t": 53.5,
+   "file": "frozen/f0107.png"
+  },
+  {
+   "t": 54,
+   "file": "frozen/f0108.png"
+  },
+  {
+   "t": 54.5,
+   "file": "frozen/f0109.png"
+  },
+  {
+   "t": 55,
+   "file": "frozen/f0110.png"
+  },
+  {
+   "t": 55.5,
+   "file": "frozen/f0111.png"
+  },
+  {
+   "t": 56,
+   "file": "frozen/f0112.png"
+  },
+  {
+   "t": 56.5,
+   "file": "frozen/f0113.png"
+  },
+  {
+   "t": 57,
+   "file": "frozen/f0114.png"
+  },
+  {
+   "t": 57.5,
+   "file": "frozen/f0115.png"
+  },
+  {
+   "t": 58,
+   "file": "frozen/f0116.png"
+  },
+  {
+   "t": 58.5,
+   "file": "frozen/f0117.png"
+  },
+  {
+   "t": 59,
+   "file": "frozen/f0118.png"
+  },
+  {
+   "t": 59.5,
+   "file": "frozen/f0119.png"
+  },
+  {
+   "t": 60,
+   "file": "frozen/f0120.png"
+  },
+  {
+   "t": 60.5,
+   "file": "frozen/f0121.png"
+  },
+  {
+   "t": 61,
+   "file": "frozen/f0122.png"
+  },
+  {
+   "t": 61.5,
+   "file": "frozen/f0123.png"
+  },
+  {
+   "t": 62,
+   "file": "frozen/f0124.png"
+  },
+  {
+   "t": 62.5,
+   "file": "frozen/f0125.png"
+  },
+  {
+   "t": 63,
+   "file": "frozen/f0126.png"
+  },
+  {
+   "t": 63.5,
+   "file": "frozen/f0127.png"
+  },
+  {
+   "t": 64,
+   "file": "frozen/f0128.png"
+  },
+  {
+   "t": 64.5,
+   "file": "frozen/f0129.png"
+  },
+  {
+   "t": 65,
+   "file": "frozen/f0130.png"
+  },
+  {
+   "t": 65.5,
+   "file": "frozen/f0131.png"
+  },
+  {
+   "t": 66,
+   "file": "frozen/f0132.png"
+  },
+  {
+   "t": 66.5,
+   "file": "frozen/f0133.png"
+  },
+  {
+   "t": 67,
+   "file": "frozen/f0134.png"
+  },
+  {
+   "t": 67.5,
+   "file": "frozen/f0135.png"
+  },
+  {
+   "t": 68,
+   "file": "frozen/f0136.png"
+  },
+  {
+   "t": 68.5,
+   "file": "frozen/f0137.png"
+  },
+  {
+   "t": 69,
+   "file": "frozen/f0138.png"
+  },
+  {
+   "t": 69.5,
+   "file": "frozen/f0139.png"
+  },
+  {
+   "t": 70,
+   "file": "frozen/f0140.png"
+  },
+  {
+   "t": 70.5,
+   "file": "frozen/f0141.png"
+  },
+  {
+   "t": 71,
+   "file": "frozen/f0142.png"
+  },
+  {
+   "t": 71.5,
+   "file": "frozen/f0143.png"
+  },
+  {
+   "t": 72,
+   "file": "frozen/f0144.png"
+  },
+  {
+   "t": 72.5,
+   "file": "frozen/f0145.png"
+  },
+  {
+   "t": 73,
+   "file": "frozen/f0146.png"
+  },
+  {
+   "t": 73.5,
+   "file": "frozen/f0147.png"
+  },
+  {
+   "t": 74,
+   "file": "frozen/f0148.png"
+  },
+  {
+   "t": 74.5,
+   "file": "frozen/f0149.png"
+  },
+  {
+   "t": 75,
+   "file": "frozen/f0150.png"
+  },
+  {
+   "t": 75.5,
+   "file": "frozen/f0151.png"
+  },
+  {
+   "t": 76,
+   "file": "frozen/f0152.png"
+  },
+  {
+   "t": 76.5,
+   "file": "frozen/f0153.png"
+  },
+  {
+   "t": 77,
+   "file": "frozen/f0154.png"
+  },
+  {
+   "t": 77.5,
+   "file": "frozen/f0155.png"
+  },
+  {
+   "t": 78,
+   "file": "frozen/f0156.png"
+  },
+  {
+   "t": 78.5,
+   "file": "frozen/f0157.png"
+  },
+  {
+   "t": 79,
+   "file": "frozen/f0158.png"
+  },
+  {
+   "t": 79.5,
+   "file": "frozen/f0159.png"
+  },
+  {
+   "t": 80,
+   "file": "frozen/f0160.png"
+  },
+  {
+   "t": 80.5,
+   "file": "frozen/f0161.png"
+  },
+  {
+   "t": 81,
+   "file": "frozen/f0162.png"
+  },
+  {
+   "t": 81.5,
+   "file": "frozen/f0163.png"
+  },
+  {
+   "t": 82,
+   "file": "frozen/f0164.png"
+  },
+  {
+   "t": 82.5,
+   "file": "frozen/f0165.png"
+  },
+  {
+   "t": 83,
+   "file": "frozen/f0166.png"
+  },
+  {
+   "t": 83.5,
+   "file": "frozen/f0167.png"
+  },
+  {
+   "t": 84,
+   "file": "frozen/f0168.png"
+  },
+  {
+   "t": 84.5,
+   "file": "frozen/f0169.png"
+  },
+  {
+   "t": 85,
+   "file": "frozen/f0170.png"
+  },
+  {
+   "t": 85.5,
+   "file": "frozen/f0171.png"
+  },
+  {
+   "t": 86,
+   "file": "frozen/f0172.png"
+  },
+  {
+   "t": 86.5,
+   "file": "frozen/f0173.png"
+  },
+  {
+   "t": 87,
+   "file": "frozen/f0174.png"
+  },
+  {
+   "t": 87.5,
+   "file": "frozen/f0175.png"
+  },
+  {
+   "t": 88,
+   "file": "frozen/f0176.png"
+  },
+  {
+   "t": 88.5,
+   "file": "frozen/f0177.png"
+  },
+  {
+   "t": 89,
+   "file": "frozen/f0178.png"
+  },
+  {
+   "t": 89.5,
+   "file": "frozen/f0179.png"
+  },
+  {
+   "t": 90,
+   "file": "frozen/f0180.png"
+  },
+  {
+   "t": 90.5,
+   "file": "frozen/f0181.png"
+  },
+  {
+   "t": 91,
+   "file": "frozen/f0182.png"
+  },
+  {
+   "t": 91.5,
+   "file": "frozen/f0183.png"
+  },
+  {
+   "t": 92,
+   "file": "frozen/f0184.png"
+  },
+  {
+   "t": 92.5,
+   "file": "frozen/f0185.png"
+  },
+  {
+   "t": 93,
+   "file": "frozen/f0186.png"
+  },
+  {
+   "t": 93.5,
+   "file": "frozen/f0187.png"
+  },
+  {
+   "t": 94,
+   "file": "frozen/f0188.png"
+  },
+  {
+   "t": 94.5,
+   "file": "frozen/f0189.png"
+  },
+  {
+   "t": 95,
+   "file": "frozen/f0190.png"
+  },
+  {
+   "t": 95.5,
+   "file": "frozen/f0191.png"
+  },
+  {
+   "t": 96,
+   "file": "frozen/f0192.png"
+  },
+  {
+   "t": 96.5,
+   "file": "frozen/f0193.png"
+  },
+  {
+   "t": 97,
+   "file": "frozen/f0194.png"
+  },
+  {
+   "t": 97.5,
+   "file": "frozen/f0195.png"
+  },
+  {
+   "t": 98,
+   "file": "frozen/f0196.png"
+  },
+  {
+   "t": 98.5,
+   "file": "frozen/f0197.png"
+  },
+  {
+   "t": 99,
+   "file": "frozen/f0198.png"
+  },
+  {
+   "t": 99.5,
+   "file": "frozen/f0199.png"
+  },
+  {
+   "t": 100,
+   "file": "frozen/f0200.png"
+  },
+  {
+   "t": 100.5,
+   "file": "frozen/f0201.png"
+  },
+  {
+   "t": 101,
+   "file": "frozen/f0202.png"
+  },
+  {
+   "t": 101.5,
+   "file": "frozen/f0203.png"
+  },
+  {
+   "t": 102,
+   "file": "frozen/f0204.png"
+  },
+  {
+   "t": 102.5,
+   "file": "frozen/f0205.png"
+  },
+  {
+   "t": 103,
+   "file": "frozen/f0206.png"
+  },
+  {
+   "t": 103.5,
+   "file": "frozen/f0207.png"
+  },
+  {
+   "t": 104,
+   "file": "frozen/f0208.png"
+  },
+  {
+   "t": 104.5,
+   "file": "frozen/f0209.png"
+  },
+  {
+   "t": 105,
+   "file": "frozen/f0210.png"
+  },
+  {
+   "t": 105.5,
+   "file": "frozen/f0211.png"
+  },
+  {
+   "t": 106,
+   "file": "frozen/f0212.png"
+  },
+  {
+   "t": 106.5,
+   "file": "frozen/f0213.png"
+  },
+  {
+   "t": 107,
+   "file": "frozen/f0214.png"
+  },
+  {
+   "t": 107.5,
+   "file": "frozen/f0215.png"
+  },
+  {
+   "t": 108,
+   "file": "frozen/f0216.png"
+  },
+  {
+   "t": 108.5,
+   "file": "frozen/f0217.png"
+  },
+  {
+   "t": 109,
+   "file": "frozen/f0218.png"
+  },
+  {
+   "t": 109.5,
+   "file": "frozen/f0219.png"
+  },
+  {
+   "t": 110,
+   "file": "frozen/f0220.png"
+  },
+  {
+   "t": 110.5,
+   "file": "frozen/f0221.png"
+  },
+  {
+   "t": 111,
+   "file": "frozen/f0222.png"
+  },
+  {
+   "t": 111.5,
+   "file": "frozen/f0223.png"
+  },
+  {
+   "t": 112,
+   "file": "frozen/f0224.png"
+  },
+  {
+   "t": 112.5,
+   "file": "frozen/f0225.png"
+  },
+  {
+   "t": 113,
+   "file": "frozen/f0226.png"
+  },
+  {
+   "t": 113.5,
+   "file": "frozen/f0227.png"
+  },
+  {
+   "t": 114,
+   "file": "frozen/f0228.png"
+  },
+  {
+   "t": 114.5,
+   "file": "frozen/f0229.png"
+  },
+  {
+   "t": 115,
+   "file": "frozen/f0230.png"
+  },
+  {
+   "t": 115.5,
+   "file": "frozen/f0231.png"
+  },
+  {
+   "t": 116,
+   "file": "frozen/f0232.png"
+  },
+  {
+   "t": 116.5,
+   "file": "frozen/f0233.png"
+  },
+  {
+   "t": 117,
+   "file": "frozen/f0234.png"
+  },
+  {
+   "t": 117.5,
+   "file": "frozen/f0235.png"
+  },
+  {
+   "t": 118,
+   "file": "frozen/f0236.png"
+  },
+  {
+   "t": 118.5,
+   "file": "frozen/f0237.png"
+  },
+  {
+   "t": 119,
+   "file": "frozen/f0238.png"
+  },
+  {
+   "t": 119.5,
+   "file": "frozen/f0239.png"
+  },
+  {
+   "t": 120,
+   "file": "frozen/f0240.png"
+  },
+  {
+   "t": 120.5,
+   "file": "frozen/f0241.png"
+  },
+  {
+   "t": 121,
+   "file": "frozen/f0242.png"
+  },
+  {
+   "t": 121.5,
+   "file": "frozen/f0243.png"
+  },
+  {
+   "t": 122,
+   "file": "frozen/f0244.png"
+  },
+  {
+   "t": 122.5,
+   "file": "frozen/f0245.png"
+  },
+  {
+   "t": 123,
+   "file": "frozen/f0246.png"
+  },
+  {
+   "t": 123.5,
+   "file": "frozen/f0247.png"
+  },
+  {
+   "t": 124,
+   "file": "frozen/f0248.png"
+  },
+  {
+   "t": 124.5,
+   "file": "frozen/f0249.png"
+  },
+  {
+   "t": 125,
+   "file": "frozen/f0250.png"
+  },
+  {
+   "t": 125.5,
+   "file": "frozen/f0251.png"
+  },
+  {
+   "t": 126,
+   "file": "frozen/f0252.png"
+  },
+  {
+   "t": 126.5,
+   "file": "frozen/f0253.png"
+  },
+  {
+   "t": 127,
+   "file": "frozen/f0254.png"
+  },
+  {
+   "t": 127.5,
+   "file": "frozen/f0255.png"
+  },
+  {
+   "t": 128,
+   "file": "frozen/f0256.png"
+  },
+  {
+   "t": 128.5,
+   "file": "frozen/f0257.png"
+  },
+  {
+   "t": 129,
+   "file": "frozen/f0258.png"
+  },
+  {
+   "t": 129.5,
+   "file": "frozen/f0259.png"
+  },
+  {
+   "t": 130,
+   "file": "frozen/f0260.png"
+  },
+  {
+   "t": 130.5,
+   "file": "frozen/f0261.png"
+  },
+  {
+   "t": 131,
+   "file": "frozen/f0262.png"
+  },
+  {
+   "t": 131.5,
+   "file": "frozen/f0263.png"
+  },
+  {
+   "t": 132,
+   "file": "frozen/f0264.png"
+  },
+  {
+   "t": 132.5,
+   "file": "frozen/f0265.png"
+  },
+  {
+   "t": 133,
+   "file": "frozen/f0266.png"
+  },
+  {
+   "t": 133.5,
+   "file": "frozen/f0267.png"
+  },
+  {
+   "t": 134,
+   "file": "frozen/f0268.png"
+  },
+  {
+   "t": 134.5,
+   "file": "frozen/f0269.png"
+  },
+  {
+   "t": 135,
+   "file": "frozen/f0270.png"
+  },
+  {
+   "t": 135.5,
+   "file": "frozen/f0271.png"
+  },
+  {
+   "t": 136,
+   "file": "frozen/f0272.png"
+  },
+  {
+   "t": 136.5,
+   "file": "frozen/f0273.png"
+  },
+  {
+   "t": 137,
+   "file": "frozen/f0274.png"
+  },
+  {
+   "t": 137.5,
+   "file": "frozen/f0275.png"
+  },
+  {
+   "t": 138,
+   "file": "frozen/f0276.png"
+  },
+  {
+   "t": 138.5,
+   "file": "frozen/f0277.png"
+  },
+  {
+   "t": 139,
+   "file": "frozen/f0278.png"
+  },
+  {
+   "t": 139.5,
+   "file": "frozen/f0279.png"
+  },
+  {
+   "t": 140,
+   "file": "frozen/f0280.png"
+  },
+  {
+   "t": 140.5,
+   "file": "frozen/f0281.png"
+  },
+  {
+   "t": 141,
+   "file": "frozen/f0282.png"
+  },
+  {
+   "t": 141.5,
+   "file": "frozen/f0283.png"
+  },
+  {
+   "t": 142,
+   "file": "frozen/f0284.png"
+  },
+  {
+   "t": 142.5,
+   "file": "frozen/f0285.png"
+  },
+  {
+   "t": 143,
+   "file": "frozen/f0286.png"
+  },
+  {
+   "t": 143.5,
+   "file": "frozen/f0287.png"
+  },
+  {
+   "t": 144,
+   "file": "frozen/f0288.png"
+  }
+ ],
+ "errors": [],
+ "mobileHScroll": false
+}

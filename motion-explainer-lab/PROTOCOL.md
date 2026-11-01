@@ -33,6 +33,7 @@ Chaque note cite une preuve : un cue, un timecode, une métrique ou une planche.
 | F4 | Actionnabilité | résumé | actions vagues | ≤ 3 actions exécutables demain (requête, réglage, réflexe) |
 | F5 | Exactitude conditionnelle | erreur factuelle | fait juste sans sa condition | chaque fait sourcé et conditionné |
 | F6 | Engagement (idées reçues, devinez) | aucun | présents mais artificiels | ≥ 2 + ≥ 2, ancrés dans le cas, silence réel |
+| F8 | Profondeur métier (ajouté en v6 après retour utilisateur) | artefacts remplacés par des icônes | quelques artefacts réels, sans usage | chaque artefact de l'inventaire montré tel quel, avec ce qu'on en fait |
 | F7 | Charge cognitive | > 5 idées ou débit > 170 mots/min | limite | 3-5 idées, ≤ 160 mots/min, respirations après idées clés |
 
 ### Forme (V) — film, pas diapo
@@ -47,6 +48,11 @@ Chaque note cite une preuve : un cue, un timecode, une métrique ou une planche.
 | V7 | Son & voix | voix calée sur les cues (dépassements), bruitages synchronisés |
 
 Score itération = moyenne F (sur 4) et moyenne V (sur 4), plus le nombre d'alertes QA.
+
+**Le retour de l'utilisateur prime sur l'auto-notation.** Après v5 (fond auto-noté 3,71), l'utilisateur a jugé le
+contenu « superficiel et abstrait » : la grille ne mesurait pas la profondeur métier, la boucle a optimisé ce
+qu'elle mesurait. Correctif : critère F8, « test du praticien » dans le skill, et tout retour humain est traité
+comme une observation de type S ou C, prioritaire sur les notes.
 
 ## 3. Diagnostic : à qui appartient le défaut ?
 

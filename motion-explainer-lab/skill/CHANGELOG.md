@@ -53,6 +53,14 @@ sujet de test ajouté entre v0 et v5.
   *Obs.* : « sujet trop petit » persistant (19-35 captures selon la version).
 - **T** Contrôle de la feuille de beats sans rendu, avant toute capture. *Obs.* : 13 trous trouvés en quelques secondes en v3.
 
+## v6 (après retour de l'utilisateur sur v5 : « superficiel et abstrait »)
+- **S** Audience sur deux axes : métier × outil. *Obs.* : « ne connaît pas l'outil » avait fait tout basculer en mode débutant.
+- **S** Inventaire de valeur avant le script (artefacts exacts + usage) ; découpage en épisodes par famille plutôt que rester en surface.
+- **C** « Un terme nouveau par scène » ne s'applique qu'aux concepts, pas aux artefacts de l'inventaire.
+- **S** Icônes pour les concepts, vrais artefacts pour les artefacts ; artefact long déroulé ligne par ligne (3 lisibles).
+- **S** Test du praticien dans la relecture pédagogique.
+- **Protocole** : critère F8 « profondeur métier » ; le retour humain prime sur l'auto-notation (v5 auto-notée 3,71 en fond, jugée superficielle).
+
 ## Rejeté ou laissé hors du skill (X : spécifique au sujet)
 Prononciations (« Set I A M Policy », « ci déployeur », « sim »), choix d'un compte Gmail fictif, la plage
 d'IP de documentation, les faits GCP eux-mêmes : notes de production dans les REVIEW, jamais dans le skill.
