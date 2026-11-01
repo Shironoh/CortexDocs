@@ -56,6 +56,11 @@ const MOUTH = {
   neutral: 'M -13 -50 Q 0 -46 13 -50', happy: 'M -17 -54 Q 0 -36 17 -54', smug: 'M -15 -50 Q 5 -44 17 -56',
   angry: 'M -14 -44 Q 0 -54 14 -44', surprise: 'M -8 -50 a 8 10 0 1 0 16 0 a 8 10 0 1 0 -16 0', worried: 'M -14 -46 Q -4 -52 4 -48 Q 10 -45 14 -48',
 };
+const VISEME = { // mouth shapes for lip-sync (tools/voice.py): M closed, F lip on teeth, O round, A open, E spread, C small
+  M: 'M -13 -50 Q 0 -49 13 -50 Q 0 -47 -13 -50 Z', F: 'M -14 -51 Q 0 -46 14 -51 Q 0 -53 -14 -51 Z',
+  O: 'M -9 -50 a 9 10 0 1 0 18 0 a 9 10 0 1 0 -18 0', A: 'M -15 -55 Q 0 -30 15 -55 Q 0 -58 -15 -55 Z',
+  E: 'M -18 -53 Q 0 -40 18 -53 Q 0 -56 -18 -53 Z', C: 'M -12 -52 Q 0 -43 12 -52 Q 0 -55 -12 -52 Z',
+};
 const BROWS = { // [left, right] as dy at inner, dy at outer
   neutral: [[0, 0], [0, 0]], happy: [[-4, -4], [-4, -4]], smug: [[2, 2], [-10, -4]], angry: [[8, -4], [8, -4]],
   surprise: [[-12, -10], [-12, -10]], worried: [[-8, 2], [-8, 2]],
@@ -96,13 +101,18 @@ class Char {
     if (o.headset) { S('path', { d: 'M -60 -84 Q -62 -150 0 -150 Q 62 -150 60 -84', stroke: '#0B1A3A', 'stroke-width': 8, fill: 'none' }, this.body);
       S('rect', { x: -68, y: -98, width: 16, height: 30, rx: 6, fill: '#0B1A3A' }, this.body);
       S('path', { d: 'M -60 -74 Q -50 -50 -22 -50', stroke: '#0B1A3A', 'stroke-width': 5, fill: 'none' }, this.body); }
+    this.feet = [-26, 26].map(fx => { const f = S('ellipse', { cx: fx, cy: -2, rx: 17, ry: 9, fill: o.limb || dark, opacity: o.ghost ? .3 : .9 }); this.root.insertBefore(f, this.body); return f; });
     this.handL = S('circle', { r: 10, fill: o.limb || col }, this.body);
     this.handR = S('circle', { r: 10, fill: o.limb || col }, this.body);
     this.loupe = S('g', { visibility: 'hidden' }, this.body);
     S('line', { x1: 0, y1: 0, x2: 24, y2: 30, stroke: '#7c5a3a', 'stroke-width': 10, 'stroke-linecap': 'round' }, this.loupe);
     S('circle', { cx: -14, cy: -18, r: 30, fill: '#bfefff', 'fill-opacity': .25, stroke: '#F8FAFC', 'stroke-width': 7 }, this.loupe);
-    this.prop = null;
+    this.prop = null; this.talk = (K.R.talk || []).filter(q => q.who === (o.name || ''));
   }
+  visemeAt(t) { // current mouth shape if this character is speaking at t, else null
+    for (const q of this.talk) { if (t < q.t || t > q.end) continue; let v = 'X';
+      for (const e of q.vis) { if (t - q.t >= e[0]) v = e[1]; else break; } return v === 'X' ? null : v; }
+    return null; }
   /* timeline API (times absolute, coords in parent space) */
   pop(t) { this.popT = t; this.K.ev(t, 'pop'); this.K.mark(t); return this; }
   out(t) { this.outT = t; return this; }
@@ -154,9 +164,15 @@ class Char {
       if (n === 'lean') { bodyRot += (p.dir || 1) * 10 * w; }
       if (n === 'walkcycle') { const sw = Math.sin((t - q.t) * 9) * 22 * w; H.L = [-58 + sw, -24]; H.R = [58 - sw, -24]; bodyDy -= Math.abs(Math.sin((t - q.t) * 9)) * 10 * w; }
     }
+    // feet: step during walks, settle otherwise
+    const fl = st.walking > 0 ? Math.max(0, Math.sin(st.phase)) * 14 * st.walking : 0, fr = st.walking > 0 ? Math.max(0, -Math.sin(st.phase)) * 14 * st.walking : 0;
+    this.feet[0].setAttribute('cy', (-2 - fl).toFixed(1)); this.feet[1].setAttribute('cy', (-2 - fr).toFixed(1));
+    // speaking: viseme mouth + small head bob on open vowels
+    const vis = this.visemeAt(t); if (vis === 'A' || vis === 'O') bodyDy -= 2;
     // gaze
     if (!gaze) { let L = null; for (const l of this.looks) if (t >= l[0]) L = l; if (L && L[1] != null) gaze = [L[1], L[2]]; }
     let px = 0, py = 0;
+    if (!gaze && AMBIENT) { const k = Math.floor((t + this.x * .01) / 1.7); px = 3 * Math.sin(k * 12.9898 + this.x) ; py = 2 * Math.sin(k * 78.233); }
     if (gaze) { const dx = gaze[0] - st.x, dy = gaze[1] - (st.y - 86 * this.s); const L = Math.hypot(dx, dy) || 1; px = dx / L * 6; py = dy / L * 6; }
     // ambient: breathing + blink
     let blink = 1;
@@ -173,8 +189,8 @@ class Char {
     const b = BROWS[ex] || BROWS.neutral;
     this.browL.setAttribute('d', `M -34 ${-108 + b[0][1]} L -8 ${-108 + b[0][0]}`);
     this.browR.setAttribute('d', `M 8 ${-108 + b[1][0]} L 34 ${-108 + b[1][1]}`);
-    this.mouth.setAttribute('d', MOUTH[ex] || MOUTH.neutral);
-    this.mouth.setAttribute('fill-opacity', ex === 'surprise' ? 1 : 0);
+    this.mouth.setAttribute('d', vis ? VISEME[vis] : (MOUTH[ex] || MOUTH.neutral));
+    this.mouth.setAttribute('fill-opacity', vis && vis !== 'M' ? 1 : (ex === 'surprise' ? 1 : 0));
     const arm = (el, sh, h) => { const mx = (sh[0] + h[0]) / 2 + (h[0] > 0 ? 8 : -8), my = (sh[1] + h[1]) / 2 + 10;
       el.setAttribute('d', `M ${sh[0]} ${sh[1]} Q ${mx} ${my} ${h[0]} ${h[1]}`); };
     arm(this.armL, [-46, -60], H.L); arm(this.armR, [46, -60], H.R);
@@ -193,9 +209,24 @@ function Runtime(ep, svg) {
   const R = { ep, svg, actors: [], chars: [], camMoves: [], frames: [], focusKeys: [], hots: [], events: [], marks: [], fx: [] };
   // ---- timing
   let t0 = ep.lead || 0.6;
+  const TM = ep.timing && ep.timing.cues ? ep.timing.cues : null; // real narration (tools/voice.py)
+  R.voiced = !!TM; R.talk = [];
   const cues = ep.cues.map(c => {
     const parts = c.say.split('|'); const w1 = words(parts[0]).length, wAll = words(c.say).length;
-    const guess = parts.length > 1;
+    const guess = parts.length > 1; const tm = TM && TM[c.id];
+    if (tm && tm.parts.length === parts.length) {
+      // cue = lead-in, spoken part(s) with their measured length, guess silence, breath after the idea
+      const pre = ep.voicePre == null ? .2 : ep.voicePre, breath = c.breath == null ? (ep.breath == null ? .45 : ep.breath) : c.breath;
+      let t = t0 + pre, pauseAt = null; const wt = [], ps = [];
+      tm.parts.forEach((p, i) => {
+        if (i === 1) { pauseAt = t + .1; t = pauseAt + GUESS_PAUSE; }
+        for (const w of p.words) wt.push([t + w[0], t + w[1]]);
+        ps.push({ t, dur: p.dur, wav: p.wav, vis: p.vis }); if (c.who) R.talk.push({ who: c.who, t, vis: p.vis, end: t + p.dur });
+        t += p.dur; });
+      const dur = Math.max(2.2, t - t0 + breath) + (c.extra || 0);
+      const o = { ...c, start: t0, dur, end: t0 + dur, guess, w1, wAll, pauseAt, wt: wt.length === wAll ? wt : null, parts: ps };
+      t0 += dur; return o;
+    }
     const dur = Math.max(3.6, wAll / WPS + 1.0) + (guess ? GUESS_PAUSE : 0) + (c.extra || 0);
     const o = { ...c, start: t0, dur, end: t0 + dur, guess, w1, wAll, pauseAt: guess ? t0 + w1 / WPS : null };
     t0 += dur; return o;
@@ -207,7 +238,7 @@ function Runtime(ep, svg) {
   R.cues = cues; R.scenes = scenes;
   const cueById = Object.fromEntries(cues.map(c => [c.id, c]));
   // ---- kit
-  const K = R.K = {};
+  const K = R.K = {}; K.R = R;
   K.S = S; K.E = E; K.P = P; K.lerp = lerp; K.clamp = clamp; K.Z = ep.zones;
   K.cue = id => { const c = cueById[id]; if (!c) throw new Error('cue inconnu ' + id); return c; };
   K.T = (id, word, n = 0, after = false) => {
@@ -215,6 +246,7 @@ function Runtime(ep, svg) {
     const ws = words(c.say); const target = norm(word); let k = -1, seen = 0;
     for (let i = 0; i < ws.length; i++) if (norm(ws[i]).startsWith(target)) { if (seen === n) { k = i; break; } seen++; }
     if (k < 0) throw new Error(`mot "${word}" absent du cue ${id}`);
+    if (c.wt) return after ? c.wt[k][1] : c.wt[k][0];
     const idx = after ? k + 1 : k;
     let t = c.start + idx / WPS; if (c.guess && idx >= c.w1) t += GUESS_PAUSE; return t;
   };

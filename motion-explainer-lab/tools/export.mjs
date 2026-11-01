@@ -12,7 +12,9 @@ async function open() {
 }
 const p0 = await open();
 const meta = await p0.evaluate(() => ({ duration: __mx.duration, events: __mx.events, guess: __mx.guessWindows,
-  cues: __mx.cues.map(c => ({ id: c.id, start: c.start, end: c.end, say: c.say, guess: c.guess, pauseAt: c.pauseAt })) }));
+  scenes: __mx.scenes.map(s => ({ id: s.id, start: s.start, title: s.title })),
+  cues: __mx.cues.map(c => ({ id: c.id, start: c.start, end: c.end, say: c.say, guess: c.guess, pauseAt: c.pauseAt, parts: c.parts || null })) }));
+if (process.env.META_ONLY) { fs.writeFileSync(path.join(out, 'meta.json'), JSON.stringify(meta, null, 1)); await browser.close(); process.exit(0); }
 fs.writeFileSync(path.join(out, 'meta.json'), JSON.stringify(meta, null, 1));
 const N = Math.ceil(meta.duration * FPS), chunk = Math.ceil(N / W);
 async function worker(k, page) {

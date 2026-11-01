@@ -1,0 +1,1 @@
+Vous tapez une adresse dans votre navigateur. En moins d'un dixième de seconde, une dizaine de machines se sont parlé. Lesquelles ? On croit souvent que la réponse vient d'un annuaire central. En réalité, elle vient presque toujours d'un cache, tout près de vous.

@@ -15,6 +15,7 @@
     <div class="stage" id="stage">
       <svg id="svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" role="img" aria-label="{{H1}}"></svg>
       <div id="hotspots" class="hotspots"></div>
+      <audio id="snd" preload="auto"{{AUDIO}}></audio>
       <div id="subs" class="subs empty" aria-live="polite"></div>
       <div id="poster" class="poster">
         <button id="bigplay" class="bigplay" type="button"><span class="tri">▶</span><span>Lire · <b id="dur"></b></span></button>
@@ -62,4 +63,5 @@
 <script>
 {{EPISODE}}
 </script>
+<script>EP.timing = {{TIMING}};</script>
 <script>boot(EP);</script>

@@ -62,20 +62,23 @@ function boot(ep) {
   R.render = render;
 
   /* -------- player state -------- */
-  const st = { t: 0, playing: false, speed: 1, subs: true, voice: false, quiz: false, last: 0, waitStart: null, spoken: {}, pending: false, quizDone: {} };
+  const snd = $('snd'), hasSnd = !!(snd && snd.getAttribute('src')); // pre-rendered soundtrack (voice + music + effects)
+  const st = { t: 0, playing: false, speed: 1, subs: true, voice: hasSnd, quiz: false, last: 0, waitStart: null, spoken: {}, pending: false, quizDone: {} };
   const synth = (() => { try { return window.speechSynthesis || null; } catch (e) { return null; } })();
   let frVoice = null;
   function pickVoice() { try { const vs = synth.getVoices(); frVoice = vs.find(v => /fr[-_]FR/i.test(v.lang)) || vs.find(v => /^fr/i.test(v.lang)) || null; } catch (e) { } }
   if (synth) { pickVoice(); try { synth.onvoiceschanged = pickVoice; } catch (e) { } }
+  function sndSync(play) { if (!hasSnd) return; try { snd.playbackRate = st.speed; if (Math.abs(snd.currentTime - st.t) > .08) snd.currentTime = st.t;
+      if (play && st.voice) { const p = snd.play(); if (p && p.catch) p.catch(() => { }); } else snd.pause(); } catch (e) { } }
   function speak(text) {
-    if (!synth || !st.voice) return;
+    if (hasSnd || !synth || !st.voice) return;
     try { const u = new SpeechSynthesisUtterance(text); u.lang = 'fr-FR'; if (frVoice) u.voice = frVoice; u.rate = 1.05 * st.speed;
       st.pending = true; u.onend = u.onerror = () => { st.pending = false; }; synth.speak(u); } catch (e) { st.pending = false; }
   }
   function cancelSpeech() { try { synth && synth.cancel(); } catch (e) { } st.pending = false; }
   function sayParts(c) { return c.say.split('|').map(s => s.trim()); }
   function voiceStep(prevT, t) {
-    if (!st.voice) return;
+    if (hasSnd || !st.voice) return;
     for (const c of R.cues) {
       const parts = sayParts(c);
       if (prevT <= c.start + .02 && t >= c.start && !st.spoken[c.id + 'a']) { st.spoken[c.id + 'a'] = 1; cancelSpeech(); speak(parts[0]); }
@@ -84,16 +87,17 @@ function boot(ep) {
   }
   function resetSpoken(t) { st.spoken = {}; for (const c of R.cues) { if (c.start < t - .05) st.spoken[c.id + 'a'] = 1; if (c.guess && c.pauseAt + GUESS_PAUSE < t - .05) st.spoken[c.id + 'b'] = 1; } }
 
-  function seek(t) { st.t = clamp(t, 0, R.duration); cancelSpeech(); resetSpoken(st.t); st.waitStart = null; render(st.t); ui(); }
+  function seek(t) { st.t = clamp(t, 0, R.duration); cancelSpeech(); resetSpoken(st.t); st.waitStart = null; sndSync(st.playing); render(st.t); ui(); }
   function play() { if (st.t >= R.duration - .05) seek(0); st.playing = true; st.last = performance.now(); $('poster').hidden = true; closeHot(); resetSpoken(st.t);
     if (st.voice) { const c = cueAt(st.t); if (c && st.t - c.start < .3) { st.spoken[c.id + 'a'] = 0; } }
-    requestAnimationFrame(loop); ui(); }
-  function pause() { st.playing = false; cancelSpeech(); ui(); }
+    sndSync(true); requestAnimationFrame(loop); ui(); }
+  function pause() { st.playing = false; cancelSpeech(); sndSync(false); ui(); }
   function loop(now) {
     if (!st.playing) return;
     const dt = Math.min(.1, (now - st.last) / 1000); st.last = now;
     let nt = st.t + dt * st.speed; const c = cueAt(st.t);
-    if (st.voice && c && st.pending && nt >= c.end - .02) {
+    if (hasSnd && st.voice && !snd.paused && !snd.ended && snd.readyState > 1) nt = snd.currentTime; // the soundtrack is the clock
+    if (!hasSnd && st.voice && c && st.pending && nt >= c.end - .02) {
       if (st.waitStart == null) st.waitStart = now;
       if (now - st.waitStart < 20000) nt = c.end - .021; else st.pending = false;
     } else st.waitStart = null;
@@ -130,10 +134,11 @@ function boot(ep) {
   $('prev').onclick = () => { const i = R.scenes.indexOf(sceneAt(st.t)); const s = R.scenes[Math.max(0, st.t - sceneAt(st.t).start > 2 ? i : i - 1)]; seek(s.start - (s === R.scenes[0] ? .6 : 1.4)); };
   $('next').onclick = () => { const i = R.scenes.indexOf(sceneAt(st.t)); if (i < R.scenes.length - 1) seek(R.scenes[i + 1].start - 1.4); };
   $('track').onclick = e => { const r = e.currentTarget.getBoundingClientRect(); seek((e.clientX - r.left) / r.width * R.duration); };
-  $('speed').onchange = e => { st.speed = +e.target.value; };
+  $('speed').onchange = e => { st.speed = +e.target.value; sndSync(st.playing); };
   const tog = (id, key, cb) => { const b = $(id); b.onclick = () => { st[key] = !st[key]; b.setAttribute('aria-pressed', st[key]); cb && cb(); }; b.setAttribute('aria-pressed', st[key]); };
   tog('cc', 'subs', () => document.body.classList.toggle('nosubs', !st.subs));
-  tog('voice', 'voice', () => { if (!st.voice) cancelSpeech(); else resetSpoken(st.t); });
+  if (hasSnd) { $('voice').textContent = 'Son'; $('voice').setAttribute('aria-label', 'Son (voix, musique, bruitages)'); }
+  tog('voice', 'voice', () => { if (!st.voice) cancelSpeech(); else resetSpoken(st.t); sndSync(st.playing); });
   tog('quizb', 'quiz', () => { st.quizDone = {}; });
   document.addEventListener('keydown', e => {
     if (e.target.tagName === 'SELECT') return;
