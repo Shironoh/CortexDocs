@@ -9,3 +9,4 @@ __pycache__/
 gallery/*.mp3
 lookdev/**/.hyperframes/
 lookdev/**/lookdev.mp4
+rnd/rive/**/build/
