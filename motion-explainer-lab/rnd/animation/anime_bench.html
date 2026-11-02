@@ -1,0 +1,14 @@
+<!doctype html><meta charset="utf-8"><body style="margin:0;background:#0B1A3A">
+<svg viewBox="0 0 1600 900" width="800" height="450">
+ <path id="a" d="M 300 450 C 300 340 390 250 500 250 C 610 250 700 340 700 450 C 700 560 610 650 500 650 C 390 650 300 560 300 450 Z" fill="#22D3EE"/>
+ <path id="b" d="M 900 250 L 1300 250 L 1300 650 L 900 650 Z" fill="none" visibility="hidden"/>
+ <path id="line" d="M 100 800 C 400 600 800 900 1500 700" stroke="#FFB703" stroke-width="14" fill="none"/>
+</svg>
+<script src="./node_modules/animejs/dist/bundles/anime.umd.min.js"></script>
+<script>
+const { createTimeline, svg } = anime;
+const tl = createTimeline({ autoplay: false });
+tl.add('#a', { d: svg.morphTo('#b'), duration: 2000, ease: 'inOutQuad' }, 0)
+  .add(svg.createDrawable('#line'), { draw: ['0 0', '0 1'], duration: 2000 }, 500);
+window.render = t => { tl.seek(t * 1000); return document.getElementById('a').getAttribute('d').slice(0, 60); };
+</script>
