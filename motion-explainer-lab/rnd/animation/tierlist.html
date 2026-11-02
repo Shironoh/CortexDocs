@@ -111,8 +111,8 @@ ol.reco b { font-family: var(--f-disp); font-weight: 700; }
         <tr><td>anime.js 4.5</td><td>oui</td><td class="num">1,8 ms / image</td><td>morphing converti en polyligne : chemins dix fois plus longs</td></tr>
         <tr><td>Manim CE 0.22.1</td><td>rendu image par image</td><td class="num">3 s de 1080p en 6,8 s</td><td>animation d'écriture du texte remarquable ; une dépendance à installer à la main</td></tr>
         <tr><td>Remotion 4.0.539</td><td>oui</td><td class="num">≈ 18 images / s</td><td>même principe que nous (captures Chromium), en React</td></tr>
-        <tr><td>Moteur du labo + export</td><td>oui</td><td class="num">≈ 14 images / s</td><td>3 735 images 1080p en 263 s, encodage compris, 4 processus</td></tr>
-        <tr><td>HyperFrames 0.9.0</td><td>non testé</td><td class="num">—</td><td>installation faite, exécution refusée par le contrôle de sécurité de la session</td></tr>
+        <tr><td>Moteur du labo + export (même épisode)</td><td>oui</td><td class="num">2:36 en ≈ 4 min 43 s</td><td>263 s d'images (4 processus) + ≈ 20 s de bande son</td></tr>
+        <tr><td>HyperFrames 0.9.0 (notre épisode complet)</td><td>oui</td><td class="num">2:36 en 3 min 31 s</td><td>4 processus, son compris ; 6 min avec 1 processus (choix automatique) ; images identiques aux nôtres</td></tr>
       </tbody>
     </table></div>
     <div class="shots">
@@ -129,7 +129,9 @@ ol.reco b { font-family: var(--f-disp); font-weight: 700; }
       <li><b>Brancher GSAP comme couche de primitives.</b> Une timeline GSAP en pause, pilotée par <code>tl.seek(t)</code> depuis <code>K.fx</code>, apporte morphing, tracé de lignes, déplacement sur chemin et découpe de texte, déterministes et gratuits. Prototype d'adaptateur <code>K.tl()</code> : une journée.</li>
       <li><b>Ajouter un critique visuel.</b> Code2Video gagne 40 % sur la génération directe grâce à un agent critique de la mise en page ; MoVer vérifie des prédicats spatio-temporels. Chez nous : chaque beat déclare ce qui doit être vrai (« X dans le cadre, ≥ 8 %, au mot Y ») et <code>qa.mjs</code> le vérifie.</li>
       <li><b>Personnages : décider entre Rive et un rig SVG plus riche.</b> Rive est le meilleur outil de personnages (os, maillages, machines à états), mais il s'anime à la main dans un éditeur et l'export est payant depuis octobre 2025. Le rig SVG reste écrivable par l'agent : bras à deux segments, cinématique inverse simple, poses clés.</li>
-      <li><b>Tester HyperFrames</b> dès que tu autorises l'exécution de sa CLI, et <b>surveiller OmniLottie</b> pour générer des éléments animés à importer.</li>
+      <li><b>Rendre avec HyperFrames, contrôler avec les deux.</b> L'adaptateur fait rendre nos épisodes sans les modifier, 25 % plus vite, et ajoute ses audits de contraste et de mise en page à notre QA.</li>
+      <li><b>Reprendre leurs règles de mouvement chiffrées</b> : courbe d'accélération selon le rôle (arrivée lente, sortie nette), sorties 40 à 50 % plus courtes que les entrées, chevauchement de 30 à 50 % entre éléments. Et retirer ce qu'ils classent comme signes de vidéo générée : nos « pulsations » de remplissage, les récaps en trois cartes alignées, le schéma posé d'un coup au lieu d'un schéma qui grandit.</li>
+      <li><b>Surveiller OmniLottie</b> pour générer des éléments animés à importer.</li>
     </ol>
   </section>
 
@@ -154,9 +156,9 @@ const ITEMS = [
     why: 'Code2Video sépare planificateur, codeur et critique de la mise en page, et rapporte 40 % de mieux que la génération directe de code. TheoremExplainAgent obtient 93,8 % de vidéos produites, mais note des défauts de mise en page dans la plupart. Le goulot est la mise en page, pas le code.',
     fit: 'Notre boucle a déjà une QA automatique ; il manque le critique qui regarde chaque plan et propose la correction pendant la production, pas seulement à la revue.',
     src: [['Code2Video, arXiv 2510.01174', 'https://arxiv.org/abs/2510.01174'], ['TheoremExplainAgent, arXiv 2502.19400', 'https://arxiv.org/abs/2502.19400']] },
-  { id: 'hyperframes', n: 'HyperFrames', t: 'A', cat: 'engine', tested: false, meta: 'HeyGen · Apache-2.0 · npm 0.9.0 · avril 2026',
-    why: 'Vidéo écrite en HTML, CSS et JavaScript par un agent, rendue en MP4 par Chrome et FFmpeg, avec des « skills » de goût fournis à l’agent. C’est notre architecture, industrialisée, avec mesure de l’audio et normalisation intégrées.',
-    fit: 'À tester en priorité : rendu plus rapide ? composants réutilisables ? Il n’apporte pas le lecteur interactif. Installé ici, mais l’exécution de sa CLI a été refusée par le contrôle de sécurité de la session.',
+  { id: 'hyperframes', n: 'HyperFrames 0.9', t: 'S', cat: 'engine', tested: true, meta: 'HeyGen · Apache-2.0 · avril 2026 · testé le 2 nov. 2026',
+    why: 'Testé sur notre épisode carbone 14 complet (2:36), via un petit adaptateur qui expose notre moteur comme une timeline : images identiques à notre exporteur, son mixé, rendu en 3 min 31 s avec 4 processus contre environ 4 min 43 s chez nous (capture BeginFrame de Chrome). Son contrôle (mise en page, contraste, exécution) a trouvé un vrai chevauchement de textes que notre QA ne voyait pas.',
+    fit: 'À adopter comme moteur de rendu et second contrôleur, en gardant notre moteur et notre lecteur interactif : l\u2019adaptateur suffit (tools/hyperframes_project.py). Points d\u2019attention : télémétrie active par défaut (on la coupe), l\u2019initialisation installe des skills dans la configuration de l\u2019agent, version 0.x qui bouge vite, et son linter statique proteste contre la boucle du lecteur (neutralisée dans la copie de rendu).',
     src: [['Paquet npm hyperframes', 'https://www.npmjs.com/package/hyperframes'], ['Présentation AI Engineer', 'https://ai.engineer/talks/html-is-all-agents-need']] },
   { id: 'rive', n: 'Rive', t: 'A', cat: 'char', tested: false, meta: 'Éditeur + runtimes MIT · export payant depuis le 20 oct. 2025 (9 $/mois)',
     why: 'Le plus abouti pour des personnages 2D vivants : os, maillages déformables, poids, cinématique inverse, machines à états et liaison de données. Un regard ou une bouche se pilotent par des entrées.',

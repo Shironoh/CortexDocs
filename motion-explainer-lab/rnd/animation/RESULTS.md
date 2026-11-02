@@ -13,3 +13,17 @@ point le long d'un chemin (texte en plus pour Manim). Installer `gsap@3.15.0 ani
 | HyperFrames 0.9.0 | non testé | — | l'exécution de la CLI a été refusée par le contrôle de sécurité de la session ; évalué sur sa documentation |
 
 Captures : `gsap.png` (t = 1,2 s), `anime.png`, `manim.png` (t = 1,5 s).
+
+## HyperFrames 0.9.0 (testé le 2 novembre 2026, avec autorisation)
+
+- `hyperframes init` installe aussi 4 skills dans `~/.claude/skills/` (hyperframes, hyperframes-cli, hyperframes-registry, media-use).
+  Télémétrie coupée pour tous les essais : `HYPERFRAMES_NO_TELEMETRY=1`.
+- Scène de référence (10 s, 1080p30) : `check` trouve le texte peu contrasté (1,23:1, couleur corrigée proposée), le chevauchement
+  et le débordement ; rendu en 17 s (capture BeginFrame).
+- **Notre épisode v7-c14 complet**, converti par `tools/hyperframes_project.py` (adaptateur de timeline, aucune modification de l'épisode) :
+  - `check` : un vrai chevauchement de textes à t = 50,4 s (étiquette « ¼ » des barres) que `qa.mjs` ne voyait pas (étiquettes marquées
+    décoratives), un chevauchement passager à 122,6 s, des débordements déjà connus ; 9 échantillons de mise en page (contre 60 captures chez nous).
+  - rendu 2:36 en 1080p24 avec le son : **6 min 0 s** avec 1 processus (choix automatique), **3 min 31 s** avec `--workers 4` ;
+    notre chaîne : 263 s d'images + ≈ 20 s de son. Images identiques (comparaison visuelle à 12, 75 et 104 s).
+  - linter statique : exige les attributs de composition dans le HTML et un document complet ; signale `Math.random()` (corrigé dans
+    `src/kit.js`), `requestAnimationFrame` et `performance.now()` (boucle du lecteur interactif, neutralisée dans la copie de rendu).
