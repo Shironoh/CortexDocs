@@ -10,3 +10,5 @@ gallery/*.mp3
 lookdev/**/.hyperframes/
 lookdev/**/lookdev.mp4
 rnd/rive/**/build/
+lookdev/**/lib/rive/
+lookdev/**/lookdev_rive.mp4

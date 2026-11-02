@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>LLMjacking · look-dev Rive</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=JetBrains+Mono:wght@700&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/MotionPathPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/DrawSVGPlugin.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #070a24; }
+  #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; font-family: Poppins, 'DejaVu Sans', sans-serif; }
+  svg { position: absolute; inset: 0; }
+  #sub { position: absolute; left: 310px; top: 948px; width: 1300px; text-align: center; color: #f4f1ff;
+    font: 600 38px/1.35 Poppins, 'DejaVu Sans', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,.7); }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="16" data-width="1920" data-height="1080" data-motion-blur="on">
+  <svg id="svg" viewBox="0 0 1920 1080" class="clip" data-start="0" data-duration="16" data-track-index="0">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#090c33"/><stop offset=".55" stop-color="#231556"/><stop offset=".85" stop-color="#4a1d6e"/><stop offset="1" stop-color="#7a2a72"/>
+      </linearGradient>
+      <radialGradient id="moonG"><stop offset="0" stop-color="#fff7e0"/><stop offset=".7" stop-color="#ffd9a8"/><stop offset="1" stop-color="#ffb37a"/></radialGradient>
+      <radialGradient id="halo"><stop offset="0" stop-color="#ffcf8a" stop-opacity=".45"/><stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/></radialGradient>
+      <linearGradient id="cloudTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9cdfc"/><stop offset=".55" stop-color="#9c86e0"/><stop offset="1" stop-color="#5a3f9e"/></linearGradient>
+      <linearGradient id="cloudFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e4fae"/><stop offset="1" stop-color="#2c1a5c"/></linearGradient>
+      <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a3488"/><stop offset="1" stop-color="#262063"/></linearGradient>
+      <linearGradient id="wallSide" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1c1849"/><stop offset="1" stop-color="#14113a"/></linearGradient>
+      <radialGradient id="core"><stop offset="0" stop-color="#ffffff"/><stop offset=".35" stop-color="#fff2b0"/><stop offset=".7" stop-color="#ffb703"/><stop offset="1" stop-color="#fb5607"/></radialGradient>
+      <radialGradient id="coreHalo"><stop offset="0" stop-color="#ffb703" stop-opacity=".55"/><stop offset="1" stop-color="#ffb703" stop-opacity="0"/></radialGradient>
+      <radialGradient id="redHalo"><stop offset="0" stop-color="#ff3b6b" stop-opacity=".7"/><stop offset="1" stop-color="#ff3b6b" stop-opacity="0"/></radialGradient>
+      <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b3a7a"/><stop offset="1" stop-color="#1b1236"/></linearGradient>
+      <linearGradient id="mixerG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a1745"/><stop offset="1" stop-color="#120a22"/></linearGradient>
+      <radialGradient id="vign" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#05030f" stop-opacity=".75"/></radialGradient>
+      <linearGradient id="subFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05030f" stop-opacity="0"/><stop offset="1" stop-color="#05030f" stop-opacity=".55"/></linearGradient>
+      <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="14"/></filter>
+    </defs>
+    <rect width="1920" height="1080" fill="url(#sky)"/>
+    <g id="L-far"></g>
+    <g id="L-mid"></g>
+    <g id="L-main"></g>
+    <g id="L-fore"></g>
+    <rect width="1920" height="1080" fill="url(#vign)" pointer-events="none"/>
+    <rect y="840" width="1920" height="240" fill="url(#subFade)" pointer-events="none"/>
+  </svg>
+  <canvas id="rv" width="1200" height="1400" style="position:absolute;left:0;top:0;transform-origin:0 0;opacity:0"></canvas>
+  <div id="sub" class="clip" data-start="0" data-duration="16" data-track-index="1"></div>
+  <audio id="vo" class="clip" src="audio.mp3" data-start="0" data-duration="16" data-track-index="2"></audio>
+</div>
+<script>
+/* Look-dev: the opening of the LLMjacking episode as an illustrated world. Deterministic: seeded PRNG, one paused GSAP timeline. */
+gsap.registerPlugin(MotionPathPlugin, DrawSVGPlugin);
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+let seed = 7; const rnd = () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+const far = document.getElementById('L-far'), mid = document.getElementById('L-mid'), main = document.getElementById('L-main'), fore = document.getElementById('L-fore');
+const tl = gsap.timeline({ paused: true });
+
+/* ---------- far: stars, moon, distant cloud banks ---------- */
+const stars = [];
+for (let i = 0; i < 260; i++) { const s = el('circle', { cx: -1400 + rnd() * 4200, cy: -900 + rnd() * 1500, r: .8 + rnd() * 2.4, fill: '#f3ecff', opacity: .25 + rnd() * .6 }, far); stars.push(s); }
+stars.slice(0, 60).forEach((s, i) => tl.to(s, { opacity: .1, duration: .6 + (i % 5) * .2, repeat: 11, yoyo: true, ease: 'sine.inOut' }, (i % 9) * .17));
+el('circle', { cx: 1150, cy: -520, r: 360, fill: 'url(#halo)' }, far);
+el('circle', { cx: 1150, cy: -520, r: 120, fill: 'url(#moonG)' }, far);
+for (const [x, y, r, o] of [[1110, -560, 22, .18], [1190, -480, 14, .15], [1180, -580, 10, .12]]) el('circle', { cx: x, cy: y, r, fill: '#c9925e', opacity: o }, far);
+const bank = (g, cx, cy, w, fill, n = 12, o = 1) => { const b = el('g', { opacity: o }, g); for (let i = 0; i < n; i++) { const x = cx - w / 2 + (i + .5) * w / n, r = w / n * (.9 + rnd() * .9);
+  el('circle', { cx: x, cy: cy - r * .35 * Math.sin(Math.PI * (i + .5) / n), r, fill }, b); } el('ellipse', { cx, cy: cy + 420, rx: w / 2 + 900, ry: 520, fill }, b); return b; };
+bank(far, -1200, 560, 3400, 'url(#cloudFar)', 18, .55); bank(far, 1900, 640, 3400, 'url(#cloudFar)', 18, .5);
+
+/* ---------- mid: the floating cloud island and its data centre ---------- */
+const island = el('g', {}, mid);
+const cloudCluster = (g, cx, cy, w, h) => { const c = el('g', {}, g);
+  for (let i = 0; i < 18; i++) { const a = i / 18 * Math.PI, x = cx - w / 2 + rnd() * w, y = cy - rnd() * h * .5, r = 70 + rnd() * 110;
+    el('circle', { cx: x, cy: y, r, fill: 'url(#cloudTop)' }, c); }
+  for (let i = 0; i < 12; i++) { const x = cx - w / 2 + 60 + i * (w - 120) / 11; el('circle', { cx: x, cy: cy + 70 + (i % 3) * 18, r: 90 + (i * 37 % 50), fill: '#4a3390' }, c); }
+  for (let i = 0; i < 7; i++) { const x = cx - w / 3 + i * (w * 2 / 3) / 6; el('circle', { cx: x, cy: cy + 150 + (i % 2) * 20, r: 70 + (i * 23 % 30), fill: '#33236e' }, c); }
+  for (let i = 0; i < 7; i++) el('path', { d: `M ${cx - w / 2 + 80 + i * w / 7} ${cy - 120 - rnd() * 60} q 40 -30 90 -4`, stroke: '#f3edff', 'stroke-width': 9, 'stroke-linecap': 'round', fill: 'none', opacity: .55 }, c);
+  return c; };
+cloudCluster(island, 0, 300, 1300, 260);
+// building: front, side, roof
+const bld = el('g', {}, island);
+el('path', { d: 'M 300 -260 L 380 -310 L 380 170 L 300 230 Z', fill: 'url(#wallSide)' }, bld);
+el('rect', { x: -300, y: -260, width: 600, height: 490, rx: 18, fill: 'url(#wall)' }, bld);
+el('path', { d: 'M -300 -260 L -220 -310 L 380 -310 L 300 -260 Z', fill: '#4a43a3' }, bld);
+el('rect', { x: -300, y: -260, width: 600, height: 10, fill: '#7d74e0', opacity: .7 }, bld);
+const wins = [];
+for (let r = 0; r < 4; r++) for (let c = 0; c < 7; c++) { if (r < 2 && c >= 2 && c <= 4) continue; // counter sits here
+  const w = el('rect', { x: -268 + c * 78, y: -230 + r * 112, width: 52, height: 72, rx: 8, fill: '#ffd36b', opacity: .08 }, bld); wins.push(w); }
+wins.forEach((w, i) => tl.to(w, { opacity: .95, duration: .25, ease: 'power2.out' }, 1.0 + (i * 7 % wins.length) * .045));
+wins.forEach((w, i) => { if (i % 5 === 2) tl.to(w, { opacity: .45, duration: .12, repeat: 9, yoyo: true }, 3 + i * .05); });
+// roof dome with the model core
+const dome = el('g', { transform: 'translate(40 -330)' }, bld);
+el('circle', { cx: 0, cy: 0, r: 260, fill: 'url(#coreHalo)' }, dome);
+el('path', { d: 'M -150 20 A 150 150 0 0 1 150 20 Z', fill: '#bfe9ff', 'fill-opacity': .14, stroke: '#d8f3ff', 'stroke-width': 6 }, dome);
+const core = el('circle', { cx: 0, cy: -40, r: 62, fill: 'url(#core)', filter: 'url(#glow)' }, dome);
+const ring1 = el('ellipse', { cx: 0, cy: -40, rx: 108, ry: 30, fill: 'none', stroke: '#ffe08a', 'stroke-width': 5, opacity: .8 }, dome);
+const ring2 = el('ellipse', { cx: 0, cy: -40, rx: 30, ry: 104, fill: 'none', stroke: '#ffd166', 'stroke-width': 4, opacity: .6 }, dome);
+tl.to(ring1, { rotation: 360, svgOrigin: '0 -40', duration: 6, ease: 'none', repeat: 2 }, 0);
+tl.to(ring2, { rotation: -360, svgOrigin: '0 -40', duration: 4.5, ease: 'none', repeat: 3 }, 0);
+tl.to(core, { attr: { r: 70 }, duration: .7, repeat: 21, yoyo: true, ease: 'sine.inOut' }, 0);
+// roof fans and antenna
+for (const fx of [-230, -120]) { const f = el('g', { transform: `translate(${fx} -282)` }, bld); el('ellipse', { cx: 0, cy: 0, rx: 46, ry: 14, fill: '#1a1645' }, f);
+  const blades = el('g', {}, f); for (let k = 0; k < 3; k++) el('ellipse', { cx: 0, cy: -2, rx: 40, ry: 6, fill: '#8f86ff', transform: `rotate(${k * 60})` }, blades);
+  tl.to(blades, { rotation: 360, svgOrigin: '0 -2', duration: .5, ease: 'none', repeat: 31 }, 0); }
+el('line', { x1: 250, y1: -310, x2: 250, y2: -420, stroke: '#8f86ff', 'stroke-width': 6 }, bld);
+const beacon = el('circle', { cx: 250, cy: -428, r: 10, fill: '#ff4d6d', filter: 'url(#glow)' }, bld);
+tl.to(beacon, { opacity: .15, duration: .5, repeat: 31, yoyo: true }, 0);
+// the bill: a mechanical counter on the facade, and a 24 h dial
+const ctr = el('g', { transform: 'translate(0 -120)' }, bld);
+el('rect', { x: -200, y: -95, width: 400, height: 190, rx: 22, fill: '#120f33', stroke: '#6c63d9', 'stroke-width': 6 }, ctr);
+const ctrGlow = el('rect', { x: -200, y: -95, width: 400, height: 190, rx: 22, fill: '#ff3b6b', opacity: 0, filter: 'url(#soft)' }, ctr);
+const digits = el('text', { x: 0, y: 30, 'text-anchor': 'middle', 'font-family': "'JetBrains Mono', 'DejaVu Sans Mono', monospace", 'font-weight': 700, 'font-size': 64, fill: '#ffe08a' }, ctr);
+digits.textContent = '$ 000 000';
+const money = { v: 0 };
+tl.to(money, { v: 100000, duration: 2.6, ease: 'power2.in', onUpdate: () => { digits.textContent = '$ ' + String(Math.round(money.v)).padStart(6, '0').replace(/(\d{3})(\d{3})/, '$1 $2'); } }, 2.4);
+tl.to(digits, { attr: { fill: '#ff5c7f' }, duration: .3 }, 4.8);
+tl.to(ctrGlow, { opacity: .55, duration: .25, repeat: 5, yoyo: true }, 4.8);
+const dial = el('g', { transform: 'translate(-245 -55)' }, bld);
+el('circle', { r: 40, fill: '#120f33', stroke: '#6c63d9', 'stroke-width': 5 }, dial);
+const hand = el('line', { x1: 0, y1: 0, x2: 0, y2: -30, stroke: '#ffe08a', 'stroke-width': 6, 'stroke-linecap': 'round' }, dial);
+tl.to(hand, { rotation: 360, svgOrigin: '0 0', duration: 1.4, ease: 'power1.inOut' }, 6.3);
+// siren
+const siren = el('g', { transform: 'translate(-100 -318)', opacity: 0 }, bld);
+el('circle', { r: 120, fill: 'url(#redHalo)' }, siren); el('rect', { x: -16, y: -18, width: 32, height: 26, rx: 8, fill: '#ff4d6d' }, siren);
+tl.to(siren, { opacity: 1, duration: .2 }, 4.8).to(siren, { opacity: .25, duration: .35, repeat: 13, yoyo: true }, 5.0);
+tl.to(island, { y: -14, duration: 2.4, repeat: 6, yoyo: true, ease: 'sine.inOut' }, 0);
+
+/* ---------- main: attacker on a rock, the pipe, the mixer, the buyers ---------- */
+const rockG = el('g', { transform: 'translate(-760 420)' }, main);
+el('path', { d: 'M -190 0 L 190 0 L 120 130 L 30 240 L -70 170 L -150 100 Z', fill: 'url(#rock)' }, rockG);
+el('path', { d: 'M -190 0 L 190 0 L 166 24 L -166 24 Z', fill: '#7b64c2' }, rockG);
+const thief = el('g', { transform: 'translate(-20 0) scale(1.7)' }, rockG);
+el('ellipse', { cx: 0, cy: 4, rx: 60, ry: 12, fill: '#000', opacity: .35 }, thief);
+const tbody = el('g', {}, thief);
+el('path', { d: 'M -58 0 C -64 -60 -48 -150 0 -158 C 48 -150 64 -60 58 0 Q 0 10 -58 0 Z', fill: '#2a1640' }, tbody);
+el('path', { d: 'M -46 -10 C -50 -70 -36 -140 0 -146', stroke: '#6a3d9a', 'stroke-width': 6, fill: 'none', 'stroke-linecap': 'round' }, tbody);
+el('path', { d: 'M -40 -110 Q 0 -150 40 -110 Q 0 -96 -40 -110 Z', fill: '#12091f' }, tbody);
+const eyes = el('g', {}, tbody); for (const ex of [-14, 14]) el('ellipse', { cx: ex, cy: -112, rx: 8, ry: 6, fill: '#ff4d6d', filter: 'url(#glow)' }, eyes);
+tl.to(eyes, { scaleY: .1, svgOrigin: '0 -112', duration: .08, repeat: 1, yoyo: true }, 3.2).to(eyes, { scaleY: .1, svgOrigin: '0 -112', duration: .08, repeat: 1, yoyo: true }, 9.1);
+tl.to(tbody, { scaleY: 1.03, svgOrigin: '0 0', duration: 1.1, repeat: 13, yoyo: true, ease: 'sine.inOut' }, 0);
+const keyG = el('g', { transform: 'translate(70 -70) rotate(-30)' }, thief);
+el('circle', { cx: -22, cy: 0, r: 18, fill: 'none', stroke: '#ffd166', 'stroke-width': 9 }, keyG); el('rect', { x: -4, y: -5, width: 62, height: 10, rx: 4, fill: '#ffd166' }, keyG);
+el('rect', { x: 40, y: 0, width: 8, height: 16, fill: '#ffd166' }, keyG);
+thief.style.display = 'none'; window.__rockG = rockG; // the Rive character replaces the SVG one
+tl.to(keyG, { rotation: 20, svgOrigin: '0 0', duration: .35, ease: 'power2.out', yoyo: true, repeat: 1 }, 9.7);
+tl.to(rockG, { y: '-=16', duration: 2.1, repeat: 7, yoyo: true, ease: 'sine.inOut' }, 0);
+// "pas du minage": a pick-axe that is struck out
+const pick = el('g', { transform: 'translate(-380 -380)', opacity: 0 }, main);
+el('circle', { r: 70, fill: '#1b1236', stroke: '#9c86e0', 'stroke-width': 5 }, pick);
+el('path', { d: 'M -34 30 L 26 -30', stroke: '#c9925e', 'stroke-width': 10, 'stroke-linecap': 'round' }, pick);
+el('path', { d: 'M 2 -44 Q 36 -40 44 -6', stroke: '#c7c3e8', 'stroke-width': 12, fill: 'none', 'stroke-linecap': 'round' }, pick);
+const strike = el('path', { d: 'M -60 60 L 60 -60', stroke: '#ff4d6d', 'stroke-width': 12, 'stroke-linecap': 'round' }, pick);
+tl.to(pick, { opacity: 1, duration: .3 }, 8.2).from(strike, { drawSVG: 0, duration: .3 }, 8.55).to(pick, { opacity: 0, scale: .6, svgOrigin: '0 0', duration: .35 }, 9.4);
+// the pipe: from the building wall, past the thief's valve, down to the mixer
+const pipePath = 'M -330 40 C -560 60 -700 200 -640 330 C -560 520 60 560 360 650';
+const pipeShadow = el('path', { d: pipePath, stroke: '#0f0a24', 'stroke-width': 46, fill: 'none', 'stroke-linecap': 'round' }, main);
+const pipe = el('path', { id: 'pipe', d: pipePath, stroke: '#5b4aa8', 'stroke-width': 30, fill: 'none', 'stroke-linecap': 'round' }, main);
+const pipeHi = el('path', { d: pipePath, stroke: '#9d8cff', 'stroke-width': 6, fill: 'none', 'stroke-linecap': 'round', opacity: .7, transform: 'translate(0 -8)' }, main);
+for (const p of [pipeShadow, pipe, pipeHi]) tl.from(p, { drawSVG: 0, duration: 1.2, ease: 'power2.inOut' }, 9.75);
+const clamp = el('rect', { x: -352, y: 14, width: 36, height: 56, rx: 8, fill: '#ffd166' }, main); tl.from(clamp, { scale: 0, svgOrigin: '-334 42', duration: .4, ease: 'back.out(2)' }, 9.7);
+// tokens flowing through the pipe
+const tokens = [];
+for (let i = 0; i < 22; i++) { const t = el('circle', { r: 11, fill: '#ffd166', filter: 'url(#glow)', opacity: 0 }, main); tokens.push(t);
+  const t0 = 11.2 + i * .19;
+  tl.set(t, { opacity: 1 }, t0).to(t, { motionPath: { path: '#pipe', align: '#pipe', alignOrigin: [.5, .5] }, duration: 1.9, ease: 'none', repeat: 2 }, t0); }
+// the mixer: a dark machine that splits the stolen flow to buyers
+const mixer = el('g', { transform: 'translate(470 680)' }, main);
+el('circle', { r: 200, fill: 'url(#redHalo)', opacity: .5 }, mixer);
+el('path', { d: 'M -130 -80 L 130 -80 L 160 60 L 90 140 L -90 140 L -160 60 Z', fill: 'url(#mixerG)', stroke: '#6a3d9a', 'stroke-width': 6 }, mixer);
+const gear = el('g', {}, mixer); el('circle', { r: 46, fill: '#2a1745', stroke: '#b86bff', 'stroke-width': 8 }, gear);
+for (let k = 0; k < 8; k++) el('rect', { x: -8, y: -62, width: 16, height: 20, rx: 4, fill: '#b86bff', transform: `rotate(${k * 45})` }, gear);
+tl.to(gear, { rotation: 360, svgOrigin: '0 0', duration: 2, ease: 'none', repeat: 7 }, 0);
+const mEye = el('circle', { cx: 0, cy: 0, r: 14, fill: '#ff4d6d', filter: 'url(#glow)' }, mixer);
+tl.from(mixer, { scale: .2, opacity: 0, svgOrigin: '470 680', duration: .7, ease: 'back.out(1.7)' }, 10.6);
+// buyers: small floating platforms with screens; outlets drawn when the access is resold
+const buyers = [[820, 360], [980, 520], [1060, 720], [960, 920], [780, 1020]];
+buyers.forEach(([x, y], i) => { const out = el('path', { id: 'out' + i, d: `M 620 680 C 700 680 ${x - 160} ${y} ${x - 60} ${y}`, stroke: '#ff4d6d', 'stroke-width': 8, fill: 'none', opacity: .85 }, main);
+  tl.from(out, { drawSVG: 0, duration: .6 }, 13.9 + i * .1);
+  const b = el('g', { transform: `translate(${x} ${y})` }, main);
+  el('ellipse', { cx: 0, cy: 34, rx: 70, ry: 18, fill: '#3b2f7a' }, b); el('rect', { x: -40, y: -30, width: 80, height: 52, rx: 8, fill: '#151036', stroke: '#22d3ee', 'stroke-width': 5 }, b);
+  el('rect', { x: -30, y: -20, width: 60, height: 8, rx: 3, fill: '#22d3ee', opacity: .7 }, b); el('rect', { x: -30, y: -6, width: 40, height: 8, rx: 3, fill: '#22d3ee', opacity: .4 }, b);
+  tl.from(b, { y: '+=60', opacity: 0, duration: .6, ease: 'back.out(1.6)' }, 13.6 + i * .1);
+  tl.to(b, { y: '-=10', duration: 1.4 + i * .2, repeat: 3, yoyo: true, ease: 'sine.inOut' }, 14.3);
+  const coin = el('circle', { r: 12, fill: '#ffd166', stroke: '#c9925e', 'stroke-width': 4, opacity: 0 }, main);
+  tl.set(coin, { opacity: 1 }, 14.4 + i * .15).to(coin, { motionPath: { path: '#out' + i, align: '#out' + i, alignOrigin: [.5, .5], start: 1, end: 0 }, duration: 1.1, ease: 'power1.in' }, 14.4 + i * .15).set(coin, { opacity: 0 }, 15.5 + i * .15); });
+
+/* ---------- fore: dark cloud wisps and dust, faster parallax ---------- */
+bank(fore, -1300, 1060, 1500, '#120b2a', 9, .95); bank(fore, 2300, 1330, 1600, '#120b2a', 9, .95);
+for (let i = 0; i < 40; i++) { const d = el('circle', { cx: -800 + rnd() * 3000, cy: -400 + rnd() * 1600, r: 1.5 + rnd() * 3, fill: '#e6dcff', opacity: .25 }, fore);
+  tl.to(d, { y: -60 - rnd() * 80, x: 20 - rnd() * 40, duration: 16, ease: 'none' }, 0); }
+
+/* ---------- camera: one continuous move, parallax per layer ---------- */
+const cam = { x: 120, y: 120, s: .5 };
+const layers = [[far, .35], [mid, .8], [main, 1], [fore, 1.35]];
+const applyCam = () => { for (const [g, f] of layers) g.setAttribute('transform', `translate(960 540) scale(${cam.s.toFixed(4)}) translate(${(-cam.x * f).toFixed(2)} ${(-cam.y * f).toFixed(2)})`); };
+const camTo = (t, d, x, y, s, ease = 'power2.inOut') => tl.to(cam, { x, y, s, duration: d, ease, onUpdate: applyCam }, t);
+camTo(0, 2.2, 40, -60, .72, 'power1.inOut');          // drift in on the island, windows light up
+camTo(2.25, .9, 40, -150, 1.55);                         // "la facture": push on the counter
+camTo(3.2, 3.6, 30, -140, 1.7, 'none');                   // slow creep while it counts
+camTo(7.9, 1.3, -320, 80, .78);                           // "pas du minage": pull back, the thief appears
+camTo(9.6, 1.2, -480, 140, .95);                          // "LLMjacking": the pipe is plugged in
+camTo(11.2, 2.5, 60, 420, .82, 'sine.inOut');             // follow the tokens down to the mixer
+camTo(13.8, 1.8, 380, 560, .72);                          // "revend l'accès": the buyers
+tl.to({}, { duration: 16 }, 0);
+applyCam();
+
+/* ---------- subtitles from the real word timings ---------- */
+const SUBS = [[.6, 7.97, 'Lundi matin, la facture cloud du projet d’IA affiche plus de 100 000 dollars. En une seule journée.'], [7.97, 15.6, 'Pas du minage : du LLMjacking. Quelqu’un consomme vos modèles de langage, et revend l’accès.']];
+const sub = document.getElementById('sub'); let lastSub = null;
+tl.eventCallback('onUpdate', () => { const t = tl.time(); if (window.__drawThief) window.__drawThief(t); const s = SUBS.find(([a, b]) => t >= a && t < b); const txt = s ? s[2] : ''; if (txt !== lastSub) { sub.textContent = txt; lastSub = txt; } });
+
+window.__timelines = window.__timelines || {}; window.__timelines.main = tl; tl.seek(0);
+</script>
+<script type="module">
+/* Rive character (RML -> .riv by Rive CLI), drawn at time t from a fresh state when time goes backwards. */
+import Rive from './lib/rive/webgl2_advanced.mjs';
+const canvas = document.getElementById('rv');
+const ss = (a, t, d = .35) => { const k = Math.max(0, Math.min(1, (t - a) / d)); return k * k * (3 - 2 * k); };
+const params = t => {
+  let eyes = 1; for (const bt of [9.1, 12.6]) if (t >= bt && t < bt + .14) eyes = .08 + .92 * Math.abs((t - bt - .07) / .07);
+  eyes *= 1 - .4 * ss(10.6, t);
+  return { mouth: .04 + .12 * ss(10.5, t), eyes, arm: ss(9.35, t, .4) - .45 * ss(10.4, t, .5), lean: .1 + .35 * ss(11.2, t, .6) };
+};
+const ready = (async () => {
+  const rive = await Rive({ locateFile: f => './lib/rive/' + (f.endsWith('.wasm') ? 'rive.wasm' : f) });
+  const bytes = new Uint8Array(await (await fetch('thief.riv')).arrayBuffer());
+  const file = await rive.load(bytes);
+  const renderer = rive.makeRenderer(canvas, true);
+  let ab, sm, vmi, cur = -1;
+  const reset = () => { ab = file.defaultArtboard(); sm = new rive.StateMachineInstance(ab.stateMachineByIndex(0), ab);
+    vmi = file.defaultArtboardViewModel(ab).defaultInstance(); ab.bindViewModelInstance(vmi); sm.bindViewModelInstance(vmi); cur = 0; };
+  const setP = t => { const p = params(t); for (const k in p) vmi.number(k).value = p[k]; };
+  window.__drawThief = t => {
+    if (!ab || t < cur - 1e-6) reset();
+    while (cur < t - 1e-6) { const dt = Math.min(1 / 30, t - cur); cur += dt; setP(cur); sm.advance(dt); ab.advance(dt); }
+    setP(t); sm.advance(0); ab.advance(0);
+    renderer.clear(); renderer.save();
+    renderer.align(rive.Fit.contain, rive.Alignment.center, { minX: 0, minY: 0, maxX: 1200, maxY: 1400 }, ab.bounds);
+    ab.draw(renderer); renderer.restore(); renderer.flush(); rive.resolveAnimationFrame();
+    const pop = ss(8.1, t, .5), m = window.__rockG.getScreenCTM();
+    const M = new DOMMatrix([m.a, m.b, m.c, m.d, m.e, m.f]).translate(-20, 40 * (1 - pop)).scale(.88 / 2).translate(-600, -1280);
+    canvas.style.transform = M.toString(); canvas.style.opacity = pop.toFixed(3);
+  };
+  window.__drawThief(window.__timelines.main.time());
+})();
+window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {}; window.__hf.buildReady.rive = ready;
+</script>
+</body>
+</html>
