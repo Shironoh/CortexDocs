@@ -7,3 +7,5 @@ versions/*/voice/
 versions/*/soundtrack.wav
 __pycache__/
 gallery/*.mp3
+lookdev/**/.hyperframes/
+lookdev/**/lookdev.mp4
