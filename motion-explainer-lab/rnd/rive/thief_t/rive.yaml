@@ -1,0 +1,4 @@
+name: thief_t
+logs:
+  file: build/rive.log
+  problems: build/problems.log
