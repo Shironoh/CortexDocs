@@ -9,6 +9,7 @@ function sceneKit(K) {
     text: '#F8FAFC', ink: '#0B1A3A', p1: '#14295C', p2: '#1E3A8A', paper: '#E8EEF9', muted: '#94A3B8' };
   const FLOOR = 250, main = K.layers.main, far = K.layers.far, front = K.layers.front;
   const sc = id => K.sc(id).start;
+  let uid = 0; // deterministic ids (clipPath, text blocks): same page, same ids, every run
   const G = (parent, x, y, o = {}) => { const g = K.g(parent); g._a = K.A(g, { x, y, ...o }); return g; };
   const I = (name, parent, x, y, s, c, o = {}) => { const g = ico(name, parent, 0, 0, 1, c); g._a = K.A(g, { x, y, s, ...o }); return g; };
   const F = (t, d, tg, part, o) => K.frame(t, d, tg, part, o);
@@ -81,7 +82,7 @@ function sceneKit(K) {
     S('rect', { x: -W / 2 + 10, y: -Hh / 2 + 12, width: W, height: Hh, rx: 28, fill: '#000', opacity: .25 }, d);
     S('rect', { x: -W / 2, y: -Hh / 2, width: W, height: Hh, rx: 28, fill: o.bg || '#071028', stroke: o.col || C.cyan, 'stroke-width': 6 }, d);
     if (o.title) K.tx(d, -W / 2 + 30, -Hh / 2 - 40, o.title, { size: 40, fill: o.col || C.cyan, weight: 700, anchor: 'start' });
-    const clip = 'clip' + Math.random().toString(36).slice(2, 8); const cp = S('clipPath', { id: clip }, d); S('rect', { x: -W / 2, y: -Hh / 2 + 10, width: W, height: Hh - 20 }, cp);
+    const clip = 'clip' + (++uid).toString(36); const cp = S('clipPath', { id: clip }, d); S('rect', { x: -W / 2, y: -Hh / 2 + 10, width: W, height: Hh - 20 }, cp);
     const inner = K.g(d, { 'clip-path': `url(#${clip})` }); const hl = S('rect', { x: -W / 2 + 14, y: -lh / 2, width: W - 28, height: lh, rx: 14, fill: o.col || C.cyan, 'fill-opacity': .22 }, inner);
     const els = lines.map((l, i) => K.tx(inner, -W / 2 + 34, i * lh, l, { size, mono: o.mono !== false, fill: C.text, weight: 600, anchor: 'start' }));
     const st = [...steps].sort((a, b) => a[0] - b[0]); for (const s of st) K.mark(s[0]);
@@ -145,7 +146,7 @@ function sceneKit(K) {
     S('rect', { x: -W / 2, y: -H / 2, width: W, height: H, rx: 26, fill: o.bg || '#071028', stroke: o.col || C.cyan, 'stroke-width': 6 }, p);
     if (o.title) { const tt = G(p, -W / 2 + 20, -H / 2 - 48); K.tx(tt, 0, 0, o.title, { size: 52, fill: o.col || C.cyan, weight: 700, anchor: 'start' }); }
     const hlg = K.g(p); const x0 = -W / 2 + 34, y0 = -H / 2 + 30 + lh / 2, cw = size * .6;
-    const bid = 'p' + Math.random().toString(36).slice(2, 8); const els = lines.map((l, i) => { const e = K.tx(p, x0, y0 + i * lh, l, { size, mono: true, fill: o.fill || C.text, weight: 600, anchor: 'start', block: bid });
+    const bid = 'p' + (++uid).toString(36); const els = lines.map((l, i) => { const e = K.tx(p, x0, y0 + i * lh, l, { size, mono: true, fill: o.fill || C.text, weight: 600, anchor: 'start', block: bid });
       if (o.typeAt != null && i === 0) typeIn(e, l, o.typeAt, Math.min(1.6, .04 * l.length + .4)); return e; });
     p._els = els; p._lh = lh;
     p._hi = (li, from, len, t0, ho = {}) => { const r = S('rect', { x: x0 + from * cw - 8, y: y0 + li * lh - lh / 2 + 4, width: len * cw + 16, height: lh - 8, rx: 10,
