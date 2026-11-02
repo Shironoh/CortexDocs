@@ -1,0 +1,15 @@
+w0 frame 0/1031
+w1 frame 0/1031
+w2 frame 0/1031
+w3 frame 0/1031
+w0 frame 480/1031
+w3 frame 480/1031
+w1 frame 480/1031
+w2 frame 480/1031
+w0 frame 960/1031
+w3 frame 960/1031
+w2 frame 960/1031
+w1 frame 960/1031
+silent video -> versions/v8test-llmjacking/_silent.mp4
+soundtrack -> versions/v8test-llmjacking/soundtrack.mp3 | voix : piper (timing réel) | video -> versions/v8test-llmjacking/video.mp4
+/home/user/CortexDocs/motion-explainer-lab/versions/v8test-llmjacking/index.html : 2837 Ko | voix réelle : oui | bande son intégrée : oui
