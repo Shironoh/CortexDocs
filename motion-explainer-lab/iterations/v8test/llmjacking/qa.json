@@ -1,0 +1,1852 @@
+{
+ "summary": {
+  "beat_gaps_gt2_5s": [],
+  "cues_under_beat_quota": [],
+  "moving_captures": 9,
+  "duration_s": 171.7,
+  "cues": 22,
+  "scenes": 7,
+  "say_words": 405,
+  "words_per_min": 141.5,
+  "captures": 66,
+  "captures_with_issue": 47,
+  "issues": {
+   "small": 40,
+   "toomanytext": 15,
+   "focus_small": 23,
+   "focus_offcenter": 10,
+   "focus_hidden": 9,
+   "cut": 17,
+   "subj_in_band": 5,
+   "subband": 7,
+   "subj_cut": 7
+  },
+  "frozen_windows_gt2_5s": [],
+  "avg_text_blocks": 3.61,
+  "avg_onscreen_words": 8.15,
+  "avg_empty": 0.081,
+  "shot_values_per_scene": {
+   "s1": [
+    0.85,
+    1.41,
+    2.2
+   ],
+   "s2": [
+    0.87,
+    1.36
+   ],
+   "s3": [
+    0.89,
+    1.31
+   ],
+   "s4": [
+    0.96,
+    2.4
+   ],
+   "s5": [
+    0.79,
+    1.2,
+    2.4
+   ],
+   "s6": [
+    0.88,
+    1.26
+   ],
+   "s7": [
+    0.78,
+    1.06
+   ]
+  },
+  "scenes_lt3_shot_values": [
+   "s2",
+   "s3",
+   "s4",
+   "s6",
+   "s7"
+  ],
+  "analyst_acting_scenes": "7/7",
+  "villain_scenes": "3/7",
+  "js_errors": [],
+  "mobile_hscroll": false,
+  "sound_events": 100
+ },
+ "captures": [
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c1_25.jpg",
+   "t": 2.4435000000000002,
+   "ntext": 2,
+   "words": 6,
+   "focus": {
+    "cx": 801,
+    "cy": 401,
+    "area": 0.627
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c1_50.jpg",
+   "t": 4.287,
+   "ntext": 2,
+   "words": 6,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.515
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c1_75.jpg",
+   "t": 6.1305,
+   "ntext": 2,
+   "words": 11,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.515
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c2_25.jpg",
+   "t": 9.82325,
+   "ntext": 5,
+   "words": 21,
+   "focus": {
+    "cx": 866,
+    "cy": 352,
+    "area": 0.022
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Facture cloud · projet IA",
+     "v": 39.3
+    },
+    {
+     "k": "small",
+     "s": "cumul observé : jusqu'à 1 M$",
+     "v": 39.3
+    },
+    {
+     "k": "toomanytext",
+     "v": 5,
+     "s": "Facture cloud · projet IA | + 100 000 $ / jour | cumul observé : jusqu'à 1 M$ | LLMjacking | pas du minage"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.022
+    }
+   ],
+   "moving": false,
+   "empty": 0.035
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c2_50.jpg",
+   "t": 11.6725,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 867,
+    "cy": 350,
+    "area": 0.022
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Facture cloud · projet IA",
+     "v": 39.3
+    },
+    {
+     "k": "small",
+     "s": "cumul observé : jusqu'à 1 M$",
+     "v": 39.3
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "Facture cloud · projet IA | + 100 000 $ / jour | cumul observé : jusqu'à 1 M$ | LLMjacking"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.022
+    }
+   ],
+   "moving": false,
+   "empty": 0.035
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c2_75.jpg",
+   "t": 13.52175,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 223,
+    "cy": 384,
+    "area": 0.064
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Facture cloud · projet IA",
+     "v": 39.8
+    },
+    {
+     "k": "small",
+     "s": "cumul observé : jusqu'à 1 M$",
+     "v": 39.8
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "Facture cloud · projet IA | + 100 000 $ / jour | cumul observé : jusqu'à 1 M$ | LLMjacking"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      223,
+      384
+     ]
+    }
+   ],
+   "moving": false,
+   "empty": 0.035
+  },
+  {
+   "cue": "c3",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c3_25.jpg",
+   "t": 16.924249999999997,
+   "ntext": 1,
+   "words": 8,
+   "focus": {
+    "cx": 1533,
+    "cy": 601,
+    "area": 0.004
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1533,
+      601
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.004
+    }
+   ],
+   "moving": false,
+   "empty": 0.059
+  },
+  {
+   "cue": "c3",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c3_50.jpg",
+   "t": 18.4775,
+   "ntext": 1,
+   "words": 8,
+   "focus": {
+    "cx": 1533,
+    "cy": 601,
+    "area": 0.004
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1533,
+      601
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.004
+    }
+   ],
+   "moving": false,
+   "empty": 0.059
+  },
+  {
+   "cue": "c3",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c3_75.jpg",
+   "t": 20.030749999999998,
+   "ntext": 4,
+   "words": 11,
+   "focus": {
+    "cx": 770,
+    "cy": 494,
+    "area": 0.169
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "caméras",
+     "v": 39.5
+    }
+   ],
+   "moving": false,
+   "empty": 0.059
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c4_25.jpg",
+   "t": 23.154249999999998,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 405,
+    "cy": 357,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false,
+   "empty": 0.144
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c4_50.jpg",
+   "t": 24.724499999999995,
+   "ntext": 1,
+   "words": 3,
+   "focus": {
+    "cx": 404,
+    "cy": 410,
+    "area": 0.087
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.144
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c4_75.jpg",
+   "t": 26.294749999999997,
+   "ntext": 2,
+   "words": 5,
+   "focus": {
+    "cx": 404,
+    "cy": 404,
+    "area": 0.067
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.067
+    }
+   ],
+   "moving": false,
+   "empty": 0.144
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c5_25.jpg",
+   "t": 29.158499999999993,
+   "ntext": 4,
+   "words": 7,
+   "focus": {
+    "cx": 1150,
+    "cy": 269,
+    "area": 0.054
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "compte de service | jeton GitHub | session | {\"max_tokens"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.054
+    }
+   ],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c5_50.jpg",
+   "t": 30.451999999999995,
+   "ntext": 3,
+   "words": 5,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.134
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.03
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c5_75.jpg",
+   "t": 31.745499999999993,
+   "ntext": 3,
+   "words": 5,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.134
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "jeton GitHub"
+    }
+   ],
+   "moving": false,
+   "empty": 0.03
+  },
+  {
+   "cue": "c6",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c6_25.jpg",
+   "t": 35.0425,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 800,
+    "cy": 401,
+    "area": 0.157
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.031
+  },
+  {
+   "cue": "c6",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c6_50.jpg",
+   "t": 37.046,
+   "ntext": 1,
+   "words": 4,
+   "focus": {
+    "cx": 731,
+    "cy": 524,
+    "area": 0.307
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.0
+  },
+  {
+   "cue": "c6",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c6_75.jpg",
+   "t": 39.0495,
+   "ntext": 1,
+   "words": 4,
+   "focus": {
+    "cx": 686,
+    "cy": 376,
+    "area": 0.309
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c7_25.jpg",
+   "t": 42.4205,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1001,
+    "cy": 283,
+    "area": 0.122
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.186
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c7_50.jpg",
+   "t": 43.788,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1001,
+    "cy": 283,
+    "area": 0.122
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.186
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c7_75.jpg",
+   "t": 45.1555,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 986,
+    "cy": 287,
+    "area": 0.123
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.186
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c8_25.jpg",
+   "t": 49.182,
+   "ntext": 2,
+   "words": 7,
+   "focus": {
+    "cx": 794,
+    "cy": 336,
+    "area": 0.159
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.214
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c8_50.jpg",
+   "t": 51.841,
+   "ntext": 3,
+   "words": 9,
+   "focus": {
+    "cx": 794,
+    "cy": 336,
+    "area": 0.159
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "toujours écrit",
+     "v": 40
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.214
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c8_75.jpg",
+   "t": 54.5,
+   "ntext": 4,
+   "words": 6,
+   "focus": {
+    "cx": 800,
+    "cy": 397,
+    "area": 0.257
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "google.api.serviceusage.v1.ServiceUsage."
+    }
+   ],
+   "moving": false,
+   "empty": 0.045
+  },
+  {
+   "cue": "c9",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c9_25.jpg",
+   "t": 58.93000000000001,
+   "ntext": 5,
+   "words": 12,
+   "focus": {
+    "cx": 772,
+    "cy": 604,
+    "area": 0.175
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "Google Cloud · journal Admin Activity | google.api.serviceusage.v1.ServiceUsage. | AWS · CloudTrail | PutUseCaseForModelAccess | CreateFoundationModelAgreement"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.113
+  },
+  {
+   "cue": "c9",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c9_50.jpg",
+   "t": 60.70100000000001,
+   "ntext": 5,
+   "words": 12,
+   "focus": {
+    "cx": 768,
+    "cy": 122,
+    "area": 0.007
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "Google Cloud · journal Admin Activity | google.api.serviceusage.v1.ServiceUsage. | AWS · CloudTrail | PutUseCaseForModelAccess | CreateFoundationModelAgreement"
+    }
+   ],
+   "moving": true,
+   "empty": 0.113
+  },
+  {
+   "cue": "c9",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c9_75.jpg",
+   "t": 62.47200000000001,
+   "ntext": 5,
+   "words": 12,
+   "focus": {
+    "cx": 774,
+    "cy": 135,
+    "area": 0.016
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Google Cloud · journal Admin Activity"
+    },
+    {
+     "k": "cut",
+     "s": "google.api.serviceusage.v1.ServiceUsage."
+    },
+    {
+     "k": "cut",
+     "s": "AWS · CloudTrail"
+    },
+    {
+     "k": "cut",
+     "s": "PutUseCaseForModelAccess"
+    },
+    {
+     "k": "cut",
+     "s": "CreateFoundationModelAgreement"
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "Google Cloud · journal Admin Activity | google.api.serviceusage.v1.ServiceUsage. | AWS · CloudTrail | PutUseCaseForModelAccess | CreateFoundationModelAgreement"
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.016
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:foe"
+    }
+   ],
+   "moving": false,
+   "empty": 0.146
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c10_25.jpg",
+   "t": 65.27475000000001,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 858,
+    "cy": 115,
+    "area": 0.016
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "google.api.serviceusage.v1.ServiceUsage."
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      858,
+      115
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.016
+    }
+   ],
+   "moving": false,
+   "empty": 0.116
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c10_50.jpg",
+   "t": 66.30650000000001,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 857,
+    "cy": 118,
+    "area": 0.013
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "google.api.serviceusage.v1.ServiceUsage."
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      857,
+      118
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.013
+    }
+   ],
+   "moving": false,
+   "empty": 0.116
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c10_75.jpg",
+   "t": 67.33825000000002,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 857,
+    "cy": 118,
+    "area": 0.013
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "google.api.serviceusage.v1.ServiceUsage."
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      857,
+      118
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.013
+    }
+   ],
+   "moving": false,
+   "empty": 0.116
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c11_25.jpg",
+   "t": 70.20425000000002,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 690,
+    "cy": 357,
+    "area": 0.048
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.045
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c11_50.jpg",
+   "t": 72.03850000000001,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 690,
+    "cy": 357,
+    "area": 0.048
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.045
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c11_75.jpg",
+   "t": 73.87275000000002,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 1381,
+    "cy": 751,
+    "area": 0.082
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "DeleteModelInvocationLoggingConfiguratio"
+    }
+   ],
+   "moving": true,
+   "empty": 0.0
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c12_25.jpg",
+   "t": 77.43425000000002,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 737,
+    "cy": 262,
+    "area": 0.057
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.04
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c12_50.jpg",
+   "t": 79.16150000000003,
+   "ntext": 3,
+   "words": 9,
+   "focus": {
+    "cx": 784,
+    "cy": 606,
+    "area": 0.041
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "compte ≠ pipeline IaC → haute sévérité",
+     "v": 38.5
+    }
+   ],
+   "moving": false,
+   "empty": 0.04
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c12_75.jpg",
+   "t": 80.88875000000003,
+   "ntext": 3,
+   "words": 9,
+   "focus": {
+    "cx": 784,
+    "cy": 606,
+    "area": 0.099
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.04
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c13_25.jpg",
+   "t": 86.50850000000003,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 135,
+    "area": 0.009
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      800,
+      135
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.009
+    }
+   ],
+   "moving": false,
+   "empty": 0.182
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c13_50.jpg",
+   "t": 90.40100000000002,
+   "ntext": 6,
+   "words": 13,
+   "focus": {
+    "cx": 1485,
+    "cy": -136,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Google Cloud"
+    },
+    {
+     "k": "cut",
+     "s": "GenerateContent"
+    },
+    {
+     "k": "cut",
+     "s": "Data Access : off"
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off"
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1485,
+      -136
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false,
+   "empty": 0.273
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c13_75.jpg",
+   "t": 94.29350000000002,
+   "ntext": 9,
+   "words": 18,
+   "focus": {
+    "cx": 986,
+    "cy": 265,
+    "area": 0.008
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "InvokeModel"
+    },
+    {
+     "k": "cut",
+     "s": "par défaut : oui"
+    },
+    {
+     "k": "cut",
+     "s": "Completions"
+    },
+    {
+     "k": "cut",
+     "s": "diagnostic : off"
+    },
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.008
+    }
+   ],
+   "moving": false,
+   "empty": 0.089
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c14_25.jpg",
+   "t": 100.36025000000002,
+   "ntext": 13,
+   "words": 32,
+   "focus": {
+    "cx": 840,
+    "cy": 197,
+    "area": 0.205
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "AWS",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "par défaut : oui",
+     "v": 39.6
+    },
+    {
+     "k": "small",
+     "s": "Google Cloud",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "Data Access : off",
+     "v": 39.6
+    },
+    {
+     "k": "small",
+     "s": "Azure",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "diagnostic : off",
+     "v": 39.6
+    },
+    {
+     "k": "small",
+     "s": "CloudTrail · exemple publié par AWS",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "\"eventName\": \"ConverseStream\",",
+     "v": 34.9
+    },
+    {
+     "k": "small",
+     "s": "\"eventType\": \"AwsServiceEvent\",",
+     "v": 34.9
+    },
+    {
+     "k": "small",
+     "s": "\"inputTokens\": 18694, \"outputTokens\": 35",
+     "v": 34.9
+    },
+    {
+     "k": "toomanytext",
+     "v": 8,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off | CloudTrail · exemple publié par AWS | \"eventName\": \"ConverseStream\", | \"eventType\": \"AwsServiceEvent\", | \"inputTokens\": 18694, \"outputTokens\": 35"
+    }
+   ],
+   "moving": false,
+   "empty": 0.149
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c14_50.jpg",
+   "t": 102.53450000000002,
+   "ntext": 13,
+   "words": 32,
+   "focus": {
+    "cx": 840,
+    "cy": 197,
+    "area": 0.205
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "AWS",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "par défaut : oui",
+     "v": 39.6
+    },
+    {
+     "k": "small",
+     "s": "Google Cloud",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "Data Access : off",
+     "v": 39.6
+    },
+    {
+     "k": "small",
+     "s": "Azure",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "diagnostic : off",
+     "v": 39.6
+    },
+    {
+     "k": "small",
+     "s": "CloudTrail · exemple publié par AWS",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "\"eventName\": \"ConverseStream\",",
+     "v": 34.9
+    },
+    {
+     "k": "small",
+     "s": "\"eventType\": \"AwsServiceEvent\",",
+     "v": 34.9
+    },
+    {
+     "k": "small",
+     "s": "\"inputTokens\": 18694, \"outputTokens\": 35",
+     "v": 34.9
+    },
+    {
+     "k": "toomanytext",
+     "v": 8,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off | CloudTrail · exemple publié par AWS | \"eventName\": \"ConverseStream\", | \"eventType\": \"AwsServiceEvent\", | \"inputTokens\": 18694, \"outputTokens\": 35"
+    }
+   ],
+   "moving": false,
+   "empty": 0.149
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c14_75.jpg",
+   "t": 104.70875000000002,
+   "ntext": 7,
+   "words": 16,
+   "focus": {
+    "cx": 800,
+    "cy": 144,
+    "area": 0.04
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 5,
+     "s": "Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off | Azure : Diagnostic Logs"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.04
+    }
+   ],
+   "moving": false,
+   "empty": 0.16
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c15_25.jpg",
+   "t": 108.72100000000003,
+   "ntext": 9,
+   "words": 18,
+   "focus": {
+    "cx": 1312,
+    "cy": 189,
+    "area": 0.034
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off"
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.034
+    }
+   ],
+   "moving": false,
+   "empty": 0.062
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c15_50.jpg",
+   "t": 110.55900000000003,
+   "ntext": 9,
+   "words": 18,
+   "focus": {
+    "cx": 1312,
+    "cy": 189,
+    "area": 0.034
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off"
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.034
+    }
+   ],
+   "moving": false,
+   "empty": 0.062
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c15_75.jpg",
+   "t": 112.39700000000003,
+   "ntext": 9,
+   "words": 18,
+   "focus": {
+    "cx": 1312,
+    "cy": 189,
+    "area": 0.034
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off"
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.034
+    }
+   ],
+   "moving": false,
+   "empty": 0.062
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c16_25.jpg",
+   "t": 116.27875000000003,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": -1277,
+    "cy": 82,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -1277,
+      82
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c16_50.jpg",
+   "t": 118.32250000000003,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 832,
+    "cy": 403,
+    "area": 0.053
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c16_75.jpg",
+   "t": 120.36625000000004,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 832,
+    "cy": 403,
+    "area": 0.054
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c17_25.jpg",
+   "t": 124.90325000000004,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 800,
+    "cy": 188,
+    "area": 0.016
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c17_50.jpg",
+   "t": 127.39650000000005,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 188,
+    "area": 0.016
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "< 8 h"
+    }
+   ],
+   "moving": false,
+   "empty": 0.0
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c17_75.jpg",
+   "t": 129.88975000000005,
+   "ntext": 3,
+   "words": 8,
+   "focus": {
+    "cx": 838,
+    "cy": 132,
+    "area": 0.131
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      838,
+      132
+     ]
+    }
+   ],
+   "moving": false,
+   "empty": 0.003
+  },
+  {
+   "cue": "c18",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c18_25.jpg",
+   "t": 134.40400000000002,
+   "ntext": 1,
+   "words": 5,
+   "focus": {
+    "cx": 800,
+    "cy": 330,
+    "area": 0.088
+   },
+   "issues": [],
+   "moving": false,
+   "empty": 0.387
+  },
+  {
+   "cue": "c18",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c18_50.jpg",
+   "t": 136.42500000000004,
+   "ntext": 2,
+   "words": 6,
+   "focus": {
+    "cx": 1260,
+    "cy": 107,
+    "area": 0.069
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "mixer"
+    }
+   ],
+   "moving": true,
+   "empty": 0.003
+  },
+  {
+   "cue": "c18",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c18_75.jpg",
+   "t": 138.44600000000003,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 2072,
+    "cy": -178,
+    "area": 0
+   },
+   "issues": [],
+   "moving": true,
+   "empty": 0.087
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c19_25.jpg",
+   "t": 142.22300000000004,
+   "ntext": 5,
+   "words": 5,
+   "focus": {
+    "cx": 555,
+    "cy": 234,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.087
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c19_50.jpg",
+   "t": 143.97900000000004,
+   "ntext": 6,
+   "words": 10,
+   "focus": {
+    "cx": 555,
+    "cy": 232,
+    "area": 0.031
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.085
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c19_75.jpg",
+   "t": 145.73500000000004,
+   "ntext": 6,
+   "words": 10,
+   "focus": {
+    "cx": 555,
+    "cy": 232,
+    "area": 0.031
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.085
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c20_25.jpg",
+   "t": 149.215,
+   "ntext": 6,
+   "words": 15,
+   "focus": {
+    "cx": 770,
+    "cy": 213,
+    "area": 0.025
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "2 · Data Access : ON · coupure → alerte",
+     "v": 34.7
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.062
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c20_50.jpg",
+   "t": 150.93900000000002,
+   "ntext": 6,
+   "words": 15,
+   "focus": {
+    "cx": 770,
+    "cy": 213,
+    "area": 0.035
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.062
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c20_75.jpg",
+   "t": 152.663,
+   "ntext": 6,
+   "words": 15,
+   "focus": {
+    "cx": 770,
+    "cy": 213,
+    "area": 0.035
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.062
+  },
+  {
+   "cue": "c21",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c21_25.jpg",
+   "t": 156.12025,
+   "ntext": 6,
+   "words": 10,
+   "focus": {
+    "cx": 508,
+    "cy": 224,
+    "area": 0.03
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false,
+   "empty": 0.057
+  },
+  {
+   "cue": "c21",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c21_50.jpg",
+   "t": 157.8535,
+   "ntext": 5,
+   "words": 9,
+   "focus": {
+    "cx": 798,
+    "cy": 286,
+    "area": 0.05
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "activation"
+    },
+    {
+     "k": "subband",
+     "s": "consommation"
+    }
+   ],
+   "moving": true,
+   "empty": 0.12
+  },
+  {
+   "cue": "c21",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c21_75.jpg",
+   "t": 159.58675,
+   "ntext": 5,
+   "words": 9,
+   "focus": {
+    "cx": 786,
+    "cy": 281,
+    "area": 0.05
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "activation"
+    },
+    {
+     "k": "subband",
+     "s": "consommation"
+    }
+   ],
+   "moving": true,
+   "empty": 0.118
+  },
+  {
+   "cue": "c22",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c22_25.jpg",
+   "t": 163.35799999999998,
+   "ntext": 5,
+   "words": 5,
+   "focus": {
+    "cx": 1282,
+    "cy": 319,
+    "area": 0.003
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "clé",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "activation",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "caméras",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "consommation",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "facture",
+     "v": 43.5
+    },
+    {
+     "k": "focus_small",
+     "v": 0.003
+    }
+   ],
+   "moving": false,
+   "empty": 0.064
+  },
+  {
+   "cue": "c22",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c22_50.jpg",
+   "t": 165.39599999999996,
+   "ntext": 5,
+   "words": 5,
+   "focus": {
+    "cx": 1282,
+    "cy": 319,
+    "area": 0.003
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.003
+    }
+   ],
+   "moving": false,
+   "empty": 0.064
+  },
+  {
+   "cue": "c22",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c22_75.jpg",
+   "t": 167.43399999999997,
+   "ntext": 5,
+   "words": 5,
+   "focus": {
+    "cx": 1282,
+    "cy": 319,
+    "area": 0.003
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "clé",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "activation",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "caméras",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "consommation",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "facture",
+     "v": 43.5
+    },
+    {
+     "k": "focus_small",
+     "v": 0.003
+    }
+   ],
+   "moving": false,
+   "empty": 0.064
+  }
+ ]
+}

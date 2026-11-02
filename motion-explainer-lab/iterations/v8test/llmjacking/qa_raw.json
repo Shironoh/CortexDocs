@@ -1,0 +1,4164 @@
+{
+ "meta": {
+  "duration": 171.67199999999994,
+  "cues": [
+   {
+    "id": "c1",
+    "sc": "s1",
+    "start": 0.6,
+    "end": 7.974,
+    "dur": 7.3740000000000006,
+    "words": 18,
+    "sub": "Lundi matin, la facture cloud du projet d'IA affiche plus de 100 000 dollars. En une seule journée.",
+    "guess": false
+   },
+   {
+    "id": "c2",
+    "sc": "s1",
+    "start": 7.974,
+    "end": 15.370999999999999,
+    "dur": 7.396999999999999,
+    "words": 17,
+    "sub": "Pas du minage : du LLMjacking. Quelqu'un consomme vos modèles de langage, et revend l'accès.",
+    "guess": false
+   },
+   {
+    "id": "c3",
+    "sc": "s1",
+    "start": 15.370999999999999,
+    "end": 21.583999999999996,
+    "dur": 6.212999999999998,
+    "words": 15,
+    "sub": "Un cas type, tiré des incidents décrits par Mandiant. À quel moment pouvait-on le voir ?",
+    "guess": false
+   },
+   {
+    "id": "c4",
+    "sc": "s2",
+    "start": 21.583999999999996,
+    "end": 27.864999999999995,
+    "dur": 6.281,
+    "words": 16,
+    "sub": "Tout commence par une clé : un compte de service exposé, un jeton GitHub, une session volée.",
+    "guess": false
+   },
+   {
+    "id": "c5",
+    "sc": "s2",
+    "start": 27.864999999999995,
+    "end": 33.038999999999994,
+    "dur": 5.173999999999997,
+    "words": 9,
+    "sub": "Une requête, un seul token. Personne ne verra rien.",
+    "guess": false
+   },
+   {
+    "id": "c6",
+    "sc": "s2",
+    "start": 33.038999999999994,
+    "end": 41.053,
+    "dur": 8.014000000000006,
+    "words": 21,
+    "sub": "Il valide les clés volées par des requêtes d'un seul token, sous les seuils d'alerte. Le volume ne vous préviendra pas.",
+    "guess": false
+   },
+   {
+    "id": "c7",
+    "sc": "s3",
+    "start": 41.053,
+    "end": 46.523,
+    "dur": 5.470000000000003,
+    "words": 11,
+    "sub": "Souvent, le service d'IA n'était même pas activé. Alors il l'active.",
+    "guess": false
+   },
+   {
+    "id": "c8",
+    "sc": "s3",
+    "start": 46.523,
+    "end": 57.159000000000006,
+    "dur": 10.636,
+    "words": 25,
+    "sub": "Google Cloud : EnableService, dans le journal Admin Activity, toujours écrit. AWS : la demande d'accès à un modèle.",
+    "guess": false
+   },
+   {
+    "id": "c9",
+    "sc": "s3",
+    "start": 57.159000000000006,
+    "end": 64.24300000000001,
+    "dur": 7.084000000000006,
+    "words": 17,
+    "sub": "Toute activation non prévue est un événement critique : votre meilleure alerte, car elle arrive avant la facture.",
+    "guess": false
+   },
+   {
+    "id": "c10",
+    "sc": "s4",
+    "start": 64.24300000000001,
+    "end": 68.37000000000002,
+    "dur": 4.127000000000007,
+    "words": 8,
+    "sub": "Avant de consommer, je regarde si on m'observe.",
+    "guess": false
+   },
+   {
+    "id": "c11",
+    "sc": "s4",
+    "start": 68.37000000000002,
+    "end": 75.70700000000002,
+    "dur": 7.337000000000001,
+    "words": 22,
+    "sub": "Il lit la politique d'audit pour savoir si les journaux Data Access sont actifs, ou coupe la journalisation des appels au modèle.",
+    "guess": false
+   },
+   {
+    "id": "c12",
+    "sc": "s4",
+    "start": 75.70700000000002,
+    "end": 82.61600000000003,
+    "dur": 6.909000000000009,
+    "words": 15,
+    "sub": "Une coupure de journalisation par un compte qui n'est pas votre pipeline d'infrastructure : haute sévérité.",
+    "guess": false
+   },
+   {
+    "id": "c13",
+    "sc": "s5",
+    "start": 82.61600000000003,
+    "end": 98.18600000000002,
+    "dur": 15.56999999999999,
+    "words": 27,
+    "sub": "Devinez : vos journaux voient-ils chaque appel au modèle ?|Ça dépend. AWS : oui, par défaut. Google Cloud : non, l'inférence est dans Data Access, éteint par défaut.",
+    "guess": true
+   },
+   {
+    "id": "c14",
+    "sc": "s5",
+    "start": 98.18600000000002,
+    "end": 106.88300000000002,
+    "dur": 8.697,
+    "words": 22,
+    "sub": "Chez AWS, la fin de chaque flux note même les tokens consommés. Chez Azure, il faut les journaux de diagnostic.",
+    "guess": false
+   },
+   {
+    "id": "c15",
+    "sc": "s5",
+    "start": 106.88300000000002,
+    "end": 114.23500000000003,
+    "dur": 7.3520000000000065,
+    "words": 17,
+    "sub": "On croit voir l'attaque dans les journaux. Sans réglage, sur Google Cloud, on ne voit que l'activation.",
+    "guess": false
+   },
+   {
+    "id": "c16",
+    "sc": "s6",
+    "start": 114.23500000000003,
+    "end": 122.41000000000004,
+    "dur": 8.175000000000008,
+    "words": 18,
+    "sub": "Pourquoi un tel volume ? L'accès est revendu : des passerelles, les « LLM Mixers », agrègent les clés volées.",
+    "guess": false
+   },
+   {
+    "id": "c17",
+    "sc": "s6",
+    "start": 122.41000000000004,
+    "end": 132.38300000000004,
+    "dur": 9.97300000000001,
+    "words": 25,
+    "sub": "Devinez combien d'appels l'une d'elles a passés en moins de 8 heures.|Plus de 500 000. Près d'un million de dollars, pour la victime.",
+    "guess": true
+   },
+   {
+    "id": "c18",
+    "sc": "s6",
+    "start": 132.38300000000004,
+    "end": 140.46700000000004,
+    "dur": 8.083999999999993,
+    "words": 19,
+    "sub": "Ses clients paient environ 60 dollars par mois. Pour vous, la facture arrive trop tard : il faut détecter avant.",
+    "guess": false
+   },
+   {
+    "id": "c19",
+    "sc": "s7",
+    "start": 140.46700000000004,
+    "end": 147.491,
+    "dur": 7.023999999999984,
+    "words": 14,
+    "sub": "Un : alertez sur toute activation d'un service d'IA, dans Admin Activity ou CloudTrail.",
+    "guess": false
+   },
+   {
+    "id": "c20",
+    "sc": "s7",
+    "start": 147.491,
+    "end": 154.387,
+    "dur": 6.895999999999998,
+    "words": 18,
+    "sub": "Deux : allumez les yeux. Data Access sur les projets d'IA, et une alerte sur toute coupure de journalisation.",
+    "guess": false
+   },
+   {
+    "id": "c21",
+    "sc": "s7",
+    "start": 154.387,
+    "end": 161.31999999999996,
+    "dur": 6.932999999999976,
+    "words": 18,
+    "sub": "Trois : chassez les requêtes d'un token et les pics d'erreurs de quota. Et posez des plafonds de dépense.",
+    "guess": false
+   },
+   {
+    "id": "c22",
+    "sc": "s7",
+    "start": 161.31999999999996,
+    "end": 169.47199999999995,
+    "dur": 8.151999999999997,
+    "words": 17,
+    "sub": "Simplification : la vraie chaîne passe aussi par l'escalade de droits et la persistance. Ce sera l'épisode 2.",
+    "guess": false
+   }
+  ],
+  "scenes": [
+   {
+    "id": "s1",
+    "title": "100 000 $ en un jour",
+    "start": 0.6,
+    "end": 21.583999999999996
+   },
+   {
+    "id": "s2",
+    "title": "La clé et le test à 1 token",
+    "start": 21.583999999999996,
+    "end": 41.053
+   },
+   {
+    "id": "s3",
+    "title": "L'activation",
+    "start": 41.053,
+    "end": 64.24300000000001
+   },
+   {
+    "id": "s4",
+    "title": "Couper les caméras",
+    "start": 64.24300000000001,
+    "end": 82.61600000000003
+   },
+   {
+    "id": "s5",
+    "title": "Qui voit l'inférence ?",
+    "start": 82.61600000000003,
+    "end": 114.23500000000003
+   },
+   {
+    "id": "s6",
+    "title": "Les LLM Mixers",
+    "start": 114.23500000000003,
+    "end": 140.46700000000004
+   },
+   {
+    "id": "s7",
+    "title": "Vos trois réflexes",
+    "start": 140.46700000000004,
+    "end": 169.47199999999995
+   }
+  ],
+  "guess": [
+   [
+    86.31800000000003,
+    87.81800000000003
+   ],
+   [
+    126.08900000000004,
+    127.58900000000004
+   ]
+  ],
+  "events": 100,
+  "marks": [
+   15.171,
+   0.4,
+   15.171,
+   4.782,
+   6.932,
+   6.932,
+   7.574,
+   7.674,
+   8.522,
+   11.752,
+   15.171,
+   11.752,
+   14.027,
+   15.171,
+   9.73,
+   15.671,
+   8.522,
+   10.33,
+   15.371,
+   21.584,
+   19.311,
+   19.611,
+   19.761,
+   19.911,
+   20.061,
+   20.211,
+   20.471,
+   22.084,
+   0,
+   0.4,
+   6.732,
+   11.452,
+   15.271,
+   6.618,
+   12.344,
+   14.294,
+   20.471,
+   23.642,
+   33.039,
+   25.128,
+   33.039,
+   26.66,
+   33.039,
+   27.365,
+   27.465,
+   29.928,
+   28.402,
+   28.402,
+   36.689,
+   36.989,
+   37.069,
+   37.149,
+   37.229,
+   37.309,
+   37.389,
+   37.469,
+   37.549,
+   37.629,
+   37.709,
+   37.789,
+   37.869,
+   37.949,
+   38.029,
+   32.994,
+   33.094,
+   38.767,
+   20.184,
+   27.665,
+   29.828,
+   36.589,
+   24.524,
+   25.395,
+   26.985,
+   31.764,
+   33.947,
+   39.359,
+   45.318,
+   40.853,
+   45.318,
+   40.653,
+   40.753,
+   45.118,
+   46.323,
+   50.16,
+   52.887,
+   51.727,
+   52.887,
+   52.987,
+   59.646,
+   62.421,
+   46.123,
+   46.223,
+   50.16,
+   60.865,
+   39.653,
+   45.018,
+   46.423,
+   52.887,
+   57.059,
+   60.665,
+   41.474,
+   43.227,
+   49.277,
+   52.122,
+   56.024,
+   61.225,
+   64.043,
+   64.243,
+   63.843,
+   63.943,
+   66.121,
+   68.27,
+   69.03,
+   72.99,
+   72.99,
+   72.99,
+   79.1,
+   75.207,
+   75.307,
+   80.946,
+   62.843,
+   68.17,
+   73.49,
+   75.607,
+   65.023,
+   71.31,
+   76.743,
+   81.097,
+   82.616,
+   87.818,
+   82.816,
+   88.318,
+   83.016,
+   88.818,
+   87.818,
+   88.318,
+   88.818,
+   83.002,
+   87.818,
+   98.086,
+   103.668,
+   103.868,
+   106.883,
+   112.576,
+   112.576,
+   82.316,
+   88.318,
+   107.466,
+   81.216,
+   82.802,
+   87.618,
+   90.529,
+   92.432,
+   94.618,
+   96.515,
+   98.086,
+   103.668,
+   106.783,
+   90.629,
+   93.998,
+   102.043,
+   110.928,
+   118.222,
+   120.729,
+   120.729,
+   120.879,
+   120.879,
+   121.029,
+   121.029,
+   121.179,
+   121.179,
+   117.026,
+   117.026,
+   117.126,
+   117.126,
+   117.226,
+   117.226,
+   117.326,
+   117.326,
+   117.426,
+   117.426,
+   122.761,
+   127.589,
+   127.589,
+   132.183,
+   127.589,
+   125.292,
+   132.183,
+   129.913,
+   132.183,
+   133.895,
+   131.983,
+   132.083,
+   137.89,
+   138.761,
+   112.835,
+   122.561,
+   127.389,
+   132.283,
+   132.738,
+   137.69,
+   136.142,
+   115.248,
+   121.484,
+   131.271,
+   135.044,
+   136.904,
+   140.067,
+   140.167,
+   140.267,
+   140.367,
+   140.467,
+   140.567,
+   142.513,
+   142.613,
+   147.391,
+   148.971,
+   149.071,
+   154.287,
+   155.272,
+   155.372,
+   161.22,
+   159.627,
+   168.081,
+   140.067,
+   141.48,
+   148.451,
+   155.272,
+   159.627,
+   168.081,
+   139.067,
+   141.28,
+   148.251,
+   155.072,
+   157.324,
+   159.427,
+   161.22,
+   143.175,
+   145.961,
+   150.151,
+   152.371,
+   157.304,
+   166.257,
+   2.379,
+   3.482,
+   17.211,
+   18.091,
+   34.713,
+   33.494,
+   47.234,
+   48.418,
+   55.13,
+   57.394,
+   84.267,
+   85.01,
+   92.732,
+   95.856,
+   96.715,
+   101.114,
+   105.435,
+   109.511,
+   109.732,
+   119.951,
+   123.539,
+   144.452,
+   152.871,
+   85.544,
+   100.395,
+   163.447,
+   161.741,
+   165.375,
+   168.592
+  ],
+  "cams": [
+   {
+    "t": 0,
+    "d": 0,
+    "z": 2.2
+   },
+   {
+    "t": 0.4,
+    "d": 1.4,
+    "z": 1.4065934065934067
+   },
+   {
+    "t": 6.731999999999999,
+    "d": 1,
+    "z": 0.8540953053891419
+   },
+   {
+    "t": 11.451999999999998,
+    "d": 1,
+    "z": 0.8648648648648649
+   },
+   {
+    "t": 15.270999999999999,
+    "d": 1,
+    "z": 0.8652958128107098
+   },
+   {
+    "t": 20.183999999999997,
+    "d": 1.5,
+    "z": 1.0487958080888953
+   },
+   {
+    "t": 27.664999999999996,
+    "d": 0.9,
+    "z": 0.8713943426381698
+   },
+   {
+    "t": 29.827999999999992,
+    "d": 0.6,
+    "z": 1.3577939765521674
+   },
+   {
+    "t": 36.589,
+    "d": 0.9,
+    "z": 1.3661636881525132
+   },
+   {
+    "t": 39.653,
+    "d": 1.5,
+    "z": 1.3138827476352193
+   },
+   {
+    "t": 45.018,
+    "d": 0.6,
+    "z": 1.35
+   },
+   {
+    "t": 46.423,
+    "d": 0.9,
+    "z": 0.8929361044840946
+   },
+   {
+    "t": 52.887,
+    "d": 0.8,
+    "z": 1.1089108910891088
+   },
+   {
+    "t": 57.059000000000005,
+    "d": 0.9,
+    "z": 0.915383801500491
+   },
+   {
+    "t": 60.665000000000006,
+    "d": 0.8,
+    "z": 1.09375
+   },
+   {
+    "t": 62.84300000000001,
+    "d": 1.5,
+    "z": 0.9558616483884369
+   },
+   {
+    "t": 68.17000000000002,
+    "d": 0.9,
+    "z": 1.1563025210084033
+   },
+   {
+    "t": 73.49000000000002,
+    "d": 0.7,
+    "z": 2.4
+   },
+   {
+    "t": 75.60700000000003,
+    "d": 0.9,
+    "z": 1.1928427493562794
+   },
+   {
+    "t": 81.21600000000002,
+    "d": 1.5,
+    "z": 0.9086419753086421
+   },
+   {
+    "t": 82.80200000000004,
+    "d": 0.6,
+    "z": 0.9092299433347169
+   },
+   {
+    "t": 87.61800000000002,
+    "d": 0.7,
+    "z": 1.2236842105263157
+   },
+   {
+    "t": 90.52900000000002,
+    "d": 0.6,
+    "z": 2.4
+   },
+   {
+    "t": 92.43200000000003,
+    "d": 0.7,
+    "z": 1.2031110325466923
+   },
+   {
+    "t": 94.61800000000004,
+    "d": 0.6,
+    "z": 0.9473684210526314
+   },
+   {
+    "t": 96.51500000000003,
+    "d": 0.6,
+    "z": 2.4
+   },
+   {
+    "t": 98.08600000000003,
+    "d": 0.9,
+    "z": 0.7929127840205277
+   },
+   {
+    "t": 103.66800000000002,
+    "d": 0.7,
+    "z": 0.9596122778675282
+   },
+   {
+    "t": 106.78300000000003,
+    "d": 0.9,
+    "z": 0.9135802469135802
+   },
+   {
+    "t": 112.83500000000002,
+    "d": 1.5,
+    "z": 0.9168472928457111
+   },
+   {
+    "t": 122.56100000000004,
+    "d": 0.7,
+    "z": 1.2552661663440003
+   },
+   {
+    "t": 127.38900000000004,
+    "d": 0.8,
+    "z": 1.2572269884152085
+   },
+   {
+    "t": 132.28300000000004,
+    "d": 0.9,
+    "z": 0.8756116336024861
+   },
+   {
+    "t": 132.73800000000003,
+    "d": 0.6,
+    "z": 1.658924210330205
+   },
+   {
+    "t": 136.14200000000002,
+    "d": 0.6,
+    "z": 1.35
+   },
+   {
+    "t": 137.69000000000003,
+    "d": 0.8,
+    "z": 1.1084172293797543
+   },
+   {
+    "t": 139.06700000000004,
+    "d": 1.5,
+    "z": 0.7861607403636729
+   },
+   {
+    "t": 141.28000000000003,
+    "d": 0.8,
+    "z": 0.7793336215525999
+   },
+   {
+    "t": 148.251,
+    "d": 0.8,
+    "z": 0.8680019637414219
+   },
+   {
+    "t": 155.072,
+    "d": 0.8,
+    "z": 0.8136957999664493
+   },
+   {
+    "t": 157.324,
+    "d": 0.6,
+    "z": 1.064818683349024
+   },
+   {
+    "t": 159.427,
+    "d": 0.8,
+    "z": 0.8872908962690091
+   },
+   {
+    "t": 161.21999999999997,
+    "d": 0.9,
+    "z": 0.7761738168628393
+   }
+  ],
+  "chars": [
+   {
+    "name": "hero",
+    "pop": 7.574,
+    "poses": [
+     [
+      8.522,
+      "jump"
+     ],
+     [
+      11.751999999999999,
+      "point"
+     ]
+    ],
+    "walks": [
+     7.674
+    ],
+    "exprs": [
+     -1,
+     7.974
+    ]
+   },
+   {
+    "name": "foe",
+    "pop": 27.364999999999995,
+    "poses": [
+     [
+      29.927999999999994,
+      "point"
+     ]
+    ],
+    "walks": [
+     27.464999999999996
+    ],
+    "exprs": [
+     -1,
+     30.974999999999994
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 32.994,
+    "poses": [
+     [
+      38.766999999999996,
+      "shrug"
+     ],
+     [
+      33.494,
+      "loupe"
+     ]
+    ],
+    "walks": [
+     33.094
+    ],
+    "exprs": [
+     -1,
+     38.766999999999996
+    ]
+   },
+   {
+    "name": "foe",
+    "pop": 40.653,
+    "poses": [
+     [
+      45.117999999999995,
+      "point"
+     ]
+    ],
+    "walks": [
+     40.753
+    ],
+    "exprs": [
+     -1,
+     45.318
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 46.123000000000005,
+    "poses": [
+     [
+      50.160000000000004,
+      "point"
+     ],
+     [
+      60.86500000000001,
+      "cheer"
+     ]
+    ],
+    "walks": [
+     46.223000000000006
+    ],
+    "exprs": [
+     -1,
+     60.86500000000001
+    ]
+   },
+   {
+    "name": "foe",
+    "pop": 63.84300000000001,
+    "poses": [
+     [
+      66.12100000000001,
+      "loupe"
+     ]
+    ],
+    "walks": [
+     63.94300000000001
+    ],
+    "exprs": [
+     -1,
+     67.055
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 75.20700000000002,
+    "poses": [
+     [
+      80.94600000000003,
+      "point"
+     ]
+    ],
+    "walks": [
+     75.30700000000002
+    ],
+    "exprs": [
+     -1
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 82.31600000000003,
+    "poses": [
+     [
+      88.31800000000003,
+      "point"
+     ],
+     [
+      107.46600000000002,
+      "shrug"
+     ]
+    ],
+    "walks": [],
+    "exprs": [
+     -1,
+     83.00200000000004,
+     87.81800000000003
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 131.98300000000003,
+    "poses": [
+     [
+      137.89000000000001,
+      "shrug"
+     ],
+     [
+      138.76100000000002,
+      "point"
+     ]
+    ],
+    "walks": [
+     132.08300000000003
+    ],
+    "exprs": [
+     -1,
+     137.89000000000001
+    ]
+   },
+   {
+    "name": "hero",
+    "pop": 140.06700000000004,
+    "poses": [
+     [
+      141.48000000000002,
+      "point"
+     ],
+     [
+      148.451,
+      "point"
+     ],
+     [
+      155.272,
+      "point"
+     ],
+     [
+      159.62699999999998,
+      "nod"
+     ],
+     [
+      168.08099999999996,
+      "cheer"
+     ]
+    ],
+    "walks": [],
+    "exprs": [
+     -1,
+     168.08099999999996
+    ]
+   }
+  ],
+  "says": [
+   "Lundi matin, la facture cloud du projet d'IA affiche plus de cent mille dollars. En une seule journée.",
+   "Pas du minage : du L L M djaking. Quelqu'un consomme vos modèles de langage, et revend l'accès.",
+   "Un cas type, tiré des incidents décrits par Mandiant. À quel moment pouvait-on le voir ?",
+   "Tout commence par une clé : un compte de service exposé, un jeton GitHub, une session volée.",
+   "Une requête, un seul token. Personne ne verra rien.",
+   "Il valide les clés volées par des requêtes d'un seul token, sous les seuils d'alerte. Le volume ne vous préviendra pas.",
+   "Souvent, le service d'IA n'était même pas activé. Alors il l'active.",
+   "Chez Google Cloud, l'activation du service tombe dans le journal admin activity, toujours écrit. Chez A W S, c'est la demande d'accès à un modèle.",
+   "Toute activation non prévue est un événement critique : votre meilleure alerte, car elle arrive avant la facture.",
+   "Avant de consommer, je regarde si on m'observe.",
+   "Il lit la politique d'audit pour savoir si les journaux data access sont actifs, ou coupe la journalisation des appels au modèle.",
+   "Une coupure de journalisation par un compte qui n'est pas votre pipeline d'infrastructure : haute sévérité.",
+   "Devinez : vos journaux voient-ils chaque appel au modèle ? | Ça dépend. A W S : oui, par défaut. Google Cloud : non, l'inférence est dans data access, éteint par défaut.",
+   "Chez A W S, la fin de chaque flux note même les tokens consommés. Chez Azure, il faut les journaux de diagnostic.",
+   "On croit voir l'attaque dans les journaux. Sans réglage, sur Google Cloud, on ne voit que l'activation.",
+   "Pourquoi un tel volume ? L'accès est revendu : des passerelles, les L L M mixeurs, agrègent les clés volées.",
+   "Devinez combien d'appels l'une d'elles a passés en moins de huit heures. | Plus de cinq cent mille. Près d'un million de dollars, pour la victime.",
+   "Ses clients paient environ soixante dollars par mois. Pour vous, la facture arrive trop tard : il faut détecter avant.",
+   "Un : alertez sur toute activation d'un service d'IA, dans admin activity ou cloud trail.",
+   "Deux : allumez les yeux. Data access sur les projets d'IA, et une alerte sur toute coupure de journalisation.",
+   "Trois : chassez les requêtes d'un token et les pics d'erreurs de quota. Et posez des plafonds de dépense.",
+   "Simplification : la vraie chaîne passe aussi par l'escalade de droits et la persistance. Ce sera l'épisode deux."
+  ]
+ },
+ "caps": [
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c1_25.jpg",
+   "t": 2.4435000000000002,
+   "ntext": 2,
+   "words": 6,
+   "focus": {
+    "cx": 801,
+    "cy": 401,
+    "area": 0.627
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c1_50.jpg",
+   "t": 4.287,
+   "ntext": 2,
+   "words": 6,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.515
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c1",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c1_75.jpg",
+   "t": 6.1305,
+   "ntext": 2,
+   "words": 11,
+   "focus": {
+    "cx": 800,
+    "cy": 400,
+    "area": 0.515
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c2_25.jpg",
+   "t": 9.82325,
+   "ntext": 5,
+   "words": 21,
+   "focus": {
+    "cx": 866,
+    "cy": 352,
+    "area": 0.022
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Facture cloud · projet IA",
+     "v": 39.3
+    },
+    {
+     "k": "small",
+     "s": "cumul observé : jusqu'à 1 M$",
+     "v": 39.3
+    },
+    {
+     "k": "toomanytext",
+     "v": 5,
+     "s": "Facture cloud · projet IA | + 100 000 $ / jour | cumul observé : jusqu'à 1 M$ | LLMjacking | pas du minage"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.022
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c2_50.jpg",
+   "t": 11.6725,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 867,
+    "cy": 350,
+    "area": 0.022
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Facture cloud · projet IA",
+     "v": 39.3
+    },
+    {
+     "k": "small",
+     "s": "cumul observé : jusqu'à 1 M$",
+     "v": 39.3
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "Facture cloud · projet IA | + 100 000 $ / jour | cumul observé : jusqu'à 1 M$ | LLMjacking"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.022
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c2",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c2_75.jpg",
+   "t": 13.52175,
+   "ntext": 4,
+   "words": 18,
+   "focus": {
+    "cx": 223,
+    "cy": 384,
+    "area": 0.064
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "Facture cloud · projet IA",
+     "v": 39.8
+    },
+    {
+     "k": "small",
+     "s": "cumul observé : jusqu'à 1 M$",
+     "v": 39.8
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "Facture cloud · projet IA | + 100 000 $ / jour | cumul observé : jusqu'à 1 M$ | LLMjacking"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      223,
+      384
+     ]
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s1",
+   "q": 0.25,
+   "file": "caps/c3_25.jpg",
+   "t": 16.924249999999997,
+   "ntext": 1,
+   "words": 8,
+   "focus": {
+    "cx": 1533,
+    "cy": 601,
+    "area": 0.004
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1533,
+      601
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.004
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s1",
+   "q": 0.5,
+   "file": "caps/c3_50.jpg",
+   "t": 18.4775,
+   "ntext": 1,
+   "words": 8,
+   "focus": {
+    "cx": 1533,
+    "cy": 601,
+    "area": 0.004
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1533,
+      601
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.004
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c3",
+   "sc": "s1",
+   "q": 0.75,
+   "file": "caps/c3_75.jpg",
+   "t": 20.030749999999998,
+   "ntext": 4,
+   "words": 11,
+   "focus": {
+    "cx": 770,
+    "cy": 494,
+    "area": 0.169
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "caméras",
+     "v": 39.5
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c4_25.jpg",
+   "t": 23.154249999999998,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 405,
+    "cy": 357,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c4_50.jpg",
+   "t": 24.724499999999995,
+   "ntext": 1,
+   "words": 3,
+   "focus": {
+    "cx": 404,
+    "cy": 410,
+    "area": 0.087
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c4",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c4_75.jpg",
+   "t": 26.294749999999997,
+   "ntext": 2,
+   "words": 5,
+   "focus": {
+    "cx": 404,
+    "cy": 404,
+    "area": 0.067
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.067
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c5_25.jpg",
+   "t": 29.158499999999993,
+   "ntext": 4,
+   "words": 7,
+   "focus": {
+    "cx": 1150,
+    "cy": 269,
+    "area": 0.054
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "compte de service | jeton GitHub | session | {\"max_tokens"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.054
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c5_50.jpg",
+   "t": 30.451999999999995,
+   "ntext": 3,
+   "words": 5,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.134
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "jeton GitHub"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c5",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c5_75.jpg",
+   "t": 31.745499999999993,
+   "ntext": 3,
+   "words": 5,
+   "focus": {
+    "cx": 798,
+    "cy": 400,
+    "area": 0.134
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "jeton GitHub"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s2",
+   "q": 0.25,
+   "file": "caps/c6_25.jpg",
+   "t": 35.0425,
+   "ntext": 1,
+   "words": 2,
+   "focus": {
+    "cx": 800,
+    "cy": 401,
+    "area": 0.157
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c6",
+   "sc": "s2",
+   "q": 0.5,
+   "file": "caps/c6_50.jpg",
+   "t": 37.046,
+   "ntext": 1,
+   "words": 4,
+   "focus": {
+    "cx": 731,
+    "cy": 524,
+    "area": 0.307
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c6",
+   "sc": "s2",
+   "q": 0.75,
+   "file": "caps/c6_75.jpg",
+   "t": 39.0495,
+   "ntext": 1,
+   "words": 4,
+   "focus": {
+    "cx": 686,
+    "cy": 376,
+    "area": 0.309
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c7_25.jpg",
+   "t": 42.4205,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1001,
+    "cy": 283,
+    "area": 0.122
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c7_50.jpg",
+   "t": 43.788,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 1001,
+    "cy": 283,
+    "area": 0.122
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c7",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c7_75.jpg",
+   "t": 45.1555,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": 986,
+    "cy": 287,
+    "area": 0.123
+   },
+   "issues": [],
+   "moving": true
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c8_25.jpg",
+   "t": 49.182,
+   "ntext": 2,
+   "words": 7,
+   "focus": {
+    "cx": 794,
+    "cy": 336,
+    "area": 0.159
+   },
+   "issues": [
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c8_50.jpg",
+   "t": 51.841,
+   "ntext": 3,
+   "words": 9,
+   "focus": {
+    "cx": 794,
+    "cy": 336,
+    "area": 0.159
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "toujours écrit",
+     "v": 40
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c8",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c8_75.jpg",
+   "t": 54.5,
+   "ntext": 4,
+   "words": 6,
+   "focus": {
+    "cx": 800,
+    "cy": 397,
+    "area": 0.257
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "google.api.serviceusage.v1.ServiceUsage."
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s3",
+   "q": 0.25,
+   "file": "caps/c9_25.jpg",
+   "t": 58.93000000000001,
+   "ntext": 5,
+   "words": 12,
+   "focus": {
+    "cx": 772,
+    "cy": 604,
+    "area": 0.175
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "Google Cloud · journal Admin Activity | google.api.serviceusage.v1.ServiceUsage. | AWS · CloudTrail | PutUseCaseForModelAccess | CreateFoundationModelAgreement"
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c9",
+   "sc": "s3",
+   "q": 0.5,
+   "file": "caps/c9_50.jpg",
+   "t": 60.70100000000001,
+   "ntext": 5,
+   "words": 12,
+   "focus": {
+    "cx": 768,
+    "cy": 122,
+    "area": 0.007
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "Google Cloud · journal Admin Activity | google.api.serviceusage.v1.ServiceUsage. | AWS · CloudTrail | PutUseCaseForModelAccess | CreateFoundationModelAgreement"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      768,
+      122
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.007
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c9",
+   "sc": "s3",
+   "q": 0.75,
+   "file": "caps/c9_75.jpg",
+   "t": 62.47200000000001,
+   "ntext": 5,
+   "words": 12,
+   "focus": {
+    "cx": 774,
+    "cy": 135,
+    "area": 0.016
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Google Cloud · journal Admin Activity"
+    },
+    {
+     "k": "cut",
+     "s": "google.api.serviceusage.v1.ServiceUsage."
+    },
+    {
+     "k": "cut",
+     "s": "AWS · CloudTrail"
+    },
+    {
+     "k": "cut",
+     "s": "PutUseCaseForModelAccess"
+    },
+    {
+     "k": "cut",
+     "s": "CreateFoundationModelAgreement"
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "Google Cloud · journal Admin Activity | google.api.serviceusage.v1.ServiceUsage. | AWS · CloudTrail | PutUseCaseForModelAccess | CreateFoundationModelAgreement"
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.016
+    },
+    {
+     "k": "subj_in_band",
+     "s": "perso:foe"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c10_25.jpg",
+   "t": 65.27475000000001,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 858,
+    "cy": 115,
+    "area": 0.016
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "google.api.serviceusage.v1.ServiceUsage."
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      858,
+      115
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.016
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c10_50.jpg",
+   "t": 66.30650000000001,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 857,
+    "cy": 118,
+    "area": 0.013
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "google.api.serviceusage.v1.ServiceUsage."
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      857,
+      118
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.013
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c10",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c10_75.jpg",
+   "t": 67.33825000000002,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 857,
+    "cy": 118,
+    "area": 0.013
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "google.api.serviceusage.v1.ServiceUsage."
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      857,
+      118
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.013
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c11_25.jpg",
+   "t": 70.20425000000002,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 690,
+    "cy": 357,
+    "area": 0.048
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c11_50.jpg",
+   "t": 72.03850000000001,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 690,
+    "cy": 357,
+    "area": 0.048
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c11",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c11_75.jpg",
+   "t": 73.87275000000002,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 1381,
+    "cy": 751,
+    "area": 0.082
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "google.iam.v1.IAMPolicy.GetIamPolicy"
+    },
+    {
+     "k": "cut",
+     "s": "DeleteModelInvocationLoggingConfiguratio"
+    },
+    {
+     "k": "subband",
+     "s": "DeleteModelInvocationLoggingConfiguratio"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1381,
+      751
+     ]
+    },
+    {
+     "k": "subj_in_band",
+     "s": "focus"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.25,
+   "file": "caps/c12_25.jpg",
+   "t": 77.43425000000002,
+   "ntext": 2,
+   "words": 2,
+   "focus": {
+    "cx": 737,
+    "cy": 262,
+    "area": 0.057
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.5,
+   "file": "caps/c12_50.jpg",
+   "t": 79.16150000000003,
+   "ntext": 3,
+   "words": 9,
+   "focus": {
+    "cx": 784,
+    "cy": 606,
+    "area": 0.041
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "compte ≠ pipeline IaC → haute sévérité",
+     "v": 38.5
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c12",
+   "sc": "s4",
+   "q": 0.75,
+   "file": "caps/c12_75.jpg",
+   "t": 80.88875000000003,
+   "ntext": 3,
+   "words": 9,
+   "focus": {
+    "cx": 784,
+    "cy": 606,
+    "area": 0.099
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c13_25.jpg",
+   "t": 86.50850000000003,
+   "ntext": 3,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 135,
+    "area": 0.009
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      800,
+      135
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.009
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c13_50.jpg",
+   "t": 90.40100000000002,
+   "ntext": 6,
+   "words": 13,
+   "focus": {
+    "cx": 1485,
+    "cy": -136,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "Google Cloud"
+    },
+    {
+     "k": "cut",
+     "s": "GenerateContent"
+    },
+    {
+     "k": "cut",
+     "s": "Data Access : off"
+    },
+    {
+     "k": "toomanytext",
+     "v": 4,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off"
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1485,
+      -136
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c13",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c13_75.jpg",
+   "t": 94.29350000000002,
+   "ntext": 9,
+   "words": 18,
+   "focus": {
+    "cx": 986,
+    "cy": 265,
+    "area": 0.008
+   },
+   "issues": [
+    {
+     "k": "cut",
+     "s": "InvokeModel"
+    },
+    {
+     "k": "cut",
+     "s": "par défaut : oui"
+    },
+    {
+     "k": "cut",
+     "s": "Completions"
+    },
+    {
+     "k": "cut",
+     "s": "diagnostic : off"
+    },
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.008
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c14_25.jpg",
+   "t": 100.36025000000002,
+   "ntext": 13,
+   "words": 32,
+   "focus": {
+    "cx": 840,
+    "cy": 197,
+    "area": 0.205
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "AWS",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "par défaut : oui",
+     "v": 39.6
+    },
+    {
+     "k": "small",
+     "s": "Google Cloud",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "Data Access : off",
+     "v": 39.6
+    },
+    {
+     "k": "small",
+     "s": "Azure",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "diagnostic : off",
+     "v": 39.6
+    },
+    {
+     "k": "small",
+     "s": "CloudTrail · exemple publié par AWS",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "\"eventName\": \"ConverseStream\",",
+     "v": 34.9
+    },
+    {
+     "k": "small",
+     "s": "\"eventType\": \"AwsServiceEvent\",",
+     "v": 34.9
+    },
+    {
+     "k": "small",
+     "s": "\"inputTokens\": 18694, \"outputTokens\": 35",
+     "v": 34.9
+    },
+    {
+     "k": "toomanytext",
+     "v": 8,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off | CloudTrail · exemple publié par AWS | \"eventName\": \"ConverseStream\", | \"eventType\": \"AwsServiceEvent\", | \"inputTokens\": 18694, \"outputTokens\": 35"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c14_50.jpg",
+   "t": 102.53450000000002,
+   "ntext": 13,
+   "words": 32,
+   "focus": {
+    "cx": 840,
+    "cy": 197,
+    "area": 0.205
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "AWS",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "par défaut : oui",
+     "v": 39.6
+    },
+    {
+     "k": "small",
+     "s": "Google Cloud",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "Data Access : off",
+     "v": 39.6
+    },
+    {
+     "k": "small",
+     "s": "Azure",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "diagnostic : off",
+     "v": 39.6
+    },
+    {
+     "k": "small",
+     "s": "CloudTrail · exemple publié par AWS",
+     "v": 41.2
+    },
+    {
+     "k": "small",
+     "s": "\"eventName\": \"ConverseStream\",",
+     "v": 34.9
+    },
+    {
+     "k": "small",
+     "s": "\"eventType\": \"AwsServiceEvent\",",
+     "v": 34.9
+    },
+    {
+     "k": "small",
+     "s": "\"inputTokens\": 18694, \"outputTokens\": 35",
+     "v": 34.9
+    },
+    {
+     "k": "toomanytext",
+     "v": 8,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off | CloudTrail · exemple publié par AWS | \"eventName\": \"ConverseStream\", | \"eventType\": \"AwsServiceEvent\", | \"inputTokens\": 18694, \"outputTokens\": 35"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c14",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c14_75.jpg",
+   "t": 104.70875000000002,
+   "ntext": 7,
+   "words": 16,
+   "focus": {
+    "cx": 800,
+    "cy": 144,
+    "area": 0.04
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 5,
+     "s": "Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off | Azure : Diagnostic Logs"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.04
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.25,
+   "file": "caps/c15_25.jpg",
+   "t": 108.72100000000003,
+   "ntext": 9,
+   "words": 18,
+   "focus": {
+    "cx": 1312,
+    "cy": 189,
+    "area": 0.034
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off"
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.034
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.5,
+   "file": "caps/c15_50.jpg",
+   "t": 110.55900000000003,
+   "ntext": 9,
+   "words": 18,
+   "focus": {
+    "cx": 1312,
+    "cy": 189,
+    "area": 0.034
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off"
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.034
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c15",
+   "sc": "s5",
+   "q": 0.75,
+   "file": "caps/c15_75.jpg",
+   "t": 112.39700000000003,
+   "ntext": 9,
+   "words": 18,
+   "focus": {
+    "cx": 1312,
+    "cy": 189,
+    "area": 0.034
+   },
+   "issues": [
+    {
+     "k": "toomanytext",
+     "v": 6,
+     "s": "AWS | InvokeModel | par défaut : oui | Google Cloud | GenerateContent | Data Access : off | Azure | Completions | diagnostic : off"
+    },
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0.034
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c16_25.jpg",
+   "t": 116.27875000000003,
+   "ntext": 0,
+   "words": 0,
+   "focus": {
+    "cx": -1277,
+    "cy": 82,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      -1277,
+      82
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c16_50.jpg",
+   "t": 118.32250000000003,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 832,
+    "cy": 403,
+    "area": 0.053
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c16",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c16_75.jpg",
+   "t": 120.36625000000004,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 832,
+    "cy": 403,
+    "area": 0.054
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c17_25.jpg",
+   "t": 124.90325000000004,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 800,
+    "cy": 188,
+    "area": 0.016
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c17_50.jpg",
+   "t": 127.39650000000005,
+   "ntext": 2,
+   "words": 4,
+   "focus": {
+    "cx": 800,
+    "cy": 188,
+    "area": 0.016
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "< 8 h"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c17",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c17_75.jpg",
+   "t": 129.88975000000005,
+   "ntext": 3,
+   "words": 8,
+   "focus": {
+    "cx": 838,
+    "cy": 132,
+    "area": 0.131
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      838,
+      132
+     ]
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s6",
+   "q": 0.25,
+   "file": "caps/c18_25.jpg",
+   "t": 134.40400000000002,
+   "ntext": 1,
+   "words": 5,
+   "focus": {
+    "cx": 800,
+    "cy": 330,
+    "area": 0.088
+   },
+   "issues": [],
+   "moving": false
+  },
+  {
+   "cue": "c18",
+   "sc": "s6",
+   "q": 0.5,
+   "file": "caps/c18_50.jpg",
+   "t": 136.42500000000004,
+   "ntext": 2,
+   "words": 6,
+   "focus": {
+    "cx": 1260,
+    "cy": 107,
+    "area": 0.069
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "mixer"
+    },
+    {
+     "k": "focus_offcenter",
+     "v": [
+      1260,
+      107
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0.069
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c18",
+   "sc": "s6",
+   "q": 0.75,
+   "file": "caps/c18_75.jpg",
+   "t": 138.44600000000003,
+   "ntext": 1,
+   "words": 1,
+   "focus": {
+    "cx": 2072,
+    "cy": -178,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_offcenter",
+     "v": [
+      2072,
+      -178
+     ]
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c19_25.jpg",
+   "t": 142.22300000000004,
+   "ntext": 5,
+   "words": 5,
+   "focus": {
+    "cx": 555,
+    "cy": 234,
+    "area": 0
+   },
+   "issues": [
+    {
+     "k": "focus_hidden"
+    },
+    {
+     "k": "focus_small",
+     "v": 0
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c19_50.jpg",
+   "t": 143.97900000000004,
+   "ntext": 6,
+   "words": 10,
+   "focus": {
+    "cx": 555,
+    "cy": 232,
+    "area": 0.031
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c19",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c19_75.jpg",
+   "t": 145.73500000000004,
+   "ntext": 6,
+   "words": 10,
+   "focus": {
+    "cx": 555,
+    "cy": 232,
+    "area": 0.031
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c20_25.jpg",
+   "t": 149.215,
+   "ntext": 6,
+   "words": 15,
+   "focus": {
+    "cx": 770,
+    "cy": 213,
+    "area": 0.025
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "2 · Data Access : ON · coupure → alerte",
+     "v": 34.7
+    },
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c20_50.jpg",
+   "t": 150.93900000000002,
+   "ntext": 6,
+   "words": 15,
+   "focus": {
+    "cx": 770,
+    "cy": 213,
+    "area": 0.035
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c20",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c20_75.jpg",
+   "t": 152.663,
+   "ntext": 6,
+   "words": 15,
+   "focus": {
+    "cx": 770,
+    "cy": 213,
+    "area": 0.035
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c21",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c21_25.jpg",
+   "t": 156.12025,
+   "ntext": 6,
+   "words": 10,
+   "focus": {
+    "cx": 508,
+    "cy": 224,
+    "area": 0.03
+   },
+   "issues": [
+    {
+     "k": "subj_cut",
+     "s": "perso:hero"
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c21",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c21_50.jpg",
+   "t": 157.8535,
+   "ntext": 5,
+   "words": 9,
+   "focus": {
+    "cx": 798,
+    "cy": 286,
+    "area": 0.05
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "activation"
+    },
+    {
+     "k": "cut",
+     "s": "consommation"
+    },
+    {
+     "k": "subband",
+     "s": "consommation"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c21",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c21_75.jpg",
+   "t": 159.58675,
+   "ntext": 5,
+   "words": 9,
+   "focus": {
+    "cx": 786,
+    "cy": 281,
+    "area": 0.05
+   },
+   "issues": [
+    {
+     "k": "subband",
+     "s": "activation"
+    },
+    {
+     "k": "cut",
+     "s": "consommation"
+    },
+    {
+     "k": "subband",
+     "s": "consommation"
+    }
+   ],
+   "moving": true
+  },
+  {
+   "cue": "c22",
+   "sc": "s7",
+   "q": 0.25,
+   "file": "caps/c22_25.jpg",
+   "t": 163.35799999999998,
+   "ntext": 5,
+   "words": 5,
+   "focus": {
+    "cx": 1282,
+    "cy": 319,
+    "area": 0.003
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "clé",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "activation",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "caméras",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "consommation",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "facture",
+     "v": 43.5
+    },
+    {
+     "k": "focus_small",
+     "v": 0.003
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c22",
+   "sc": "s7",
+   "q": 0.5,
+   "file": "caps/c22_50.jpg",
+   "t": 165.39599999999996,
+   "ntext": 5,
+   "words": 5,
+   "focus": {
+    "cx": 1282,
+    "cy": 319,
+    "area": 0.003
+   },
+   "issues": [
+    {
+     "k": "focus_small",
+     "v": 0.003
+    }
+   ],
+   "moving": false
+  },
+  {
+   "cue": "c22",
+   "sc": "s7",
+   "q": 0.75,
+   "file": "caps/c22_75.jpg",
+   "t": 167.43399999999997,
+   "ntext": 5,
+   "words": 5,
+   "focus": {
+    "cx": 1282,
+    "cy": 319,
+    "area": 0.003
+   },
+   "issues": [
+    {
+     "k": "small",
+     "s": "clé",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "activation",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "caméras",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "consommation",
+     "v": 43.5
+    },
+    {
+     "k": "small",
+     "s": "facture",
+     "v": 43.5
+    },
+    {
+     "k": "focus_small",
+     "v": 0.003
+    }
+   ],
+   "moving": false
+  }
+ ],
+ "frozen": [
+  {
+   "t": 0,
+   "file": "frozen/f0000.png"
+  },
+  {
+   "t": 0.5,
+   "file": "frozen/f0001.png"
+  },
+  {
+   "t": 1,
+   "file": "frozen/f0002.png"
+  },
+  {
+   "t": 1.5,
+   "file": "frozen/f0003.png"
+  },
+  {
+   "t": 2,
+   "file": "frozen/f0004.png"
+  },
+  {
+   "t": 2.5,
+   "file": "frozen/f0005.png"
+  },
+  {
+   "t": 3,
+   "file": "frozen/f0006.png"
+  },
+  {
+   "t": 3.5,
+   "file": "frozen/f0007.png"
+  },
+  {
+   "t": 4,
+   "file": "frozen/f0008.png"
+  },
+  {
+   "t": 4.5,
+   "file": "frozen/f0009.png"
+  },
+  {
+   "t": 5,
+   "file": "frozen/f0010.png"
+  },
+  {
+   "t": 5.5,
+   "file": "frozen/f0011.png"
+  },
+  {
+   "t": 6,
+   "file": "frozen/f0012.png"
+  },
+  {
+   "t": 6.5,
+   "file": "frozen/f0013.png"
+  },
+  {
+   "t": 7,
+   "file": "frozen/f0014.png"
+  },
+  {
+   "t": 7.5,
+   "file": "frozen/f0015.png"
+  },
+  {
+   "t": 8,
+   "file": "frozen/f0016.png"
+  },
+  {
+   "t": 8.5,
+   "file": "frozen/f0017.png"
+  },
+  {
+   "t": 9,
+   "file": "frozen/f0018.png"
+  },
+  {
+   "t": 9.5,
+   "file": "frozen/f0019.png"
+  },
+  {
+   "t": 10,
+   "file": "frozen/f0020.png"
+  },
+  {
+   "t": 10.5,
+   "file": "frozen/f0021.png"
+  },
+  {
+   "t": 11,
+   "file": "frozen/f0022.png"
+  },
+  {
+   "t": 11.5,
+   "file": "frozen/f0023.png"
+  },
+  {
+   "t": 12,
+   "file": "frozen/f0024.png"
+  },
+  {
+   "t": 12.5,
+   "file": "frozen/f0025.png"
+  },
+  {
+   "t": 13,
+   "file": "frozen/f0026.png"
+  },
+  {
+   "t": 13.5,
+   "file": "frozen/f0027.png"
+  },
+  {
+   "t": 14,
+   "file": "frozen/f0028.png"
+  },
+  {
+   "t": 14.5,
+   "file": "frozen/f0029.png"
+  },
+  {
+   "t": 15,
+   "file": "frozen/f0030.png"
+  },
+  {
+   "t": 15.5,
+   "file": "frozen/f0031.png"
+  },
+  {
+   "t": 16,
+   "file": "frozen/f0032.png"
+  },
+  {
+   "t": 16.5,
+   "file": "frozen/f0033.png"
+  },
+  {
+   "t": 17,
+   "file": "frozen/f0034.png"
+  },
+  {
+   "t": 17.5,
+   "file": "frozen/f0035.png"
+  },
+  {
+   "t": 18,
+   "file": "frozen/f0036.png"
+  },
+  {
+   "t": 18.5,
+   "file": "frozen/f0037.png"
+  },
+  {
+   "t": 19,
+   "file": "frozen/f0038.png"
+  },
+  {
+   "t": 19.5,
+   "file": "frozen/f0039.png"
+  },
+  {
+   "t": 20,
+   "file": "frozen/f0040.png"
+  },
+  {
+   "t": 20.5,
+   "file": "frozen/f0041.png"
+  },
+  {
+   "t": 21,
+   "file": "frozen/f0042.png"
+  },
+  {
+   "t": 21.5,
+   "file": "frozen/f0043.png"
+  },
+  {
+   "t": 22,
+   "file": "frozen/f0044.png"
+  },
+  {
+   "t": 22.5,
+   "file": "frozen/f0045.png"
+  },
+  {
+   "t": 23,
+   "file": "frozen/f0046.png"
+  },
+  {
+   "t": 23.5,
+   "file": "frozen/f0047.png"
+  },
+  {
+   "t": 24,
+   "file": "frozen/f0048.png"
+  },
+  {
+   "t": 24.5,
+   "file": "frozen/f0049.png"
+  },
+  {
+   "t": 25,
+   "file": "frozen/f0050.png"
+  },
+  {
+   "t": 25.5,
+   "file": "frozen/f0051.png"
+  },
+  {
+   "t": 26,
+   "file": "frozen/f0052.png"
+  },
+  {
+   "t": 26.5,
+   "file": "frozen/f0053.png"
+  },
+  {
+   "t": 27,
+   "file": "frozen/f0054.png"
+  },
+  {
+   "t": 27.5,
+   "file": "frozen/f0055.png"
+  },
+  {
+   "t": 28,
+   "file": "frozen/f0056.png"
+  },
+  {
+   "t": 28.5,
+   "file": "frozen/f0057.png"
+  },
+  {
+   "t": 29,
+   "file": "frozen/f0058.png"
+  },
+  {
+   "t": 29.5,
+   "file": "frozen/f0059.png"
+  },
+  {
+   "t": 30,
+   "file": "frozen/f0060.png"
+  },
+  {
+   "t": 30.5,
+   "file": "frozen/f0061.png"
+  },
+  {
+   "t": 31,
+   "file": "frozen/f0062.png"
+  },
+  {
+   "t": 31.5,
+   "file": "frozen/f0063.png"
+  },
+  {
+   "t": 32,
+   "file": "frozen/f0064.png"
+  },
+  {
+   "t": 32.5,
+   "file": "frozen/f0065.png"
+  },
+  {
+   "t": 33,
+   "file": "frozen/f0066.png"
+  },
+  {
+   "t": 33.5,
+   "file": "frozen/f0067.png"
+  },
+  {
+   "t": 34,
+   "file": "frozen/f0068.png"
+  },
+  {
+   "t": 34.5,
+   "file": "frozen/f0069.png"
+  },
+  {
+   "t": 35,
+   "file": "frozen/f0070.png"
+  },
+  {
+   "t": 35.5,
+   "file": "frozen/f0071.png"
+  },
+  {
+   "t": 36,
+   "file": "frozen/f0072.png"
+  },
+  {
+   "t": 36.5,
+   "file": "frozen/f0073.png"
+  },
+  {
+   "t": 37,
+   "file": "frozen/f0074.png"
+  },
+  {
+   "t": 37.5,
+   "file": "frozen/f0075.png"
+  },
+  {
+   "t": 38,
+   "file": "frozen/f0076.png"
+  },
+  {
+   "t": 38.5,
+   "file": "frozen/f0077.png"
+  },
+  {
+   "t": 39,
+   "file": "frozen/f0078.png"
+  },
+  {
+   "t": 39.5,
+   "file": "frozen/f0079.png"
+  },
+  {
+   "t": 40,
+   "file": "frozen/f0080.png"
+  },
+  {
+   "t": 40.5,
+   "file": "frozen/f0081.png"
+  },
+  {
+   "t": 41,
+   "file": "frozen/f0082.png"
+  },
+  {
+   "t": 41.5,
+   "file": "frozen/f0083.png"
+  },
+  {
+   "t": 42,
+   "file": "frozen/f0084.png"
+  },
+  {
+   "t": 42.5,
+   "file": "frozen/f0085.png"
+  },
+  {
+   "t": 43,
+   "file": "frozen/f0086.png"
+  },
+  {
+   "t": 43.5,
+   "file": "frozen/f0087.png"
+  },
+  {
+   "t": 44,
+   "file": "frozen/f0088.png"
+  },
+  {
+   "t": 44.5,
+   "file": "frozen/f0089.png"
+  },
+  {
+   "t": 45,
+   "file": "frozen/f0090.png"
+  },
+  {
+   "t": 45.5,
+   "file": "frozen/f0091.png"
+  },
+  {
+   "t": 46,
+   "file": "frozen/f0092.png"
+  },
+  {
+   "t": 46.5,
+   "file": "frozen/f0093.png"
+  },
+  {
+   "t": 47,
+   "file": "frozen/f0094.png"
+  },
+  {
+   "t": 47.5,
+   "file": "frozen/f0095.png"
+  },
+  {
+   "t": 48,
+   "file": "frozen/f0096.png"
+  },
+  {
+   "t": 48.5,
+   "file": "frozen/f0097.png"
+  },
+  {
+   "t": 49,
+   "file": "frozen/f0098.png"
+  },
+  {
+   "t": 49.5,
+   "file": "frozen/f0099.png"
+  },
+  {
+   "t": 50,
+   "file": "frozen/f0100.png"
+  },
+  {
+   "t": 50.5,
+   "file": "frozen/f0101.png"
+  },
+  {
+   "t": 51,
+   "file": "frozen/f0102.png"
+  },
+  {
+   "t": 51.5,
+   "file": "frozen/f0103.png"
+  },
+  {
+   "t": 52,
+   "file": "frozen/f0104.png"
+  },
+  {
+   "t": 52.5,
+   "file": "frozen/f0105.png"
+  },
+  {
+   "t": 53,
+   "file": "frozen/f0106.png"
+  },
+  {
+   "t": 53.5,
+   "file": "frozen/f0107.png"
+  },
+  {
+   "t": 54,
+   "file": "frozen/f0108.png"
+  },
+  {
+   "t": 54.5,
+   "file": "frozen/f0109.png"
+  },
+  {
+   "t": 55,
+   "file": "frozen/f0110.png"
+  },
+  {
+   "t": 55.5,
+   "file": "frozen/f0111.png"
+  },
+  {
+   "t": 56,
+   "file": "frozen/f0112.png"
+  },
+  {
+   "t": 56.5,
+   "file": "frozen/f0113.png"
+  },
+  {
+   "t": 57,
+   "file": "frozen/f0114.png"
+  },
+  {
+   "t": 57.5,
+   "file": "frozen/f0115.png"
+  },
+  {
+   "t": 58,
+   "file": "frozen/f0116.png"
+  },
+  {
+   "t": 58.5,
+   "file": "frozen/f0117.png"
+  },
+  {
+   "t": 59,
+   "file": "frozen/f0118.png"
+  },
+  {
+   "t": 59.5,
+   "file": "frozen/f0119.png"
+  },
+  {
+   "t": 60,
+   "file": "frozen/f0120.png"
+  },
+  {
+   "t": 60.5,
+   "file": "frozen/f0121.png"
+  },
+  {
+   "t": 61,
+   "file": "frozen/f0122.png"
+  },
+  {
+   "t": 61.5,
+   "file": "frozen/f0123.png"
+  },
+  {
+   "t": 62,
+   "file": "frozen/f0124.png"
+  },
+  {
+   "t": 62.5,
+   "file": "frozen/f0125.png"
+  },
+  {
+   "t": 63,
+   "file": "frozen/f0126.png"
+  },
+  {
+   "t": 63.5,
+   "file": "frozen/f0127.png"
+  },
+  {
+   "t": 64,
+   "file": "frozen/f0128.png"
+  },
+  {
+   "t": 64.5,
+   "file": "frozen/f0129.png"
+  },
+  {
+   "t": 65,
+   "file": "frozen/f0130.png"
+  },
+  {
+   "t": 65.5,
+   "file": "frozen/f0131.png"
+  },
+  {
+   "t": 66,
+   "file": "frozen/f0132.png"
+  },
+  {
+   "t": 66.5,
+   "file": "frozen/f0133.png"
+  },
+  {
+   "t": 67,
+   "file": "frozen/f0134.png"
+  },
+  {
+   "t": 67.5,
+   "file": "frozen/f0135.png"
+  },
+  {
+   "t": 68,
+   "file": "frozen/f0136.png"
+  },
+  {
+   "t": 68.5,
+   "file": "frozen/f0137.png"
+  },
+  {
+   "t": 69,
+   "file": "frozen/f0138.png"
+  },
+  {
+   "t": 69.5,
+   "file": "frozen/f0139.png"
+  },
+  {
+   "t": 70,
+   "file": "frozen/f0140.png"
+  },
+  {
+   "t": 70.5,
+   "file": "frozen/f0141.png"
+  },
+  {
+   "t": 71,
+   "file": "frozen/f0142.png"
+  },
+  {
+   "t": 71.5,
+   "file": "frozen/f0143.png"
+  },
+  {
+   "t": 72,
+   "file": "frozen/f0144.png"
+  },
+  {
+   "t": 72.5,
+   "file": "frozen/f0145.png"
+  },
+  {
+   "t": 73,
+   "file": "frozen/f0146.png"
+  },
+  {
+   "t": 73.5,
+   "file": "frozen/f0147.png"
+  },
+  {
+   "t": 74,
+   "file": "frozen/f0148.png"
+  },
+  {
+   "t": 74.5,
+   "file": "frozen/f0149.png"
+  },
+  {
+   "t": 75,
+   "file": "frozen/f0150.png"
+  },
+  {
+   "t": 75.5,
+   "file": "frozen/f0151.png"
+  },
+  {
+   "t": 76,
+   "file": "frozen/f0152.png"
+  },
+  {
+   "t": 76.5,
+   "file": "frozen/f0153.png"
+  },
+  {
+   "t": 77,
+   "file": "frozen/f0154.png"
+  },
+  {
+   "t": 77.5,
+   "file": "frozen/f0155.png"
+  },
+  {
+   "t": 78,
+   "file": "frozen/f0156.png"
+  },
+  {
+   "t": 78.5,
+   "file": "frozen/f0157.png"
+  },
+  {
+   "t": 79,
+   "file": "frozen/f0158.png"
+  },
+  {
+   "t": 79.5,
+   "file": "frozen/f0159.png"
+  },
+  {
+   "t": 80,
+   "file": "frozen/f0160.png"
+  },
+  {
+   "t": 80.5,
+   "file": "frozen/f0161.png"
+  },
+  {
+   "t": 81,
+   "file": "frozen/f0162.png"
+  },
+  {
+   "t": 81.5,
+   "file": "frozen/f0163.png"
+  },
+  {
+   "t": 82,
+   "file": "frozen/f0164.png"
+  },
+  {
+   "t": 82.5,
+   "file": "frozen/f0165.png"
+  },
+  {
+   "t": 83,
+   "file": "frozen/f0166.png"
+  },
+  {
+   "t": 83.5,
+   "file": "frozen/f0167.png"
+  },
+  {
+   "t": 84,
+   "file": "frozen/f0168.png"
+  },
+  {
+   "t": 84.5,
+   "file": "frozen/f0169.png"
+  },
+  {
+   "t": 85,
+   "file": "frozen/f0170.png"
+  },
+  {
+   "t": 85.5,
+   "file": "frozen/f0171.png"
+  },
+  {
+   "t": 86,
+   "file": "frozen/f0172.png"
+  },
+  {
+   "t": 86.5,
+   "file": "frozen/f0173.png"
+  },
+  {
+   "t": 87,
+   "file": "frozen/f0174.png"
+  },
+  {
+   "t": 87.5,
+   "file": "frozen/f0175.png"
+  },
+  {
+   "t": 88,
+   "file": "frozen/f0176.png"
+  },
+  {
+   "t": 88.5,
+   "file": "frozen/f0177.png"
+  },
+  {
+   "t": 89,
+   "file": "frozen/f0178.png"
+  },
+  {
+   "t": 89.5,
+   "file": "frozen/f0179.png"
+  },
+  {
+   "t": 90,
+   "file": "frozen/f0180.png"
+  },
+  {
+   "t": 90.5,
+   "file": "frozen/f0181.png"
+  },
+  {
+   "t": 91,
+   "file": "frozen/f0182.png"
+  },
+  {
+   "t": 91.5,
+   "file": "frozen/f0183.png"
+  },
+  {
+   "t": 92,
+   "file": "frozen/f0184.png"
+  },
+  {
+   "t": 92.5,
+   "file": "frozen/f0185.png"
+  },
+  {
+   "t": 93,
+   "file": "frozen/f0186.png"
+  },
+  {
+   "t": 93.5,
+   "file": "frozen/f0187.png"
+  },
+  {
+   "t": 94,
+   "file": "frozen/f0188.png"
+  },
+  {
+   "t": 94.5,
+   "file": "frozen/f0189.png"
+  },
+  {
+   "t": 95,
+   "file": "frozen/f0190.png"
+  },
+  {
+   "t": 95.5,
+   "file": "frozen/f0191.png"
+  },
+  {
+   "t": 96,
+   "file": "frozen/f0192.png"
+  },
+  {
+   "t": 96.5,
+   "file": "frozen/f0193.png"
+  },
+  {
+   "t": 97,
+   "file": "frozen/f0194.png"
+  },
+  {
+   "t": 97.5,
+   "file": "frozen/f0195.png"
+  },
+  {
+   "t": 98,
+   "file": "frozen/f0196.png"
+  },
+  {
+   "t": 98.5,
+   "file": "frozen/f0197.png"
+  },
+  {
+   "t": 99,
+   "file": "frozen/f0198.png"
+  },
+  {
+   "t": 99.5,
+   "file": "frozen/f0199.png"
+  },
+  {
+   "t": 100,
+   "file": "frozen/f0200.png"
+  },
+  {
+   "t": 100.5,
+   "file": "frozen/f0201.png"
+  },
+  {
+   "t": 101,
+   "file": "frozen/f0202.png"
+  },
+  {
+   "t": 101.5,
+   "file": "frozen/f0203.png"
+  },
+  {
+   "t": 102,
+   "file": "frozen/f0204.png"
+  },
+  {
+   "t": 102.5,
+   "file": "frozen/f0205.png"
+  },
+  {
+   "t": 103,
+   "file": "frozen/f0206.png"
+  },
+  {
+   "t": 103.5,
+   "file": "frozen/f0207.png"
+  },
+  {
+   "t": 104,
+   "file": "frozen/f0208.png"
+  },
+  {
+   "t": 104.5,
+   "file": "frozen/f0209.png"
+  },
+  {
+   "t": 105,
+   "file": "frozen/f0210.png"
+  },
+  {
+   "t": 105.5,
+   "file": "frozen/f0211.png"
+  },
+  {
+   "t": 106,
+   "file": "frozen/f0212.png"
+  },
+  {
+   "t": 106.5,
+   "file": "frozen/f0213.png"
+  },
+  {
+   "t": 107,
+   "file": "frozen/f0214.png"
+  },
+  {
+   "t": 107.5,
+   "file": "frozen/f0215.png"
+  },
+  {
+   "t": 108,
+   "file": "frozen/f0216.png"
+  },
+  {
+   "t": 108.5,
+   "file": "frozen/f0217.png"
+  },
+  {
+   "t": 109,
+   "file": "frozen/f0218.png"
+  },
+  {
+   "t": 109.5,
+   "file": "frozen/f0219.png"
+  },
+  {
+   "t": 110,
+   "file": "frozen/f0220.png"
+  },
+  {
+   "t": 110.5,
+   "file": "frozen/f0221.png"
+  },
+  {
+   "t": 111,
+   "file": "frozen/f0222.png"
+  },
+  {
+   "t": 111.5,
+   "file": "frozen/f0223.png"
+  },
+  {
+   "t": 112,
+   "file": "frozen/f0224.png"
+  },
+  {
+   "t": 112.5,
+   "file": "frozen/f0225.png"
+  },
+  {
+   "t": 113,
+   "file": "frozen/f0226.png"
+  },
+  {
+   "t": 113.5,
+   "file": "frozen/f0227.png"
+  },
+  {
+   "t": 114,
+   "file": "frozen/f0228.png"
+  },
+  {
+   "t": 114.5,
+   "file": "frozen/f0229.png"
+  },
+  {
+   "t": 115,
+   "file": "frozen/f0230.png"
+  },
+  {
+   "t": 115.5,
+   "file": "frozen/f0231.png"
+  },
+  {
+   "t": 116,
+   "file": "frozen/f0232.png"
+  },
+  {
+   "t": 116.5,
+   "file": "frozen/f0233.png"
+  },
+  {
+   "t": 117,
+   "file": "frozen/f0234.png"
+  },
+  {
+   "t": 117.5,
+   "file": "frozen/f0235.png"
+  },
+  {
+   "t": 118,
+   "file": "frozen/f0236.png"
+  },
+  {
+   "t": 118.5,
+   "file": "frozen/f0237.png"
+  },
+  {
+   "t": 119,
+   "file": "frozen/f0238.png"
+  },
+  {
+   "t": 119.5,
+   "file": "frozen/f0239.png"
+  },
+  {
+   "t": 120,
+   "file": "frozen/f0240.png"
+  },
+  {
+   "t": 120.5,
+   "file": "frozen/f0241.png"
+  },
+  {
+   "t": 121,
+   "file": "frozen/f0242.png"
+  },
+  {
+   "t": 121.5,
+   "file": "frozen/f0243.png"
+  },
+  {
+   "t": 122,
+   "file": "frozen/f0244.png"
+  },
+  {
+   "t": 122.5,
+   "file": "frozen/f0245.png"
+  },
+  {
+   "t": 123,
+   "file": "frozen/f0246.png"
+  },
+  {
+   "t": 123.5,
+   "file": "frozen/f0247.png"
+  },
+  {
+   "t": 124,
+   "file": "frozen/f0248.png"
+  },
+  {
+   "t": 124.5,
+   "file": "frozen/f0249.png"
+  },
+  {
+   "t": 125,
+   "file": "frozen/f0250.png"
+  },
+  {
+   "t": 125.5,
+   "file": "frozen/f0251.png"
+  },
+  {
+   "t": 126,
+   "file": "frozen/f0252.png"
+  },
+  {
+   "t": 126.5,
+   "file": "frozen/f0253.png"
+  },
+  {
+   "t": 127,
+   "file": "frozen/f0254.png"
+  },
+  {
+   "t": 127.5,
+   "file": "frozen/f0255.png"
+  },
+  {
+   "t": 128,
+   "file": "frozen/f0256.png"
+  },
+  {
+   "t": 128.5,
+   "file": "frozen/f0257.png"
+  },
+  {
+   "t": 129,
+   "file": "frozen/f0258.png"
+  },
+  {
+   "t": 129.5,
+   "file": "frozen/f0259.png"
+  },
+  {
+   "t": 130,
+   "file": "frozen/f0260.png"
+  },
+  {
+   "t": 130.5,
+   "file": "frozen/f0261.png"
+  },
+  {
+   "t": 131,
+   "file": "frozen/f0262.png"
+  },
+  {
+   "t": 131.5,
+   "file": "frozen/f0263.png"
+  },
+  {
+   "t": 132,
+   "file": "frozen/f0264.png"
+  },
+  {
+   "t": 132.5,
+   "file": "frozen/f0265.png"
+  },
+  {
+   "t": 133,
+   "file": "frozen/f0266.png"
+  },
+  {
+   "t": 133.5,
+   "file": "frozen/f0267.png"
+  },
+  {
+   "t": 134,
+   "file": "frozen/f0268.png"
+  },
+  {
+   "t": 134.5,
+   "file": "frozen/f0269.png"
+  },
+  {
+   "t": 135,
+   "file": "frozen/f0270.png"
+  },
+  {
+   "t": 135.5,
+   "file": "frozen/f0271.png"
+  },
+  {
+   "t": 136,
+   "file": "frozen/f0272.png"
+  },
+  {
+   "t": 136.5,
+   "file": "frozen/f0273.png"
+  },
+  {
+   "t": 137,
+   "file": "frozen/f0274.png"
+  },
+  {
+   "t": 137.5,
+   "file": "frozen/f0275.png"
+  },
+  {
+   "t": 138,
+   "file": "frozen/f0276.png"
+  },
+  {
+   "t": 138.5,
+   "file": "frozen/f0277.png"
+  },
+  {
+   "t": 139,
+   "file": "frozen/f0278.png"
+  },
+  {
+   "t": 139.5,
+   "file": "frozen/f0279.png"
+  },
+  {
+   "t": 140,
+   "file": "frozen/f0280.png"
+  },
+  {
+   "t": 140.5,
+   "file": "frozen/f0281.png"
+  },
+  {
+   "t": 141,
+   "file": "frozen/f0282.png"
+  },
+  {
+   "t": 141.5,
+   "file": "frozen/f0283.png"
+  },
+  {
+   "t": 142,
+   "file": "frozen/f0284.png"
+  },
+  {
+   "t": 142.5,
+   "file": "frozen/f0285.png"
+  },
+  {
+   "t": 143,
+   "file": "frozen/f0286.png"
+  },
+  {
+   "t": 143.5,
+   "file": "frozen/f0287.png"
+  },
+  {
+   "t": 144,
+   "file": "frozen/f0288.png"
+  },
+  {
+   "t": 144.5,
+   "file": "frozen/f0289.png"
+  },
+  {
+   "t": 145,
+   "file": "frozen/f0290.png"
+  },
+  {
+   "t": 145.5,
+   "file": "frozen/f0291.png"
+  },
+  {
+   "t": 146,
+   "file": "frozen/f0292.png"
+  },
+  {
+   "t": 146.5,
+   "file": "frozen/f0293.png"
+  },
+  {
+   "t": 147,
+   "file": "frozen/f0294.png"
+  },
+  {
+   "t": 147.5,
+   "file": "frozen/f0295.png"
+  },
+  {
+   "t": 148,
+   "file": "frozen/f0296.png"
+  },
+  {
+   "t": 148.5,
+   "file": "frozen/f0297.png"
+  },
+  {
+   "t": 149,
+   "file": "frozen/f0298.png"
+  },
+  {
+   "t": 149.5,
+   "file": "frozen/f0299.png"
+  },
+  {
+   "t": 150,
+   "file": "frozen/f0300.png"
+  },
+  {
+   "t": 150.5,
+   "file": "frozen/f0301.png"
+  },
+  {
+   "t": 151,
+   "file": "frozen/f0302.png"
+  },
+  {
+   "t": 151.5,
+   "file": "frozen/f0303.png"
+  },
+  {
+   "t": 152,
+   "file": "frozen/f0304.png"
+  },
+  {
+   "t": 152.5,
+   "file": "frozen/f0305.png"
+  },
+  {
+   "t": 153,
+   "file": "frozen/f0306.png"
+  },
+  {
+   "t": 153.5,
+   "file": "frozen/f0307.png"
+  },
+  {
+   "t": 154,
+   "file": "frozen/f0308.png"
+  },
+  {
+   "t": 154.5,
+   "file": "frozen/f0309.png"
+  },
+  {
+   "t": 155,
+   "file": "frozen/f0310.png"
+  },
+  {
+   "t": 155.5,
+   "file": "frozen/f0311.png"
+  },
+  {
+   "t": 156,
+   "file": "frozen/f0312.png"
+  },
+  {
+   "t": 156.5,
+   "file": "frozen/f0313.png"
+  },
+  {
+   "t": 157,
+   "file": "frozen/f0314.png"
+  },
+  {
+   "t": 157.5,
+   "file": "frozen/f0315.png"
+  },
+  {
+   "t": 158,
+   "file": "frozen/f0316.png"
+  },
+  {
+   "t": 158.5,
+   "file": "frozen/f0317.png"
+  },
+  {
+   "t": 159,
+   "file": "frozen/f0318.png"
+  },
+  {
+   "t": 159.5,
+   "file": "frozen/f0319.png"
+  },
+  {
+   "t": 160,
+   "file": "frozen/f0320.png"
+  },
+  {
+   "t": 160.5,
+   "file": "frozen/f0321.png"
+  },
+  {
+   "t": 161,
+   "file": "frozen/f0322.png"
+  },
+  {
+   "t": 161.5,
+   "file": "frozen/f0323.png"
+  },
+  {
+   "t": 162,
+   "file": "frozen/f0324.png"
+  },
+  {
+   "t": 162.5,
+   "file": "frozen/f0325.png"
+  },
+  {
+   "t": 163,
+   "file": "frozen/f0326.png"
+  },
+  {
+   "t": 163.5,
+   "file": "frozen/f0327.png"
+  },
+  {
+   "t": 164,
+   "file": "frozen/f0328.png"
+  },
+  {
+   "t": 164.5,
+   "file": "frozen/f0329.png"
+  },
+  {
+   "t": 165,
+   "file": "frozen/f0330.png"
+  },
+  {
+   "t": 165.5,
+   "file": "frozen/f0331.png"
+  },
+  {
+   "t": 166,
+   "file": "frozen/f0332.png"
+  },
+  {
+   "t": 166.5,
+   "file": "frozen/f0333.png"
+  },
+  {
+   "t": 167,
+   "file": "frozen/f0334.png"
+  },
+  {
+   "t": 167.5,
+   "file": "frozen/f0335.png"
+  },
+  {
+   "t": 168,
+   "file": "frozen/f0336.png"
+  },
+  {
+   "t": 168.5,
+   "file": "frozen/f0337.png"
+  },
+  {
+   "t": 169,
+   "file": "frozen/f0338.png"
+  },
+  {
+   "t": 169.5,
+   "file": "frozen/f0339.png"
+  },
+  {
+   "t": 170,
+   "file": "frozen/f0340.png"
+  },
+  {
+   "t": 170.5,
+   "file": "frozen/f0341.png"
+  },
+  {
+   "t": 171,
+   "file": "frozen/f0342.png"
+  },
+  {
+   "t": 171.5,
+   "file": "frozen/f0343.png"
+  }
+ ],
+ "errors": [],
+ "mobileHScroll": false
+}

@@ -1,0 +1,329 @@
+{
+ "engine": "piper:fr_FR-siwis-medium",
+ "wer_mean": 0.085,
+ "to_fix": [
+  [
+   "c2",
+   0.21,
+   [
+    [
+     "l l m djaking",
+     "llmjacking"
+    ]
+   ]
+  ],
+  [
+   "c16",
+   0.32,
+   [
+    [
+     "des passerelles",
+     "depasse rel"
+    ],
+    [
+     "l l m mixeurs",
+     "llm mixer"
+    ]
+   ]
+  ]
+ ],
+ "often_misheard": [
+  [
+   "l",
+   6
+  ],
+  [
+   "d",
+   4
+  ],
+  [
+   "ia",
+   2
+  ],
+  [
+   "m",
+   2
+  ],
+  [
+   "projet",
+   1
+  ],
+  [
+   "djaking",
+   1
+  ],
+  [
+   "tire",
+   1
+  ],
+  [
+   "il",
+   1
+  ],
+  [
+   "valide",
+   1
+  ],
+  [
+   "audit",
+   1
+  ],
+  [
+   "data",
+   1
+  ],
+  [
+   "access",
+   1
+  ],
+  [
+   "eteint",
+   1
+  ],
+  [
+   "flux",
+   1
+  ],
+  [
+   "note",
+   1
+  ]
+ ],
+ "parts": [
+  {
+   "cue": "c1",
+   "wer": 0.158,
+   "heard": "Lundi matin, la facture Claude du Projédiat affiche plus de 100 000 dollars. En une seule journée.",
+   "errors": [
+    [
+     "projet d ia",
+     "projediat"
+    ]
+   ]
+  },
+  {
+   "cue": "c2",
+   "wer": 0.211,
+   "heard": "Pas du minage, du LLMJacking. Quelqu 'un consomme vos modèles de langage et revend l 'accès.",
+   "errors": [
+    [
+     "l l m djaking",
+     "llmjacking"
+    ]
+   ]
+  },
+  {
+   "cue": "c3",
+   "wer": 0.062,
+   "heard": "Un cas type, sirer des incidents décrits par Mendiante, à quel moment pouvait -on le voir ?",
+   "errors": [
+    [
+     "tire",
+     "sirer"
+    ]
+   ]
+  },
+  {
+   "cue": "c4",
+   "wer": 0.062,
+   "heard": "Tout commence par une clé, un compte de service exposé à un jeton GitHub, une session volée.",
+   "errors": [
+    [
+     "",
+     "a"
+    ]
+   ]
+  },
+  {
+   "cue": "c5",
+   "wer": 0.0,
+   "heard": "Une requête, un seul token. Personne ne verra rien.",
+   "errors": []
+  },
+  {
+   "cue": "c6",
+   "wer": 0.087,
+   "heard": "Ils valitent les clés volés par des requêtes d 'un seul token sous les seuils d 'alerte. Le volume ne vous préviendra pas.",
+   "errors": [
+    [
+     "il valide",
+     "ils valitent"
+    ]
+   ]
+  },
+  {
+   "cue": "c7",
+   "wer": 0.071,
+   "heard": "Souvent, le service d 'Ian était même pas activé. Alors il active.",
+   "errors": [
+    [
+     "l",
+     ""
+    ]
+   ]
+  },
+  {
+   "cue": "c8",
+   "wer": 0.0,
+   "heard": "Chez Google Cloud, l 'activation du service tombe dans le journal Admin Activity, toujours écrit. Chez AWS, c 'est la demande d 'accès à un modèle.",
+   "errors": []
+  },
+  {
+   "cue": "c9",
+   "wer": 0.0,
+   "heard": "Toute activation non prévue est un événement critique. Votre meilleur alerte, car elle arrive avant la facture.",
+   "errors": []
+  },
+  {
+   "cue": "c10",
+   "wer": 0.0,
+   "heard": "Avant de consommer, je regarde si on m 'observe.",
+   "errors": []
+  },
+  {
+   "cue": "c11",
+   "wer": 0.087,
+   "heard": "Il lit la politique dodie pour savoir si les journaux des taxes sont actifs ou couple la journalisation des appels au modèle.",
+   "errors": [
+    [
+     "d audit",
+     "dodie"
+    ]
+   ]
+  },
+  {
+   "cue": "c12",
+   "wer": 0.0,
+   "heard": "Une coupure de journalisation par un compte qui n 'est pas votre pipine d 'infrastructure, haute sévérité.",
+   "errors": []
+  },
+  {
+   "cue": "c13",
+   "wer": 0.0,
+   "heard": "Devinez, vos journaux voient -ils chaque appel au modèle ?",
+   "errors": []
+  },
+  {
+   "cue": "c13",
+   "wer": 0.2,
+   "heard": "Ça dépend. AWS, oui, par défaut. Google Cloud, non, l 'inférence est dans des taxes, est un par défaut.",
+   "errors": [
+    [
+     "data access eteint",
+     "des taxes est un"
+    ]
+   ]
+  },
+  {
+   "cue": "c14",
+   "wer": 0.091,
+   "heard": "Chez AWS, la fin de chaque funote, même les tokens consommés. Chez Azure, il faut les journaux de diagnostique.",
+   "errors": [
+    [
+     "flux note",
+     "funote"
+    ]
+   ]
+  },
+  {
+   "cue": "c15",
+   "wer": 0.0,
+   "heard": "On croit voir l 'attaque dans les journaux. Sans réglage sur Google Cloud, on ne voit que l 'activation.",
+   "errors": []
+  },
+  {
+   "cue": "c16",
+   "wer": 0.316,
+   "heard": "Pourquoi un tel volume ? L 'accès est revendu, dépasse -rel, les LLM Mixer agrègent les clés volés.",
+   "errors": [
+    [
+     "des passerelles",
+     "depasse rel"
+    ],
+    [
+     "l l m mixeurs",
+     "llm mixer"
+    ]
+   ]
+  },
+  {
+   "cue": "c17",
+   "wer": 0.2,
+   "heard": "Devinez combien d 'appels une dêle a passé en moins de 8 heures ?",
+   "errors": [
+    [
+     "l",
+     ""
+    ],
+    [
+     "d elles",
+     "dele"
+    ]
+   ]
+  },
+  {
+   "cue": "c17",
+   "wer": 0.143,
+   "heard": "Plus de 500 .000. Près d 'un million de dollars pour la victime.",
+   "errors": [
+    [
+     "cent mille",
+     "cents zero"
+    ]
+   ]
+  },
+  {
+   "cue": "c18",
+   "wer": 0.105,
+   "heard": "Ces clients pètent environ 60 dollars par mois. Pour vous, la facture arrive trop tard, il faut détecter avant.",
+   "errors": [
+    [
+     "ses",
+     "ces"
+    ],
+    [
+     "paient",
+     "petent"
+    ]
+   ]
+  },
+  {
+   "cue": "c19",
+   "wer": 0.0,
+   "heard": "1. Alerter sur toute activation d 'un service d 'IA dans Adminativity ou Cloud Trail",
+   "errors": []
+  },
+  {
+   "cue": "c20",
+   "wer": 0.158,
+   "heard": "2. Allumer les yeux d 'État access sur les Projédias et une alerte sur toute coupure de journalisation.",
+   "errors": [
+    [
+     "projets d ia",
+     "projedias"
+    ]
+   ]
+  },
+  {
+   "cue": "c21",
+   "wer": 0.1,
+   "heard": "Trois, chasser les requêtes d 'un token et les piques d 'erreur de Cota, et poser des plafonds de dépenses.",
+   "errors": [
+    [
+     "pics",
+     "piques"
+    ],
+    [
+     "quota",
+     "cota"
+    ]
+   ]
+  },
+  {
+   "cue": "c22",
+   "wer": 0.0,
+   "heard": "Simplification, la vraie chaîne passe aussi par l 'escalade de droit et la persistance. Ce sera l 'épisode 2.",
+   "errors": []
+  }
+ ]
+}
