@@ -1,0 +1,119 @@
+<Rive version="1" kind="fragment">
+    <Artboard defaultStateMachineId="0:7" styleId="0:5" viewModelId="0:100" viewModelInstanceId="0:110" width="600" height="700" name="Analyst" id="0:2">
+        <LayoutComponentStyle name="Artboard Style" id="0:5"/>
+
+        <Node x="300" y="640" name="Rig" id="0:20">
+            <DataBindContext sourcePathIds="0:100-0:103" propertyKey="15" converterId="0:121"/>
+            <Node name="Breath" id="0:25">
+                <!-- arm with a glowing tablet -->
+                <Node x="-86" y="-150" name="Arm" id="0:30">
+                    <DataBindContext sourcePathIds="0:100-0:104" propertyKey="15" converterId="0:122"/>
+                    <Shape x="-92" y="-26" rotation="0.25" name="Tablet">
+                        <Rectangle width="76" height="56" cornerRadiusTL="10" cornerRadiusTR="10" cornerRadiusBL="10" cornerRadiusBR="10" name="R"/>
+                        <Stroke thickness="10" name="Glow"><SolidColor colorValue="8822D3EE" name="C"/><Feather strength="10" name="Fe"/></Stroke>
+                        <Fill name="Screen"><SolidColor colorValue="FF0E2A4A" name="C"/></Fill>
+                        <Stroke thickness="5" name="Edge"><SolidColor colorValue="FF7FE8F7" name="C"/></Stroke>
+                    </Shape>
+                    <Shape name="ArmShape">
+                        <PointsPath isClosed="true" name="P">
+                            <StraightVertex x="14" y="-22" radius="20"/>
+                            <StraightVertex x="-70" y="-30" radius="14"/>
+                            <StraightVertex x="-72" y="-4" radius="14"/>
+                            <StraightVertex x="14" y="24" radius="20"/>
+                        </PointsPath>
+                        <Fill name="F"><SolidColor colorValue="FF1BA6C4" name="C"/></Fill>
+                    </Shape>
+                </Node>
+
+                <!-- headset -->
+                <Shape y="-215" name="Headset">
+                    <PointsPath isClosed="false" name="P">
+                        <StraightVertex x="-118" y="20"/>
+                        <CubicMirroredVertex x="0" y="-108" rotation="0" distance="75"/>
+                        <StraightVertex x="118" y="20"/>
+                    </PointsPath>
+                    <Stroke thickness="12" cap="round" name="S"><SolidColor colorValue="FF0B1A3A" name="C"/></Stroke>
+                </Shape>
+                <Shape x="-120" y="-195" name="EarCup">
+                    <Rectangle width="30" height="56" cornerRadiusTL="12" cornerRadiusTR="12" cornerRadiusBL="12" cornerRadiusBR="12" name="R"/>
+                    <Fill name="F"><SolidColor colorValue="FF0B1A3A" name="C"/></Fill>
+                </Shape>
+
+                <!-- face -->
+                <Node y="-210" name="Face" id="0:40">
+                    <Shape y="58" name="Mouth" id="0:41">
+                        <Ellipse width="42" height="10" name="MouthPath" id="0:43">
+                            <DataBindContext sourcePathIds="0:100-0:101" propertyKey="21" converterId="0:120"/>
+                        </Ellipse>
+                        <Fill name="F"><SolidColor colorValue="FF0B1A3A" name="C"/></Fill>
+                    </Shape>
+                    <Node name="Eyes" id="0:42">
+                        <DataBindContext sourcePathIds="0:100-0:102" propertyKey="17"/>
+                        <Shape x="-34" y="2" name="PupilL"><Ellipse width="18" height="20" name="P"/><Fill name="F"><SolidColor colorValue="FF0B1A3A" name="C"/></Fill></Shape>
+                        <Shape x="38" y="2" name="PupilR"><Ellipse width="18" height="20" name="P"/><Fill name="F"><SolidColor colorValue="FF0B1A3A" name="C"/></Fill></Shape>
+                        <Shape x="-30" name="EyeL"><Ellipse width="46" height="52" name="P"/><Fill name="F"><SolidColor colorValue="FFFFFFFF" name="C"/></Fill></Shape>
+                        <Shape x="30" name="EyeR"><Ellipse width="46" height="52" name="P"/><Fill name="F"><SolidColor colorValue="FFFFFFFF" name="C"/></Fill></Shape>
+                    </Node>
+                </Node>
+
+                <!-- highlight -->
+                <Shape x="-52" y="-262" rotation="-0.5" name="Shine">
+                    <Ellipse width="44" height="22" name="P"/>
+                    <Fill name="F"><SolidColor colorValue="55FFFFFF" name="C"/></Fill>
+                </Shape>
+
+                <!-- body: a soft rounded blob -->
+                <Shape name="Body" id="0:50">
+                    <PointsPath isClosed="true" isClockwise="true" name="P">
+                        <CubicMirroredVertex x="0" y="-300" rotation="0" distance="95"/>
+                        <CubicMirroredVertex x="125" y="-150" rotation="1.5708" distance="90"/>
+                        <StraightVertex x="115" y="0" radius="36"/>
+                        <StraightVertex x="-115" y="0" radius="36"/>
+                        <CubicMirroredVertex x="-125" y="-150" rotation="-1.5708" distance="90"/>
+                    </PointsPath>
+                    <Fill name="F">
+                        <LinearGradient startX="0" startY="-300" endX="0" endY="0" name="G">
+                            <GradientStop colorValue="FF5EE6F5" position="0"/>
+                            <GradientStop colorValue="FF1593B5" position="1"/>
+                        </LinearGradient>
+                    </Fill>
+                </Shape>
+            </Node>
+            <Shape y="6" name="Shadow">
+                <Ellipse width="250" height="34" name="P"/>
+                <Fill fillRule="clockwise" name="F"><SolidColor colorValue="66000000" name="C"/><Feather strength="10" name="Fe"/></Fill>
+            </Shape>
+        </Node>
+
+        <StateMachine name="State Machine 1" id="0:7">
+            <StateMachineLayer name="Layer 1" id="0:8">
+                <EntryState><StateTransition stateToId="0:12"/></EntryState>
+                <AnimationState x="200" animationId="0:6" id="0:12"/>
+            </StateMachineLayer>
+        </StateMachine>
+        <LinearAnimation loopValue="loop" duration="110" name="Idle" id="0:6">
+            <KeyedObject objectId="0:25">
+                <KeyedProperty propertyKey="17">
+                    <KeyFrameDouble value="1" interpolationType="cubic"/>
+                    <KeyFrameDouble value="1.03" interpolationType="cubic" frame="55"/>
+                    <KeyFrameDouble value="1" interpolationType="cubic" frame="110"/>
+                </KeyedProperty>
+            </KeyedObject>
+        </LinearAnimation>
+    </Artboard>
+    <DataConverterRangeMapper minInput="0" maxInput="1" minOutput="6" maxOutput="46" clampLower="true" clampUpper="true" name="MouthToHeight" id="0:120"/>
+    <DataConverterRangeMapper minInput="-1" maxInput="1" minOutput="-0.3" maxOutput="0.3" clampLower="true" clampUpper="true" name="LeanToRad" id="0:121"/>
+    <DataConverterRangeMapper minInput="0" maxInput="1" minOutput="0" maxOutput="1.3" clampLower="true" clampUpper="true" name="ArmToRad" id="0:122"/>
+    <ViewModel defaultInstanceId="0:110" name="Rig" id="0:100">
+        <ViewModelPropertyNumber name="mouth" id="0:101"/>
+        <ViewModelPropertyNumber name="eyes" id="0:102"/>
+        <ViewModelPropertyNumber name="lean" id="0:103"/>
+        <ViewModelPropertyNumber name="arm" id="0:104"/>
+        <ViewModelInstance exports="true" name="Default" id="0:110">
+            <ViewModelInstanceNumber propertyValue="0.2" viewModelPropertyId="0:101"/>
+            <ViewModelInstanceNumber propertyValue="1" viewModelPropertyId="0:102"/>
+            <ViewModelInstanceNumber propertyValue="0" viewModelPropertyId="0:103"/>
+            <ViewModelInstanceNumber propertyValue="0" viewModelPropertyId="0:104"/>
+        </ViewModelInstance>
+    </ViewModel>
+</Rive>

@@ -3,7 +3,7 @@ iterations/**/frozen/
 versions/*/_silent.mp4
 versions/*/_seg*
 versions/*/video.mp4
-versions/*/voice/
+versions/*/voice
 versions/*/soundtrack.wav
 __pycache__/
 gallery/*.mp3
@@ -12,3 +12,8 @@ lookdev/**/lookdev.mp4
 rnd/rive/**/build/
 lookdev/**/lib/rive/
 lookdev/**/lookdev_rive.mp4
+versions/**/lib/rive/
+versions/**/.hyperframes/
+versions/*/render.log
+versions/*/work-*/
+versions/*/._*
