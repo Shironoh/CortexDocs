@@ -17,3 +17,5 @@ versions/**/.hyperframes/
 versions/*/render.log
 versions/*/work-*/
 versions/*/._*
+research/**/raw/ext/*.html
+research/**/raw/ext/*.pdf

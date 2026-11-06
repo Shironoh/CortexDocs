@@ -1,0 +1,351 @@
+# Tailscale Documentation
+
+> Tailscale is a Zero Trust identity-based connectivity platform. This is a curated index of the Tailscale documentation: it covers each area of the docs and the pages within it, and each listed page links to more detail. Any documentation page is available as Markdown by appending `.md` to its URL.
+
+- [Docs](https://tailscale.com/docs.md): Use Tailscale to securely connect your devices, no matter where they live.
+
+## Install Tailscale
+
+- [Install Tailscale](https://tailscale.com/docs/install.md): Install and uninstall the Tailscale client.
+- [Install Tailscale on Amazon Fire devices](https://tailscale.com/docs/install/amazon-fire.md): Install Tailscale on your Amazon Fire devices, including Amazon Fire TV and Amazon Fire Tablets.
+- [Install Tailscale on Android](https://tailscale.com/docs/install/android.md): Install the Tailscale client on Android devices.
+- [Install Tailscale on an Apple TV](https://tailscale.com/docs/install/appletv.md): Install the Tailscale client on an Apple TV.
+- [Install Tailscale on a Chromebook](https://tailscale.com/docs/install/chromebook.md): Install the Tailscale client on a Chromebook.
+- [Install Tailscale on iOS](https://tailscale.com/docs/install/ios.md): Install the Tailscale client on iOS.
+- [Install Tailscale on Linux](https://tailscale.com/docs/install/linux.md): Install the Tailscale client on Linux distributions using the install script for mainstream distributions, or other distributions with alternative package managers.
+- [Install Tailscale on macOS](https://tailscale.com/docs/install/mac.md): Install the Tailscale client on macOS.
+- [Using OPNsense with Tailscale](https://tailscale.com/docs/install/opnsense.md): Set up a Tailscale VPN on OPNsense. Get secure communication across your devices without the need for complex configuration.
+- [Start using Tailscale](https://tailscale.com/docs/install/start.md): Install Tailscale, create a network, and invite your team.
+- [Install unstable Tailscale clients](https://tailscale.com/docs/install/unstable.md): Find out how to test new features before they are released to the wider community.
+- [Install Tailscale on Windows](https://tailscale.com/docs/install/windows.md): Install the Tailscale client on Windows.
+- [Install Tailscale with cloud-init](https://tailscale.com/docs/install/with-cloud-init.md): Install Tailscale automatically on the first boot of a machine with cloud-init.
+
+## Use cases
+
+- [Use cases](https://tailscale.com/docs/use-cases.md): Explore how you can use Tailscale at home and at work.
+- [AI infrastructure access](https://tailscale.com/docs/use-cases/ai-infrastructure-access.md): Secure access to AI infrastructure, GPU clusters, and private LLM deployments across your network.
+- [Application testing](https://tailscale.com/docs/use-cases/application-testing.md): Share local development servers, test webhooks, and simulate geo-specific traffic without deploying to the cloud.
+- [Infrastructure access](https://tailscale.com/docs/use-cases/infrastructure-access.md): Manage secure, audited access to production servers, Kubernetes clusters, and cloud environments.
+- [Personal or at-home use](https://tailscale.com/docs/use-cases/personal-or-at-home-use.md): Connect and manage your home network devices and services from anywhere with Tailscale.
+- [Accessing a regulated environment](https://tailscale.com/docs/use-cases/regulated-environment.md): Meet compliance requirements with static egress IPs, device posture checks, and access controls you can audit.
+- [VPN replacement](https://tailscale.com/docs/use-cases/vpn-replacement.md): Replace your legacy corporate VPN with Tailscale for faster and more secure remote access to your devices.
+
+## Solutions
+
+- [Solutions](https://tailscale.com/docs/solutions.md): Explore how to use Tailscale in various scenarios through hands-on guides.
+- [Access remote desktops using Windows RDP](https://tailscale.com/docs/solutions/access-remote-desktops-using-windows-rdp.md): Access a Windows PC securely from anywhere using Remote Desktop and Tailscale. Connect devices on your private tailnet without port forwarding or public IPs.
+- [Access remote desktops using RustDesk](https://tailscale.com/docs/solutions/access-remote-desktops-with-rustdesk.md): Set up secure remote desktop access using RustDesk and Tailscale for connecting devices directly over your private tailnet, no servers needed.
+- [Block ads on all your devices from anywhere using a Raspberry Pi](https://tailscale.com/docs/solutions/block-ads-all-devices-anywhere-using-raspberry-pi.md): Increase privacy, security, and browsing performance in a cost-effective way by using a Raspberry Pi with Pi-hole to block ads.
+- [Code on iPad using Visual Studio Code, Caddy, and code-server](https://tailscale.com/docs/solutions/code-on-ipad-vscode-caddy-code-server.md): Code from your iPad from anywhere with a secure private connection to your own remote coding environment.
+- [Connect GitHub CI/CD workflows to private infrastructure without public exposure](https://tailscale.com/docs/solutions/connect-github-cicd-workflows-to-private-infrastructure-without-public-exposure.md): Connect GitHub-hosted runners to private infrastructure without public exposure using Tailscale's ephemeral, authenticated connections.
+- [Connect Kubernetes pods to your tailnet using a sidecar](https://tailscale.com/docs/solutions/connect-kubernetes-pods-to-tailnet-using-sidecar.md): Run the Tailscale container image as a sidecar in Kubernetes with persistent state, DNS configuration, authentication, and routing guidance.
+- [Create a secure connection to MongoDB Atlas](https://tailscale.com/docs/solutions/create-a-secure-connection-to-mongodb-atlas.md): Securely connect to a MongoDB Atlas database and permit access only to your Tailscale network.
+- [Host a private web server with Docker](https://tailscale.com/docs/solutions/host-private-server-docker.md): Run a web application in Docker on a Linux device and allow access only from your Tailscale network.
+- [Use custom domains with Kubernetes Gateway API and Tailscale](https://tailscale.com/docs/solutions/kubernetes-operator-byod-gateway-api.md): Configure custom domains for services exposed through Tailscale using Kubernetes Gateway API, ExternalDNS, and automated TLS certificate management.
+- [Manage multi-cluster Kubernetes deployments with ArgoCD](https://tailscale.com/docs/solutions/manage-multi-cluster-kubernetes-deployments-argocd.md): Set up secure multi-cluster Kubernetes management with ArgoCD using Tailscale's private network to connect clusters across regions without complex networking.
+- [Migrate from a legacy VPN to Tailscale](https://tailscale.com/docs/solutions/migrate-legacy-vpn-tailscale.md): Migrate your legacy VPN to Tailscale. Securely connect multiple devices, restrict access by user role and purpose, and explore additional Tailscale features.
+- [Migrate from OpenVPN to Tailscale](https://tailscale.com/docs/solutions/migrate-openvpn-tailscale.md): Migrate your OpenVPN network to Tailscale. Securely connect multiple devices, restrict access by user role and purpose, and explore additional Tailscale features.
+- [Protect production PostgreSQL databases from unencrypted MacBooks](https://tailscale.com/docs/solutions/protect-postgresql-unencrypted-macbooks.md): Use grants to automatically route PostgreSQL traffic based on MacBook encryption status, providing direct access for encrypted devices while monitoring unencrypted device connections.
+- [Reduce AI token spend without changing your applications](https://tailscale.com/docs/solutions/reduce-aperture-token-costs-with-tsheadroom.md): Add tsheadroom to Aperture to compress bulky AI request bodies before they reach your provider, cutting token spend across all of your traffic with no changes to your client applications.
+- [Route AI code reviews through Aperture](https://tailscale.com/docs/solutions/route-ai-code-reviews-through-aperture.md): Centralize API key management, usage tracking, and cost control for AI-powered code reviews by routing Claude Code GitHub Action requests through Aperture by Tailscale.
+- [Secure your internet traffic on public Wi-Fi using an Apple TV](https://tailscale.com/docs/solutions/secure-traffic-public-wifi-appletv.md): Route Tailscale traffic through your Apple TV for secure, private browsing and access to region-locked content.
+- [Set up a dog camera with Tailscale, Raspberry Pi, and Motion](https://tailscale.com/docs/solutions/set-up-dogcam.md): Set up a dog camera that you can securely access from anywhere.
+- [Run a private Minecraft server with Tailscale](https://tailscale.com/docs/solutions/set-up-minecraft.md): Share a Minecraft server with the people you want from anywhere.
+- [Tailscale on NixOS: A New Minecraft Server in Ten Minutes](https://tailscale.com/docs/solutions/set-up-nixos-minecraft.md): Set up a Minecraft server on NixOS.
+- [Sync Kubernetes secrets across clusters with External Secrets Operator](https://tailscale.com/docs/solutions/sync-kubernetes-secrets-across-clusters-external-secrets.md): Distribute secrets between Kubernetes clusters using External Secrets Operator and Tailscale's private network, eliminating the need to store credentials in Git or expose API servers to the internet.
+
+## Features
+
+- [Features](https://tailscale.com/docs/features.md): Features documentation index.
+- [Access control](https://tailscale.com/docs/features/access-control.md): Understand the options available for access control in Tailscale.
+- [How app connectors work](https://tailscale.com/docs/features/app-connectors.md): Route SaaS application traffic in your tailnet using app connectors.
+- [Declarative node sharing](https://tailscale.com/docs/features/declarative-node-sharing.md): Define sharing relationships and grant access to resources across trusted tailnets using policy.
+- [Device posture management](https://tailscale.com/docs/features/device-posture.md): Use device posture for enforcing device rules in your tailnet.
+- [Ephemeral nodes](https://tailscale.com/docs/features/ephemeral-nodes.md): Use ephemeral nodes in Tailscale for managing short-lived devices like containers and CI/CD systems.
+- [Exit nodes (route all traffic)](https://tailscale.com/docs/features/exit-nodes.md): Route all internet traffic through a specific device on your network.
+- [Firewall mode in tailscaled](https://tailscale.com/docs/features/firewall-mode.md): Understand the different firewall modes supported by Tailscale on Linux devices.
+- [Group visibility on Tailscale clients](https://tailscale.com/docs/features/group-visibility-clients.md): Get group membership information for applications running in your Tailscale network.
+- [Logging overview](https://tailscale.com/docs/features/logging.md): Understand Tailscale's logging infrastructure.
+- [macOS and iOS shortcuts](https://tailscale.com/docs/features/mac-ios-shortcuts.md): Understand how Tailscale works with the Shortcuts app, allowing you to automate tasks.
+- [MagicDNS](https://tailscale.com/docs/features/magicdns.md): Find out how to automatically register DNS names for devices in your Tailscale network.
+- [MagicRoute](https://tailscale.com/docs/features/magicroute.md): Select among eligible subnet routers, app connectors, and Tailscale Service hosts with MagicRoute.
+- [Manage multiple tailnets](https://tailscale.com/docs/features/multiple-tailnets.md): Manage multiple tailnets under a single organization.
+- [OAuth apps](https://tailscale.com/docs/features/oauth-apps.md): Build internal tools that act on behalf of individual users through a standard OAuth 2.0 authorization code flow, so each action carries the consenting user's identity.
+- [OAuth clients](https://tailscale.com/docs/features/oauth-clients.md): Use OAuth clients to provide ongoing access to the Tailscale API.
+- [Tailscale Peer Relays](https://tailscale.com/docs/features/peer-relay.md): Use Tailscale Peer Relays for client-to-client connections when direct connections aren't possible.
+- [Route selection](https://tailscale.com/docs/features/route-selection.md): Compare and configure route selection for subnet routers, app connectors, and Tailscale Service hosts, including MagicRoute exit node recommendations.
+- [Secure node state storage](https://tailscale.com/docs/features/secure-node-state-storage.md): Encrypt Tailscale node state at rest.
+- [Viewing the list of endpoints on your network](https://tailscale.com/docs/features/services.md): Find out how to monitor and easily connect to the endpoints running on machines in your Tailscale network.
+- [Share your machines with other users](https://tailscale.com/docs/features/sharing.md): Give a Tailscale user on another tailnet access to a private machine within your tailnet, without exposing the machine publicly.
+- [Site-to-site networking](https://tailscale.com/docs/features/site-to-site.md): Connect two subnets in your tailnet with each other.
+- [Subnet routers](https://tailscale.com/docs/features/subnet-routers.md): Use subnet routers to give devices outside your local network access to services within specific subnets. Extend your private network with Tailscale.
+- [Group devices with tags](https://tailscale.com/docs/features/tags.md): Use Tailscale tags to authenticate and identify non-user devices, such as a server.
+- [Taildrive](https://tailscale.com/docs/features/taildrive.md): Share folders securely between devices on your Tailscale network.
+- [Taildrop](https://tailscale.com/docs/features/taildrop.md): Send files between your personal devices on a Tailscale network.
+- [Tailnet Lock](https://tailscale.com/docs/features/tailnet-lock.md): Ensure that no node joins your tailnet unless trusted nodes in your tailnet sign the new node.
+- [Tailnet policy file](https://tailscale.com/docs/features/tailnet-policy-file.md): Understand the tailnet policy file.
+- [Tailnets API](https://tailscale.com/docs/features/tailnets-api.md): Create and manage tailnets in your organization programmatically with the Tailscale Tailnets API.
+- [Use device posture for just-in-time access](https://tailscale.com/docs/features/tailscale-accessbot-jit.md): Use device posture for just-in-time access to resources in your tailnet.
+- [Tailscale Funnel](https://tailscale.com/docs/features/tailscale-funnel.md): Securely route internet traffic to local services using Tailscale Funnel.
+- [Tailscale Serve](https://tailscale.com/docs/features/tailscale-serve.md): Explore the Tailscale Serve service.
+- [Tailscale Services](https://tailscale.com/docs/features/tailscale-services.md): Securely connect to and manage access to your internal resources using Tailscale Services.
+- [Tailscale skill for coding agents](https://tailscale.com/docs/features/tailscale-skill.md): Install the Tailscale skill so a coding agent can work with Tailscale configuration and code.
+- [Tailscale SSH](https://tailscale.com/docs/features/tailscale-ssh.md): Use Tailscale SSH to manage the authentication and authorization of SSH connections in your tailnet.
+- [Customize Tailscale using system policies](https://tailscale.com/docs/features/tailscale-system-policies.md): A list of configuration keys you can use to customize the Tailscale client using system policies, including MDM.
+- [tsidp](https://tailscale.com/docs/features/tsidp.md): Use tsidp to secure any service that supports OIDC/OAuth with no additional login while in a tailnet, including self-hosted apps like Grafana and MCP servers.
+- [tsnet](https://tailscale.com/docs/features/tsnet.md): Use the tsnet package to embed Tailscale inside a Go program.
+- [tsrecorder](https://tailscale.com/docs/features/tsrecorder.md): Use tsrecorder for session recording with Tailscale SSH and the Tailscale Kubernetes Operator.
+- [User & group provisioning](https://tailscale.com/docs/features/user-group-provisioning.md): Learn about the System for Cross-domain Identity Management (SCIM) identity providers that Tailscale supports.
+- [Visual policy editor](https://tailscale.com/docs/features/visual-editor.md): Update your tailnet policy file with the visual policy editor.
+- [Webhooks](https://tailscale.com/docs/features/webhooks.md): Set up a webhook to receive notification of events on your Tailscale network.
+- [Workload identity federation](https://tailscale.com/docs/features/workload-identity-federation.md): Use federated OIDC workload identities from third-party providers to authenticate requests to the Tailscale API.
+
+## Aperture
+
+- [Aperture](https://tailscale.com/docs/aperture.md): Monitor and secure LLM usage with Aperture by Tailscale.
+- [Aperture admin dashboard](https://tailscale.com/docs/aperture/admin-dashboard.md): Use the Aperture admin dashboard to monitor organization-wide activity, manage access and spending, and configure your Aperture gateway.
+- [Buy tokens through Aperture](https://tailscale.com/docs/aperture/buy-tokens-through-aperture.md): Buy tokens through Aperture for model usage, or continue using your own supported providers.
+- [Chat](https://tailscale.com/docs/aperture/chat.md): Chat with models, use connected tools, and review your own Aperture usage in one web interface.
+- [Chat sandbox](https://tailscale.com/docs/aperture/chat-sandbox.md): Run code, analyze data, and create downloadable files in an isolated Linux environment during a chat conversation.
+- [Aperture CLI](https://tailscale.com/docs/aperture/cli.md): Use the Aperture CLI to discover, configure, and run coding agents that connect through your Aperture gateway.
+- [Aperture configuration reference](https://tailscale.com/docs/aperture/configuration.md): Reference for Aperture configuration fields, defaults, and validation errors.
+- [Connect devices outside your tailnet](https://tailscale.com/docs/aperture/connect-outside-tailnet.md): Connect devices that are not in your tailnet to your Aperture gateway using an Aperture CLI bridge or ts-unplug.
+- [Connectors](https://tailscale.com/docs/aperture/connectors.md): Find Aperture connector setup guides, the public provider catalog, authentication types, system tools, and configuration reference.
+- [Control AI access](https://tailscale.com/docs/aperture/control-access.md): Manage who can access Aperture and which models they can use.
+- [Get started with Aperture](https://tailscale.com/docs/aperture/get-started.md): Sign up for Aperture, configure a provider, and send your first request.
+- [Guardrails](https://tailscale.com/docs/aperture/guardrails.md): Inspect, modify, or block LLM requests before they reach the provider.
+- [How Aperture works](https://tailscale.com/docs/aperture/how-aperture-works.md): Understand how Aperture uses Tailscale identity, model-based routing, and telemetry to secure and monitor LLM requests.
+- [How Aperture grants work](https://tailscale.com/docs/aperture/how-grants-work.md): Understand the Aperture grants model, including deny-by-default access, additive allow-only rules, capability matching, and how Aperture resolves precedence when multiple grants apply.
+- [Aperture how-to guides](https://tailscale.com/docs/aperture/how-to.md): Step-by-step guides for configuring Aperture providers, access controls, spending limits, observability, and integrations.
+- [Integrate with external tools](https://tailscale.com/docs/aperture/integrate.md): Connect Aperture with authorization engines, log aggregators, and external services.
+- [Manage AI spending](https://tailscale.com/docs/aperture/manage-spending.md): Set budgets, buy tokens, control per-user spending limits, and monitor quota balances in Aperture.
+- [MCP server proxying](https://tailscale.com/docs/aperture/mcp-server.md): Aggregate tools and resources from remote MCP servers through Aperture with identity-based access control.
+- [Model aliases](https://tailscale.com/docs/aperture/model-aliases.md): Configure model aliases, choose destinations, and apply grants, quotas, and hooks.
+- [Observe and export AI usage](https://tailscale.com/docs/aperture/observe-and-export.md): Review your own Aperture usage in Chat or use the admin dashboard to inspect and export organization-wide activity.
+- [Privacy and data retention](https://tailscale.com/docs/aperture/privacy-and-data-retention.md): Control how long Aperture retains captured data, where it exports, and how to decommission an Aperture gateway and its data.
+- [Provider configuration](https://tailscale.com/docs/aperture/provider-compatibility.md): Reference for Aperture provider compatibility flags, authorization, credential sources, custom headers, and cost estimates.
+- [Aperture reference](https://tailscale.com/docs/aperture/reference.md): Reference documentation for Aperture interfaces, configuration, provider compatibility, CLI, and integration recipes.
+- [Set up LLM providers](https://tailscale.com/docs/aperture/set-up-providers.md): Configure upstream LLM providers so Aperture can route requests and inject authentication on behalf of your users.
+- [Troubleshooting Aperture](https://tailscale.com/docs/aperture/troubleshooting.md): Common Aperture by Tailscale error conditions, their causes, and resolution steps.
+- [Set up LLM clients](https://tailscale.com/docs/aperture/use-your-tools.md): Configure LLM clients to route requests through Aperture.
+- [Visible groups for Aperture](https://tailscale.com/docs/aperture/visible-groups.md): Use Tailscale groups and SCIM groups to control access to Aperture models and admin roles.
+- [What is Aperture?](https://tailscale.com/docs/aperture/what-is-aperture.md): Aperture by Tailscale is an AI agent that works with the machines in your tailnet, backed by a gateway that routes LLM requests through your Tailscale identity.
+
+## Tailscale PAM
+
+- [Tailscale PAM](https://tailscale.com/docs/privileged-access-management.md): Govern and secure privileged access with Tailscale PAM.
+- [Tailscale PAM architecture and core concepts](https://tailscale.com/docs/privileged-access-management/architecture-and-concepts.md): Get an overview of the Tailscale PAM architecture and core concepts.
+- [Tailscale PAM connectors](https://tailscale.com/docs/privileged-access-management/connectors.md): Find documentation for Border connectors, including setup guides, conceptual explanations, and configuration reference.
+- [Get started with Tailscale PAM](https://tailscale.com/docs/privileged-access-management/get-started.md): Sign up for Tailscale PAM and use it to provide privileged access to resources in your Tailscale network.
+- [Tailscale PAM how-to guides](https://tailscale.com/docs/privileged-access-management/how-to.md): Step-by-step guides for configuring Tailscale PAM to provide privileged access to your services.
+- [Tailscale PAM reference](https://tailscale.com/docs/privileged-access-management/reference.md): Explore reference guides for Tailscale PAM.
+- [Tailscale PAM service accounts](https://tailscale.com/docs/privileged-access-management/service-accounts.md): Use service accounts to manage Tailscale PAM programmatically and to access an HTTP service without the Tailscale client.
+- [Tailscale PAM services](https://tailscale.com/docs/privileged-access-management/services.md): Use Tailscale PAM services to manage privileged access to services on your Tailscale network.
+- [Tailscale PAM session logs](https://tailscale.com/docs/privileged-access-management/session-logs.md): Get insight into the privileged access sessions in your Tailscale network.
+- [What is Tailscale PAM?](https://tailscale.com/docs/privileged-access-management/what-is-tailscale-pam.md): Tailscale PAM provides privileged and auditable access to resources like Linux servers, databases, and Kubernetes clusters in your Tailscale network.
+
+## Tailscale Kubernetes Operator
+
+- [Tailscale Kubernetes Operator](https://tailscale.com/docs/kubernetes-operator.md): The Tailscale Kubernetes Operator provides secure connectivity to and from your Kubernetes cluster.
+- [Access the Kubernetes API server over Tailscale](https://tailscale.com/docs/kubernetes-operator/api-server-access.md): Securely access the Kubernetes API server over Tailscale.
+- [Tailscale Kubernetes Operator concepts explained](https://tailscale.com/docs/kubernetes-operator/concepts.md): Learn about the architecture and key resources of the Tailscale Kubernetes Operator.
+- [Host Tailscale resources in Kubernetes with Connector](https://tailscale.com/docs/kubernetes-operator/connector.md): Deploy subnet routers and exit nodes on Kubernetes using the Connector resource
+- [Access tailnet resources from your cluster with Egress](https://tailscale.com/docs/kubernetes-operator/egress.md): Access tailnet resources from your Kubernetes cluster using the Tailscale Kubernetes Operator.
+- [Expose cluster workloads to your tailnet with Ingress](https://tailscale.com/docs/kubernetes-operator/ingress.md): Expose Kubernetes workloads to your tailnet or the internet using the Tailscale Kubernetes Operator.
+- [Install the Tailscale Kubernetes Operator](https://tailscale.com/docs/kubernetes-operator/install-operator.md): Install the Tailscale Kubernetes Operator in your Kubernetes cluster.
+- [Manage and configure the Tailscale Kubernetes Operator](https://tailscale.com/docs/kubernetes-operator/manage-and-configure.md): Manage and configure your Tailscale Kubernetes Operator cluster.
+- [Host peer relays in Kubernetes with PeerRelay](https://tailscale.com/docs/kubernetes-operator/peer-relay.md): Deploy Tailscale peer relays on Kubernetes using the PeerRelay custom resource.
+- [Quickstart tutorial for the Tailscale Kubernetes Operator](https://tailscale.com/docs/kubernetes-operator/quickstart.md): A hands-on guide to the Tailscale Kubernetes Operator and its key features.
+- [Session recording with the Tailscale Kubernetes Operator](https://tailscale.com/docs/kubernetes-operator/recorder.md): Deploy and configure session recording using the Tailscale Kubernetes Operator.
+- [Tailscale Kubernetes Operator reference](https://tailscale.com/docs/kubernetes-operator/reference.md): Reference documentation for the Tailscale Kubernetes Operator.
+
+## How-to Guides
+
+- [How-to Guides](https://tailscale.com/docs/how-to.md): Step-by-step instructions on how to use Tailscale features to make managing your network easy.
+- [SSH into a Linux VM](https://tailscale.com/docs/how-to/connect-ssh-linux-vm.md): Use Tailscale SSH to connect securely to a Linux VM.
+- [Connect to devices](https://tailscale.com/docs/how-to/connect-to-devices.md): Connect to devices in your tailnet.
+- [Access your virtual private cloud (VPC)](https://tailscale.com/docs/how-to/connect-vpc.md): Access your virtual private cloud (VPC) and configure a subnet router using Tailscale.
+- [Tailscale quickstart](https://tailscale.com/docs/how-to/quickstart.md): Install Tailscale in minutes. Create your private network and manage any device, anywhere.
+- [Keep Tailscale running when I'm not logged in to my computer](https://tailscale.com/docs/how-to/run-unattended.md): Configure your device to run Tailscale even when no users are logged in.
+- [Use ufw to lock down an Ubuntu server](https://tailscale.com/docs/how-to/secure-ubuntu-server-with-ufw.md): Accept connections from Tailscale and ignore internet traffic to a server.
+- [Configure Tailscale clients to use a custom coordination server](https://tailscale.com/docs/how-to/set-up-custom-coordination-server.md): Configure Tailscale clients to use a custom coordination server such as Headscale.
+- [Set up high availability](https://tailscale.com/docs/how-to/set-up-high-availability.md): Set up high availability (HA) for subnet routers and app connectors.
+- [Enabling HTTPS](https://tailscale.com/docs/how-to/set-up-https-certificates.md): Configure HTTPS for devices in your Tailscale network.
+- [Setting up a server on your Tailscale network](https://tailscale.com/docs/how-to/set-up-servers.md): Set up a server in your tailnet, and use Tailscale SSH to manage authentication for those servers.
+- [Smaller binaries for embedded devices](https://tailscale.com/docs/how-to/set-up-small-tailscale.md): Build an extra-small Tailscale binary for deployment in disk space constrained environments.
+
+## Hubs
+
+- [Automations](https://tailscale.com/docs/automations.md): Automate your tailnet using infrastructure-as-code providers, webhooks, and other integrations.
+- [Aperture chat sandbox](https://tailscale.com/docs/chat-sandbox.md): Find documentation for the Aperture chat sandbox, including setup, operations, reference, and troubleshooting.
+- [Connect to a cloud server](https://tailscale.com/docs/cloud-server.md): Connect your cloud server to Tailscale.
+- [Containers and virtualization](https://tailscale.com/docs/containers-and-virtualization.md): Integrate Tailscale with container and virtualization technologies.
+- [Connect to a database](https://tailscale.com/docs/database.md): Connect to databases over Tailscale.
+- [Develop with AI](https://tailscale.com/docs/develop-with-ai.md): Give AI coding agents and chat assistants accurate Tailscale information.
+- [Integrate with a firewall](https://tailscale.com/docs/firewall.md): Integrate Tailscale with popular firewall products.
+- [GitOps for Tailscale](https://tailscale.com/docs/gitops.md): Use GitOps to maintain your tailnet policy file as code.
+- [Access or share resources from within your development environment](https://tailscale.com/docs/integration-dev-tools.md): Explore recommended developer tools to use with Tailscale.
+- [Infrastructure as code](https://tailscale.com/docs/integration-infrastructure-as-code.md): Infrastructure as Code integrations let you deploy infrastructure programmatically.
+- [Connect to a serverless app](https://tailscale.com/docs/integration-serverless-apps.md): Securely connect to serverless applications using Tailscale
+- [Tailscale on Kubernetes](https://tailscale.com/docs/kubernetes.md): Use Tailscale for Kubernetes cluster deployments.
+- [Manage access](https://tailscale.com/docs/manage.md): Manage access to your Tailscale resources.
+- [Manage users](https://tailscale.com/docs/manage-users.md): Invite users, assign or change user roles, remove users, and quickly switch between accounts.
+- [Deploy Tailscale with an MDM solution](https://tailscale.com/docs/mdm.md): Integrate Tailscale with an MDM solution.
+- [Enable two-factor and multifactor authentication](https://tailscale.com/docs/multifactor-auth.md): Enable MFA from your identity provider.
+- [OAuth on Tailscale](https://tailscale.com/docs/oauth.md): Authorize tools and integrations to act upon your tailnet through OAuth.
+- [Tailscale quick guides](https://tailscale.com/docs/quick-guides.md): Configure some of Tailscale's most popular features.
+- [Connect to your remote code environment](https://tailscale.com/docs/remote-code.md): Connect to remote code environments like code-server, Coder, GitHub Codespaces, Gitpod, and OpenVSCode.
+- [Resources](https://tailscale.com/docs/resources.md): Access resources about Tailscale software changes, comparisons with other products, open source community projects, security, privacy, and compliance.
+- [Route traffic](https://tailscale.com/docs/route.md): Explore Tailscale routing features, such as subnet routers, exit nodes, and MagicDNS.
+- [Secure the network](https://tailscale.com/docs/secure-networks.md): Prevent security issues with your Tailscale network.
+- [Set up servers](https://tailscale.com/docs/servers.md): Securely set up servers using tags, pre-authorization keys, ephemeral nodes, and more.
+- [Access and share services](https://tailscale.com/docs/share.md): View services, share machines, and share files in your tailnet.
+- [Share a web server](https://tailscale.com/docs/share-web-server.md): Share resources, including websites, from tailnet devices.
+- [Get support](https://tailscale.com/docs/support.md): Get support from Tailscale.
+
+## Integrations
+
+- [Integrations](https://tailscale.com/docs/integrations.md): How to use Tailscale to various kinds of servers, services, or devices.
+- [Using Tailscale with captive portals](https://tailscale.com/docs/integrations/captive-portals.md): Understand how Tailscale handles captive portals when you connect to a public network.
+- [Access your tailnet from CodeSandbox](https://tailscale.com/docs/integrations/codesandbox.md): Privately access CodeSandbox repositories.
+- [Access your tailnet from code-server](https://tailscale.com/docs/integrations/codeserver.md): Write code remotely by installing Tailscale on code-server.
+- [Use Control D](https://tailscale.com/docs/integrations/control-d.md): Use Control D with devices in your tailnet.
+- [Restrict device access with CrowdStrike ZTA scores](https://tailscale.com/docs/integrations/crowdstrike-zta.md): Use Zero Trust Assessment (ZTA) scores reported by CrowdStrike Falcon as a device posture attribute for use in access rules.
+- [Access Crunchy Bridge privately using Tailscale](https://tailscale.com/docs/integrations/crunchy-bridge.md): Use Crunchy Bridge with Tailscale.
+- [Using Tailscale with your firewall](https://tailscale.com/docs/integrations/firewalls.md): Use Tailscale with an existing firewall configuration.
+- [Restrict device access with Fleet](https://tailscale.com/docs/integrations/fleet.md): Use signals reported by Fleet as a device posture attribute for use in access rules.
+- [User & group provisioning for Google Workspace](https://tailscale.com/docs/integrations/google-sync.md): Sync users and groups from Google Workspace to use in Tailscale access controls.
+- [Use Grafana with Tailscale](https://tailscale.com/docs/integrations/grafana.md): Use Grafana to monitor your tailnet or secure access to a Grafana dashboard using Tailscale.
+- [Restrict device access with Huntress](https://tailscale.com/docs/integrations/huntress.md): Use signals reported by Huntress as device posture attributes for use in access rules.
+- [Supported SSO identity providers](https://tailscale.com/docs/integrations/identity.md): Tailscale works on top of the IdP or SSO provider you already use. Leverage the capabilities of these providers for secure access, including passkeys, 2FA, and MFA.
+- [Restrict device access with Iru](https://tailscale.com/docs/integrations/iru.md): Use signals reported by Iru (formerly Kandji) as device posture attributes for use in access rules.
+- [Restrict device access with Jamf Pro](https://tailscale.com/docs/integrations/jamf-pro.md): Use signals reported by Jamf Pro as device posture attributes for use in access rules.
+- [Third-party integrations for JIT access](https://tailscale.com/docs/integrations/jit-access.md): Use third-party integrations for just-in-time access, also known as on-demand access, to your Tailscale network.
+- [JIT access with ConductorOne](https://tailscale.com/docs/integrations/jit-conductorone.md): Use Tailscale and ConductorOne for on-demand access to your Tailscale network.
+- [JIT access with Opal](https://tailscale.com/docs/integrations/jit-opal.md): Use Tailscale and Opal for on-demand access to your Tailscale network.
+- [Restrict device access with 1Password Extended Access Management (XAM)](https://tailscale.com/docs/integrations/kolide.md): Use signals reported by 1Password Extended Access Management (XAM) as a device posture attribute for use in access rules.
+- [Connect to network attached storage (NAS)](https://tailscale.com/docs/integrations/nas.md): Install the Tailscale client on supported network-attached storage (NAS) devices.
+- [Use NextDNS](https://tailscale.com/docs/integrations/nextdns.md): Use NextDNS with devices in your tailnet.
+- [Access your tailnet from OpenVSCode](https://tailscale.com/docs/integrations/open-vscode.md): Write code remotely by installing Tailscale on OpenVSCode.
+- [Access PiKVM from anywhere](https://tailscale.com/docs/integrations/pikvm.md): Set up Tailscale on PiKVM.
+- [Tailscale on a Proxmox host](https://tailscale.com/docs/integrations/proxmox.md): Optimally configure Proxmox for use with Tailscale.
+- [Manage Tailscale resources using Pulumi](https://tailscale.com/docs/integrations/pulumi-provider.md): Use the Pulumi Tailscale provider to interact with the Tailscale API.
+- [Access QNAP NAS from anywhere](https://tailscale.com/docs/integrations/qnap.md): Configure the Tailscale client on a QNAP NAS device.
+- [Scanning for exposed Tailscale secrets](https://tailscale.com/docs/integrations/secret-scanning.md): Find out how Tailscale partners scan for exposed Tailscale secrets and provide notifications to help prevent fraudulent access.
+- [Restrict device access with SentinelOne](https://tailscale.com/docs/integrations/sentinelone.md): Use signals reported by SentinelOne agents as device posture attributes for use in access rules.
+- [Access Synology NAS from anywhere](https://tailscale.com/docs/integrations/synology.md): Install Tailscale on your Synology device. Use this guide to get secure access to your Synology NAS from anywhere.
+- [Manage Tailscale resources using Terraform](https://tailscale.com/docs/integrations/terraform-provider.md): Use the Terraform Tailscale provider to interact with the Tailscale API.
+- [Access TrueNAS SCALE from anywhere](https://tailscale.com/docs/integrations/truenas.md): Configure the Tailscale client on a TrueNAS SCALE server and securely connect multiple TrueNAS SCALE servers for ZFS replication.
+- [Access Unraid NAS from anywhere](https://tailscale.com/docs/integrations/unraid.md): Configure the Tailscale client on an Unraid NAS server.
+- [Use the Tailscale extension for Visual Studio Code](https://tailscale.com/docs/integrations/vscode-extension.md): Use the Tailscale extension for VS Code.
+- [Integrate with a web server](https://tailscale.com/docs/integrations/web-servers.md): Use Tailscale with a web server.
+
+## Manage your organization
+
+- [Manage your organization](https://tailscale.com/docs/account.md): Manage your contact information, your account, the plans we offer, and how to manage your tailnet DNS name and domain.
+- [Admin console session timeout](https://tailscale.com/docs/account/admin-console-session-timeout.md): Explore idle session timeout in the Tailscale admin console.
+- [Manage billing](https://tailscale.com/docs/account/billing.md): Change billing information related to your Tailscale account.
+- [Generate a bug report](https://tailscale.com/docs/account/bug-report.md): Generate a bug report to help troubleshoot issues with your tailnet.
+- [Delete your tailnet](https://tailscale.com/docs/account/delete-tailnet.md): Delete your Tailscale network using the Admin console.
+- [Domain aliases](https://tailscale.com/docs/account/domain-aliases.md): Understand how domain aliases work for tailnets and where they affect Tailscale behavior.
+- [Manage domains](https://tailscale.com/docs/account/domain-verification.md): Manage the domains associated with your tailnet.
+- [Manage your plan](https://tailscale.com/docs/account/manage-plans.md): Change your Tailscale plan by upgrading or downgrading to a different plan to suit your needs.
+
+## Technical overviews
+
+- [Technical overviews](https://tailscale.com/docs/concepts.md): Get in-depth technical details about Tailscale.
+- [VPN from the couch to the office and HQ](https://tailscale.com/docs/concepts/all-your-offices.md): Tailscale's encryption, low latency, easy configuration, and robust access controls like SSO and MFA make it an ideal modern office VPN solution for remote and distributed workforces.
+- [Antivirus flagging of the Tailscale client](https://tailscale.com/docs/concepts/av-flagging.md): What to do when Tailscale is being flagged by antivirus software and how to report legitimate concerns.
+- [Can Tailscale decrypt my traffic?](https://tailscale.com/docs/concepts/can-tailscale-decrypt-traffic.md): Understand why Tailscale cannot decrypt your traffic.
+- [Control and data planes](https://tailscale.com/docs/concepts/control-data-planes.md): Understand the control plane and data planes in Tailscale.
+- [Corporate VPN, explained](https://tailscale.com/docs/concepts/corporate-vpn.md): Secure your corporate VPN with direct device-to-device encryption, seamless identity provider integration, and flexible access controls.
+- [Deprecate complex physical network (wired and Wi-Fi) security schemes](https://tailscale.com/docs/concepts/deprecated-physical-security.md): Use Tailscale to move off of complex physical networks.
+- [What devices can connect to or know mine?](https://tailscale.com/docs/concepts/device-visibility.md): Understand how Tailscale determines which devices can connect to or know about your devices.
+- [Domain ownership](https://tailscale.com/docs/concepts/domain-ownership.md): Explore how your tailnet is tied to your domain.
+- [Transparently interconnect microservices between data centers and pods](https://tailscale.com/docs/concepts/interconnect-microservices.md): Use Tailscale to transparently interconnect microservices between data centers and pods.
+- [Deploy internal apps anywhere, without changing firewall settings](https://tailscale.com/docs/concepts/internal-apps-anywhere.md): Deploying servers without modifying firewall settings using Tailscale.
+- [How Tailscale assigns IP addresses](https://tailscale.com/docs/concepts/ip-and-dns-addresses.md): Understand how Tailscale assigns stable IP addresses based on the device and authorization credentials.
+- [Connect to external services with IP block lists](https://tailscale.com/docs/concepts/ip-blocklist-relays.md): Control access to SaaS applications hosted on servers that aren't running Tailscale.
+- [Tailscale IPv6 support](https://tailscale.com/docs/concepts/ipv6.md): Understand how Tailscale works with IPv6.
+- [Connect to your corporate laptop no matter where you left it](https://tailscale.com/docs/concepts/laptop-anywhere.md): Connect to your corporate laptop no matter where it is.
+- [Connect to colleagues' local servers from anywhere](https://tailscale.com/docs/concepts/local-team-server.md): Discover how Tailscale helps you to securely connect to colleagues and servers.
+- [Machine names](https://tailscale.com/docs/concepts/machine-names.md): Understand how Tailscale determines machine names, and how you can rename a machine.
+- [Authorizing the Tailscale system extension on macOS](https://tailscale.com/docs/concepts/macos-sysext.md): Authorize Tailscale system extensions on macOS.
+- [Three ways to run Tailscale on macOS](https://tailscale.com/docs/concepts/macos-variants.md): Explore three ways to run Tailscale on macOS so you can choose the right approach for your situation.
+- [macOS Screen Time and Tailscale](https://tailscale.com/docs/concepts/macos-webfilterproxyd.md): Identify conflicts between the macOS web content filter and Tailscale.
+- [Node keys](https://tailscale.com/docs/concepts/node-keys.md): How Tailscale uses node keys as the mechanism for which machines can join a tailnet.
+- [Post-quantum cryptography](https://tailscale.com/docs/concepts/post-quantum-cryptography.md): Explore post-quantum cryptography in relation to Tailscale.
+- [Shared responsibility model](https://tailscale.com/docs/concepts/shared-responsibility.md): Understand the responsibilities for protecting your network.
+- [What is a tailnet?](https://tailscale.com/docs/concepts/tailnet.md): Understand what the term tailnet means.
+- [Tailnet Lock white paper](https://tailscale.com/docs/concepts/tailnet-lock-whitepaper.md): Review the details about the Tailnet Lock feature.
+- [Tailnet names and types](https://tailscale.com/docs/concepts/tailnet-name.md): A tailnet uses several name types to identify devices and manage access, including Tailnet DNS, machine, Tailnet ID, and Legacy ID, each serving unique purposes.
+- [Tailscale encryption](https://tailscale.com/docs/concepts/tailscale-encryption.md): Review how Tailscale uses encryption.
+- [Tailscale identity](https://tailscale.com/docs/concepts/tailscale-identity.md): Understand how identity is established and used in Tailscale.
+- [What are these 100.x.y.z addresses?](https://tailscale.com/docs/concepts/tailscale-ip-addresses.md): Tailscale uses 100.x.y.z IP addresses from the Carrier-Grade NAT (CGNAT) range to ensure stable, private connections for devices on your private network.
+- [Tailscale and the OSI model](https://tailscale.com/docs/concepts/tailscale-osi.md): Review how Tailscale relates to the OSI model layers.
+- [Is my traffic routed through your servers?](https://tailscale.com/docs/concepts/traffic-routing-through-tailscale.md): Understand how Tailscale makes routing decisions and when your traffic is routed through our DERP servers.
+- [TunnelVision vulnerability and Tailscale](https://tailscale.com/docs/concepts/tunnel-vision.md): Understand the TunnelVision network vulnerability warning pop-up on macOS, and how to manage it.
+- [Userspace networking mode (for containers)](https://tailscale.com/docs/concepts/userspace-networking.md): Find out about userspace networking mode and when it is useful.
+- [What is Tailscale?](https://tailscale.com/docs/concepts/what-is-tailscale.md): Get a brief introduction to Tailscale.
+- [About WireGuard](https://tailscale.com/docs/concepts/wireguard.md): Discover how Tailscale builds on WireGuard to offer single sign-on (SSO) and other capabilities.
+- ["Zero Trust Networking" definition](https://tailscale.com/docs/concepts/zero-trust.md): Find out what Zero Trust Networking means.
+
+## Technical reference
+
+- [Technical reference](https://tailscale.com/docs/reference.md): Explore reference guides for Tailscale tools and features, including access control policies, command-line interface (Tailscale CLI), API, and best practices for managing your tailnet. Understand access controls, production strategies, security, and key terminology.
+- [Do admin console sessions expire?](https://tailscale.com/docs/reference/admin-console-session-expiry.md): Understand Tailscale admin console session expiration.
+- [CGNAT interoperability](https://tailscale.com/docs/reference/cgnat-interoperability.md): Disable the CGNAT drop rule to use Tailscale alongside networks that consume CGNAT address space.
+- [Connection types](https://tailscale.com/docs/reference/connection-types.md): Understand how Tailscale connects devices using either direct or relayed connections.
+- [Contact preferences](https://tailscale.com/docs/reference/contact-preferences.md): Set contacts for account changes, configuration issues, security issues, and billing.
+- [What happens if the coordination server is down?](https://tailscale.com/docs/reference/coordination-server-down.md): Review how Tailscale handles coordination server downtime.
+- [Debug menu and options](https://tailscale.com/docs/reference/debug-menu.md): Enable debug mode of the Tailscale client menu to help troubleshoot issues.
+- [Deployment checklist](https://tailscale.com/docs/reference/deployment-checklist.md): Your checklist to ensure a successful Tailscale deployment.
+- [DERP servers](https://tailscale.com/docs/reference/derp-servers.md): Tailscale uses Designated Encrypted Relay for Packets (DERP) servers for secure, low-latency connections in your tailnet. Customization options let you optimize device communication and NAT traversal.
+- [Device connectivity](https://tailscale.com/docs/reference/device-connectivity.md): Understand connectivity between Tailscale devices.
+- [Connecting without installing Tailscale](https://tailscale.com/docs/reference/devices-without-tailscale.md): Securely connect to devices that without installing Tailscale.
+- [DNS in Tailscale](https://tailscale.com/docs/reference/dns-in-tailscale.md): Optimize your Tailscale network for DNS management, including custom DNS servers, for seamless access and better control.
+- [FAQ](https://tailscale.com/docs/reference/faq.md): Answers to common questions.
+- [Funnel vs. sharing devices](https://tailscale.com/docs/reference/funnel-vs-sharing.md): Understand the differences between Tailscale Funnel service and sharing devices.
+- [Terminology and concepts](https://tailscale.com/docs/reference/glossary.md): Review Tailscale terminology and concepts.
+- [Grants vs. ACLs](https://tailscale.com/docs/reference/grants-vs-acls.md): A comparison of grants and ACLs as access control mechanisms
+- [Interoperability with other software](https://tailscale.com/docs/reference/interoperability.md): Get information about Tailscale interoperability with other software.
+- [Invite only features](https://tailscale.com/docs/reference/invite-only-feature.md): Create and accept invitations for Tailscale features.
+- [Inviting users vs sharing a device](https://tailscale.com/docs/reference/inviting-vs-sharing.md): Understand the difference between inviting a user and sharing a device.
+- [IP pool](https://tailscale.com/docs/reference/ip-pool.md): Configure Tailscale to assign IP addresses from a specific IP pool.
+- [Kernel vs. netstack subnet routing & exit nodes](https://tailscale.com/docs/reference/kernel-vs-userspace-routers.md): Understand the kernel and userspace modes and how they are used by subnet routers and exit nodes.
+- [Key prefixes](https://tailscale.com/docs/reference/key-prefixes.md): Learn about the Tailscale prefixes for keys, such as an API access token.
+- [Key and secret management](https://tailscale.com/docs/reference/key-secret-management.md): Manage the various types of keys and secrets for your tailnet.
+- [Configuring Linux DNS](https://tailscale.com/docs/reference/linux-dns.md): Common problems when configuring DNS on Linux.
+- [Logging, streaming, and events](https://tailscale.com/docs/reference/logging-streaming-events.md): Explore Tailscale's logging features and events for webhooks.
+- [Tailscale messages](https://tailscale.com/docs/reference/messages.md): Tailscale client and admin console messages to help you understand, manage, and troubleshoot tailnet-related issues.
+- [Migrate from ACLs to grants](https://tailscale.com/docs/reference/migrate-acls-grants.md): Convert ACLs to grants.
+- [Add multifactor authentication to any legacy service](https://tailscale.com/docs/reference/multifactor-auth.md): Explore how Tailscale integrates with SSO providers for authentication, including for 2FA/MFA.
+- [Deploy multiple Tailscale SSH session recorder nodes](https://tailscale.com/docs/reference/multiple-recorder-nodes.md): Configure multiple SSH session recorder nodes in your tailnet to provide backup nodes for failover
+- [Tailscale netfilter modes](https://tailscale.com/docs/reference/netfilter-modes.md): Information about the netfilter modes supported by Tailscale on Linux devices.
+- [Node attributes vs. grant app capabilities](https://tailscale.com/docs/reference/node-attributes-vs-app-capabilities.md): Understand whether a capability belongs on a device or on a connection, and how node attributes and grant app capabilities differ.
+- [Tailscale ping message types](https://tailscale.com/docs/reference/ping-types.md): The Tailscale CLI ping command supports four types of ping messages.
+- [What is 100.100.100.100?](https://tailscale.com/docs/reference/quad100.md): Find out what 100.100.100.100 (also known as Quad100) is.
+- [Reserved IP addresses](https://tailscale.com/docs/reference/reserved-ip-addresses.md): Review the reserved IP addresses and ranges that Tailscale uses for device addressing and internal services.
+- [Route injection](https://tailscale.com/docs/reference/route-injection.md): Understand how Tailscale injects subnet routes into client routing tables, including the relationship between routes and access controls.
+- [Protect your SSH servers using Tailscale](https://tailscale.com/docs/reference/ssh-over-tailscale.md): Understand how Tailscale works well with SSH clients and SSH servers, improving security and offering a better user experience.
+- [What is STUN?](https://tailscale.com/docs/reference/stun-protocol.md): Explore the STUN protocol and how Tailscale uses it.
+- [Replace site-to-site VPNs with Tailscale and WireGuard](https://tailscale.com/docs/reference/subnet-site-to-site.md): Use Tailscale for site-to-site VPN to forward network traffic between local networks.
+- [Support options](https://tailscale.com/docs/reference/support-options.md): Understand Tailscale's support options.
+- [Admin account with passkey login](https://tailscale.com/docs/reference/tailnet-passkey-admin.md): Proactively set up an admin user that can log in to your tailnet with a passkey, to mitigate against a future SSO lockout.
+- [Tailscale API](https://tailscale.com/docs/reference/tailscale-api.md): Explore the Tailscale application programming interface (API).
+- [Tailscale CLI](https://tailscale.com/docs/reference/tailscale-cli.md): Manage and troubleshoot your tailnet with the Tailscale command-line interface (Tailscale CLI).
+- [Tailscale client metrics](https://tailscale.com/docs/reference/tailscale-client-metrics.md): Collect metrics from Tailscale clients.
+- [Tailscale client versions and release tracks](https://tailscale.com/docs/reference/tailscale-client-versions.md): Understand Tailscale client versions and release tracks.
+- [Tailscale Community Projects](https://tailscale.com/docs/reference/tailscale-community-projects.md): Use community-supported open source projects built on Tailscale's platform. These projects include apps, tools, extensions, and interfaces that build on Tailscale's networking and identity primitives.
+- [Tailscale FedRAMP and FIPS-140 considerations](https://tailscale.com/docs/reference/tailscale-fedramp-fips140.md): Use Tailscale in FedRAMP Moderate environments and in the context of FIPS 140.
+- [Release stages](https://tailscale.com/docs/reference/tailscale-release-stages.md): Understand the Tailscale release stages.
+- [Tailscale Services configuration file](https://tailscale.com/docs/reference/tailscale-services-configuration-file.md): Use the Tailscale Services configuration file to define how resources are exposed within your tailnet.
+- [tailscaled daemon](https://tailscale.com/docs/reference/tailscaled.md): Explore the tailscaled daemon.
+- [Targets and selectors](https://tailscale.com/docs/reference/targets-and-selectors.md): Understand Tailscale targets, the identifiers you use to identify users, devices, or subnets in the tailnet policy file.
+- [Troubleshooting guide](https://tailscale.com/docs/reference/troubleshooting.md): Troubleshoot common tailnet scenarios.
+- [Trust credentials](https://tailscale.com/docs/reference/trust-credentials.md): Use trust credentials to provide ongoing fine grained access to the Tailscale API.
+- [tsidp configuration](https://tailscale.com/docs/reference/tsidp-configuration.md): Customize the configuration of tsidp to securely isolate and authorize any service that supports OIDC/OAuth.
+- [tsnet.Server](https://tailscale.com/docs/reference/tsnet-server-api.md): Use tsnet.Server in a Go program to access tailnet services.
+- [User roles](https://tailscale.com/docs/reference/user-roles.md): Use roles for restricting access to the admin console.
+- [Visual policy editor reference](https://tailscale.com/docs/reference/visual-editor.md): Complete reference for the visual policy editor user interface.
+- [WireGuard VPN with a dynamic IP address](https://tailscale.com/docs/reference/wireguard-dynamic-ip.md): How WireGuard VPN works with dynamic IP addresses.

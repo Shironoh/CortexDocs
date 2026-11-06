@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>__TITLE__</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@700&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/MotionPathPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/DrawSVGPlugin.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #070a24; }
+  #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; font-family: Poppins, 'DejaVu Sans', sans-serif; }
+  svg { position: absolute; inset: 0; }
+  canvas.rv { position: absolute; left: 0; top: 0; transform-origin: 0 0; opacity: 0; }
+  #sub { position: absolute; left: 260px; top: 948px; width: 1400px; text-align: center; color: #f4f1ff;
+    font: 600 38px/1.35 Poppins, 'DejaVu Sans', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,.75); }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="__DUR__" data-width="1920" data-height="1080" data-motion-blur="on">
+  <svg id="svg" viewBox="0 0 1920 1080" class="clip" data-start="0" data-duration="__DUR__" data-track-index="0">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#090c33"/><stop offset=".55" stop-color="#231556"/><stop offset=".85" stop-color="#4a1d6e"/><stop offset="1" stop-color="#7a2a72"/></linearGradient>
+      <radialGradient id="moonG"><stop offset="0" stop-color="#fff7e0"/><stop offset=".7" stop-color="#ffd9a8"/><stop offset="1" stop-color="#ffb37a"/></radialGradient>
+      <radialGradient id="halo"><stop offset="0" stop-color="#ffcf8a" stop-opacity=".45"/><stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/></radialGradient>
+      <linearGradient id="cloudTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9cdfc"/><stop offset=".55" stop-color="#9c86e0"/><stop offset="1" stop-color="#5a3f9e"/></linearGradient>
+      <linearGradient id="cloudFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e4fae"/><stop offset="1" stop-color="#2c1a5c"/></linearGradient>
+      <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a3488"/><stop offset="1" stop-color="#262063"/></linearGradient>
+      <linearGradient id="wallSide" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1c1849"/><stop offset="1" stop-color="#14113a"/></linearGradient>
+      <linearGradient id="hall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1650"/><stop offset="1" stop-color="#2d2275"/></linearGradient>
+      <linearGradient id="floorG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b2f86"/><stop offset="1" stop-color="#1c1648"/></linearGradient>
+      <radialGradient id="core"><stop offset="0" stop-color="#ffffff"/><stop offset=".35" stop-color="#fff2b0"/><stop offset=".7" stop-color="#ffb703"/><stop offset="1" stop-color="#fb5607"/></radialGradient>
+      <radialGradient id="coreOff"><stop offset="0" stop-color="#8a86b8"/><stop offset="1" stop-color="#3b3766"/></radialGradient>
+      <radialGradient id="coreHalo"><stop offset="0" stop-color="#ffb703" stop-opacity=".55"/><stop offset="1" stop-color="#ffb703" stop-opacity="0"/></radialGradient>
+      <radialGradient id="redHalo"><stop offset="0" stop-color="#ff3b6b" stop-opacity=".7"/><stop offset="1" stop-color="#ff3b6b" stop-opacity="0"/></radialGradient>
+      <radialGradient id="greenHalo"><stop offset="0" stop-color="#2ee6a0" stop-opacity=".7"/><stop offset="1" stop-color="#2ee6a0" stop-opacity="0"/></radialGradient>
+      <radialGradient id="cyanHalo"><stop offset="0" stop-color="#22d3ee" stop-opacity=".55"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+      <radialGradient id="starG"><stop offset="0" stop-color="#ffffff"/><stop offset=".4" stop-color="#fff2b0"/><stop offset="1" stop-color="#ffb703" stop-opacity="0"/></radialGradient>
+      <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b3a7a"/><stop offset="1" stop-color="#1b1236"/></linearGradient>
+      <linearGradient id="mixerG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a1745"/><stop offset="1" stop-color="#120a22"/></linearGradient>
+      <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff2b0" stop-opacity=".55"/><stop offset="1" stop-color="#fff2b0" stop-opacity="0"/></linearGradient>
+      <linearGradient id="chest" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5a2b"/><stop offset="1" stop-color="#4e2f15"/></linearGradient>
+      <linearGradient id="subFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05030f" stop-opacity="0"/><stop offset="1" stop-color="#05030f" stop-opacity=".6"/></linearGradient>
+      <radialGradient id="vign" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#05030f" stop-opacity=".75"/></radialGradient>
+      <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="14"/></filter>
+    </defs>
+    <rect width="1920" height="1080" fill="url(#sky)"/>
+    <g id="L-far"></g><g id="L-mid"></g><g id="L-main"></g><g id="L-fore"></g>
+    <rect width="1920" height="1080" fill="url(#vign)" pointer-events="none"/>
+    <rect y="840" width="1920" height="240" fill="url(#subFade)" pointer-events="none"/>
+  </svg>
+  <canvas id="rvThief" class="rv" width="1200" height="1400"></canvas>
+  <canvas id="rvHero" class="rv" width="1200" height="1400"></canvas>
+  <div id="sub" class="clip" data-start="0" data-duration="__DUR__" data-track-index="1"></div>
+</div>
+<script id="words" type="application/json">__WORDS__</script>
+<script>
+/* Illustrated episode (src/illus/shell.html, assembled by tools/illus_build.py). One world, one paused GSAP timeline keyed on the real word times (tools/voice.py + tools/timeline.py).
+   Real artefacts (method names, values) are objects of the world: printed tickets, plaques. Deterministic: seeded PRNG. */
+gsap.registerPlugin(MotionPathPlugin, DrawSVGPlugin);
+const W = JSON.parse(document.getElementById('words').textContent);
+const CUE = Object.fromEntries(W.cues.map(c => [c.id, c]));
+const norm = s => s.toLowerCase().replace(/œ/g, 'oe').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
+const T = (cid, w, n = 0) => { const c = CUE[cid]; if (w == null) return c.start; let k = 0;
+  for (const x of c.words) { const a = norm(x[0]), b = norm(x[0].split(/['’]/).pop()); if (a.startsWith(w) || b.startsWith(w)) { if (k === n) return x[1]; k++; } }
+  throw new Error('mot absent ' + cid + ' ' + w); };
+const END = cid => CUE[cid].end, REV = cid => CUE[cid].pauseAt + 1.5;
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const G = (p, x, y, extra = {}) => el('g', { transform: `translate(${x} ${y})`, ...extra }, p);
+let seed = 11; const rnd = () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+const far = document.getElementById('L-far'), mid = document.getElementById('L-mid'), main = document.getElementById('L-main'), fore = document.getElementById('L-fore');
+const tl = gsap.timeline({ paused: true }); const SFX = [];
+const sfx = (t, type) => SFX.push({ t: +t.toFixed(3), type });
+const pop = (e, t, d = .5) => { tl.fromTo(e, { scale: .2, opacity: 0, transformOrigin: '50% 50%' }, { scale: 1, opacity: 1, duration: d, ease: 'back.out(1.7)', immediateRender: true }, t); sfx(t, 'pop'); return e; };
+const show = (e, t, d = .4) => tl.fromTo(e, { opacity: 0 }, { opacity: 1, duration: d, immediateRender: true }, t);
+const hide = (e, t, d = .35) => tl.to(e, { opacity: 0, duration: d }, t);
+const bump = (e, t) => tl.to(e, { scale: 1.12, transformOrigin: '50% 50%', duration: .16, yoyo: true, repeat: 1, ease: 'power2.out' }, t);
+const C = { amber: '#ffd166', gold: '#ffb703', rose: '#ff4d6d', cyan: '#22d3ee', green: '#2ee6a0', violet: '#9d8cff', ink: '#120f33', paper: '#f3eee2', text: '#f4f1ff' };
+const MONO = "'JetBrains Mono','DejaVu Sans Mono',monospace";
+/* a plaque (sign) with text; size in world units */
+function plaque(p, x, y, text, o = {}) { const size = o.size || 52, mono = o.mono !== false, w = text.length * size * (mono ? .62 : .56) + 70, h = size + 44;
+  const g = G(p, x, y); el('rect', { x: -w / 2 + 6, y: -h / 2 + 8, width: w, height: h, rx: 18, fill: '#000', opacity: .35 }, g);
+  el('rect', { x: -w / 2, y: -h / 2, width: w, height: h, rx: 18, fill: o.bg || C.ink, stroke: o.col || C.amber, 'stroke-width': 6 }, g);
+  const tx = el('text', { x: 0, y: size * .36, 'text-anchor': 'middle', 'font-family': mono ? MONO : "Poppins,'DejaVu Sans',sans-serif", 'font-weight': mono ? 700 : 700, 'font-size': size, fill: o.fill || C.text }, g); tx.textContent = text; g._w = w; return g; }
+/* a printed ticket: real artefact text on paper */
+function ticket(p, x, y, lines, o = {}) { const size = o.size || 44, w = Math.max(...lines.map(l => l.length)) * size * .62 + 70, h = lines.length * size * 1.35 + 50;
+  const g = G(p, x, y); el('path', { d: `M ${-w / 2} ${-h / 2} L ${w / 2} ${-h / 2} L ${w / 2} ${h / 2 - 14} l -20 14 l -20 -14 l -20 14 l -20 -14 L ${-w / 2} ${h / 2 - 14} Z`, fill: C.paper }, g);
+  el('rect', { x: -w / 2, y: -h / 2, width: w, height: 12, fill: o.col || C.cyan }, g);
+  lines.forEach((l, i) => { const t = el('text', { x: -w / 2 + 34, y: -h / 2 + 30 + size * (i + .9) * 1.35 - size * .3, 'font-family': MONO, 'font-weight': 700, 'font-size': size, fill: '#1a1440' }, g); t.textContent = l; });
+  return g; }
+const bank = (g, cx, cy, w, fill, n = 12, o = 1) => { const b = el('g', { opacity: o }, g); for (let i = 0; i < n; i++) { const x = cx - w / 2 + (i + .5) * w / n, r = w / n * (.9 + rnd() * .9);
+  el('circle', { cx: x, cy: cy - r * .35 * Math.sin(Math.PI * (i + .5) / n), r, fill }, b); } el('ellipse', { cx, cy: cy + 420, rx: w / 2 + 900, ry: 520, fill }, b); return b; };
+function cloudIsland(g, cx, cy, w, h = 240) { const c = el('g', {}, g);
+  for (let i = 0; i < Math.round(w / 70); i++) { const x = cx - w / 2 + rnd() * w, y = cy - rnd() * h * .5, r = 60 + rnd() * 100; el('circle', { cx: x, cy: y, r, fill: 'url(#cloudTop)' }, c); }
+  for (let i = 0; i < 10; i++) { const x = cx - w / 2 + 50 + i * (w - 100) / 9; el('circle', { cx: x, cy: cy + 70 + (i % 3) * 18, r: 80 + (i * 37 % 50), fill: '#4a3390' }, c); }
+  for (let i = 0; i < 6; i++) { const x = cx - w / 3 + i * (w * 2 / 3) / 5; el('circle', { cx: x, cy: cy + 150 + (i % 2) * 20, r: 60 + (i * 23 % 30), fill: '#33236e' }, c); }
+  for (let i = 0; i < 5; i++) el('path', { d: `M ${cx - w / 2 + 80 + i * w / 5} ${cy - 110 - rnd() * 50} q 40 -30 90 -4`, stroke: '#f3edff', 'stroke-width': 9, 'stroke-linecap': 'round', fill: 'none', opacity: .5 }, c);
+  return c; }
+function camera(p, x, y, s, led0, o = {}) { const g = G(p, x, y, { }); const b = el('g', { transform: `scale(${s})${o.flip ? ' scale(-1 1)' : ''}` }, g);
+  el('rect', { x: -6, y: 0, width: 12, height: 70, fill: '#2c2560' }, b);
+  el('rect', { x: -60, y: -40, width: 100, height: 54, rx: 12, fill: '#d9d4f2' }, b); el('path', { d: 'M 40 -30 L 70 -42 L 70 6 L 40 -6 Z', fill: '#b9b2e3' }, b);
+  el('circle', { cx: 52, cy: -18, r: 9, fill: '#2a2357' }, b);
+  const ledHalo = el('circle', { cx: -40, cy: -26, r: 34, fill: led0 === 'on' ? 'url(#greenHalo)' : 'none' }, b);
+  const led = el('circle', { cx: -40, cy: -26, r: 9, fill: led0 === 'on' ? C.green : '#3b3766' }, b); g._led = led; g._halo = ledHalo; return g; }
+const ledOn = (cam, t, col = C.green, halo = 'url(#greenHalo)') => { tl.set(cam._led, { attr: { fill: col } }, t); tl.set(cam._halo, { attr: { fill: halo } }, t); };
+function reactor(p, x, y, s, on = true) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  const halo = el('circle', { cx: 0, cy: -40, r: 280, fill: 'url(#coreHalo)', opacity: on ? 1 : 0 }, b);
+  el('path', { d: 'M -170 30 A 170 170 0 0 1 170 30 Z', fill: '#bfe9ff', 'fill-opacity': .12, stroke: '#d8f3ff', 'stroke-width': 7 }, b);
+  el('rect', { x: -200, y: 30, width: 400, height: 46, rx: 14, fill: '#2c2560' }, b);
+  const coreOff = el('circle', { cx: 0, cy: -40, r: 72, fill: 'url(#coreOff)' }, b);
+  const core = el('circle', { cx: 0, cy: -40, r: 72, fill: 'url(#core)', filter: 'url(#glow)', opacity: on ? 1 : 0 }, b);
+  const r1 = el('ellipse', { cx: 0, cy: -40, rx: 124, ry: 34, fill: 'none', stroke: '#ffe08a', 'stroke-width': 6, opacity: on ? .85 : .15 }, b);
+  const r2 = el('ellipse', { cx: 0, cy: -40, rx: 34, ry: 118, fill: 'none', stroke: '#ffd166', 'stroke-width': 5, opacity: on ? .65 : .1 }, b);
+  g._ignite = t => { tl.to([core, halo], { opacity: 1, duration: .6 }, t).to(r1, { opacity: .85, duration: .6 }, t).to(r2, { opacity: .65, duration: .6 }, t);
+    tl.fromTo(core, { attr: { r: 30 } }, { attr: { r: 72 }, duration: .7, ease: 'back.out(2)' }, t); sfx(t, 'impact'); };
+  g._spin = (t0, d) => { tl.to(r1, { rotation: 360 * Math.floor(d / 6), svgOrigin: '0 -40', duration: Math.floor(d / 6) * 6, ease: 'none' }, t0); tl.to(r2, { rotation: -360 * Math.floor(d / 4.5), svgOrigin: '0 -40', duration: Math.floor(d / 4.5) * 4.5, ease: 'none' }, t0); };
+  return g; }
+function bell(p, x, y, s = 1) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  el('circle', { cx: 0, cy: -10, r: 90, fill: 'url(#coreHalo)', opacity: .6 }, b);
+  el('path', { d: 'M -44 20 C -44 -40 -30 -62 0 -62 C 30 -62 44 -40 44 20 L 56 34 L -56 34 Z', fill: C.gold }, b);
+  el('circle', { cx: 0, cy: 42, r: 12, fill: '#c98a00' }, b); el('rect', { x: -8, y: -76, width: 16, height: 16, rx: 6, fill: '#c98a00' }, b); return g; }
+const ring = (b, t) => { tl.to(b, { rotation: 16, transformOrigin: '50% 0%', duration: .09, yoyo: true, repeat: 9, ease: 'sine.inOut' }, t); sfx(t, 'impact'); };
+function keyIcon(p, x, y, s, col) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  el('circle', { cx: -26, cy: 0, r: 22, fill: 'none', stroke: col, 'stroke-width': 11 }, b); el('rect', { x: -6, y: -6, width: 70, height: 12, rx: 5, fill: col }, b);
+  el('rect', { x: 46, y: 4, width: 9, height: 18, fill: col }, b); el('rect', { x: 30, y: 4, width: 9, height: 13, fill: col }, b); return g; }
+
+/* ================= far layer: stars, moon, distant banks across the whole world ================= */
+for (let i = 0; i < 900; i++) { const s = el('circle', { cx: -2500 + rnd() * 22000, cy: -2600 + rnd() * 3200, r: .8 + rnd() * 2.4, fill: '#f3ecff', opacity: .25 + rnd() * .6 }, far);
+  if (i < 120) tl.to(s, { opacity: .1, duration: .6 + (i % 5) * .2, repeat: 140, yoyo: true, ease: 'sine.inOut' }, (i % 9) * .17); }
+el('circle', { cx: 1150, cy: -520, r: 360, fill: 'url(#halo)' }, far); el('circle', { cx: 1150, cy: -520, r: 120, fill: 'url(#moonG)' }, far);
+for (let k = 0; k < 7; k++) bank(far, -1200 + k * 2900, 560 + (k % 2) * 80, 3400, 'url(#cloudFar)', 18, .5);
+
+/* __WORLD__ */
+/* ================= fore layer: dark wisps and dust over the whole journey ================= */
+for (let k = 0; k < 14; k++) { bank(fore, -1300 + k * 2700, 1080 + (k % 2) * 160, 1500, '#120b2a', 9, .95); }
+for (let i = 0; i < 120; i++) { const d = el('circle', { cx: -2000 + rnd() * 34000, cy: -2400 + rnd() * 3000, r: 1.5 + rnd() * 3, fill: '#e6dcff', opacity: .25 }, fore);
+  tl.to(d, { y: -60 - rnd() * 80, duration: __DUR__, ease: 'none' }, 0); }
+
+/* ================= camera: one continuous move through the world, parallax per layer ================= */
+const cam = { x: 120, y: 120, s: .5 }; const layers = [[far, .35], [mid, .8], [main, 1], [fore, 1.35]];
+const applyCam = () => { for (const [g, f] of layers) g.setAttribute('transform', `translate(960 540) scale(${cam.s.toFixed(4)}) translate(${(-cam.x * f).toFixed(2)} ${(-cam.y * f).toFixed(2)})`); };
+/* x,y are main-layer coordinates; mid (island Z1) has factor .8, so a mid-layer target at X maps to X/.8 */
+const CAMK = []; const camTo = (t, d, x, y, s, ease = 'power2.inOut') => CAMK.push({ t, d, x, y, s, ease });
+/* __CAMERA__ */
+/* moves never overlap: a move that would still run when the next starts is shortened, else the older tween overwrites the newer one at its end */
+CAMK.sort((p, q) => p.t - q.t).forEach((k, i) => { const nx = CAMK[i + 1], d = nx ? Math.min(k.d, nx.t - k.t - .02) : k.d;
+  tl.to(cam, { x: k.x, y: k.y, s: k.s, duration: Math.max(.3, d), ease: k.ease, onUpdate: applyCam }, k.t); if (d >= 1) sfx(k.t, 'whoosh'); });
+tl.to({}, { duration: __DUR__ }, 0); applyCam();
+
+/* ================= characters (Rive): anchors in the world + acting over time ================= */
+const ss = (a, t, d = .35) => { const k = Math.max(0, Math.min(1, (t - a) / d)); return k * k * (3 - 2 * k); };
+const vis = cid => CUE[cid].vis; const OPEN = { X: .04, M: 0, F: .22, C: .38, E: .55, O: .8, A: 1 };
+const mouthAt = (cid, t) => { let cur = 'X', prev = 'X', t0 = 0; for (const [a, s] of vis(cid)) if (t >= a) { prev = cur; cur = s; t0 = a; } const k = Math.min(1, (t - t0) / .045); return OPEN[prev] + (OPEN[cur] - OPEN[prev]) * k * k * (3 - 2 * k); };
+const blink = (t, list) => { for (const b of list) if (t >= b && t < b + .14) return .08 + .92 * Math.abs((t - b - .07) / .07); return 1; };
+/* __CHARS__ */
+
+/* ================= subtitles from the real cue timings ================= */
+const sub = document.getElementById('sub'); let lastSub = null;
+tl.eventCallback('onUpdate', () => { const t = tl.time(); if (window.__drawChars) window.__drawChars(t);
+  const c = W.cues.find(c => t >= c.start && t < c.end); let txt = '';
+  if (c) { const parts = c.sub.split('|'); txt = parts.length > 1 ? (t < c.pauseAt + 1.5 ? parts[0] : parts.slice(1).join(' ')) : parts[0]; }
+  if (txt !== lastSub) { sub.textContent = txt; lastSub = txt; } });
+window.__SFX = SFX.sort((a, b) => a.t - b.t);
+window.__timelines = window.__timelines || {}; window.__timelines.main = tl; tl.seek(0);
+</script>
+<script type="module">
+/* Rive characters: compiled from RML by Rive CLI, drawn from a fresh state whenever time goes backwards. */
+import Rive from './lib/rive/webgl2_advanced.mjs';
+const ready = (async () => {
+  const rive = await Rive({ locateFile: f => './lib/rive/' + (f.endsWith('.wasm') ? 'rive.wasm' : f) });
+  const inst = {};
+  for (const [name, file] of [['thief', 'thief.riv'], ['hero', 'analyst.riv']]) {
+    const f = await rive.load(new Uint8Array(await (await fetch(file)).arrayBuffer()));
+    const def = window.__CHARS[name], canvas = document.getElementById(def.canvas);
+    inst[name] = { f, def, canvas, renderer: rive.makeRenderer(canvas, true), ab: null, sm: null, vmi: null, cur: -1 }; }
+  const reset = I => { I.ab = I.f.defaultArtboard(); I.sm = new rive.StateMachineInstance(I.ab.stateMachineByIndex(0), I.ab);
+    I.vmi = I.f.defaultArtboardViewModel(I.ab).defaultInstance(); I.ab.bindViewModelInstance(I.vmi); I.sm.bindViewModelInstance(I.vmi); I.cur = 0; };
+  const setP = (I, t) => { const p = I.def.params(t); for (const k in p) I.vmi.number(k).value = p[k]; };
+  window.__drawChars = t => {
+    for (const I of Object.values(inst)) {
+      const a = I.def.anchors.find(([, t0, t1]) => t >= t0 - .05 && t < t1 + .35);
+      if (!a) { I.canvas.style.opacity = 0; continue; }
+      const [anchor, t0, t1, dir, sc] = a;
+      if (!I.ab || t < I.cur - 1e-6) reset(I);
+      while (I.cur < t - 1e-6) { const dt = Math.min(1 / 30, t - I.cur); I.cur += dt; setP(I, I.cur); I.sm.advance(dt); I.ab.advance(dt); }
+      setP(I, t); I.sm.advance(0); I.ab.advance(0);
+      I.renderer.clear(); I.renderer.save();
+      I.renderer.align(rive.Fit.contain, rive.Alignment.center, { minX: 0, minY: 0, maxX: 1200, maxY: 1400 }, I.ab.bounds);
+      I.ab.draw(I.renderer); I.renderer.restore(); I.renderer.flush(); rive.resolveAnimationFrame();
+      const fadeIn = Math.max(0, Math.min(1, (t - t0) / .35)), fadeOut = 1 - Math.max(0, Math.min(1, (t - t1) / .35)), k = fadeIn * fadeOut;
+      const m = anchor.getScreenCTM();
+      const M = new DOMMatrix([m.a, m.b, m.c, m.d, m.e, m.f]).translate(0, 30 * (1 - fadeIn)).scale(dir * sc * .44, sc * .44).translate(-600, -1280);
+      I.canvas.style.transform = M.toString(); I.canvas.style.opacity = k.toFixed(3);
+    }
+  };
+  window.__drawChars(window.__timelines.main.time());
+})();
+window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {}; window.__hf.buildReady.rive = ready;
+</script>
+</body>
+</html>

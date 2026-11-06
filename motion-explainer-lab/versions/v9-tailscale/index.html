@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>Tailscale · épisode 1</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@700&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/MotionPathPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/DrawSVGPlugin.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #070a24; }
+  #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; font-family: Poppins, 'DejaVu Sans', sans-serif; }
+  svg { position: absolute; inset: 0; }
+  canvas.rv { position: absolute; left: 0; top: 0; transform-origin: 0 0; opacity: 0; }
+  #sub { position: absolute; left: 260px; top: 948px; width: 1400px; text-align: center; color: #f4f1ff;
+    font: 600 38px/1.35 Poppins, 'DejaVu Sans', sans-serif; text-shadow: 0 2px 10px rgba(0,0,0,.75); }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="192" data-width="1920" data-height="1080" data-motion-blur="on">
+  <svg id="svg" viewBox="0 0 1920 1080" class="clip" data-start="0" data-duration="192" data-track-index="0">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#090c33"/><stop offset=".55" stop-color="#231556"/><stop offset=".85" stop-color="#4a1d6e"/><stop offset="1" stop-color="#7a2a72"/></linearGradient>
+      <radialGradient id="moonG"><stop offset="0" stop-color="#fff7e0"/><stop offset=".7" stop-color="#ffd9a8"/><stop offset="1" stop-color="#ffb37a"/></radialGradient>
+      <radialGradient id="halo"><stop offset="0" stop-color="#ffcf8a" stop-opacity=".45"/><stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/></radialGradient>
+      <linearGradient id="cloudTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9cdfc"/><stop offset=".55" stop-color="#9c86e0"/><stop offset="1" stop-color="#5a3f9e"/></linearGradient>
+      <linearGradient id="cloudFar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e4fae"/><stop offset="1" stop-color="#2c1a5c"/></linearGradient>
+      <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a3488"/><stop offset="1" stop-color="#262063"/></linearGradient>
+      <linearGradient id="wallSide" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1c1849"/><stop offset="1" stop-color="#14113a"/></linearGradient>
+      <linearGradient id="hall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1650"/><stop offset="1" stop-color="#2d2275"/></linearGradient>
+      <linearGradient id="floorG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b2f86"/><stop offset="1" stop-color="#1c1648"/></linearGradient>
+      <radialGradient id="core"><stop offset="0" stop-color="#ffffff"/><stop offset=".35" stop-color="#fff2b0"/><stop offset=".7" stop-color="#ffb703"/><stop offset="1" stop-color="#fb5607"/></radialGradient>
+      <radialGradient id="coreOff"><stop offset="0" stop-color="#8a86b8"/><stop offset="1" stop-color="#3b3766"/></radialGradient>
+      <radialGradient id="coreHalo"><stop offset="0" stop-color="#ffb703" stop-opacity=".55"/><stop offset="1" stop-color="#ffb703" stop-opacity="0"/></radialGradient>
+      <radialGradient id="redHalo"><stop offset="0" stop-color="#ff3b6b" stop-opacity=".7"/><stop offset="1" stop-color="#ff3b6b" stop-opacity="0"/></radialGradient>
+      <radialGradient id="greenHalo"><stop offset="0" stop-color="#2ee6a0" stop-opacity=".7"/><stop offset="1" stop-color="#2ee6a0" stop-opacity="0"/></radialGradient>
+      <radialGradient id="cyanHalo"><stop offset="0" stop-color="#22d3ee" stop-opacity=".55"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+      <radialGradient id="starG"><stop offset="0" stop-color="#ffffff"/><stop offset=".4" stop-color="#fff2b0"/><stop offset="1" stop-color="#ffb703" stop-opacity="0"/></radialGradient>
+      <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b3a7a"/><stop offset="1" stop-color="#1b1236"/></linearGradient>
+      <linearGradient id="mixerG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a1745"/><stop offset="1" stop-color="#120a22"/></linearGradient>
+      <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff2b0" stop-opacity=".55"/><stop offset="1" stop-color="#fff2b0" stop-opacity="0"/></linearGradient>
+      <linearGradient id="chest" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5a2b"/><stop offset="1" stop-color="#4e2f15"/></linearGradient>
+      <linearGradient id="subFade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05030f" stop-opacity="0"/><stop offset="1" stop-color="#05030f" stop-opacity=".6"/></linearGradient>
+      <radialGradient id="vign" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#05030f" stop-opacity=".75"/></radialGradient>
+      <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="14"/></filter>
+    </defs>
+    <rect width="1920" height="1080" fill="url(#sky)"/>
+    <g id="L-far"></g><g id="L-mid"></g><g id="L-main"></g><g id="L-fore"></g>
+    <rect width="1920" height="1080" fill="url(#vign)" pointer-events="none"/>
+    <rect y="840" width="1920" height="240" fill="url(#subFade)" pointer-events="none"/>
+  </svg>
+  <canvas id="rvThief" class="rv" width="1200" height="1400"></canvas>
+  <canvas id="rvHero" class="rv" width="1200" height="1400"></canvas>
+  <div id="sub" class="clip" data-start="0" data-duration="192" data-track-index="1"></div>
+</div>
+<script id="words" type="application/json">{"duration": 191.643, "scenes": [{"id": "s1", "start": 0.6, "title": "Le C2 tombe, l'accès reste"}, {"id": "s2", "start": 22.677, "title": "Le tailnet et sa tour"}, {"id": "s3", "start": 39.909, "title": "Direct ou relayé"}, {"id": "s4", "start": 64.253, "title": "Le poste rejoint l'attaquant"}, {"id": "s5", "start": 84.423, "title": "Trois journaux"}, {"id": "s6", "start": 132.564, "title": "Chercher sur le poste"}, {"id": "s7", "start": 157.48, "title": "Vos trois réflexes"}], "guess": [[55.568, 57.068], [114.541, 116.041]], "cues": [{"id": "c1", "sc": "s1", "start": 0.6, "end": 7.475, "sub": "Le serveur de commande de l'attaquant tombe. Pendant 18 jours, il garde pourtant l'accès au poste.", "guess": false, "pauseAt": null, "who": null, "words": [["Le", 0.893, 1.032], ["serveur", 1.137, 1.543], ["de", 1.578, 1.624], ["commande", 1.694, 1.984], ["de", 2.007, 2.077], ["l'attaquant", 2.124, 2.483], ["tombe.", 2.6, 2.855], ["Pendant", 3.635, 3.913], ["dix-huit", 3.948, 4.261], ["jours,", 4.331, 4.61], ["il", 4.83, 4.981], ["garde", 5.028, 5.515], ["pourtant", 5.701, 5.991], ["l'accès", 6.015, 6.293], ["au", 6.351, 6.409], ["poste.", 6.467, 6.827]], "vis": []}, {"id": "c2", "sc": "s1", "start": 7.475, "end": 16.116, "sub": "Son autre chemin : un logiciel légitime, Tailscale. Comment fonctionne-t-il ? Et où voir ses traces ?", "guess": false, "pauseAt": null, "who": null, "words": [["Son", 7.884, 8.116], ["autre", 8.151, 8.348], ["chemin", 8.441, 8.848], ["un", 9.277, 9.405], ["logiciel", 9.451, 9.985], ["légitime,", 10.043, 10.659], ["Tailscale.", 11.019, 11.727], ["Comment", 12.321, 12.576], ["fonctionne-t-il", 12.599, 13.412], ["Et", 14.157, 14.366], ["où", 14.47, 14.54], ["voir", 14.598, 14.772], ["ses", 14.842, 14.911], ["traces", 15.004, 15.411]], "vis": []}, {"id": "c3", "sc": "s1", "start": 16.116, "end": 22.677, "sub": "Un cas type, tiré de deux incidents publiés. Et une question : où l'auriez-vous vu ?", "guess": false, "pauseAt": null, "who": null, "words": [["Un", 16.502, 16.676], ["cas", 16.746, 16.873], ["type,", 16.943, 17.303], ["tiré", 17.593, 17.849], ["de", 17.883, 17.953], ["deux", 18.081, 18.266], ["incidents", 18.313, 18.661], ["publiés.", 18.696, 19.195], ["Et", 19.928, 19.998], ["une", 20.068, 20.184], ["question", 20.253, 20.822], ["où", 21.264, 21.368], ["l'auriez-vous", 21.414, 21.798], ["vu", 21.867, 22.076]], "vis": []}, {"id": "c4", "sc": "s2", "start": 22.677, "end": 30.062, "sub": "Tailscale relie vos machines en un réseau privé, le tailnet. Chacune y reçoit une adresse en 100.x.y.z.", "guess": false, "pauseAt": null, "who": null, "words": [["Tailscale", 22.9, 23.539], ["relie", 23.608, 23.806], ["vos", 23.864, 23.945], ["machines", 23.98, 24.351], ["en", 24.375, 24.456], ["un", 24.491, 24.549], ["réseau", 24.595, 24.839], ["privé,", 24.862, 25.327], ["le", 25.536, 25.64], ["tailnet.", 25.745, 26.29], ["Chacune", 27.116, 27.616], ["y", 27.65, 27.708], ["reçoit", 27.743, 27.987], ["une", 28.022, 28.115], ["adresse", 28.138, 28.51], ["qui", 28.579, 28.684], ["commence", 28.719, 29.009], ["par", 29.055, 29.195], ["cent.", 29.287, 29.473]], "vis": []}, {"id": "c5", "sc": "s2", "start": 30.062, "end": 39.909, "sub": "Une tour de contrôle, le serveur de coordination, distribue les clés publiques et les règles d'accès. Mais le trafic ne passe jamais par elle.", "guess": false, "pauseAt": null, "who": null, "words": [["Une", 30.471, 30.645], ["tour", 30.761, 30.947], ["de", 30.982, 31.04], ["contrôle,", 31.098, 31.586], ["le", 32.073, 32.166], ["serveur", 32.294, 32.654], ["de", 32.677, 32.758], ["coordination,", 32.805, 33.606], ["distribue", 34.012, 34.453], ["les", 34.476, 34.558], ["clés", 34.651, 34.813], ["publiques", 34.871, 35.301], ["et", 35.568, 35.626], ["les", 35.672, 35.754], ["règles", 35.8, 36.009], ["d'accès.", 36.055, 36.531], ["Mais", 37.253, 37.381], ["le", 37.415, 37.485], ["trafic", 37.578, 37.95], ["ne", 37.973, 38.089], ["passe", 38.17, 38.391], ["jamais", 38.437, 38.704], ["par", 38.751, 38.925], ["elle.", 39.145, 39.308]], "vis": []}, {"id": "c7", "sc": "s3", "start": 39.909, "end": 46.619, "sub": "Entre deux machines, le trafic part chiffré par WireGuard, en direct quand le réseau le permet.", "guess": false, "pauseAt": null, "who": null, "words": [["Entre", 40.318, 40.631], ["deux", 40.748, 40.84], ["machines,", 40.887, 41.456], ["le", 41.595, 41.723], ["trafic", 41.792, 42.245], ["part", 42.338, 42.535], ["chiffré", 42.617, 42.988], ["par", 43.058, 43.209], ["WireGuard,", 43.29, 43.964], ["en", 44.486, 44.614], ["direct", 44.649, 44.95], ["quand", 44.974, 45.043], ["le", 45.078, 45.148], ["réseau", 45.217, 45.403], ["le", 45.426, 45.508], ["permet.", 45.577, 45.96]], "vis": []}, {"id": "c8", "sc": "s3", "start": 46.619, "end": 51.82, "sub": "Sinon, un relais DERP transporte les paquets, sans pouvoir les ouvrir.", "guess": false, "pauseAt": null, "who": null, "words": [["Sinon,", 46.819, 47.679], ["un", 47.699, 47.819], ["relais", 47.839, 48.139], ["DERP", 48.159, 48.399], ["transporte", 48.419, 48.919], ["les", 48.939, 49.119], ["paquets,", 49.139, 49.919], ["sans", 49.939, 50.139], ["pouvoir", 50.159, 50.439], ["les", 50.459, 50.639], ["ouvrir.", 50.659, 51.35]], "vis": []}, {"id": "c9", "sc": "s3", "start": 51.82, "end": 64.253, "sub": "Devinez : combien de ports faut-il ouvrir dans le pare-feu ?|En général, aucun : chaque machine appelle vers l'extérieur. Pratique pour vous, et pour un attaquant.", "guess": true, "pauseAt": 55.568, "who": null, "words": [["Devinez", 52.194, 52.775], ["combien", 53.111, 53.436], ["de", 53.46, 53.541], ["ports", 53.622, 53.785], ["faut-il", 53.82, 54.087], ["ouvrir", 54.121, 54.551], ["dans", 54.597, 54.69], ["le", 54.714, 54.795], ["pare-feu", 54.876, 55.282], ["En", 57.265, 57.405], ["général,", 57.463, 58.032], ["aucun", 58.322, 58.856], ["chaque", 59.158, 59.425], ["machine", 59.471, 59.785], ["appelle", 59.82, 60.098], ["vers", 60.133, 60.238], ["l'extérieur.", 60.284, 61.05], ["Pratique", 61.516, 61.923], ["pour", 62.004, 62.19], ["vous,", 62.259, 62.457], ["et", 62.782, 62.851], ["pour", 62.921, 63.026], ["un", 63.06, 63.13], ["attaquant.", 63.165, 63.664]], "vis": []}, {"id": "c10", "sc": "s4", "start": 64.253, "end": 72.136, "sub": "Dans notre cas, un script crée un compte administrateur, installe Tailscale et un serveur OpenSSH.", "guess": false, "pauseAt": null, "who": null, "words": [["Dans", 64.697, 64.836], ["notre", 64.859, 65.08], ["cas,", 65.173, 65.463], ["un", 65.823, 65.962], ["script", 65.986, 66.462], ["crée", 66.543, 66.74], ["un", 66.763, 66.879], ["compte", 66.903, 67.054], ["administrateur,", 67.088, 68.04], ["installe", 68.191, 68.609], ["Tailscale", 68.644, 69.387], ["et", 69.573, 69.619], ["un", 69.689, 69.77], ["serveur", 69.828, 70.374], ["OpenSSH.", 70.525, 71.454]], "vis": []}, {"id": "c11", "sc": "s4", "start": 72.136, "end": 79.638, "sub": "Puis il connecte le poste avec une clé d'authentification écrite en dur. Le poste rejoint le tailnet de l'attaquant.", "guess": false, "pauseAt": null, "who": null, "words": [["Puis", 72.464, 72.951], ["il", 73.067, 73.207], ["connecte", 73.276, 73.613], ["le", 73.671, 73.776], ["poste", 73.845, 74.054], ["avec", 74.077, 74.298], ["une", 74.321, 74.449], ["clé", 74.484, 74.6], ["d'authentification", 74.635, 75.436], ["écrite", 75.494, 75.773], ["en", 75.831, 75.889], ["dur.", 75.935, 76.272], ["Le", 76.97, 77.098], ["poste", 77.202, 77.446], ["rejoint", 77.516, 77.783], ["le", 77.818, 77.887], ["tailnet", 77.992, 78.352], ["de", 78.398, 78.468], ["l'attaquant.", 78.514, 79.037]], "vis": []}, {"id": "c12", "sc": "s4", "start": 79.638, "end": 84.423, "sub": "Je n'ouvre aucun port. C'est ton poste qui m'appelle.", "guess": false, "pauseAt": null, "who": "foe", "words": [["Je", 80.088, 80.262], ["n'ouvre", 80.349, 80.662], ["aucun", 80.749, 80.993], ["port.", 81.074, 81.498], ["C'est", 82.22, 82.417], ["ton", 82.527, 82.649], ["poste", 82.76, 83.067], ["qui", 83.149, 83.218], ["m'appelle.", 83.282, 83.793]], "vis": [[79.838, "X"], [80.088, "C"], [80.262, "X"], [80.349, "C"], [80.482, "O"], [80.593, "C"], [80.662, "X"], [80.749, "O"], [80.813, "C"], [80.906, "O"], [80.993, "X"], [81.074, "M"], [81.185, "O"], [81.295, "C"], [81.498, "X"], [82.22, "C"], [82.347, "E"], [82.417, "X"], [82.551, "O"], [82.649, "X"], [82.76, "M"], [82.852, "O"], [82.911, "C"], [83.067, "X"], [83.317, "A"], [83.416, "M"], [83.596, "E"], [83.654, "C"], [83.793, "X"]]}, {"id": "c14", "sc": "s5", "start": 84.423, "end": 94.747, "sub": "Côté défense, Tailscale tient trois journaux. Le journal d'audit : qui a changé quoi, et quand. Toujours actif, 90 jours.", "guess": false, "pauseAt": null, "who": null, "words": [["Côté", 84.82, 85.099], ["défense,", 85.134, 85.726], ["Tailscale", 86.179, 86.724], ["tient", 86.806, 87.154], ["trois", 87.177, 87.386], ["journaux.", 87.433, 87.793], ["Le", 88.514, 88.665], ["journal", 88.723, 89.118], ["d'audit", 89.176, 89.617], ["qui", 89.989, 90.128], ["a", 90.163, 90.209], ["changé", 90.267, 90.534], ["quoi,", 90.592, 90.929], ["et", 91.138, 91.254], ["quand.", 91.347, 91.533], ["Toujours", 92.092, 92.463], ["actif,", 92.498, 93.009], ["quatre-vingt-dix", 93.229, 93.822], ["jours.", 93.88, 94.181]], "vis": []}, {"id": "c15", "sc": "s5", "start": 94.747, "end": 104.187, "sub": "Les flow logs : qui a parlé à qui, par fenêtres de 5 secondes. Éteints par défaut, et réservés aux offres Premium et Enterprise.", "guess": false, "pauseAt": null, "who": null, "words": [["Les", 95.028, 95.179], ["flow", 95.249, 95.516], ["logs", 95.562, 95.887], ["qui", 96.224, 96.352], ["a", 96.387, 96.445], ["parlé", 96.503, 96.839], ["à", 96.909, 96.956], ["qui,", 97.048, 97.199], ["par", 97.339, 97.478], ["fenêtres", 97.548, 97.896], ["de", 97.919, 98.0], ["cinq", 98.082, 98.291], ["secondes.", 98.337, 98.802], ["Éteints", 99.593, 99.895], ["par", 99.941, 100.08], ["défaut,", 100.104, 100.58], ["et", 100.835, 100.951], ["réservés", 101.009, 101.462], ["aux", 101.532, 101.601], ["offres", 101.706, 101.88], ["Premium", 101.961, 102.518], ["et", 102.704, 102.785], ["Enterprise.", 102.843, 103.447]], "vis": []}, {"id": "c16", "sc": "s5", "start": 104.187, "end": 108.088, "sub": "Et les journaux du client, sur la machine elle-même.", "guess": false, "pauseAt": null, "who": null, "words": [["Et", 104.584, 104.689], ["les", 104.724, 104.793], ["journaux", 104.898, 105.142], ["du", 105.176, 105.258], ["client,", 105.374, 105.838], ["sur", 106.07, 106.245], ["la", 106.279, 106.337], ["machine", 106.396, 106.802], ["elle-même.", 106.941, 107.475]], "vis": []}, {"id": "c17", "sc": "s5", "start": 108.088, "end": 124.215, "sub": "Devinez : dans votre console Tailscale, quel journal montre le poste qui rejoint le tailnet de l'attaquant ?|Aucun. Ce journal d'audit-là est celui de son tailnet, pas du vôtre. Seul le poste garde la trace.", "guess": true, "pauseAt": 114.541, "who": null, "words": [["Devinez", 108.439, 108.961], ["dans", 109.275, 109.379], ["votre", 109.426, 109.658], ["console", 109.704, 110.111], ["Tailscale,", 110.157, 110.842], ["quel", 111.26, 111.446], ["journal", 111.516, 111.887], ["montre", 111.922, 112.177], ["le", 112.212, 112.293], ["poste", 112.375, 112.688], ["qui", 112.769, 112.851], ["rejoint", 112.897, 113.129], ["le", 113.153, 113.199], ["tailnet", 113.304, 113.64], ["de", 113.675, 113.733], ["l'attaquant", 113.791, 114.302], ["Aucun.", 116.204, 116.598], ["Ce", 117.308, 117.436], ["journal", 117.552, 117.877], ["d'audit-là", 117.9, 118.446], ["est", 118.667, 118.725], ["celui", 118.759, 119.038], ["de", 119.061, 119.131], ["son", 119.201, 119.34], ["tailnet,", 119.421, 119.955], ["pas", 120.269, 120.396], ["du", 120.42, 120.513], ["vôtre.", 120.594, 120.977], ["Seul", 121.907, 122.128], ["le", 122.174, 122.244], ["poste", 122.325, 122.546], ["garde", 122.662, 122.918], ["la", 122.987, 123.068], ["trace.", 123.161, 123.591]], "vis": []}, {"id": "c18", "sc": "s5", "start": 124.215, "end": 132.564, "sub": "Autre idée reçue : les flow logs ne montrent pas les tentatives refusées. Seulement les connexions réussies, jamais leur contenu.", "guess": false, "pauseAt": null, "who": null, "words": [["Autre", 124.508, 124.717], ["idée", 124.763, 124.937], ["reçue", 124.984, 125.39], ["les", 125.599, 125.762], ["flow", 125.831, 126.064], ["logs", 126.11, 126.47], ["ne", 126.76, 126.853], ["montrent", 126.9, 127.155], ["pas", 127.213, 127.271], ["les", 127.306, 127.376], ["tentatives", 127.48, 127.991], ["refusées.", 128.037, 128.548], ["Seulement", 129.328, 129.676], ["les", 129.699, 129.769], ["connexions", 129.839, 130.326], ["réussies,", 130.384, 130.907], ["jamais", 131.023, 131.313], ["leur", 131.359, 131.487], ["contenu.", 131.534, 131.94]], "vis": []}, {"id": "c19", "sc": "s6", "start": 132.564, "end": 140.331, "sub": "Alors on cherche sur le poste : Tailscale là où aucun VPN n'est prévu, et des connexions vers son serveur de coordination.", "guess": false, "pauseAt": null, "who": null, "words": [["Alors", 132.973, 133.31], ["on", 133.344, 133.426], ["cherche", 133.495, 133.774], ["sur", 133.844, 133.971], ["le", 134.006, 134.088], ["poste", 134.18, 134.529], ["Tailscale", 134.935, 135.55], ["là", 135.585, 135.713], ["où", 135.771, 135.806], ["aucun", 135.899, 136.131], ["VPN", 136.166, 136.63], ["n'est", 136.711, 136.793], ["prévu,", 136.827, 137.292], ["et", 137.443, 137.524], ["des", 137.547, 137.629], ["connexions", 137.698, 138.139], ["vers", 138.163, 138.302], ["son", 138.337, 138.441], ["serveur", 138.499, 138.813], ["de", 138.859, 138.917], ["coordination.", 138.999, 139.73]], "vis": []}, {"id": "c20", "sc": "s6", "start": 140.331, "end": 149.365, "sub": "La commande tailscale status, en JSON, donne le nom du tailnet courant. Si ce n'est pas le vôtre, c'est un incident.", "guess": false, "pauseAt": null, "who": null, "words": [["La", 140.728, 140.879], ["commande", 140.972, 141.483], ["Tailscale", 141.588, 142.133], ["status,", 142.203, 142.737], ["en", 142.865, 143.016], ["JSON,", 143.062, 143.689], ["donne", 144.246, 144.42], ["le", 144.467, 144.525], ["nom", 144.583, 144.711], ["du", 144.734, 144.827], ["tailnet", 144.943, 145.326], ["courant.", 145.396, 145.767], ["Si", 146.465, 146.581], ["ce", 146.628, 146.686], ["n'est", 146.744, 146.837], ["pas", 146.872, 146.953], ["le", 146.976, 147.058], ["vôtre,", 147.139, 147.487], ["c'est", 147.963, 148.137], ["un", 148.16, 148.253], ["incident.", 148.3, 148.787]], "vis": []}, {"id": "c21", "sc": "s6", "start": 149.365, "end": 157.48, "sub": "Dans votre propre tailnet, le danger est une clé réutilisable volée : l'audit montre alors un nœud créé, puis connecté.", "guess": false, "pauseAt": null, "who": null, "words": [["Dans", 149.716, 149.832], ["votre", 149.855, 150.087], ["propre", 150.157, 150.447], ["tailnet,", 150.505, 151.051], ["le", 151.283, 151.399], ["danger", 151.446, 151.771], ["est", 151.829, 151.899], ["une", 151.922, 152.026], ["clé", 152.096, 152.282], ["réutilisable", 152.34, 153.002], ["volée", 153.06, 153.431], ["l'audit", 153.594, 154.128], ["montre", 154.325, 154.569], ["alors", 154.604, 154.789], ["un", 154.836, 154.894], ["nœud", 154.929, 155.068], ["créé,", 155.115, 155.486], ["puis", 155.892, 156.252], ["connecté.", 156.357, 156.868]], "vis": []}, {"id": "c22", "sc": "s7", "start": 157.48, "end": 165.108, "sub": "Un : depuis votre EDR, alertez sur Tailscale et sur un serveur OpenSSH là où ils ne sont pas prévus.", "guess": false, "pauseAt": null, "who": null, "words": [["Un", 158.028, 158.26], ["depuis", 158.562, 158.818], ["votre", 158.853, 159.027], ["EDR,", 159.096, 159.572], ["alertez", 159.642, 160.095], ["sur", 160.13, 160.281], ["Tailscale", 160.35, 161.151], ["et", 161.372, 161.407], ["sur", 161.465, 161.569], ["un", 161.627, 161.72], ["serveur", 161.755, 162.266], ["OpenSSH", 162.417, 163.38], ["là", 163.439, 163.531], ["où", 163.555, 163.589], ["ils", 163.613, 163.682], ["ne", 163.706, 163.764], ["sont", 163.822, 163.949], ["pas", 163.996, 164.089], ["prévus.", 164.147, 164.507]], "vis": []}, {"id": "c23", "sc": "s7", "start": 165.108, "end": 172.515, "sub": "Deux : sur vos postes gérés, imposez votre tailnet avec la politique système Tailnet, en mode obligatoire.", "guess": false, "pauseAt": null, "who": null, "words": [["Deux", 165.529, 165.772], ["sur", 166.19, 166.365], ["vos", 166.388, 166.527], ["postes", 166.55, 166.794], ["gérés,", 166.864, 167.305], ["imposez", 167.584, 168.025], ["votre", 168.06, 168.28], ["tailnet", 168.35, 168.71], ["avec", 168.745, 168.907], ["la", 168.942, 169.023], ["politique", 169.104, 169.476], ["système", 169.511, 169.94], ["Tailnet,", 170.01, 170.591], ["en", 170.869, 171.032], ["mode", 171.055, 171.171], ["obligatoire.", 171.206, 171.926]], "vis": []}, {"id": "c24", "sc": "s7", "start": 172.515, "end": 180.212, "sub": "Trois : dans la console, activez les flow logs, envoyez l'audit à votre SIEM, et préférez des clés à usage unique.", "guess": false, "pauseAt": null, "who": null, "words": [["Trois", 172.936, 173.354], ["dans", 173.563, 173.667], ["la", 173.69, 173.783], ["console,", 173.864, 174.398], ["activez", 174.607, 175.002], ["les", 175.037, 175.107], ["flow", 175.176, 175.339], ["logs,", 175.362, 175.676], ["envoyez", 175.977, 176.419], ["l'audit", 176.442, 176.732], ["à", 176.755, 176.79], ["votre", 176.813, 177.034], ["SIEM,", 177.057, 177.487], ["et", 177.789, 177.916], ["préférez", 178.009, 178.427], ["des", 178.45, 178.555], ["clés", 178.636, 178.775], ["à", 178.799, 178.833], ["usage", 178.892, 179.147], ["unique.", 179.205, 179.507]], "vis": []}, {"id": "c25", "sc": "s7", "start": 180.212, "end": 189.443, "sub": "Simplification : Tailscale a aussi ses propres failles, publiées en bulletins. Vous savez maintenant où chercher un tailnet qui n'est pas le vôtre.", "guess": false, "pauseAt": null, "who": null, "words": [["Simplification", 180.435, 181.352], ["Tailscale", 181.956, 182.513], ["a", 182.548, 182.571], ["aussi", 182.606, 182.78], ["ses", 182.827, 182.885], ["propres", 182.943, 183.21], ["failles,", 183.291, 183.709], ["publiées", 184.127, 184.534], ["en", 184.557, 184.615], ["bulletins.", 184.661, 185.114], ["Vous", 185.812, 185.963], ["savez", 186.021, 186.254], ["maintenant", 186.323, 186.683], ["où", 186.73, 186.753], ["chercher", 186.822, 187.171], ["un", 187.217, 187.333], ["tailnet", 187.356, 187.809], ["qui", 187.879, 187.937], ["n'est", 187.983, 188.053], ["pas", 188.111, 188.192], ["le", 188.216, 188.274], ["vôtre.", 188.367, 188.784]], "vis": []}]}</script>
+<script>
+/* Illustrated episode (src/illus/shell.html, assembled by tools/illus_build.py). One world, one paused GSAP timeline keyed on the real word times (tools/voice.py + tools/timeline.py).
+   Real artefacts (method names, values) are objects of the world: printed tickets, plaques. Deterministic: seeded PRNG. */
+gsap.registerPlugin(MotionPathPlugin, DrawSVGPlugin);
+const W = JSON.parse(document.getElementById('words').textContent);
+const CUE = Object.fromEntries(W.cues.map(c => [c.id, c]));
+const norm = s => s.toLowerCase().replace(/œ/g, 'oe').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
+const T = (cid, w, n = 0) => { const c = CUE[cid]; if (w == null) return c.start; let k = 0;
+  for (const x of c.words) { const a = norm(x[0]), b = norm(x[0].split(/['’]/).pop()); if (a.startsWith(w) || b.startsWith(w)) { if (k === n) return x[1]; k++; } }
+  throw new Error('mot absent ' + cid + ' ' + w); };
+const END = cid => CUE[cid].end, REV = cid => CUE[cid].pauseAt + 1.5;
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const G = (p, x, y, extra = {}) => el('g', { transform: `translate(${x} ${y})`, ...extra }, p);
+let seed = 11; const rnd = () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+const far = document.getElementById('L-far'), mid = document.getElementById('L-mid'), main = document.getElementById('L-main'), fore = document.getElementById('L-fore');
+const tl = gsap.timeline({ paused: true }); const SFX = [];
+const sfx = (t, type) => SFX.push({ t: +t.toFixed(3), type });
+const pop = (e, t, d = .5) => { tl.fromTo(e, { scale: .2, opacity: 0, transformOrigin: '50% 50%' }, { scale: 1, opacity: 1, duration: d, ease: 'back.out(1.7)', immediateRender: true }, t); sfx(t, 'pop'); return e; };
+const show = (e, t, d = .4) => tl.fromTo(e, { opacity: 0 }, { opacity: 1, duration: d, immediateRender: true }, t);
+const hide = (e, t, d = .35) => tl.to(e, { opacity: 0, duration: d }, t);
+const bump = (e, t) => tl.to(e, { scale: 1.12, transformOrigin: '50% 50%', duration: .16, yoyo: true, repeat: 1, ease: 'power2.out' }, t);
+const C = { amber: '#ffd166', gold: '#ffb703', rose: '#ff4d6d', cyan: '#22d3ee', green: '#2ee6a0', violet: '#9d8cff', ink: '#120f33', paper: '#f3eee2', text: '#f4f1ff' };
+const MONO = "'JetBrains Mono','DejaVu Sans Mono',monospace";
+/* a plaque (sign) with text; size in world units */
+function plaque(p, x, y, text, o = {}) { const size = o.size || 52, mono = o.mono !== false, w = text.length * size * (mono ? .62 : .56) + 70, h = size + 44;
+  const g = G(p, x, y); el('rect', { x: -w / 2 + 6, y: -h / 2 + 8, width: w, height: h, rx: 18, fill: '#000', opacity: .35 }, g);
+  el('rect', { x: -w / 2, y: -h / 2, width: w, height: h, rx: 18, fill: o.bg || C.ink, stroke: o.col || C.amber, 'stroke-width': 6 }, g);
+  const tx = el('text', { x: 0, y: size * .36, 'text-anchor': 'middle', 'font-family': mono ? MONO : "Poppins,'DejaVu Sans',sans-serif", 'font-weight': mono ? 700 : 700, 'font-size': size, fill: o.fill || C.text }, g); tx.textContent = text; g._w = w; return g; }
+/* a printed ticket: real artefact text on paper */
+function ticket(p, x, y, lines, o = {}) { const size = o.size || 44, w = Math.max(...lines.map(l => l.length)) * size * .62 + 70, h = lines.length * size * 1.35 + 50;
+  const g = G(p, x, y); el('path', { d: `M ${-w / 2} ${-h / 2} L ${w / 2} ${-h / 2} L ${w / 2} ${h / 2 - 14} l -20 14 l -20 -14 l -20 14 l -20 -14 L ${-w / 2} ${h / 2 - 14} Z`, fill: C.paper }, g);
+  el('rect', { x: -w / 2, y: -h / 2, width: w, height: 12, fill: o.col || C.cyan }, g);
+  lines.forEach((l, i) => { const t = el('text', { x: -w / 2 + 34, y: -h / 2 + 30 + size * (i + .9) * 1.35 - size * .3, 'font-family': MONO, 'font-weight': 700, 'font-size': size, fill: '#1a1440' }, g); t.textContent = l; });
+  return g; }
+const bank = (g, cx, cy, w, fill, n = 12, o = 1) => { const b = el('g', { opacity: o }, g); for (let i = 0; i < n; i++) { const x = cx - w / 2 + (i + .5) * w / n, r = w / n * (.9 + rnd() * .9);
+  el('circle', { cx: x, cy: cy - r * .35 * Math.sin(Math.PI * (i + .5) / n), r, fill }, b); } el('ellipse', { cx, cy: cy + 420, rx: w / 2 + 900, ry: 520, fill }, b); return b; };
+function cloudIsland(g, cx, cy, w, h = 240) { const c = el('g', {}, g);
+  for (let i = 0; i < Math.round(w / 70); i++) { const x = cx - w / 2 + rnd() * w, y = cy - rnd() * h * .5, r = 60 + rnd() * 100; el('circle', { cx: x, cy: y, r, fill: 'url(#cloudTop)' }, c); }
+  for (let i = 0; i < 10; i++) { const x = cx - w / 2 + 50 + i * (w - 100) / 9; el('circle', { cx: x, cy: cy + 70 + (i % 3) * 18, r: 80 + (i * 37 % 50), fill: '#4a3390' }, c); }
+  for (let i = 0; i < 6; i++) { const x = cx - w / 3 + i * (w * 2 / 3) / 5; el('circle', { cx: x, cy: cy + 150 + (i % 2) * 20, r: 60 + (i * 23 % 30), fill: '#33236e' }, c); }
+  for (let i = 0; i < 5; i++) el('path', { d: `M ${cx - w / 2 + 80 + i * w / 5} ${cy - 110 - rnd() * 50} q 40 -30 90 -4`, stroke: '#f3edff', 'stroke-width': 9, 'stroke-linecap': 'round', fill: 'none', opacity: .5 }, c);
+  return c; }
+function camera(p, x, y, s, led0, o = {}) { const g = G(p, x, y, { }); const b = el('g', { transform: `scale(${s})${o.flip ? ' scale(-1 1)' : ''}` }, g);
+  el('rect', { x: -6, y: 0, width: 12, height: 70, fill: '#2c2560' }, b);
+  el('rect', { x: -60, y: -40, width: 100, height: 54, rx: 12, fill: '#d9d4f2' }, b); el('path', { d: 'M 40 -30 L 70 -42 L 70 6 L 40 -6 Z', fill: '#b9b2e3' }, b);
+  el('circle', { cx: 52, cy: -18, r: 9, fill: '#2a2357' }, b);
+  const ledHalo = el('circle', { cx: -40, cy: -26, r: 34, fill: led0 === 'on' ? 'url(#greenHalo)' : 'none' }, b);
+  const led = el('circle', { cx: -40, cy: -26, r: 9, fill: led0 === 'on' ? C.green : '#3b3766' }, b); g._led = led; g._halo = ledHalo; return g; }
+const ledOn = (cam, t, col = C.green, halo = 'url(#greenHalo)') => { tl.set(cam._led, { attr: { fill: col } }, t); tl.set(cam._halo, { attr: { fill: halo } }, t); };
+function reactor(p, x, y, s, on = true) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  const halo = el('circle', { cx: 0, cy: -40, r: 280, fill: 'url(#coreHalo)', opacity: on ? 1 : 0 }, b);
+  el('path', { d: 'M -170 30 A 170 170 0 0 1 170 30 Z', fill: '#bfe9ff', 'fill-opacity': .12, stroke: '#d8f3ff', 'stroke-width': 7 }, b);
+  el('rect', { x: -200, y: 30, width: 400, height: 46, rx: 14, fill: '#2c2560' }, b);
+  const coreOff = el('circle', { cx: 0, cy: -40, r: 72, fill: 'url(#coreOff)' }, b);
+  const core = el('circle', { cx: 0, cy: -40, r: 72, fill: 'url(#core)', filter: 'url(#glow)', opacity: on ? 1 : 0 }, b);
+  const r1 = el('ellipse', { cx: 0, cy: -40, rx: 124, ry: 34, fill: 'none', stroke: '#ffe08a', 'stroke-width': 6, opacity: on ? .85 : .15 }, b);
+  const r2 = el('ellipse', { cx: 0, cy: -40, rx: 34, ry: 118, fill: 'none', stroke: '#ffd166', 'stroke-width': 5, opacity: on ? .65 : .1 }, b);
+  g._ignite = t => { tl.to([core, halo], { opacity: 1, duration: .6 }, t).to(r1, { opacity: .85, duration: .6 }, t).to(r2, { opacity: .65, duration: .6 }, t);
+    tl.fromTo(core, { attr: { r: 30 } }, { attr: { r: 72 }, duration: .7, ease: 'back.out(2)' }, t); sfx(t, 'impact'); };
+  g._spin = (t0, d) => { tl.to(r1, { rotation: 360 * Math.floor(d / 6), svgOrigin: '0 -40', duration: Math.floor(d / 6) * 6, ease: 'none' }, t0); tl.to(r2, { rotation: -360 * Math.floor(d / 4.5), svgOrigin: '0 -40', duration: Math.floor(d / 4.5) * 4.5, ease: 'none' }, t0); };
+  return g; }
+function bell(p, x, y, s = 1) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  el('circle', { cx: 0, cy: -10, r: 90, fill: 'url(#coreHalo)', opacity: .6 }, b);
+  el('path', { d: 'M -44 20 C -44 -40 -30 -62 0 -62 C 30 -62 44 -40 44 20 L 56 34 L -56 34 Z', fill: C.gold }, b);
+  el('circle', { cx: 0, cy: 42, r: 12, fill: '#c98a00' }, b); el('rect', { x: -8, y: -76, width: 16, height: 16, rx: 6, fill: '#c98a00' }, b); return g; }
+const ring = (b, t) => { tl.to(b, { rotation: 16, transformOrigin: '50% 0%', duration: .09, yoyo: true, repeat: 9, ease: 'sine.inOut' }, t); sfx(t, 'impact'); };
+function keyIcon(p, x, y, s, col) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  el('circle', { cx: -26, cy: 0, r: 22, fill: 'none', stroke: col, 'stroke-width': 11 }, b); el('rect', { x: -6, y: -6, width: 70, height: 12, rx: 5, fill: col }, b);
+  el('rect', { x: 46, y: 4, width: 9, height: 18, fill: col }, b); el('rect', { x: 30, y: 4, width: 9, height: 13, fill: col }, b); return g; }
+
+/* ================= far layer: stars, moon, distant banks across the whole world ================= */
+for (let i = 0; i < 900; i++) { const s = el('circle', { cx: -2500 + rnd() * 22000, cy: -2600 + rnd() * 3200, r: .8 + rnd() * 2.4, fill: '#f3ecff', opacity: .25 + rnd() * .6 }, far);
+  if (i < 120) tl.to(s, { opacity: .1, duration: .6 + (i % 5) * .2, repeat: 140, yoyo: true, ease: 'sine.inOut' }, (i % 9) * .17); }
+el('circle', { cx: 1150, cy: -520, r: 360, fill: 'url(#halo)' }, far); el('circle', { cx: 1150, cy: -520, r: 120, fill: 'url(#moonG)' }, far);
+for (let k = 0; k < 7; k++) bank(far, -1200 + k * 2900, 560 + (k % 2) * 80, 3400, 'url(#cloudFar)', 18, .5);
+
+/* ================= props shared by every zone ================= */
+const SANS = "Poppins,'DejaVu Sans',sans-serif";
+const txt = (p, x, y, s, o = {}) => { const t = el('text', { x, y, 'text-anchor': o.anchor || 'middle', 'font-family': o.mono ? MONO : SANS, 'font-weight': o.w || 700, 'font-size': o.size || 50, fill: o.fill || C.text, ...(o.attrs || {}) }, p); t.textContent = s; return t; };
+const isle = (x, y, w, h = 200) => { const g = G(main, x, y); cloudIsland(g, 0, 0, w, h); return g; };
+function pc(p, x, y, s = 1) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  el('rect', { x: -170, y: -8, width: 340, height: 22, rx: 8, fill: '#6a55b8' }, b); el('rect', { x: -150, y: 14, width: 18, height: 70, fill: '#4a3d8a' }, b); el('rect', { x: 132, y: 14, width: 18, height: 70, fill: '#4a3d8a' }, b);
+  el('rect', { x: -14, y: -52, width: 28, height: 46, fill: '#3b2f7a' }, b); el('rect', { x: -60, y: -14, width: 120, height: 10, rx: 4, fill: '#3b2f7a' }, b);
+  el('rect', { x: -130, y: -210, width: 260, height: 162, rx: 16, fill: '#1b1546', stroke: '#8f86ff', 'stroke-width': 8 }, b);
+  const scr = el('rect', { x: -116, y: -196, width: 232, height: 134, rx: 8, fill: '#22d3ee', opacity: .25 }, b);
+  el('rect', { x: 160, y: -120, width: 70, height: 112, rx: 10, fill: '#2c2560', stroke: '#6c63d9', 'stroke-width': 5 }, b); const led = el('circle', { cx: 195, cy: -92, r: 7, fill: C.green }, b);
+  g._scr = scr; g._led = led; return g; }
+function rack(p, x, y, s = 1) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  el('rect', { x: -80, y: -230, width: 160, height: 230, rx: 14, fill: '#2c2560', stroke: '#8f86ff', 'stroke-width': 6 }, b);
+  for (let i = 0; i < 4; i++) { el('rect', { x: -62, y: -212 + i * 52, width: 124, height: 38, rx: 6, fill: '#1b1546' }, b); const l = el('circle', { cx: 44, cy: -193 + i * 52, r: 7, fill: C.green }, b); tl.to(l, { opacity: .2, duration: .3 + i * .07, repeat: 300, yoyo: true }, i * .2); }
+  return g; }
+function laptop(p, x, y, s = 1) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  el('path', { d: 'M -130 0 L 130 0 L 150 18 L -150 18 Z', fill: '#6a55b8' }, b); el('rect', { x: -110, y: -150, width: 220, height: 145, rx: 12, fill: '#1b1546', stroke: '#8f86ff', 'stroke-width': 7 }, b);
+  el('rect', { x: -96, y: -136, width: 192, height: 118, rx: 6, fill: '#9d8cff', opacity: .3 }, b); return g; }
+function phone(p, x, y, s = 1) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  el('rect', { x: -48, y: -170, width: 96, height: 170, rx: 18, fill: '#1b1546', stroke: '#8f86ff', 'stroke-width': 7 }, b); el('rect', { x: -36, y: -150, width: 72, height: 124, rx: 8, fill: '#2ee6a0', opacity: .3 }, b); return g; }
+function ctlTower(p, x, y, s = 1, col = C.cyan) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  el('path', { d: 'M -70 0 L 70 0 L 40 -460 L -40 -460 Z', fill: 'url(#wall)' }, b); el('path', { d: 'M 40 -460 L 70 0 L 90 -20 L 56 -470 Z', fill: 'url(#wallSide)' }, b);
+  for (let i = 0; i < 4; i++) el('rect', { x: -14, y: -400 + i * 90, width: 28, height: 40, rx: 6, fill: '#ffd36b', opacity: .8 }, b);
+  el('rect', { x: -130, y: -600, width: 260, height: 140, rx: 30, fill: '#2c2560', stroke: col, 'stroke-width': 8 }, b);
+  el('rect', { x: -110, y: -580, width: 220, height: 70, rx: 18, fill: col, opacity: .35 }, b); el('rect', { x: -150, y: -470, width: 300, height: 18, rx: 9, fill: '#4a43a3' }, b);
+  const halo = el('circle', { cx: 0, cy: -650, r: 110, fill: col === C.rose ? 'url(#redHalo)' : 'url(#cyanHalo)', opacity: 0 }, b);
+  el('rect', { x: -6, y: -660, width: 12, height: 60, fill: '#b9b2e3' }, b); const bea = el('circle', { cx: 0, cy: -664, r: 16, fill: col }, b);
+  g._halo = halo; g._bea = bea; return g; }
+function brickWall(p, x, y, w, h) { const g = G(p, x, y); el('rect', { x: -w / 2, y: -h, width: w, height: h, rx: 10, fill: '#5b2a4a', stroke: '#ff7aa2', 'stroke-width': 6 }, g);
+  for (let r = 0; r < Math.floor(h / 60); r++) for (let c = 0; c < Math.ceil(w / 90) + 1; c++) { const bx = -w / 2 + c * 90 - (r % 2) * 45; if (bx < -w / 2 - 40 || bx > w / 2 - 50) continue;
+    el('rect', { x: Math.max(-w / 2 + 6, bx + 4), y: -h + 6 + r * 60, width: Math.min(82, w / 2 - 6 - Math.max(-w / 2 + 6, bx + 4)), height: 50, rx: 6, fill: '#7a3560', opacity: .9 }, g); }
+  return g; }
+function balloon(p, x, y, s = 1) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  el('path', { d: 'M 0 -330 C 170 -330 200 -150 120 -60 L 50 10 L -50 10 L -120 -60 C -200 -150 -170 -330 0 -330 Z', fill: C.violet }, b);
+  el('path', { d: 'M 0 -330 C 60 -320 70 -150 40 -60 L 20 10 L -20 10 L -40 -60 C -70 -150 -60 -320 0 -330 Z', fill: '#c4b8ff' }, b);
+  el('path', { d: 'M -46 10 L -40 70 M 46 10 L 40 70', stroke: '#c7c3e8', 'stroke-width': 5 }, b); el('rect', { x: -56, y: 66, width: 112, height: 70, rx: 12, fill: '#8a5a2b' }, b); return g; }
+function sealed(p, x, y, s = 1, col = C.amber) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  el('rect', { x: -34, y: -34, width: 68, height: 68, rx: 12, fill: col }, b); el('rect', { x: -12, y: -6, width: 24, height: 20, rx: 4, fill: '#120f33' }, b);
+  el('path', { d: 'M -8 -6 L -8 -16 A 8 8 0 0 1 8 -16 L 8 -6', stroke: '#120f33', 'stroke-width': 5, fill: 'none' }, b); return g; }
+function keyCard(p, x, y, s = 1, col = C.amber) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  el('rect', { x: -60, y: -40, width: 120, height: 80, rx: 12, fill: C.paper }, b); el('rect', { x: -60, y: -40, width: 120, height: 14, rx: 6, fill: col }, b);
+  keyIcon(b, 6, 8, .62, '#1a1440'); return g; }
+function scrollCard(p, x, y, s = 1) { const g = G(p, x, y); const b = el('g', { transform: `scale(${s})` }, g);
+  el('rect', { x: -50, y: -60, width: 100, height: 120, rx: 10, fill: C.paper }, b); for (let i = 0; i < 4; i++) el('rect', { x: -34, y: -40 + i * 24, width: i === 3 ? 40 : 68, height: 9, rx: 4, fill: C.violet }, b); return g; }
+function book(p, x, y, col) { const g = G(p, x, y);
+  el('path', { d: 'M -60 170 L 60 170 L 30 40 L -30 40 Z', fill: '#2c2560' }, g); el('rect', { x: -110, y: 160, width: 220, height: 24, rx: 10, fill: '#3b2f86' }, g);
+  el('path', { d: 'M -300 -170 L 0 -150 L 300 -170 L 300 70 L 0 90 L -300 70 Z', fill: '#2a1f5e' }, g);
+  el('path', { d: 'M -284 -160 L -6 -142 L -6 76 L -284 60 Z', fill: C.paper }, g); el('path', { d: 'M 6 -142 L 284 -160 L 284 60 L 6 76 Z', fill: '#e9e2d0' }, g);
+  el('rect', { x: -300, y: -178, width: 600, height: 14, rx: 7, fill: col }, g); g._lines = el('g', {}, g); return g; }
+const bookLine = (b, i, s, t, o = {}) => { const ln = txt(b._lines, o.x ?? -270, -105 + i * 52, s, { anchor: 'start', mono: true, size: o.size || 40, fill: o.fill || '#1a1440' }); tl.fromTo(ln, { opacity: 0 }, { opacity: 1, duration: .3, immediateRender: true }, t); sfx(t, 'tick'); return ln; };
+function terminal(p, x, y, w, rows) { const g = G(p, x, y); el('rect', { x: -w / 2 + 8, y: 10, width: w, height: rows * 62 + 70, rx: 18, fill: '#000', opacity: .35 }, g);
+  el('rect', { x: -w / 2, y: 0, width: w, height: rows * 62 + 70, rx: 18, fill: '#0d0a26', stroke: '#6c63d9', 'stroke-width': 6 }, g);
+  for (let i = 0; i < 3; i++) el('circle', { cx: -w / 2 + 34 + i * 30, cy: 26, r: 9, fill: ['#ff4d6d', C.amber, C.green][i] }, g); g._w = w; return g; }
+const termLine = (term, i, s, t, fill = '#e6e1ff', size = 42) => { const ln = txt(term, -term._w / 2 + 36, 96 + i * 62, s, { anchor: 'start', mono: true, size, fill, attrs: { style: 'white-space:pre' } }); tl.fromTo(ln, { opacity: 0 }, { opacity: 1, duration: .25, immediateRender: true }, t); sfx(t, 'tick'); return ln; };
+function rockAt(x, y, w = 380, col = '#7b64c2') { const g = G(main, x, y); el('path', { d: `M ${-w / 2} 0 L ${w / 2} 0 L ${w * .3} 130 L ${w * .08} 240 L ${-w * .18} 170 L ${-w * .4} 100 Z`, fill: 'url(#rock)' }, g);
+  el('path', { d: `M ${-w / 2} 0 L ${w / 2} 0 L ${w / 2 - 24} 24 L ${-w / 2 + 24} 24 Z`, fill: col }, g); return g; }
+const qmark = (p, x, y, size = 190, col = C.gold) => { const g = G(p, x, y); txt(g, 0, size * .35, '?', { size, w: 800, fill: col }); return g; };
+const bob = (g, amp, d, t0 = 0) => tl.to(g, { y: `-=${amp}`, duration: d, repeat: Math.ceil(200 / d), yoyo: true, ease: 'sine.inOut' }, t0);
+const tunnel = (d, col, w = 18) => { const g = el('g', {}, main); el('path', { d, stroke: '#0f0a24', 'stroke-width': w + 16, fill: 'none', 'stroke-linecap': 'round', opacity: .8 }, g);
+  const core = el('path', { d, stroke: col, 'stroke-width': w, fill: 'none', 'stroke-linecap': 'round', filter: 'url(#glow)' }, g); return { g, core, parts: [...g.children] }; };
+const drawIn = (tn, t, d = 1) => { for (const p of tn.parts) tl.from(p, { drawSVG: 0, duration: d, ease: 'power2.inOut' }, t); };
+const flowAlong = (id, n, t0, t1, col = C.amber, gap = .45, dur = 1.2) => { for (let i = 0; t0 + i * gap < t1; i++) { const d = el('circle', { r: 13, fill: col, filter: 'url(#glow)', opacity: 0 }, main); const a = t0 + i * gap;
+  tl.set(d, { opacity: 1 }, a).to(d, { motionPath: { path: id, align: id, alignOrigin: [.5, .5] }, duration: dur, ease: 'none' }, a).set(d, { opacity: 0 }, a + dur); } };
+const fly = (e, t, x, y, d = .9) => tl.to(e, { x, y, duration: d, ease: 'power2.inOut' }, t);
+
+/* ================= Z1 — the hacked workstation (s1, 0.6 → 22.7) ================= */
+const Z1x = 0; const Z1 = isle(Z1x, 330, 1400, 220); bob(Z1, 14, 2.4);
+const pc1 = pc(Z1, 0, -120, 1.5); tl.to(pc1._scr, { opacity: .55, duration: .5 }, .8);
+const mastRock = rockAt(Z1x + 1000, 300, 420, '#a0456e'); bob(mastRock, 16, 2.1);
+const mast = G(mastRock, 0, 0); const mb = el('g', {}, mast);
+el('path', { d: 'M -80 0 L 80 0 L 12 -620 L -12 -620 Z', fill: 'none', stroke: '#c7c3e8', 'stroke-width': 10 }, mb);
+for (let i = 0; i < 6; i++) { const y0 = -i * 100, y1 = -(i + 1) * 100, w0 = 80 - i * 11.3, w1 = 80 - (i + 1) * 11.3; el('path', { d: `M ${-w0} ${y0} L ${w1} ${y1} M ${w0} ${y0} L ${-w1} ${y1}`, stroke: '#9d8cff', 'stroke-width': 5 }, mb); }
+const mHalo = el('circle', { cx: 0, cy: -640, r: 130, fill: 'url(#redHalo)' }, mb); const mLed = el('circle', { cx: 0, cy: -640, r: 22, fill: C.rose }, mb);
+tl.to(mHalo, { opacity: .3, duration: .5, repeat: 5, yoyo: true }, 0);
+const c2Lab = plaque(mastRock, 0, -800, 'C2 · Havoc', { size: 54, col: C.rose }); pop(c2Lab, .9);
+tl.to(mast, { rotation: 78, svgOrigin: '0 0', duration: .9, ease: 'power3.in' }, T('c1', 'tombe') - .2); tl.to([mHalo, mLed], { opacity: 0, duration: .3 }, T('c1', 'tombe') + .4);
+tl.to(c2Lab, { opacity: 0, y: 40, duration: .5 }, T('c1', 'tombe') + .2); sfx(T('c1', 'tombe') + .6, 'impact');
+for (let i = 0; i < 6; i++) { const pf = el('circle', { cx: 300 + i * 60, cy: -10, r: 30 + i * 6, fill: '#c7c3e8', opacity: 0 }, mastRock); tl.fromTo(pf, { opacity: .6, scale: .3, transformOrigin: '50% 50%' }, { opacity: 0, scale: 1.8, y: -80, duration: 1.4, immediateRender: false }, T('c1', 'tombe') + .65 + i * .05); }
+const thiefRock1 = rockAt(Z1x - 1050, 300, 400); bob(thiefRock1, 18, 2.6); const thiefA1 = G(thiefRock1, 0, 0);
+const tn1 = tunnel(`M ${Z1x - 160} 150 C ${Z1x - 420} 320 ${Z1x - 760} 380 ${Z1x - 1000} 250`, '#ff7aa2', 14); tn1.core.id = 'tn1'; tn1.core.setAttribute('stroke-dasharray', '28 18');
+drawIn(tn1, T('c1', 'garde') - .2, 1.1); sfx(T('c1', 'garde'), 'whoosh'); flowAlong('#tn1', 0, T('c1', 'acces'), END('c3') - .5, '#ffb3c8', .7, 1.4);
+const days = plaque(main, Z1x - 520, -330, '1 jour', { size: 58, col: C.rose }); pop(days, T('c1', 'pendant') - .1);
+const dT = days.querySelector('text'); const dc = { v: 1 }; tl.to(dc, { v: 18, duration: T('c1', 'jours') - T('c1', 'pendant') + .3, ease: 'none', onUpdate: () => { const n = Math.round(dc.v); dT.textContent = n + (n > 1 ? ' jours' : ' jour'); } }, T('c1', 'pendant'));
+for (let k = 0; k < 8; k++) sfx(T('c1', 'pendant') + k * .12, 'tick'); hide(days, T('c2', 'son') + .2);
+const exe1 = plaque(Z1, 0, -560, 'tailscale.exe', { size: 58, col: C.cyan }); pop(exe1, T('c2', 'tailscale') - .15); tl.to(pc1._scr, { attr: { fill: C.rose }, duration: .3 }, T('c2', 'tailscale'));
+const qGear = G(main, Z1x - 420, -560); el('circle', { r: 80, fill: '#2c2560', stroke: C.violet, 'stroke-width': 8 }, qGear); txt(qGear, 0, 34, '?', { size: 100, w: 800, fill: C.gold });
+const qLoupe = G(main, Z1x + 420, -560); el('circle', { cx: -10, cy: -10, r: 62, fill: '#bfe9ff', 'fill-opacity': .2, stroke: C.text, 'stroke-width': 12 }, qLoupe); el('path', { d: 'M 34 34 L 80 80', stroke: '#c9925e', 'stroke-width': 18, 'stroke-linecap': 'round' }, qLoupe); txt(qLoupe, -10, 22, '?', { size: 84, w: 800, fill: C.gold });
+pop(qGear, T('c2', 'comment')); pop(qLoupe, T('c2', 'voir')); hide([qGear, qLoupe, exe1], T('c3', 'un') + .1);
+const cas = plaque(main, Z1x, -620, 'cas type · Cyble 2024 + Cato CTRL 2026', { size: 52, mono: false, col: C.violet }); pop(cas, T('c3', 'cas')); hide(cas, T('c3', 'question') - .2);
+const q1 = qmark(main, Z1x, -470, 220); pop(q1, T('c3', 'ou')); hide(q1, END('c3') - .1);
+
+/* ================= Z2 — the tailnet and its control tower (s2, 22.7 → 39.9) ================= */
+const Z2x = 3300;
+const isA = isle(Z2x - 950, 300, 640, 170), isB = isle(Z2x - 330, 430, 560, 160), isC = isle(Z2x + 520, 430, 560, 160), isD = isle(Z2x + 1080, 300, 520, 160);
+[isA, isB, isC, isD].forEach((g, i) => bob(g, 10 + i * 2, 2.2 + i * .3, i * .4));
+const mA = laptop(isA, 120, -80, 1.2), mB = rack(isB, 0, -80, 1.1), mC = pc(isC, 0, -110, 1.0), mD = phone(isD, 0, -80, 1.2);
+const machines = [[isA, 120, mA], [isB, 0, mB], [isC, 0, mC], [isD, 0, mD]];
+machines.forEach(([g, x, m], i) => pop(m, T('c4', 'machines') + i * .12));
+const towerRock = rockAt(Z2x + 100, 240, 360); const tower = ctlTower(towerRock, 0, 0, 1.0); pop(tower, T('c5', 'tour') - .2, .6);
+const tnRing = el('ellipse', { cx: Z2x + 60, cy: 220, rx: 1520, ry: 560, fill: 'none', stroke: C.cyan, 'stroke-width': 8, 'stroke-dasharray': '30 22', opacity: .8 }, main);
+tl.from(tnRing, { drawSVG: 0, duration: 1.2 }, T('c4', 'reseau')); sfx(T('c4', 'reseau'), 'whoosh');
+const tnLab = plaque(main, Z2x - 1150, -330, 'tailnet', { size: 64, mono: false, col: C.cyan }); pop(tnLab, T('c4', 'tailnet') - .1);
+const ipTags = machines.map(([g, x, m], i) => { const tg = plaque(g, x, -470, '100.x.y.z', { size: 46, col: C.cyan }); pop(tg, T('c4', 'adresse') + i * .15); hide(tg, T('c5', 'tour') - .5); return tg; });
+const coordLab = plaque(towerRock, 0, -840, 'serveur de coordination', { size: 60, mono: false, col: C.cyan }); pop(coordLab, T('c5', 'serveur'));
+tl.to(tower._halo, { opacity: 1, duration: .4 }, T('c5', 'tour')); tl.to(tower._halo, { opacity: .4, duration: .6, repeat: 30, yoyo: true }, T('c5', 'tour') + .5);
+const cab = [Z2x + 100, -360];
+machines.forEach(([g, x, m], i) => { const gx = +g.getAttribute('transform').match(/translate\(([-\d.]+)/)[1] + x, gy = +g.getAttribute('transform').match(/ ([-\d.]+)\)/)[1] - 300;
+  const k = keyCard(main, cab[0], cab[1], .9, C.amber); tl.set(k, { opacity: 0 }, 0); tl.set(k, { opacity: 1 }, T('c5', 'distribue') + i * .18); fly(k, T('c5', 'distribue') + i * .18, gx, gy, .8); tl.to(k, { opacity: 0, duration: .3 }, END('c5') - .4); sfx(T('c5', 'distribue') + i * .18, 'pop');
+  const sc = scrollCard(main, cab[0], cab[1], .8); tl.set(sc, { opacity: 0 }, 0); tl.set(sc, { opacity: 1 }, T('c5', 'regles') + i * .15); fly(sc, T('c5', 'regles') + i * .15, gx + 110, gy + 10, .8); tl.to(sc, { opacity: 0, duration: .3 }, END('c5') - .4); });
+const keyLab = plaque(towerRock, -560, -600, 'clés publiques', { size: 64, mono: false, col: C.amber }), aclLab = plaque(towerRock, 560, -600, 'règles d’accès', { size: 64, mono: false, col: C.violet });
+pop(keyLab, T('c5', 'cles')); pop(aclLab, T('c5', 'regles')); hide([keyLab, aclLab], T('c5', 'mais') - .2);
+const direct = tunnel(`M ${Z2x - 830} 200 C ${Z2x - 300} 520 ${Z2x + 500} 520 ${Z2x + 1080} 210`, C.green, 12); direct.core.id = 'dir2'; drawIn(direct, T('c5', 'trafic') - .2, .9);
+flowAlong('#dir2', 0, T('c5', 'trafic'), END('c5'), C.green, .35, 1.0);
+const ghost = el('path', { d: `M ${Z2x - 830} 200 Q ${Z2x - 300} -500 ${cab[0]} ${cab[1] + 40} Q ${Z2x + 600} -500 ${Z2x + 1080} 210`, stroke: C.text, 'stroke-width': 7, 'stroke-dasharray': '12 16', fill: 'none', opacity: 0 }, main);
+tl.to(ghost, { opacity: .6, duration: .3 }, T('c5', 'jamais') - .3); const xMark = G(main, Z2x - 380, -150); el('path', { d: 'M -50 -50 L 50 50 M 50 -50 L -50 50', stroke: C.rose, 'stroke-width': 18, 'stroke-linecap': 'round' }, xMark);
+pop(xMark, T('c5', 'jamais') + .1); sfx(T('c5', 'jamais') + .1, 'myth'); hide([ghost, xMark], END('c5') - .2);
+const heroB1 = G(isA, -150, -70);
+
+/* ================= Z3 — direct or relayed (s3, 39.9 → 64.3) ================= */
+const Z3x = 6600;
+const isL = isle(Z3x - 760, 330, 820, 200), isR = isle(Z3x + 760, 330, 820, 200); bob(isL, 12, 2.3); bob(isR, 12, 2.6, .5);
+const pcL = pc(isL, 40, -110, 1.2), rkR = rack(isR, 0, -90, 1.2);
+const wg = tunnel(`M ${Z3x - 560} 120 C ${Z3x - 200} -120 ${Z3x + 200} -120 ${Z3x + 620} 120`, C.green, 16); wg.core.id = 'wg3'; drawIn(wg, T('c7', 'entre') - .1, 1.0); sfx(T('c7', 'entre'), 'whoosh');
+for (let i = 0; i < 9; i++) { const bx = sealed(main, 0, 0, .7, C.green); tl.set(bx, { opacity: 0 }, 0); const a = T('c7', 'trafic') + i * .55; if (a > T('c8', 'sinon') - .6) break;
+  tl.set(bx, { opacity: 1 }, a).to(bx, { motionPath: { path: '#wg3', align: '#wg3', alignOrigin: [.5, .5] }, duration: 1.3, ease: 'none' }, a).set(bx, { opacity: 0 }, a + 1.3); }
+const wgLab = plaque(main, Z3x, -330, 'WireGuard · UDP direct', { size: 54, col: C.green }); pop(wgLab, T('c7', 'wireguard') - .1); hide(wgLab, T('c8', 'sinon'));
+const wall = brickWall(main, Z3x, 330, 220, 640); tl.fromTo(wall, { y: 1500 }, { y: 330, duration: .7, ease: 'back.out(1.4)', immediateRender: true }, T('c8', 'sinon') - .1); sfx(T('c8', 'sinon') + .2, 'impact');
+tl.to(wg.g, { opacity: .12, duration: .3 }, T('c8', 'sinon') + .2);
+const bal = balloon(main, Z3x, -480, 1.0); tl.fromTo(bal, { y: -1300 }, { y: -480, duration: 1.0, ease: 'power2.out', immediateRender: true }, T('c8', 'relais') - .3); sfx(T('c8', 'relais'), 'whoosh'); bob(bal, 20, 1.8, T('c8', 'relais') + .8);
+const derpLab = plaque(main, Z3x + 430, -720, 'relais DERP', { size: 56, col: C.violet }); pop(derpLab, T('c8', 'derp'));
+const box3 = sealed(main, Z3x - 560, 60, 1.0, C.amber); tl.set(box3, { opacity: 0 }, 0); tl.set(box3, { opacity: 1 }, T('c8', 'transporte') - .2);
+tl.to(box3, { x: Z3x, y: -400, duration: .9, ease: 'power2.inOut' }, T('c8', 'transporte') - .2).to(box3, { x: Z3x + 560, y: 60, duration: .9, ease: 'power2.inOut' }, T('c8', 'sans') + .3).to(box3, { opacity: 0, duration: .2 }, T('c8', 'sans') + 1.3);
+const noEye = G(main, Z3x - 250, -250, { opacity: 0 }); el('ellipse', { rx: 56, ry: 34, fill: '#fff', stroke: '#1a1440', 'stroke-width': 6 }, noEye); el('circle', { r: 16, fill: '#1a1440' }, noEye); el('path', { d: 'M -60 40 L 60 -40', stroke: C.rose, 'stroke-width': 12, 'stroke-linecap': 'round' }, noEye);
+pop(noEye, T('c8', 'ouvrir') - .2); hide([noEye, derpLab], END('c8') - .1);
+const portSign = G(main, Z3x, -60); el('rect', { x: -230, y: -80, width: 460, height: 150, rx: 18, fill: C.ink, stroke: C.gold, 'stroke-width': 7 }, portSign);
+txt(portSign, 0, -20, 'ports à ouvrir', { size: 44 }); const portV = txt(portSign, 0, 50, '?', { size: 70, w: 800, fill: C.gold, mono: true }), portZ = txt(portSign, 0, 50, '0', { size: 70, w: 800, fill: C.green, mono: true, attrs: { opacity: 0 } });
+pop(portSign, T('c9', 'combien') - .1); tl.set(portV, { opacity: 0 }, REV('c9')); tl.set(portZ, { opacity: 1 }, REV('c9')); bump(portSign, REV('c9')); sfx(REV('c9'), 'reveal');
+const outL = el('path', { d: `M ${Z3x - 640} -40 C ${Z3x - 640} -500 ${Z3x - 900} -700 ${Z3x - 1100} -760`, stroke: C.cyan, 'stroke-width': 12, fill: 'none', 'stroke-linecap': 'round' }, main);
+const outR = el('path', { d: `M ${Z3x + 760} -60 C ${Z3x + 760} -500 ${Z3x + 1000} -700 ${Z3x + 1200} -760`, stroke: C.cyan, 'stroke-width': 12, fill: 'none', 'stroke-linecap': 'round' }, main);
+for (const [pth, x] of [[outL, Z3x - 1100], [outR, Z3x + 1200]]) { tl.from(pth, { drawSVG: 0, duration: .7 }, T('c9', 'appelle') - .2); const tip = el('circle', { cx: x, cy: -760, r: 20, fill: C.cyan, filter: 'url(#glow)' }, main); pop(tip, T('c9', 'appelle') + .4, .3); }
+const p443 = plaque(main, Z3x - 1000, -560, 'TCP 443 sortant', { size: 62, col: C.cyan }), pUdp = plaque(main, Z3x + 1100, -560, 'UDP 41641', { size: 62, col: C.cyan });
+pop(p443, T('c9', 'exterieur') - .2); pop(pUdp, T('c9', 'exterieur'));
+const thiefRock2 = rockAt(Z3x + 1500, 300, 360); bob(thiefRock2, 14, 2.2); const thiefA2 = G(thiefRock2, 0, 0);
+
+/* ================= Z4 — the workstation joins the attacker's tailnet (s4, 64.3 → 84.4) ================= */
+const Z4x = 9900;
+const isV = isle(Z4x - 600, 330, 1100, 220); bob(isV, 12, 2.4); const pc4 = pc(isV, 0, -120, 1.5); tl.to(pc4._scr, { attr: { fill: C.rose }, duration: .01 }, 0); tl.set(pc4._scr, { opacity: .5 }, 0);
+const chips = [['+ compte admin local', 'compte'], ['Tailscale (Chocolatey)', 'installe'], ['OpenSSH Server', 'openssh']].map(([s, w], i) => {
+  const c = plaque(main, Z4x - 1180, -480 + i * 130, s, { size: 46, mono: false, col: i === 0 ? C.gold : C.cyan }); pop(c, T('c10', w) - .1); hide(c, END('c10') - .2); return c; });
+const scriptT = G(main, Z4x - 420, -400); const sc4 = ticket(scriptT, 0, 0, ['script PowerShell'], { size: 44, col: C.rose }); pop(scriptT, T('c10', 'script') - .15); hide(scriptT, END('c10') - .2);
+const upT = ticket(main, Z4x - 560, -470, ['tailscale up', '  --auth-key=tskey-…'], { size: 50, col: C.amber }); tl.fromTo(upT, { opacity: 0, y: -400 }, { opacity: 1, y: -470, duration: .7, ease: 'power2.out', immediateRender: true }, T('c11', 'connecte') - .1); sfx(T('c11', 'connecte'), 'pop');
+const hard = plaque(main, Z4x - 260, -280, 'écrite en dur', { size: 44, mono: false, col: C.rose }); pop(hard, T('c11', 'ecrite')); hide([upT, hard], END('c12') - .2);
+const key4 = keyIcon(main, Z4x - 560, -200, 1.4, C.amber); tl.set(key4, { opacity: 0 }, 0); tl.set(key4, { opacity: 1 }, T('c11', 'cle')); fly(key4, T('c11', 'cle'), Z4x - 600, 0, .7); tl.to(key4, { opacity: 0, duration: .2 }, T('c11', 'cle') + .8);
+const redIs = isle(Z4x + 1000, 300, 760, 180); bob(redIs, 12, 2.5, .3);
+const redRing = el('ellipse', { cx: Z4x + 1000, cy: 230, rx: 520, ry: 300, fill: 'none', stroke: C.rose, 'stroke-width': 8, 'stroke-dasharray': '26 20' }, main); tl.from(redRing, { drawSVG: 0, duration: .9 }, T('c11', 'rejoint') - .3);
+const redLab = plaque(main, Z4x + 1000, -380, 'tailnet de l’attaquant', { size: 52, mono: false, col: C.rose }); pop(redLab, T('c11', 'tailnet'));
+const rack4 = rack(redIs, 180, -70, .9); pop(rack4, T('c11', 'rejoint'));
+const tn4 = tunnel(`M ${Z4x - 420} 40 C ${Z4x - 100} -360 ${Z4x + 500} -360 ${Z4x + 820} 100`, '#ff7aa2', 14); tn4.core.id = 'tn4'; drawIn(tn4, T('c11', 'rejoint') - .1, 1.0); sfx(T('c11', 'rejoint'), 'whoosh');
+flowAlong('#tn4', 0, T('c11', 'rejoint') + .9, END('c12'), '#ffb3c8', .5, 1.2);
+const fw4 = brickWall(main, Z4x + 230, 330, 160, 420); pop(fw4, T('c12', 'aucun') - .2); const lock4 = G(main, Z4x + 230, -160); el('rect', { x: -50, y: -20, width: 100, height: 84, rx: 14, fill: C.green }, lock4); el('path', { d: 'M -32 -20 L -32 -50 A 32 32 0 0 1 32 -50 L 32 -20', stroke: C.green, 'stroke-width': 14, fill: 'none' }, lock4);
+pop(lock4, T('c12', 'port')); const callTag = plaque(main, Z4x + 230, -620, 'connexion sortante', { size: 46, mono: false, col: '#ff7aa2' }); pop(callTag, T('c12', 'appelle') - .2); hide([callTag], END('c12'));
+const thiefA3 = G(redIs, -120, -70);
+
+/* ================= Z5 — three logs (s5, 84.4 → 132.6) ================= */
+const Z5x = 13200;
+const lib = isle(Z5x, 360, 2700, 220); bob(lib, 8, 3.0);
+const bAud = book(main, Z5x - 860, 60, C.green), bFlow = book(main, Z5x, 60, C.cyan), bCli = book(main, Z5x + 860, 60, C.amber);
+[bAud, bFlow, bCli].forEach((b, i) => pop(b, T('c14', 'trois') + i * .2, .6));
+const tAud = txt(main, Z5x - 860, -260, 'journal d’audit', { size: 56, fill: C.green }), tFlow = txt(main, Z5x, -260, 'flow logs', { size: 56, fill: C.cyan }), tCli = txt(main, Z5x + 860, -260, 'journaux du client', { size: 56, fill: C.amber });
+show(tAud, T('c14', 'journal')); show(tFlow, T('c15', 'flow') - .1); show(tCli, T('c16', 'client') - .2);
+bookLine(bAud, 0, 'Create node', T('c14', 'qui')); bookLine(bAud, 1, 'Log in node', T('c14', 'change')); bookLine(bAud, 2, 'Update policy file', T('c14', 'quand'));
+const audBadge = plaque(main, Z5x - 860, 330, 'toujours actif · 90 j', { size: 46, mono: false, col: C.green }); pop(audBadge, T('c14', 'toujours'));
+const fl1 = bookLine(bFlow, 0, 'virtualTraffic', T('c15', 'qui')), fl2 = bookLine(bFlow, 1, 'src → dst', T('c15', 'parle')), fl3 = bookLine(bFlow, 2, 'txBytes rxBytes', T('c15', 'parle') + .4);
+const win5 = plaque(main, Z5x + 230, -150, '5 s', { size: 50, col: C.cyan }); pop(win5, T('c15', 'fenetres')); hide(win5, T('c15', 'eteints') - .2);
+const sw = G(main, Z5x - 200, -150); el('rect', { x: -70, y: -34, width: 140, height: 68, rx: 34, fill: '#3b3766' }, sw); const knob = el('circle', { cx: -34, cy: 0, r: 26, fill: '#9a96c4' }, sw);
+pop(sw, T('c15', 'eteints') - .1); tl.to([fl1, fl2, fl3], { opacity: .3, duration: .3 }, T('c15', 'eteints'));
+const flBadge = plaque(main, Z5x, 330, 'désactivés par défaut · Premium, Enterprise', { size: 42, mono: false, col: C.cyan }); pop(flBadge, T('c15', 'defaut') - .1);
+bookLine(bCli, 0, 'C:\\ProgramData\\', T('c16', 'client'), { size: 36 }); bookLine(bCli, 1, '   Tailscale', T('c16', 'client') + .2, { size: 36 }); bookLine(bCli, 2, 'journalctl -u', T('c16', 'machine'), { size: 36 }); bookLine(bCli, 3, '   tailscaled', T('c16', 'machine') + .2, { size: 36 });
+const cliBadge = plaque(main, Z5x + 860, 330, 'sur la machine', { size: 46, mono: false, col: C.amber }); pop(cliBadge, T('c16', 'machine') + .3);
+hide([audBadge, flBadge, cliBadge], CUE.c17.start + .1);
+const consoleBox = el('rect', { x: Z5x - 1200, y: -360, width: 1530, height: 610, rx: 40, fill: 'none', stroke: C.text, 'stroke-width': 7, 'stroke-dasharray': '22 16', opacity: 0 }, main);
+const consoleLab = plaque(main, Z5x - 430, -440, 'votre console Tailscale', { size: 52, mono: false, col: C.text }); show(consoleBox, T('c17', 'console') - .1); pop(consoleLab, T('c17', 'console'));
+const q5 = qmark(main, Z5x - 430, -230, 230); pop(q5, T('c17', 'journal')); hide(q5, REV('c17'));
+const redRock5 = rockAt(Z5x + 1750, 300, 600, '#a0456e'); const bRed = book(redRock5, 0, -260, C.rose); const tRed = txt(redRock5, 0, -580, 'audit de son tailnet', { size: 52, fill: C.rose });
+tl.set([redRock5], { opacity: 0 }, 0); show(redRock5, T('c17', 'attaquant') - .4, .5);
+for (const b of [bAud, bFlow]) { const st = G(b, 0, -40); el('rect', { x: -170, y: -60, width: 340, height: 110, rx: 16, fill: 'none', stroke: C.rose, 'stroke-width': 10, transform: 'rotate(-8)' }, st); txt(st, 0, 22, 'rien', { size: 64, w: 800, fill: C.rose, attrs: { transform: 'rotate(-8)' } }); pop(st, REV('c17') + (b === bFlow ? .15 : 0)); hide(st, END('c17') - .2); }
+sfx(REV('c17'), 'reveal'); sfx(REV('c17') + .3, 'myth');
+bookLine(bRed, 0, 'Create node', T('c17', 'son') - .2); bookLine(bRed, 1, 'Log in node', T('c17', 'son') + .1); tl.to(consoleLab, { opacity: 0, duration: .3 }, T('c17', 'son')); tl.to(consoleBox, { opacity: 0, duration: .3 }, T('c17', 'son'));
+const glowCli = el('rect', { x: Z5x + 540, y: -190, width: 640, height: 300, rx: 30, fill: C.amber, opacity: 0, filter: 'url(#soft)' }, main); main.insertBefore(glowCli, bCli);
+tl.to(glowCli, { opacity: .45, duration: .5 }, T('c17', 'seul')); tl.to(glowCli, { opacity: 0, duration: .4 }, END('c17'));
+const deny = el('path', { d: `M ${Z5x - 600} -560 L ${Z5x - 150} -560`, stroke: C.rose, 'stroke-width': 14, 'stroke-linecap': 'round' }, main); const bar = el('rect', { x: Z5x - 140, y: -640, width: 30, height: 160, rx: 10, fill: C.rose }, main);
+const okA = el('path', { d: `M ${Z5x + 160} -560 C ${Z5x + 300} -560 ${Z5x + 200} -300 ${Z5x + 120} -130`, stroke: C.green, 'stroke-width': 14, fill: 'none', 'stroke-linecap': 'round' }, main);
+tl.set([deny, bar, okA], { opacity: 0 }, 0); show(deny, T('c18', 'tentatives') - .2, .2); tl.from(deny, { drawSVG: 0, duration: .5 }, T('c18', 'tentatives') - .2); show(bar, T('c18', 'refusees') - .3, .2);
+const denyLab = plaque(main, Z5x - 400, -700, 'refusée : non journalisée', { size: 44, mono: false, col: C.rose }); pop(denyLab, T('c18', 'refusees')); sfx(T('c18', 'refusees'), 'myth');
+show(okA, T('c18', 'connexions') - .2, .2); tl.from(okA, { drawSVG: 0, duration: .5 }, T('c18', 'connexions') - .2); tl.to([fl1, fl2, fl3], { opacity: 1, duration: .3 }, T('c18', 'reussies'));
+const noContent = plaque(main, Z5x + 520, -700, 'contenu : jamais', { size: 44, mono: false, col: C.text }); pop(noContent, T('c18', 'contenu') - .1);
+hide([deny, bar, okA, denyLab, noContent], END('c18') - .1);
+const heroB2 = G(main, Z5x - 1330, 300);
+
+/* ================= Z6 — searching the workstation (s6, 132.6 → 156.1) ================= */
+const Z6x = 17300;
+const isW = isle(Z6x - 700, 330, 1200, 220); bob(isW, 10, 2.4); const pc6 = pc(isW, 120, -120, 1.6); tl.set(pc6._scr, { opacity: .5 }, 0); tl.set(pc6._scr, { attr: { fill: C.rose } }, 0);
+const term = terminal(main, Z6x + 380, -620, 1080, 5); pop(term, T('c19', 'cherche') - .2, .5);
+termLine(term, 0, 'tailscale.exe        (aucun VPN prévu)', T('c19', 'tailscale'), '#ff9fb8');
+termLine(term, 1, '→ controlplane.tailscale.com:443', T('c19', 'coordination') - .3, C.cyan);
+const t20 = [termLine(term, 2, '> tailscale status --json', T('c20', 'commande'), C.green), termLine(term, 3, '"CurrentTailnet": { "Name": "…" }', T('c20', 'nom'), '#e6e1ff')];
+const notYours = plaque(main, Z6x + 380, -165, '≠ votre tailnet', { size: 52, mono: false, col: C.rose }); pop(notYours, T('c20', 'si')); sfx(T('c20', 'incident'), 'impact');
+const siren6 = G(isW, 120, -520, { opacity: 0 }); el('circle', { r: 130, fill: 'url(#redHalo)' }, siren6); el('rect', { x: -22, y: -26, width: 44, height: 36, rx: 10, fill: C.rose }, siren6);
+tl.to(siren6, { opacity: 1, duration: .2 }, T('c20', 'incident')).to(siren6, { opacity: .3, duration: .3, repeat: 5, yoyo: true }, T('c20', 'incident') + .2);
+hide([term, notYours, siren6], END('c20') - .1);
+const heroB3 = G(isW, -340, -70);
+// your own tailnet: a stolen reusable key makes a new node appear
+const isY = isle(Z6x + 1700, 330, 1300, 220); bob(isY, 10, 2.6);
+const yRing = el('ellipse', { cx: Z6x + 1700, cy: 240, rx: 760, ry: 330, fill: 'none', stroke: C.cyan, 'stroke-width': 8, 'stroke-dasharray': '30 22' }, main); tl.set(yRing, { opacity: 0 }, 0); show(yRing, T('c21', 'propre') - .2);
+const yLab = plaque(main, Z6x + 1700, -420, 'votre tailnet', { size: 54, mono: false, col: C.cyan }); pop(yLab, T('c21', 'tailnet'));
+const yRack = rack(isY, 330, -70, .95); pop(yRack, T('c21', 'propre'));
+const reuse = G(main, Z6x + 1000, -150); keyCard(reuse, 0, 0, 1.4, C.rose); const reuseLab = plaque(main, Z6x + 1000, -330, 'clé réutilisable', { size: 46, mono: false, col: C.rose });
+pop(reuse, T('c21', 'cle') - .1); pop(reuseLab, T('c21', 'reutilisable')); fly(reuse, T('c21', 'volee') + .1, Z6x + 1500, 110, .8);
+const newNode = laptop(isY, -80, -70, 1.1); pop(newNode, T('c21', 'noeud') - .1);
+const audT = ticket(main, Z6x + 2350, -330, ['Create node', 'Log in node'], { size: 46, col: C.green }); tl.set(audT, { opacity: 0 }, 0); show(audT, T('c21', 'audit'));
+tl.fromTo(audT.querySelectorAll('text')[1], { opacity: 0 }, { opacity: 1, duration: .3, immediateRender: true }, T('c21', 'connecte') - .1); sfx(T('c21', 'connecte'), 'tick');
+hide([reuse, reuseLab], END('c21') - .2);
+const thiefA4 = G(main, Z6x + 760, 300); const thiefRock4 = rockAt(Z6x + 760, 300, 320); main.insertBefore(thiefRock4, thiefA4);
+
+/* ================= Z7 — recap on the same workstation (s7, 156.1 → 191.6) ================= */
+const Z7x = 23000;
+const isR7 = isle(Z7x, 330, 1500, 220); bob(isR7, 12, 2.4); const pc7 = pc(isR7, 0, -120, 1.5); tl.set(pc7._scr, { attr: { fill: C.rose }, opacity: .5 }, 0);
+const thiefRock7 = rockAt(Z7x - 920, 300, 380); const thiefA5 = G(thiefRock7, 0, 0);
+const tn7 = tunnel(`M ${Z7x - 160} 150 C ${Z7x - 380} 320 ${Z7x - 640} 380 ${Z7x - 870} 250`, '#ff7aa2', 14); tn7.core.id = 'tn7'; tn7.core.setAttribute('stroke-dasharray', '28 18');
+flowAlong('#tn7', 0, CUE.c22.start, T('c23', 'obligatoire'), '#ffb3c8', .7, 1.4);
+const bell7 = bell(main, Z7x - 420, -470, 1.0); pop(bell7, T('c22', 'alertez') - .2); ring(bell7, T('c22', 'alertez') + .2);
+const lock7 = G(main, Z7x, -520); el('rect', { x: -60, y: -24, width: 120, height: 100, rx: 16, fill: C.green }, lock7); el('path', { d: 'M -38 -24 L -38 -60 A 38 38 0 0 1 38 -60 L 38 -24', stroke: C.green, 'stroke-width': 16, fill: 'none' }, lock7); pop(lock7, T('c23', 'imposez') - .1);
+tl.to(tn7.g, { opacity: 0, duration: .4 }, T('c23', 'obligatoire') + .1); sfx(T('c23', 'obligatoire') + .1, 'impact');
+tl.to(thiefRock7, { x: '-=900', y: '+=200', opacity: 0, duration: 1.6, ease: 'power2.in' }, T('c23', 'obligatoire') + .3);
+tl.to(pc7._scr, { attr: { fill: C.cyan }, duration: .4 }, T('c23', 'obligatoire') + .3);
+const b7w = G(main, Z7x + 480, -400); book(el('g', { transform: 'scale(.55)' }, b7w), 0, 0, C.green); pop(b7w, T('c24', 'activez') - .1);
+const sw7 = G(main, Z7x + 480, -600); el('rect', { x: -70, y: -34, width: 140, height: 68, rx: 34, fill: '#3b3766' }, sw7); const knob7 = el('circle', { cx: -34, cy: 0, r: 26, fill: '#9a96c4' }, sw7);
+pop(sw7, T('c24', 'activez') - .1); tl.to(knob7, { attr: { cx: 34, fill: C.green }, duration: .3 }, T('c24', 'flow')); sfx(T('c24', 'flow'), 'pop');
+const rules = [['1 · EDR : tailscale.exe · OpenSSH Server', 'c22', 'alertez', C.gold], ['2 · politique Tailnet = required:T…CNTRL', 'c23', 'politique', C.green], ['3 · flow logs ON · audit → SIEM · clés à usage unique', 'c24', 'activez', C.cyan]];
+rules.forEach(([s, cid, w, col]) => { const pl = plaque(main, Z7x, 430, s, { size: 46, col }); pop(pl, T(cid, w) + .1); hide(pl, END(cid) - .15); });
+const bull = plaque(main, Z7x + 60, 430, 'Tailscale Security Bulletins', { size: 50, mono: false, col: C.violet }); pop(bull, T('c25', 'failles')); hide(bull, T('c25', 'vous') - .1);
+const done = plaque(main, Z7x, 430, 'où chercher : le poste, puis votre console', { size: 50, mono: false, col: C.gold }); pop(done, T('c25', 'chercher') - .2);
+const heroB4 = G(isR7, -430, -70);
+
+/* ================= fore layer: dark wisps and dust over the whole journey ================= */
+for (let k = 0; k < 14; k++) { bank(fore, -1300 + k * 2700, 1080 + (k % 2) * 160, 1500, '#120b2a', 9, .95); }
+for (let i = 0; i < 120; i++) { const d = el('circle', { cx: -2000 + rnd() * 34000, cy: -2400 + rnd() * 3000, r: 1.5 + rnd() * 3, fill: '#e6dcff', opacity: .25 }, fore);
+  tl.to(d, { y: -60 - rnd() * 80, duration: 192, ease: 'none' }, 0); }
+
+/* ================= camera: one continuous move through the world, parallax per layer ================= */
+const cam = { x: 120, y: 120, s: .5 }; const layers = [[far, .35], [mid, .8], [main, 1], [fore, 1.35]];
+const applyCam = () => { for (const [g, f] of layers) g.setAttribute('transform', `translate(960 540) scale(${cam.s.toFixed(4)}) translate(${(-cam.x * f).toFixed(2)} ${(-cam.y * f).toFixed(2)})`); };
+/* x,y are main-layer coordinates; mid (island Z1) has factor .8, so a mid-layer target at X maps to X/.8 */
+const CAMK = []; const camTo = (t, d, x, y, s, ease = 'power2.inOut') => CAMK.push({ t, d, x, y, s, ease });
+// s1 — the hacked workstation
+cam.x = 0; cam.y = -100; cam.s = .62;
+camTo(T('c1', 'tombe') - .6, .7, 760, -180, .85); camTo(T('c1', 'pendant') - .3, 1.2, -480, -80, .8);
+camTo(T('c2', 'logiciel') - .3, 1.0, 0, -60, 1.05); camTo(T('c2', 'comment') - .3, 1.0, 0, -220, .72);
+camTo(T('c3', 'cas') - .3, .9, 0, -260, .8);
+// s2 — the tailnet and its tower
+camTo(END('c3') - .4, 1.6, Z2x, -80, .55); camTo(T('c4', 'chacune') - .3, .9, Z2x - 850, -60, 1.0);
+camTo(T('c5', 'tour') - .4, 1.0, Z2x + 100, -330, .9); camTo(T('c5', 'distribue') - .3, 1.0, Z2x + 60, -120, .58); camTo(T('c5', 'mais') - .3, .9, Z2x, 0, .62);
+// s3 — direct or relayed
+camTo(END('c5') - .4, 1.6, Z3x, -80, .62); camTo(T('c7', 'chiffre') - .3, 1.0, Z3x, -120, .8);
+camTo(T('c8', 'relais') - .4, 1.0, Z3x, -400, .85); camTo(T('c8', 'transporte') - .2, 1.2, Z3x, -220, .7);
+camTo(T('c9', 'devinez') - .3, 1.0, Z3x, -100, .9); camTo(REV('c9') + .6, 1.2, Z3x + 100, -330, .58);
+// s4 — the workstation joins the attacker
+camTo(END('c9') - .4, 1.6, Z4x - 750, -150, .8); camTo(T('c11', 'connecte') - .3, .9, Z4x - 500, -260, 1.0);
+camTo(T('c11', 'rejoint') - .4, 1.2, Z4x + 200, -120, .62); camTo(CUE.c12.start, 1.0, Z4x + 600, -60, .8);
+// s5 — three logs
+camTo(END('c12') - .4, 1.6, Z5x, -80, .6); camTo(T('c14', 'journal') - .4, 1.0, Z5x - 700, -40, .95);
+camTo(T('c15', 'flow') - .4, 1.0, Z5x, -40, .95); camTo(CUE.c16.start, 1.0, Z5x + 860, -40, .95);
+camTo(T('c17', 'devinez') - .3, 1.0, Z5x - 300, -150, .62); camTo(T('c17', 'son') - .5, 1.0, Z5x + 1300, -200, .7); camTo(T('c17', 'seul') - .3, .9, Z5x + 860, -40, .95);
+camTo(CUE.c18.start, 1.0, Z5x, -260, .78);
+// s6 — searching the workstation
+camTo(END('c18') - .4, 1.6, Z6x + 100, -200, .7); camTo(T('c20', 'commande') - .3, .9, Z6x + 380, -420, .95); camTo(T('c20', 'incident') - .3, .8, Z6x - 100, -200, .72);
+camTo(CUE.c21.start, 1.4, Z6x + 1450, -100, .68);
+// s7 — recap on the same workstation
+camTo(END('c21') - .4, 1.8, Z7x - 150, 0, .8); camTo(T('c23', 'imposez') - .3, .9, Z7x, 0, .82); camTo(T('c23', 'obligatoire'), 1.2, Z7x - 300, -20, .7);
+camTo(T('c24', 'activez') - .3, .9, Z7x + 150, 0, .8); camTo(T('c25', 'simplification') - .2, 1.6, Z7x, -60, .66);
+
+/* moves never overlap: a move that would still run when the next starts is shortened, else the older tween overwrites the newer one at its end */
+CAMK.sort((p, q) => p.t - q.t).forEach((k, i) => { const nx = CAMK[i + 1], d = nx ? Math.min(k.d, nx.t - k.t - .02) : k.d;
+  tl.to(cam, { x: k.x, y: k.y, s: k.s, duration: Math.max(.3, d), ease: k.ease, onUpdate: applyCam }, k.t); if (d >= 1) sfx(k.t, 'whoosh'); });
+tl.to({}, { duration: 192 }, 0); applyCam();
+
+/* ================= characters (Rive): anchors in the world + acting over time ================= */
+const ss = (a, t, d = .35) => { const k = Math.max(0, Math.min(1, (t - a) / d)); return k * k * (3 - 2 * k); };
+const vis = cid => CUE[cid].vis; const OPEN = { X: .04, M: 0, F: .22, C: .38, E: .55, O: .8, A: 1 };
+const mouthAt = (cid, t) => { let cur = 'X', prev = 'X', t0 = 0; for (const [a, s] of vis(cid)) if (t >= a) { prev = cur; cur = s; t0 = a; } const k = Math.min(1, (t - t0) / .045); return OPEN[prev] + (OPEN[cur] - OPEN[prev]) * k * k * (3 - 2 * k); };
+const blink = (t, list) => { for (const b of list) if (t >= b && t < b + .14) return .08 + .92 * Math.abs((t - b - .07) / .07); return 1; };
+window.__CHARS = {
+  thief: { canvas: 'rvThief', anchors: [[thiefA1, T('c1', 'pendant') - .3, END('c3') - .4, 1, .95], [thiefA2, T('c9', 'pratique') - .3, END('c9') - .3, -1, .9],
+      [thiefA3, T('c11', 'rejoint') - .2, END('c12') - .2, -1, .95], [thiefA4, T('c21', 'danger') - .3, END('c21') - .3, 1, .9], [thiefA5, CUE.c22.start, T('c23', 'obligatoire') + 1.2, 1, .9]],
+    params: t => { let mouth = .04; if (t >= CUE.c12.start && t < CUE.c12.end) mouth = mouthAt('c12', t);
+      const eyes = blink(t, [5.5, 12.0, 19.4, 62.0, 78.0, 82.6, 151.0, 160.0]) * (1 - .4 * (ss(T('c12', 'cest') - .2, t) - ss(END('c12'), t)));
+      const arm = ss(T('c1', 'garde') - .3, t) - ss(T('c2', 'comment'), t) + ss(T('c9', 'attaquant') - .3, t) - ss(END('c9') - .4, t)
+        + ss(T('c12', 'appelle') - .4, t) - ss(END('c12') - .2, t) + ss(T('c21', 'cle') - .3, t) - ss(T('c21', 'volee') + .1, t);
+      const lean = .1 + .35 * (ss(T('c1', 'garde'), t, .6) - ss(END('c3') - .5, t)) + .4 * (ss(T('c12', 'je'), t) - ss(END('c12'), t)) + .3 * (ss(T('c21', 'volee'), t) - ss(END('c21'), t));
+      return { mouth, eyes, arm: Math.max(0, Math.min(1, arm)), lean }; } },
+  hero: { canvas: 'rvHero', anchors: [[heroB1, T('c4', 'chacune') - .3, END('c5') - .3, 1, .95], [heroB2, CUE.c14.start, END('c18') - .3, 1, .95],
+      [heroB3, CUE.c19.start - .2, END('c20') - .3, 1, 1.0], [heroB4, CUE.c22.start, 192, 1, .95]],
+    params: t => { const eyes = blink(t, [28.0, 35.5, 90.0, 99.0, 106.0, 129.0, 137.0, 144.0, 160.0, 170.0, 182.0]);
+      const surprised = ss(REV('c17'), t, .2) - ss(T('c17', 'seul'), t) + ss(T('c20', 'incident') - .2, t, .2) - ss(END('c20'), t);
+      const arm = ss(T('c4', 'adresse') - .3, t) - ss(T('c5', 'tour'), t) + ss(T('c14', 'qui') - .3, t) - ss(T('c14', 'toujours'), t) + ss(T('c16', 'machine') - .3, t) - ss(END('c16') - .2, t)
+        + ss(T('c18', 'refusees') - .3, t) - ss(END('c18') - .4, t) + ss(T('c19', 'cherche') - .3, t) - ss(T('c20', 'incident'), t)
+        + ss(T('c22', 'alertez') - .3, t) - ss(END('c22') - .3, t) + ss(T('c23', 'imposez') - .3, t) - ss(END('c23') - .3, t) + ss(T('c24', 'activez') - .3, t) - ss(END('c24') - .3, t) + ss(T('c25', 'vous'), t);
+      const lean = .2 * (ss(T('c5', 'distribue'), t) - ss(END('c5'), t)) - .25 * surprised + .2 * (ss(T('c19', 'cherche'), t) - ss(END('c20') - .4, t)) + .15 * ss(T('c25', 'vous'), t);
+      return { mouth: .08 + .5 * surprised, eyes, arm: Math.max(0, Math.min(1, arm)), lean }; } },
+};
+
+
+/* ================= subtitles from the real cue timings ================= */
+const sub = document.getElementById('sub'); let lastSub = null;
+tl.eventCallback('onUpdate', () => { const t = tl.time(); if (window.__drawChars) window.__drawChars(t);
+  const c = W.cues.find(c => t >= c.start && t < c.end); let txt = '';
+  if (c) { const parts = c.sub.split('|'); txt = parts.length > 1 ? (t < c.pauseAt + 1.5 ? parts[0] : parts.slice(1).join(' ')) : parts[0]; }
+  if (txt !== lastSub) { sub.textContent = txt; lastSub = txt; } });
+window.__SFX = SFX.sort((a, b) => a.t - b.t);
+window.__timelines = window.__timelines || {}; window.__timelines.main = tl; tl.seek(0);
+</script>
+<script type="module">
+/* Rive characters: compiled from RML by Rive CLI, drawn from a fresh state whenever time goes backwards. */
+import Rive from './lib/rive/webgl2_advanced.mjs';
+const ready = (async () => {
+  const rive = await Rive({ locateFile: f => './lib/rive/' + (f.endsWith('.wasm') ? 'rive.wasm' : f) });
+  const inst = {};
+  for (const [name, file] of [['thief', 'thief.riv'], ['hero', 'analyst.riv']]) {
+    const f = await rive.load(new Uint8Array(await (await fetch(file)).arrayBuffer()));
+    const def = window.__CHARS[name], canvas = document.getElementById(def.canvas);
+    inst[name] = { f, def, canvas, renderer: rive.makeRenderer(canvas, true), ab: null, sm: null, vmi: null, cur: -1 }; }
+  const reset = I => { I.ab = I.f.defaultArtboard(); I.sm = new rive.StateMachineInstance(I.ab.stateMachineByIndex(0), I.ab);
+    I.vmi = I.f.defaultArtboardViewModel(I.ab).defaultInstance(); I.ab.bindViewModelInstance(I.vmi); I.sm.bindViewModelInstance(I.vmi); I.cur = 0; };
+  const setP = (I, t) => { const p = I.def.params(t); for (const k in p) I.vmi.number(k).value = p[k]; };
+  window.__drawChars = t => {
+    for (const I of Object.values(inst)) {
+      const a = I.def.anchors.find(([, t0, t1]) => t >= t0 - .05 && t < t1 + .35);
+      if (!a) { I.canvas.style.opacity = 0; continue; }
+      const [anchor, t0, t1, dir, sc] = a;
+      if (!I.ab || t < I.cur - 1e-6) reset(I);
+      while (I.cur < t - 1e-6) { const dt = Math.min(1 / 30, t - I.cur); I.cur += dt; setP(I, I.cur); I.sm.advance(dt); I.ab.advance(dt); }
+      setP(I, t); I.sm.advance(0); I.ab.advance(0);
+      I.renderer.clear(); I.renderer.save();
+      I.renderer.align(rive.Fit.contain, rive.Alignment.center, { minX: 0, minY: 0, maxX: 1200, maxY: 1400 }, I.ab.bounds);
+      I.ab.draw(I.renderer); I.renderer.restore(); I.renderer.flush(); rive.resolveAnimationFrame();
+      const fadeIn = Math.max(0, Math.min(1, (t - t0) / .35)), fadeOut = 1 - Math.max(0, Math.min(1, (t - t1) / .35)), k = fadeIn * fadeOut;
+      const m = anchor.getScreenCTM();
+      const M = new DOMMatrix([m.a, m.b, m.c, m.d, m.e, m.f]).translate(0, 30 * (1 - fadeIn)).scale(dir * sc * .44, sc * .44).translate(-600, -1280);
+      I.canvas.style.transform = M.toString(); I.canvas.style.opacity = k.toFixed(3);
+    }
+  };
+  window.__drawChars(window.__timelines.main.time());
+})();
+window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {}; window.__hf.buildReady.rive = ready;
+</script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+{
+ "engine": "piper:fr_FR-siwis-medium",
+ "wer_mean": 0.065,
+ "to_fix": [],
+ "often_misheard": [
+  [
+   "tailscale",
+   3
+  ],
+  [
+   "audit",
+   2
+  ],
+  [
+   "attaquant",
+   1
+  ],
+  [
+   "ou",
+   1
+  ],
+  [
+   "ses",
+   1
+  ],
+  [
+   "relie",
+   1
+  ],
+  [
+   "vos",
+   1
+  ],
+  [
+   "publiques",
+   1
+  ],
+  [
+   "direct",
+   1
+  ],
+  [
+   "quand",
+   1
+  ],
+  [
+   "relais",
+   1
+  ],
+  [
+   "derp",
+   1
+  ],
+  [
+   "installe",
+   1
+  ],
+  [
+   "d",
+   1
+  ],
+  [
+   "eteints",
+   1
+  ]
+ ],
+ "parts": [
+  {
+   "cue": "c1",
+   "wer": 0.105,
+   "heard": "Le serveur de commande de l 'attaque en tombe. Pendant 18 jours, il garde, pourtant l 'accès au poste.",
+   "errors": [
+    [
+     "attaquant",
+     "attaque en"
+    ]
+   ]
+  },
+  {
+   "cue": "c2",
+   "wer": 0.125,
+   "heard": "Son autre chemin, un logiciel légitime, did -skill. Comment fonctionne -t -il ? Et vous voir ces traces ?",
+   "errors": [
+    [
+     "ou",
+     "vous"
+    ],
+    [
+     "ses",
+     "ces"
+    ]
+   ]
+  },
+  {
+   "cue": "c3",
+   "wer": 0.0,
+   "heard": "Un cas type tiré de deux incidents publiés. Et une question, où l 'auriez -vous vu ?",
+   "errors": []
+  },
+  {
+   "cue": "c4",
+   "wer": 0.158,
+   "heard": "Tillscale relive aux machines en un réseau privé, le Telnet. Chacune y reçoit une adresse qui commence par 100.",
+   "errors": [
+    [
+     "tailscale relie vos",
+     "tillscale relive aux"
+    ]
+   ]
+  },
+  {
+   "cue": "c5",
+   "wer": 0.04,
+   "heard": "Une tour de contrôle, le serveur de coordination distribue les clés publics et les règles d 'accès. Mais le trafic ne passe jamais par elle.",
+   "errors": [
+    [
+     "publiques",
+     "publics"
+    ]
+   ]
+  },
+  {
+   "cue": "c7",
+   "wer": 0.188,
+   "heard": "Entre deux machines, le trafic par chiffré par WireGuard en dirait qu 'on le réseau le permet.",
+   "errors": [
+    [
+     "direct quand",
+     "dirait qu on"
+    ]
+   ]
+  },
+  {
+   "cue": "c8",
+   "wer": 0.182,
+   "heard": "Sinon, un relédeur de transporte les paquets, sans pouvoir les ouvrir.",
+   "errors": [
+    [
+     "relais derp",
+     "reledeur de"
+    ]
+   ]
+  },
+  {
+   "cue": "c9",
+   "wer": 0.0,
+   "heard": "Devinez, combien de porcs faut -il ouvrir dans le pare -feu ?",
+   "errors": []
+  },
+  {
+   "cue": "c9",
+   "wer": 0.0,
+   "heard": "En général, aucun, chaque machine appelle vers l 'extérieur. Pratique pour vous et pour un attaquant.",
+   "errors": []
+  },
+  {
+   "cue": "c10",
+   "wer": 0.133,
+   "heard": "Dans notre cas, un script crée un compte administrateur, install telescale et un serveur OpenSSH.",
+   "errors": [
+    [
+     "installe tailscale",
+     "install telescale"
+    ]
+   ]
+  },
+  {
+   "cue": "c11",
+   "wer": 0.0,
+   "heard": "Puis, il connecte le poste avec une clé d 'authentification écrite en dur. Le poste rejoint le tel net de l 'attaquant.",
+   "errors": []
+  },
+  {
+   "cue": "c12",
+   "wer": 0.0,
+   "heard": "Je n 'ouvre aucun port. C 'est ton poste qui m 'appelle.",
+   "errors": []
+  },
+  {
+   "cue": "c14",
+   "wer": 0.091,
+   "heard": "Côté défense, Telski il tient trois journaux. Le journal 2D, qui a changé quoi et quand. Toujours actif, 90 jours.",
+   "errors": [
+    [
+     "d audit",
+     "deuxd"
+    ]
+   ]
+  },
+  {
+   "cue": "c15",
+   "wer": 0.13,
+   "heard": "Les floologues qui a parlé à qui, par fenêtre de 5 secondes, est un par défaut et réservé aux afres premium et entreprise.",
+   "errors": [
+    [
+     "eteints",
+     "est un"
+    ],
+    [
+     "offres",
+     "afres"
+    ]
+   ]
+  },
+  {
+   "cue": "c16",
+   "wer": 0.0,
+   "heard": "et les journaux du client sur la machine elle -même.",
+   "errors": []
+  },
+  {
+   "cue": "c17",
+   "wer": 0.0,
+   "heard": "Devinez, dans votre console telle scale, quel journal montre le poste qui rejoint le ténètre de l 'attaquant ?",
+   "errors": []
+  },
+  {
+   "cue": "c17",
+   "wer": 0.2,
+   "heard": "«Aucun. Ce journal d 'Odila est celui de son tail net, pas du vôtre. Seul le poste -gard de la trace. »",
+   "errors": [
+    [
+     "audit la",
+     "odila"
+    ],
+    [
+     "garde",
+     "gard de"
+    ]
+   ]
+  },
+  {
+   "cue": "c18",
+   "wer": 0.0,
+   "heard": "Autre idée reçue, les flots logs ne montrent pas les tentatives refusées. Seulement les connexions réussies, jamais leurs contenus.",
+   "errors": []
+  },
+  {
+   "cue": "c19",
+   "wer": 0.0,
+   "heard": "Alors on cherche sur le poste, tel ski là où aucun VPN n 'est prévu et des connexions vers son serveur de coordination.",
+   "errors": []
+  },
+  {
+   "cue": "c20",
+   "wer": 0.087,
+   "heard": "La commande Tellskill -Status -Angisan donne le nom du tel net courant. Si ce n 'est pas le vôtre, c 'est un incident.",
+   "errors": [
+    [
+     "en json",
+     "angisan"
+    ]
+   ]
+  },
+  {
+   "cue": "c21",
+   "wer": 0.05,
+   "heard": "Dans votre propre tail net, le danger est une clé réutilisable volée. L 'audi montre alors un œil créé, puis connecté.",
+   "errors": [
+    [
+     "noeud",
+     "oeil"
+    ]
+   ]
+  },
+  {
+   "cue": "c22",
+   "wer": 0.0,
+   "heard": "1. Depuis votre DR alerté sur Talescale et sur un serveur OpenSSH là où ils ne sont pas prévus.",
+   "errors": []
+  },
+  {
+   "cue": "c23",
+   "wer": 0.0,
+   "heard": "2. Sur vos postes gérés. Imposez votre Telnet avec la politique système Telnet en mode obligatoire.",
+   "errors": []
+  },
+  {
+   "cue": "c24",
+   "wer": 0.0,
+   "heard": "Trois, dans la console, activez les floologues, envoyez l 'audi à votre SIM et préférez des clés à usage unique.",
+   "errors": []
+  },
+  {
+   "cue": "c25",
+   "wer": 0.13,
+   "heard": "simplification. Tillsky est là aussi ses propres failles, publiées en bulletin. Vous savez maintenant où chercher un tel net qui n 'est pas le vôtre.",
+   "errors": [
+    [
+     "tailscale a",
+     "tillsky est la"
+    ]
+   ]
+  }
+ ]
+}
