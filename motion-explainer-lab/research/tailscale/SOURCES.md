@@ -75,3 +75,26 @@ Aucun tailnet réel n'est disponible ici : les exemples d'événements sont ceux
 
 - Détails propres au rapport primaire de Cato CTRL (commandes exactes, mode d'enregistrement du poste) : non lus, page rendue en JavaScript.
 - Rapports de presse mentionnant APT31 et Tailscale (cités par THN) : non recoupés, non utilisés.
+
+## Variante « insider chez Tailscale » (épisode 1 bis, scénario hypothétique)
+
+Sources supplémentaires : TLW = Tailscale docs, *Tailnet Lock white paper* (https://tailscale.com/docs/concepts/tailnet-lock-whitepaper) ;
+TL = Tailscale docs, *Tailnet Lock* (https://tailscale.com/docs/features/tailnet-lock, validée le 2 déc. 2025). Textes bruts dans `raw/`.
+
+| # | Fait | Valeurs | Source (citation exacte) | Niveau |
+|---|---|---|---|---|
+| 31 | Un plan de contrôle compromis ou malveillant pourrait diffuser des nœuds porteurs de clés générées par l'attaquant, et envoyer ou recevoir du trafic en clair | — | TLW : « a compromised control plane could read or write traffic by distributing attacker-generated keys » ; « a compromised or malicious control plane could broadcast nodes with attacker-controlled keys, and send or receive network traffic in plaintext » | P |
+| 32 | Les clients doivent faire confiance au plan de contrôle pour décider qui rejoint le tailnet | — | TL : « Inherently, customers must trust Tailscale's control plane to make the right decisions about who and what can join any given tailnet » | P |
+| 33 | Tailnet Lock : chaque nœud n'accepte la clé publique d'un pair que si elle est signée par une clé de confiance (TLK) ; sinon pas de session WireGuard | — | TLW : « each node verifies and enforces that the other nodes' public keys (as announced by the control plane), are accompanied by a valid cryptographic signature from a trusted source. Node keys that fail signature verification are not accepted » | P |
+| 34 | Objectif : l'infrastructure Tailscale ne peut pas ajouter un nœud non autorisé à un tailnet verrouillé ; toute tentative peut être détectée et bloquée | — | TLW : « Tailscale infrastructure cannot add an unauthorized node to a tailnet with Tailnet Lock enabled, and any attempt to do so can be detected and blocked. » | P |
+| 35 | Les clés de signature restent sur les nœuds ; le plan de contrôle ne les voit ni ne les stocke | — | TLW : « Signing keys are verified by the locally-managed key authority, and are never seen or stored by the control plane » | P |
+| 36 | Désactiver Tailnet Lock exige un secret de désactivation ; les nœuds n'en gardent qu'une dérivée (Argon2) | — | TLW : « the use of a disablement secret is required to globally disable Tailnet Lock » | P |
+| 37 | Limites : n'empêche pas un plan de contrôle compromis de couper la connectivité ; confiance au premier usage (ToFU) de l'état initial, à vérifier avec `tailscale lock status` | — | TLW, Limitations : « It does not prevent a compromised control plane from breaking connectivity » ; « Enablement is Trust on First Use (ToFU) » ; « verify the provisioned state of Tailnet Lock on each node by running the tailscale lock status command » | P |
+| 38 | Activation : `tailscale lock init` depuis un nœud de signature ; la console demande au moins deux nœuds de signature ; signer un nœud : `tailscale lock sign nodekey:… tlpub:…` | 2 | TL : « You must select at least two signing nodes » ; commande `tailscale lock sign nodekey:<your-node-key> tlpub:<your-tailnet-lock-key>` | P |
+| 39 | Tailnet Lock n'est pas activé par défaut ; offres Personal et Enterprise | — | TL : « Tailnet Lock is not enabled by default » ; « available for the Personal and Enterprise plans » | P |
+| 40 | Alternative : héberger son propre plan de contrôle avec Headscale, au prix de la disponibilité et de la maintenance | — | TL : « Customers could alternatively host their own trusted control plane by using Headscale » | P |
+| 41 | Chaque nœud connaît ses pairs : `tailscale status --json` expose `Peer`, indexé par la clé publique de chaque pair | — | CODE : « Peer is the state of each peer, keyed by each peer's current public key » | P |
+| 42 | Chaque connexion est journalisée par ses deux extrémités : la comparaison permet de repérer un journal perdu ou altéré | — | LOG : « both endpoints log every connection, it's possible to detect lost or tampered logs by comparing the double entries of each endpoint » | P |
+| 43 | Face à un insider de Tailscale, le journal d'audit (produit par l'infrastructure de Tailscale) n'est plus un témoin indépendant ; les traces des postes le restent | — | déduit de AUD (journal tenu par le service) et de 31-32 | D |
+| 44 | TS-2025-008 : sans répertoire d'état, des nœuds non signés pouvaient communiquer malgré Tailnet Lock ; corrigé en 1.90.8 ; recommandation : un répertoire d'état pour tous les nœuds | 1.90.8 | SB (ligne 27) : « We strongly recommend setting a state directory for all nodes » | P |
+| 45 | Aucun incident public d'insider de Tailscale trouvé (recherche du 6 nov. 2026) : le scénario est hypothétique | 2026 | recherche web + bulletins de sécurité (aucun bulletin de ce type) | D |

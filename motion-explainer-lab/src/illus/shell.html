@@ -162,7 +162,10 @@ const blink = (t, list) => { for (const b of list) if (t >= b && t < b + .14) re
 const sub = document.getElementById('sub'); let lastSub = null;
 tl.eventCallback('onUpdate', () => { const t = tl.time(); if (window.__drawChars) window.__drawChars(t);
   const c = W.cues.find(c => t >= c.start && t < c.end); let txt = '';
-  if (c) { const parts = c.sub.split('|'); txt = parts.length > 1 ? (t < c.pauseAt + 1.5 ? parts[0] : parts.slice(1).join(' ')) : parts[0]; }
+  if (c) { const parts = c.sub.split('|'); txt = parts.length > 1 ? (t < c.pauseAt + 1.5 ? parts[0] : parts.slice(1).join(' ')) : parts[0];
+    // a subtitle longer than two lines is shown in two halves, cut at the sentence or colon closest to the middle, switched on the spoken word
+    if (txt.length > 140) { const cuts = [...txt.matchAll(/[.:?] /g)].map(m => m.index + 2); if (cuts.length) { const k = cuts.reduce((p, q) => Math.abs(q - txt.length / 2) < Math.abs(p - txt.length / 2) ? q : p);
+      const ws = c.words.filter(w => parts.length < 2 || w[1] >= c.pauseAt), wi = Math.min(ws.length - 1, Math.round(ws.length * k / txt.length)); txt = t < ws[wi][1] - .15 ? txt.slice(0, k).trim() : txt.slice(k).trim(); } } }
   if (txt !== lastSub) { sub.textContent = txt; lastSub = txt; } });
 window.__SFX = SFX.sort((a, b) => a.t - b.t);
 window.__timelines = window.__timelines || {}; window.__timelines.main = tl; tl.seek(0);

@@ -1,0 +1,334 @@
+{
+ "engine": "piper:fr_FR-siwis-medium",
+ "wer_mean": 0.097,
+ "to_fix": [
+  [
+   "c5",
+   0.25,
+   [
+    [
+     "l insider",
+     "linkseidor"
+    ]
+   ]
+  ],
+  [
+   "c9",
+   0.42,
+   [
+    [
+     "leurs pairs tailscale status liste",
+     "leur pere tel ce qu ils stetusulistes"
+    ],
+    [
+     "pair",
+     "pere"
+    ]
+   ]
+  ],
+  [
+   "c13",
+   0.29,
+   [
+    [
+     "noeud",
+     "ne"
+    ],
+    [
+     "passe",
+     "pas"
+    ]
+   ]
+  ]
+ ],
+ "often_misheard": [
+  [
+   "pair",
+   4
+  ],
+  [
+   "noeud",
+   3
+  ],
+  [
+   "pairs",
+   2
+  ],
+  [
+   "point",
+   2
+  ],
+  [
+   "publiques",
+   1
+  ],
+  [
+   "l",
+   1
+  ],
+  [
+   "insider",
+   1
+  ],
+  [
+   "leurs",
+   1
+  ],
+  [
+   "tailscale",
+   1
+  ],
+  [
+   "status",
+   1
+  ],
+  [
+   "liste",
+   1
+  ],
+  [
+   "aux",
+   1
+  ],
+  [
+   "deux",
+   1
+  ],
+  [
+   "bouts",
+   1
+  ],
+  [
+   "passe",
+   1
+  ]
+ ],
+ "parts": [
+  {
+   "cue": "c1",
+   "wer": 0.0,
+   "heard": "Scénario hypothétique, l 'attaquant travail chez Ted Skeil dans la tour de contrôle.",
+   "errors": []
+  },
+  {
+   "cue": "c2",
+   "wer": 0.0,
+   "heard": "Nous n 'avons trouvé aucun incident public de ce type. Mais Telski l 'a conçu une parade contre ce risque précis.",
+   "errors": []
+  },
+  {
+   "cue": "c3",
+   "wer": 0.0,
+   "heard": "Que peut faire cet insider ? Que verriez -vous et comment vous en protéger ?",
+   "errors": []
+  },
+  {
+   "cue": "c4",
+   "wer": 0.062,
+   "heard": "Rappel, la tour distribue les clés publics, mais vos clés privés ne quittent jamais vos machines.",
+   "errors": [
+    [
+     "publiques",
+     "publics"
+    ]
+   ]
+  },
+  {
+   "cue": "c5",
+   "wer": 0.25,
+   "heard": "Devinez, Linkseidor, peut -il lire votre trafic ?",
+   "errors": [
+    [
+     "l insider",
+     "linkseidor"
+    ]
+   ]
+  },
+  {
+   "cue": "c5",
+   "wer": 0.1,
+   "heard": "Pas directement, mais il peut diffuser la clé d 'un eau fantôme que vos machines prendront pour un père légitime.",
+   "errors": [
+    [
+     "noeud",
+     "eau"
+    ],
+    [
+     "pair",
+     "pere"
+    ]
+   ]
+  },
+  {
+   "cue": "c6",
+   "wer": 0.111,
+   "heard": "Je ne casse rien. J 'ajoute juste un père.",
+   "errors": [
+    [
+     "pair",
+     "pere"
+    ]
+   ]
+  },
+  {
+   "cue": "c7",
+   "wer": 0.077,
+   "heard": "Ce ne peut alors échanger du trafic avec vos machines et le lire.",
+   "errors": [
+    [
+     "noeud",
+     "ne"
+    ]
+   ]
+  },
+  {
+   "cue": "c8",
+   "wer": 0.0,
+   "heard": "Le verriez -vous, le journal d 'Audi est tenu par T .L .S .K .I .L. Face à un insaider, ce n 'est plus un témoin indépendant.",
+   "errors": []
+  },
+  {
+   "cue": "c9",
+   "wer": 0.421,
+   "heard": "Vos machines, elles, connaissent leur père, tel ce qu 'ils stétusulistes chaque père et sa clé sur le poste lui -même.",
+   "errors": [
+    [
+     "leurs pairs tailscale status liste",
+     "leur pere tel ce qu ils stetusulistes"
+    ],
+    [
+     "pair",
+     "pere"
+    ]
+   ]
+  },
+  {
+   "cue": "c10",
+   "wer": 0.167,
+   "heard": "Et chaque connexion est journalisée au debout. En les comparant, on repère un journal manquant ou modifié.",
+   "errors": [
+    [
+     "aux deux bouts",
+     "au debout"
+    ]
+   ]
+  },
+  {
+   "cue": "c11",
+   "wer": 0.0,
+   "heard": "La parade s 'appelle Telnet Lock. Vos propres nœuds de signature signent chaque clé de nœud.",
+   "errors": []
+  },
+  {
+   "cue": "c12",
+   "wer": 0.05,
+   "heard": "Chaque machine vérifie la signature avant d 'accepter un père et la tour ne voit jamais les clés de signature.",
+   "errors": [
+    [
+     "pair",
+     "pere"
+    ]
+   ]
+  },
+  {
+   "cue": "c13",
+   "wer": 0.286,
+   "heard": "Devinez -le, ne fantôme pas -t -il ?",
+   "errors": [
+    [
+     "noeud",
+     "ne"
+    ],
+    [
+     "passe",
+     "pas"
+    ]
+   ]
+  },
+  {
+   "cue": "c13",
+   "wer": 0.143,
+   "heard": "Non. Son signature, il est refusé. Et pour désactiver le verrou, il faut un secret que la tourne à pas.",
+   "errors": [
+    [
+     "sans",
+     "son"
+    ],
+    [
+     "tour n",
+     "tourne"
+    ]
+   ]
+  },
+  {
+   "cue": "c14",
+   "wer": 0.0,
+   "heard": "Limite, le verrou n 'empêche pas la tour de couper le réseau et il fait confiance à son tout premier état.",
+   "errors": []
+  },
+  {
+   "cue": "c15",
+   "wer": 0.114,
+   "heard": "Vérifiez cet état avec telle skill l 'Oxtetus et donnez un répertoire d 'étages chaque nœud, sans lui, avant la version 1 .90 .8, le verrou pouvait ne pas s 'appliquer.",
+   "errors": [
+    [
+     "etat a",
+     "etages"
+    ],
+    [
+     "point",
+     ""
+    ],
+    [
+     "point",
+     ""
+    ]
+   ]
+  },
+  {
+   "cue": "c16",
+   "wer": 0.15,
+   "heard": "1. Activétez une netlock avec au moins deux nœuds de signature et ranger les secrètes de désactivation en lieux sûr.",
+   "errors": [
+    [
+     "activez tailnet lock",
+     "activetez une netlock"
+    ]
+   ]
+  },
+  {
+   "cue": "c17",
+   "wer": 0.043,
+   "heard": "2. Depuis votre DR, relevez la liste des pères et l 'état du verrou sur chaque poste et comparez -les à votre inventaire.",
+   "errors": [
+    [
+     "pairs",
+     "peres"
+    ]
+   ]
+  },
+  {
+   "cue": "c18",
+   "wer": 0.167,
+   "heard": "Trois. Gardez les journaux, des postes dans votre cime, indépendant de telles skills.",
+   "errors": [
+    [
+     "siem independants",
+     "cime independant"
+    ]
+   ]
+  },
+  {
+   "cue": "c19",
+   "wer": 0.0,
+   "heard": "Simplification, Tailnet Lock est inactif par défaut et réservé aux offres personnelles et entreprises. Solution radicale, votre propre tour avec AdSkill.",
+   "errors": []
+  },
+  {
+   "cue": "c20",
+   "wer": 0.0,
+   "heard": "Vous savez maintenant ce qu 'un enseigneur pourrait faire, est -ce que vos machines, elles, verraient.",
+   "errors": []
+  }
+ ]
+}

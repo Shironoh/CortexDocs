@@ -4,6 +4,7 @@
   src/illus/shell.html          layers, gradients, helpers (plaque, ticket, cloudIsland, camera, bell, keyIcon…),
                                 parallax camera with non-overlapping moves, Rive characters, subtitles, sound list
   versions/<id>/words.json      tools/timeline.py (real word times)
+  src/illus/props.js            shared props (pc, rack, laptop, control tower, wall, balloon, sealed box, key card, book, terminal, tunnels…)
   versions/<id>/parts/world.js  the world: zones, props, beats keyed on T(cue, word)
   versions/<id>/parts/camera.js camTo(t, d, x, y, s) keyframes
   versions/<id>/parts/chars.js  window.__CHARS = {thief, hero}: anchors [group, t0, t1, dir, scale] + params(t)
@@ -19,7 +20,7 @@ def main(vdir, title):
     words = (v / 'words.json').read_text(encoding='utf-8'); dur = math.ceil(json.loads(words)['duration'])
     part = lambda n: (v / 'parts' / n).read_text(encoding='utf-8')
     out = (shell.replace('__TITLE__', title).replace('__DUR__', str(dur)).replace('__WORDS__', words.replace('</', '<\\/'))
-           .replace('/* __WORLD__ */', part('world.js')).replace('/* __CAMERA__ */', part('camera.js')).replace('/* __CHARS__ */', part('chars.js')))
+           .replace('/* __WORLD__ */', (LAB / 'src/illus/props.js').read_text(encoding='utf-8') + '\n' + part('world.js')).replace('/* __CAMERA__ */', part('camera.js')).replace('/* __CHARS__ */', part('chars.js')))
     (v / 'index.html').write_text(out, encoding='utf-8')
     src = LAB / 'versions/v8-llmjacking-illustre'
     for f in ['thief.riv', 'analyst.riv']:
